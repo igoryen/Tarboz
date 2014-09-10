@@ -1,0 +1,61 @@
+SETUP GIT:
+git config --global user.name "YOUR NAME"
+git config --global user.email "YOUR EMAIL"
+
+CONFIGURATIONS:
+
+location Linux:
+/etc/gitconfig
+
+Windows:
+program files /git/etc/gitconfig
+
+User:
+Applied to Single user only:
+unix: ~/.gitconfig
+$HOme\.gitconfig (Document/Settings)
+
+We can store configs on single projects:
+my_project/.git.config
+
+NOW TO EDIT ALL OF THEM OR CONFIGURE YOUR GIT
+
+git config --system
+
+user Level: git config --global
+
+project base config: git config
+
+SETUP NOW:
+
+git config --global user.name "Habib"
+git config --global user.email "hzahoori@myseneca.ca"
+to see:
+git config --list
+
+To Configure Editor:
+
+git config --global core.editor "notepad++ -wl1"
+
+
+
+INITIALIZE THE PROJECT IN GIT
+
+1. get in the folder you want to make your repository director
+2. git init
+
+Master is the main branch that we work on..
+TO CLONE A REPO TO YOUR COMPUTER:
+1.git clone https://github.com/user/repo.git
+2. git status (to check status of your file)
+3.
+
+
+
+TO DO FIRST COMMIT:
+1. git add .
+. means all changes
+
+2. git commit -m "myfirst commit"
+3.
+
