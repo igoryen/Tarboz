@@ -6,15 +6,11 @@
 <body>
 	<div id="maindiv">
         <div id="header">	
-			<div id="logo"><h1>TARBOZ</h1></div>
-			<div id="links">login : log-out </div>
-			<nav id="navigation">Home  |  FAQ | LINK 2 | LINK 3</nav>
+			<div id="logo"> </div>
+			<div id="links"> </div>
 		</div>
-		<div id="search">
-		     <form>
-			    <input type="text" name="search"> 
-			 </form>
-	    </div>
+		<nav id="navigation">Home  |  FAQ | LINK 2 | LINK 3</nav>
+		<div id="search"> </div>
 		<div id="leftside"> </div>
 		<div id="middleside"> </div>
 		<div id="rightside"> </div>
