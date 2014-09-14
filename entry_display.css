@@ -1,0 +1,37 @@
+#authors{
+  display: inline;
+}
+#entry_profile{
+  margin-left: 200px;
+  margin-right: 200px;
+  padding: 50px;
+}
+.Entry_profile_row{
+}
+#entry_text{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_translit{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#form{
+  display: inline;
+}
+#language{
+  display: inline;
+}
+#place{
+  display: inline;
+}
+#time{
+  display: inline; 
+}
+#user{
+  display: inline;
+}
