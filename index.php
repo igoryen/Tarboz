@@ -1,4 +1,4 @@
-<?php require("header.php"); ?>
+<?php require("index_header.php"); ?>
 
 <div id="leftside">
 	Test Div
