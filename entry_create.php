@@ -1,10 +1,5 @@
-<html>
-<head>
-  <meta charset="UTF-8">
- <link rel="stylesheet" type="text/css" href="entry_create.css">
-</head>
+<?php require("header.php"); ?>
 
-<body>
   <div id="entry_create_form">
     Create entry
     <div class="Note">
@@ -111,6 +106,5 @@
     </div>
 
   </div>
-</body>
 
-</html>
+<?php require("footer.php"); ?>
