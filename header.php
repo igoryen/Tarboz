@@ -1,5 +1,6 @@
 <html>
 <head>
+  <meta charset="UTF-8">
   <!-- for the virtual keyboard -->
   <script type="text/javascript" src="keyboard.js" charset="UTF-8"></script>
   <link rel="stylesheet" type="text/css" href="keyboard.css">
