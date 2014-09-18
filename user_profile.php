@@ -1,14 +1,5 @@
-<html>
-<head>
-  <meta charset="UTF-8">
- <link rel="stylesheet" type="text/css" href="user_profile.css">
-</head>
+<?php require("header.php"); ?>
 
-<body>
-
-  <!--
-
-  -->
   <div class="User_profile">
 
     <div class="Left_panel">
@@ -43,7 +34,4 @@
     </div>
 
   </div>
-
-  
-</body>
-</html>
+<?php require("footer.php"); ?>
