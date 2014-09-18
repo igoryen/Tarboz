@@ -15,7 +15,7 @@
 
       <div id="user_photo_id">
         <div id="user_photo">
-          <img src="hubert.jpg" alt="User" height="142">
+          <img src="images/hubert.jpg" alt="User" height="142">
         </div>
         <div id="user_id">
           <div id="user_name">Hubert Humphrey</div>
