@@ -1,6 +1,10 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <!-- for the virtual keyboard -->
+  <script type="text/javascript" src="keyboard.js" charset="UTF-8"></script>
+  <link rel="stylesheet" type="text/css" href="keyboard.css">
+
   <link rel="stylesheet" type="text/css" href="style/style.css"  />
   <link rel="shortcut icon" href="images/watermelon8.png"/>
   <title>WWG</title>
@@ -14,7 +18,7 @@
     </div>
     <div id="search">
      <form>
-      <input type="text" name="search">
+      <input type="text" name="search" class="keyboardInput">
       <br>
       <select>
        <option>Source Language</option>

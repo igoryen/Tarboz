@@ -1,3 +1,4 @@
+<?php require("header.php"); ?>
 <?php
 // session_start();
 
@@ -6,8 +7,9 @@
   // exit();
 // }
 // else{
-  include_once("func_lib.php");
+  include("func_lib.php");
 //   $title = "Please, log in";
    login_form();
 // }
 ?>
+<?php require("footer.php"); ?>

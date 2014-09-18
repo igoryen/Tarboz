@@ -2,11 +2,6 @@
 
 function login_form(){
 ?>
-<html>
-<head>
-  <link rel="stylesheet" type="text/css" href="login.css"> 
-</head>
-<body>
   <form 
     action="login.php" 
     method="post">
@@ -33,8 +28,6 @@ function login_form(){
 
 
   </form>
-</body>  
-</html>
 <?php
 }
 ?>

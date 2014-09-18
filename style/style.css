@@ -175,6 +175,7 @@ font-size:12px;
 }
 
 /*---start login.php -------*/
+/*
 #tablecloth{
   display: table;
   position: absolute;
@@ -187,7 +188,7 @@ font-size:12px;
   vertical-align: middle;
   border: solid blue;
 }
-
+*/
 #login_form{
   display: table;
   border: solid red;
