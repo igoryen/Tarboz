@@ -1,5 +1,6 @@
 <html>
 <head>
+  <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="style/style.css"  />
   <link rel="shortcut icon" href="images/watermelon8.png"/>
   <title>WWG</title>
