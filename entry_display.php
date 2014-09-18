@@ -1,10 +1,5 @@
-<html>
-<head>
-  <meta charset="UTF-8">
- <link rel="stylesheet" type="text/css" href="entry_display.css">
-</head>
+<?php require("header.php"); ?>
 
-<body>
   <div id="entry_profile">
 
     <div class="Entry_profile_row">
@@ -54,5 +49,4 @@
 
 
   </div>
-</body>
-</html>
+<?php require("footer.php"); ?>
