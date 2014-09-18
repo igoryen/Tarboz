@@ -5,15 +5,15 @@ body{
 }
 #maindiv {
 	position:absolute;
-	border:Solid 2px;
+	border: dotted 2px red;
 	height:Auto;
-	width: 100%;
-	background:#f8f8f2;
+	width: 98%;
+	/*background:#f8f8f2;*/
 }
 
 #header{
 	margin-bottom:2%;
-	border:Solid 1px;
+	border:dotted 1px blue;
 	width: 100%;
 	height:30%;
 }
