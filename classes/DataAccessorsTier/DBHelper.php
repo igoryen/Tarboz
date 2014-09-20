@@ -8,10 +8,16 @@
 		* Create a database connection to connect to a db server
 		* and select a database to use
 		*/
+		public function getConnection(){
+		
+			return $this->connection;
+		}
 		private function connectToDB(){
 		
 			// Step 1. Create a Database connection
-			$this->connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS) or die("Error, failed to connect".mysqli_error());
+			$this->connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS,DB_NAME) or die("Error, failed to connect".mysqli_error($this->connection));
+			
+			//$db_select = mysqli_select_db("prj666", $this->connection) or die("Can not connect to the database".mysqli_error($this->connection));
 
 		}
 		
@@ -49,7 +55,6 @@
 			
 			}
 			
-			echo "Result is: ".$result;
 			
 			$this->closeConnection();
 			
