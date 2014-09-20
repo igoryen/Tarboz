@@ -60,7 +60,6 @@
 			$user = $userDataAccessor->getUserByLoginId($userlogin);
 			
 			return $user;			
-			
 		}
 		
 		public function getAllUsers(){
@@ -88,7 +87,7 @@
 
 			$userDataAccessor = new UserDataAccessor();			
 
-			$user= $userDataAccessor->getUserByName($userfname,$userlname);
+			$users= $userDataAccessor->getUserByName($userfname,$userlname);
 
 			return $users;	
 		}
