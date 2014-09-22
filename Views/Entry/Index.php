@@ -1,52 +1,72 @@
   <?php require("../../header.php"); ?>
 
-  <div id="entry_profile">
+  <div id="entry_index_container">
 
-    <div class="Entry_profile_row">
-      <div id="entry_text">
+    <div class="entry_record">
+      <div class="entry_record_title">
+        Text
+      </div>
+      <div class="entry_record_value">
         с днем рожденья тебя!<br>
         с днем рожденья тебя! <br>
         с днем рождения, Вася!<br>
-        с днем рожденья тебя! 
-      </div>
-      <div id="entry_translit">
-        s dnem rozhden'ya tebya!<br>
-        s dnem rozhden'ya tebya! <br>
-        s dnem rozhdeniya, Vasya!<br>
-        s dnem rozhden'ya tebya!<br>
+        с днем рожденья тебя!
       </div>
     </div>
 
-    <div class="Entry_profile_row">
-      <div class="Entry_video_link">
+    <div class="entry_record">
+      <div class="entry_record_title">
+        Translit
+      </div>
+      <div class="entry_record_value">
+        s dnem rozhden'ya tebya!<br>
+        s dnem rozhden'ya tebya! <br>
+        s dnem rozhdeniya, Vasya!<br>
+        s dnem rozhden'ya tebya!
+      </div>
+    </div>
+
+    <div class="entry_record">
+      <div class="entry_record_title">Video link</div>
+      <div class="entry_record_value">
         <embed width="420" height="315" src="https://www.youtube.com/v/CjD0KdRYyDo">
       </div>
     </div>
 
-    <div class="Entry_profile_row">
-      <div class="Use">A song to sing at birthday</div>
+    <div class="entry_record">
+      <div class="entry_record_title">Use</div>
+      <div class="entry_record_value">A song to sing at birthday</div>
     </div>
 
-    <div class="Entry_profile_row">
-      Translated by <div id="authors">[unknown]</div>   
-      in <div id="time">late 20th century</div> 
-      in <div id="place">Russia</div>
-      into <div id="language">Russian</div>
-      
-      in the form of <div id="form">song</div>
+    <div class="entry_record">
+      <div class="entry_record_title">Translated by</div>
+      <div class="entry_record_value">[unknown]</div>
     </div>
 
-    <div class="Entry_profile_row">
-      Added by <div id="user">user123</div>
+    <div class="entry_record">
+      <div class="entry_record_title">Time</div>
+      <div class="entry_record_value">late 20th century</div>
     </div>
 
-    <div class="Entry_profile_row">
-      <div id="comments"></div>
+    <div class="entry_record">
+      <div class="entry_record_title">Country</div>
+      <div class="entry_record_value">Russia</div>
     </div>
 
+    <div class="entry_record">
+      <div class="entry_record_title">Form</div>
+      <div class="entry_record_value">song</div>
+    </div>
 
-    
+    <div class="entry_record">
+      <div class="entry_record_title">Added by user</div>
+      <div class="entry_record_value">user123</div>
+    </div>
 
+    <div class="entry_record">
+      <div class="entry_record_title">Comments</div>
+      <div class="entry_record_value">...</div>
+    </div>
 
-  </div>
+  </div><!--entry_index_container-->
 <?php require("../../footer.php"); ?>

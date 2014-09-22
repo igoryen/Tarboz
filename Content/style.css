@@ -463,166 +463,44 @@ body{
 
 
 /* for entry_display.php*/
-#authors{
-  display: inline;
+#entry_index_container{
+  /*border: ridge 10px blue;*/
+  width: 98%;
 }
-#entry_profile{
-  margin-left: 200px;
-  margin-right: 200px;
-  padding: 50px;
-}
-.Entry_profile_row{
-}
-#entry_text{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
+.entry_record{
+  /*border: ridge 10px green;*/
+  display: block;
   padding: 5px;
+  margin: auto;
+  width: 60%;
 }
-#entry_translit{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#form{
-  display: inline;
-}
-#language{
-  display: inline;
-}
-#place{
-  display: inline;
-}
-#time{
-  display: inline; 
-}
-#user{
-  display: inline;
-}
-/* finish for entry_display.php*/
-
-/*for entry_create.php*/
-
-#authors{
-  display: inline;
-}
-#entry_create_form{
-  margin-left: 200px;
-  border: solid;
-  margin-right: 200px;
-  padding: 50px;
-}
-.Entry_create_row{
-  display: table-row;
-}
-
-#entry_source_label{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_source_value{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_text_in_original_label{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_text_in_original_value{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_text_translated_label{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_text_translated_value{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_translit{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#form{
-  display: inline;
-}
-.Form_management_buttons{
-  padding: 10px;
-}
-
-#language{
-  display: inline;
-}
-.Note{
+.entry_record_title{
+  /*border: ridge 10px red;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: block;
+  /*font-family: serif "Georgia";*/
   font-style: italic;
   color: gray;
+  margin: auto;
+  /*margin-left: 10%;*/
+  /*margin-right: 10%;*/
+  width: 55%;
 }
-.Painted_red{
-  color: red;
+.entry_record_value{
+  background: white;
+  /*border: ridge 10px orange;*/
+  border: 1px solid #c1c1c1;
+  box-shadow: 5px 5px 5px #888888;
+  display: block;
+  font-family: serif "Georgia";
+  font-size: large;
+  margin: auto;
+  /*margin-left: 10%;*/
+  /*margin-right: 10%;*/
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 55%;
 }
-#place{
-  display: inline;
-}
-.Row_lable{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-  text-align: right;
-  font-style: italic;
-  vertical-align: top;
-}
-.Row_value{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-  vertical-align: top;
-}
-#source_language_lable{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#source_language_value{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#target_language_lable{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#target_language_value{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#time{
-  display: inline; 
-}
-#user{
-  display: inline;
-}
+
 /*fiish entry_create.php*/
