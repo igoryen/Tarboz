@@ -503,4 +503,176 @@ body{
   width: 55%;
 }
 
-/*fiish entry_create.php*/
+/*finish entry_display.php*/
+
+/* start entry_create.php */
+#entry_create_form{
+  /*border: ridge 10px red;*/
+  margin-left: 20%;
+  margin-right: 20%;
+  /*padding: 50px;*/
+}
+#create_entry_form_title{
+  font-size: large;
+}
+.entry_create_row{
+  /*border: ridge 10px blue;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: block;
+  margin-left: 80px;
+  margin-right: 80px;
+  padding: 5px;
+  /*margin: auto;*/
+
+}
+.entry_create_record_title{
+  /*border: ridge 10px green;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell;
+  padding-left: 5px;
+  vertical-align: top;
+  width: 180px;
+}
+.entry_create_record_value{
+  /*border: ridge 10px orange;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell;
+}
+.entry_create_record_title_explanation{
+  color: gray;
+  font-style: italic;
+}
+.Painted_red{
+  color: red;
+}
+#place{
+  display: inline;
+}
+.Row_lable{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+  text-align: right;
+  font-style: italic;
+  vertical-align: top;
+}
+.Row_value{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+  vertical-align: top;
+}
+#source_language_lable{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#source_language_value{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#target_language_lable{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#target_language_value{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#time{
+  display: inline; 
+}
+#user{
+  display: inline;
+
+#authors{
+  display: inline;
+}
+#entry_profile{
+  margin-left: 200px;
+  margin-right: 200px;
+  padding: 50px;
+}
+.Entry_profile_row{
+}
+#entry_text{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_translit{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#form{
+  display: inline;
+}
+#language{
+  display: inline;
+}
+#place{
+  display: inline;
+}
+#time{
+  display: inline; 
+}
+#user{
+  display: inline;
+}
+/* finish for entry_display.php*/
+
+/* for entry_create.php */
+
+#authors{
+  /*display: inline;*/
+}
+
+#entry_source_label{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_source_value{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_text_in_original_label{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_text_in_original_value{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_text_translated_label{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_text_translated_value{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+/* finish entry_create.php */
