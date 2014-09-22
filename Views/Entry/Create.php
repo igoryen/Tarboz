@@ -1,4 +1,4 @@
-<?php require("header.php"); ?>
+<?php require("../../header.php"); ?>
 
   <div id="entry_create_form">
     Create entry
@@ -107,4 +107,4 @@
 
   </div>
 
-<?php require("footer.php"); ?>
+<?php require("../../footer.php"); ?>

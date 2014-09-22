@@ -1,4 +1,4 @@
-  <?php require("header.php"); ?>
+  <?php require("../../header.php"); ?>
 
   <div id="entry_profile">
 
@@ -49,4 +49,4 @@
 
 
   </div>
-<?php require("footer.php"); ?>
+<?php require("../../footer.php"); ?>

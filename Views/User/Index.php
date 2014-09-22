@@ -1,12 +1,22 @@
-<?php require("header.php"); ?>
+<?php
+  require("../../header.php");
+?>
 
   <div class="User_profile">
+    <?php 
+  // echo "dirname SCRIPT_NAME: " . dirname($_SERVER['SCRIPT_NAME']) . "<br>"; 
+  // echo "dirname  DOCUMENT_ROOT: " . dirname($_SERVER['DOCUMENT_ROOT']) . "<br>"; 
+  // echo "dirname  __FILE__  " . dirname(__FILE__) . "<br>"; 
+  // echo "basename  __FILE__ : " . basename(__FILE__) . "<br>"; 
+  // $pathInPieces = explode('/', dirname($_SERVER['SCRIPT_NAME']));
+  // echo $pathInPieces[1];
+  ?>
 
     <div class="Left_panel">
 
       <div id="user_photo_id">
         <div id="user_photo">
-          <img src="images/hubert.jpg" alt="User" height="142">
+          <img src="../../Images/hubert.jpg" alt="User" height="142">
         </div>
         <div id="user_id">
           <div id="user_name">Hubert Humphrey</div>
@@ -34,4 +44,4 @@
     </div>
 
   </div>
-<?php require("footer.php"); ?>
+<?php require("../../footer.php"); ?>
