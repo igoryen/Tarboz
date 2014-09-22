@@ -1,14 +1,21 @@
 <?php require("../../header.php"); ?>
 
   <div id="entry_create_form">
-    Create entry
-    <div class="Note">
-      Note: fields marked with the red asterisk (<span class="Painted_red">*</span>) are mandatory.
+    <div class="entry_create_row">
+      <div id="create_entry_form_title">Create entry</div>
+      <div class="Note">
+        Note: fields marked with the red asterisk (<span class="Painted_red">*</span>) are mandatory.
+      </div>
     </div>
+    
 
-    <div class="Entry_create_row">
-      <div class="Row_lable">Source language <span class="Painted_red">*</span> </div>
-      <div class="Row_value">
+    <div class="entry_create_row">
+      <div class="entry_create_record_title">Source language <span class="Painted_red">*</span>
+        <!--<div class="entry_create_record_title_explanation">
+          The language in which the text of your phrase is written
+        </div>-->
+      </div>
+      <div class="entry_create_record_value">
         <select name="entry_source_lang">
           <option selected="selected">Choose one...</option>
           <option>English</option>
@@ -18,9 +25,9 @@
       </div>
     </div>
 
-    <div class="Entry_create_row">
-      <div class="Row_lable">Target language <span class="Painted_red">*</span> </div>
-      <div class="Row_value">
+    <div class="entry_create_row">
+      <div class="entry_create_record_title">Target language <span class="Painted_red">*</span> </div>
+      <div class="entry_create_record_value">
         <select name="entry_target_lang">
           <option selected="selected">Choose one...</option>
           <option>English</option>
@@ -30,27 +37,27 @@
       </div>
     </div>
 
-    <div class="Entry_create_row">
-      <div class="Row_lable">
+    <div class="entry_create_row">
+      <div class="entry_create_record_title">
         Text of the phrase <span class="Painted_red">*</span> 
       </div>
-      <div class="Row_value">
+      <div class="entry_create_record_value">
         <textarea rows="4" cols="50" placeholder="Enter the text of the phrase"></textarea>
       </div>
     </div>
     
-    <div class="Entry_create_row">
-      <div class="Row_lable">
+    <div class="entry_create_row">
+      <div class="entry_create_record_title">
          Translation <span class="Painted_red">*</span> 
       </div>
-      <div class="Row_value">
+      <div class="entry_create_record_value">
         <textarea rows="4" cols="50" placeholder="Enter the translation of the phrase"></textarea>
       </div>
     </div>
 
-    <div class="Entry_create_row">
-      <div class="Row_lable">Authenticity status <span class="Painted_red">*</span> </div>
-      <div class="Row_value">
+    <div class="entry_create_row">
+      <div class="entry_create_record_title">Authenticity status <span class="Painted_red">*</span> </div>
+      <div class="entry_create_record_value">
         <select name="entry_auth_status">
           <option selected="selected">Choose one...</option>
           <option>Original</option>
@@ -60,11 +67,11 @@
       </div>
     </div>
 
-    <div class="Entry_create_row">
-      <div class="Row_lable">
+    <div class="entry_create_row">
+      <div class="entry_create_record_title">
          Source
       </div>
-      <div class="Row_value">
+      <div class="entry_create_record_value">
          <select name="entry_source">
           <option selected="selected">Choose one...</option>
           <option>Book</option>
@@ -76,11 +83,11 @@
       </div>
     </div>
 
-    <div class="Entry_create_row">
-      <div class="Row_lable">
+    <div class="entry_create_row">
+      <div class="entry_create_record_title">
         Country
       </div>
-      <div class="Row_value">
+      <div class="entry_create_record_value">
         <select name="entry_country">
           <option selected="selected">Choose one...</option>
           <option>Russia</option>
@@ -90,17 +97,17 @@
       </div>
     </div>
 
-    <div class="Entry_create_row">
-      <div class="Row_lable">
+    <div class="entry_create_row">
+      <div class="entry_create_record_title">
         Phrase use  <span class="Painted_red">*</span> 
       </div>
-      <div class="Row_value">
+      <div class="entry_create_record_value">
         <textarea rows="4" cols="50"
           placeholder="Describe how to use this phrase"></textarea>
       </div>
     </div>
 
-    <div class="Form_management_buttons">
+    <div class="entry_create_row">
       <button type="submit">Submit</button>
       <button type="reset">Reset</button>
     </div>
