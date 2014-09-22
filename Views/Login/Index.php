@@ -1,15 +1,25 @@
-<?php
+<?php 
+  require("../../header.php");
+// session_start();
 
-function login_form(){
+// if(isset($_SESSION['user'])){
+  // header('Location: index.php');
+  // exit();
+// }
+// else{
+  //include("func_lib.php");
+//   $title = "Please, log in";
+   //login_form();
+// }
 ?>
   <form 
     action="login.php" 
     method="post">
-  <!--
-  <form 
-    action="<?php echo $_SERVER['PHP_SELF']; ?>" 
-    method="post">
-  -->
+    <!--
+    <form 
+      action="<?php echo $_SERVER['PHP_SELF']; ?>" 
+      method="post">
+    -->
     <div id="tablecloth">
       <div id="placemat">
         <div id="login_form">
@@ -25,9 +35,5 @@ function login_form(){
         </div>
       </div>
     </div>
-
-
   </form>
-<?php
-}
-?>
+<?php require("../../footer.php"); ?>

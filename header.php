@@ -1,8 +1,17 @@
-<html>
+<?php
+  //require("include/config.php");
+  // echo "dirname  DOCUMENT_ROOT: " . dirname($_SERVER['DOCUMENT_ROOT']) . "<br>"; 
+  // echo "dirname  __FILE__  " . dirname(__FILE__) . "<br>"; 
+  // echo "basename  __FILE__ : " . basename(__FILE__) . "<br>"; 
+  // //$pathInPieces = explode('/', dirname($_SERVER['SCRIPT_NAME']));
+  // echo "dirname SCRIPT_NAME: " . dirname($_SERVER['SCRIPT_NAME']) . "<br>"; 
+  $pathInPieces = explode('\\', dirname(__FILE__));
+  $root = "/" . $pathInPieces[3];
+?><html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="style/style.css"  />
-  <link rel="shortcut icon" href="images/watermelon8.png"/>
+  <link rel="stylesheet" type="text/css" href="/Tarboz/Content/style.css"/>
+  <link rel="shortcut icon" href="/TarbozImages/watermelon8.png"/>
   <title>WWG</title>
 </title>
 <body>
@@ -10,8 +19,14 @@
 
     <div id="header">
       <div class="header_row">
-        <div id="logo"><img src="images/logo.png" height="50"></div>
-        <nav id="navigation">Home  |  FAQ | LINK 2 | LINK 3</nav>
-        <div id="links"><a href="login.php">Login</a></div>
+        <div id="logo"><img src="/Tarboz/Images/logo.png" height="50"></div>
+        <nav id="navigation">
+          <a href="/Tarboz/index.php">Home</a> |
+          <a href="/Tarboz/Views/Entry/Index.php">Entry Index</a>  |  
+          <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>  | 
+          <a href="/Tarboz/Views/Login/Index.php">Login Index</a>  | 
+          <a href="/Tarboz/Views/User/Index.php">User Index</a>  | 
+        </nav>
+        <div id="links"><a href="/TarbozViews/Login/Login.php">Login</a></div>
       </div>
     </div><!--"header"-->
