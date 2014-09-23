@@ -1,5 +1,10 @@
 <?php
   require("../../header.php");
+  $photo_url = "../../Images/hubert.jpg";
+  $name = "Hubert Humphrey";
+  $country = "Canada";
+  $languages = "Russian, English, Pharsi, Mandarin, English";
+  $contributions = "<ul><li>I'm a man who's suffering from the narzan.</li><li>We will be helped from abroad!</li><li>Come back, you abortion!</li><li>It's a sin to eat cabbage like this without vodka!</li></ul>More ...";
 ?>
 
   <div id="user_profile_container">
@@ -22,39 +27,27 @@
         <div id="user_pers_info">
 
           <div id="user_pers_info_photo">
-            <img src="../../Images/hubert.jpg" alt="User" height="142">
+            <img src="<?php echo $photo_url; ?>" alt="User" height="142">
           </div>
 
           <div id="user_pers_info_desc">
 
             <!-- row 1 -->
             <div class="user_pers_info_desc_row">
-              <div class="user_pers_info_desc_row_title">
-                Name
-              </div>
-              <div class="user_pers_info_desc_row_value">
-                Hubert Humphrey
-              </div>
+              <div class="user_pers_info_desc_row_title">Name</div>
+              <div class="user_pers_info_desc_row_value"><?php echo $name; ?></div>
             </div>
 
             <!-- row 2 -->
             <div class="user_pers_info_desc_row">
-              <div class="user_pers_info_desc_row_title">
-                Country
-              </div>
-              <div class="user_pers_info_desc_row_value">
-                Canada
-              </div>
+              <div class="user_pers_info_desc_row_title">Country</div>
+              <div class="user_pers_info_desc_row_value"><?php echo $country; ?></div>
             </div>
 
             <!-- row 3 -->
             <div class="user_pers_info_desc_row">
-              <div class="user_pers_info_desc_row_title">
-                Knows languages
-              </div>
-              <div class="user_pers_info_desc_row_value">
-                Russian, English, Pharsi, Mandarin, English
-              </div>
+              <div class="user_pers_info_desc_row_title">Knows</div>
+              <div class="user_pers_info_desc_row_value"><?php echo $languages; ?></div>
             </div>
 
           </div><!-- user_pers_info_desc -->
@@ -62,18 +55,8 @@
         </div><!-- user_pers_info -->
 
         <div id="user_contrib">
-          <div id="user_contrib_title">
-            Contributed
-          </div>
-          <div id="user_contrib_values">
-            <ul>
-              <li>I'm a man who's suffering from the narzan.</li>
-              <li>We will be helped from abroad!</li>
-              <li>Come back, you abortion!</li>
-              <li>It's a sin to eat cabbage like this without vodka!</li>
-            </ul>
-            More ...
-          </div>
+          <div id="user_contrib_title">Contributed</div>
+          <div id="user_contrib_values"><?php echo $contributions; ?></div>
         </div> <!--user_contrib-->
 
       </div><!--user_middle_panel-->
