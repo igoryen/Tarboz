@@ -1,5 +1,5 @@
 <?php
-  require("../../header.php");
+  require("../Shared/header.php");
   $photo_url = "../../Images/hubert.jpg";
   $name = "Hubert Humphrey";
   $country = "Canada";
@@ -68,4 +68,4 @@
     </div><!-- user_profile-->
 
   </div><!--user_profile_container-->
-<?php require("../../footer.php"); ?>
+<?php require("../Shared/footer.php"); ?>

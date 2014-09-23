@@ -1,4 +1,4 @@
-<?php require("../../header.php"); ?>
+<?php require("../Shared/header.php"); ?>
 
   <div id="entry_create_form">
     <div class="entry_create_row">
@@ -114,4 +114,4 @@
 
   </div>
 
-<?php require("../../footer.php"); ?>
+<?php require("../Shared/footer.php"); ?>
