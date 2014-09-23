@@ -1,11 +1,11 @@
-<?php require("index_header.php"); ?>
+<?php require("../Shared/index_header.php"); ?>
 
 	<div id="index_table_container">
 
 		<div id="index_table">
 
 			<div id="LeftCol">
-				<object id="obj" type="text/html" data="1.htm">
+				<object id="obj" type="text/html" data="/Tarboz/1.htm">
 				</object>
 			</div><!--LeftCol-->
 
@@ -64,13 +64,13 @@
 							<table id="innertbl">
 								<tr>
 									<td>
-										<img src="Images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
+										<img src="/Tarboz/Images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
 									</td>
 									<td>
-										<img src="Images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
+										<img src="/Tarboz/Images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
 									</td>
 									<td>
-										<img src="Images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
+										<img src="/Tarboz/Images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
 									</td>
 								</tr>
 							</table><!--innertbl-->
@@ -87,4 +87,4 @@
 
 	</div><!--"index_table_container"-->
 
-<?php require("footer.php"); ?>
+<?php require("../Shared/footer.php"); ?>

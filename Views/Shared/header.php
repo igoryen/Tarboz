@@ -5,8 +5,8 @@
   // echo "basename  __FILE__ : " . basename(__FILE__) . "<br>"; 
   // //$pathInPieces = explode('/', dirname($_SERVER['SCRIPT_NAME']));
   // echo "dirname SCRIPT_NAME: " . dirname($_SERVER['SCRIPT_NAME']) . "<br>"; 
-  $pathInPieces = explode('\\', dirname(__FILE__));
-  $root = "/" . $pathInPieces[3];
+  // $pathInPieces = explode('\\', dirname(__FILE__));
+  // $root = "/" . $pathInPieces[3];
 ?><html>
 <head>
   <meta charset="UTF-8">
@@ -21,7 +21,7 @@
       <div class="header_row">
         <div id="logo"><img src="/Tarboz/Images/logo.png" height="50"></div>
         <nav id="navigation">
-          <a href="/Tarboz/index.php">Home</a> |
+          <a href="/Tarboz/Views/Home/index.php">Home</a> |
           <a href="/Tarboz/Views/Entry/Index.php">Entry Index</a>  |  
           <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>  | 
           <a href="/Tarboz/Views/Login/Index.php">Login Index</a>  | 

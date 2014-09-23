@@ -1,4 +1,4 @@
-  <?php require("../../header.php"); 
+  <?php require("../Shared/header.php");
     $text = "с днем рожденья тебя!<br>с днем рожденья тебя! <br>с днем рождения, Вася!<br>с днем рожденья тебя!";
     $translit = "s dnem rozhden'ya tebya!<br>s dnem rozhden'ya tebya! <br>s dnem rozhdeniya, Vasya!<br>s dnem rozhden'ya tebya!";
     $video_link = "https://www.youtube.com/v/CjD0KdRYyDo";
@@ -65,4 +65,4 @@
     </div>
 
   </div><!--entry_index_container-->
-<?php require("../../footer.php"); ?>
+<?php require("../Shared/footer.php"); ?>
