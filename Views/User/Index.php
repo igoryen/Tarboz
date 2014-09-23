@@ -4,7 +4,7 @@
   $name = "Hubert Humphrey";
   $country = "Canada";
   $languages = "Russian, English, Pharsi, Mandarin, English";
-  $contributions = "<ul><li>I'm a man who's suffering from the narzan.</li><li>We will be helped from abroad!</li><li>Come back, you abortion!</li><li>It's a sin to eat cabbage like this without vodka!</li></ul>More ...";
+  $contributions = "<ul><li><a href='/Tarboz/Views/Entry/Index.php'>С днем рождения тебя!</a></li><li>I'm a man who's suffering from the narzan.</li><li>We will be helped from abroad!</li><li>Come back, you abortion!</li><li>It's a sin to eat cabbage like this without vodka!</li></ul>More ...";
 ?>
 
   <div id="user_profile_container">
