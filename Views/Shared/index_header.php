@@ -2,8 +2,8 @@
 <head>
   <meta charset="UTF-8">
   <!-- for the virtual keyboard -->
-  <script type="text/javascript" src="Scripts/keyboard.js" charset="UTF-8"></script>
-  <link rel="stylesheet" type="text/css" href="/Tarboz/Content/keyboard.css">
+  <script type="text/javascript" src="/Tarboz/packages/virtual_keyboard/keyboard.js" charset="UTF-8"></script>
+  <link rel="stylesheet" type="text/css" href="/Tarboz/packages/virtual_keyboard/keyboard.css">
 
   <link rel="stylesheet" type="text/css" href="/Tarboz/Content/style.css"  />
   <link rel="shortcut icon" href="/Tarboz/Images/watermelon8.png"/>
