@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="/Tarboz/Content/style.css"/>
-  <link rel="shortcut icon" href="/TarbozImages/watermelon8.png"/>
+  <link rel="shortcut icon" href="/Tarboz/Images/watermelon8.png"/>
   <title>WWG</title>
 </title>
 <body>
