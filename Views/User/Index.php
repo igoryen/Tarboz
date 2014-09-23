@@ -2,7 +2,7 @@
   require("../../header.php");
 ?>
 
-  <div class="User_profile">
+  <div id="user_profile_container">
     <?php 
   // echo "dirname SCRIPT_NAME: " . dirname($_SERVER['SCRIPT_NAME']) . "<br>"; 
   // echo "dirname  DOCUMENT_ROOT: " . dirname($_SERVER['DOCUMENT_ROOT']) . "<br>"; 
@@ -11,37 +11,78 @@
   // $pathInPieces = explode('/', dirname($_SERVER['SCRIPT_NAME']));
   // echo $pathInPieces[1];
   ?>
+    <div id="user_profile">
 
-    <div class="Left_panel">
-
-      <div id="user_photo_id">
-        <div id="user_photo">
-          <img src="../../Images/hubert.jpg" alt="User" height="142">
-        </div>
-        <div id="user_id">
-          <div id="user_name">Hubert Humphrey</div>
-          <div id="user_country">from Canada</div>
-          <div id="user_langs">knows Russian, English, Mandarin, Pharsi, Hindi</div>
-          <div id="user_contributions_no">made 130+ contributions</div>
-        </div>
+      <div id="user_left_panel">
+        left panel
       </div>
 
-      <div id="user_contributions">
-        Recent contributions:
-        <ul>
-          <li>I'm a man who's suffering from the narzan.</li>
-          <li>We will be helped from abroad!</li>
-          <li>Come back, you abortion!</li>
-          <li>It's a sin to eat cabbage like this without vodka!</li>
-        </ul>
-        More ...
+      <div id="user_middle_panel">
+
+        <div id="user_pers_info">
+
+          <div id="user_pers_info_photo">
+            <img src="../../Images/hubert.jpg" alt="User" height="142">
+          </div>
+
+          <div id="user_pers_info_desc">
+
+            <!-- row 1 -->
+            <div class="user_pers_info_desc_row">
+              <div class="user_pers_info_desc_row_title">
+                Name
+              </div>
+              <div class="user_pers_info_desc_row_value">
+                Hubert Humphrey
+              </div>
+            </div>
+
+            <!-- row 2 -->
+            <div class="user_pers_info_desc_row">
+              <div class="user_pers_info_desc_row_title">
+                Country
+              </div>
+              <div class="user_pers_info_desc_row_value">
+                Canada
+              </div>
+            </div>
+
+            <!-- row 3 -->
+            <div class="user_pers_info_desc_row">
+              <div class="user_pers_info_desc_row_title">
+                Knows languages
+              </div>
+              <div class="user_pers_info_desc_row_value">
+                Russian, English, Pharsi, Mandarin, English
+              </div>
+            </div>
+
+          </div><!-- user_pers_info_desc -->
+
+        </div><!-- user_pers_info -->
+
+        <div id="user_contrib">
+          <div id="user_contrib_title">
+            Contributed
+          </div>
+          <div id="user_contrib_values">
+            <ul>
+              <li>I'm a man who's suffering from the narzan.</li>
+              <li>We will be helped from abroad!</li>
+              <li>Come back, you abortion!</li>
+              <li>It's a sin to eat cabbage like this without vodka!</li>
+            </ul>
+            More ...
+          </div>
+        </div> <!--user_contrib-->
+
+      </div><!--user_middle_panel-->
+
+      <div id="user_right_panel">
+        right panel
       </div>
 
-    </div>
+    </div><!-- user_profile-->
 
-    <div class="Right_panel">
-      bbb
-    </div>
-
-  </div>
+  </div><!--user_profile_container-->
 <?php require("../../footer.php"); ?>

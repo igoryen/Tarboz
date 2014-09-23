@@ -400,26 +400,127 @@ body{
 }
 /* finish search_result.php */
 
+/*=====================================*/
 
+/* start user_profile.css*/
 
-/*for user_profile.css*/
-.Left_panel{
-    display: table-cell; /* 10 */
-    width: 70%;
-    border: solid green;
-    border-width: thin;
-    padding: 5px;
-    vertical-align: top;
+#user_profile_container{
+  /*border: ridge 10px red;*/
+  border-spacing: 10px;
+  /*display: block;*/
+  margin: 5px auto;
+  /*margin-left: 10%;*/
+  /*margin-right: 10%;*/
+  /*padding: 5px;*/
+  width: 98%;
+    
+}
+#user_profile{
+  /*border: ridge 10px darksalmon;*/
+  display: block;
+  margin: auto;
+  width: 95%;
 }
 
-.Right_panel{
-    display: table-cell; /* 10 */
-    width: 20%;
-    border: solid blue;
-    border-width: thin;
-    padding: 5px;
-    vertical-align: top;
+#user_left_panel{
+  background-color: white;
+  /*border: ridge 10px green;*/
+  border: 1px solid #c1c1c1;
+  box-shadow: 5px 5px 5px #888888;
+  display: table-cell;
+  padding: 5px;
+  vertical-align: top;
+  width: 20%;
 }
+
+
+#user_middle_panel{
+  border: 1px solid #c1c1c1;
+  /*border: ridge 10px orange;*/
+  box-shadow: 5px 5px 5px #888888;
+  /*display: block;*/
+  display: table-cell;
+  /*display: table;*/
+  width: 40%;
+}
+
+#user_right_panel{
+  background-color: white;
+  border: 1px solid #c1c1c1;
+  /*border: ridge 10px blue;*/
+  box-shadow: 5px 5px 5px #888888;
+  display: table-cell; /* 10 */
+  padding: 5px;
+  vertical-align: top;
+  width: 20%;
+}
+
+#user_pers_info{
+  /*border: ridge 10px magenta;*/
+  /*border: 1px solid #c1c1c1;*/
+  border-spacing: 5px;
+  display: block;
+}
+
+#user_pers_info_photo{
+  /*border: ridge 10px chocolate;*/
+  /*border: 1px solid #c1c1c1;*/
+  /*display: block;*/
+  display: table-cell;
+  vertical-align: middle;
+  /*width: 100px;*/
+}
+#user_pers_info_desc{
+  /*border: ridge 10px cornflowerblue;*/
+  /*display: block;*/
+  display: table-cell;
+  /*width: 100px;*/
+}
+.user_pers_info_desc_row{
+  /*border: ridge 10px crimson;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: block;
+}
+.user_pers_info_desc_row_title{
+  /*border: ridge 10px cyan;*/
+  /*border: 1px solid #c1c1c1;*/
+  color: gray;
+  display: block;
+  font-style: italic;
+  padding: 3px;
+}
+.user_pers_info_desc_row_value{
+  background-color: white;
+  /*border: ridge 10px darkblue;*/
+  border: 1px solid #c1c1c1;
+  display: block;
+  font-family: serif "Georgia";
+  font-size: large;
+  padding: 2px;
+}
+
+#user_contrib{
+  /*border: ridge 10px chartreuse;*/
+  display: block;
+  padding: 5px;
+}
+#user_contrib_title{
+  /*border: ridge 10px darkcyan;*/
+  color: gray;
+  display: block;
+  font-style: italic;
+  padding-bottom: 3px;
+}
+#user_contrib_values{
+  background-color: white;
+  /*border: ridge 10px darkgoldenrod;*/
+  border: 1px solid #c1c1c1;
+  display: block;
+  font-family: serif "Georgia";
+  font-size: large;
+  padding: 5px;
+}
+
 #user_contributions{
     border: solid;
     border-width: thin;
@@ -451,13 +552,7 @@ body{
     padding-left: 5px;
     padding-right: 5px;
 }
-.User_profile{
-    border: solid red;
-    border-width: thin;
-    padding: 5px;
-    margin-left: 10%;
-    margin-right: 10%;
-}
+
 
 /* finish user_profile.css*/
 
