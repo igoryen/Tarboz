@@ -27,6 +27,6 @@
           <a href="/Tarboz/Views/Login/Index.php">Login Index</a>  | 
           <a href="/Tarboz/Views/User/Index.php">User Index</a>  | 
         </nav>
-        <div id="links"><a href="/TarbozViews/Login/Login.php">Login</a></div>
+        <div id="links"><a href="/Tarboz/Views/Login/Index.php">Login</a></div>
       </div>
     </div><!--"header"-->

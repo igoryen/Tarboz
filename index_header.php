@@ -23,7 +23,7 @@
             <a href="/Tarboz/Views/Login/Index.php">Login Index</a>  | 
             <a href="/Tarboz/Views/User/Index.php">User Index</a>  | 
         </nav>
-        <div id="links"><a href="./Views/Login/login.php">Login</a></div>
+        <div id="links"><a href="./Views/Login/Index.php">Login</a></div>
       </div>
 
       <div class="header_row">
