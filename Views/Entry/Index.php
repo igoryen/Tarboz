@@ -7,7 +7,7 @@
     $time = "late 20th century";
     $country = "Russia";
     $form = "song";
-    $user = "user123";
+    $user = "<a href='/Tarboz/Views/User/Index.php'>user123</a>";
   ?>
 
   <div id="entry_index_container">
