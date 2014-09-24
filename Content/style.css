@@ -416,16 +416,21 @@ div#footer > div > a {
 }
 
 .door{
+  background-color: azure;
   /*border: ridge 10px blueviolet;*/
-  /*border: 1px solid #c1c1c1;*/
+  border: 1px solid #c1c1c1;
   color: silver;
+  /*display: inline-block;*/
   display: block;
+  float: left;
   font-weight: bold;
   margin: auto;
   padding: 3px;
   padding-left: 10px;
+  /*position: initial;*/
   vertical-align: middle;
-  width: 95%;
+  width: 98.5%;
+  /*width: auto;*/
 
 }
 
