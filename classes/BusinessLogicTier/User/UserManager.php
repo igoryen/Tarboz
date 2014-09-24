@@ -1,7 +1,7 @@
 <?php
 
 	//this is a constant ,we will put it inside the include files, where it will show the location to the files,
-	require_once DATA_ACCESSOR_DIR . 'UserDataAccessor.php';
+	require_once DATA_ACCESSOR_DIR_USER . 'UserDataAccessor.php';
 	
 	class UserManager {
 		
@@ -60,11 +60,9 @@
 			$user = $userDataAccessor->getUserByLoginId($userlogin);
 			
 			return $user;			
-			
 		}
 		
 		public function getAllUsers(){
-			// implementation
 			
 			$userDataAccessor = new UserDataAccessor();
 			
@@ -89,7 +87,7 @@
 
 			$userDataAccessor = new UserDataAccessor();			
 
-			$user= $userDataAccessor->getUserByName($userfname,$userlname);
+			$users= $userDataAccessor->getUserByName($userfname,$userlname);
 
 			return $users;	
 		}

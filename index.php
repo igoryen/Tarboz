@@ -87,4 +87,4 @@
 
 	</div><!--"index_table_container"-->
 
-<?php require("footer.php"); ?>
+<?php require("includes/footer.php"); ?>
