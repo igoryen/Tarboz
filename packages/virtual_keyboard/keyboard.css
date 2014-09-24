@@ -268,4 +268,6 @@
   margin:0px 3px;
   vertical-align:middle;
   cursor:pointer;
+  /*modify search keyboard input position*/
+  padding: 0px 0px 9px 13px;
 }
