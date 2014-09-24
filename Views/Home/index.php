@@ -89,4 +89,5 @@
 
 	</div><!--"index_table_container"-->
 
-<?php require("../Shared/footer.php"); ?>
+<?php require("includes/footer.php"); ?>
+

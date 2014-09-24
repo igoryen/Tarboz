@@ -1,11 +1,10 @@
 <?php
 
-	require_once DATA_ACCESSOR_DIR . 'DBHelper.php';
-	
-	require_once BUSINESS_DIR . 'User.php';
-	
-	//has constants for the table; USER
-	require_once('datainfo.php');
+	require_once DB_CONNECTION . 'DBHelper.php';
+	require_once BUSINESS_DIR_USER. 'User.php';
+		//has constants for the table; USER
+	require_once(DB_CONNECTION.'datainfo.php');	
+
 
 	class UserDataAccessor {
 	
@@ -119,7 +118,8 @@
 		
 		//for search
 		public function getUserByLoginId($loginid){
-			$query = "SELECT * FROM .'USER.' WHERE usr_user_id = $loginid";
+		
+			$query = "SELECT * FROM ".USER."  WHERE usr_login = ".' " $loginid " ' ;
 
 			// create new instance of database helper
 			$dbHelper = new DBHelper();
@@ -130,6 +130,7 @@
 			// returns the user
 			$user = $this->getUser($result);
 
+			
 			return $user;
 
 		}
@@ -137,11 +138,12 @@
 		//To be moved to bottom later, private to be accessed by member functions only..
 	    private function getUser($selectResult){
 		
-			$User = null;
-			$count = 0;
-			while($list = mysql_fetch_assoc($selectResult)){
-			////usr_user_id,`usr_first_name`, `usr_last_name`, `usr_login`, `usr_password`, `usr_email`, `usr_DOB`, `usr_registration_date`, `usr_user_type_id`, `usr_language`, `usr_email_subscribed`
 			$User = new User();
+			$count = 0;
+			
+			while($list = mysqli_fetch_assoc($selectResult)){
+			////usr_user_id,`usr_first_name`, `usr_last_name`, `usr_login`, `usr_password`, `usr_email`, `usr_DOB`, `usr_registration_date`, `usr_user_type_id`, `usr_language`, `usr_email_subscribed`
+						
 			$User->setUserId($list['usr_user_id']);
 			
 			$User->setFirstName($list['usr_first_name']);
@@ -150,13 +152,13 @@
 			
 			$User->setLogin($list['usr_login']);
 			
-			$User->setUserRatingId($list['']);
+			//$User->setUserRatingId($list['']);
 			
 			$User->setEmail($list['usr_email']);
 			
 			$User->setDOB($list['usr_DOB']);
 			
-			$User->setLocation($list['']);
+			//$User->setLocation($list['']);
 			
 			$User->setRegistration_date($list['usr_registration_date']);
 			
@@ -166,11 +168,9 @@
 			
 			$User->setEmailSub($list['usr_email_subscribed']);
 			
-			
-		
 			}
-
-			return $User;			
+			return $User;		
+			
 
 		} // end of getUser
 
@@ -178,16 +178,16 @@
 		//A function that returns all the users descending
 		public function getAllUsers(){			
 
-			$query = "SELECT * FROM .'USER'. ORDER BY usr_user_id DESC";
-
-			// create new instance of database helper
 			$dbHelper = new DBHelper();
-
+			
+			$query = "SELECT * FROM ".USER ." ORDER BY usr_user_id DESC" ;
+			 
 			// pass a query statment and get the data
-			$result = $dbHelper->executeSelect($query);
-
+			$result = $dbHelper->executeQuery($query);
+			
 			$Users = $this->getUserList($result);
-
+			
+			
 			return $Users;			
 
 		} 
@@ -195,14 +195,17 @@
 
 		private function getUserList($selectResult){
 		
-			$Users = null;
-			//Counter that keeps count of the users
-			$count = 0;
-			while($list = mysql_fetch_assoc($selectResult)){
 			
-				$Users = new User();
+			//Counter that keeps count of the users
+			$Users[] = new User();
+			
+			$count = 0;
+			
+			while($list = mysqli_fetch_assoc($selectResult)){
+			
+				$Users[] = new User();
 				
-				$Users->setUserId($list['usr_user_id']);
+				$Users[$count]->setUserId($list['usr_user_id']);
 				
 				$Users[$count]->setFirstName($list['usr_first_name']);
 				
@@ -210,13 +213,13 @@
 				
 				$Users[$count]->setLogin($list['usr_login']);
 				
-				$Users[$count]->setUserRatingId($list['']);
+				//$Users[$count]->setUserRatingId($list['']);
 				
 				$Users[$count]->setEmail($list['usr_email']);
 				
 				$Users[$count]->setDOB($list['usr_DOB']);
 				
-				$Users[$count]->setLocation($list['']);
+				//$Users[$count]->setLocation($list['']);
 				
 				$Users[$count]->setRegistration_date($list['usr_registration_date']);
 				
@@ -235,9 +238,10 @@
 		} // end of getAllUsers
 		
 			
+			
 		public function getUserByTypeId($userTypeId){
 
-			$query = "SELECT * FROM USER WHERE usr_user_type_id = $userTypeId";
+			$query = "SELECT * FROM ".USER. " WHERE usr_user_type_id = $userTypeId";
 
 			// create new instance of database helper
 			$dbHelper = new DBHelper();
@@ -245,7 +249,7 @@
 			// pass a query statment and get the data
 			$result = $dbHelper->executeSelect($query);
 
-			// returns a list of Users
+			// returns a list of
 			$Users = $this->getUserList($result);
 
 			return $Users;
@@ -255,10 +259,15 @@
 
 		//A function that gets the user by the names passed
 		public function getUserByName($userfname,$userlname){
+		
+			$userfname = "%".strtoupper($userfname)."%";
+			$userlname = "%".strtoupper($userlname)."%";
 
 			// returns returns all users with the names passed
-			$query = "SELECT * FROM .'USER'. WHERE first_name = '%'.'$userfname'.'%' and last_name = '%'.'$userlname'.'%' ";
+			//$query = "SELECT * FROM ".USER. "  WHERE upper(usr_first_name) like " ."%JOHN%";
 
+			$query = "SELECT * FROM ".USER." WHERE UPPER(USR_FIRST_NAME)  LIKE  '$userfname'";
+			
 			// create new instance of database helper
 			$dbHelper = new DBHelper();
 
@@ -271,12 +280,14 @@
 			return $Users;
 
 		} // end of getUserByName
-		
+	
 		//A function that you pass the language id to it and it returns you all the users that have similar language id;
 		public function getUserByLanguage($languageid){
 		
+		$languageid = "%".$languageid."%";
+		
 		// returns returns all users with the names passed
-			$query = "SELECT * FROM .'USER'. WHERE usr_language = '$languageid' ";
+			$query = "SELECT * FROM ".USER. "  WHERE usr_language LIKE '$languageid' ";
 
 			// create new instance of database helper
 			$dbHelper = new DBHelper();
@@ -289,11 +300,12 @@
 
 			return $Users;
 		}
-			
+		
+		
 		public function getUserByLocation($userloc){
 		
 		// returns returns all users with the names passed
-			$query = "SELECT * FROM .'USER'. WHERE usr_location_id = '$userloc' ";
+			$query = "SELECT * FROM ".USER. "   WHERE usr_location_id = '$userloc' ";
 
 			// create new instance of database helper
 			$dbHelper = new DBHelper();
@@ -306,6 +318,7 @@
 
 			return $Users;
 		}	
+				
 	
 	}
 

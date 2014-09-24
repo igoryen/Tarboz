@@ -1,0 +1,529 @@
+body{
+   color:#2a57fc;
+   font-family:Verdana, Geneva, sans-serif;
+   font-size:11px;
+}
+#maindiv {
+	position:absolute;
+	border: dotted 2px red;
+	height:Auto;
+	width: 98%;
+	/*background:#f8f8f2;*/
+}
+
+#header{
+  border:dotted 1px blue;
+  width: 100%;
+  position:relative;
+  height:auto;
+  border: 1px solid #999;
+  float:left;
+  background:#E0E0E0;
+  margin-bottom: 1%;
+}
+#logo{
+	margin-left:0.5%;
+	float:left;
+	border:Solid 1px;
+	width: 10%;
+	height:auto;
+	margin-top:1%;
+}
+#links{
+     position:relative;
+     margin-right:-4%;
+	 float:right;
+	 /*border:Solid 1px; */
+	 width: 10%;
+	 height:auto;
+}
+#navigation{
+	float:right;
+	width: 55%;
+	height:auto;
+	margin:0 auto;
+	margin-top:11%;	
+}
+
+#navigation{
+	float:right;
+	width: 55%;
+	height:auto;
+	margin:0 auto;
+	margin-top:11%;	
+}
+
+#search{
+
+	margin-top:1%;
+	margin-left:20%;
+	margin-bottom:-2%;
+}
+
+#search input[type=text]{ 
+	box-shadow: 2px 1.5px 2px #999;
+	font-size:25pt;
+	color:#999;
+    background: white url(../images/search.png) no-repeat 1% 50%; 
+    border: 1px solid white; 
+    padding-left: 3%;
+    width: 85%;
+	margin-left:2.5%;
+	margin-top:3%;
+	height:7%;
+	width:80%;
+}
+
+/*
+#searchinput {
+	background:white;
+	margin-top:20%;
+	height:7%;
+	width:80%;
+	border: 1px solid #0066cc;
+    outline:0; 
+}
+*/
+#searchinput img {
+	height:50px;
+	margin-top:3%;
+	margin-bottom:1%;
+}
+
+
+#search select ,input[type=date]{
+	border: 2px solid #eeeded; 
+	margin-top:1%;
+	margin-left:6%;	
+}
+#leftside{
+	margin-top:2%;
+	border: 1px solid #999;
+	width:25%;
+	height:auto;
+	float:left;
+	margin-left:0px;
+}
+
+#obj{
+	overflow:hidden;
+	width:100%;
+	height:470px;
+}
+#middleside{
+	margin-top:2%;
+	border: 1px solid #999;
+	width:49%;
+	height:50%;
+	float:left;
+}
+
+#middleside table{
+margin:0 auto;
+margin-top:1%;
+table-layout:fixed;
+border-spacing:20px;
+font-weight:bold;
+color:#999;
+font-size:12px;
+
+}
+
+#middleside td{
+	text-align:center;
+	border:1px solid #999;
+	box-shadow: 2px 1.5px 2px #999;
+	border-top-right-radius: 2em;
+	border-bottom-left-radius: 2em;
+	color:#999;
+}
+
+#middleside li{
+	margin-left:-10%;
+	color:#404040;
+	text-align:left;
+	font-size:11px;
+	font-weight:normal;
+	list-style:none;
+}
+
+#rightside{
+	margin-top:2%;
+	border: 1px solid #999;
+	width:25%;
+	height:50%;
+	float:right;
+}
+#footer{
+	position:relative;
+	width:100%;
+	height:auto;
+	border: 1px solid #999;
+	float:left;
+	background:#E0E0E0;
+	margin-top:2%;
+	
+}
+#footer p {
+	margin-top:0%;
+	margin-bottom:0%;
+}
+
+/*Footer Links*/
+.flink {
+	text-align:center;
+}
+
+#innertbl img{
+	border-top-right-radius: 2em;
+}
+
+/*---start login.php -------*/
+/*
+#tablecloth{
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border: solid magenta;
+}
+#placemat{
+  display: table-cell;
+  vertical-align: middle;
+  border: solid blue;
+}
+*/
+#login_form{
+  display: table;
+  border: solid red;
+  padding: 5px;
+  width-:400px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+.login_form_row{
+  display: table-row;
+  border: solid green;
+  padding: 5px;
+}
+#login_form_username{
+  display: table-cell;
+  border: solid;
+  padding: 5px;
+}
+#login_form_username_field{
+  display: table-cell;
+  border: solid;
+  padding: 5px;
+}
+#login_form_password{
+  display: table-cell;
+  border: solid;
+  padding: 5px;
+}
+#login_form_password_field{
+  display: table-cell;
+  border: solid;
+  padding: 5px;
+}
+/*--- finish login.php -------*/
+
+/*for search_result.php*/
+.Add_kid{
+    display: table-cell; /* 10 */
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle; /*50*/
+}
+/*-------------------------------
+10. Lets the element behave like a <td> element
+50. align text in cell vertically in the middle
+---------------------------------*/
+
+.Dad_link{
+    display: table-cell; /* 10 */
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle; /*50*/
+}
+.Kid_added_by{
+    display: table-cell; /* 10 */
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle; /*50*/
+}
+.Kid_link{
+    display: table-cell; /* 10 */
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle; /*50*/
+}
+.Kids_num{
+    display: table-cell; /* 10 */
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle; /*50*/
+}
+.Kid_votes{
+    display: table-cell; /* 10 */
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle; /*50*/
+}
+.Member_text{
+    display: table-cell; /* 10 */
+    width: 200px;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle; /*50*/    
+}
+.Mom{
+    display: table-cell; /* 10 */
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle; /*50*/
+}
+/* finish search_result.php */
+
+
+
+/*for user_profile.css*/
+.Left_panel{
+    display: table-cell; /* 10 */
+    width: 70%;
+    border: solid green;
+    border-width: thin;
+    padding: 5px;
+    vertical-align: top;
+}
+
+.Right_panel{
+    display: table-cell; /* 10 */
+    width: 20%;
+    border: solid blue;
+    border-width: thin;
+    padding: 5px;
+    vertical-align: top;
+}
+#user_contributions{
+    border: solid;
+    border-width: thin;
+    padding: 5px;
+    vertical-align: top;
+}
+#user_id{
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: top;
+}
+#user_name{
+    font-size: large;
+    font-weight: bold;  
+}
+#user_photo{
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    padding: 5px;
+}
+#user_photo_id{
+    display: table-row;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.User_profile{
+    border: solid red;
+    border-width: thin;
+    padding: 5px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/* finish user_profile.css*/
+
+
+/* for entry_display.php*/
+#authors{
+  display: inline;
+}
+#entry_profile{
+  margin-left: 200px;
+  margin-right: 200px;
+  padding: 50px;
+}
+.Entry_profile_row{
+}
+#entry_text{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_translit{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#form{
+  display: inline;
+}
+#language{
+  display: inline;
+}
+#place{
+  display: inline;
+}
+#time{
+  display: inline; 
+}
+#user{
+  display: inline;
+}
+/* finish for entry_display.php*/
+
+/*for entry_create.php*/
+
+#authors{
+  display: inline;
+}
+#entry_create_form{
+  margin-left: 200px;
+  border: solid;
+  margin-right: 200px;
+  padding: 50px;
+}
+.Entry_create_row{
+  display: table-row;
+}
+
+#entry_source_label{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_source_value{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_text_in_original_label{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_text_in_original_value{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_text_translated_label{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_text_translated_value{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#entry_translit{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#form{
+  display: inline;
+}
+.Form_management_buttons{
+  padding: 10px;
+}
+
+#language{
+  display: inline;
+}
+.Note{
+  font-style: italic;
+  color: gray;
+}
+.Painted_red{
+  color: red;
+}
+#place{
+  display: inline;
+}
+.Row_lable{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+  text-align: right;
+  font-style: italic;
+  vertical-align: top;
+}
+.Row_value{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+  vertical-align: top;
+}
+#source_language_lable{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#source_language_value{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#target_language_lable{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#target_language_value{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+#time{
+  display: inline; 
+}
+#user{
+  display: inline;
+}
+/*fiish entry_create.php*/
