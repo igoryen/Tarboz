@@ -698,6 +698,7 @@ body{
 /* start entry_create.php */
 #entry_create_form{
   /*border: ridge 10px red;*/
+  margin: 5px;
   margin-left: 20%;
   margin-right: 20%;
   /*padding: 50px;*/
@@ -706,8 +707,10 @@ body{
   font-size: large;
 }
 .entry_create_row{
+  background-color: white;
   /*border: ridge 10px blue;*/
-  border: 1px solid #c1c1c1;
+  border-left: 1px solid #c1c1c1;
+  border-right: 1px solid #c1c1c1;
   /*box-shadow: 5px 5px 5px #888888;*/
   display: block;
   margin-left: 80px;
