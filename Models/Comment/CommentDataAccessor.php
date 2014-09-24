@@ -33,7 +33,7 @@
 
 			$query_update = "UPDATE COMMENT SET 
 				com_text = $text,
-				com_rating_id = $rating_id;
+				com_rating_id = $rating_id,
 				com_created_by = $created_by
 			WHERE com_comment_id = $id
 			";
@@ -57,8 +57,8 @@
 			return $result;
 		}
 
-		public function deleteCommentById($comment->id) {
-			$query_delete = "DELETE FROM COMMENT WHERE com_comment_id = $comment->id";
+		public function deleteCommentById($comment_id) {
+			$query_delete = "DELETE FROM COMMENT WHERE com_comment_id = $comment_id";
 
 			$dbHelper = new DBHelper();
 
@@ -67,8 +67,8 @@
 			return $result;
 		}
 
-		public function getCommentById($comment->id) {
-			$query = "SELECT * FROM COMMENT WHERE com_comment_id = $comment->id";
+		public function getCommentById($comment_id) {
+			$query = "SELECT * FROM COMMENT WHERE com_comment_id = $comment_id";
 
 			$dbHelper = new DBHelper();
 
@@ -77,8 +77,8 @@
 			return $comment;
 		}
 
-		public function getCommentByUser($comment->created_by) {
-			$query = "SELECT * FROM COMMENT WHERE com_created_by = $comment->created_by";
+		public function getCommentByUser($comment_created_by) {
+			$query = "SELECT * FROM COMMENT WHERE com_created_by = $comment_created_by";
 
 			$dbHelper = new DBHelper();
 
@@ -87,8 +87,8 @@
 			return $comments_by_user;
 		}
 
-		public function getCommentByRating($comment->rating_id) {
-			$query = "SELECT * FROM COMMENT WHERE com_rating_id = $comment->rating_id";
+		public function getCommentByRating($comment_rating_id) {
+			$query = "SELECT * FROM COMMENT WHERE com_rating_id = $comment_rating_id";
 
 			$dbHelper = new DBHelper();
 

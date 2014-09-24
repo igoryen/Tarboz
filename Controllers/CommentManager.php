@@ -27,10 +27,10 @@
 			return $result;
 		}
 
-		public function deleteCommentById($comment->id){
+		public function deleteCommentById($comment_id){
 			$commentDataAccessor = new CommentDataAccessor();
 
-			$result = $commentDataAccessor->deleteCommentById($comment->id);
+			$result = $commentDataAccessor->deleteCommentById($comment_id);
 
 			return $result;
 		}
@@ -43,18 +43,18 @@
 			return $result;		
 		}
 
-		public function getCommentByUser($comment->created_by) {
+		public function getCommentByUser($comment_created_by) {
 			$commentDataAccessor = new CommentDataAccessor();
 
-			$result = $commentDataAccessor->getCommentByUser($comment->created_by);
+			$result = $commentDataAccessor->getCommentByUser($comment_created_by);
 
 			return $result;		
 		}
 
-		public function getCommentByRating($comment->rating_id) {
+		public function getCommentByRating($comment_rating_id) {
 			$commentDataAccessor = new CommentDataAccessor();
 
-			$result = $commentDataAccessor->getCommentByRating($comment->rating_id);
+			$result = $commentDataAccessor->getCommentByRating($comment_rating_id);
 
 			return $result;		
 		}
