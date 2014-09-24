@@ -18,6 +18,7 @@
         <div id="logo"><img src="/Tarboz/Images/logo.png" height="50"></div>
         <nav id="navigation">
           <a href="/Tarboz/Views/Home/Index.php">Home</a> |
+          <a href="/Tarboz/Views/Home/Result.php">Result</a> |
             <a href="/Tarboz/Views/Entry/Index.php">Entry Index</a>  |  
             <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>  | 
             <a href="/Tarboz/Views/Login/Index.php">Login Index</a>  | 

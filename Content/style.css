@@ -327,78 +327,173 @@ body{
 }
 /*--- finish login.php -------*/
 
-/*for search_result.php*/
-.Add_kid{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
+/*--- for search_result.php ---*/
+#land{
+  /*background-color: white;*/
+  /*border: ridge 10px fuchsia;*/
+  border-spacing: 5px;
+  margin: 5px auto;
+  padding: 5px;
+  width: 98%;
 }
-/*-------------------------------
-10. Lets the element behave like a <td> element
-50. align text in cell vertically in the middle
----------------------------------*/
 
-.Dad_link{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
+#village{
+  /*border: ridge 10px aqua;*/
+  display: block;
+  margin: 5px auto;
+  width: 95%;
 }
-.Kid_added_by{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
+#dad_house{
+  background-color: white;
+  /*background-color: #d4ddfe;*/
+  /*border: ridge 10px blue;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: block;
+  margin: 5px auto;
+  width: 90%;
+
 }
-.Kid_link{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
+.door{
+  /*border: ridge 10px blueviolet;*/
+  /*border: 1px solid #c1c1c1;*/
+  color: silver;
+  display: block;
+  font-weight: bold;
+  margin: auto;
+  padding: 3px;
+  padding-left: 10px;
+  vertical-align: middle;
+  width: 95%;
+
 }
-.Kids_num{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
+#dad_room{
+  /*border: ridge 10px brown;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: block;
+  margin: auto;
+  width: 95%;
+
 }
-.Kid_votes{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
+#dad_text{
+  background-color: white;
+  /*border: ridge 10px chartreuse;*/
+  /*border: 1px solid #c1c1c1;*/
+  color: black;
+  display: table-cell;
+  /*font-family: serif "Georgia";*/
+  font-family: sans-serif "Calibri";
+  font-size: large;
+  vertical-align: middle;
+  width: 500px;
+
 }
-.Member_text{
-    display: table-cell; /* 10 */
-    width: 200px;
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/    
+#dad_profile_link{
+  /*border: ridge 10px chocolate;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle;
+  width: 5px;
 }
-.Mom{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
+#kids_num{
+  /*border: ridge 10px coral;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle;
+  width: 5px;
 }
-/* finish search_result.php */
+#add_kid{
+  /*border: ridge 10px cornflowerblue;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+  width: 5px;
+}
+
+.kids_house{
+  background-color: white;
+  /*background-color: #d4ddfe;*/
+  /*border: ridge 10px crimson;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: block;
+  margin: 5px auto;
+  width: 90%;
+
+}
+.kid_room{
+  /*border: ridge 10px cyan;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: block;
+  margin: auto;
+  width: 95%;
+}
+.kid_text{
+  background-color: white;
+  /*border: ridge 10px darkgoldenrod;*/
+  /*border: 1px solid #c1c1c1;*/
+  color: black;
+  display: table-cell;
+  /*font-family: serif "Georgia";*/
+  font-family: sans-serif "Calibri";
+  font-size: large;
+  vertical-align: middle;
+  width: 500px;
+}
+.kid_profile_link{
+  /*border: ridge 10px darkgreen;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle;
+  width: 5px;
+}
+.kid_dad_link{
+  /*border: ridge 10px darkmagenta;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+}
+
+
+.kid_votes{
+  /*border: ridge 10px darkorange;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+  width: 50px;
+}
+.kid_added_by{
+  /*border: ridge 10px darkred;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+  width: 100px;
+}
+
+.is_mom{
+  /*border: ridge 10px darkseagreen;*/
+  /*border: 1px solid #c1c1c1;*/
+  color: gray;
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+}
+/* --- finish search_result.php --- */
 
 /*=====================================*/
 
