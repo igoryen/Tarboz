@@ -418,7 +418,8 @@ div#footer > div > a {
 .door{
   background-color: azure;
   /*border: ridge 10px blueviolet;*/
-  border: 1px solid #c1c1c1;
+  /*border: 1px solid #c1c1c1;*/
+  border: 1px solid gainsboro;
   color: silver;
   /*display: inline-block;*/
   display: block;
