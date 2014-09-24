@@ -1,9 +1,12 @@
+ 
       <div id="footer">
-        <p>Copyright © 2014  Tarboz.com all rights reserved.<p>
-        <p class="flink">Link1 - Link2 - Link3 - Link4</p>
+	      	<div>
+	      		<a href="/Tarboz/Views/Home/Index.php">Home</a> 
+	         	<a href="/Tarboz/Views/Home/Result.php">About Us</a> 
+	          	<a href="/Tarboz/Views/Entry/Index.php">Contact Us</a>    
+	        </div>
+	        <br />  
+	        <div><b>Copyright © 2014 Tarboz.com all rights reserved.<b><div>
       </div><!--"footer"-->
-
-    </div><!-- "MainDiv"-->
-
   </body>
 </html>

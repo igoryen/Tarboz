@@ -1,4 +1,6 @@
-<?php require("../Shared/index_header.php"); ?>
+<?php require("../Shared/header.php");
+	  require("../Shared/search.php");	
+ ?>
 
 	<div id="index_table_container">
 
