@@ -2,9 +2,10 @@
 
   <div id="entry_create_form">
     <div class="entry_create_row">
-      <div id="create_entry_form_title">Create entry</div>
-      <div class="Note">
-        Note: fields marked with the red asterisk (<span class="Painted_red">*</span>) are mandatory.
+      <div id="entry_create_form_title">Create entry
+        <div class="note">
+          Note: fields marked with the red asterisk (<span class="Painted_red">*</span>) are mandatory.
+        </div>
       </div>
     </div>
     
@@ -107,7 +108,7 @@
       </div>
     </div>
 
-    <div class="entry_create_row">
+    <div class="entry_create_buttons">
       <button type="submit">Submit</button>
       <button type="reset">Reset</button>
     </div>

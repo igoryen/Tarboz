@@ -759,7 +759,7 @@ div#footer > div > a {
   /*background: rgba(255,255,255,0.5);*/
   background-color: lavender;
   /*border: ridge 10px red;*/
-  border: 1px solid #c1c1c1;
+  /*border: 1px solid #c1c1c1;*/
   /*color: black;*/
   /*color: gray;*/
   color: silver;
@@ -804,12 +804,31 @@ div#footer > div > a {
   /*padding: 50px;*/
 }
 
-#create_entry_form_title{
+#entry_create_form_title{
+  background-color: lavender;
+  /*border: 1px solid #c1c1c1;*/
+  /*display: block;*/
+  color: gray;
   font-size: large;
+  padding: 2px;
 }
 
 .entry_create_row{
   background-color: white;
+  /*border: ridge 10px blue;*/
+  border-left: 1px solid #c1c1c1;
+  border-right: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: block;
+  margin-left: 80px;
+  margin-right: 80px;
+  padding: 5px;
+  /*margin: auto;*/
+
+}
+
+.entry_create_buttons{
+  background-color: lavender;
   /*border: ridge 10px blue;*/
   border-left: 1px solid #c1c1c1;
   border-right: 1px solid #c1c1c1;
@@ -841,7 +860,10 @@ div#footer > div > a {
   color: gray;
   font-style: italic;
 }
-
+.note{
+  font-size: small;
+  font-style: italic;
+}
 .Painted_red{
   color: red;
 }
