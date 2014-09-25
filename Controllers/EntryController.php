@@ -1,9 +1,11 @@
 <?php
-
-  //this is a constant, we will put it inside the include files, where it will show the location to the files,
+  /*---------------------------------------
+    a constant to put inside the include files, where it will show the location to the files,
+    ---------------------------------------*/
   require_once DATA_ACCESSOR_DIR_USER . 'UserDataAccessor.php';
   
   class EntryController {
+    
     $entry = new Entry();
 
     /*---------------------------------------

@@ -7,8 +7,7 @@ class Entry{
   private $entryTranslationOf;
   private $entryTranslit;
   private $entryVerbatim;
-  private $userId; // of class User
-  
+  private $userId; // of class User  
 
 }
 
