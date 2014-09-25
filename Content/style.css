@@ -171,7 +171,7 @@ div > nav#navigation > a:hover {
   background: white;
   /*border: 2px solid red;*/
   border: 1px solid #c1c1c1;
-  box-shadow: 5px 5px 5px #888888;
+  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell;
   /*float: left;*/
   /*height: auto;*/
@@ -201,7 +201,7 @@ div > nav#navigation > a:hover {
   background: white;
   /*border: 2px solid yellow;*/
   border: 1px solid #c1c1c1;
-  box-shadow: 5px 5px 5px #888888;
+  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell;
   /*float: left;*/
   /*height: auto;*/
@@ -254,7 +254,7 @@ div > nav#navigation > a:hover {
   background: white;
   /*border: 2px solid green;*/
   border: 1px solid #c1c1c1;
-  box-shadow: 5px 5px 5px #888888;
+  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell;
   /*float: right;*/
   /*height: 422px;*/
@@ -416,11 +416,12 @@ div#footer > div > a {
 }
 
 .door{
-  background-color: azure;
+  background-color: lavender;
   /*border: ridge 10px blueviolet;*/
   /*border: 1px solid #c1c1c1;*/
   border: 1px solid gainsboro;
   color: silver;
+  /*color: gray;*/
   /*display: inline-block;*/
   display: block;
   float: left;
@@ -598,7 +599,7 @@ div#footer > div > a {
   background-color: white;
   /*border: ridge 10px green;*/
   border: 1px solid #c1c1c1;
-  box-shadow: 5px 5px 5px #888888;
+  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell;
   padding: 5px;
   vertical-align: top;
@@ -606,9 +607,10 @@ div#footer > div > a {
 }
 
 #user_middle_panel{
+  background-color: gainsboro;
   border: 1px solid #c1c1c1;
   /*border: ridge 10px orange;*/
-  box-shadow: 5px 5px 5px #888888;
+  /*box-shadow: 5px 5px 5px #888888;*/
   /*display: block;*/
   display: table-cell;
   /*display: table;*/
@@ -619,7 +621,7 @@ div#footer > div > a {
   background-color: white;
   border: 1px solid #c1c1c1;
   /*border: ridge 10px blue;*/
-  box-shadow: 5px 5px 5px #888888;
+  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell; /* 10 */
   padding: 5px;
   vertical-align: top;
@@ -741,27 +743,36 @@ div#footer > div > a {
 /* for entry_display.php*/
 #entry_index_container{
   /*border: ridge 10px blue;*/
+  margin: 3px auto;
   width: 98%;
 }
 
 .entry_record{
   /*border: ridge 10px green;*/
   display: block;
-  padding: 5px;
+  /*padding: 2px;*/
   margin: auto;
   width: 60%;
 }
 
 .entry_record_title{
+  /*background: rgba(255,255,255,0.5);*/
+  background-color: lavender;
   /*border: ridge 10px red;*/
-  /*border: 1px solid #c1c1c1;*/
+  border: 1px solid #c1c1c1;
+  /*color: black;*/
+  /*color: gray;*/
+  color: silver;
   display: block;
   /*font-family: serif "Georgia";*/
   font-style: italic;
-  color: gray;
+  font-weight: bold;
   margin: auto;
   /*margin-left: 10%;*/
   /*margin-right: 10%;*/
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
   width: 55%;
 }
 
@@ -769,7 +780,7 @@ div#footer > div > a {
   background: white;
   /*border: ridge 10px orange;*/
   border: 1px solid #c1c1c1;
-  box-shadow: 5px 5px 5px #888888;
+  /*box-shadow: 5px 5px 5px #888888;*/
   display: block;
   font-family: serif "Georgia";
   font-size: large;
