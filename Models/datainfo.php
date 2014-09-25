@@ -9,10 +9,4 @@ define('RATING', 'tbl_rating');
 define('REPORT', 'tbl_report');
 define('SBUSCRIPTION', 'tbl_subscription');
 
-
-
-
 ?>
-
-
-

@@ -1,11 +1,11 @@
 body{
+  background-size: 100% 100%;
   background: url("../images/background.jpg");
   color: #2a57fc;
+  display: block;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 11px;
   margin: 0px 0px;
-  display: block;
-  background-size: 100% 100%;
 }
 
 #maindiv {
@@ -75,15 +75,15 @@ body{
 }
 
 div > nav#navigation > a {
-  text-decoration: none;
   color: #000000;
   font-size: 15px;
   padding: 10px 28px;
+  text-decoration: none;
 }
 
 div > nav#navigation > a:hover {
-  color: #FCFCFC !important;
   background: #14ACF3;
+  color: #FCFCFC !important;
 }
 
 #search{
@@ -97,11 +97,11 @@ div > nav#navigation > a:hover {
   margin-left: 10%;
   margin-right: 10%;
   /*margin-top: 1%;*/
+  margin-top: 18px;
+  padding: 14px 0px 1px 0px;
   /*position: relative;  */
   text-align: center;
   /*width: 80%;*/
-  margin-top: 18px;
-  padding: 14px 0px 1px 0px;
 }
 
 #search input[type=text]{ 
