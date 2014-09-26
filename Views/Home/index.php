@@ -2,7 +2,7 @@
 	  require("../Shared/search.php");	
  ?>
 
-	<div id="index_table_container">
+	<div id="index_table_container" align="center">
 
 		<div id="index_table">
 
@@ -89,5 +89,5 @@
 
 	</div><!--"index_table_container"-->
 
-<?php require("includes/footer.php"); ?>
+<?php require("../Shared/footer.php"); ?>
 
