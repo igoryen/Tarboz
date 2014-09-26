@@ -4,35 +4,42 @@ class EntryAuthor{
   /*----------------------------------
     10. of class Entry
     ---------------------------------*/
-  private $author_geo;
-  private $author_id;
-  private $author_name;
-  private $author_time;
-  private $entry_id; // 10
+  private $id;
+  private $geo;  
+  private $name;
+  private $time;
+  private $entryId; // 10
 
-  public function getAuthorGeo(){
-    return $this->author_geo;
+  /* getter & setter for $geo */
+  public function getGeo(){
+    return $this->geo;
   }
-  public function setAuthorGeo(){
-    $this->author_geo = $author_geo;
-  }
-
-  public function getAuthorId(){
-    return $this->author_id;
+  public function setGeo($geo){
+    $this->geo = $geo;
   }
 
-  public function getAuthorName(){
-    return $this->author_name;
+  /* getter & setter for $id */
+  public function getId(){
+    return $this->$id;
   }
-  public function setAuthorName(){
-    $this->author_name = $author_name;
+  public function setId($id){
+    $this->$id = $id;
   }
 
-  public function getAuthorTime(){
-    return $this->author_time;
+  /* getter & setter for $name */
+  public function getName(){
+    return $this->$name;
   }
-  public function setAuthorTime(){
-    $this->author_time = $author_time;
+  public function setName($name){
+    $this->name = $name;
+  }
+
+  /* getter & setter for $time */
+  public function getTime(){
+    return $this->time;
+  }
+  public function setTime($time){
+    $this->time = $time;
   }
 }
 
