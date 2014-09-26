@@ -2,13 +2,21 @@
   require_once DATA_ACCESSOR_DIR_COMMENT . 'CommentDataAccessor.php';
 
   class CommentManager {
+    /* page a - (for update & edit)
+    part of the entry profile page & user profile page
+    ---------------------------*/
+    public function updateComment($comment) {
+      $commentDataAccessor = new CommentDataAccessor();
+      $result = $commentDataAccessor->updateComment($comment);
+      return $result;
+    }
 
     public function addComment($comment) {
       $commentDataAccessor = new CommentDataAccessor();
       $last_inserted_id = $commentDataAccessor->addComment($comment);
       return $last_inserted_id;
     }
-
+    /* page b - (for the admin)*/
     public function deleteComment($comment) {
       $commentDataAccessor = new CommentDataAccessor();
       $result = $commentDataAccessor->deleteComment($comment);
@@ -39,10 +47,6 @@
       return $result;   
     }
 
-    public function updateComment($comment) {
-      $commentDataAccessor = new CommentDataAccessor();
-      $result = $commentDataAccessor->updateComment($comment);
-      return $result;
-    }
+
   }
 ?>
