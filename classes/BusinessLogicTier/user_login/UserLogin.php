@@ -1,4 +1,5 @@
 <?php 
+
 class UserLogin extends User{
 
   private $username;

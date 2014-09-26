@@ -1,4 +1,5 @@
 <?php
+
   /*-----------------------------------------
     this is a constant ,we will put it inside the include files, where it will show the location to the files,
     ------------------------------------------*/
