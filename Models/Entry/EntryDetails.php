@@ -1,4 +1,10 @@
 <?php
+
+include_once("Comment.php");
+include_once("Rating.php");
+include_once("Media.php");
+
+
 class EntryDetails{
   /*----------------------------------
     10. of class Entry
