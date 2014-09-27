@@ -1,34 +1,45 @@
 <?php
 
   require_once DB_CONNECTION . 'DBHelper.php';
-  require_once BUSINESS_DIR_USER. 'User.php';
-  //has constants for the table; USER
-  require_once(DB_CONNECTION.'datainfo.php'); 
+  require_once BUSINESS_DIR_ENTRY . 'Entry.php';
+  require_once(DB_CONNECTION . 'datainfo.php');
 
+  class EntryDataAccessor{
 
-  class UserDataAccessor {
-  
-    /*----------------------------------------------
-      takes a User object and inserts it into the data
-      -----------------------------------------------*/
-    public function addUser($user){     
+    public function addEntry($entry){     
 
-      $uid         =   $user->getUserId();
-      $fname       =   $user->getFirstName();
-      $lname       =   $user->getLastName();
-      $pwd         =   $user->getPassword();
-      $loginid     =   $user->getLogin();
-      $email       =   $user->getEmail();
-      $dob         =   $user->getDOB();
-      $language    =   $user->getUserLanguage();
-      $usertype    =   $user->getUserType();
-      $regdate     =   $user->getRegistrationDate();
-      $location    =   $user->getLocation();
-      $mediaid     =   $user->getMediaId();
-      $ratingid    =   $user->getUserRatingId();
-      $emailsub    =   $user->getEmailSub();
+      $entryId     =  $entry->getId();
+      $text        =  $entry->getText();
+      $verbatim    =  $entry->getVerbatim();
+      $translit    =  $entry->getTranslit();
+      $translOf    =  $entry->getTranslOf();
+      
+      $userId      =  $entry->getUserId();
+                      
+      $authsid     =  $entry->getAuthStatId();
+      
+      $use         =  $entry->getUse();
+      $httpLink    =  $entry->getHttpLink();
+      $commentSet  =  $entry->getCommentSet();
+      $ratingSet   =  $entry->getRatingSet();
+      $mediaSet    =  $entry->getMediaSet();
+      $authorId    =  $entry->getAuthorId();
+      
+      $sourceId    =  $entry->getSourceId();
 
-      $query_insert = "INSERT INTO USER VALUES('', '$fname', '$lname','$loginid','$pwd','$ratingid','$mediaid','$email','$dob','$location','$regdate','$usertype','$language','$emailsub')";      
+      $query_insert = "INSERT INTO ENTRY VALUES('', '"
+              . "$text', '"
+              . "$verbatim','"
+              . "$translit','"
+              . "$translOf','"
+              . "$userId','"
+              . "$authsid','"
+              . "$use','"
+              . "$httpLink','"
+              . "$commentSet','"
+              . "$ratingSet','"
+              . "$mediaSet','"
+              . "$authorId')";      
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query_insert);
@@ -36,7 +47,7 @@
       return $last_inserted_id;
     }
     
-    public function updateUser($user){
+    public function updateEntry($entry){
 
       $uid          =   $user->getUserId();
       $fname        =   $user->getFirstName();
@@ -167,7 +178,8 @@
       $result = $dbHelper->executeSelect($query);
       $Users = $this->getUserList($result);
       return $Users;
-    } // getUserByTypeId    
+    } // getUserByTypeId
+    
 
     //A function that gets the user by the names passed
     public function getUserByName($userfname,$userlname){    
@@ -206,4 +218,10 @@
       return $Users;
     }
   }
+
+/*
+#) write your Entry class
+  - what is in the Entry class?
+#) write a data accessor class for Entry class you 
+*/
 ?>
