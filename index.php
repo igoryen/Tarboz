@@ -1,5 +1,5 @@
-<?php require("../Shared/header.php");
-	  require("../Shared/search.php");	
+<?php require("html_codes_to_use/Shared/header.php");
+	  require("html_codes_to_use/Shared/search.php");	
  ?>
 
 	<div id="index_table_container" align="center">
@@ -89,5 +89,5 @@
 
 	</div><!--"index_table_container"-->
 
-<?php require("../Shared/footer.php"); ?>
+<?php require("html_codes_to_use/Shared/footer.php"); ?>
 
