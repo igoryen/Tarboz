@@ -1,77 +1,123 @@
 body{
-   color:#2a57fc;
-   font-family:Verdana, Geneva, sans-serif;
-   font-size:11px;
+  background: url("/Tarboz/images/background.jpg");
+  background-size: 100% 100%;
+  color: #2a57fc;
+  display: block;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 11px;
+  margin: 0px 0px;
 }
+
 #maindiv {
-	position:absolute;
-	border: dotted 2px red;
-	height:Auto;
-	width: 98%;
-	/*background:#f8f8f2;*/
+  /*background: #f8f8f2;*/
+  /*border: dotted 10px red;*/
+  /*height: auto;*/
+  /*height: 100%;*/
+  /*position: relative;
+  width: 98%; */
 }
 
 #header{
-  border:dotted 1px blue;
-  width: 100%;
-  position:relative;
-  height:auto;
-  border: 1px solid #999;
-  float:left;
-  background:#E0E0E0;
-  margin-bottom: 1%;
+  background: rgba(255,255,255,0.5); /*#E0E0E0*/
+  /*border: ridge 10px #999;*/
+  /*border: dotted 1px blue;*/
+  /*box-shadow: 5px 5px 5px #888888;*/
+  /*float: left;*/
+  /*height: auto;*/
+  /*margin: auto;*/
+  /*margin-bottom: 1%;*/
+  /*position: relative;
+  width: 95%;*/
 }
+
+.header_row{
+  /*border: ridge 5px orange;*/
+  display: table;
+  /*display: block;*/
+  margin: auto;
+  text-align: center;
+  padding: 7px 0px;
+  width: 95%;
+}
+
 #logo{
-	margin-left:0.5%;
-	float:left;
-	border:Solid 1px;
-	width: 10%;
-	height:auto;
-	margin-top:1%;
+  /*border: ridge 5px red;*/
+  display: table-cell;
+  /*float: left;*/
+  /*height: auto;*/
+  /*margin-left:0.5%;*/
+  /*margin-top:1%;*/
+  /*position: initial;*/
+  width: 10%;
 }
+
 #links{
-     position:relative;
-     margin-right:-4%;
-	 float:right;
-	 /*border:Solid 1px; */
-	 width: 10%;
-	 height:auto;
-}
-#navigation{
-	float:right;
-	width: 55%;
-	height:auto;
-	margin:0 auto;
-	margin-top:11%;	
+  /*border: double 5px green; */
+  display: table-cell;
+  /*float:right;*/
+  /*height:auto;*/
+  /*margin-right:-4%;*/
+  padding-right: 10px;
+  /*position:relative;*/
+  text-align: right;
+  vertical-align: middle;
+  width: 10%;
 }
 
 #navigation{
-	float:right;
-	width: 55%;
-	height:auto;
-	margin:0 auto;
-	margin-top:11%;	
+  /*border: double 5px blue;*/
+  display: table-cell;
+  /*float: right;*/
+  /*height: auto;*/
+  /*margin-top: 11%;*/ 
+  margin: 0 auto;
+  vertical-align: middle;
+  width: 60%;
+}
+
+div > nav#navigation > a {
+  color: #000000;
+  font-size: 30px;
+  padding: 10px 28px;
+  text-decoration: none;
+
+}
+
+div > nav#navigation > a:hover {
+  background: #14ACF3;
+  color: #FCFCFC !important;
 }
 
 #search{
-
-	margin-top:1%;
-	margin-left:20%;
-	margin-bottom:-2%;
+  background: white;
+  /*border: ridge 10px magenta;*/
+  display: block;
+  /*display: inline-block;*/
+  /*height: auto;*/
+  /*padding: auto;*/
+  /*margin-bottom: 2%;*/
+  margin-left: 10%;
+  margin-right: 10%;
+  /*margin-top: 1%;*/
+  margin-top: 18px;
+  padding: 14px 0px 1px 0px;
+  /*position: relative;  */
+  text-align: center;
+  /*width: 80%;*/
 }
 
 #search input[type=text]{ 
-	box-shadow: 2px 1.5px 2px #999;
-	font-size:25pt;
-	color:#999;
-    background: white url(../images/search.png) no-repeat 1% 50%; 
-    border: 1px solid white; 
-    padding-left: 3%;
-    width: 85%;
-	margin-left:2.5%;
-	margin-top:3%;
-	height:7%;
-	width:80%;
+  background: #eaeaea url(../images/search.png) no-repeat 1% 50%; 
+  border: 1px solid white; 
+  box-shadow: 2px 1.5px 2px #999;
+  color: #999;
+  font-size: 25pt;
+  height: 7%;
+  /*margin: auto;*/
+  /*margin-left: 2.5%;*/
+  /*margin-top: 1%;*/
+  padding-left: 3%;
+  width: 80%;
 }
 
 /*
@@ -84,90 +130,197 @@ body{
     outline:0; 
 }
 */
+
 #searchinput img {
-	height:50px;
-	margin-top:3%;
-	margin-bottom:1%;
+  height: 50px;
+  margin-bottom: 1%;
+  margin-top: 3%;
 }
 
 
-#search select ,input[type=date]{
+#search select, input[type=date]{
 	border: 2px solid #eeeded; 
 	margin-top:1%;
-	margin-left:6%;	
+	/*margin-left:6%;	*/
 }
-#leftside{
-	margin-top:2%;
-	border: 1px solid #999;
-	width:25%;
-	height:auto;
-	float:left;
-	margin-left:0px;
+/* ======= start the 3-column table ========*/
+
+#index_table_container{
+  /*border:  ridge 10px #9799ad;*/
+  border-spacing: 10px;
+  /*height: 100%; */
+  /*margin-top: 10px;*/
+  margin: 5px auto;
+  /*position: relative;*/
+  /*width: 1150px;*/
+  width: 95%;
+}
+
+#index_table {
+  /*border:  ridge 5px blue;*/
+  display: block;
+  /*left: 0px;*/
+  margin: 5px auto;
+  /*margin-left: 5px auto;*/
+  /*margin-right: 5px auto;*/
+  /*position: relative;*/
+  /*top: 0px;*/
+  width: 95%;
+}
+
+/* start left column*/
+#LeftCol{
+  background: white;
+  /*border: 2px solid red;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: table-cell;
+  /*float: left;*/
+  /*height: auto;*/
+ /* height: 422px;*/
+  /*left: 0px;*/
+  /*margin-left: 0%;*/
+  /*margin-top: 2%;*/
+  padding-left: 5px;
+  padding-top: 5px;
+  /*position: absolute;*/
+  text-align: center;
+  /*top: 42px;*/
+  /*width: 300px;*/ 
+  width: 20%;
 }
 
 #obj{
-	overflow:hidden;
-	width:100%;
-	height:470px;
-}
-#middleside{
-	margin-top:2%;
-	border: 1px solid #999;
-	width:49%;
-	height:50%;
-	float:left;
+  height: 97%;
+	overflow: hidden;
+	width: 97%;	
 }
 
-#middleside table{
-margin:0 auto;
-margin-top:1%;
-table-layout:fixed;
-border-spacing:20px;
-font-weight:bold;
-color:#999;
-font-size:12px;
+/* finish left column*/
+/* start middle column*/
 
+#MidCol{
+  background: white;
+  /*border: 2px solid yellow;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: table-cell;
+  /*float: left;*/
+  /*height: auto;*/
+  /*height: 50%;*/
+  /*height: 422px;*/      
+  /*left: 300px;*/
+  /*margin: 0 auto;*/
+  margin-right: 35px;
+  /*margin-top: 2%;*/
+  padding: 10px;
+  /*position: absolute;*/
+  text-align: center;
+  /*top: 42px;*/
+  vertical-align: top;
+  width: 40%;/*550px;*/
 }
 
-#middleside td{
-	text-align:center;
-	border:1px solid #999;
-	box-shadow: 2px 1.5px 2px #999;
-	border-top-right-radius: 2em;
-	border-bottom-left-radius: 2em;
-	color:#999;
+#MidCol table{
+  border-spacing: 20px;
+  color: #999;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 auto;
+  margin-top: 1%;
+  table-layout: fixed;    
 }
 
-#middleside li{
-	margin-left:-10%;
-	color:#404040;
-	text-align:left;
-	font-size:11px;
-	font-weight:normal;
-	list-style:none;
+#MidCol td{
+  border-bottom-left-radius: 2em;
+  border-top-right-radius: 2em;
+  border: 1px solid #999;
+  box-shadow: 2px 1.5px 2px #999;
+  color: #999;
+  text-align: center;
 }
 
-#rightside{
-	margin-top:2%;
-	border: 1px solid #999;
-	width:25%;
-	height:50%;
-	float:right;
+#MidCol li{
+  margin-left:-10%;
+  color:#404040;
+  text-align:left;
+  font-size:11px;
+  font-weight:normal;
+  list-style:none;
 }
+
+/* finish middle column*/
+/* start right column*/
+
+#RightCol{
+  background: white;
+  /*border: 2px solid green;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: table-cell;
+  /*float: right;*/
+  /*height: 422px;*/
+  /*height: 50%;*/
+  /*left: 850px;*/
+  /*margin-left: 5px;*/
+  /*margin-top:2%;*/
+  padding: 10px;
+  /*position: absolute;*/
+  text-align: left;
+  /*top: 42px;*/
+  vertical-align: top;
+  /*width: 300px; */
+  width: 20%; 
+}
+
+/* finish right column*/
+/* ====== finish the 3-column table ======= */
+
 #footer{
-	position:relative;
-	width:100%;
-	height:auto;
-	border: 1px solid #999;
-	float:left;
-	background:#E0E0E0;
-	margin-top:2%;
-	
+  color: #12AFFA;
+  /*background: #E0E0E0;*/
+  /*border: 1px solid #c1c1c1; */
+  /*float: left;*/
+  height: auto;
+  /*height: 10px;*/
+  /*margin-top: 2%;*/
+  /*position: fixed;*/
+  /*position: relative;*/
+  width: 100%;
+  /*width: auto;*/
+  text-align: center;
+  padding: 34px 20px;
+  /* all ways keep footer at bottom
+  position: absolute;
+  bottom: 0;
+  left: 0; */
+
 }
+
+div#footer > div > a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size:  13px;
+  padding: 5px 10px;
+}
+/*
+ always keep footer at bottom
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+#footer_box {
+  width:50%;
+  margin: 0 auto;
+}
+  */
+/*
 #footer p {
-	margin-top:0%;
-	margin-bottom:0%;
+  margin-bottom: 0%;
+  margin-top: 0%;
 }
+*/
 
 /*Footer Links*/
 .flink {
@@ -193,140 +346,369 @@ font-size:12px;
   border: solid blue;
 }
 */
+
 #login_form{
   display: table;
   border: solid red;
   padding: 5px;
-  width-:400px; 
+  width: 400px; 
   margin-left: auto;
   margin-right: auto;
 }
+
 .login_form_row{
   display: table-row;
   border: solid green;
   padding: 5px;
 }
+
 #login_form_username{
   display: table-cell;
   border: solid;
   padding: 5px;
 }
+
 #login_form_username_field{
   display: table-cell;
   border: solid;
   padding: 5px;
 }
+
 #login_form_password{
   display: table-cell;
   border: solid;
   padding: 5px;
 }
+
 #login_form_password_field{
   display: table-cell;
   border: solid;
   padding: 5px;
 }
+
 /*--- finish login.php -------*/
 
-/*for search_result.php*/
-.Add_kid{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
-}
-/*-------------------------------
-10. Lets the element behave like a <td> element
-50. align text in cell vertically in the middle
----------------------------------*/
-
-.Dad_link{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
-}
-.Kid_added_by{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
-}
-.Kid_link{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
-}
-.Kids_num{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
-}
-.Kid_votes{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
-}
-.Member_text{
-    display: table-cell; /* 10 */
-    width: 200px;
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/    
-}
-.Mom{
-    display: table-cell; /* 10 */
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    vertical-align: middle; /*50*/
-}
-/* finish search_result.php */
-
-
-
-/*for user_profile.css*/
-.Left_panel{
-    display: table-cell; /* 10 */
-    width: 70%;
-    border: solid green;
-    border-width: thin;
-    padding: 5px;
-    vertical-align: top;
+/*--- for search_result.php ---*/
+#land{
+  /*background-color: white;*/
+  /*border: ridge 10px fuchsia;*/
+  border-spacing: 5px;
+  margin: 5px auto;
+  padding: 5px;
+  width: 98%;
 }
 
-.Right_panel{
-    display: table-cell; /* 10 */
-    width: 20%;
-    border: solid blue;
-    border-width: thin;
-    padding: 5px;
-    vertical-align: top;
+#village{
+  /*border: ridge 10px aqua;*/
+  display: block;
+  margin: 5px auto;
+  width: 95%;
 }
+
+#dad_house{
+  background-color: white;
+  /*background-color: #d4ddfe;*/
+  /*border: ridge 10px blue;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: block;
+  margin: 5px auto;
+  width: 90%;
+
+}
+
+.door{
+  background-color: lavender;
+  /*border: ridge 10px blueviolet;*/
+  /*border: 1px solid #c1c1c1;*/
+  border: 1px solid gainsboro;
+  color: silver;
+  /*color: gray;*/
+  /*display: inline-block;*/
+  display: block;
+  float: left;
+  font-weight: bold;
+  margin: auto;
+  padding: 3px;
+  padding-left: 10px;
+  /*position: initial;*/
+  vertical-align: middle;
+  width: 98.5%;
+  /*width: auto;*/
+
+}
+
+#dad_room{
+  /*border: ridge 10px brown;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: block;
+  margin: auto;
+  width: 95%;
+
+}
+
+#dad_text{
+  background-color: white;
+  /*border: ridge 10px chartreuse;*/
+  /*border: 1px solid #c1c1c1;*/
+  color: black;
+  display: table-cell;
+  /*font-family: serif "Georgia";*/
+  font-family: sans-serif "Calibri";
+  font-size: large;
+  vertical-align: middle;
+  width: 500px;
+
+}
+
+#dad_profile_link{
+  /*border: ridge 10px chocolate;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle;
+  width: 5px;
+}
+
+#kids_num{
+  /*border: ridge 10px coral;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle;
+  width: 5px;
+}
+
+#add_kid{
+  /*border: ridge 10px cornflowerblue;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+  width: 5px;
+}
+
+.kids_house{
+  background-color: white;
+  /*background-color: #d4ddfe;*/
+  /*border: ridge 10px crimson;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: block;
+  margin: 5px auto;
+  width: 90%;
+
+}
+
+.kid_room{
+  /*border: ridge 10px cyan;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: block;
+  margin: auto;
+  width: 95%;
+}
+
+.kid_text{
+  background-color: white;
+  /*border: ridge 10px darkgoldenrod;*/
+  /*border: 1px solid #c1c1c1;*/
+  color: black;
+  display: table-cell;
+  /*font-family: serif "Georgia";*/
+  font-family: sans-serif "Calibri";
+  font-size: large;
+  vertical-align: middle;
+  width: 500px;
+}
+
+.kid_profile_link{
+  /*border: ridge 10px darkgreen;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle;
+  width: 5px;
+}
+
+.kid_dad_link{
+  /*border: ridge 10px darkmagenta;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+}
+
+.kid_votes{
+  /*border: ridge 10px darkorange;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+  width: 50px;
+}
+
+.kid_added_by{
+  /*border: ridge 10px darkred;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+  width: 100px;
+}
+
+.is_mom{
+  /*border: ridge 10px darkseagreen;*/
+  /*border: 1px solid #c1c1c1;*/
+  color: gray;
+  display: table-cell; /* 10 */
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: middle; /*50*/
+}
+/* --- finish search_result.php --- */
+
+/*=====================================*/
+
+/* start user_profile.css*/
+
+#user_profile_container{
+  /*border: ridge 10px red;*/
+  border-spacing: 10px;
+  /*display: block;*/
+  margin: 5px auto;
+  /*margin-left: 10%;*/
+  /*margin-right: 10%;*/
+  /*padding: 5px;*/
+  width: 98%;
+    
+}
+
+#user_profile{
+  /*border: ridge 10px darksalmon;*/
+  display: block;
+  margin: auto;
+  width: 95%;
+}
+
+#user_left_panel{
+  background-color: white;
+  /*border: ridge 10px green;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: table-cell;
+  padding: 5px;
+  vertical-align: top;
+  width: 20%;
+}
+
+#user_middle_panel{
+  background-color: gainsboro;
+  border: 1px solid #c1c1c1;
+  /*border: ridge 10px orange;*/
+  /*box-shadow: 5px 5px 5px #888888;*/
+  /*display: block;*/
+  display: table-cell;
+  /*display: table;*/
+  width: 40%;
+}
+
+#user_right_panel{
+  background-color: white;
+  border: 1px solid #c1c1c1;
+  /*border: ridge 10px blue;*/
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: table-cell; /* 10 */
+  padding: 5px;
+  vertical-align: top;
+  width: 20%;
+}
+
+#user_pers_info{
+  /*border: ridge 10px magenta;*/
+  /*border: 1px solid #c1c1c1;*/
+  border-spacing: 5px;
+  display: block;
+}
+
+#user_pers_info_photo{
+  /*border: ridge 10px chocolate;*/
+  /*border: 1px solid #c1c1c1;*/
+  /*display: block;*/
+  display: table-cell;
+  vertical-align: middle;
+  /*width: 100px;*/
+}
+
+#user_pers_info_desc{
+  /*border: ridge 10px cornflowerblue;*/
+  /*display: block;*/
+  display: table-cell;
+  /*width: 100px;*/
+}
+
+.user_pers_info_desc_row{
+  /*border: ridge 10px crimson;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: block;
+}
+
+.user_pers_info_desc_row_title{
+  /*border: ridge 10px cyan;*/
+  /*border: 1px solid #c1c1c1;*/
+  color: gray;
+  display: block;
+  font-style: italic;
+  padding: 3px;
+}
+
+.user_pers_info_desc_row_value{
+  background-color: white;
+  /*border: ridge 10px darkblue;*/
+  border: 1px solid #c1c1c1;
+  display: block;
+  font-family: serif "Georgia";
+  font-size: large;
+  padding: 2px;
+}
+
+#user_contrib{
+  /*border: ridge 10px chartreuse;*/
+  display: block;
+  padding: 5px;
+}
+
+#user_contrib_title{
+  /*border: ridge 10px darkcyan;*/
+  color: gray;
+  display: block;
+  font-style: italic;
+  padding-bottom: 3px;
+}
+
+#user_contrib_values{
+  background-color: white;
+  /*border: ridge 10px darkgoldenrod;*/
+  border: 1px solid #c1c1c1;
+  display: block;
+  font-family: serif "Georgia";
+  font-size: large;
+  padding: 5px;
+}
+
 #user_contributions{
     border: solid;
     border-width: thin;
     padding: 5px;
     vertical-align: top;
 }
+
 #user_id{
     display: table-cell;
     border: solid;
@@ -335,16 +717,19 @@ font-size:12px;
     padding-right: 5px;
     vertical-align: top;
 }
+
 #user_name{
     font-size: large;
     font-weight: bold;  
 }
+
 #user_photo{
     display: table-cell;
     border: solid;
     border-width: thin;
     padding: 5px;
 }
+
 #user_photo_id{
     display: table-row;
     border: solid;
@@ -352,134 +737,143 @@ font-size:12px;
     padding-left: 5px;
     padding-right: 5px;
 }
-.User_profile{
-    border: solid red;
-    border-width: thin;
-    padding: 5px;
-    margin-left: 10%;
-    margin-right: 10%;
-}
+
 
 /* finish user_profile.css*/
 
 
 /* for entry_display.php*/
-#authors{
-  display: inline;
-}
-#entry_profile{
-  margin-left: 200px;
-  margin-right: 200px;
-  padding: 50px;
-}
-.Entry_profile_row{
-}
-#entry_text{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_translit{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#form{
-  display: inline;
-}
-#language{
-  display: inline;
-}
-#place{
-  display: inline;
-}
-#time{
-  display: inline; 
-}
-#user{
-  display: inline;
-}
-/* finish for entry_display.php*/
-
-/*for entry_create.php*/
-
-#authors{
-  display: inline;
-}
-#entry_create_form{
-  margin-left: 200px;
-  border: solid;
-  margin-right: 200px;
-  padding: 50px;
-}
-.Entry_create_row{
-  display: table-row;
+#entry_index_container{
+  /*border: ridge 10px blue;*/
+  margin: 3px auto;
+  width: 98%;
 }
 
-#entry_source_label{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_source_value{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_text_in_original_label{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_text_in_original_value{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_text_translated_label{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_text_translated_value{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#entry_translit{
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding: 5px;
-}
-#form{
-  display: inline;
-}
-.Form_management_buttons{
-  padding: 10px;
+.entry_record{
+  /*border: ridge 10px green;*/
+  display: block;
+  /*padding: 2px;*/
+  margin: auto;
+  width: 60%;
 }
 
-#language{
-  display: inline;
-}
-.Note{
+.entry_record_title{
+  /*background: rgba(255,255,255,0.5);*/
+  background-color: lavender;
+  /*border: ridge 10px red;*/
+  /*border: 1px solid #c1c1c1;*/
+  /*color: black;*/
+  /*color: gray;*/
+  color: silver;
+  display: block;
+  /*font-family: serif "Georgia";*/
   font-style: italic;
+  font-weight: bold;
+  margin: auto;
+  /*margin-left: 10%;*/
+  /*margin-right: 10%;*/
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 55%;
+}
+
+.entry_record_value{
+  background: white;
+  /*border: ridge 10px orange;*/
+  border: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: block;
+  font-family: serif "Georgia";
+  font-size: large;
+  margin: auto;
+  /*margin-left: 10%;*/
+  /*margin-right: 10%;*/
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 55%;
+}
+
+/*finish entry_display.php*/
+
+/* start entry_create.php */
+#entry_create_form{
+  /*border: ridge 10px red;*/
+  margin: 5px;
+  margin-left: 20%;
+  margin-right: 20%;
+  /*padding: 50px;*/
+}
+
+#entry_create_form_title{
+  background-color: lavender;
+  /*border: 1px solid #c1c1c1;*/
+  /*display: block;*/
   color: gray;
+  font-size: large;
+  padding: 2px;
+}
+
+.entry_create_row{
+  background-color: white;
+  /*border: ridge 10px blue;*/
+  border-left: 1px solid #c1c1c1;
+  border-right: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: block;
+  margin-left: 80px;
+  margin-right: 80px;
+  padding: 5px;
+  /*margin: auto;*/
+
+}
+
+.entry_create_buttons{
+  background-color: lavender;
+  /*border: ridge 10px blue;*/
+  border-left: 1px solid #c1c1c1;
+  border-right: 1px solid #c1c1c1;
+  /*box-shadow: 5px 5px 5px #888888;*/
+  display: block;
+  margin-left: 80px;
+  margin-right: 80px;
+  padding: 5px;
+  /*margin: auto;*/
+
+}
+
+.entry_create_record_title{
+  /*border: ridge 10px green;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell;
+  padding-left: 5px;
+  vertical-align: top;
+  width: 180px;
+}
+
+.entry_create_record_value{
+  /*border: ridge 10px orange;*/
+  /*border: 1px solid #c1c1c1;*/
+  display: table-cell;
+}
+
+.entry_create_record_title_explanation{
+  color: gray;
+  font-style: italic;
+}
+.note{
+  font-size: small;
+  font-style: italic;
 }
 .Painted_red{
   color: red;
 }
+
 #place{
   display: inline;
 }
+
 .Row_lable{
   display: table-cell;
   border: solid;
@@ -489,6 +883,7 @@ font-size:12px;
   font-style: italic;
   vertical-align: top;
 }
+
 .Row_value{
   display: table-cell;
   border: solid;
@@ -496,34 +891,141 @@ font-size:12px;
   padding: 5px;
   vertical-align: top;
 }
+
 #source_language_lable{
   display: table-cell;
   border: solid;
   border-width: thin;
   padding: 5px;
 }
+
 #source_language_value{
   display: table-cell;
   border: solid;
   border-width: thin;
   padding: 5px;
 }
+
 #target_language_lable{
   display: table-cell;
   border: solid;
   border-width: thin;
   padding: 5px;
 }
+
 #target_language_value{
   display: table-cell;
   border: solid;
   border-width: thin;
   padding: 5px;
 }
+
 #time{
   display: inline; 
 }
+
 #user{
   display: inline;
 }
-/*fiish entry_create.php*/
+
+#authors{
+  display: inline;
+}
+
+#entry_profile{
+  margin-left: 200px;
+  margin-right: 200px;
+  padding: 50px;
+}
+
+.Entry_profile_row{
+}
+
+#entry_text{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+
+#entry_translit{
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+
+#form{
+  display: inline;
+}
+
+#language{
+  display: inline;
+}
+
+#place{
+  display: inline;
+}
+
+#time{
+  display: inline; 
+}
+
+#user{
+  display: inline;
+}
+
+/* finish for entry_display.php*/
+
+/* for entry_create.php */
+
+#authors{
+  /*display: inline;*/
+}
+
+#entry_source_label{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+
+#entry_source_value{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+
+#entry_text_in_original_label{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+
+#entry_text_in_original_value{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+
+#entry_text_translated_label{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+
+#entry_text_translated_value{
+  /*display: table-cell;*/
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+/* finish entry_create.php */
+}
+
+.pannel_inline {
+	display: inline;
+}

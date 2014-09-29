@@ -36,5 +36,5 @@
       </div>
     </div>
   </form>
-<?php require("../../includes/footer.php"); ?>
+<?php require("../Shared/footer.php"); ?>
 
