@@ -46,7 +46,7 @@
 
 public function ForgotPassword($useremail){     
 
-      $loggeduser = new User();
+      //$loggeduser = new User();
 
       if($user !== null && $pwd != null){
 

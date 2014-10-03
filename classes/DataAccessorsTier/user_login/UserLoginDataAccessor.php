@@ -35,6 +35,8 @@
 
     public function ForgotPassword($email){
 
+      $reset=false;
+
       $random_text="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@.()";
       //TO SHUFFLE THE ABOVE TEXT AND PIC 10 CHARS.
       $substr = substr(str_shuffle($random_text),0,10);
@@ -49,13 +51,14 @@
 
       $user = $this->getUser($result);
 
-     // if($user->getFirstName()!=null){
-
-      //}
+      if($user){
+        
+        $reset=true;
+      }
 
       str_shuffle(str);
 
-      return $user;
+      return $reset;
     }
     
     /*-------------------------------
