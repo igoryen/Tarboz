@@ -38,6 +38,7 @@
       $reset=false;
 
       $random_text="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@.()";
+
       //TO SHUFFLE THE ABOVE TEXT AND PIC 10 CHARS.
       $substr = substr(str_shuffle($random_text),0,10);
 
@@ -51,12 +52,26 @@
 
       $user = $this->getUser($result);
 
+      $userid=$user->getUserId();
+      $username=$user->getFirstName();
+      $date = date("Y/m/d");
+
       if($user){
-        
-        $reset=true;
+      //PASSWORD_RESET
+      if($this->email($email,$username,$substr)){
+
+      $query_insert = "INSERT INTO PASSWORD_RESET VALUES('','$substr','$userid', '$date',0)";    
+
+      $dbHelper = new DBHelper();
+
+      $result = $dbHelper->executeQuery($query_insert);
+      if($result) echo "Inserted";
+       }
+      //$last_inserted_id = mysql_insert_id();
       }
 
-      str_shuffle(str);
+
+
 
       return $reset;
     }
@@ -87,6 +102,20 @@
 
       return $User;  
     } // end of getUser
+
+
+  private function email($email,$username,$reset_code){
+    ini_set("SMTP","aspmx.l.google.com");
+
+    $subject="Password Reset Request @ Tarboz.com";
+    $sent = false;
+    $message="Dear ".$username."<br>A request has been made for resetting your password, if it was requested by you, please follow the link below and a 
+    a your new password will be sent to your email.<br> Link:".PASSWORD_RESET_LOC."?security= ".$reset_code."<br><br>Tarboz Team";
+
+    mail($email,$subject,$message);
+
+ }
+
 
   }
 

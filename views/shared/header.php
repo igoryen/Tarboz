@@ -10,7 +10,7 @@
 
 
 
-require_once BUSINESS_DIR_USER. 'User.php';
+require_once BUSINESS_DIR_USER. '/User.php';
 
 session_start();
 
@@ -35,7 +35,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
    <script>
       
       $(document).ready(function(){
-
+           document.getElementById("forgotpwd").innerHTML="<a href='#'>Forgot Password</a>";
         $("#forgotdiv").hide();
       //var log_div =document.getElementById("call_it").innerHTML;
 
@@ -48,7 +48,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         else{
           document.getElementById("call_it").innerHTML="Login";
           document.getElementById("user_name").innerHTML="";
-          <?php session_destroy();  ?>
+          <?php session_destroy(); $user=""; ?>
         }
 
       });
@@ -59,10 +59,10 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
       });
 
-        var count=0;
+        
        $("#sub").click(function(){
         //To keep count of the number of times, requested
-        count++;
+         
         $.post("user_test/login.php",
         {   
           userid: $("#userlogin").val(),
@@ -86,10 +86,6 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             }
             else {
               document.getElementById("ftest").innerHTML="<?php echo LOGIN_FAIL; ?>";
-            
-            if(count>3){
-               document.getElementById("forgotpwd").innerHTML="<a href='#'>Forgot Password</a>";
-            }
             } 
         });
 

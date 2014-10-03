@@ -4,12 +4,12 @@
 			require_once BUSINESS_DIR_USER. 'User.php';	
 			require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 
-				$userid=isset($_POST['userid']) ? $_POST['userid'] : "";
-				$pwd=isset($_POST['password']) ? $_POST['password'] : "";
+				//$EmailAddress=isset($_POST['email']) ? $_POST['email'] : "";
 
+				$EmailAddress="like_change@hotmail.com";
 				$userManager = new UserLoginManager();
 
-				$logged = $userManager->userLogin($ForgotPassword);
+				$logged = $userManager->ForgotPassword($EmailAddress);
 				
 				if($logged){
 					echo SUCCESS;
