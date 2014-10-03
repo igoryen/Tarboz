@@ -1,74 +1,90 @@
 <?php
 
   require_once DB_CONNECTION . 'DBHelper.php';
-  require_once BUSINESS_DIR_USER_LOGIN. 'User.php';
+
+  require_once BUSINESS_DIR_USER. 'User.php';
+
     //has constants for the table; USER
   require_once(DB_CONNECTION.'datainfo.php'); 
+  //require_once('../../plug-in/email/email_password.php');
 
 
-  class UserLoginDataAccessor {      
-      
-    /*-------------------------------------------
-      gets the user by the names passed
-      -----------------------------------------*/
-    public function Login($uname,$upwd){
+  class UserLoginDataAccessor {
     
-      $uname = sha1($uname);
-      $upwd = sha1($upwd);
+    /*-------------------------------
+      for search
+      20. create new instance of database helper
+      30. pass a query statment and get the data
+      40. returns the user
+      ------------------------------*/
+    public function user_Login($loginid, $pwd){
 
-      // returns all users with the names passed
-      //$query = "SELECT * FROM ".USER. "  WHERE upper(usr_first_name) like " ."%JOHN%";
+      $user = new User();
 
-      $query = "SELECT * FROM ".USER." WHERE  usr_login = '$uname' and   usr_password='$upwd'";
-      
-      $dbHelper = new DBHelper();
-      $result = $dbHelper->executeSelect($query);
-      $Users = $this->getLogin($result);
-      return $Users;
-    } // getUserByName
-  
-  
-    //To be moved to bottom later, private to be accessed by member functions only..
-    private function getLogin($result){    
+      $query = "SELECT * FROM ". USER . " WHERE usr_login =  '$loginid' and usr_password = '$pwd'";
+
+      $dbHelper = new DBHelper(); // 20
+
+      $result = $dbHelper->executeSelect($query); // 30    
+
+      $user = $this->getUser($result);   
+
+      return $user;
+    }
+
+
+    public function ForgotPassword($email){
+
+      $random_text="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@.()";
+      //TO SHUFFLE THE ABOVE TEXT AND PIC 10 CHARS.
+      $substr = substr(str_shuffle($random_text),0,10);
+
+      $user = new User();
+
+      $query = "SELECT * FROM ". USER . "  WHERE usr_login =  '$email' " ;
+
+      $dbHelper = new DBHelper(); 
+
+      $result = $dbHelper->executeSelect($query); // 30    
+
+      $user = $this->getUser($result);
+
+     // if($user->getFirstName()!=null){
+
+      //}
+
+      str_shuffle(str);
+
+      return $user;
+    }
+    
+    /*-------------------------------
+      To be moved to bottom later, private to be accessed by member functions only
+      ------------------------------*/
+    private function getUser($selectResult){ 
+       
       $User = new User();
-      $count = 0;      
-      while($list = mysqli_fetch_assoc($selectResult)){      
-        $id = $user->setUserId($list['usr_user_id']);
-      }      
-      if($id) echo "Good One";
-      else echo "no Good";
-      ////usr_user_id,`usr_first_name`, `usr_last_name`, `usr_login`, `usr_password`, `usr_email`, `usr_DOB`, `usr_registration_date`, `usr_user_type_id`, `usr_language`, `usr_email_subscribed`
-    }   
-    /*  $User->setUserId($list['usr_user_id']);
+      $count = 0;
       
-      $User->setFirstName($list['usr_first_name']);
-      
-      $User->setLastName($list['usr_last_name']);
-      
-      $User->setLogin($list['usr_login']);
-      
-      //$User->setUserRatingId($list['']);
-      
-      $User->setEmail($list['usr_email']);
-      
-      $User->setDOB($list['usr_DOB']);
-      
-      //$User->setLocation($list['']);
-      
-      $User->setRegistration_date($list['usr_registration_date']);
-      
-      $User->setUserType($list['usr_user_type_id']);
-      
-      $User->setUserLanguage($list['usr_language']);
-      
-      $User->setEmailSub($list['usr_email_subscribed']);
-      
+      while($list = mysqli_fetch_assoc($selectResult)){
+          
+        $User->setUserId($list['usr_user_id']);     
+        $User->setFirstName($list['usr_first_name']);     
+        $User->setLastName($list['usr_last_name']);     
+        $User->setLogin($list['usr_login']);      
+        //$User->setUserRatingId($list['']);      
+        $User->setEmail($list['usr_email']);      
+        $User->setDOB($list['usr_DOB']);      
+        //$User->setLocation($list['']);      
+        $User->setRegistration_date($list['usr_registration_date']);      
+        $User->setUserType($list['usr_user_type_id']);      
+        $User->setUserLanguage($list['usr_language']);      
+        $User->setEmailSub($list['usr_email_subscribed']);      
       }
-      return $User;   
-      
 
+      return $User;  
     } // end of getUser
-*/
+
   }
 
 
