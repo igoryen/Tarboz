@@ -46,15 +46,18 @@
 
 public function ForgotPassword($useremail){     
 
-      $loggeduser = new User();
+        $loggeduser = false;
+      //$loggeduser = new User();
 
-      if($user !== null && $pwd != null){
+      if($useremail != null){
 
         $userLoginDataAccessor = new UserLoginDataAccessor();
 
-        $loggeduser = $userLoginDataAccessor->ForgotPassword($user);
+        $loggeduser = $userLoginDataAccessor->ForgotPassword($useremail);
 
       }
+
+      return $loggeduser;  
     }
 
 }

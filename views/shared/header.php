@@ -10,9 +10,10 @@
 
 
 
-require_once BUSINESS_DIR_USER. 'User.php';
+require_once BUSINESS_DIR_USER. '/User.php';
 
 session_start();
+
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
 //echo $user->getFirstName();
@@ -34,7 +35,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
    <script>
       
       $(document).ready(function(){
-
+           document.getElementById("forgotpwd").innerHTML="<a href='#'>Forgot Password</a>";
+        $("#forgotdiv").hide();
       //var log_div =document.getElementById("call_it").innerHTML;
 
       $( "#login" ).dialog({ autoOpen: false });
@@ -46,16 +48,21 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         else{
           document.getElementById("call_it").innerHTML="Login";
           document.getElementById("user_name").innerHTML="";
-          <?php session_destroy();  ?>
-
+          <?php session_destroy(); $user=""; ?>
         }
 
       });
 
-        var count=0;
+      $("#forgotpwd").click(function(){
+         $("#forgotdiv").show();
+         $("#login_form").hide();
+
+      });
+
+        
        $("#sub").click(function(){
         //To keep count of the number of times, requested
-        count++;
+         
         $.post("user_test/login.php",
         {   
           userid: $("#userlogin").val(),
@@ -63,7 +70,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
           
         },
         function(data,status){
-            alert(data);
+            
           if(data==1){
             document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";
             document.getElementById("forgotpwd").innerHTML="";
@@ -72,17 +79,14 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             document.getElementById("call_it").innerHTML="Logout";
 
             //When Successful it will print the user's name beside the logout
-            document.getElementById("user_name").innerHTML="<?php echo $user->getFirstName(); ?>";
+            document.getElementById("user_name").innerHTML="<?php if($user) echo $user->getFirstName(); ?>";
             //When logged in successful, it will close the window
             $( "#login" ).dialog( "close" );
 
             }
             else {
               document.getElementById("ftest").innerHTML="<?php echo LOGIN_FAIL; ?>";
-            } f
-            if(count>3){
-               document.getElementById("forgotpwd").innerHTML="<a href='#'>Forgot Password</a>";
-            }
+            } 
         });
 
       });
@@ -110,13 +114,20 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
           <a href="#" id="user_name"></a> 
         </nav>
         <div style="width:100px;" title="Login Window" id="login">
-
+          <div id="login_form">
             Login:     <input type="text" id="userlogin"><br>
             Password:  <input type="text" id="userpassword"><br>
-
             <button id="sub">Login</button>
-          <p id="ftest"></p>
-          <p id="forgotpwd"></p>
+            <p id="ftest"></p>
+            <p id="forgotpwd"></p>
+        </div>
+          <!---forgot password window-->
+          <div id="forgotdiv">
+
+              Email Address <input type="text" id="forgotemail">
+               <button id="forgotbtn">Forgot</button> 
+               <p>Please type the email address associated with your account in the above box</p>
+          </div>
         </div>
       <!--  <div id="links"><a href="/Tarboz/Views/Login/Index.php">Login</a></div>-->
       </div>
