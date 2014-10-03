@@ -79,7 +79,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             document.getElementById("call_it").innerHTML="Logout";
 
             //When Successful it will print the user's name beside the logout
-            document.getElementById("user_name").innerHTML="<?php if($user!='') echo $user->getFirstName(); ?>";
+            document.getElementById("user_name").innerHTML="<?php if($user) echo $user->getFirstName(); ?>";
             //When logged in successful, it will close the window
             $( "#login" ).dialog( "close" );
 
