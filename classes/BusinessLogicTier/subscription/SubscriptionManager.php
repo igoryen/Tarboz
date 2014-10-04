@@ -20,12 +20,19 @@
       $result = $subscriptionDataAccessor->deleteSubscriptionById($subscription_id);
       return $result;
     }
+      
+    public function getAllSubscriptions() {
+      $subscriptionDataAccessor = new SubscriptionDataAccessor();
+      $result = $subscriptionDataAccessor->getSubscriptionAll();
+      return $result;   
+    }
 
     public function getSubscriptionByEmail($subscription_email) {
       $subscriptionDataAccessor = new SubscriptionDataAccessor();
       $result = $subscriptionDataAccessor->getSubscriptionByEntity($subscription_email);
       return $result;   
     }
+      
     public function getSubscriptionById($id) {
       $subscriptionDataAccessor = new SubscriptionDataAccessor();
       $result = $subscriptionDataAccessor->getSubscriptionById($id);

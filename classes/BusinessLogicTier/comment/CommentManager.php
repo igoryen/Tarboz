@@ -28,6 +28,12 @@
       $result = $commentDataAccessor->deleteCommentById($comment_id);
       return $result;
     }
+      
+    public function getAllComments(){
+      $commentDataAccessor = new CommentDataAccessor();
+      $result = $commentDataAccessor->getAllComments();
+      $return $result;
+    }
 
     public function getCommentById($id) {
       $commentDataAccessor = new CommentDataAccessor();

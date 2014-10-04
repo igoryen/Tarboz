@@ -1,10 +1,10 @@
 <?PHP
 class Rating {
-    private id;
-    private entity_id;
-    private like_user_id;
-    private dislike_user_id;
-    private created_on;
+    private $id;
+    private $entity_id;
+    private $like_user_id;
+    private $dislike_user_id;
+    private $created_on;
 
     public function getId() {
       return $this->id;

@@ -20,7 +20,13 @@
       $result = $ratingDataAccessor->deleteRatingById($rating_id);
       return $result;
     }
-
+      
+    public function getAllRatings(){
+      $ratingDataAccessor = new RatingDataAccessor();
+      $result = $ratingDataAccessor->getAllRatings();
+      return $result;
+    }
+      
     public function getRatingById($id) {
       $ratingDataAccessor = new RatingDataAccessor();
       $result = $ratingDataAccessor->getRatingById($id);

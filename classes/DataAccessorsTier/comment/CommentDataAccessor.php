@@ -13,7 +13,7 @@
       $rating_id = $comment->getRatingId();
       $created_by = $comment->getCreatedBy();
 
-      $query_insert="INSERT INTO COMMENT VALUES ('', $text, $rating_id, $created_by)";
+      $query_insert="INSERT INTO ".COMMENT." VALUES ('', ".$text.", ".$rating_id.", ".$created_by.")";
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query_insert);
@@ -28,12 +28,12 @@
       $rating_id = $comment->getRatingId();
       $created_by = $comment->getCreatedBy();
 
-      $query_update = "UPDATE COMMENT SET 
-        com_text = $text,
-        com_rating_id = $rating_id,
-        com_created_by = $created_by
-      WHERE com_comment_id = $id
-      ";
+      $query_update = "UPDATE ".COMMENT." SET 
+        com_text = ".$text.", 
+        com_rating_id = ".$rating_id.", 
+        com_created_by = ".$created_by
+        ." WHERE com_comment_id = ".$id
+        ;
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query_update);
@@ -43,7 +43,7 @@
 
     public function deleteComment($comment) {
       $id = $comment->getId();
-      $query_delete = "DELETE FROM COMMENT WHERE com_comment_id = $id";
+      $query_delete = "DELETE FROM ".COMMENT." WHERE com_comment_id = ".$id;
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query_delete);
@@ -51,35 +51,75 @@
     }
 
     public function deleteCommentById($comment_id) {
-      $query_delete = "DELETE FROM COMMENT WHERE com_comment_id = $comment_id";
+      $query_delete = "DELETE FROM ".COMMENT." WHERE com_comment_id = ".$comment_id;
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query_delete);
       return $result;
     }
+      
+    public function getAllComments() {
+      $query_select_all = "SELECT * FROM ".COMMENT;
+      $dbHelper = new DBHelper();
+      $result = $dbHelper->executeQuery($query);
+      $comment_all = $this->getCommentList($result);
+      return $comment_all;
+      
+    }
 
     public function getCommentById($comment_id) {
-      $query = "SELECT * FROM COMMENT WHERE com_comment_id = $comment_id";
+      $query = "SELECT * FROM ".COMMENT." WHERE com_comment_id = ".$comment_id;
 
       $dbHelper = new DBHelper();
-      $comment = $dbHelper->executeQuery($query);
-      return $comment;
+      $result = $dbHelper->executeQuery($query);
+      $comment_by_id = $this->getComment($result);
+      return $comment_by_id;
     }
 
     public function getCommentByUser($comment_created_by) {
-      $query = "SELECT * FROM COMMENT WHERE com_created_by = $comment_created_by";
+      $query = "SELECT * FROM ".COMMENT." WHERE com_created_by = ".$comment_created_by;
 
       $dbHelper = new DBHelper();
-      $comments_by_user = $dbHelper->executeQuery($query);
+      $result = $dbHelper->executeQuery($query);
+      $comments_by_user = $this->getCommentList($result);
       return $comments_by_user;
     }
 
     public function getCommentByRating($comment_rating_id) {
-      $query = "SELECT * FROM COMMENT WHERE com_rating_id = $comment_rating_id";
+      $query = "SELECT * FROM ".COMMENT." WHERE com_rating_id = ".$comment_rating_id;
 
       $dbHelper = new DBHelper();
-      $comments_by_user = $dbHelper->executeQuery($query);
-      return $comments_by_user;
+      $result = $dbHelper->executeQuery($query);
+      $comments_by_rating = $this->getCommentList($result);
+      return $comments_by_rating;
+    }
+      
+    public function getComment($selectResult) {
+        $comment = new Comment();
+        $count = 0;
+        while($list = mysqli_fetch_assoc($selectResult)){
+            $comment->setId($list['com_comment_id']);
+            $comment->setText($list['com_text']);
+            $comment->setRatingId($list['com_rating_id']);
+            $comment->setCreatedBy($list['com_created_by']);
+        }//end while
+        
+        return $comment;
+    }
+      
+    public function getCommentList($selectResult) {
+        $comments = array();
+        $count = 0;
+        while ($list = mysqli_fetch_assoc($selectResult)) {
+            $comments[$count] = new Comment();
+            $comments[$count]->setId($list['com_comment_id']);
+            $comments[$count]->setText($list['com_text']);
+            $comments[$count]->setRatingId($list['com_rating_id']);
+            $comments[$count]->setCreatedBy($list['com_created_by']);
+            $count++;
+        }
+        return $comments;
+        
     }
 
   }

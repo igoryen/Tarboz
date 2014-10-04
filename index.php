@@ -1,5 +1,5 @@
-<?php require("html_codes_to_use/Shared/header.php");
-	  require("html_codes_to_use/Shared/search.php");	
+<?php require("views/shared/header.php");
+	  require("views/shared/search.php");	
  ?>
 
 	<div id="index_table_container" align="center">
@@ -66,13 +66,13 @@
 							<table id="innertbl">
 								<tr>
 									<td>
-										<img src="/Tarboz/Images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
+										<img src="images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
 									</td>
 									<td>
-										<img src="/Tarboz/Images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
+										<img src="images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
 									</td>
 									<td>
-										<img src="/Tarboz/Images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
+										<img src="images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
 									</td>
 								</tr>
 							</table><!--innertbl-->
@@ -89,5 +89,5 @@
 
 	</div><!--"index_table_container"-->
 
-<?php require("html_codes_to_use/Shared/footer.php"); ?>
+<?php require("views/shared/footer.php"); ?>
 

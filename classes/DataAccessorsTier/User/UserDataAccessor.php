@@ -28,7 +28,7 @@
       $ratingid    =   $user->getUserRatingId();
       $emailsub    =   $user->getEmailSub();
 
-      $query_insert = "INSERT INTO USER VALUES('', '$fname', '$lname','$loginid','$pwd','$ratingid','$mediaid','$email','$dob','$location','$regdate','$usertype','$language','$emailsub')";      
+      $query_insert = "INSERT INTO ".USER." VALUES('', '$fname', '$lname','$loginid','$pwd','$ratingid','$mediaid','$email','$dob','$location','$regdate','$usertype','$language','$emailsub')";      
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query_insert);
@@ -89,7 +89,7 @@
     }
     
     public function deleteUser($userid){
-      $query ="DELETE FROM .'USER'. WHERE usr_user_id = $userid";
+      $query ="DELETE FROM ."USER". WHERE usr_user_id = $userid";
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
