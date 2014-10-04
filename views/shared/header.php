@@ -99,11 +99,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   <title>WWG</title>
 </title>
 <body>
-  <div id="maindiv">
+  <div id="wrapper">
 
     <div id="header">
       <div class="header_row">
-        <div id="logo"><a href=""><img src="../../images/logo.png" height="50"></a></div>
+        <div id="logo"><a href=""><img src="images/logo.png" height="50"></a></div>
         <nav id="navigation">
           <a href="/Tarboz/Views/Home/Index.php">Home</a> 
           <a href="/Tarboz/Views/Home/Result.php">Result</a> 

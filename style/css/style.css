@@ -1,11 +1,16 @@
 body{
-  background: url("../../images/background.jpg");
-  background-size: 100% 100%;
+  background: url("../../images/background.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
   color: #2a57fc;
   display: block;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 11px;
-  margin: 0px 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
 #maindiv {
@@ -19,6 +24,7 @@ body{
 
 #header{
   background: rgba(255,255,255,0.5); /*#E0E0E0*/
+  padding: 12px 0px;
   /*border: ridge 10px #999;*/
   /*border: dotted 1px blue;*/
   /*box-shadow: 5px 5px 5px #888888;*/
@@ -76,7 +82,7 @@ body{
 
 div > nav#navigation > a {
   color: #000000;
-  font-size: 15px;
+  font-size: 23px;
   padding: 10px 28px;
   text-decoration: none;
 }
@@ -275,7 +281,9 @@ div > nav#navigation > a:hover {
 /* ====== finish the 3-column table ======= */
 
 #footer{
-  color: #12AFFA;
+  background: rgba(255,255,255,0.5); /*#ffffff*/
+  color: #000000;
+  font-size: 15px;
   /*background: #E0E0E0;*/
   /*border: 1px solid #c1c1c1; */
   /*float: left;*/
@@ -285,34 +293,28 @@ div > nav#navigation > a:hover {
   /*position: fixed;*/
   /*position: relative;*/
   width: 100%;
-  /*width: auto;*/
   text-align: center;
-  padding: 34px 20px;
-  /* all ways keep footer at bottom
+  padding: 15px 0px;
+  /* all ways keep footer at bottom */
   position: absolute;
   bottom: 0;
-  left: 0; */
+  left: 0; 
 
 }
 
 div#footer > div > a {
   text-decoration: none;
-  color: #ffffff;
-  font-size:  13px;
+  color: #000000;
+  font-size:  15px;
   padding: 5px 10px;
 }
-/*
- always keep footer at bottom
+
+ /* always keep footer at bottom */
 #wrapper {
-  min-height: 100%;
+  height: 100%;
   position: relative;
 }
 
-#footer_box {
-  width:50%;
-  margin: 0 auto;
-}
-  */
 /*
 #footer p {
   margin-bottom: 0%;
