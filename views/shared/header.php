@@ -114,11 +114,20 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
          <div class="table-cell" style="text-align: right;"><a href="#" id="call_it" class="login_button">Login</a> </div>
         <div style="width:100px;" title="Login Window" id="login">
           <div id="login_form">
-            Login:     <input type="text" id="userlogin"><br>
-            Password:  <input type="text" id="userpassword"><br>
-            <button id="sub">Login</button>
+           <p>
+            <input type="text" id="userlogin" placeholder="Username" class="login_input">
+           </p> 
+           <p>
+            <input type="password" id="userpassword" placeholder="Password" class="login_input">
+           </p>
+           <p>
+
+              <div><button class="lw_button">Login</button></div>            
+              <div style="top: 9.1em; position: absolute; left: 12em;"><button class="lw_button">Register</button></div>
+              <div id="or">or</div>
+           </p> 
             <p id="ftest"></p>
-            <p id="forgotpwd"></p>
+            <p style="margin-left: 1em;" id="forgotpwd"></p>
         </div>
           <!---forgot password window-->
           <div id="forgotdiv">
