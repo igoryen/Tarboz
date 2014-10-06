@@ -7,9 +7,11 @@
 				//$_POST['userid']="johnsmith";
 				//$_POST['password']="habib";
 
+
 				$userid=isset($_POST['userid']) ? $_POST['userid'] : "";
 				$pwd=isset($_POST['password']) ? $_POST['password'] : "";
 
+					echo $userid."Testing ";
 
 				$userManager = new UserLoginManager();
 

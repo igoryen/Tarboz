@@ -10,7 +10,7 @@
 
 
 
-require_once BUSINESS_DIR_USER. '/User.php';
+require_once BUSINESS_DIR_USER. 'User.php';
 
 session_start();
 
@@ -64,13 +64,13 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         //To keep count of the number of times, requested
          
         $.post("user_test/login.php",
-        {   
-          userid: $("#userlogin").val(),
-          password: $("#userpassword").val(),
-          
-        },
+          {
+            userid: $("#userlogin").val(),
+            password: $("#userpassword").val(),
+          },
         function(data,status){
-            
+
+          alert(data);
           if(data==1){
             document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";
             document.getElementById("forgotpwd").innerHTML="";
@@ -115,11 +115,14 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         </nav>
         <div style="width:100px;" title="Login Window" id="login">
           <div id="login_form">
+
             Login:     <input type="text" id="userlogin"><br>
             Password:  <input type="text" id="userpassword"><br>
             <button id="sub">Login</button>
+
             <p id="ftest"></p>
             <p id="forgotpwd"></p>
+
         </div>
           <!---forgot password window-->
           <div id="forgotdiv">
