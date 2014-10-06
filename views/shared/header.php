@@ -103,26 +103,31 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
     <div id="header">
       <div class="header_row">
-        <div id="logo"><a href=""><img src="images/logo.png" height="50"></a></div>
+        <div class="table-cell" style="text-align: left;"><a href=""><img src="images/logo.png" height="50"></a></div>
         <nav id="navigation">
           <a href="/Tarboz/Views/Home/Index.php">Home</a> 
           <a href="/Tarboz/Views/Home/Result.php">Result</a> 
           <a href="/Tarboz/Views/Entry/Index.php">Entry Index</a>  
           <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>
           <a href="/Tarboz/Views/User/Index.php">User Index</a>     
-          <a href="#" id="call_it">Login</a> 
-          <a href="#" id="user_name"></a> 
         </nav>
+         <div class="table-cell" style="text-align: right;"><a href="#" id="call_it" class="login_button">Login</a> </div>
         <div style="width:100px;" title="Login Window" id="login">
           <div id="login_form">
+           <p>
+            <input type="text" id="userlogin" placeholder="Username" class="login_input">
+           </p> 
+           <p>
+            <input type="password" id="userpassword" placeholder="Password" class="login_input">
+           </p>
+           <p>
 
-            Login:     <input type="text" id="userlogin"><br>
-            Password:  <input type="text" id="userpassword"><br>
-            <button id="sub">Login</button>
-
+              <div><button class="lw_button">Login</button></div>            
+              <div style="top: 9.1em; position: absolute; left: 12em;"><button class="lw_button">Register</button></div>
+              <div id="or">or</div>
+           </p> 
             <p id="ftest"></p>
-            <p id="forgotpwd"></p>
-
+            <p style="margin-left: 1em;" id="forgotpwd"></p>
         </div>
           <!---forgot password window-->
           <div id="forgotdiv">

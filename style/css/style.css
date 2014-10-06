@@ -45,15 +45,9 @@ body{
   width: 95%;
 }
 
-#logo{
-  /*border: ridge 5px red;*/
+.table-cell{
   display: table-cell;
-  /*float: left;*/
-  /*height: auto;*/
-  /*margin-left:0.5%;*/
-  /*margin-top:1%;*/
-  /*position: initial;*/
-  width: 10%;
+  vertical-align: middle;
 }
 
 #links{
@@ -348,8 +342,6 @@ div#footer > div > a {
 */
 
 #login_form{
-  display: table;
-  border: solid red;
   padding: 5px;
   width-:400px; 
   margin-left: auto;
@@ -384,6 +376,74 @@ div#footer > div > a {
   display: table-cell;
   border: solid;
   padding: 5px;
+}
+
+.login_input {
+  width: 385px;
+  height: 50px;
+  padding-left: 17px;
+  margin-left: 18px;
+}
+
+.ui-widget {
+  font-size: 1.7em !important;
+}
+
+.ui-widget-header {
+  border: 0px solid !important;
+  -webkit-box-shadow: inset 0px -3px 7px 0px #29bbff;
+  box-shadow: inset 0px -3px 7px 0px #29bbff;
+  background: linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%) !important;
+  color: #ffffff !important;
+}
+
+.ui-dialog {
+  padding: 0em!important;
+  width: 471px !important;
+}
+
+#or {
+  position: absolute;
+  background: #FFFFFF;
+  text-shadow: 0 2px 0px #121212;
+  color: #000000;
+  width: 47px;
+  height: 47px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: bold;
+  line-height: 38px;
+  font-size: 13px;
+  bottom: 5.9em;
+  left: 16.3em;
+}
+
+.lw_button {
+  -moz-box-shadow:inset 0px -3px 7px 0px #29bbff;
+  -webkit-box-shadow:inset 0px -3px 7px 0px #29bbff;
+  box-shadow:inset 0px -3px 7px 0px #29bbff;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2dabf9), color-stop(1, #0688fa));
+  background:-moz-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+  background:-webkit-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+  background:-o-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+  background:-ms-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+  background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2dabf9', endColorstr='#0688fa',GradientType=0);
+  background-color:#2dabf9;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  border:1px solid #636462;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:arial;
+  font-size:15px;
+  padding: 10px 39px;
+  text-decoration: none;
+  width: 185px;
+  text-shadow:0px 1px 0px #263666;
+  margin-left: 1em;
 }
 
 /*--- finish login.php -------*/
@@ -1028,4 +1088,45 @@ div#footer > div > a {
 
 .pannel_inline {
 	display: inline;
+}
+
+.login_button {
+  -moz-box-shadow:inset 0px -3px 7px 0px #29bbff;
+  -webkit-box-shadow:inset 0px -3px 7px 0px #29bbff;
+  box-shadow:inset 0px -3px 7px 0px #29bbff;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2dabf9), color-stop(1, #0688fa));
+  background:-moz-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+  background:-webkit-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+  background:-o-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+  background:-ms-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+  background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2dabf9', endColorstr='#0688fa',GradientType=0);
+  background-color:#2dabf9;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #057fd0;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Courier New;
+  font-size: 22px;
+  padding: 7px 18px;
+  text-decoration:none;
+}
+
+.login_button:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
+  background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+  background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+  background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+  background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+  background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
+  background-color:#33bdef;
+}
+
+.login_button:active {
+  position:relative;
+  top:1px;
 }
