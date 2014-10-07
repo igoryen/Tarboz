@@ -1,9 +1,9 @@
 <?PHP
 class Subscription {
-  private id;
-  private email;
-  private name;
-  private location_name;
+  private $id;
+  private $email;
+  private $name;
+  private $location_name;
 
   public function getId() {
     return $this->id;

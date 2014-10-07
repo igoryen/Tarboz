@@ -66,13 +66,13 @@
 							<table id="innertbl">
 								<tr>
 									<td>
-										<img src="images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
+										<img src="images/topuser.jpg" caption="User001" width="40px" height="40px"><br><a href="#">User001</a>
 									</td>
 									<td>
-										<img src="images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
+										<img src="images/topuser.jpg" caption="User001" width="40px" height="40px"><br><a href="#">User001</a>
 									</td>
 									<td>
-										<img src="images/topuser.jpg" caption="User001" width="100px" height="100px"><br><a href="#">User001</a>
+										<img src="images/topuser.jpg" caption="User001" width="40px" height="40px"><br><a href="#">User001</a>
 									</td>
 								</tr>
 							</table><!--innertbl-->
