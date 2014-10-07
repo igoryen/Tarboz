@@ -1,9 +1,11 @@
 <?PHP
+
 class Report {
-  private id;
-  private reason;
-  private entity_for_report;
-  private entity_id;
+
+  private $id;
+  private $reason;
+  private $entity_for_report;
+  private $entity_id;
 
   public function getId() {
     return $this->id;
@@ -36,5 +38,7 @@ class Report {
   public function setEntityId($entity_id) {
     $this->entity_id = $entity_id;
   }
+
 }
+
 ?>
