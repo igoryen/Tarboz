@@ -22,7 +22,10 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/Tarboz/packages/virtual_keyboard/keyboard.css">
+  <!--search bar keyboard -->
+  <link rel="stylesheet" type="text/css" href="plug-in/virtual_keyboard/keyboard.css">
+  <script type="text/javascript" src="plug-in/virtual_keyboard/keyboard.js" charset="UTF-8"></script>
+  <!--   End    -->
   <link rel="stylesheet" type="text/css" href="style/css/style.css"/>
   <link rel="shortcut icon" href="../../images/watermelon8.png"/>
    
@@ -30,7 +33,6 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
    <script>
       
