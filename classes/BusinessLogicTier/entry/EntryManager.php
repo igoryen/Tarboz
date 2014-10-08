@@ -13,7 +13,7 @@ class EntryController {
     to add a new entry to the DB
     30. returns the last inserted row
     --------------------------------------- */
-  public function create($entry) {
+  public function createEntry($entry) {
     $last_inserted_id = $entry->add($entry);
     return $last_inserted_id; // 30
   }
@@ -22,12 +22,12 @@ class EntryController {
     to update an entry
     --------------------------------------- */
 
-  public function edit($entry) {
+  public function editEntry($entry) {
     $result = $entry->edit($entry);
     return $result;
   }
 
-  public function delete($id) {
+  public function deleteEntry($id) {
     $result = $entry->delete($id);
     return $result;
   }
@@ -36,7 +36,7 @@ class EntryController {
     to retrieve by entry_id
     --------------------------------------- */
 
-  public function details($id) {
+  public function getEntryById($id) {
     $entry = $entry->find($id);
     return $entry;
   }
