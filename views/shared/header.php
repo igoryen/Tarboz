@@ -108,7 +108,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         <div class="table-cell" style="text-align: left;"><a href=""><img src="images/logo.png" height="50"></a></div>
         <nav id="navigation">
           <a href="/Tarboz/Views/Home/Index.php">Home</a> 
-          <a href="/Tarboz/Views/Home/Result.php">Result</a> 
+          <a href="/Tarboz/views2/Home/search_result.php">Result</a>
           <a href="/Tarboz/Views/Entry/Index.php">Entry Index</a>  
           <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>
           <a href="/Tarboz/Views/User/Index.php">User Index</a>     
