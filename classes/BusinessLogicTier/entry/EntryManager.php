@@ -1,46 +1,61 @@
 <?php
 
-/* ---------------------------------------
-  a constant to put inside the include files, where it will show the location to the files,
-  --------------------------------------- */
-require_once DATA_ACCESSOR_DIR_USER . 'UserDataAccessor.php';
+require_once DATA_ACCESSOR_DIR_ENTRY . 'EntryDataAccessor.php';
 
 class EntryController {
 
-//$entry = new Entry();
-
-  /* ---------------------------------------
-    to add a new entry to the DB
-    30. returns the last inserted row
-    --------------------------------------- */
+  /**
+   *
+   * @param type $entry
+   * @return $last_inserted_id (the ID generated in the last query)
+   */
   public function createEntry($entry) {
-    $last_inserted_id = $entry->add($entry);
-    return $last_inserted_id; // 30
+    $eda = new EntryDataAccessor();
+    $last_inserted_id = $eda->addEntry($entry);
+    return $last_inserted_id;
   }
 
-  /* ---------------------------------------
-    to update an entry
-    --------------------------------------- */
-
-  public function editEntry($entry) {
-    $result = $entry->edit($entry);
-    return $result;
+  /**
+   *
+   * @param type $entry
+   * @return $resultOfEntryUpdate
+   */
+  public function updateEntry($entry) {
+    $eda = new EntryDataAccessor();
+    $resultOfEntryUpdate = $eda->updateEntry($entry);
+    return $resultOfEntryUpdate;
   }
 
-  public function deleteEntry($id) {
-    $result = $entry->delete($id);
-    return $result;
+  /**
+   *
+   * @param type $entryId
+   * @return $resultOfEntryDelete
+   */
+  public function deleteEntry($entryId) {
+    $eda = new EntryDataAccessor();
+    $resultOfEntryDelete = $eda->deleteEntry($entryId);
+    return $resultOfEntryDelete;
   }
 
-  /* ---------------------------------------
-    to retrieve by entry_id
-    --------------------------------------- */
+  /**
+   *
+   * @param type $entryId
+   * @return $entryGottenById
+   */
+  public function getEntryById($entryId) {
+    $eda = new EntryDataAccessor();
+    $entryGottenById = $eda->getEntryById($entryId);
+    return $entryGottenById;
+  }
 
-  public function getEntryById($id) {
-    $entry = $entry->find($id);
-    return $entry;
+  /**
+   *
+   * @return $arrayOfFathers
+   */
+  public function getAllFathers() {
+    $eda = new EntryDataAccessor();
+    $arrayOfFathers = $eda->getAllFathers();
+    return $arrayOfFathers;
   }
 
 }
-
-?>
