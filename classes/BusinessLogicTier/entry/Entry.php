@@ -38,18 +38,18 @@ class Entry {
   private $entry_text; // 15
   private $entry_verbatim; // 20
   private $entry_translit; // 23
+  private $entry_authen_status_id; // 50
   private $entry_transl_of;
   private $entry_tags;
-  private $entry_meaning;
   private $entry_user_id; // 65
-  private $entry_authen_status_id; // 50
-  private $entry_use; // 53
-  private $entry_http_link; //53
+  private $entry_media_id; // 93
   private $entry_comment_id; // 90
   private $entry_rating_id; // 70
-  private $entry_media_id; // 93
+  private $entry_tags;
   private $entry_author_id; // 25
   private $entry_source_id; // 100
+  private $entry_use; // 53
+  private $entry_http_link; //53
 
   /* ----------------------------------
     functions for class Entry
@@ -57,75 +57,42 @@ class Entry {
 
   /* getter & setter $id */
 
-  public function getId() {
+  public function getEntryId() {
     return $this->entry_id;
   }
 
-  public function setId($x) {
+  public function setEntryId($x) {
     $this->entry_id = $x;
   }
 
   /* getter & setter for $text */
 
-  public function getText() {
+  public function getEntryText() {
     return $this->entry_text;
   }
 
-  public function setText($t) {
+  public function setEntryText($t) {
     $this->entry_text = $t;
   }
 
   /* getter & setter for $verbatim */
 
-  public function getVerbatim() {
+  public function getEntryVerbatim() {
     return $this->entry_verbatim;
   }
 
-  public function setVerbatim($v) {
+  public function setEntryVerbatim($v) {
     $this->entry_verbatim = $v;
   }
 
-  /* getter & setter for $translOf */
+  /* getter & setter for $translit */
 
-  public function getTranslOf() {
-    return $this->entry_transl_of;
+  public function getEntryTranslit() {
+    return $this->entry_translit;
   }
 
-  public function setTranslOf($t) {
-    $this->entry_transl_of = $t;
-  }
-
-  /* getter & setter for $tags */
-
-  public function getTags() {
-    return $this->entry_tags;
-  }
-
-  public function setTags($t) {
-    $this->entry_tags = $t;
-  }
-
-  /* getter & setter for $meaning */
-
-  public function getMeaning() {
-    return $this->entry_meaning;
-  }
-
-  public function setMeaning($m) {
-    $this->entry_meaning = $m;
-  }
-
-  /* --------------------------------------
-    functions for class Entry -> User
-    -------------------------------------- */
-  /* getter & setter for $userId */
-
-  public function getUserId() {
-    return $this->entry_user_id;
-  }
-
-  public function setUserId($x) {
-    $this->entry_user_id = $x;
+  public function setEntryTranslit($t) {
+    $this->entry_translit = $t;
   }
 
   /* --------------------------------------
@@ -133,35 +100,48 @@ class Entry {
     -------------------------------------- */
   /* getter & setter for $authenStatusId */
 
-  public function getAuthenStatusId() {
+  public function getEntryAuthenStatusId() {
     return $this->entry_authen_status_id;
   }
 
-  public function setAuthenStatusId($a) {
+  public function setEntryAuthenStatusId($a) {
     $this->entry_authen_status_id = $a;
   }
 
+  /* getter & setter for $translOf */
+
+  public function getEntryTranslOf() {
+    return $this->entry_transl_of;
+  }
+
+  public function setEntryTranslOf($t) {
+    $this->entry_transl_of = $t;
+  }
+
   /* --------------------------------------
-    functions for class Entry -> EntryDetails
+    functions for class Entry -> User
     -------------------------------------- */
-  /* getter & setter for $use */
+  /* getter & setter for $userId */
 
-  public function getUse() {
-    return $this->entry_use;
+  public function getEntryUserId() {
+    return $this->entry_user_id;
   }
 
-  public function setUse($u) {
-    $this->entry_use = $u;
+  public function setEntryUserId($x) {
+    $this->entry_user_id = $x;
   }
 
-  /* getter & setter for $httpLink */
+  /* --------------------------------------
+    functions for class EntryDetails -> Media
+    -------------------------------------- */
+  /* getter & setter for $mediaSet */
 
-  public function getHttpLink() {
-    return $this->entry_http_link;
+  public function getEntryMediaId() {
+    return $this->entry_media_id;
   }
 
-  public function setHttpLink($h) {
-    $this->entry_http_link = $h;
+  public function setEntryMediaId($m) {
+    $this->entry_media_id = $m;
   }
 
   /* --------------------------------------
@@ -169,11 +149,11 @@ class Entry {
     -------------------------------------- */
   /* getter & setter for $commentId */
 
-  public function getCommentId() {
+  public function getEntryCommentId() {
     return $this->entry_comment_id;
   }
 
-  public function setCommentId($c) {
+  public function setEntryCommentId($c) {
     $this->entry_comment_id = $c;
   }
 
@@ -182,25 +162,22 @@ class Entry {
     -------------------------------------- */
   /* getter & setter for $ratingId */
 
-  public function getRatingId() {
+  public function getEntryRatingId() {
     return $this->entry_rating_id;
   }
 
-  public function setRatingId($r) {
+  public function setEntryRatingId($r) {
     $this->entry_rating_id = $r;
   }
 
-  /* --------------------------------------
-    functions for class EntryDetails -> Media
-    -------------------------------------- */
-  /* getter & setter for $mediaSet */
+  /* getter & setter for $tags */
 
-  public function getMediaSet() {
-    return $this->entry_media_id;
+  public function getEntryTags() {
+    return $this->entry_tags;
   }
 
-  public function setMediaSet($m) {
-    $this->entry_media_id = $m;
+  public function setEntryTags($t) {
+    $this->entry_tags = $t;
   }
 
   /* --------------------------------------
@@ -208,11 +185,11 @@ class Entry {
     -------------------------------------- */
   /* getter & setter for $authorId */
 
-  public function getAuthorId() {
+  public function getEntryAuthorId() {
     return $this->entry_author_id;
   }
 
-  public function setAuthorId($a) {
+  public function setEntryAuthorId($a) {
     $this->entry_author_id = $a;
   }
 
@@ -221,12 +198,35 @@ class Entry {
     -------------------------------------- */
   /* getter & setter for $sourceId */
 
-  public function getSourceId() {
+  public function getEntrySourceId() {
     return $this->entry_source_id;
   }
 
-  public function setSourceId($s) {
+  public function setEntrySourceId($s) {
     $this->entry_source_id = $s;
+  }
+
+  /* --------------------------------------
+    functions for class Entry -> EntryDetails
+    -------------------------------------- */
+  /* getter & setter for $use */
+
+  public function getEntryUse() {
+    return $this->entry_use;
+  }
+
+  public function setEntryUse($u) {
+    $this->entry_use = $u;
+  }
+
+  /* getter & setter for $httpLink */
+
+  public function getEntryHttpLink() {
+    return $this->entry_http_link;
+  }
+
+  public function setEntryHttpLink($h) {
+    $this->entry_http_link = $h;
   }
 
 }
@@ -236,4 +236,3 @@ class Entry {
   some class members are instances of another class. How do I write them?
 
  */
-?>
