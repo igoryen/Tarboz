@@ -275,21 +275,24 @@ class EntryDataAccessor {
               AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
               AND ent_entry_authen_status_id = 1';
     $dbHelper = new DBHelper();
-    $selectResult = $dbHelper->executeSelect($query);
+    $resultOfSelect = $dbHelper->executeSelect($query);
     // the current EntryDataAccessor object = $this
-    $fatherGottenByVerbatim = $this->getEntry($selectResult);
+    $fatherGottenByVerbatim = $this->getEntryBrief($resultOfSelect);
     return $fatherGottenByVerbatim;
   }
-
-private function getEntry($selectResult) {
-    // To be moved to bottom later
+  /**
+   * getEntryBrief($resultOfSelect)
+   * To retrieve only some fields of one entry for the phrase search result page.
+   * @param type $resultOfSelect
+   * @return \Entry
+   */
+  private function getEntryBrief($resultOfSelect) {
     // private: to be accessed by member functions only
-    // $selectResult is the result from executing a SELECT query
-    // create an empty object
+    // $resultOfSelect is the result from executing a SELECT query
+    // create an empty Entry object
     $Entry = new Entry();
-    //$count = 0;
-    // Fetch a result row as an associative array
-    while ($list = mysqli_fetch_assoc($selectResult)) {
+    // Fetch the result of SELECT as an associative array
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) {
       /*
         `ent_entry_id`
         `ent_entry_text`
@@ -323,6 +326,55 @@ private function getEntry($selectResult) {
       //$Entry->setEntrySourceId($list['ent_entry_source_id']);
       //$Entry->setEntryUse($list['ent_entry_use']);
       //$Entry->setEntryHttpLink($list['ent_entry_http_link']);
+    } // while
+    return $Entry;
+  }
+  /**
+   * getEntryFull($resultOfSelect)
+   * To retrieve ALL the fields of one entry for the entry profile page.
+   * @param type $resultOfSelect
+   * @return \Entry
+   */
+  private function getEntryFull($resultOfSelect) {
+    // private: to be accessed by member functions only
+    // $selectResult is the result from executing a SELECT query
+    // create an empty object
+    $Entry = new Entry();
+    // Fetch a result row as an associative array
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) {
+      /*
+        `ent_entry_id`
+        `ent_entry_text`
+        `ent_entry_verbatim`
+        `ent_entry_translit`
+        `ent_entry_authen_status_id`
+        `ent_entry_translation_of`
+        `ent_entry_creator_id`
+        `ent_entry_media_id`
+        `ent_entry_comment_id`
+        `ent_entry_rating_id`
+        `ent_entry_tags`
+        `ent_entry_author_id`
+        `ent_entry_source_id`
+        `ent_entry_use`
+        `ent_entry_http_link`
+       */
+      // assign the value of each key of the assoc.array
+      $Entry->setEntryUserId($list['ent_entry_id']);
+      $Entry->setEntryText($list['ent_entry_text']);
+      $Entry->setEntryVerbatim($list['ent_entry_verbatim']);
+      $Entry->setEntryTranslit($list['ent_entry_translit']);
+      $Entry->setEntryAuthenStatusId($list[ent_entry_authen_status_id]);
+      $Entry->setEntryTranslOf($list['ent_entry_translation_of']);
+      $Entry->setEntryUserId($list['ent_entry_creator_id']);
+      $Entry->setEntryMediaId($list['ent_entry_media_id']);
+      $Entry->setEntryCommentId($list['ent_entry_comment_id']);
+      $Entry->setEntryRatingId($list['ent_entry_rating_id']);
+      $Entry->setEntryTags($list['ent_entry_tags']);
+      $Entry->setEntryAuthorId($list['ent_entry_author_id']);
+      $Entry->setEntrySourceId($list['ent_entry_source_id']);
+      $Entry->setEntryUse($list['ent_entry_use']);
+      $Entry->setEntryHttpLink($list['ent_entry_http_link']);
     } // while
     return $Entry;
   }
