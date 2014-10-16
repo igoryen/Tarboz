@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="/Tarboz/style/css/style.css"/>
   <link rel="shortcut icon" href="/Tarboz/Images/watermelon8.png"/>
   <title>WWG</title>
-</title>
+</head>
 <body>
   <div id="maindiv">
 

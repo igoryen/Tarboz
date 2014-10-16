@@ -40,7 +40,7 @@ class Entry {
   private $entry_translit; // 23
   private $entry_authen_status_id; // 50
   private $entry_transl_of;
-  private $entry_tags;
+  //private $entry_tags;
   private $entry_user_id; // 65
   private $entry_media_id; // 93
   private $entry_comment_id; // 90

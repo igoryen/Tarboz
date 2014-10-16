@@ -182,6 +182,13 @@ class EntryDataAccessor {
     return $entryGottenById;
   }
 
+  /*
+    public function getEntrySetByVerbatim($verbatim) {
+    // for SELECT use Full-Text Search Functions
+    $query = "SELECT "
+    }
+   */
+
   /**
    *
    * @param type $entryId
@@ -243,7 +250,38 @@ class EntryDataAccessor {
     return $Entries;
   }
 
-  private function getEntry($selectResult) {
+// used to search the database for the "father" using a verbatim string
+  public function getFatherByVerbatim($verbatim) {
+    //$fatherGottenByVerbatim = new Entry();
+    // # search all language tables for the original entry whose verbatim
+    // is close to the user-provided verbatim
+    $query = 'SELECT ent_entry_text
+            FROM tbl_entry_russian
+            WHERE
+              MATCH(ent_entry_verbatim)
+              AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
+              AND ent_entry_authen_status_id = 1
+            UNION ALL
+            SELECT ent_entry_text
+            FROM  tbl_entry_mandarin
+            WHERE
+              MATCH(ent_entry_verbatim)
+              AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
+              AND ent_entry_authen_status_id = 1
+            UNION ALL
+            SELECT ent_entry_text FROM  tbl_entry_english
+            WHERE
+              MATCH(ent_entry_verbatim)
+              AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
+              AND ent_entry_authen_status_id = 1';
+    $dbHelper = new DBHelper();
+    $selectResult = $dbHelper->executeSelect($query);
+    // the current EntryDataAccessor object = $this
+    $fatherGottenByVerbatim = $this->getEntry($selectResult);
+    return $fatherGottenByVerbatim;
+  }
+
+private function getEntry($selectResult) {
     // To be moved to bottom later
     // private: to be accessed by member functions only
     // $selectResult is the result from executing a SELECT query
@@ -270,21 +308,21 @@ class EntryDataAccessor {
         `ent_entry_http_link`
        */
       // assign the value of each key of the assoc.array
-      $Entry->getEntryUserId($list['ent_entry_id']);
-      $Entry->getEntryText($list['ent_entry_text']);
-      $Entry->getEntryVerbatim($list['ent_entry_verbatim']);
-      $Entry->getEntryTranslit($list['ent_entry_translit']);
-      $Entry->getEntryAuthenStatusId($list[ent_entry_authen_status_id]);
-      $Entry->getEntryTranslOf($list['ent_entry_translation_of']);
-      $Entry->getEntryUserId($list['ent_entry_creator_id']);
-      $Entry->getEntryMediaId($list['ent_entry_media_id']);
-      $Entry->getEntryCommentId($list['ent_entry_comment_id']);
-      $Entry->getEntryRatingId($list['ent_entry_rating_id']);
-      $Entry->getEntryTags($list['ent_entry_tags']);
-      $Entry->getEntryAuthorId($list['ent_entry_author_id']);
-      $Entry->getEntrySourceId($list['ent_entry_source_id']);
-      $Entry->getEntryUse($list['ent_entry_use']);
-      $Entry->getEntryHttpLink($list['ent_entry_http_link']);
+      //$Entry->setEntryUserId($list['ent_entry_id']);
+      $Entry->setEntryText($list['ent_entry_text']);
+      //$Entry->setEntryVerbatim($list['ent_entry_verbatim']);
+      //$Entry->setEntryTranslit($list['ent_entry_translit']);
+      //$Entry->setEntryAuthenStatusId($list[ent_entry_authen_status_id]);
+      //$Entry->setEntryTranslOf($list['ent_entry_translation_of']);
+      //$Entry->setEntryUserId($list['ent_entry_creator_id']);
+      //$Entry->setEntryMediaId($list['ent_entry_media_id']);
+      //$Entry->setEntryCommentId($list['ent_entry_comment_id']);
+      //$Entry->setEntryRatingId($list['ent_entry_rating_id']);
+      //$Entry->setEntryTags($list['ent_entry_tags']);
+      //$Entry->setEntryAuthorId($list['ent_entry_author_id']);
+      //$Entry->setEntrySourceId($list['ent_entry_source_id']);
+      //$Entry->setEntryUse($list['ent_entry_use']);
+      //$Entry->setEntryHttpLink($list['ent_entry_http_link']);
     } // while
     return $Entry;
   }

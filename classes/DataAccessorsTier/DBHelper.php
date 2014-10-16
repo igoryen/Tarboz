@@ -19,6 +19,9 @@ class DBHelper {
     // Step 1. Create a Database connection
     $this->connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
             or die("Error, failed to connect" . mysqli_error($this->connection));
+    // Sets the default client character set
+    // to be used when sending data from and to the database server
+    $this->connection->set_charset("utf8");
     //$db_select = mysqli_select_db("prj666", $this->connection)
     // or die("Can not connect to the database".mysqli_error($this->connection));
   }
