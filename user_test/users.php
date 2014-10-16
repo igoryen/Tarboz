@@ -7,7 +7,7 @@
 
     <?php
     // Include utility files
-    require_once '../include/config.php';
+    require_once '../config.php';
     require_once BUSINESS_DIR_USER . 'UserManager.php';
 
     $userManager = new UserManager();

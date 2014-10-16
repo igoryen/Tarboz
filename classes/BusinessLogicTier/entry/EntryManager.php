@@ -2,7 +2,7 @@
 
 require_once DATA_ACCESSOR_DIR_ENTRY . 'EntryDataAccessor.php';
 
-class EntryController {
+class EntryManager {
 
   /**
    *
@@ -47,6 +47,16 @@ class EntryController {
     $entryGottenById = $eda->getEntryById($entryId);
     return $entryGottenById;
   }
+  /**
+   *
+   * @param string $verbatim
+   * @return $entrySetGottenByVerbatim
+   */
+  public function getEntrySetByVerbatim($verbatim) {
+    $eda = new EntryDataAccessor();
+    $entrySetGottenByVerbatim = $eda->getEntrySetByVerbatim($verbatim);
+    return $entrySetGottenByVerbatim;
+  }
 
   /**
    *
@@ -56,6 +66,12 @@ class EntryController {
     $eda = new EntryDataAccessor();
     $arrayOfFathers = $eda->getAllFathers();
     return $arrayOfFathers;
+  }
+
+  public function getFatherByVerbatim($verbatim) {
+    $eda = new EntryDataAccessor();
+    $fatherGottenByVerbatim = $eda->getFatherByVerbatim($verbatim);
+    return $fatherGottenByVerbatim;
   }
 
 }
