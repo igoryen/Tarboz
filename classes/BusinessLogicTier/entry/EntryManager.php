@@ -74,4 +74,10 @@ class EntryManager {
     return $fatherGottenByVerbatim;
   }
 
+  public function getListOfKidBriefByVerbatim($verbatim) {
+    $eda = new EntryDataAccessor();
+    $arrayOfKidsGottenByVerbatim = $eda->getListOfKidBriefByVerbatim($verbatim);
+    return $arrayOfKidsGottenByVerbatim;
+  }
+
 }

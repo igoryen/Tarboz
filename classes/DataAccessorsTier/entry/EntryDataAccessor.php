@@ -255,21 +255,22 @@ class EntryDataAccessor {
     //$fatherGottenByVerbatim = new Entry();
     // # search all language tables for the original entry whose verbatim
     // is close to the user-provided verbatim
-    $query = 'SELECT ent_entry_text
+    $query = 'SELECT ent_entry_id, ent_entry_text
             FROM tbl_entry_russian
             WHERE
               MATCH(ent_entry_verbatim)
               AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
               AND ent_entry_authen_status_id = 1
             UNION ALL
-            SELECT ent_entry_text
+            SELECT  ent_entry_id, ent_entry_text
             FROM  tbl_entry_mandarin
             WHERE
               MATCH(ent_entry_verbatim)
               AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
               AND ent_entry_authen_status_id = 1
             UNION ALL
-            SELECT ent_entry_text FROM  tbl_entry_english
+            SELECT  ent_entry_id, ent_entry_text
+            FROM  tbl_entry_english
             WHERE
               MATCH(ent_entry_verbatim)
               AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
@@ -280,6 +281,102 @@ class EntryDataAccessor {
     $fatherGottenByVerbatim = $this->getEntryBrief($resultOfSelect);
     return $fatherGottenByVerbatim;
   }
+
+  public function getListOfKidBriefByVerbatim($verbatim) {
+    $query = 'SELECT ent_entry_id, ent_entry_text, relevance FROM
+          (SELECT ent_entry_id, ent_entry_text, relevance FROM(
+
+            # Russian
+            (SELECT ent_entry_id, ent_entry_text,
+              MATCH(ent_entry_verbatim)
+              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
+              AS relevance
+              FROM tbl_entry_russian
+              WHERE
+              MATCH(ent_entry_verbatim)
+              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
+              AND ent_entry_authen_status_id = 2
+              HAVING Relevance > 0
+              ORDER BY relevance DESC
+            ) # Russian
+
+            UNION ALL
+
+            # English
+            (SELECT ent_entry_id, ent_entry_text,
+              MATCH(ent_entry_verbatim)
+              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
+              AS relevance
+              FROM  tbl_entry_english
+              WHERE
+              MATCH(ent_entry_verbatim)
+              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
+              AND ent_entry_authen_status_id = 2
+              HAVING Relevance > 0
+              ORDER BY relevance DESC
+            )# English
+
+            UNION ALL
+
+            # Mandarin
+            (SELECT ent_entry_id, ent_entry_text,
+              MATCH(ent_entry_verbatim)
+              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
+              AS relevance
+              FROM  tbl_entry_mandarin
+              WHERE
+              MATCH(ent_entry_verbatim)
+              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
+              AND ent_entry_authen_status_id = 2
+              HAVING Relevance > 0
+              ORDER BY relevance DESC
+            ) # Mandarin
+
+          ) AS UnionTable
+          GROUP BY ent_entry_id ASC
+        ) AS TableToOrderById';
+
+    $dbHelper = new DBHelper();
+    $resultOfSelect = $dbHelper->executeSelect($query);
+    // the current EntryDataAccessor object = $this
+    $arrayOfKidsGottenByVerbatim = $this->getListOfKidBrief($resultOfSelect);
+    return $arrayOfKidsGottenByVerbatim;
+  }
+  /**
+   *
+   * @param type $resultOfSelect
+   * @return array of Entry objects
+   */
+  private function getListOfKidBrief($resultOfSelect) {
+    $Entries[] = new Entry();
+    //the counter keeps count of the entries
+    $count = 0;
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) {
+      // an array of class Entry objects
+      $Entries[] = new Entry();
+      // assign the value of each key of the assoc.array
+      $Entries[$count]->setEntryId($list['ent_entry_id']);
+      $Entries[$count]->setEntryText($list['ent_entry_text']);
+//      $Entries[$count]->setEntryVerbatim($list['ent_entry_verbatim']);
+//      $Entries[$count]->setEntryTranslit($list['ent_entry_translit']);
+//      $Entries[$count]->setEntryAuthenStatusId($list['ent_entry_authen_status_id']);
+//      $Entries[$count]->setEntryTranslOf($list['ent_entry_translation_of']);
+//      $Entries[$count]->setEntryUserId($list['ent_entry_creator_id']);
+//      $Entries[$count]->setEntryMediaId($list['ent_entry_media_id']);
+//      $Entries[$count]->setEntryCommentId($list['ent_entry_comment_id']);
+//      $Entries[$count]->setEntryRatingId($list['ent_entry_rating_id']);
+//      $Entries[$count]->setEntryTags($list['ent_entry_tags']);
+//      $Entries[$count]->setEntryAuthorId($list['ent_entry_author_id']);
+//      $Entries[$count]->setEntrySourceId($list['ent_entry_source_id']);
+//      $Entries[$count]->setEntryUse($list['ent_entry_use']);
+//      $Entries[$count]->setEntryHttpLink($list['ent_entry_http_link']);
+      $count++;
+    } // while
+    // to filter the array and remove empty values (DOESN'T WORK)
+    //return array_filter($Entries);
+    return $Entries;
+  }
+
   /**
    * getEntryBrief($resultOfSelect)
    * To retrieve only some fields of one entry for the phrase search result page.
@@ -311,7 +408,7 @@ class EntryDataAccessor {
         `ent_entry_http_link`
        */
       // assign the value of each key of the assoc.array
-      //$Entry->setEntryUserId($list['ent_entry_id']);
+      $Entry->setEntryId($list['ent_entry_id']);
       $Entry->setEntryText($list['ent_entry_text']);
       //$Entry->setEntryVerbatim($list['ent_entry_verbatim']);
       //$Entry->setEntryTranslit($list['ent_entry_translit']);
