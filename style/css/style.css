@@ -632,6 +632,25 @@ div#footer > div > a {
   padding-right: 5px;
   vertical-align: middle; /*50*/
 }
+
+.no_dad_no_kids{
+  background-color: white;
+  text-align: center;
+  color: lightsteelblue;
+  font-size: 30px;
+  font-style: italic;
+  padding: 10px;
+}
+.debug_table, td{
+  border: solid 1px black;
+  font-size: small;
+  white-space: nowrap;
+  /*width: 100%;*/         
+  /* "overflow" value must be different from "visible" */          
+  /*overflow: hidden;*/               
+  /*text-overflow: ellipsis;*/
+}
+
 /* --- finish search_result.php --- */
 
 /*=====================================*/
