@@ -171,14 +171,30 @@ class EntryDataAccessor {
      * What is the language of the query?
      * Which language table to go to?
      */
-    $query = "SELECT * FROM " . ENTRY .
-            " WHERE ent_entry_id = ' $entryId ';";
+//    $query = "SELECT * FROM " . ENTRY .
+//            " WHERE ent_entry_id = ' $entryId ';";
+
+    $query = 'SELECT *
+              FROM tbl_entry_russian
+              WHERE ent_entry_id = "'.$entryId.'"
+
+              UNION ALL
+
+              SELECT *
+              FROM  tbl_entry_mandarin
+              WHERE ent_entry_id = "'.$entryId.'"
+
+              UNION ALL
+
+              SELECT *
+              FROM  tbl_entry_english
+              WHERE ent_entry_id = "'.$entryId.'";';
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
 
     // the current EntryDataAccessor object = $this
-    $entryGottenById = $this->getEntry($result);
+    $entryGottenById = $this->getEntryFull($result);
     return $entryGottenById;
   }
 
@@ -457,11 +473,11 @@ class EntryDataAccessor {
         `ent_entry_http_link`
        */
       // assign the value of each key of the assoc.array
-      $Entry->setEntryUserId($list['ent_entry_id']);
+      $Entry->setEntryId($list['ent_entry_id']);
       $Entry->setEntryText($list['ent_entry_text']);
       $Entry->setEntryVerbatim($list['ent_entry_verbatim']);
       $Entry->setEntryTranslit($list['ent_entry_translit']);
-      $Entry->setEntryAuthenStatusId($list[ent_entry_authen_status_id]);
+      $Entry->setEntryAuthenStatusId($list['ent_entry_authen_status_id']);
       $Entry->setEntryTranslOf($list['ent_entry_translation_of']);
       $Entry->setEntryUserId($list['ent_entry_creator_id']);
       $Entry->setEntryMediaId($list['ent_entry_media_id']);
