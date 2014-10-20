@@ -139,10 +139,12 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                     <input type="password" id="userpassword" placeholder="Password" class="login_input">
                  </p>
                  <p>
-                    <!--Login button -->
-                    <div><button class="lw_button" id="sub">Login</button></div>            
+                    <!--Login button                     <div><button class="lw_button" id="sub">Login</button></div>            
                     <div style="top: 9.1em; position: absolute; left: 12em;"><button class="lw_button">Register</button></div>
-                    <div id="or">or</div>
+                    <div id="or">or</div>-->
+                    <div style="margin-left: 1em;"><button class="lw_button" id="sub">Login</button>
+                      <b id="or">or</b>
+                        <button class="lw_button">Register</button></div> 
                  </p> 
                  <p id="ftest"></p>
                  <p style="margin-left: 1em;" id="forgotpwd"></p>
