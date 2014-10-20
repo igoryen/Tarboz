@@ -27,7 +27,7 @@ if ($logged->getFirstName() != "" && $UST=="ADMIN") {
   echo SUCCESS_ADMIN_RIGHT;
 }else
 if ($logged->getFirstName() != "" && $UST=="USER") {
-  echo "1";
+  echo SUCCESS_ADMIN_RIGHT;
 }else
 if ($logged->getFirstName() != "" && $UST=="BANNED") {
   echo FAILURE_BANNED;
