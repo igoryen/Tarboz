@@ -27,7 +27,7 @@ if ($logged->getFirstName() != "" && $UST=="ADMIN") {
   echo SUCCESS_ADMIN_RIGHT;
 }else
 if ($logged->getFirstName() != "" && $UST=="USER") {
-  echo SUCCESS_USER_RIGHT;
+  echo SUCCESS_ADMIN_RIGHT;
 }else
 if ($logged->getFirstName() != "" && $UST=="BANNED") {
   echo FAILURE_BANNED;
@@ -39,5 +39,4 @@ else {
   echo FAIL;
 }
 
-//				echo "\nThe user is:".$_SESSION["user"]->getFirstName();
 ?>

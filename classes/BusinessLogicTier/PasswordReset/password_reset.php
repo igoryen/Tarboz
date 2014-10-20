@@ -33,6 +33,7 @@ class ResetPassword{
     $this->date = $date;
   }
 
+  //a true and false int variable
   public function getResetRequest() {
     return $this->request;
   }
