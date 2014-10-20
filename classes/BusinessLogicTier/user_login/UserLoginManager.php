@@ -76,53 +76,62 @@ public function ForgotPassword($useremail){
 
         $user_login = $password_reset->getResetUser();
 
-        //echo "User_Login: ".$user_login;
+        //will return 0 or 1, if had already requested he/she will get 1, which means he/she has to do it again
+        $requested_before = $password_reset->getResetRequest();
 
       }
-      $userman = new UserManager();
+
+      //if 0, means he/she has not requested it before
+      if($requested_before==0){
+
+          $userman = new UserManager();
 
 
-      //For generating password
-      $random_text = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@()";
-      $substr="";
+          //For generating password
+          $random_text = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@()";
+          $substr="";
 
-      $substr = substr(str_shuffle($random_text), 0, 15);  
+          $substr = substr(str_shuffle($random_text), 0, 15);  
 
-      $user = $userman->getUserByLoginId($user_login); 
+          $user = $userman->getUserByLoginId($user_login); 
 
-      //If we recieve the user object, then we set the password
-      if(isset($user)){
-
-
-       // $generatedpwd = $substr;
-         
-          
-          //sets the password in the object to the generated password
-          //$user->setPassword($generatedpwd);
-  
-          $pwd=$substr;
-          $user->setPassword(sha1($pwd)); 
-          
-          $myemail=$user->getEmail();
-          $username=$user->getLogin();
-          $userFirstName=$user->getFirstName();
-           }
-
-          $body="Dear ".$userFirstName.",<br>Your Password has been successfully resetted, Please find your password below, 
-          you can change it or keep it the same way as it is; It is an auto-generated password.<br>The userID is: ".$username."<br>The
-          Password is: ".$pwd;
+          //If we recieve the user object, then we set the password
+          if(isset($user)){
       
-         //A function that passes recieves the user object and changes the password 
-        $userman->changePassword($user);
+              $pwd=$substr;
+              $user->setPassword(sha1($pwd)); 
+              
+              $myemail=$user->getEmail();
+              $username=$user->getLogin();
+              $userFirstName=$user->getFirstName();
 
-        if($userLoginDataAccessor->email($myemail, null, null,$body)) {
-          exit;
-          return true;   
+              }
+
+              $body="Dear ".$userFirstName.",<br>Your Password has been successfully resetted, Please find your password below, 
+              you can change it or keep it the same way as it is; It is an auto-generated password.<br>The userID is: ".$username."<br>The
+              Password is: ".$pwd;
+          
+             //A function that passes recieves the user object and changes the password 
+            $userman->changePassword($user);
+
+            //A function, that changes the requested bool to 1
+            $userLoginDataAccessor->updateRequestCode($resetcode);
+
+            if($userLoginDataAccessor->email($myemail, null, null,$body)) {
+              exit;
+              return "Your new Password has been Successfully sent to your email! please check your email";   
+            }
+      
+        } else{
+            //if its not 0, it means it was requested by someone previously
+            $userLoginDataAccessor->deleteRequestCode($user_login);
+
+            echo "Sorry, you have already requested!! Please goto the login page and re-request for a password reset, Thank you";   
+
         }
-      
-      //echo "Testing Now: ".$user->getFirstName();
 
-      return false;
+
+    //  return false;
 
     }
 

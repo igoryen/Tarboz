@@ -72,6 +72,49 @@ class UserLoginDataAccessor {
     return $reset;
   }
 
+  public function deleteRequestCode($user_id){
+
+    if(isset($user_id)){
+
+    //object that holds the password and user id for the resetter  
+    //Retrieving the data from the table, based on the data sent
+    $Reset = new ResetPassword();
+
+     $query = "DELETE FROM  " .PASSWORD_RESET. " WHERE user_id = '".$user_id."'";
+
+    $dbHelper = new DBHelper();
+
+    $result = $dbHelper->executeSelect($query); // 30
+
+    }
+
+    return $result;
+  }
+
+
+  public function updateRequestCode($reset_code){
+
+    if(isset($reset_code)){
+
+    //object that holds the password and user id for the resetter  
+    //Retrieving the data from the table, based on the data sent
+    $Reset = new ResetPassword();
+
+     $query = "UPDATE " .PASSWORD_RESET. " SET
+      requested    = '1' WHERE reset_code = '".$reset_code."'";
+
+    $dbHelper = new DBHelper();
+
+    $result = $dbHelper->executeSelect($query); // 30
+
+    //getting the object of PasswordReset
+   // $Reset = $this->getReset($result);
+
+    }
+
+    return $result;
+  }
+
   public function LoginReset($resetcode){
 
     if(isset($resetcode)){

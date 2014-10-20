@@ -39,5 +39,4 @@ else {
   echo FAIL;
 }
 
-//				echo "\nThe user is:".$_SESSION["user"]->getFirstName();
 ?>
