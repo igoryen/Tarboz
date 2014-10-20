@@ -87,14 +87,14 @@
   left:0px;
   top:90%;
   list-style-type:none;
-  height:9.4em;
   overflow-y:auto;
   overflow-x:hidden;
   background-color:#f6f6f6;
   border:1px solid #999999;
   display:none;
   text-align:left;
-  width:12em;
+  width: 24em;
+  height: 33em;
 }
 #keyboardInputMaster thead tr th div ol li {
   padding:0.2em 0.4em;
