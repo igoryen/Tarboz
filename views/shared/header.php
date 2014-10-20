@@ -84,7 +84,6 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             function(data,status){
               //this sets the session variable of username inside the variable username
               var username="<?php if(isset($_SESSION['user'])) echo $_SESSION['user']->getFirstName(); ?>"
-
               if(data==1){
 
                 document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";

@@ -101,7 +101,7 @@ public function ForgotPassword($useremail){
           //$user->setPassword($generatedpwd);
   
           $pwd=$substr;
-          $user->setPassword($pwd); 
+          $user->setPassword(sha1($pwd)); 
           
           $myemail=$user->getEmail();
           $username=$user->getLogin();
@@ -115,12 +115,14 @@ public function ForgotPassword($useremail){
          //A function that passes recieves the user object and changes the password 
         $userman->changePassword($user);
 
-        if($userLoginDataAccessor->email($myemail, null, null,$body)) echo "Success";
-
+        if($userLoginDataAccessor->email($myemail, null, null,$body)) {
+          exit;
+          return true;   
+        }
       
       //echo "Testing Now: ".$user->getFirstName();
 
-      return true;  
+      return false;
 
     }
 
