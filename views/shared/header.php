@@ -11,6 +11,7 @@
 
 
 require_once BUSINESS_DIR_USER. 'User.php';
+require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 
 session_start();
 
@@ -156,6 +157,36 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               </div>
           </div>
         <!--  <div id="links"><a href="/Tarboz/Views/Login/Index.php">Login</a></div>-->
-        </div>
-    </div><!--"header"-->
 
+        <!-- A section for resetting the forgot password -->
+
+        <?php 
+         $_GET['security']="uwUE@vm4AO";
+          //If the security variable has something, then assign it otherwise keep the variable empty
+          $reset=(isset($_GET['security']))?$_GET['security']:""; 
+
+          //Pattern to avoid some weird hackers  
+          $m_reg="/^[a-zA-Z0-9\.\@\(\)]+$/";
+
+          //matchin the pattern and checking if the variable is also not empty
+          if(isset($reset) && preg_match($m_reg,$reset)){
+
+
+           // $logged = $userManager->getLoginReset($EmailAddress);
+            $userLoginManager = new UserLoginManager();
+
+            $logged = $userLoginManager->getLoginReset($reset);
+            }
+
+            if (isset($logged)) {
+              echo "sent";
+            }
+            else {
+              echo "fail";
+            }
+
+
+        ?>
+        </div>
+
+    </div><!--"header"-->
