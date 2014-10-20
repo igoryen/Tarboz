@@ -9,5 +9,6 @@
   define('REPORT',          'tbl_report');
   define('SBUSCRIPTION',    'tbl_subscription');
   define('PASSWORD_RESET',  'password_reset');
+  define('USER_TYPE',  'tbl_user_type');
 
 ?>
