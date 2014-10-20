@@ -1,46 +1,56 @@
 <?php
 
-class EntryAuthor{
-  /*----------------------------------
+class EntryAuthor {
+  /* ----------------------------------
     10. of class Entry
-    ---------------------------------*/
+    --------------------------------- */
+
   private $id;
-  private $geo;  
+  private $geo;
   private $name;
   private $time;
   private $entryId; // 10
 
   /* getter & setter for $geo */
-  public function getGeo(){
+
+  public function getGeo() {
     return $this->geo;
   }
-  public function setGeo($geo){
+
+  public function setGeo($geo) {
     $this->geo = $geo;
   }
 
   /* getter & setter for $id */
-  public function getId(){
+
+  public function getId() {
     return $this->$id;
   }
-  public function setId($id){
+
+  public function setId($id) {
     $this->$id = $id;
   }
 
   /* getter & setter for $name */
-  public function getName(){
+
+  public function getName() {
     return $this->$name;
   }
-  public function setName($name){
+
+  public function setName($name) {
     $this->name = $name;
   }
 
   /* getter & setter for $time */
-  public function getTime(){
+
+  public function getTime() {
     return $this->time;
   }
-  public function setTime($time){
+
+  public function setTime($time) {
     $this->time = $time;
   }
+
 }
 
 ?>

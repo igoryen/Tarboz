@@ -1,5 +1,7 @@
 <?PHP
+
 class Subscription {
+
   private $id;
   private $email;
   private $name;
@@ -20,7 +22,7 @@ class Subscription {
   public function setEmail($email) {
     $this->email = $email;
   }
-  
+
   public function getName() {
     return $this->name;
   }
@@ -28,7 +30,7 @@ class Subscription {
   public function setName($name) {
     $this->name = $name;
   }
-  
+
   public function getLocationName() {
     return $this->location_name;
   }
@@ -38,4 +40,5 @@ class Subscription {
   }
 
 }
+
 ?>

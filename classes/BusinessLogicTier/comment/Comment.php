@@ -1,5 +1,7 @@
 <?PHP
-class Comment{
+
+class Comment {
+
   private $id;
   private $text;
   private $rating_id;
@@ -7,11 +9,11 @@ class Comment{
 
   public function getId() {
     return $this->id;
-  } 
+  }
 
   public function setId($id) {
     $this->id = $id;
-  } 
+  }
 
   public function getText() {
     return $this->text;
