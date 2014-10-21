@@ -117,6 +117,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   <div id="wrapper">
 
     <div id="header">
+
         <div class="header_row">
           <div class="table-cell" style="text-align: left;"><a href=""><img src="images/logo.png" height="50"></a></div>
           <nav id="navigation">
