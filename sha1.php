@@ -1,5 +1,5 @@
 <?php
 
-echo sha1("prj");
+echo sha1("4ezpskoNYWA0OQE");
 
 ?>
