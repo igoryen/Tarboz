@@ -15,6 +15,7 @@ CREATE TABLE `prj666`.`tbl_entry` (
   `ent_entry_source_id` INT NULL,
   `ent_entry_use` VARCHAR(255) NULL,
   `ent_entry_http_link` VARCHAR(255) NULL,
+  `ent_entry_creation_date` DATE NOT NULL,
   PRIMARY KEY (`ent_entry_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
