@@ -12,97 +12,52 @@ class EntryDataAccessor {
    * @return type $last_inserted_id (the ID generated in the last query)
    */
   public function addEntry($entry) {
-    /*
-     * Using: require_once BUSINESS_DIR_ENTRY . 'Entry.php';
-     */
+    
+    $id =         $entry->getEntryId();
+    $text =       $entry->getEntryText(); // 1
+    // TODO: create the verbatim of $text using the Bing translator
+    $verbatim =   $entry->getEntryVerbatim(); // 2
+    // TODO: transliterate the value of $text using ...
+    $translit =   $entry->getEntryTranslit(); // 3
+    $authen =     $entry->getEntryAuthenStatusId(); // 4
+    $translOf =   $entry->getEntryTranslOf(); // 5
+    $userId =     $entry->getEntryUserId(); // 6
+    $mediaId =    $entry->getEntryMediaId(); // 7
+    $commentId =  $entry->getEntryCommentId(); // 8
+    $ratingId =   $entry->getEntryRatingId(); // 9
+    $tags =       $entry->getEntryTags(); //10
+    $authorId =   $entry->getEntryAuthorId(); // 11
+    $sourceId =   $entry->getEntrySourceId(); // 12
+    $use =        $entry->getEntryUse(); // 13
+    $link =       $entry->getEntryHttpLink(); // 14
+       
+    // 15   
+    $query_insert = 'INSERT INTO '
+      . 'tbl_entry_english'
+      //. " tbl_entry_english"
+      . ' VALUES('
+      . '"' . $id
+      . '", "' . $text
+      . '", "' . $verbatim
+      . '", "' . $translit
+      . '", ' . $authen
+      . ', "' . $translOf
+      . '", "' . $userId
+      . '", "' . $mediaId
+      . '", "' . $commentId
+      . '", "' . $ratingId
+      . '", "' . $tags
+      . '", "' . $authorId
+      . '", "' . $sourceId
+      . '", "' . $use
+      . '", "' . $link
+      . '")'; 
 
-    // [ent_entry_text]
-    // the text of the entry, e.g. "Happy Birthday To You"
-    $text = $entry->getEntryText();
+    $dbHelper = new DBHelper();  // 18
+    $result = $dbHelper->executeQuery($query_insert); // 16
 
-    /*
-     * TODO: create the verbatim of $text using the Bing translator
-     */
-    // [ent_entry_verbatim]
-    // the verbatim of entry
-    // ~ pinyin: e.g. "s dnyom rozhdenia tebya"
-    $verbatim = $entry->getEntryVerbatim();
-
-    /*
-     * TODO: transliterate the value of $text using ...
-     */
-    // [ent_entry_translit]
-    // entry's transliteration, using roman alphabet
-    $translit = $entry->getEntryTranslit();
-
-    // [ent_entry_authen_status_id]
-    // The authenticity status of the entry:
-    // whether the entry is original, or a translation, or unauthenticated
-    $authsid = $entry->getEntryAuthenStatusId();
-
-    // [ent_entry_translation_of]
-    // the hyperlink to the entry which is the "father" of the 'entry family'
-    $translOf = $entry->getEntryTranslOf();
-
-    // [ent_entry_creator_id]
-    // the id of the creator-user who added the entry to the database
-    $userId = $entry->getEntryUserId();
-
-    // [ent_entry_media_id]
-    // $mediaSet = $entry->getMediaSet();
-    //
-    // [ent_entry_comment_id]
-    // the set of comments for this entry
-    // $commentId = $entry->;
-    //
-    // [ent_entry_rating_id]
-    // the rating of the entry
-    // $ratingId = $entry->getEntryRatingId();
-    //
-    // [ent_entry_tags]
-    // tags to make the entry search easier
-    $tags = $entry->getEntryTags();
-
-    // Whoever is the author of the text of the entry.
-    // Why the id??? Author is not in our database
-    $authorId = $entry->getEntryAuthorId();
-
-    // which book or other work the entry is taken from
-    $sourceId = $entry->getEntrySourceId();
-
-    // when/in which situations it is appropriate to use the entry
-    $use = $entry->getEntryUse();
-
-    // the link to the video of the entry
-    $httpLink = $entry->getEntryHttpLink();
-
-
-    /*
-     * compose the MySQL link
-     */
-    $query_insert = "INSERT INTO ENTRY VALUES('', '"
-            . "$text', '"
-            . "$verbatim','"
-            . "$translit','"
-            . "$authsid','"
-            . "$translOf','"
-            . "$userId','"
-            // media
-            // comment
-            // rating
-            . "$tags','"
-            . "$authorId','"
-            . "$sourceId','"
-            . "$use','"
-            . "$httpLink','"
-            . ")";
-    /*
-     * using: require_once DB_CONNECTION . 'DBHelper.php';
-     */
-    $dbHelper = new DBHelper();
-    // TRUE (if INSERT succeeded) or FALSE (if failed)
-    $result = $dbHelper->executeQuery($query_insert);
-    $last_inserted_id = mysql_insert_id();
+    if ($result) echo "<br> eda::query_insert = " . $result;
+    $last_inserted_id = mysql_insert_id(); // 17
     return $last_inserted_id;
   }
 
@@ -176,19 +131,19 @@ class EntryDataAccessor {
 
     $query = 'SELECT *
               FROM tbl_entry_russian
-              WHERE ent_entry_id = "'.$entryId.'"
+              WHERE ent_entry_id = "' . $entryId . '"
 
               UNION ALL
 
               SELECT *
               FROM  tbl_entry_mandarin
-              WHERE ent_entry_id = "'.$entryId.'"
+              WHERE ent_entry_id = "' . $entryId . '"
 
               UNION ALL
 
               SELECT *
               FROM  tbl_entry_english
-              WHERE ent_entry_id = "'.$entryId.'";';
+              WHERE ent_entry_id = "' . $entryId . '";';
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -358,6 +313,7 @@ class EntryDataAccessor {
     $arrayOfKidsGottenByVerbatim = $this->getListOfKidBrief($resultOfSelect);
     return $arrayOfKidsGottenByVerbatim;
   }
+
   /**
    *
    * @param type $resultOfSelect
@@ -442,6 +398,7 @@ class EntryDataAccessor {
     } // while
     return $Entry;
   }
+
   /**
    * getEntryFull($resultOfSelect)
    * To retrieve ALL the fields of one entry for the entry profile page.

@@ -12,6 +12,7 @@ class EntryManager {
   public function createEntry($entry) {
     $eda = new EntryDataAccessor();
     $last_inserted_id = $eda->addEntry($entry);
+    echo "<br>EntryManager::last inserted id = ". $last_inserted_id;
     return $last_inserted_id;
   }
 
