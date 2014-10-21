@@ -18,6 +18,11 @@ CREATE TABLE `prj666_143a02`.`tbl_entry_english` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE `tbl_entry_english`
+ADD `ent_entry_language` VARCHAR(25) NOT NULL
+DEFAULT 'English'
+AFTER `ent_entry_id`;
+
 CREATE TABLE `prj666_143a02`.`tbl_entry_russian` (
   `ent_entry_id` VARCHAR(25) NOT NULL,
   `ent_entry_text` TEXT NOT NULL,
@@ -38,6 +43,11 @@ CREATE TABLE `prj666_143a02`.`tbl_entry_russian` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE `tbl_entry_russian`
+ADD `ent_entry_language` VARCHAR(25) NOT NULL
+DEFAULT 'Russian'
+AFTER `ent_entry_id`;
+
 CREATE TABLE `prj666_143a02`.`tbl_entry_mandarin` (
   `ent_entry_id` VARCHAR(25) NOT NULL,
   `ent_entry_text` TEXT NOT NULL,
@@ -57,6 +67,11 @@ CREATE TABLE `prj666_143a02`.`tbl_entry_mandarin` (
   PRIMARY KEY (`ent_entry_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+ALTER TABLE `tbl_entry_mandarin`
+ADD `ent_entry_language` VARCHAR(25) NOT NULL
+DEFAULT 'Chinese'
+AFTER `ent_entry_id`;
 
 
 CREATE TABLE `prj666_143a02`.`tbl_user` (
