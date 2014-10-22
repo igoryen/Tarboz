@@ -35,12 +35,12 @@ class Entry {
     100) of class EntrySource. source = a piece of lit. work
     ------------------------------------------ */
   private $entry_id; // 10
+  private $entry_language;
   private $entry_text; // 15
   private $entry_verbatim; // 20
   private $entry_translit; // 23
   private $entry_authen_status_id; // 50
   private $entry_transl_of;
-  //private $entry_tags;
   private $entry_user_id; // 65
   private $entry_media_id; // 93
   private $entry_comment_id; // 90
@@ -50,6 +50,7 @@ class Entry {
   private $entry_source_id; // 100
   private $entry_use; // 53
   private $entry_http_link; //53
+  private $entry_creation_date;
 
   /* ----------------------------------
     functions for class Entry
@@ -65,6 +66,14 @@ class Entry {
     $this->entry_id = $x;
   }
 
+   public function getEntryLanguage() {
+    return $this->entry_language;
+  }
+
+  public function setEntryLanguage($x) {
+    $this->entry_language = $x;
+  }
+  
   /* getter & setter for $text */
 
   public function getEntryText() {
@@ -227,6 +236,14 @@ class Entry {
 
   public function setEntryHttpLink($h) {
     $this->entry_http_link = $h;
+  }
+  
+  public function getCreationDate() {
+    return $this->entry_creation_date;
+  }
+
+  public function setCreationDate($x) {
+    $this->entry_creation_date = $x;
   }
 
 }

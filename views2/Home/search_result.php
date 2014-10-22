@@ -1,6 +1,7 @@
 <?php 
   require("../Shared/header.php");
   include "../../config.php";
+  include "lib.php";
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
   include "search_result_cases.php";
@@ -34,7 +35,7 @@ $search_phrase = "Happy Birthday to you";
 //
 // 4B: one dad, 6 kids (2 per language)
 // Original: English. Variants: 2 in English, 2 in Russian, 2 in Mandarin
-// $verbatim = 'happy birth day to you';
+ $verbatim = 'happy birth day to you';
 //
 // 4C: one dad, 4 kids (2 per language)
 // Original: Russian. Variants: 2 in English, 2 in Mandarin.
@@ -50,7 +51,9 @@ $search_phrase = "Happy Birthday to you";
 // #) initialize manager class
 $em = new EntryManager();
 // #) try to make a search for dad
+//echo "<hr>sr, verbatim:<br>" . $verbatim;
 $dad = $em->getFatherByVerbatim($verbatim);
+//echo "<hr>sr, dad's lang:<br>".$dad->getEntryLanguage();
 // #) try to make a search for kids
 // get one array of kids (Entry objects) by verbatim
 $array_of_kids = $em->getListOfKidBriefByVerbatim($verbatim);
@@ -93,96 +96,21 @@ $array_of_kids = $em->getListOfKidBriefByVerbatim($verbatim);
 
       <?php
 
-//====== DEBUGGING TABLE====================================================
-//echo "<div style='background-color:white; width: 700px;'>";
-//$d = '';
-//
-//$d .= "<table class=\'debug_table\'>";
-//$d .= '<tr><td>$verbatim</td><td>' . $verbatim . '</td></tr>';
-//$d .= '<tr><td>isset($dad)</td><td>'
-//        . (isset($dad) ? '1 (set)' : '0 (not set)') . '</td></tr>';
-//
-//$d .= '<tr><td>!is_null($dad)</td><td>'
-//        . (!is_null($dad) ? '1 (not null)' : '0 (null)') . '</td></tr>';
-//
-//$dad_ary = (array) $dad;
-//$d .= '<tr><td>!empty($dad_ary)</td><td>'
-//        . (!empty($dad_ary) ? '1 (not empty)' : '0 (empty)') . '</td></tr>';
-//
-//$properties_of_dad = array_filter(get_object_vars($dad));
-//$d .= '<tr><td>!empty($properties_of_dad)</td><td>'
-//        . (!empty($properties_of_dad) ? '1 (not empty)' : '0 (empty)') . '</td></tr>';
-//
-//$d .= '<tr><td>!null == $dad->getEntryId()</td><td>'
-//        . (!null == $dad->getEntryId() ? '1 (not null)' : '0 (null)') . '</td></tr>';
-//
-//$d .= '<tr><td>!null == $dad->getEntryText()</td><td>'
-//        . (!null == $dad->getEntryText() ? '1 (not null)' : '0 (null)') . '</td></tr>';
-//$d .= '<tr><td>$dad->getEntryText()</td><td>'
-//        . substr($dad->getEntryText(), 0, 25) . '</td></tr>';
-//
-//$d .= '<tr><td>sizeof($kids_array)</td><td>'
-//        . sizeof($array_of_kids) . '</td></tr>';
-//
-//$d .= '<tr><td>count($kids_array)</td><td>'
-//        . count($array_of_kids) . '</td></tr>';
-//
-//$d .= '<tr><td>!null == reset($array_of_kids)->getEntryId()</td><td>'
-//        . (!null == reset($array_of_kids)->getEntryId() ? '1 (not null)' : '0 (null)') . '</td></tr>';
-//$d .= '<tr><td>reset($array_of_kids)->getEntryId()</td><td>'
-//        . reset($array_of_kids)->getEntryId() . '</td></tr>';
-//$d .= '<tr><td>reset($array_of_kids)->getEntryText()</td><td>'
-//        . reset($array_of_kids)->getEntryText() . '</td></tr>';
-//$d .= '<tr><td>!null == end($array_of_kids)->getEntryId()</td><td>'
-//        . (!null == end($array_of_kids)->getEntryId() ? '1 (not null)' : '0 (null, empty, corpse)') . '</td></tr>';
-//$d .= '<tr><td>end($array_of_kids)->getEntryId()</td><td>'
-//        . end($array_of_kids)->getEntryId() . '</td></tr>';
-//$d .= '<tr><td>end($array_of_kids)->getEntryText()</td><td>'
-//        . end($array_of_kids)->getEntryText() . '</td></tr>';
-////.................................................................
-//// remove a null object from the array
-//// loop through the whole array
-//foreach ($array_of_kids as $kid) {
-//  // if an element is null
-//  if (null == $kid) {
-//    echo 'null element';
-//    // remove it
-//    unset($kid);
-//  }
-//}
-////.................................................................
-//
-////$array_of_kids = array_filter($array_of_kids);
-//
-//$d .= '<tr><td>removed null object from array</td><td></td></tr>';
-//$d .= '<tr><td>sizeof($kids_array)</td><td>'
-//        . sizeof($array_of_kids) . '</td></tr>';
-//
-//$d .= '<tr><td>count($kids_array)</td><td>'
-//        . count($array_of_kids) . '</td></tr>';
-//$d .= '<tr><td>end($array_of_kids)->getEntryId()</td><td>'
-//        . end($array_of_kids)->getEntryId() . '</td></tr>';
-//$d .= '<tr><td>end($array_of_kids)->getEntryText()</td><td>'
-//        . end($array_of_kids)->getEntryText() . '</td></tr>';
-//
-//$d .= '</table>';
-//echo $d;
-//echo "</div>";
-// ======== END OF DEBUGGING TABLE ==========================================
+//table_to_see_entry_values($dad, $array_of_kids, $verbatim);
 
 $num_of_kids = count($array_of_kids);
 // check if entry_id field is empty. If it is then the whole object is empty
 // do we have a dad? -- no
 
 if (null == $dad->getEntryId()) {
-  //echo "We have no dad ... ";
+  //echo "We have no dad ..";
   // check the number of kids. if $kids are ALSO empty
   if ($num_of_kids == 1) {
     //echo "and no kids.<br>";
     no_dad_no_kids("Seems we have no original or translations for this search.");
   } //if kids are not empty
   elseif ($num_of_kids > 1) {
-    //echo "but we have one or more kids! <br> ";
+    //echo ".. but we have one or more kids! <br> ";
     
     // a counter to use with every iteration
     $i = 0;
@@ -195,8 +123,8 @@ if (null == $dad->getEntryId()) {
       if($kid == reset($array_of_kids)){
         //echo 'A: current == first <br>';
         // what's your language?
-        $current_lang = substr($kid->getEntryId(),0,2);
-        $next_lang = substr($array_of_kids[$i+1]->getEntryId(), 0, 2);
+        $current_lang = $kid->getEntryLanguage();
+        $next_lang = $array_of_kids[$i+1]->getEntryLanguage();
         
         //echo 'A: first language is >', $current_lang . '<<br>';
         //echo 'A: next language is >', $next_lang . '< !!!!!!!!!!! <br>';
@@ -223,8 +151,8 @@ if (null == $dad->getEntryId()) {
         
         //$prev_lang = substr(prev($array_of_kids)->getEntryId(),0,2);
         // NOTE: [$i--] doesn't work!
-        $prev_lang = substr($array_of_kids[$i-1]->getEntryId(),0,2);
-        $current_lang = substr($kid->getEntryId(),0,2);
+        $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
+        $current_lang = $kid->getEntryLanguage();
         
         
         //echo 'Z: prev language is ', $prev_lang . '<br>';
@@ -260,11 +188,11 @@ if (null == $dad->getEntryId()) {
           unset($prev_lang);
         } // your language is different from previous? - no (the same)
         else{
-          $current_lang = substr($kid->getEntryId(),0,2);
-          $prev_lang = substr($array_of_kids[$i-1]->getEntryId(),0,2);
+          $current_lang = $kid->getEntryLanguage();
+          $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
           
           //echo 'Zs: the previous language >'.$prev_lang.
-          //        '< is same as current >'.$current_lang.'<<br>';          
+                  '< is same as current >'.$current_lang.'<<br>';          
           
           // make a room for the kid
           // collect things to put into the room 
@@ -289,8 +217,8 @@ if (null == $dad->getEntryId()) {
         
         // what's your language?
         //$prev_lang = substr(prev($array_of_kids)->getEntryId(),0,2);
-        $prev_lang = substr($array_of_kids[$i-1]->getEntryId(),0,2);
-        $current_lang = substr($kid->getEntryId(),0,2);
+        $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
+        $current_lang = $kid->getEntryLanguage();
         
         
         //echo 'previous language is >', $prev_lang . '< !!!!!!!!!!!!!!!!!!<br>';
@@ -342,19 +270,19 @@ if (null == $dad->getEntryId()) {
 } // if we have no dad
 // do we have a dad? -- Yes
 else {
-  //echo "Dad: 1. ";
+  //echo "We have a dad ... ";
   // How many kids? -- no kids
   if ($num_of_kids == 1) {
-    //echo "Kids: 0. ";
+    //echo "but no kids.";
 
-    $ary['language'] = substr($dad->getEntryId(), 0, 2);
+    $ary['language'] = $dad->getEntryLanguage();
     $ary['text'] = substr($dad->getEntryText(), 0, 55);
     dad_house_dad_1($ary);
   } // How many kids? -- 1 or more kids
   elseif ($num_of_kids > 1) {
-    //echo "Kids: " . $num_of_kids . '<br>';
+    //echo "and " . $num_of_kids . ' kids!<br>';
     
-    $ary['language'] = substr($dad->getEntryId(), 0, 2);
+    $ary['language'] = $dad->getEntryLanguage();
     $ary['text'] = substr($dad->getEntryText(), 0, 55);
     dad_house_dad_1($ary);
     
@@ -369,8 +297,8 @@ else {
       if($kid == reset($array_of_kids)){
         //echo 'A: current == first <br>';
         // what's your language?
-        $current_lang = substr($kid->getEntryId(),0,2);
-        $next_lang = substr(next($array_of_kids)->getEntryId(),0,2);
+        $current_lang = $kid->getEntryLanguage();
+        $next_lang = next($array_of_kids)->getEntryLanguage();
         
         //echo 'A: first language is >', $current_lang . '<<br>';
         //echo 'A: next language is >', $next_lang . '< !!!!!!!!!!! <br>';
@@ -395,10 +323,10 @@ else {
         //echo 'Z: current == last <br>';
         // what's your language?
         
-        //$prev_lang = substr(prev($array_of_kids)->getEntryId(),0,2);
+        //$prev_lang = substr(prev($array_of_kids)->getEntryLanguageId(),0,2);
         // NOTE: [$i--] doesn't work!
-        $prev_lang = substr($array_of_kids[$i-1]->getEntryId(),0,2);
-        $current_lang = substr($kid->getEntryId(),0,2);
+        $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
+        $current_lang = $kid->getEntryLanguage();
         
         
         //echo 'Z: prev language is ', $prev_lang . '<br>';
@@ -434,8 +362,8 @@ else {
           unset($prev_lang);
         } // your language is different from previous? - no (the same)
         else{
-          $current_lang = substr($kid->getEntryId(),0,2);
-          $prev_lang = substr($array_of_kids[$i-1]->getEntryId(),0,2);
+          $current_lang = $kid->getEntryLanguageId();
+          $prev_lang = $array_of_kids[$i-1]->getEntryLanguageId();
           
           //echo 'Zs: the previous language >'.$prev_lang.
                   '< is same as current >'.$current_lang.'<<br>';          
@@ -463,8 +391,8 @@ else {
         
         // what's your language?
         //$prev_lang = substr(prev($array_of_kids)->getEntryId(),0,2);
-        $prev_lang = substr($array_of_kids[$i-1]->getEntryId(),0,2);
-        $current_lang = substr($kid->getEntryId(),0,2);
+        $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
+        $current_lang = $kid->getEntryLanguage();
         
         
         //echo 'previous language is >', $prev_lang . '< !!!!!!!!!!!!!!!!!!<br>';
@@ -520,4 +448,4 @@ else {
     </div><!-- village -->
   </div><!-- land -->
 
-<?php //require("../Shared/footer.php"); ?>
+<?php require("../Shared/footer.php"); ?>

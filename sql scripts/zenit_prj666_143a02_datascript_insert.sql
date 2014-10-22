@@ -35,7 +35,7 @@ VALUES ('English');
 INSERT INTO `prj666`.`tbl_language` (`lan_lang_name`)
 VALUES ('Russian');
 INSERT INTO `prj666`.`tbl_language` (`lan_lang_name`)
-VALUES ('Chinese-Simplify');
+VALUES ('Chinese');
 
 #----tbl_mediatype  table
 INSERT INTO `prj666`.`tbl_media_type` (`mtp_name`)
