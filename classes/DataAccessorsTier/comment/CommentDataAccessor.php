@@ -36,19 +36,26 @@
 
     }
 
-    public function updataComment($comment) {
+    public function updateComment($comment) {
       $id = $comment->getId();
       $text = $comment->getText();
       $rating_id = $comment->getRatingId();
-      $created_by = $comment->getCreatedBy();
-
-      $query_update = "UPDATE ".COMMENT." SET 
-        com_text = ".$text.", 
-        com_rating_id = ".$rating_id.", 
-        com_created_by = ".$created_by
-        ." WHERE com_comment_id = ".$id
-        ;
-
+//      $created_by = $comment->getCreatedBy();
+//      $entry_id = $comment->getEntryId();
+      $rating_id = isset($rating_id) ? $rating_id : "";
+      if($rating_id != "" ) {
+          $query_update = "UPDATE ".COMMENT." SET 
+            com_text = '".$text.
+            "' com_rating_id = '".$rating_id.
+    //        "' com_created_by = '".$created_by.
+    //        "' com_entry_id = '".$entry_id.
+            "' WHERE com_comment_id = '".$id."'";
+      } else {
+          $query_update = "UPDATE ".COMMENT." SET 
+            com_text = '".$text.
+            "' WHERE com_comment_id = '".$id."'";
+      }
+      //print "CommentDataAccess update query ".$query_update."<br/>";
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query_update);
       return $result;
@@ -125,6 +132,7 @@
             $comment->setText($list['com_text']);
             $comment->setRatingId($list['com_rating_id']);
             $comment->setCreatedBy($list['com_created_by']);
+            $comment->setEntryId($list['com_entry_id']);
         }//end while
         
         return $comment;
@@ -139,6 +147,7 @@
             $comments[$count]->setText($list['com_text']);
             $comments[$count]->setRatingId($list['com_rating_id']);
             $comments[$count]->setCreatedBy($list['com_created_by']);
+            $comments[$count]->setEntryId($list['com_entry_id']);
             $count++;
         }
         return $comments;

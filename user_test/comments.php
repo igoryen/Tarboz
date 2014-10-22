@@ -1,3 +1,26 @@
+<?php
+  // Include utility files
+  require_once '../config.php';    
+  require_once BUSINESS_DIR_COMMENT . 'CommentManager.php';
+  require_once BUSINESS_DIR_USER. 'User.php';
+  require_once BUSINESS_DIR_COMMENT . 'Comment.php';
+
+  session_start();
+  $user_logged_in = true;
+  //$user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
+  $user_id = "";
+  if (isset($_SESSION['user'])) {
+      $user = $_SESSION['user'];
+      $user_id = $user->getUserId();
+  } else {
+    $user_logged_in = false;
+    //redirect to homepage
+    header("Location: http://localhost/tarboz/");
+  }
+  
+  
+?>
+
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -25,7 +48,7 @@
                     } else if (data.indexOf( 'fail') >0) {
                       alert(data);
                     }
-                    window.location.reload(true);;
+                    window.location.reload(true);
                   },
                 error:
                   function() {
@@ -34,30 +57,18 @@
             }); //end $.ajax()
             event.preventDefault();
         });
-      });      
+
+           
+      });
+        
+
     </script>
   </head>
   <body>
 
+
+      
 <?php
-  // Include utility files
-  require_once '../config.php';    
-  require_once BUSINESS_DIR_COMMENT . 'CommentManager.php';
-  require_once BUSINESS_DIR_USER. 'User.php';
-  require_once BUSINESS_DIR_COMMENT . 'Comment.php';
-
-  session_start();
-  $user_logged_in = true;
-  //$user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
-  if (isset($_SESSION['user'])) {
-      $user = $_SESSION['user'];
-      $user_id = $user->getUserId();
-  } else {
-    $user_logged_in = false;
-    //redirect to homepage
-    header("Location: http://localhost/tarboz/");
-  }
-
  //Get all comments
   $commentManager = new CommentManager();
   $comments = $commentManager->getAllComments();
@@ -148,12 +159,12 @@
       <input type="submit" id="commentSub" value="Comment" disabled>
 <?php } ?>
   </form>
-  <div id="add_comment_result" style="display:none"></div>
+  <div id="add_comment_result" style="display:none;"></div>
         
 <?php        
   //Edit comment
   echo "<br/><br/><br/><b>************************</b><br>";
-  echo "<br/>=======Edit commment=====<br/><br/> ";
+  echo "<br/>=======Edit commment and Delete=====<br/><br/> ";
   $commentManager = new CommentManager();
   $comments = $commentManager->getAllComments();
 
@@ -166,14 +177,84 @@
       $text       =   $coms->getText();
       $rating_id  =   $coms->getRatingId();
       $created_by =   $coms->getCreatedBy();
+    
+    //define ids for html tags in the loop
+      $edit_icon_id = "edit_icon_".$id;
+      $edit_area_id = "edit_area_".$id;
+      $edit_comment_text_id = "comment_text_id_".$id;
+      $form_name = "formEditComment_".$id;
+      $edit_comment_textarea = "editCommentText_".$id;
+      $edit_comment_input_hidden = "editCommentId_".$id;
+      $edit_comment_submit = "editCommentSub_".$id;
+        
 ?>
     
-    <div> The comment is: <?php echo $text; ?> 
-          <a href="" onclick=""><img src="../images/edit.png" alt="Edit Icon" style="width:16px;height:16px"></a>
-    </div>
-    <div id="edit_are">
+    <div> 
+        <div>The comment is: <span id="<?php echo $edit_comment_text_id; ?>"><?php echo $text; ?></span> 
         
-    </div>
+<?php if ($user_logged_in && $created_by == $user_id) { ?>
+            <img src="../images/edit.png" alt="Edit Icon" style="width:16px;height:16px" id="<?php echo $edit_icon_id ?>" 
+                 class="<?php echo $edit_icon_id ?>" onmouseover="$(this).css({'cursor': 'pointer'});" 
+                 onclick = "$('#<?php echo $edit_area_id ?>').css({'display': 'block'});"/>
+<?php } //end if 
+      //if ($user_logged_in && 
+      if ($user_logged_in && $created_by == $user_id) {       
+?>
+        </div>
+        <div id="<?php echo $edit_area_id ?>" class="<?php echo $edit_area_id ?>" style="display:none;">
+                <script>
+                    var sendData = function() { 
+                        //var form_id = "#"+"<?php echo $form_name; ?>";
+                        var textarea_id = "#"+"<?php echo $edit_comment_textarea; ?>";
+                        var input_hidden_id = "#"+"<?php echo $edit_comment_input_hidden; ?>";
+                        //var submit_id = "#"+"<?php echo $edit_comment_submit; ?>";
+                        
+                        //alert("textarea_id: "+textarea_id);
+                        //alert("input_hidden_id: "+input_hidden_id);
+                        //alert("edit comment text: "+$(textarea_id).val());
+                        //alert("edit comment id: "+$(input_hidden_id).val());
+                        
+                        var editCommentData = encodeURIComponent($.trim ($(textarea_id).val() ));
+                        var editCommentId = encodeURIComponent($(input_hidden_id).val());
+
+                        $.ajax({
+                            url: "edit_comment.php",
+                            type: "POST",
+                            cache: false,
+                            data: 
+                            {
+                                editComment : editCommentData,
+                                editCommentId: editCommentId
+                            },
+                            success:
+                              function(data, status) {
+                                //alert(data);
+                                if(data.indexOf("succeed")>0) {                                   
+                                   location.reload(true);
+                                } else if (data.indexOf("fail") >0) {
+                                  alert(data);
+                                }                                
+                              }, //end of function(data, status) and success function
+                            error:
+                              function() {
+                                alert("ajax error");  
+                              } 
+                            
+                         });//end $.ajax()*/
+                    };
+                </script>
+            <form name="<?php echo $form_name; ?>" id="<?php echo $form_name; ?>" method="POST">
+                <textarea rows="2" cols="40" name="<?php echo $edit_comment_textarea; ?>" 
+                                             id="<?php echo $edit_comment_textarea; ?>"><?php echo $text; ?></textarea><br/>
+                <input type="hidden" id="<?php echo $edit_comment_input_hidden; ?>" 
+                                     name="<?php echo $edit_comment_input_hidden; ?>" 
+                                     value ="<?php echo $id; ?>"/>
+                <button id="<?php echo $edit_comment_submit; ?>" name="<?php echo $edit_comment_submit; ?>" type="button" onclick="sendData();">Submit</button>
+           </form> 
+        </div>
+        
+<?php } //end if ?>
+    </div>        
     <br> 
 <?php
     } // end of foreach loop
@@ -182,7 +263,7 @@
   }// end of if statement
   //reset $commentCount
   $commentCount = 0;
-  echo "<br/><br/><br/><b>************************</b><br>";
 ?>
+
 </body>
 </html>
