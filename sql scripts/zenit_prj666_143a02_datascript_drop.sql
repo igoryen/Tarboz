@@ -1,3 +1,4 @@
+DROP TABLE `prj666`.`tbl_entry`;
 DROP TABLE `prj666`.`tbl_entry_english`;
 DROP TABLE `prj666`.`tbl_entry_mandarin`;
 DROP TABLE `prj666`.`tbl_entry_russian`;

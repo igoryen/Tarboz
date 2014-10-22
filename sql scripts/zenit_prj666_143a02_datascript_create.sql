@@ -1,3 +1,26 @@
+CREATE TABLE `prj666`.`tbl_entry` (
+  `ent_entry_id` INT NOT NULL AUTO_INCREMENT,
+  `ent_entry_language_id` INT NOT NULL,
+  `ent_entry_text` TEXT NOT NULL,
+  `ent_entry_verbatim` TEXT NOT NULL,
+  `ent_entry_translit` TEXT NOT NULL,
+  `ent_entry_authen_status_id` INT NULL,
+  `ent_entry_translation_of` VARCHAR(25) NULL,
+  `ent_entry_creator_id` INT NULL,
+  `ent_entry_media_id` INT NULL,
+  `ent_entry_comment_id` INT NULL,
+  `ent_entry_rating_id` INT NULL,
+  `ent_entry_tags` VARCHAR(255) NULL,
+  `ent_entry_author_id` INT NULL,
+  `ent_entry_source_id` INT NULL,
+  `ent_entry_use` VARCHAR(255) NULL,
+  `ent_entry_http_link` VARCHAR(255) NULL,
+  `ent_entry_creation_date` DATE NOT NULL,
+  PRIMARY KEY (`ent_entry_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
 CREATE TABLE `prj666`.`tbl_entry_english` (
   `ent_entry_id` VARCHAR(25) NOT NULL,
   `ent_entry_text` TEXT NOT NULL,
@@ -17,6 +40,11 @@ CREATE TABLE `prj666`.`tbl_entry_english` (
   PRIMARY KEY (`ent_entry_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+ALTER TABLE `tbl_entry_english`
+ADD `ent_entry_language` VARCHAR(25) NOT NULL
+DEFAULT 'English'
+AFTER `ent_entry_id`;
 
 CREATE TABLE `prj666`.`tbl_entry_russian` (
   `ent_entry_id` VARCHAR(25) NOT NULL,
@@ -58,6 +86,10 @@ CREATE TABLE `prj666`.`tbl_entry_mandarin` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE `tbl_entry_mandarin`
+ADD `ent_entry_language` VARCHAR(25) NOT NULL
+DEFAULT 'Chinese'
+AFTER `ent_entry_id`;
 
 CREATE TABLE `prj666`.`tbl_user` (
   `usr_user_id`  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

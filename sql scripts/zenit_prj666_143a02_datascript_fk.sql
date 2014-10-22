@@ -1,3 +1,77 @@
+ALTER TABLE `prj666`.`tbl_entry`
+ADD INDEX `tblEntry_tblLanguage_language_id_FK_idx` (`ent_entry_language_id` ASC);
+ALTER TABLE `prj666`.`tbl_entry`
+ADD CONSTRAINT `tblEntry_tblLanguage_language_id_FK`
+ FOREIGN KEY (`ent_entry_language_id`)
+ REFERENCES `prj666`.`tbl_language` (`lan_language_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
+
+ALTER TABLE `prj666`.`tbl_entry`
+ADD INDEX `tblEntry_tblAuthenStatus_authen_status_id_FK_idx` (`ent_entry_authen_status_id` ASC);
+ALTER TABLE `prj666`.`tbl_entry`
+ADD CONSTRAINT `tblEntry_tblAuthenStatus_ent_entry_authen_status_id_FK`
+ FOREIGN KEY (`ent_entry_authen_status_id`)
+ REFERENCES `prj666`.`tbl_authen_status` (`athn_authen_status_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
+
+ALTER TABLE `prj666`.`tbl_entry`
+ADD INDEX `tblEntry_tblUser_creator_id_FK_idx` (`ent_entry_creator_id` ASC);
+ALTER TABLE `prj666`.`tbl_entry`
+ADD CONSTRAINT `tblEntry_tblUser_ent_entry_creator_id_FK`
+ FOREIGN KEY (`ent_entry_creator_id`)
+ REFERENCES `prj666`.`tbl_user` (`usr_user_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
+
+ALTER TABLE `prj666`.`tbl_entry`
+ADD INDEX `tblEntry_tblMedia_media_id_FK_idx` (`ent_entry_media_id` ASC);
+ALTER TABLE `prj666`.`tbl_entry`
+ADD CONSTRAINT `tblEntry_tblMedia_ent_entry_media_id_FK`
+ FOREIGN KEY (`ent_entry_media_id`)
+ REFERENCES `prj666`.`tbl_media` (`med_media_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
+
+ALTER TABLE `prj666`.`tbl_entry`
+ADD INDEX `tblEntry_tblComment_commentid_FK_idx` (`ent_entry_comment_id` ASC);
+ALTER TABLE `prj666`.`tbl_entry`
+ADD CONSTRAINT `tblEntry_tblComment_ent_entry_comment_id_FK`
+ FOREIGN KEY (`ent_entry_comment_id`)
+ REFERENCES `prj666`.`tbl_comment` (`com_comment_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
+
+ALTER TABLE `prj666`.`tbl_entry`
+ADD INDEX `tblEntry_tblRating_rating_id_FK_idx` (`ent_entry_rating_id` ASC);
+ALTER TABLE `prj666`.`tbl_entry`
+ADD CONSTRAINT `tblEntry_tblRating_ent_entry_rating_id_FK`
+ FOREIGN KEY (`ent_entry_rating_id`)
+ REFERENCES `prj666`.`tbl_rating` (`rat_rating_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
+
+ALTER TABLE `prj666`.`tbl_entry` 
+ADD INDEX `tblEntry_tblAuthor_author_id_FK_idx` (`ent_entry_author_id` ASC);
+ALTER TABLE `prj666`.`tbl_entry` 
+ADD CONSTRAINT `tblEntry_tblAuthor_ent_entry_author_id_FK`
+ FOREIGN KEY (`ent_entry_author_id`)
+ REFERENCES `prj666`.`tbl_author` (`aut_author_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
+
+ALTER TABLE `prj666`.`tbl_entry` 
+ADD INDEX `tblEntry_tblSource_source_id_FK_idx` (`ent_entry_source_Id` ASC);
+ALTER TABLE `prj666`.`tbl_entry` 
+ADD CONSTRAINT `tblEntry_tblSource_ent_entry_source_id_FK`
+ FOREIGN KEY (`ent_entry_source_id`)
+ REFERENCES `prj666`.`tbl_source` (`sou_source_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
+
+
+# table entry english
 ALTER TABLE `prj666`.`tbl_entry_english`
 ADD INDEX `tblEntryEng_tblAuthenStatus_authen_status_id_FK_idx` (`ent_entry_authen_status_id` ASC);
 ALTER TABLE `prj666`.`tbl_entry_english`

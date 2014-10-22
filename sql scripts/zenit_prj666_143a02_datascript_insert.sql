@@ -55,10 +55,10 @@ VALUES ('It\'s not accurate!!!', '2', 1);
 #----tbl_media table
 SET foreign_key_checks = 0;
 INSERT INTO `prj666`.`tbl_media`
-(`med_name`,`med_desc`,`med_link`,`med_author`,`med_media_type_id`,`med_comment_id`,`med_rating_id`)
+(`med_name`,`med_desc`,`med_link`,`med_author`,`med_mediatype_id`,`med_comment_id`,`med_rating_id`)
 VALUES ('Forrest Gump','movie','','','2','1' , '1' );
 INSERT INTO `prj666`.`tbl_media` 
-(`med_name`,`med_desc`,`med_link`,`med_author`,`med_media_type_id`,`med_comment_id`,`med_rating_id`)
+(`med_name`,`med_desc`,`med_link`,`med_author`,`med_mediatype_id`,`med_comment_id`,`med_rating_id`)
 VALUES ('John in the farm','picture','','John','3','2' , '2' );
 
 #----tbl_location table
@@ -149,8 +149,41 @@ VALUES(
 'English, Russian, Mandarin', 
 'Y');
 
-#----tbl_entry_english table
+#----tbl_entry table
 SET foreign_key_checks = 0;
+
+INSERT INTO `prj666`.`tbl_entry` ( `ent_entry_language_id`, `ent_entry_text`, `ent_entry_verbatim`, `ent_entry_translit`, `ent_entry_authen_status_id`, `ent_entry_translation_of`, `ent_entry_creator_id`, `ent_entry_media_id`, `ent_entry_comment_id`, `ent_entry_rating_id`, `ent_entry_tags`, `ent_entry_author_id`, `ent_entry_source_id`, `ent_entry_use`, `ent_entry_http_link`) VALUES( 1 , ' Happy birthday to you! Happy birthday to you! Happy birthday, dear Person! Happy birthday to you! ' , ' Happy birthday to you! Happy birthday to you! Happy birthday, dear Person! Happy birthday to you! ' , ' Hepi b30dei tu ju! Hepi b30dei tu ju! Hepi b30dei dir p3san! Hepi b30dei tu ju! ' , 1 , NULL , 3 , 1 , 1 , 1 , ' happy birthday ' , 1 , 1 , ' a song to song on a birth day ' , ' ' )
+INSERT INTO `prj666`.`tbl_entry` ( `ent_entry_language_id`, `ent_entry_text`, `ent_entry_verbatim`, `ent_entry_translit`, `ent_entry_authen_status_id`, `ent_entry_translation_of`, `ent_entry_creator_id`, `ent_entry_media_id`, `ent_entry_comment_id`, `ent_entry_rating_id`, `ent_entry_tags`, `ent_entry_author_id`, `ent_entry_source_id`, `ent_entry_use`, `ent_entry_http_link`) VALUES( 1 , ' To be, or not to be, that is the question ' , ' To be, or not to be, that is the question ' , ' To be, or not to be, that is the question ' , 1 , NULL , 3 , 1 , 1 , 1 , ' hamlet ' , 1 , 1 , ' The first line of the speech, in which a despondent or feigning Prince Hamlet contemplates death and suicide. He bemoans the pains and unfairness of life but acknowledges the alternative might be still worse. ' , ' ' )
+INSERT INTO `prj666`.`tbl_entry` ( `ent_entry_language_id`, `ent_entry_text`, `ent_entry_verbatim`, `ent_entry_translit`, `ent_entry_authen_status_id`, `ent_entry_translation_of`, `ent_entry_creator_id`, `ent_entry_media_id`, `ent_entry_comment_id`, `ent_entry_rating_id`, `ent_entry_tags`, `ent_entry_author_id`, `ent_entry_source_id`, `ent_entry_use`, `ent_entry_http_link`) VALUES( 1 , ' Smile and wave, boys! Smile and wave! ' , ' Smile and wave, boys! Smile and wave! ' , ' Smile and wave, boys! Smile and wave! ' , 1 , NULL , 3 , 1 , 1 , 1 , ' penguins, madagascar ' , 1 , 1 , ' A phrase to use which means "Pretend everything is fine". ' , ' ' )
+
+
+INSERT INTO `prj666`.`tbl_entry_english` (
+`ent_entry_Id`,
+`ent_entry_text`,
+`ent_entry_verbatim`, 
+`ent_entry_translit`, 
+`ent_entry_authen_status_id`, 
+`ent_entry_translation_of`, 
+`ent_entry_creator_id`, 
+`ent_entry_comment_id`, 
+`ent_entry_rating_id`, 
+`ent_entry_author_id`, 
+`ent_entry_source_id`)
+VALUES(
+'eng2', # id
+'Happy birthday to you! Happy birthday to you! Happy birthday, dear Person! Happy birthday to you! ', # text
+'Happy birthday to you! Happy birthday to you! Happy birthday, dear Person! Happy birthday to you! ', # verbatim
+'Hepi b30dei tu ju! Hepi b30dei tu ju! Hepi b30dei dir p3san! Hepi b30dei tu ju!', # translit
+1, # authen status (??? it should be `t` or `o`, or `u`, not int
+'', # translation of (empty because it's a 'father'
+3, #  added by igoryen
+1, # comment id
+1, # rating id
+1, #  author id
+1); #  source id
+
+
+
 #--- ENGLISH ENTRY 1
 INSERT INTO `prj666`.`tbl_entry_english` (`ent_entry_Id`,`ent_entry_text`,`ent_entry_verbatim`, `ent_entry_translit`, `ent_entry_authen_status_id`, `ent_entry_translation_of`, `ent_entry_creator_id`, `ent_entry_comment_id`, `ent_entry_rating_id`, `ent_entry_author_id`, `ent_entry_source_id`)
 VALUES('eng1','It\'s boring and sad, and there\'s no one around.', '','',2,'ru1', 1, 1, 1, 1, 1);
