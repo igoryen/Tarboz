@@ -11,4 +11,5 @@
   define('PASSWORD_RESET',  'tbl_password_reset');
   define('USER_TYPE',  'tbl_user_type');
 
+
 ?>

@@ -8,15 +8,15 @@ require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 //$EmailAddress=isset($_POST['email']) ? $_POST['email'] : "";
 
 $EmailAddress = "like_change@hotmail.com";
-$userManager = new UserLoginManager();
+$userLoginManager = new UserLoginManager();
 
-$logged = $userManager->ForgotPassword($EmailAddress);
+$logged = $userLoginManager->ForgotPassword($EmailAddress);
 
 if ($logged) {
-  echo SUCCESS;
+  echo "sent";
 }
 else {
-  echo FAIL;
+  echo "fail";
 }
 
 //				echo "\nThe user is:".$_SESSION["user"]->getFirstName();

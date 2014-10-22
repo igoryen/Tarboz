@@ -11,6 +11,7 @@
 
 
 require_once BUSINESS_DIR_USER. 'User.php';
+require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 
 session_start();
 
@@ -83,7 +84,6 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             function(data,status){
               //this sets the session variable of username inside the variable username
               var username="<?php if(isset($_SESSION['user'])) echo $_SESSION['user']->getFirstName(); ?>"
-
               if(data==1){
 
                 document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";
@@ -117,6 +117,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   <div id="wrapper">
 
     <div id="header">
+
         <div class="header_row">
           <div class="table-cell" style="text-align: left;"><a href=""><img src="images/logo.png" height="50"></a></div>
           <nav id="navigation">
@@ -138,10 +139,12 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                     <input type="password" id="userpassword" placeholder="Password" class="login_input">
                  </p>
                  <p>
-                    <!--Login button -->
-                    <div><button class="lw_button" id="sub">Login</button></div>            
+                    <!--Login button                     <div><button class="lw_button" id="sub">Login</button></div>            
                     <div style="top: 9.1em; position: absolute; left: 12em;"><button class="lw_button">Register</button></div>
-                    <div id="or">or</div>
+                    <div id="or">or</div>-->
+                    <div style="margin-left: 1em;"><button class="lw_button" id="sub">Login</button>
+                      <b id="or">or</b>
+                        <button class="lw_button">Register</button></div> 
                  </p> 
                  <p id="ftest"></p>
                  <p style="margin-left: 1em;" id="forgotpwd"></p>
@@ -156,6 +159,34 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               </div>
           </div>
         <!--  <div id="links"><a href="/Tarboz/Views/Login/Index.php">Login</a></div>-->
-        </div>
-    </div><!--"header"-->
 
+        <!-- A section for resetting the forgot password -->
+
+        <?php 
+         $_GET['security']="0vLalqY93y";
+          //If the security variable has something, then assign it otherwise keep the variable empty
+          $reset=(isset($_GET['security']))?$_GET['security']:""; 
+
+          //Pattern to avoid some weird hackers  
+          $m_reg="/^[a-zA-Z0-9\.\@\(\)]+$/";
+
+          //matchin the pattern and checking if the variable is also not empty
+          if(isset($reset) && preg_match($m_reg,$reset)){
+
+            $userLoginManager = new UserLoginManager();
+
+            $logged = $userLoginManager->getLoginReset($reset);
+            }
+
+            if (isset($logged)) {
+              echo "sent";
+            }
+            else {
+              echo "fail";
+            }
+
+
+        ?>
+        </div>
+
+    </div><!--"header"-->

@@ -76,7 +76,7 @@ body{
 
 div > nav#navigation > a {
   color: #000000;
-  font-size: 15px;
+  font-size: 27px;
   padding: 10px 28px;
   text-decoration: none;
 }
@@ -86,38 +86,38 @@ div > nav#navigation > a:hover {
   color: #FCFCFC !important;
 }
 
-#search{
-  background: white;
-  /*border: ridge 10px magenta;*/
-  display: block;
-  /*display: inline-block;*/
-  /*height: auto;*/
-  /*padding: auto;*/
-  /*margin-bottom: 2%;*/
-  margin-left: 10%;
-  margin-right: 10%;
-  /*margin-top: 1%;*/
-  margin-top: 18px;
-  padding: 14px 0px 1px 0px;
-  /*position: relative;  */
-  text-align: center;
-  /*width: 80%;*/
+#search {
+background: rgba(255,255,255,0.5);
+/* border: ridge 10px magenta; */
+display: block;
+/* display: inline-block; */
+/* height: auto; */
+/* padding: auto; */
+/* margin-bottom: 2%; */
+/* margin-left: 10%; */
+/* margin-right: 10%; */
+/* margin-top: 1%; */
+/* margin-top: 18px; */
+padding: 130px;
+/* position: relative; */
+text-align: center;
+/* width: 80%; */
 }
 
-#search input[type=text]{ 
-  background: #eaeaea url(../../images/search.png) no-repeat 1% 50%; 
-  border: 1px solid white; 
-  box-shadow: 2px 1.5px 2px #999;
-  color: #999;
-  font-size: 25pt;
-  height: 7%;
-  /*margin: auto;*/
-  /*margin-left: 2.5%;*/
-  /*margin-top: 1%;*/
-  padding-left: 3%;
-  width: 80%;
+#search input[type=text] {
+background: #FFFFFF url(../../images/searchi.png) no-repeat 0% 51%;
+border: 1px solid white;
+background-size: contain;
+/* box-shadow: 2px 1.5px 2px #999; */
+color: #000;
+font-size: 25pt;
+height: 8%;
+/* margin: auto; */
+/* margin-left: 2.5%; */
+/* margin-top: 1%; */
+padding-left: 5%;
+width: 80%;
 }
-
 /*
 #searchinput {
 	background:white;
@@ -414,8 +414,8 @@ div#footer > div > a {
   font-weight: bold;
   line-height: 38px;
   font-size: 13px;
-  bottom: 5.9em;
-  left: 16.3em;
+  margin-left: -2em;
+  margin-top: 2px;
 }
 
 .lw_button {
@@ -441,9 +441,8 @@ div#footer > div > a {
   font-size:15px;
   padding: 10px 39px;
   text-decoration: none;
-  width: 185px;
+  width: 188px;
   text-shadow:0px 1px 0px #263666;
-  margin-left: 1em;
 }
 
 /*--- finish login.php -------*/
@@ -1149,3 +1148,108 @@ div#footer > div > a {
   position:relative;
   top:1px;
 }
+
+/***********************Modify search's Keyboard******************************/
+#keyboardInputMaster tbody tr td table tbody tr td {
+vertical-align: middle;
+padding: 0px 0.45em;
+white-space: pre;
+height: 4em;
+font-family: 'Lucida Console','Arial Unicode MS',monospace;
+border-top: 1px solid #e5e5e5;
+border-right: 1px solid #5d5d5d;
+border-bottom: 1px solid #5d5d5d;
+border-left: 1px solid #e5e5e5;
+background-color: #eeeeee;
+cursor: default;
+min-width: 2.75em;
+-webkit-border-radius: 0.2em;
+-moz-border-radius: 0.2em;
+border-radius: 0.2em;
+-webkit-transition: background-color .15s ease-in-out;
+-o-transition: background-color .15s ease-in-out;
+transition: background-color .15s ease-in-out;
+font-size: 2em;
+}
+
+// space
+#keyboardInputMaster tbody tr td table tbody tr td.space {
+padding: 0px 23em;
+}
+
+// us international
+#keyboardInputMaster thead tr th div {
+float: left;
+font-size: 31px !important;
+height: initial;
+font-weight: bold;
+position: relative;
+z-index: 1;
+margin-right: 0.5em;
+cursor: pointer;
+background-color: transparent;
+}
+
+// selection language
+#keyboardInputMaster thead tr th div ol li {
+padding: 0.2em 0.4em;
+cursor: pointer;
+white-space: nowrap;
+width: 12em;
+font-size: 2em;
+}
+
+// selection box
+#keyboardInputMaster thead tr th div ol {
+position: absolute;
+left: 0px;
+top: 90%;
+list-style-type: none;
+height: 32.4em;
+overflow-y: auto;
+overflow-x: hidden;
+background-color: #f6f6f6;
+border: 1px solid #999999;
+display: none;
+text-align: left;
+width: 24em;
+}
+
+#keyboardInputMaster thead tr th div {
+float: left;
+font-size: 31px !important;
+height: initial;
+font-weight: bold;
+position: relative;
+z-index: 1;
+margin-right: 0.5em;
+cursor: pointer;
+background-color: transparent;
+}
+
+#keyboardInputMaster thead tr th span, 
+#keyboardInputMaster thead tr th strong, 
+#keyboardInputMaster thead tr th small, 
+#keyboardInputMaster thead tr th big {
+display: inline-block;
+padding: 0px 0.4em;
+/* height: 3em; */
+/* width: 3em; */
+font-size: 25px;
+line-height: 1.4em;
+border-top: 1px solid #e5e5e5;
+border-right: 1px solid #5d5d5d;
+border-bottom: 1px solid #5d5d5d;
+border-left: 1px solid #e5e5e5;
+background-color: #cccccc;
+cursor: pointer;
+margin: 0px 0px 0px 0.3em;
+-webkit-border-radius: 0.3em;
+-moz-border-radius: 0.3em;
+border-radius: 0.3em;
+vertical-align: middle;
+-webkit-transition: background-color .15s ease-in-out;
+-o-transition: background-color .15s ease-in-out;
+transition: background-color .15s ease-in-out;
+}
+/*************************************************************************/
