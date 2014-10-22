@@ -8,7 +8,7 @@
   define('RATING',          'tbl_rating');
   define('REPORT',          'tbl_report');
   define('SBUSCRIPTION',    'tbl_subscription');
-  define('PASSWORD_RESET',  'password_reset');
+  define('PASSWORD_RESET',  'tbl_password_reset');
   define('USER_TYPE',  'tbl_user_type');
 
 

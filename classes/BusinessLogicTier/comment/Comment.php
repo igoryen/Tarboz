@@ -1,19 +1,18 @@
 <?PHP
-
-class Comment {
-
+class Comment{
   private $id;
   private $text;
   private $rating_id;
   private $created_by;
+  private $entry_id;
 
   public function getId() {
     return $this->id;
-  }
+  } 
 
   public function setId($id) {
     $this->id = $id;
-  }
+  } 
 
   public function getText() {
     return $this->text;
@@ -39,6 +38,13 @@ class Comment {
     $this->created_by = $created_by;
   }
 
+  public function getEntryId(){
+    return $this->entry_id;
+  }
+
+  public function setEntryId($entry_id){
+    $this->entry_id = $entry_id;
+  }
 }
 
 ?>
