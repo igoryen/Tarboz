@@ -65,6 +65,12 @@ class UserManager {
     return $users;
   }
 
+  public function getUserByUserId($userid) {
+    $userDataAccessor = new UserDataAccessor();
+    $users = $userDataAccessor->getUserByUserId($userid);
+    return $users;
+  }
+
   //A method inside the  UserDataAccessor that updates the data
   //if  A user wants to make changes to his/her account
   public function updateUser($user) {

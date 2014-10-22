@@ -143,7 +143,7 @@ class UserDataAccessor {
 
   private function getUserList($selectResult) {
     //Counter that keeps count of the users
-    $Users[] = new User();
+    //$Users[] = new User();
     $count = 0;
     while ($list = mysqli_fetch_assoc($selectResult)) {
       $Users[] = new User();
@@ -215,6 +215,15 @@ class UserDataAccessor {
     return $Users;
   }
 
+  public function getUserByUserId($userId) {
+    // returns returns all users with the names passed
+    $query = "SELECT * FROM " . USER . "   WHERE usr_user_id = '$userId' ";
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $Users = $this->getUserList($result);
+    return $Users;
+  }
 }
 
 ?>
