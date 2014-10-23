@@ -57,9 +57,10 @@
       $entry->setEntryCreationDate("2014-10-23");
       
       $em = new EntryManager(); // 12      
-      $last_id = $em->createEntry($entry); // 13
-      echo "<br> create::the result of the insert query = ". $last_id;
-      
+      $id = $em->createEntry($entry); // 13
+      echo "<br> create::the result of the insert query = ". $id;
+      // 31
+      header("Location: index.php?id=" . $id);
       // 
             
       //if($_GET['id']){ // 14
