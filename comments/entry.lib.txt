@@ -1,0 +1,3 @@
+1. the values from the form to be delivered in the $_POST super-global array. it is an associative array. So HEAN (Html Element's Attribute Name) will be the array's key. HEAV (Html Element's Attribute Value) will be the array's value
+2. if we have an id delivered here by GET, then we know the user is updating the entry
+3. instantiate entry manager
