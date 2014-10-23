@@ -12,7 +12,7 @@ class EntryManager {
   public function createEntry($entry) {
     $eda = new EntryDataAccessor();
     $last_inserted_id = $eda->addEntry($entry);
-    echo "<br>EntryManager::last inserted id = ". $last_inserted_id;
+    //echo "<hr>em::last inserted id = ". $last_inserted_id;
     return $last_inserted_id;
   }
 
@@ -71,7 +71,11 @@ class EntryManager {
 
   public function getFatherByVerbatim($verbatim) {
     $eda = new EntryDataAccessor();
+    //echo "<br>TTT<br>em::getFatherByVerbatim() before eda->getFatherByVerbatim(verbatim)";
     $fatherGottenByVerbatim = $eda->getFatherByVerbatim($verbatim);
+    
+    //echo "em::getFatherByVerbatim() fatherGottenByVerbatim-lang:<br>". $fatherGottenByVerbatim->getEntryLanguage();
+    //echo "<br>LLL<br>";
     return $fatherGottenByVerbatim;
   }
 

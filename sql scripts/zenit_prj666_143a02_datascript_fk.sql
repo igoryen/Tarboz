@@ -70,6 +70,9 @@ ADD CONSTRAINT `tblEntry_tblSource_ent_entry_source_id_FK`
  ON DELETE NO ACTION
  ON UPDATE NO ACTION;
 
+ALTER TABLE `prj666`.`tbl_entry` 
+ADD FULLTEXT `tblEntry_verbatim_idx` (`ent_entry_verbatim`)COMMENT '';
+
 
 # table entry english
 ALTER TABLE `prj666`.`tbl_entry_english`
