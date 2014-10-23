@@ -63,11 +63,9 @@ class DBHelper {
   }
 
   public function executeQuery($sql) {
-    //echo "<hr> DBHelper:: sql => ", $sql;
     $this->connectToDB();
     if ($this->connection) {
       $result = mysqli_query($this->connection, $sql);
-      //echo "<hr>DBHelper::result => " . str_replace(", ", "<br>,", $result);
     }
     $this->closeConnection();
     return $result;

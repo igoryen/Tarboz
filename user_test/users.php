@@ -15,7 +15,7 @@
 
     echo "<br/><br/><br/><b>See All Users</b><br>";
     $userCount = count($Users);
-
+    echo "user count: ".$userCount.".<br/>";
     if ($userCount > 0) {
       foreach ($Users as $users) {
 

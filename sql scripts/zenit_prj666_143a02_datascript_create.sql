@@ -66,11 +66,6 @@ CREATE TABLE `prj666`.`tbl_entry_russian` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-ALTER TABLE `tbl_entry_russian`
-ADD `ent_entry_language` VARCHAR(25) NOT NULL
-DEFAULT 'Russian'
-AFTER `ent_entry_id`;
-
 CREATE TABLE `prj666`.`tbl_entry_mandarin` (
   `ent_entry_id` VARCHAR(25) NOT NULL,
   `ent_entry_text` TEXT NOT NULL,
@@ -95,7 +90,6 @@ ALTER TABLE `tbl_entry_mandarin`
 ADD `ent_entry_language` VARCHAR(25) NOT NULL
 DEFAULT 'Chinese'
 AFTER `ent_entry_id`;
-
 
 CREATE TABLE `prj666`.`tbl_user` (
   `usr_user_id`  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -159,7 +153,7 @@ CREATE TABLE  `prj666`.`tbl_media`(
   `med_desc`  VARCHAR(255),
   `med_link`  VARCHAR(255),
   `med_author`  VARCHAR(255),
-  `med_mediatype_id`  INT,
+  `med_media_type_id`  INT,
   `med_comment_id`  INT,
   `med_rating_id`  INT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
