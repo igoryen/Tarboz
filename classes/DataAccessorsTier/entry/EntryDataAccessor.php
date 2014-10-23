@@ -14,6 +14,7 @@ class EntryDataAccessor {
   public function addEntry($entry) {
     
     $id =         $entry->getEntryId();
+    $lang =       $entry->getEntryLanguage();
     $text =       $entry->getEntryText(); // 1
     // TODO: create the verbatim of $text using the Bing translator
     $verbatim =   $entry->getEntryVerbatim(); // 2
@@ -30,13 +31,20 @@ class EntryDataAccessor {
     $sourceId =   $entry->getEntrySourceId(); // 12
     $use =        $entry->getEntryUse(); // 13
     $link =       $entry->getEntryHttpLink(); // 14
+    $date =       $entry->getEntryCreationDate();
        
     // 15   
     $query_insert = 'INSERT INTO '
-      . 'tbl_entry_english'
-      //. " tbl_entry_english"
+      . 'tbl_entry ('
+            . '`ent_entry_language_id`, `ent_entry_text`, `ent_entry_verbatim`, '
+            . '`ent_entry_translit`, `ent_entry_authen_status_id`, '
+            . '`ent_entry_translation_of`, `ent_entry_creator_id`, '
+            . '`ent_entry_media_id`, `ent_entry_comment_id`, '
+            . '`ent_entry_rating_id`, `ent_entry_tags`, `ent_entry_author_id`, '
+            . '`ent_entry_source_id`, `ent_entry_use`, `ent_entry_http_link`, '
+            . '`ent_entry_creation_date`)'
       . ' VALUES('
-      . '"' . $id
+      . '"' . $lang
       . '", "' . $text
       . '", "' . $verbatim
       . '", "' . $translit
@@ -51,13 +59,12 @@ class EntryDataAccessor {
       . '", "' . $sourceId
       . '", "' . $use
       . '", "' . $link
+      . '", "' . $date
       . '")'; 
-
+    // 51
     $dbHelper = new DBHelper();  // 18
-    $result = $dbHelper->executeQuery($query_insert); // 16
-
-    //if ($result) echo "<hr>eda::addEntry() insert_result = " . $result;
-    $last_inserted_id = mysql_insert_id(); // 17
+    $last_inserted_id = $dbHelper->executeInsertQuery($query_insert); // 17
+    //16
     return $last_inserted_id;
   }
 

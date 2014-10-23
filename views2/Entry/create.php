@@ -36,10 +36,9 @@
       
       // 11
       $entry = new Entry();
-      
-      $language =   $_POST['language'];
-      
-      $entry->setEntryId($_POST['id']);
+      // 29
+      //$entry->setEntryId($_POST['id']);
+      $entry->setEntryLanguage($_POST['language']); // 30 (?)
       $entry->setEntryText($_POST['text']);
       $entry->setEntryVerbatim($_POST['verbatim']);
       $entry->setEntryTranslit($_POST['translit']);
@@ -53,11 +52,13 @@
       $entry->setEntryAuthorId($_POST['author']);
       $entry->setEntrySourceId($_POST['source']); 
       $entry->setEntryUse($_POST['use']);
-      $entry->setEntryHttpLink($_POST['link']);      
+      $entry->setEntryHttpLink($_POST['link']);
+      // add logic to create today's date
+      $entry->setEntryCreationDate("2014-10-23");
       
       $em = new EntryManager(); // 12      
-      $result = $em->createEntry($entry); // 13
-      echo "<br> create::the result of the insert query => ". $result;
+      $last_id = $em->createEntry($entry); // 13
+      echo "<br> create::the result of the insert query = ". $last_id;
       
       // 
             

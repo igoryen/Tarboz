@@ -92,18 +92,7 @@ function form_to_create_entry(){
           </div>
         </div>
       </div>
-
-      <!-- temporary: next id -->
-      <div class="entry_create_row">
-        <div class="entry_create_record_title">[enter an id] <span class="Painted_red">*</span>
-          <!--<div class="entry_create_record_title_explanation">
-            The language in which the text of your phrase is written
-          </div>-->
-        </div>
-        <div class="entry_create_record_value">
-          <input name="id" type="text" size="5" value=""/>
-        </div>
-      </div>
+      
       
       
       <!-- language in which entry is created -->
@@ -116,9 +105,9 @@ function form_to_create_entry(){
         <div class="entry_create_record_value">
           <select name="language">
             <option value="" selected="selected">Choose one...</option>
-            <option value="chinese">Chinese</option>
-            <option value="english">English</option>
-            <option value="russian">Russian</option>          
+            <option value="3">Chinese</option><!-- 4 -->
+            <option value="1">English</option>
+            <option value="2">Russian</option>
           </select>
         </div>
       </div>
@@ -256,7 +245,7 @@ function form_to_create_entry(){
       <!-- ent_entry_author_id -->
       <div class="entry_create_row">
         <div class="entry_create_record_title">
-           Author [enter '1']
+           Author [enter '3']
         </div>
         <div class="entry_create_record_value">
           <input name="author" type="text" size="50" value="<?php
@@ -339,15 +328,7 @@ function form_to_create_entry(){
 
 
       <div class="entry_create_buttons">
-        <!-- 
-        When the submit button is pressed $_POST super-global array 
-        is filled with values in this format:
-        each HEAN becomes the AE key
-        each HEAV becomes the AE value
-        
-        if the $_POST is read in the same page
-        the values will be taken by the same page again
-        -->
+        <!-- 5 -->
         <button name ="submit" type="submit">Submit</button>
         <button type="reset">Reset</button>
       </div>

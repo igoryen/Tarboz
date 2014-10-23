@@ -1,0 +1,4 @@
+1. echo "<hr>em::last inserted id = ". $last_inserted_id;
+2. echo "<br>TTT<br>em::getFatherByVerbatim() before eda->getFatherByVerbatim(verbatim)";
+3. echo "em::getFatherByVerbatim() fatherGottenByVerbatim-lang:<br>". $fatherGottenByVerbatim->getEntryLanguage();
+4. echo "<br>LLL<br>";
