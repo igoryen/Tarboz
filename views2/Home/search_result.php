@@ -46,49 +46,10 @@ $search_phrase = "Happy Birthday to you";
 // $verbatim = 'break wok sink boats';
 //=====================================================================
 
+$em = new EntryManager(); // 1
+$dad = $em->getFatherByVerbatim($verbatim); // 2
+$array_of_kids = $em->getListOfKidBriefByVerbatim($verbatim); // 3
 
-
-// #) initialize manager class
-$em = new EntryManager();
-// #) try to make a search for dad
-//echo "<hr>sr, verbatim:<br>" . $verbatim;
-$dad = $em->getFatherByVerbatim($verbatim);
-//echo "<hr>sr, dad's lang:<br>".$dad->getEntryLanguage();
-// #) try to make a search for kids
-// get one array of kids (Entry objects) by verbatim
-$array_of_kids = $em->getListOfKidBriefByVerbatim($verbatim);
-
-
-//=========================================================================
-//echo '*******************************<br>';
-//// remove a null object from the array
-//// loop through the whole array
-//echo 'attempt to remove null array elements<br>';
-//foreach ($array_of_kids as $kid) {
-//  echo 'inside the loop. ';
-//  if (is_object($kid)){
-//    echo 'the AE is an object. ';
-//    
-//    if (isset($kid)){
-//      echo 'it is set. ';
-//      
-//      // Print out all props of the each object and their values
-//      // var_dump(($kid));
-//      
-//      //Cannot use isset() on the result of a function call 
-//      if(null == $kid->getEntryId()){
-//        echo 'its id is null <br>';
-//        //unset($array_of_kids($kid));
-//      }
-//      else {
-//        echo 'its id is not null. ';
-//        echo 'its id is ' . $kid->getEntryId() . ". ";
-//        echo 'its text is ' . substr($kid->getEntryText(), 0, 25) . "<br>";
-//      }      
-//    }
-//  }  
-//}
-//==========================================================================
 ?>
   
   <div id="land">
@@ -96,350 +57,189 @@ $array_of_kids = $em->getListOfKidBriefByVerbatim($verbatim);
 
       <?php
 
-//table_to_see_entry_values($dad, $array_of_kids, $verbatim);
+//table_to_see_entry_values($dad, $array_of_kids, $verbatim); // 4
 
 $num_of_kids = count($array_of_kids);
-// check if entry_id field is empty. If it is then the whole object is empty
-// do we have a dad? -- no
 
-if (null == $dad->getEntryId()) {
-  //echo "We have no dad ..";
-  // check the number of kids. if $kids are ALSO empty
+if (null == $dad->getEntryId()) { // 5
+  // 6,7
   if ($num_of_kids == 1) {
-    //echo "and no kids.<br>";
+    // 8
     no_dad_no_kids("Seems we have no original or translations for this search.");
-  } //if kids are not empty
+  } // 5
   elseif ($num_of_kids > 1) {
-    //echo ".. but we have one or more kids! <br> ";
+    // 9
+    $i = 0; // 10
     
-    // a counter to use with every iteration
-    $i = 0;
-    // for every kid
-    foreach($array_of_kids as $kid){
-      //echo '----------- started the loop ----------- <br>';
-      
-      
-      // are you first in the queue? -- yes
+    foreach($array_of_kids as $kid){ // 24
+      // 11,12
       if($kid == reset($array_of_kids)){
-        //echo 'A: current == first <br>';
-        // what's your language?
+        // 13,14
         $current_lang = $kid->getEntryLanguage();
         $next_lang = $array_of_kids[$i+1]->getEntryLanguage();
-        
-        //echo 'A: first language is >', $current_lang . '<<br>';
-        //echo 'A: next language is >', $next_lang . '< !!!!!!!!!!! <br>';
-        
-        // open the house for the kids of this language
-        // pass to it the name of the language of the current object
-        //echo "A: opening a house for the current >". $current_lang . "<<br>";
+        // 15,16,17,18,19
         open_kids_house($current_lang);
-        
-        // make a room for the kid
-        // collect things to put into the room 
-        //echo "A: making a room<br>";
+        // 20,21,22
         $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
-        make_kid_room($kid_room_array);
-        
-        //destroy the specified variables
+        make_kid_room($kid_room_array);        
+        //23
         unset($current_lang);
         unset($next_lang);
-      }// A 
-      //are you last in the queue? -- yes
-      elseif($kid == end($array_of_kids)){
-        //echo 'Z: current == last <br>';
-        // what's your language?
-        
-        //$prev_lang = substr(prev($array_of_kids)->getEntryId(),0,2);
-        // NOTE: [$i--] doesn't work!
+      }// 12
+      elseif($kid == end($array_of_kids)){ // 25
+        // 26,14,28,29
         $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
         $current_lang = $kid->getEntryLanguage();
-        
-        
-        //echo 'Z: prev language is ', $prev_lang . '<br>';
-        //echo 'Z: current language is ', $current_lang . '<br>';
-        
-        
-        // your language is different from previous? - yes
+        // 30,31,32
         if ($current_lang !== $prev_lang){
-          
-          //echo 'Zd: prev language is ', $prev_lang . '<br>';
-          //echo 'Zd: first kid with this lang ('. $current_lang .')<br>';          
-          
-          // close the previous house
-          //echo 'Zd: closing the house for the previous >'.$prev_lang.'<<br>';
+          // 33,34,35,36
           close_kids_house();
-          // open a new house
-          //echo 'Zd: opening a new house for the current >'. $current_lang .'<<br>';
+          // 37, 38
           open_kids_house($current_lang);
-          
-          // make a room for the kid
-          // collect things to put into the room 
-          //echo 'Zd: making a room<br>';
+          // 20,21,41
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
-          
-          // close the current house
-          //echo 'Zd: closing the house for the current >'.$current_lang.'<<br>';
+          // 42,43
           close_kids_house();
-          // end of the queue
-          //echo 'Zd: the end of the array!';
-          //destroy the specified variables
+          // 44,45,23
           unset($current_lang);
           unset($prev_lang);
-        } // your language is different from previous? - no (the same)
+        } // 47
         else{
           $current_lang = $kid->getEntryLanguage();
-          $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
-          
-          //echo 'Zs: the previous language >'.$prev_lang.
-                  '< is same as current >'.$current_lang.'<<br>';          
-          
-          // make a room for the kid
-          // collect things to put into the room 
-          //echo 'Zs: making a room <br>';
+          $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();          
+          //48,20,21,51
           $kid_room_array['text'] = substr($kid->getEntryText(),0 ,55);
-          make_kid_room($kid_room_array);
-          
-          // close the current house
-          //echo 'Zs: closing the house for >'.$current_lang.'<<br>';
+          make_kid_room($kid_room_array);          
+          // 42,53
           close_kids_house();
-          // end of the queue
-          //echo 'Zs: the end of array!';
-          
-          //destroy the specified variables
+          // 44,55,23
           unset($current_lang);
           unset($prev_lang);
-        } // last in the queue, lang is same
-      } // last in the queue 
-      // between first and last in the queue
-      else{
-        //echo 'current is between first (A) and last (Z) <br>';
-        
-        // what's your language?
-        //$prev_lang = substr(prev($array_of_kids)->getEntryId(),0,2);
+        } // 25, 47
+      } // 25
+      else{ //56
+        // 57,14,59
         $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
         $current_lang = $kid->getEntryLanguage();
-        
-        
-        //echo 'previous language is >', $prev_lang . '< !!!!!!!!!!!!!!!!!!<br>';
-        //echo 'current language is >', $current_lang . '< !!!!!!! <br>';
-        
-        
-        // your language is different from previous? - yes
+        // 60,61,32
         if ($current_lang !== $prev_lang){
-          //echo 'prev & current are NOT SAME !!!!!!!!<br>';
-          
-          // close the previous house
-          //echo 'closing the house for the previous >'.$prev_lang.'<<br>';
+          // 62,35,64
           close_kids_house();
-          
-          // open a new house
-          //echo 'opening a new house for the current >'.$current_lang.'<<br>';
+          // 37,66
           open_kids_house($current_lang);
-          
-          // make a room for the kid
-          // collect things to put into the room 
-          //echo 'making a room<br>';
+          // 20,21,69
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
-          // don't close the house, the next kid might have the same language
-          
-          //destroy the specified variables
+          // 70, 23
           unset($current_lang);
           unset($prev_lang);
-        } // lang is different from previous
-        // your language is different from previous? - no (the same)
-        else{
-          // make a room for the kid
-          // collect things to put into the room 
-          //echo 'making a room<br>';
+        } // 32        
+        else{ // 47
+          // 20,21,69
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
-          // don't close the house, the next kid might have the same language
-          
-          //destroy the specified variables
+          // 70,23
           unset($current_lang);
           unset($prev_lang);
-        } // lang is the same as previous
-      } // between first and last in the queue
+        } // 47
+      } // 56
       $i++;
-    } // loop through each kiD
-    
-    
+    } // 24    
   }
-} // if we have no dad
-// do we have a dad? -- Yes
-else {
-  //echo "We have a dad ... ";
-  // How many kids? -- no kids
+} // 5
+else { // 27
+  // 71,72
   if ($num_of_kids == 1) {
-    //echo "but no kids.";
-
+    // 73
     $ary['language'] = $dad->getEntryLanguage();
     $ary['text'] = substr($dad->getEntryText(), 0, 55);
     dad_house_dad_1($ary);
-  } // How many kids? -- 1 or more kids
-  elseif ($num_of_kids > 1) {
-    //echo "and " . $num_of_kids . ' kids!<br>';
-    
+  }
+  elseif ($num_of_kids > 1) { //74
+    // 75    
     $ary['language'] = $dad->getEntryLanguage();
     $ary['text'] = substr($dad->getEntryText(), 0, 55);
     dad_house_dad_1($ary);
-    
     
     $i = 0;
-    // for every kid
-    foreach($array_of_kids as $kid){
-      //echo '----------- started the loop ----------- <br>';
-      
-      
-      // are you first in the queue? -- yes
+    foreach($array_of_kids as $kid){ // 24
+      //11, 12
       if($kid == reset($array_of_kids)){
-        //echo 'A: current == first <br>';
-        // what's your language?
+        //13,14
         $current_lang = $kid->getEntryLanguage();
-        $next_lang = next($array_of_kids)->getEntryLanguage();
-        
-        //echo 'A: first language is >', $current_lang . '<<br>';
-        //echo 'A: next language is >', $next_lang . '< !!!!!!!!!!! <br>';
-        
-        // open the house for the kids of this language
-        // pass to it the name of the language of the current object
-        //echo "A: opening a house for the current >". $current_lang . "<<br>";
-        open_kids_house($current_lang);
-        
-        // make a room for the kid
-        // collect things to put into the room 
-        //echo "A: making a room<br>";
+        $next_lang = next($array_of_kids)->getEntryLanguage();        
+        //15,16,17,18,19
+        open_kids_house($current_lang);        
+        // 20, 21,22
         $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
         make_kid_room($kid_room_array);
-        
-        //destroy the specified variables
+        // 23
         unset($current_lang);
         unset($next_lang);
-      }// A 
-      //are you last in the queue? -- yes
-      elseif($kid == end($array_of_kids)){
-        //echo 'Z: current == last <br>';
-        // what's your language?
-        
-        //$prev_lang = substr(prev($array_of_kids)->getEntryLanguageId(),0,2);
-        // NOTE: [$i--] doesn't work!
+      }// 12
+      elseif($kid == end($array_of_kids)){ // 25
+        //26,14,39,29
         $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
         $current_lang = $kid->getEntryLanguage();
-        
-        
-        //echo 'Z: prev language is ', $prev_lang . '<br>';
-        //echo 'Z: current language is ', $current_lang . '<br>';
-        
-        
-        // your language is different from previous? - yes
-        if ($current_lang !== $prev_lang){
-          
-          //echo 'Zd: prev language is ', $prev_lang . '<br>';
-          //echo 'Zd: first kid with this lang ('. $current_lang .')<br>';          
-          
-          // close the previous house
-          //echo 'Zd: closing the house for the previous >'.$prev_lang.'<<br>';
+        // 30,31
+        if ($current_lang !== $prev_lang){ // 32
+          //33,34,35,36
           close_kids_house();
-          // open a new house
-          //echo 'Zd: opening a new house for the current >'. $current_lang .'<<br>';
-          open_kids_house($current_lang);
-          
-          // make a room for the kid
-          // collect things to put into the room 
-          //echo 'Zd: making a room<br>';
+          // 37,38
+          open_kids_house($current_lang);          
+          // 20,21,41
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
-          make_kid_room($kid_room_array);
-          
-          // close the current house
-          //echo 'Zd: closing the house for the current >'.$current_lang.'<<br>';
+          make_kid_room($kid_room_array);          
+          // 42,43
           close_kids_house();
-          // end of the queue
-          //echo 'Zd: the end of the array!';
-          //destroy the specified variables
+          // 44,45,23
           unset($current_lang);
           unset($prev_lang);
-        } // your language is different from previous? - no (the same)
+        } // 47
         else{
           $current_lang = $kid->getEntryLanguageId();
           $prev_lang = $array_of_kids[$i-1]->getEntryLanguageId();
-          
-          //echo 'Zs: the previous language >'.$prev_lang.
-                  '< is same as current >'.$current_lang.'<<br>';          
-          
-          // make a room for the kid
-          // collect things to put into the room 
-          //echo 'Zs: making a room <br>';
+          //48,20,21,51
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
-          make_kid_room($kid_room_array);
-          
-          // close the current house
-          //echo 'Zs: closing the house for >'.$current_lang.'<<br>';
+          make_kid_room($kid_room_array);          
+          // 42,53
           close_kids_house();
-          // end of the queue
-          //echo 'Zs: the end of array!';
-          
-          //destroy the specified variables
+          // 44,55,23
           unset($current_lang);
           unset($prev_lang);
-        } // last in the queue, lang is same
-      } // last in the queue 
-      // between first and last in the queue
-      else{
-        //echo 'current is between first (A) and last (Z) <br>';
-        
-        // what's your language?
-        //$prev_lang = substr(prev($array_of_kids)->getEntryId(),0,2);
+        } // 25, 47
+      } // 25      
+      else{ // 56
+        //57,14
         $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
         $current_lang = $kid->getEntryLanguage();
-        
-        
-        //echo 'previous language is >', $prev_lang . '< !!!!!!!!!!!!!!!!!!<br>';
-        //echo 'current language is >', $current_lang . '< !!!!!!! <br>';
-        
-        
-        // your language is different from previous? - yes
+        //60,61,32
         if ($current_lang !== $prev_lang){
-          //echo 'prev & current are NOT SAME !!!!!!!!<br>';
-          
-          // close the previous house
-          //echo 'closing the house for the previous >'.$prev_lang.'<<br>';
-          close_kids_house();
-          
-          // open a new house
-          //echo 'opening a new house for the current >'.$current_lang.'<<br>';
-          open_kids_house($current_lang);
-          
-          // make a room for the kid
-          // collect things to put into the room 
-          //echo 'making a room<br>';
+          //62,35,64,37
+          close_kids_house();          
+          // 37,66
+          open_kids_house($current_lang);          
+          // 20,21,69
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
-          // don't close the house, the next kid might have the same language
-          
-          //destroy the specified variables
+          // 70,23
           unset($current_lang);
           unset($prev_lang);
-        } // lang is different from previous
-        // your language is different from previous? - no (the same)
-        else{
-          // make a room for the kid
-          // collect things to put into the room 
-          //echo 'making a room<br>';
+        } // 32
+        else{ // 47
+          // 20,21,69
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
-          // don't close the house, the next kid might have the same language
-          
-          //destroy the specified variables
+          // 70,23
           unset($current_lang);
           unset($prev_lang);
-        } // lang is the same as previous
-      } // between first and last in the queue
+        } // 47
+      } // 56
       $i++;
-    } // loop through each kiD
-  } // one or more kids
-} // we have a dad
+    } // 24
+  } // 74
+} // 27
 
       ?>
 
