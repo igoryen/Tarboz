@@ -1,0 +1,76 @@
+1. initialize manager class
+2. try to make a search for dad
+3. try to make a search for kids. get one array of kids (Entry objects) by verbatim. echo "<hr>sr, dad's lang:<br>".$dad->getEntryLanguage();
+4. debugging, to see values
+5. check if entry_id field is empty. If it is then the whole object is empty. do we have a dad? -- no
+6. echo "We have no dad ..";
+7. check the number of kids. if $kids are ALSO empty
+8. echo "and no kids.<br>";
+9. echo ".. but we have one or more kids! <br> ";
+10. a counter to use with every iteration
+11. echo '----------- started the loop ----------- <br>';
+12. are you first in the queue? -- yes
+13. echo 'A: current == first <br>';
+14. what's your language?
+15. echo 'A: first language is >', $current_lang . '<<br>';
+16. echo 'A: next language is >', $next_lang . '< !!!!!!!!!!! <br>';
+17. open the house for the kids of this language
+18. pass to it the name of the language of the current object
+19. echo "A: opening a house for the current >". $current_lang . "<<br>";
+20. make a room for the kid
+21. collect things to put into the room 
+22. echo "A: making a room<br>";
+23. destroy the specified variables
+24. loop through each kid
+25. are you last in the queue? -- yes
+26. echo 'Z: current == last <br>';
+27. do we have a dad? -- Yes, we have a dad!
+28. $prev_lang = substr(prev($array_of_kids)->getEntryId(),0,2);
+29. NOTE: [$i--] doesn't work!
+30. echo 'Z: prev language is ', $prev_lang . '<br>';
+31. echo 'Z: current language is ', $current_lang . '<br>';
+32. your language is different from previous? - yes
+33. echo 'Zd: prev language is ', $prev_lang . '<br>';
+34. echo 'Zd: first kid with this lang ('. $current_lang .')<br>';          
+35. close the previous house
+36. echo 'Zd: closing the house for the previous >'.$prev_lang.'<<br>';
+37. open a new house
+38. echo 'Zd: opening a new house for the current >'. $current_lang .'<<br>';
+39. $prev_lang = substr(prev($array_of_kids)->getEntryLanguageId(),0,2);
+40. 
+41. echo 'Zd: making a room<br>';
+42. close the current house
+43. echo 'Zd: closing the house for the current >'.$current_lang.'<<br>';
+44. end of the queue
+45. echo 'Zd: the end of the array!';
+46. 
+47. your language is different from previous? - no, the same
+48. echo 'Zs: the previous language >'.$prev_lang. '< is same as current >'.$current_lang.'<<br>';
+49. 
+50.  
+51. echo 'Zs: making a room <br>';
+52. 
+53. echo 'Zs: closing the house for >'.$current_lang.'<<br>';
+54. 
+55.
+56. between first and last in the queue
+57. echo 'current is between first (A) and last (Z) <br>';
+58. 
+59. $prev_lang = substr(prev($array_of_kids)->getEntryId(),0,2);
+60. echo 'previous language is >', $prev_lang . '< !!!!!!!!!!!!!!!!!!<br>';
+61. echo 'current language is >', $current_lang . '< !!!!!!! <br>';
+62. echo 'prev & current are NOT SAME !!!!!!!!<br>';
+63. 
+64. echo 'closing the house for the previous >'.$prev_lang.'<<br>';
+65. 
+66. echo 'opening a new house for the current >'.$current_lang.'<<br>';
+67. 
+68. 
+69. echo 'making a room<br>';
+70. don't close the house, the next kid might have the same language
+71. echo "We have a dad ... ";
+72. How many kids? -- no kids
+73. echo "but no kids.";
+74. How many kids? -- 1 or more kids. We have one or more kids.
+75. echo "and " . $num_of_kids . ' kids!<br>';
+
