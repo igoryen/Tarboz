@@ -13,7 +13,7 @@
 13. when/in which situations it is appropriate to use the entry
 14. // the link to the video of the entry
 15. compose the MySQL link
-16. TRUE (if INSERT succeeded) or FALSE (if failed)
+16. echo "<hr>eda::addEntry() last_inserted_id = " . $last_inserted_id;
 17. returns the id of the last row which was inserted
 18. using: require_once DB_CONNECTION . 'DBHelper.php';
 19. like 'lan_lang_name' in 'tbl_language'
@@ -48,3 +48,4 @@
 48. echo "<hr>eda::getEntryBrief() entry->getEntryLanguage() == " . $Entry->getEntryLanguage() . "<br>";
 49. echo "<br>LLL<br>eda::getEntryBrief() entry->getEntryLanguage() == " . print_r($Entry) . "<hr>";
 50. echo "<hr>eda::getEntryBrief() entry['lan_lang_name'] == " . $Entry['lan_lang_name'] . "<br>";
+51. echo "<br>eda::query_insert:<br>"; echo $query_insert;

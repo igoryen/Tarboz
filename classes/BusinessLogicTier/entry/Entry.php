@@ -3,7 +3,7 @@
 class Entry {
 
   private $entry_id; // 1
-  private $entry_language;
+  private $entry_language; // 13
   private $entry_text; // 2
   private $entry_verbatim; // 3
   private $entry_translit; // 4
@@ -178,11 +178,11 @@ class Entry {
     $this->entry_http_link = $h;
   }
   
-  public function getCreationDate() {
+  public function getEntryCreationDate() {
     return $this->entry_creation_date;
   }
 
-  public function setCreationDate($x) {
+  public function setEntryCreationDate($x) {
     $this->entry_creation_date = $x;
   }
 

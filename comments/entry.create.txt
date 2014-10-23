@@ -10,7 +10,7 @@
 10. also: maybe use numbers or single letters in the POST array to disguise?
 11. pull the values from the $_POST superglobal array and place them into an Entry object
 12. initialize EntryManager | create an EntryManager object
-13. pass the filled object for database CREATE operation
+13. pass the filled class Entry object for database INSERT operation
 14. if user is logged in && we have data in $_POST && user input is valid && we have an entry id delivered in $_GET (i.e. UPDATE operation)
 15. create a query for UPDATE operation using the id we have
 16. else if user is logged in && we have data in $_POST && user input is valid BUT we don't have an id in $_GET (i.e. we have a CREATE operation)
@@ -25,4 +25,6 @@
 25. the file with inclidable functions
 26. validation section
 27. table to see the values contained in the $_POST superglobal array
-28. send the id of the newly created entry to the entry profile page to be displayed there.
+28. send the id of the newly created entry to the entry profile page to be displayed there
+29. pull the values from the $_POST array and use them to populate a class Entry object. the names of the keys of the $_POST superglobal array are the names of the attributes of the html elements in the entry create form. The values are the values of the attributes of the html elements.
+30. when I do the insert operation I store "1" here, but when I do SELECT, I put a string here. Is that OK?
