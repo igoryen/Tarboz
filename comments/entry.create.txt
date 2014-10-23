@@ -1,0 +1,28 @@
+1. if a user is already in
+2. create a variable for user input validation
+3. variables to hold error messages for validation errors
+4. if we have data brought in by POST | if POST has data
+5. if format validation is passed | if user's input validation check was successful
+6. if user's input is valid
+7. create temporary variables
+8. populate the temp variables
+9. TO DO: add methods to sanitize the values
+10. also: maybe use numbers or single letters in the POST array to disguise?
+11. pull the values from the $_POST superglobal array and place them into an Entry object
+12. initialize EntryManager | create an EntryManager object
+13. pass the filled object for database CREATE operation
+14. if user is logged in && we have data in $_POST && user input is valid && we have an entry id delivered in $_GET (i.e. UPDATE operation)
+15. create a query for UPDATE operation using the id we have
+16. else if user is logged in && we have data in $_POST && user input is valid BUT we don't have an id in $_GET (i.e. we have a CREATE operation)
+17. if $_POST has no data
+18. if data dalidation succeeds, if there is no bad data
+19. What is the language X in which we are creating this new entry?
+20. What is the language X that the user selected?
+21. What is the greatest id number in the table for language X?
+22. create a new entry which is +1 greater than the greatest id number
+23. else if nobody is logged in, if no user is logged in, if the visitor is not logged in
+24. invite the guest to come in through the front door, send the not-logged-in guest to the login page
+25. the file with inclidable functions
+26. validation section
+27. table to see the values contained in the $_POST superglobal array
+28. send the id of the newly created entry to the entry profile page to be displayed there.
