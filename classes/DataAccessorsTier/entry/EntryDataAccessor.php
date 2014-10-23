@@ -122,12 +122,6 @@ class EntryDataAccessor {
    * @return type $entryGottenById
    */
   public function getEntryById($entryId) {
-    /*
-     * What is the language of the query?
-     * Which language table to go to?
-     */
-//    $query = "SELECT * FROM " . ENTRY .
-//            " WHERE ent_entry_id = ' $entryId ';";
 
     $query = 'SELECT *
               FROM tbl_entry_russian
@@ -147,8 +141,7 @@ class EntryDataAccessor {
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
-
-    // the current EntryDataAccessor object = $this
+    // 46
     $entryGottenById = $this->getEntryFull($result);
     return $entryGottenById;
   }
@@ -170,8 +163,7 @@ class EntryDataAccessor {
             . "WHERE ent_entry_id = $entryId";
 
     $dbHelper = new DBHelper();
-    // TRUE or FALSE
-    $resultOfDelete = $dbHelper->executeQuery($query);
+    $resultOfDelete = $dbHelper->executeQuery($query); //47
     return $resultOfDelete;
   }
 
@@ -195,12 +187,12 @@ class EntryDataAccessor {
    */
   private function getListOfFathers($resultOfSelect) {
     $Entries[] = new Entry();
-    //the counter keeps count of the entries
-    $count = 0;
+    //
+    $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-      // an array of class Entry objects
-      $Entries[] = new Entry();
-      // assign the value of each key of the assoc.array
+
+      $Entries[] = new Entry(); // 31
+      // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryText($list['ent_entry_text']);
       $Entries[$count]->setEntryVerbatim($list['ent_entry_verbatim']);
@@ -238,22 +230,12 @@ class EntryDataAccessor {
               AGAINST("'.$verbatim .'" IN BOOLEAN MODE )
               AND e.ent_entry_authen_status_id = 1';
     
-    //echo "<br>TTT<br>eda::getFatherByVerbatim() query:<br>" . $query . "<br>";
-    
+    //25
     $dbHelper = new DBHelper();
-    
     $result = $dbHelper->executeSelect($query); // 20
-    
-    //echo "<br>eda::getFatherByVerbatim() mysql_result:<br>";
-    //TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-    //$assoc_array= $result->fetch_array(MYSQLI_ASSOC);
-    //print_r($assoc_array);
-    //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-
+    // 26,27
     $fatherGottenByVerbatim = $this->getEntryBrief($result); // 22
-    //echo "<br>eda::getFatherByVerbatim() fatherGottenByVerbatim:<br>" . print_r($fatherGottenByVerbatim);
-    //echo "<br>LLL<br>eda::getFatherByVerbatim() fatherGottenByVerbatim->lang:<br>" . print_r($fatherGottenByVerbatim->getEntryLanguage());
-    
+    //28,29
     return $fatherGottenByVerbatim;
   }
 
@@ -284,12 +266,11 @@ class EntryDataAccessor {
    */
   private function getListOfKidBrief($resultOfSelect) {
     $Entries[] = new Entry();
-    //the counter keeps count of the entries
-    $count = 0;
-    while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-      // an array of class Entry objects
-      $Entries[] = new Entry();
-      // assign the value of each key of the assoc.array
+    $count = 0; // 30
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
+      
+      $Entries[] = new Entry(); //31
+      // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryLanguage($list['lan_lang_name']); // 19
       $Entries[$count]->setEntryText($list['ent_entry_text']);
@@ -307,9 +288,8 @@ class EntryDataAccessor {
 //      $Entries[$count]->setEntryUse($list['ent_entry_use']);
 //      $Entries[$count]->setEntryHttpLink($list['ent_entry_http_link']);
       $count++;
-    } // while
-    // to filter the array and remove empty values (DOESN'T WORK)
-    //return array_filter($Entries);
+    } // 33
+    // 34,35
     return $Entries;
   }
 
@@ -322,14 +302,9 @@ class EntryDataAccessor {
   private function getEntryBrief($resultOfSelect) { // 23
     $Entry = new Entry();
     $i=0;
-    //echo "<br>TTT<br>eda::getEntryBrief() resultOfSelect['lan_lang_name']:<br>";
-    //echo mysqli_fetch_assoc($resultOfSelect)['lan_lang_name'];
-    //echo "<br>eda::getEntryBrief() list = mysqli_fetch_assoc(resultOfSelect):<br>";
-    //print_r($list = mysqli_fetch_assoc($resultOfSelect));
-    // 
+    //36,37,38,39
     $ary = mysqli_fetch_assoc($resultOfSelect); // 24
-      //echo "<br>eda::getEntryBrief() list['lan_lang_name']:<br>". $ary['lan_lang_name'];
-      // assign the value of each key of the assoc.array
+      // 40,41
       $Entry->setEntryId($ary['ent_entry_id']);
       $Entry->setEntryLanguage($ary['lan_lang_name']); // 19
       $Entry->setEntryText($ary['ent_entry_text']);
@@ -346,9 +321,7 @@ class EntryDataAccessor {
       //$Entry->setEntrySourceId($ary['ent_entry_source_id']);
       //$Entry->setEntryUse($ary['ent_entry_use']);
       //$Entry->setEntryHttpLink($ary['ent_entry_http_link']);
-//    echo "<hr>eda::getEntryBrief() entry->getEntryLanguage() == " . $Entry->getEntryLanguage() . "<br>";
-      //echo "<br>LLL<br>eda::getEntryBrief() entry->getEntryLanguage() == " . print_r($Entry) . "<hr>";
-    //echo "<hr>eda::getEntryBrief() entry['lan_lang_name'] == " . $Entry['lan_lang_name'] . "<br>";
+      //48,49,50
     return $Entry;
   }
 
@@ -359,30 +332,11 @@ class EntryDataAccessor {
    * @return \Entry
    */
   private function getEntryFull($resultOfSelect) {
-    // private: to be accessed by member functions only
-    // $selectResult is the result from executing a SELECT query
-    // create an empty object
+    // 42,43,44
     $Entry = new Entry();
-    // Fetch a result row as an associative array
+    // 45
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-      /*
-        `ent_entry_id`
-        `ent_entry_text`
-        `ent_entry_verbatim`
-        `ent_entry_translit`
-        `ent_entry_authen_status_id`
-        `ent_entry_translation_of`
-        `ent_entry_creator_id`
-        `ent_entry_media_id`
-        `ent_entry_comment_id`
-        `ent_entry_rating_id`
-        `ent_entry_tags`
-        `ent_entry_author_id`
-        `ent_entry_source_id`
-        `ent_entry_use`
-        `ent_entry_http_link`
-       */
-      // assign the value of each key of the assoc.array
+      // 41
       $Entry->setEntryId($list['ent_entry_id']);
       $Entry->setEntryLanguageId(['ent_entry_language_id']);
       $Entry->setEntryText($list['ent_entry_text']);
