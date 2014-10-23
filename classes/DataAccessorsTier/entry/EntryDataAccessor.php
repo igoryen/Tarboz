@@ -131,21 +131,9 @@ class EntryDataAccessor {
   public function getEntryById($entryId) {
 
     $query = 'SELECT *
-              FROM tbl_entry_russian
-              WHERE ent_entry_id = "' . $entryId . '"
-
-              UNION ALL
-
-              SELECT *
-              FROM  tbl_entry_mandarin
-              WHERE ent_entry_id = "' . $entryId . '"
-
-              UNION ALL
-
-              SELECT *
-              FROM  tbl_entry_english
-              WHERE ent_entry_id = "' . $entryId . '";';
-
+              FROM tbl_entry
+              WHERE ent_entry_id = ' . $entryId . ';';
+    // 52
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
     // 46
@@ -345,7 +333,7 @@ class EntryDataAccessor {
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
       // 41
       $Entry->setEntryId($list['ent_entry_id']);
-      $Entry->setEntryLanguageId(['ent_entry_language_id']);
+      $Entry->setEntryLanguage(['ent_entry_language_id']);
       $Entry->setEntryText($list['ent_entry_text']);
       $Entry->setEntryVerbatim($list['ent_entry_verbatim']);
       $Entry->setEntryTranslit($list['ent_entry_translit']);
@@ -360,6 +348,7 @@ class EntryDataAccessor {
       $Entry->setEntrySourceId($list['ent_entry_source_id']);
       $Entry->setEntryUse($list['ent_entry_use']);
       $Entry->setEntryHttpLink($list['ent_entry_http_link']);
+      $Entry->setEntryHttpLink($list['ent_entry_creation_date']);
     } // while
     return $Entry;
   }
