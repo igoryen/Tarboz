@@ -239,7 +239,7 @@ public function getProvincesByCountryId($countryid) {
     return $loc;
   }
 
-
+    /////
     //**********************************************
   //Get city by id
   public function getCityById($cityid) {
