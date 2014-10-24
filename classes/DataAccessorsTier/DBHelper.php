@@ -42,10 +42,15 @@ class DBHelper {
    * @return mysql_result $result
    */
   public function executeSelect($sql) {
+<<<<<<< HEAD
+
+    //echo $sql;
+=======
     //echo "TTT";
 //    echo "<br>dbh::executeSelect(sql) sql:<br>" . $sql;
 //    echo "<br>";
     
+>>>>>>> master
     $this->connectToDB();
     
     $result = mysqli_query($this->connection, $sql); // 1
