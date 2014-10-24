@@ -38,6 +38,8 @@ class DBHelper {
   }
 
   public function executeSelect($sql) {
+
+    //echo $sql;
     $this->connectToDB();
     $result = mysqli_query($this->connection, $sql);
     $this->closeConnection();

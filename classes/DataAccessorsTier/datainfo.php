@@ -11,5 +11,9 @@
   define('PASSWORD_RESET',  'password_reset');
   define('USER_TYPE',  'tbl_user_type');
 
+  define('COUNTRY',   'tbl_country');
+  define('PROVINCE',  'tbl_province');
+  define('CITY',      'tbl_city');
+
 
 ?>

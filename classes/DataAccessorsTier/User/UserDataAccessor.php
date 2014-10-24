@@ -96,15 +96,26 @@ class UserDataAccessor {
     return $result;
   }
 
+
+  //for search
+  public function getUserByEmail($emailaddress) {
+    $query = "SELECT * FROM " . USER . " WHERE usr_email = " . " '".$emailaddress."' ";
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $user = $this->getUser($result);
+    return $user;
+  }
+
   //for search
   public function getUserByLoginId($loginid) {
-    $query = "SELECT * FROM " . USER . " WHERE usr_login = " . " '".$loginid."' ";
+    $query = "SELECT * FROM " . USER . " WHERE usr_email = " . " '".$loginid."' ";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
     $user = $this->getUser($result);
 
-    echo "testing 2:".$user->getFirstName();
+    //echo "testing 2:".$user->getFirstName();
     return $user;
   }
 
