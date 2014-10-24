@@ -154,7 +154,7 @@ class UserDataAccessor {
 
   private function getUserList($selectResult) {
     //Counter that keeps count of the users
-    $Users[] = new User();
+    //$Users[] = new User();
     $count = 0;
     while ($list = mysqli_fetch_assoc($selectResult)) {
       $Users[] = new User();

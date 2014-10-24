@@ -1,0 +1,13 @@
+1. ent_entry_id
+2. ent_entry_text
+3. ent_entry_verbatim
+4. ent_entry_translit
+5. of class AuthenStatus
+6. of class User
+7. of class Media. why not "mediaSetId" ??
+8. why not "commentSetId" ??
+9. of class Rating. why not "ratingSet" or "ratingSetId" ???
+10 of class EntryAuthor. better than $authorName?
+11. of class EntrySource. source = a piece of lit. work
+12. of class EntryDetails
+13. the name of the variable is not $entry_language_id because we want it to store a string, that comes from the DB

@@ -1,0 +1,6 @@
+1. the values from the form to be delivered in the $_POST super-global array. it is an associative array. So HEAN (Html Element's Attribute Name) will be the array's key. HEAV (Html Element's Attribute Value) will be the array's value
+2. if we have an id delivered here by GET, then we know the user is updating the entry
+3. instantiate entry manager
+4. the values of the `value` attribute are based on `tbl_language`
+5. When the submit button is pressed $_POST super-global array is filled with values in this format: each HEAN becomes the AE key, each HEAV becomes the AE value. if the $_POST is read in the same page the values will be taken by the same page again
+

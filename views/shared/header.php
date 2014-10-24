@@ -84,7 +84,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             function(data,status){
               //this sets the session variable of username inside the variable username
               var username="<?php if(isset($_SESSION['user'])) echo $_SESSION['user']->getFirstName(); ?>"
+<<<<<<< HEAD
               if(data>=1){
+=======
+              if(data==1 || data==2){
+>>>>>>> master
 
                 document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";
                 
@@ -117,6 +121,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   <div id="wrapper">
 
     <div id="header">
+
         <div class="header_row">
           <div class="table-cell" style="text-align: left;"><a href=""><img src="images/logo.png" height="50"></a></div>
           <nav id="navigation">
@@ -162,7 +167,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         <!-- A section for resetting the forgot password -->
 
         <?php 
+<<<<<<< HEAD
          // $_GET['security']="qQgMlH@bsU";
+=======
+         //$_GET['security']="0vLalqY93y";
+>>>>>>> master
           //If the security variable has something, then assign it otherwise keep the variable empty
           $reset=(isset($_GET['security']))?$_GET['security']:""; 
 

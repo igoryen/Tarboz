@@ -1,118 +1,102 @@
-<?php require("../Shared/header.php"); ?>
+<?php 
 
-  <div id="entry_create_form">
-    <div class="entry_create_row">
-      <div id="entry_create_form_title">Create entry
-        <div class="note">
-          Note: fields marked with the red asterisk (<span class="Painted_red">*</span>) are mandatory.
-        </div>
-      </div>
-    </div>
+//session_start();
+//
+//if(isset($_SESSION['user'])){ // 1  
+
+  require("../Shared/header.php"); 
+  include "../../config.php";
+  require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
+  include_once "lib.php";  // 25
+  
+  $user_input_valid = true; // 2
+  
+  // 3
+  $text_error = "";
+  //etc...
+  
+  //$language = "english";
+  
+    
+  if($_POST){ // 4
+    echo '$_POST is populated';
+ 
+    //------------------------------------------
+    // 26
+    //
+    //
+    //------------------------------------------
     
 
-    <div class="entry_create_row">
-      <div class="entry_create_record_title">Source language <span class="Painted_red">*</span>
-        <!--<div class="entry_create_record_title_explanation">
-          The language in which the text of your phrase is written
-        </div>-->
-      </div>
-      <div class="entry_create_record_value">
-        <select name="entry_source_lang">
-          <option selected="selected">Choose one...</option>
-          <option>English</option>
-          <option>Russian</option>
-          <option>Chinese</option>
-        </select>
-      </div>
-    </div>
+    //if($user_input_valid){ // 3
+      
+      // 6, 7, 8, 9, 10
+      
+      //table_to_see_POST_values(); // 27      
+      
+      // 11
+      $entry = new Entry();
+      // 29
+      //$entry->setEntryId($_POST['id']);
+      $entry->setEntryLanguage($_POST['language']); // 30 (?)
+      $entry->setEntryText($_POST['text']);
+      $entry->setEntryVerbatim($_POST['verbatim']);
+      $entry->setEntryTranslit($_POST['translit']);
+      $entry->setEntryAuthenStatusId($_POST['authen']);
+      $entry->setEntryTranslOf(NULL); // $_POST['transl_of']);
+      $entry->setEntryUserId('3'); //$_POST['creator']);
+      $entry->setEntryMediaId('1');//($_POST['media_id']);
+      $entry->setEntryCommentId('2'); //$_POST['comment_id'];
+      $entry->setEntryRatingId('1'); //($_POST['rating_id']);
+      $entry->setEntryTags($_POST['tags']);
+      $entry->setEntryAuthorId($_POST['author']);
+      $entry->setEntrySourceId($_POST['source']); 
+      $entry->setEntryUse($_POST['use']);
+      $entry->setEntryHttpLink($_POST['link']);
+      // add logic to create today's date
+      $entry->setEntryCreationDate("2014-10-23");
+      
+      $em = new EntryManager(); // 12      
+      $id = $em->createEntry($entry); // 13
+      echo "<br> create::the result of the insert query = ". $id;
+      // 31
+      header("Location: index.php?id=" . $id);
+      // 
+            
+      //if($_GET['id']){ // 14
+        
+        //$query = "UPDATE ..."; // 15
+      //}
+      //else{ // 16
+        
+      
+      //} // create a query for INSERT operation
+    //} // 6
+  }// 4
+  else { // 17
+    form_to_create_entry();
+     // 18
+  //$em = new EntryManager();
 
-    <div class="entry_create_row">
-      <div class="entry_create_record_title">Target language <span class="Painted_red">*</span> </div>
-      <div class="entry_create_record_value">
-        <select name="entry_target_lang">
-          <option selected="selected">Choose one...</option>
-          <option>English</option>
-          <option>Russian</option>
-          <option>Chinese</option>
-        </select>
-      </div>
-    </div>
+  // 19
+  // 20
+  //$language = 'english';
+  // 21
+  //$greatest_id = '10';
+  //$next_id_num = '11';
+  // 22 
+  //$new_id = $language . '_' . $next_id_num;
 
-    <div class="entry_create_row">
-      <div class="entry_create_record_title">
-        Text of the phrase <span class="Painted_red">*</span> 
-      </div>
-      <div class="entry_create_record_value">
-        <textarea rows="4" cols="50" placeholder="Enter the text of the phrase"></textarea>
-      </div>
-    </div>
-    
-    <div class="entry_create_row">
-      <div class="entry_create_record_title">
-         Translation <span class="Painted_red">*</span> 
-      </div>
-      <div class="entry_create_record_value">
-        <textarea rows="4" cols="50" placeholder="Enter the translation of the phrase"></textarea>
-      </div>
-    </div>
+  //}// 4  
+  
+//} // 1
+//else{ // 23
+  // 
+  // 24
+  //header('Location: ... login.php');
+//}
+      //$language = 'english';
 
-    <div class="entry_create_row">
-      <div class="entry_create_record_title">Authenticity status <span class="Painted_red">*</span> </div>
-      <div class="entry_create_record_value">
-        <select name="entry_auth_status">
-          <option selected="selected">Choose one...</option>
-          <option>Original</option>
-          <option>Translation</option>
-          <option>Unknown</option>
-        </select>
-      </div>
-    </div>
+}
 
-    <div class="entry_create_row">
-      <div class="entry_create_record_title">
-         Source
-      </div>
-      <div class="entry_create_record_value">
-         <select name="entry_source">
-          <option selected="selected">Choose one...</option>
-          <option>Book</option>
-          <option>Speech</option>
-          <option>Song</option>
-          <option>Movie</option>
-          <option>Poem</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="entry_create_row">
-      <div class="entry_create_record_title">
-        Country
-      </div>
-      <div class="entry_create_record_value">
-        <select name="entry_country">
-          <option selected="selected">Choose one...</option>
-          <option>Russia</option>
-          <option>China</option>
-          <option>Persia</option>
-        </select>      
-      </div>
-    </div>
-
-    <div class="entry_create_row">
-      <div class="entry_create_record_title">
-        Phrase use  <span class="Painted_red">*</span> 
-      </div>
-      <div class="entry_create_record_value">
-        <textarea rows="4" cols="50"
-          placeholder="Describe how to use this phrase"></textarea>
-      </div>
-    </div>
-
-    <div class="entry_create_buttons">
-      <button type="submit">Submit</button>
-      <button type="reset">Reset</button>
-    </div>
-
-  </div>
-
-<?php require("../Shared/footer.php"); ?>
+require("../Shared/footer.php");

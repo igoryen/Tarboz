@@ -1,0 +1,52 @@
+1. [ent_entry_text] - the text of the entry, e.g. "Happy Birthday To You"
+2. [ent_entry_verbatim] - the verbatim of entry  ~ pinyin: e.g. "s dnyom rozhdenia tebya"
+3. [ent_entry_translit] -  entry's transliteration, using roman alphabet
+4. [ent_entry_authen_status_id] - The authenticity status of the entry: whether the entry is original, or a translation, or unauthenticated
+5. [ent_entry_translation_of] - the hyperlink to the entry which is the "father" of the 'entry family'
+6. [ent_entry_creator_id] - the id of the creator-user who added the entry to the database
+7. [ent_entry_media_id]
+8. [ent_entry_comment_id] - the set of comments for this entry/ [ent_entry_rating_id]
+9. [ent_entry_rating_id] - the rating of the entry
+10. [ent_entry_tags] - tags to make the entry search easier
+11. Whoever is the author of the text of the entry. Why the id??? Author is not in our database
+12. which book or other work the entry is taken from
+13. when/in which situations it is appropriate to use the entry
+14. // the link to the video of the entry
+15. compose the MySQL link
+16. echo "<hr>eda::addEntry() last_inserted_id = " . $last_inserted_id;
+17. returns the id of the last row which was inserted
+18. using: require_once DB_CONNECTION . 'DBHelper.php';
+19. like 'lan_lang_name' in 'tbl_language'
+20. receive the mysql_result object passed up by DBHelper 
+21. search bl_entry (the table with phrases) for the original entry whose verbatim is close to the verbatim provided by the user
+22. pass the mysql_result object to method getEntryBried() in the same object
+23. method is private: to be accessed by member functions only.
+24. convert the mysql_result object into an associative array
+25. echo "<br>TTT<br>eda::getFatherByVerbatim() query:<br>" . $query . "<br>";
+26. echo "<br>eda::getFatherByVerbatim() mysql_result:<br>";
+27. $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array);
+28. echo "<br>eda::getFatherByVerbatim() fatherGottenByVerbatim:<br>" . print_r($fatherGottenByVerbatim);
+29. echo "<br>LLL<br>eda::getFatherByVerbatim() fatherGottenByVerbatim->lang:<br>" . print_r($fatherGottenByVerbatim->getEntryLanguage());
+30. the counter keeps count of the entries
+31. an array of class Entry objects
+32. assign the value of each key of the associative array
+33. loop through each kid in the array of kids
+34. to filter the array and remove empty values
+35. return array_filter($Entries);  (DOESN'T WORK)
+36. echo "<br>TTT<br>eda::getEntryBrief() resultOfSelect['lan_lang_name']:<br>";
+37. echo mysqli_fetch_assoc($resultOfSelect)['lan_lang_name'];
+38. echo "<br>eda::getEntryBrief() list = mysqli_fetch_assoc(resultOfSelect):<br>";
+39. print_r($list = mysqli_fetch_assoc($resultOfSelect));
+40. echo "<br>eda::getEntryBrief() list['lan_lang_name']:<br>". $ary['lan_lang_name'];
+41. assign the value of each key of the associative array
+42. private: to be accessed by member functions only
+43. $selectResult is the result from executing a SELECT query
+44. create an empty object
+45. Fetch a result row as an associative array
+46. the current EntryDataAccessor object is $this
+47. return value is TRUE or FALSE
+48. echo "<hr>eda::getEntryBrief() entry->getEntryLanguage() == " . $Entry->getEntryLanguage() . "<br>";
+49. echo "<br>LLL<br>eda::getEntryBrief() entry->getEntryLanguage() == " . print_r($Entry) . "<hr>";
+50. echo "<hr>eda::getEntryBrief() entry['lan_lang_name'] == " . $Entry['lan_lang_name'] . "<br>";
+51. echo "<br>eda::query_insert:<br>"; echo $query_insert;
+52. echo "<br>eda::getEntryById() query:<br>" . $query;

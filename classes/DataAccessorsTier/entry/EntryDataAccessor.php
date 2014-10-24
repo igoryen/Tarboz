@@ -12,97 +12,59 @@ class EntryDataAccessor {
    * @return type $last_inserted_id (the ID generated in the last query)
    */
   public function addEntry($entry) {
-    /*
-     * Using: require_once BUSINESS_DIR_ENTRY . 'Entry.php';
-     */
-
-    // [ent_entry_text]
-    // the text of the entry, e.g. "Happy Birthday To You"
-    $text = $entry->getEntryText();
-
-    /*
-     * TODO: create the verbatim of $text using the Bing translator
-     */
-    // [ent_entry_verbatim]
-    // the verbatim of entry
-    // ~ pinyin: e.g. "s dnyom rozhdenia tebya"
-    $verbatim = $entry->getEntryVerbatim();
-
-    /*
-     * TODO: transliterate the value of $text using ...
-     */
-    // [ent_entry_translit]
-    // entry's transliteration, using roman alphabet
-    $translit = $entry->getEntryTranslit();
-
-    // [ent_entry_authen_status_id]
-    // The authenticity status of the entry:
-    // whether the entry is original, or a translation, or unauthenticated
-    $authsid = $entry->getEntryAuthenStatusId();
-
-    // [ent_entry_translation_of]
-    // the hyperlink to the entry which is the "father" of the 'entry family'
-    $translOf = $entry->getEntryTranslOf();
-
-    // [ent_entry_creator_id]
-    // the id of the creator-user who added the entry to the database
-    $userId = $entry->getEntryUserId();
-
-    // [ent_entry_media_id]
-    // $mediaSet = $entry->getMediaSet();
-    //
-    // [ent_entry_comment_id]
-    // the set of comments for this entry
-    // $commentId = $entry->;
-    //
-    // [ent_entry_rating_id]
-    // the rating of the entry
-    // $ratingId = $entry->getEntryRatingId();
-    //
-    // [ent_entry_tags]
-    // tags to make the entry search easier
-    $tags = $entry->getEntryTags();
-
-    // Whoever is the author of the text of the entry.
-    // Why the id??? Author is not in our database
-    $authorId = $entry->getEntryAuthorId();
-
-    // which book or other work the entry is taken from
-    $sourceId = $entry->getEntrySourceId();
-
-    // when/in which situations it is appropriate to use the entry
-    $use = $entry->getEntryUse();
-
-    // the link to the video of the entry
-    $httpLink = $entry->getEntryHttpLink();
-
-
-    /*
-     * compose the MySQL link
-     */
-    $query_insert = "INSERT INTO ENTRY VALUES('', '"
-            . "$text', '"
-            . "$verbatim','"
-            . "$translit','"
-            . "$authsid','"
-            . "$translOf','"
-            . "$userId','"
-            // media
-            // comment
-            // rating
-            . "$tags','"
-            . "$authorId','"
-            . "$sourceId','"
-            . "$use','"
-            . "$httpLink','"
-            . ")";
-    /*
-     * using: require_once DB_CONNECTION . 'DBHelper.php';
-     */
-    $dbHelper = new DBHelper();
-    // TRUE (if INSERT succeeded) or FALSE (if failed)
-    $result = $dbHelper->executeQuery($query_insert);
-    $last_inserted_id = mysql_insert_id();
+    
+    $id =         $entry->getEntryId();
+    $lang =       $entry->getEntryLanguage();
+    $text =       $entry->getEntryText(); // 1
+    // TODO: create the verbatim of $text using the Bing translator
+    $verbatim =   $entry->getEntryVerbatim(); // 2
+    // TODO: transliterate the value of $text using ...
+    $translit =   $entry->getEntryTranslit(); // 3
+    $authen =     $entry->getEntryAuthenStatusId(); // 4
+    $translOf =   $entry->getEntryTranslOf(); // 5
+    $userId =     $entry->getEntryUserId(); // 6
+    $mediaId =    $entry->getEntryMediaId(); // 7
+    $commentId =  $entry->getEntryCommentId(); // 8
+    $ratingId =   $entry->getEntryRatingId(); // 9
+    $tags =       $entry->getEntryTags(); //10
+    $authorId =   $entry->getEntryAuthorId(); // 11
+    $sourceId =   $entry->getEntrySourceId(); // 12
+    $use =        $entry->getEntryUse(); // 13
+    $link =       $entry->getEntryHttpLink(); // 14
+    $date =       $entry->getEntryCreationDate();
+       
+    // 15   
+    $query_insert = 'INSERT INTO '
+      . 'tbl_entry ('
+            . '`ent_entry_language_id`, `ent_entry_text`, `ent_entry_verbatim`, '
+            . '`ent_entry_translit`, `ent_entry_authen_status_id`, '
+            . '`ent_entry_translation_of`, `ent_entry_creator_id`, '
+            . '`ent_entry_media_id`, `ent_entry_comment_id`, '
+            . '`ent_entry_rating_id`, `ent_entry_tags`, `ent_entry_author_id`, '
+            . '`ent_entry_source_id`, `ent_entry_use`, `ent_entry_http_link`, '
+            . '`ent_entry_creation_date`)'
+      . ' VALUES('
+      . '"' . $lang
+      . '", "' . $text
+      . '", "' . $verbatim
+      . '", "' . $translit
+      . '", ' . $authen
+      . ', "' . $translOf
+      . '", "' . $userId
+      . '", "' . $mediaId
+      . '", "' . $commentId
+      . '", "' . $ratingId
+      . '", "' . $tags
+      . '", "' . $authorId
+      . '", "' . $sourceId
+      . '", "' . $use
+      . '", "' . $link
+      . '", "' . $date
+      . '")'; 
+    // 51
+    $dbHelper = new DBHelper();  // 18
+    $last_inserted_id = $dbHelper->executeInsertQuery($query_insert); // 17
+    //16
     return $last_inserted_id;
   }
 
@@ -167,33 +129,14 @@ class EntryDataAccessor {
    * @return type $entryGottenById
    */
   public function getEntryById($entryId) {
-    /*
-     * What is the language of the query?
-     * Which language table to go to?
-     */
-//    $query = "SELECT * FROM " . ENTRY .
-//            " WHERE ent_entry_id = ' $entryId ';";
 
     $query = 'SELECT *
-              FROM tbl_entry_russian
-              WHERE ent_entry_id = "'.$entryId.'"
-
-              UNION ALL
-
-              SELECT *
-              FROM  tbl_entry_mandarin
-              WHERE ent_entry_id = "'.$entryId.'"
-
-              UNION ALL
-
-              SELECT *
-              FROM  tbl_entry_english
-              WHERE ent_entry_id = "'.$entryId.'";';
-
+              FROM tbl_entry
+              WHERE ent_entry_id = ' . $entryId . ';';
+    // 52
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
-
-    // the current EntryDataAccessor object = $this
+    // 46
     $entryGottenById = $this->getEntryFull($result);
     return $entryGottenById;
   }
@@ -215,8 +158,7 @@ class EntryDataAccessor {
             . "WHERE ent_entry_id = $entryId";
 
     $dbHelper = new DBHelper();
-    // TRUE or FALSE
-    $resultOfDelete = $dbHelper->executeQuery($query);
+    $resultOfDelete = $dbHelper->executeQuery($query); //47
     return $resultOfDelete;
   }
 
@@ -240,12 +182,12 @@ class EntryDataAccessor {
    */
   private function getListOfFathers($resultOfSelect) {
     $Entries[] = new Entry();
-    //the counter keeps count of the entries
-    $count = 0;
+    //
+    $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-      // an array of class Entry objects
-      $Entries[] = new Entry();
-      // assign the value of each key of the assoc.array
+
+      $Entries[] = new Entry(); // 31
+      // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryText($list['ent_entry_text']);
       $Entries[$count]->setEntryVerbatim($list['ent_entry_verbatim']);
@@ -267,90 +209,43 @@ class EntryDataAccessor {
   }
 
 // used to search the database for the "father" using a verbatim string
+  /**
+   * 
+   * @param string $verbatim
+   * @return type
+   */
   public function getFatherByVerbatim($verbatim) {
+    
     //$fatherGottenByVerbatim = new Entry();
-    // # search all language tables for the original entry whose verbatim
-    // is close to the user-provided verbatim
-    $query = 'SELECT ent_entry_id, ent_entry_text
-            FROM tbl_entry_russian
-            WHERE
-              MATCH(ent_entry_verbatim)
-              AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
-              AND ent_entry_authen_status_id = 1
-            UNION ALL
-            SELECT  ent_entry_id, ent_entry_text
-            FROM  tbl_entry_mandarin
-            WHERE
-              MATCH(ent_entry_verbatim)
-              AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
-              AND ent_entry_authen_status_id = 1
-            UNION ALL
-            SELECT  ent_entry_id, ent_entry_text
-            FROM  tbl_entry_english
-            WHERE
-              MATCH(ent_entry_verbatim)
-              AGAINST("' . $verbatim . '" IN BOOLEAN MODE )
-              AND ent_entry_authen_status_id = 1';
+    // 21
+    $query = 'SELECT e.ent_entry_id, l.lan_lang_name, e.ent_entry_text
+              FROM tbl_entry e, tbl_language l
+              WHERE e.ent_entry_language_id = l.lan_language_id
+              AND MATCH(e.ent_entry_verbatim)
+              AGAINST("'.$verbatim .'" IN BOOLEAN MODE )
+              AND e.ent_entry_authen_status_id = 1';
+    
+    //25
     $dbHelper = new DBHelper();
-    $resultOfSelect = $dbHelper->executeSelect($query);
-    // the current EntryDataAccessor object = $this
-    $fatherGottenByVerbatim = $this->getEntryBrief($resultOfSelect);
+    $result = $dbHelper->executeSelect($query); // 20
+    // 26,27
+    $fatherGottenByVerbatim = $this->getEntryBrief($result); // 22
+    //28,29
     return $fatherGottenByVerbatim;
   }
 
   public function getListOfKidBriefByVerbatim($verbatim) {
-    $query = 'SELECT ent_entry_id, ent_entry_text, relevance FROM
-          (SELECT ent_entry_id, ent_entry_text, relevance FROM(
-
-            # Russian
-            (SELECT ent_entry_id, ent_entry_text,
-              MATCH(ent_entry_verbatim)
-              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
-              AS relevance
-              FROM tbl_entry_russian
-              WHERE
-              MATCH(ent_entry_verbatim)
-              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
-              AND ent_entry_authen_status_id = 2
-              HAVING Relevance > 0
-              ORDER BY relevance DESC
-            ) # Russian
-
-            UNION ALL
-
-            # English
-            (SELECT ent_entry_id, ent_entry_text,
-              MATCH(ent_entry_verbatim)
-              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
-              AS relevance
-              FROM  tbl_entry_english
-              WHERE
-              MATCH(ent_entry_verbatim)
-              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
-              AND ent_entry_authen_status_id = 2
-              HAVING Relevance > 0
-              ORDER BY relevance DESC
-            )# English
-
-            UNION ALL
-
-            # Mandarin
-            (SELECT ent_entry_id, ent_entry_text,
-              MATCH(ent_entry_verbatim)
-              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
-              AS relevance
-              FROM  tbl_entry_mandarin
-              WHERE
-              MATCH(ent_entry_verbatim)
-              AGAINST("' . $verbatim . '" IN NATURAL LANGUAGE MODE)
-              AND ent_entry_authen_status_id = 2
-              HAVING Relevance > 0
-              ORDER BY relevance DESC
-            ) # Mandarin
-
-          ) AS UnionTable
-          GROUP BY ent_entry_id ASC
-        ) AS TableToOrderById';
+    $query = 'SELECT e.ent_entry_id, l.lan_lang_name, e.ent_entry_text,
+                MATCH(e.ent_entry_verbatim) 
+                AGAINST("'.$verbatim.'" IN NATURAL LANGUAGE MODE)
+                AS relevance
+              FROM tbl_entry e, tbl_language l
+              WHERE e.ent_entry_language_id = l.lan_language_id 
+                AND MATCH(e.ent_entry_verbatim) 
+                    AGAINST("'.$verbatim.'" IN NATURAL LANGUAGE MODE)
+                AND e.ent_entry_authen_status_id = 2
+              HAVING relevance > 0.5
+              ORDER BY l.lan_lang_name';
 
     $dbHelper = new DBHelper();
     $resultOfSelect = $dbHelper->executeSelect($query);
@@ -358,6 +253,7 @@ class EntryDataAccessor {
     $arrayOfKidsGottenByVerbatim = $this->getListOfKidBrief($resultOfSelect);
     return $arrayOfKidsGottenByVerbatim;
   }
+
   /**
    *
    * @param type $resultOfSelect
@@ -365,13 +261,13 @@ class EntryDataAccessor {
    */
   private function getListOfKidBrief($resultOfSelect) {
     $Entries[] = new Entry();
-    //the counter keeps count of the entries
-    $count = 0;
-    while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-      // an array of class Entry objects
-      $Entries[] = new Entry();
-      // assign the value of each key of the assoc.array
+    $count = 0; // 30
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
+      
+      $Entries[] = new Entry(); //31
+      // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
+      $Entries[$count]->setEntryLanguage($list['lan_lang_name']); // 19
       $Entries[$count]->setEntryText($list['ent_entry_text']);
 //      $Entries[$count]->setEntryVerbatim($list['ent_entry_verbatim']);
 //      $Entries[$count]->setEntryTranslit($list['ent_entry_translit']);
@@ -387,61 +283,43 @@ class EntryDataAccessor {
 //      $Entries[$count]->setEntryUse($list['ent_entry_use']);
 //      $Entries[$count]->setEntryHttpLink($list['ent_entry_http_link']);
       $count++;
-    } // while
-    // to filter the array and remove empty values (DOESN'T WORK)
-    //return array_filter($Entries);
+    } // 33
+    // 34,35
     return $Entries;
   }
 
   /**
    * getEntryBrief($resultOfSelect)
    * To retrieve only some fields of one entry for the phrase search result page.
-   * @param type $resultOfSelect
-   * @return \Entry
+   * @param mysql_result $resultOfSelect
+   * @return Entry $Entry
    */
-  private function getEntryBrief($resultOfSelect) {
-    // private: to be accessed by member functions only
-    // $resultOfSelect is the result from executing a SELECT query
-    // create an empty Entry object
+  private function getEntryBrief($resultOfSelect) { // 23
     $Entry = new Entry();
-    // Fetch the result of SELECT as an associative array
-    while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-      /*
-        `ent_entry_id`
-        `ent_entry_text`
-        `ent_entry_verbatim`
-        `ent_entry_translit`
-        `ent_entry_authen_status_id`
-        `ent_entry_translation_of`
-        `ent_entry_creator_id`
-        `ent_entry_media_id`
-        `ent_entry_comment_id`
-        `ent_entry_rating_id`
-        `ent_entry_tags`
-        `ent_entry_author_id`
-        `ent_entry_source_id`
-        `ent_entry_use`
-        `ent_entry_http_link`
-       */
-      // assign the value of each key of the assoc.array
-      $Entry->setEntryId($list['ent_entry_id']);
-      $Entry->setEntryText($list['ent_entry_text']);
-      //$Entry->setEntryVerbatim($list['ent_entry_verbatim']);
-      //$Entry->setEntryTranslit($list['ent_entry_translit']);
-      //$Entry->setEntryAuthenStatusId($list[ent_entry_authen_status_id]);
-      //$Entry->setEntryTranslOf($list['ent_entry_translation_of']);
-      //$Entry->setEntryUserId($list['ent_entry_creator_id']);
-      //$Entry->setEntryMediaId($list['ent_entry_media_id']);
-      //$Entry->setEntryCommentId($list['ent_entry_comment_id']);
-      //$Entry->setEntryRatingId($list['ent_entry_rating_id']);
-      //$Entry->setEntryTags($list['ent_entry_tags']);
-      //$Entry->setEntryAuthorId($list['ent_entry_author_id']);
-      //$Entry->setEntrySourceId($list['ent_entry_source_id']);
-      //$Entry->setEntryUse($list['ent_entry_use']);
-      //$Entry->setEntryHttpLink($list['ent_entry_http_link']);
-    } // while
+    $i=0;
+    //36,37,38,39
+    $ary = mysqli_fetch_assoc($resultOfSelect); // 24
+      // 40,41
+      $Entry->setEntryId($ary['ent_entry_id']);
+      $Entry->setEntryLanguage($ary['lan_lang_name']); // 19
+      $Entry->setEntryText($ary['ent_entry_text']);
+      //$Entry->setEntryVerbatim($ary['ent_entry_verbatim']);
+      //$Entry->setEntryTranslit($ary['ent_entry_translit']);
+      //$Entry->setEntryAuthenStatusId($ary[ent_entry_authen_status_id]);
+      //$Entry->setEntryTranslOf($ary['ent_entry_translation_of']);
+      //$Entry->setEntryUserId($ary['ent_entry_creator_id']);
+      //$Entry->setEntryMediaId($ary['ent_entry_media_id']);
+      //$Entry->setEntryCommentId($ary['ent_entry_comment_id']);
+      //$Entry->setEntryRatingId($ary['ent_entry_rating_id']);
+      //$Entry->setEntryTags($ary['ent_entry_tags']);
+      //$Entry->setEntryAuthorId($ary['ent_entry_author_id']);
+      //$Entry->setEntrySourceId($ary['ent_entry_source_id']);
+      //$Entry->setEntryUse($ary['ent_entry_use']);
+      //$Entry->setEntryHttpLink($ary['ent_entry_http_link']);
+      //48,49,50
     return $Entry;
   }
+
   /**
    * getEntryFull($resultOfSelect)
    * To retrieve ALL the fields of one entry for the entry profile page.
@@ -449,31 +327,13 @@ class EntryDataAccessor {
    * @return \Entry
    */
   private function getEntryFull($resultOfSelect) {
-    // private: to be accessed by member functions only
-    // $selectResult is the result from executing a SELECT query
-    // create an empty object
+    // 42,43,44
     $Entry = new Entry();
-    // Fetch a result row as an associative array
+    // 45
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-      /*
-        `ent_entry_id`
-        `ent_entry_text`
-        `ent_entry_verbatim`
-        `ent_entry_translit`
-        `ent_entry_authen_status_id`
-        `ent_entry_translation_of`
-        `ent_entry_creator_id`
-        `ent_entry_media_id`
-        `ent_entry_comment_id`
-        `ent_entry_rating_id`
-        `ent_entry_tags`
-        `ent_entry_author_id`
-        `ent_entry_source_id`
-        `ent_entry_use`
-        `ent_entry_http_link`
-       */
-      // assign the value of each key of the assoc.array
+      // 41
       $Entry->setEntryId($list['ent_entry_id']);
+      $Entry->setEntryLanguage(['ent_entry_language_id']);
       $Entry->setEntryText($list['ent_entry_text']);
       $Entry->setEntryVerbatim($list['ent_entry_verbatim']);
       $Entry->setEntryTranslit($list['ent_entry_translit']);
@@ -488,6 +348,7 @@ class EntryDataAccessor {
       $Entry->setEntrySourceId($list['ent_entry_source_id']);
       $Entry->setEntryUse($list['ent_entry_use']);
       $Entry->setEntryHttpLink($list['ent_entry_http_link']);
+      $Entry->setEntryHttpLink($list['ent_entry_creation_date']);
     } // while
     return $Entry;
   }

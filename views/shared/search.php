@@ -33,25 +33,29 @@
 <div id="wrapper">
 <div id="search">
   <form>
-    <input type="text" name="search" class="keyboardInput">
-    <br>
-    <select name="src_lang">
-      <option>Source Language</option>
-      <option>English</option>
-      <option>Russian</option>
-      <option>Mandarin</option>
-      <option>Farsi</option>
-    </select>
-    <select name="tgt_lang">
-      <option>Target Language</option>
-      <option>English</option>
-      <option>Russian</option>
-      <option>Mandarin</option>
-      <option>Farsi</option>
-    </select>
-    From: <input type="date" name="startdate" placeholder="Start Date">
-    To: <input type="date" name="enddate" placeholder="End Date">
-    <br>
+    <div>
+      <div>
+        <input type="text" name="search" class="keyboardInput">
+        <p style="font-size:20px; ">
+        <select name="src_lang">
+          <option>Source Language</option>
+          <option>English</option>
+          <option>Russian</option>
+          <option>Mandarin</option>
+          <option>Farsi</option>
+        </select>
+        <select name="tgt_lang">
+          <option>Target Language</option>
+          <option>English</option>
+          <option>Russian</option>
+          <option>Mandarin</option>
+          <option>Farsi</option>
+        </select>
+        <b>From:</b> <input type="date" name="startdate" placeholder="Start Date">
+        <b>To:</b> <input type="date" name="enddate" placeholder="End Date">
+        </p>
+    </div>
+  </div>
   </form>
 </div><!--search-->
     <!--</div>header-->
