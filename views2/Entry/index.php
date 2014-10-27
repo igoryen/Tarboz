@@ -28,6 +28,12 @@ $user =       $entry->getEntryUserId();
 
   <div id="entry_index_container">    
     <mark>index</mark>.php
+    
+    <div class="entry_record">
+      <div class="entry_record_title">id</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryId(); ?></div>
+    </div>
+    
     <div class="entry_record">
       <div class="entry_record_title">Text</div>
       <div class="entry_record_value"><?php echo $text; ?></div>
