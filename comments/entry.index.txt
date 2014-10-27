@@ -1,1 +1,2 @@
 1. try to make a search for entry
+#1. redirect to Entry/create.php with "id=" set to the id of the entry which is currently displayed in this page.

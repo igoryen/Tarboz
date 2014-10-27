@@ -5,8 +5,8 @@
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
 
-//$entryId = $_GET['id'];
-$entryId = 13;
+$entryId = $_GET['id'];
+//$entryId = 26;
 
 $em = new EntryManager();
 $entry = $em->getEntryById($entryId); // 1
@@ -26,8 +26,8 @@ $user =       $entry->getEntryUserId();
 
   ?>
 
-  <div id="entry_index_container">
-
+  <div id="entry_index_container">    
+    <mark>index</mark>.php
     <div class="entry_record">
       <div class="entry_record_title">Text</div>
       <div class="entry_record_value"><?php echo $text; ?></div>
@@ -79,6 +79,10 @@ $user =       $entry->getEntryUserId();
       <div class="entry_record_title">Comments</div>
       <div class="entry_record_value">...</div>
     </div>
-
+    
+    <a href="create.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
+    
+    
   </div><!--entry_index_container-->
+  
 <?php require("../Shared/footer.php"); ?>
