@@ -42,28 +42,10 @@ class DBHelper {
    * @return mysql_result $result
    */
   public function executeSelect($sql) {
-<<<<<<< HEAD
-
-    //echo $sql;
-=======
-    //echo "TTT";
-//    echo "<br>dbh::executeSelect(sql) sql:<br>" . $sql;
-//    echo "<br>";
-    
->>>>>>> master
+    //3
     $this->connectToDB();
-    
-    $result = mysqli_query($this->connection, $sql); // 1
-    
-    // TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-    //echo "<br><br>dbh::executeSelect() mysql_result:<br>";    
-    //$assoc_array= $result->fetch_array(MYSQLI_ASSOC); // 2
-    //print_r($assoc_array);
-    // this is dangerous because these 2 lines change values in $result
-    // LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-    
+    $result = mysqli_query($this->connection, $sql); // 1    
     $this->closeConnection();
-    //echo "<br>LLL<br>";
     return $result; // 1
   }
 
@@ -73,6 +55,7 @@ class DBHelper {
       $result = mysqli_query($this->connection, $sql);
     }
     $this->closeConnection();
+    // 4
     return $result;
   }
 
