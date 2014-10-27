@@ -4,6 +4,8 @@
   require_once BUSINESS_DIR_COMMENT . 'CommentManager.php';
   require_once BUSINESS_DIR_USER. 'User.php';
   require_once BUSINESS_DIR_COMMENT . 'Comment.php';
+  require_once BUSINESS_DIR_RATING . 'RatingManager.php';
+  require_once BUSINESS_DIR_RATING . 'Rating.php';
 
   session_start();
   $user_logged_in = true;
@@ -57,10 +59,120 @@
             }); //end $.ajax()
             event.preventDefault();
         });
+          
+        $("button").click( function(event) {
+            var this_id = $(this).attr('id');
+            var edit_id_num = this_id.substring(this_id.indexOf("_")+1);
+            var textarea_id = "#editCommentText_"+edit_id_num;
+            var input_hidden_id = "#editCommentId_"+edit_id_num;
 
-           
+            //alert("edit id:"+edit_id_num);
+            //alert("textarea_id: "+textarea_id);
+            //alert("input_hidden_id: "+input_hidden_id);
+            //alert("edit comment text: "+$(textarea_id).val());
+            //alert("edit comment id: "+$(input_hidden_id).val());
+            
+            var editCommentData = encodeURIComponent($.trim ($(textarea_id).val() ));
+            var editCommentId = encodeURIComponent($(input_hidden_id).val());
+
+            $.ajax({
+                url: "edit_comment.php",
+                type: "POST",
+                cache: false,
+                data: 
+                {
+                    editComment : editCommentData,
+                    editCommentId: editCommentId
+                },
+                success:
+                  function(data, status) {
+                    //alert(data);
+                    if(data.indexOf("succeed")>0) {                                   
+                       location.reload(true);
+                    } else if (data.indexOf("fail") >0) {
+                      alert(data);
+                    }                                
+                  }, //end of function(data, status) and success function
+                error:
+                  function() {
+                    alert("ajax error");  
+                  } 
+                
+             });//end $.ajax()*/
+            event.preventDefault();
+          });
+          
+        $('.deleteComment').click(	function (event) {
+            var delete_comment_id = $(this).attr('id');
+            //alert("delete comment id: "+delete_comment_id);
+            var delete_id = delete_comment_id.substring(delete_comment_id.indexOf("_")+1);
+            //alert("delete id: "+delete_id);
+            $.ajax({
+                url: "delete_comment.php",
+                type: "POST",
+                data: 
+                {
+                    deleteCommentId : delete_id
+                },
+                success:
+                  function(data, status) {
+                    //alert(data);
+                    if(data.indexOf("succeed")>0) {                                   
+                       location.reload(true);                            
+                    } else if (data.indexOf("fail") >0) {
+                      alert(data);
+                    }                                
+                  }, //end of function(data, status) and success function
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }                 
+            });//end $.ajax()*/
+            event.preventDefault();
+        });
+
+        $('.comment_like').click( function (event) {
+            //$(this).css({'display': 'none'}); 
+            //$(this).next().css({'display': ''})
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_")); //alert("user id: "+user_id);
+            var comment_id = this_id.substring(this_id.lastIndexOf("_")+1); //alert("comment id: "+comment_id);
+            var is_like = "";
+            //alert("inner text: "+$(this).text());
+            if($(this).text() == "Like" ){
+                is_like = "Y";
+                $(this).text("Unlike");
+            } else if ($(this).text() == "Unlike") {
+                is_like = "N";
+                $(this).text("Like");
+            }
+            $.ajax({
+               url: "comment_rating.php",
+               type: "POST",
+               data: {
+                    commentId : comment_id,
+                    userId : user_id,
+                    isLike : is_like
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           
+                       } else  if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+        });
+
       });
-        
+            
 
     </script>
   </head>
@@ -177,79 +289,54 @@
       $text       =   $coms->getText();
       $rating_id  =   $coms->getRatingId();
       $created_by =   $coms->getCreatedBy();
-    
     //define ids for html tags in the loop
-      $edit_icon_id = "edit_icon_".$id;
+      $edit_icon_id = "editIcon_".$id;
       $edit_area_id = "edit_area_".$id;
       $edit_comment_text_id = "comment_text_id_".$id;
       $form_name = "formEditComment_".$id;
       $edit_comment_textarea = "editCommentText_".$id;
       $edit_comment_input_hidden = "editCommentId_".$id;
       $edit_comment_submit = "editCommentSub_".$id;
+      $delete_icon_id ="deleteIcon_".$id;
+      $comment_like_id = $created_by."_commentLike_".$id;
+      $comment_unlike_id = $created_by."_commentUnlike_".$id;
         
+      $ratingManager = new RatingManager();
+      $rating_content = "";
+      if ($ratingManager->hasRatingByEntityLikeUser("com".$id, $created_by) ==1) {
+          $rating_content = "Unlike";
+      } else if ($ratingManager->hasRatingByEntityDislikeUser("com".$id, $created_by) == 1 || 
+                 $ratingManager->hasRatingByEntityLikeUser("com".$id, $created_by) == 0 || 
+                 $ratingManager->hasRatingByEntityDislikeUser("com".$id, $created_by) == 0){
+          $rating_content = "Like";
+      }
 ?>
     
     <div> 
-        <div>The comment is: <span id="<?php echo $edit_comment_text_id; ?>"><?php echo $text; ?></span> 
-        
+        <div>
+			<div>The comment is: </div><span id="<?php echo $edit_comment_text_id; ?>"><?php echo $text; ?></span>     
 <?php if ($user_logged_in && $created_by == $user_id) { ?>
-            <img src="../images/edit.png" alt="Edit Icon" style="width:16px;height:16px" id="<?php echo $edit_icon_id ?>" 
-                 class="<?php echo $edit_icon_id ?>" onmouseover="$(this).css({'cursor': 'pointer'});" 
-                 onclick = "$('#<?php echo $edit_area_id ?>').css({'display': 'block'});"/>
+            <img src="../images/edit.png" alt="Edit Icon" style="width:16px;height:16px" id="<?php echo $edit_icon_id; ?>" 
+                  onmouseover="$(this).css({'cursor': 'pointer'});" 
+                 onclick = "$('#<?php echo $edit_area_id; ?>').css({'display': 'block'});"/>
+            <img src="../images/delete.png" alt="Delete Icon" style="width:16px;height:16px" id="<?php echo $delete_icon_id; ?>" 
+                 class="deleteComment" onmouseover="$(this).css({'cursor': 'pointer'});" 
+                 />
+            <span id ="<?php echo $comment_like_id; ?>" name="<?php echo $comment_like_id; ?>" class="comment_like"
+                  style="font-family:Tahoma;font-size:12px;" onmouseover="$(this).css({'cursor': 'pointer'});"><?php echo $rating_content; ?></span>
+        </div>
 <?php } //end if 
-      //if ($user_logged_in && 
       if ($user_logged_in && $created_by == $user_id) {       
 ?>
-        </div>
+        
         <div id="<?php echo $edit_area_id ?>" class="<?php echo $edit_area_id ?>" style="display:none;">
-                <script>
-                    var sendData = function() { 
-                        //var form_id = "#"+"<?php echo $form_name; ?>";
-                        var textarea_id = "#"+"<?php echo $edit_comment_textarea; ?>";
-                        var input_hidden_id = "#"+"<?php echo $edit_comment_input_hidden; ?>";
-                        //var submit_id = "#"+"<?php echo $edit_comment_submit; ?>";
-                        
-                        //alert("textarea_id: "+textarea_id);
-                        //alert("input_hidden_id: "+input_hidden_id);
-                        //alert("edit comment text: "+$(textarea_id).val());
-                        //alert("edit comment id: "+$(input_hidden_id).val());
-                        
-                        var editCommentData = encodeURIComponent($.trim ($(textarea_id).val() ));
-                        var editCommentId = encodeURIComponent($(input_hidden_id).val());
-
-                        $.ajax({
-                            url: "edit_comment.php",
-                            type: "POST",
-                            cache: false,
-                            data: 
-                            {
-                                editComment : editCommentData,
-                                editCommentId: editCommentId
-                            },
-                            success:
-                              function(data, status) {
-                                //alert(data);
-                                if(data.indexOf("succeed")>0) {                                   
-                                   location.reload(true);
-                                } else if (data.indexOf("fail") >0) {
-                                  alert(data);
-                                }                                
-                              }, //end of function(data, status) and success function
-                            error:
-                              function() {
-                                alert("ajax error");  
-                              } 
-                            
-                         });//end $.ajax()*/
-                    };
-                </script>
             <form name="<?php echo $form_name; ?>" id="<?php echo $form_name; ?>" method="POST">
                 <textarea rows="2" cols="40" name="<?php echo $edit_comment_textarea; ?>" 
                                              id="<?php echo $edit_comment_textarea; ?>"><?php echo $text; ?></textarea><br/>
                 <input type="hidden" id="<?php echo $edit_comment_input_hidden; ?>" 
                                      name="<?php echo $edit_comment_input_hidden; ?>" 
                                      value ="<?php echo $id; ?>"/>
-                <button id="<?php echo $edit_comment_submit; ?>" name="<?php echo $edit_comment_submit; ?>" type="button" onclick="sendData();">Submit</button>
+                <button id="<?php echo $edit_comment_submit; ?>" name="<?php echo $edit_comment_submit; ?>" class="editComment" type="button" >Submit</button>
            </form> 
         </div>
         
