@@ -103,7 +103,10 @@ function dad_house_dad_0($no_original) { ?>
         <div id="dad_house">
               <div class="door"><?php echo $ary['language']; ?></div>
             <div id="dad_room">
-              <div id="dad_text"><?php echo $ary['text']; ?></div>
+              <div id="dad_text">
+                <a href="http://localhost/Tarboz/views2/Entry/index.php?id=<?php echo $ary['id']?>"><?php 
+              echo $ary['text']; 
+              ?></a></div>
               <div id="dad_profile_link">O</div>
           <div id="kids_num">18</div>
           <div id="add_kid">+</div>

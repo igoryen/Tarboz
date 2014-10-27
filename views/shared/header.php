@@ -165,9 +165,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         <!-- A section for resetting the forgot password -->
 
         <?php 
-
          //$_GET['security']="0vLalqY93y";
-        
           //If the security variable has something, then assign it otherwise keep the variable empty
           $reset=(isset($_GET['security']))?$_GET['security']:""; 
 

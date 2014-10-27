@@ -79,15 +79,15 @@ class EntryDataAccessor {
     /*
      * TODO: create the verbatim of $text using the Bing translator
      */
-    $verbatim = $entry->getEntryVerbatim();
+    //$verbatim = $entry->getEntryVerbatim();
 
     /*
      * TODO: transliterate the value of $text using ...
      */
     $translit = $entry->getEntryTranslit();
-    $authsid = $entry->getEntryAuthenStatusId();
-    $translOf = $entry->getEntryTranslOf();
-    $userId = $entry->getEntryUserId();
+    //$authsid = $entry->getEntryAuthenStatusId();
+    //$translOf = $entry->getEntryTranslOf();
+    //$userId = $entry->getEntryUserId();
     // $mediaSet = $entry->getMediaSet();
     // $commentId = $entry->;
     // $ratingId = $entry->getEntryRatingId();
@@ -99,22 +99,23 @@ class EntryDataAccessor {
     /*
      * Compose the MySQL link
      */
-    $query = "UPDATE ENTRY SET "
+    $query = "UPDATE tbl_entry SET "
             . "ent_entry_text = '$text',"
-            . "ent_entry_verbatim = '$verbatim',"
-            . "ent_entry_translit = '$authsid',"
-            . "ent_entry_authen_status_id = '$email',"
-            . "ent_entry_translation_of = '$translOf',"
-            . "ent_entry_creator_id = '$userId',"
+            //. "ent_entry_verbatim = '$verbatim',"
+            . "ent_entry_translit = '$translit',"
+            //. "ent_entry_authen_status_id = '$email',"
+            //. "ent_entry_translation_of = '$translOf',"
+            //. "ent_entry_creator_id = '$userId',"
             //  . "ent_entry_media_id = '$bla',"
             //  . "ent_entry_comment_id = '',"
             //  . "ent_entry_rating_id = '',"
             . "ent_entry_tags = '$tags',"
-            . "ent_entry_author_id = '$authorId',"
+            //. "ent_entry_author_id = '$authorId',"
             . "ent_entry_source_id = '$sourceId',"
             . "ent_entry_use = '$use',"
-            . "ent_entry_http_link = '$httpLink'"
-            . "WHERE ent_entry_id = ' $entryId'";
+            . "ent_entry_http_link = '$httpLink' "
+            . "WHERE ent_entry_id = $entryId";
+    echo "<br>eda::updateEntry() query:<br>" . $query . "<br>";
     /*
      * using: require_once DB_CONNECTION . 'DBHelper.php';
      */
@@ -130,9 +131,28 @@ class EntryDataAccessor {
    */
   public function getEntryById($entryId) {
 
-    $query = 'SELECT *
-              FROM tbl_entry
-              WHERE ent_entry_id = ' . $entryId . ';';
+    $query = 'SELECT 
+                e.ent_entry_id, 
+                l.lan_lang_name, 
+                e.ent_entry_text,
+                e.ent_entry_text,
+                e.ent_entry_verbatim,
+                e.ent_entry_translit,
+                e.ent_entry_authen_status_id,
+                e.ent_entry_translation_of,
+                e.ent_entry_creator_id,
+                e.ent_entry_media_id,
+                e.ent_entry_comment_id,
+                e.ent_entry_rating_id,
+                e.ent_entry_tags,
+                e.ent_entry_author_id,
+                e.ent_entry_source_id,
+                e.ent_entry_use,
+                e.ent_entry_http_link,
+                e.ent_entry_creation_date
+              FROM tbl_entry e, tbl_language l 
+              WHERE e.ent_entry_language_id = l.lan_language_id 
+              AND e.ent_entry_id = ' . $entryId . ';';
     // 52
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -332,23 +352,23 @@ class EntryDataAccessor {
     // 45
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
       // 41
-      $Entry->setEntryId($list['ent_entry_id']);
-      $Entry->setEntryLanguage(['ent_entry_language_id']);
-      $Entry->setEntryText($list['ent_entry_text']);
-      $Entry->setEntryVerbatim($list['ent_entry_verbatim']);
-      $Entry->setEntryTranslit($list['ent_entry_translit']);
-      $Entry->setEntryAuthenStatusId($list['ent_entry_authen_status_id']);
-      $Entry->setEntryTranslOf($list['ent_entry_translation_of']);
-      $Entry->setEntryUserId($list['ent_entry_creator_id']);
-      $Entry->setEntryMediaId($list['ent_entry_media_id']);
-      $Entry->setEntryCommentId($list['ent_entry_comment_id']);
-      $Entry->setEntryRatingId($list['ent_entry_rating_id']);
-      $Entry->setEntryTags($list['ent_entry_tags']);
-      $Entry->setEntryAuthorId($list['ent_entry_author_id']);
-      $Entry->setEntrySourceId($list['ent_entry_source_id']);
-      $Entry->setEntryUse($list['ent_entry_use']);
-      $Entry->setEntryHttpLink($list['ent_entry_http_link']);
-      $Entry->setEntryHttpLink($list['ent_entry_creation_date']);
+      $Entry->setEntryId(             $list['ent_entry_id']);
+      $Entry->setEntryLanguage(       $list['lan_lang_name']); //53
+      $Entry->setEntryText(           $list['ent_entry_text']);
+      $Entry->setEntryVerbatim(       $list['ent_entry_verbatim']);
+      $Entry->setEntryTranslit(       $list['ent_entry_translit']);
+      $Entry->setEntryAuthenStatusId( $list['ent_entry_authen_status_id']);
+      $Entry->setEntryTranslOf(       $list['ent_entry_translation_of']);
+      $Entry->setEntryUserId(         $list['ent_entry_creator_id']);
+      $Entry->setEntryMediaId(        $list['ent_entry_media_id']);
+      $Entry->setEntryCommentId(      $list['ent_entry_comment_id']);
+      $Entry->setEntryRatingId(       $list['ent_entry_rating_id']);
+      $Entry->setEntryTags(           $list['ent_entry_tags']);
+      $Entry->setEntryAuthorId(       $list['ent_entry_author_id']);
+      $Entry->setEntrySourceId(       $list['ent_entry_source_id']);
+      $Entry->setEntryUse(            $list['ent_entry_use']);
+      $Entry->setEntryHttpLink(       $list['ent_entry_http_link']);
+      $Entry->setEntryCreationDate(   $list['ent_entry_creation_date']);
     } // while
     return $Entry;
   }
