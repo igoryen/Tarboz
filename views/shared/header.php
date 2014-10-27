@@ -87,6 +87,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
               if(data==1 || data==2){
 
+
                 document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";
                 
                 document.getElementById("forgotpwd").innerHTML="";
@@ -165,6 +166,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
         <?php 
 
+         //$_GET['security']="0vLalqY93y";
+        
           //If the security variable has something, then assign it otherwise keep the variable empty
           $reset=(isset($_GET['security']))?$_GET['security']:""; 
 

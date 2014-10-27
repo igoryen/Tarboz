@@ -1,48 +1,78 @@
-
+<!DOCTYPE html>
 
 <html>
 <head>
 	<title> Registration Form</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="../../plug-in/jqueryui/jquery-ui.css">
+	<script src="../../plug-in/jqueryui/jquery.js"></script>
+	<script src="../../plug-in/jqueryui/jquery-ui.js"></script>
+	<script src="../../plug-in/autocomplete/jquery.js"></script>
+	<script src="../../plug-in/autocomplete/jquery.autocomplete.js"></script>
+	
+	<link rel="stylesheet" href="./style.css">
+
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 		<!-- for date picking purpose-->
-		<script>
+	<script>
 		$(function() {
-		$( "#dob" ).datepicker();
+			//$( "#dob" ).datepicker();
 		});
-		</script>
+	</script>
 
-		<script>
+	<script>
 
-			$(document).ready(function(){
+		$(document).ready(function(){
 
-				//Regex Patterns
-				var pass = /^[a-z0-9\.\-\)\(\_)]+$/i;
-				var uname = /^[a-z0-9\.\-]+$/i;
-				var mname = /^[a-z ]+$/i;
-				var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	
+		$("#city").autocomplete("../../user_test/form_search.php?q="+$("#city").val(), {
 
-				//When the Last Name texbox is changing this will be invoked
-				$("#fname").change(function(){
+        selectFirst: true
 
-					//comparing the above regex to the value in the texbox, if not from the box then send error
-		 			if(!mname.test($("#fname").val())){
+  		});
+
+		$("#city").change(function(){	
+
+  		$.post("../../user_test/province_by_city_name.php",
+			              {
+			               // userid: $("#userlogin").val(),
+			                city: $("#city").val(),
+			                province: $("#province").val(),
+			              },
+		            	function(data,status){
+
+		                      var mydata = data.split(",");
+
+		                      $("#province").val(mydata[0]); 
+		                      $("#country").val(mydata[1]);
+		    });
+  			});
+
+		//Regex Patterns
+		var pass = /^[a-z0-9\.\-\)\(\_)]+$/i;
+		var uname = /^[a-z0-9\.\-]+$/i;
+		var mname = /^[a-z ]+$/i;
+		var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+		//When the Last Name texbox is changing this will be invoked
+		$("#fname").change(function(){
+
+			//comparing the above regex to the value in the texbox, if not from the box then send error
+		 	if(!mname.test($("#fname").val())){
 		 				
-		 				//fill the textbox label with error
-	            	   document.getElementById("fname_error").innerHTML="<font color='red' size='2px' family='verdana'>Invalid FirstName</font>";
-	            	   $("#fname").css("border-color","rgba(255,0,0,.6)"); 
+		 		//fill the textbox label with error
+	            document.getElementById("fname_error").innerHTML="<font color='red' size='2px' family='verdana'>Invalid FirstName</font>";
+	            $("#fname").css("border-color","rgba(255,0,0,.6)"); 
 
-	            	   	//Disable submit button
-	            	   $('#submitbtn').attr('disabled','disabled'); 
+	            //Disable submit button
+	            $('#submitbtn').attr('disabled','disabled'); 
 
-	            	}
-	            	else{
-	            		$("#fname").css("border-color","rgba(0,255,100,.6)"); 
-	            		document.getElementById("fname_error").innerHTML="";
-	            	}	
+	            }
+	        else{
+	            $("#fname").css("border-color","rgba(0,255,100,.6)"); 
+	                document.getElementById("fname_error").innerHTML="";
+	            }	
 
                 });//end of fname onchange
 
@@ -79,7 +109,20 @@
 
 	            	   //disable the submit button
 	            	   $('#submitbtn').attr('disabled','disabled'); 
+
 	            	   } 
+	            	else if($("#userid").val().length<4){
+
+					   //fill the textbox label with error
+	            	   document.getElementById("userid_error").innerHTML="<font color='red' size='2px' family='verdana'>Minimum user length is 4</font>";
+
+	            	   $("#userid").css("border-color","rgba(255,0,0,.6"); 
+
+	            	   //disable the submit button
+	            	   $('#submitbtn').attr('disabled','disabled'); 
+
+					   }
+
 					else{
 						$("#userid").css("border-color","rgba(0,0,0,.3)"); 
 
@@ -111,9 +154,9 @@
 	            	   //disable the submit button
 	            	   $('#submitbtn').attr('disabled','disabled'); 
 
-	            	   } 
+		            	   } 
 					else{
-						$("#userid").css("border-color","rgba(0,0,0,.3)"); 
+ 
 		            	$.post("../../user_test/user_email_test.php",
 			              {
 			               // userid: $("#userlogin").val(),
@@ -121,9 +164,11 @@
 			              },
 		            	function(data,status){
 
-		                      document.getElementById("email_error").innerHTML=data; 
+		                      document.getElementById("email_error").innerHTML=data;
+		                      $("#userid").css("border-color","rgba(0,0,0,.3)"); 
 
 		                });
+
 		            
 		         		}
 		        });//end of change
@@ -146,7 +191,7 @@
 
 					}else{
 
-						$("#userid").css("border-color","rgba(0,0,0,.3)");
+						$("#pwd1, #pwd2").css("border-color","rgba(0,0,0,.3)");
 						document.getElementById("pwd_error").innerHTML="";	
 
 	                    //comparing the above regex to the value in the texbox and checking if the lenght is atleast 10                            		
@@ -167,7 +212,7 @@
 		         	}
 		        });//end of change
 			});//end of document ready		
-		</script>
+	</script>
 </head>
 <body>
 	<div id="bg">
@@ -192,7 +237,10 @@
 		      <input type="password" placeholder="Password" class="textbox" id="pwd1"/>
 		      <input type="password" placeholder="Retype Password" class="textbox" id="pwd2"/>
 		      <input type="checkbox" placeholder="Date of Birth" class="textbox" id="dob"/>
-		      <input type="text" placeholder="Location" class="textbox" id="location" />
+		      <input type="text" placeholder="City" class="textbox" id="city" />
+		      <input type="text" placeholder="Province" class="textbox" id="province" />
+		      <input type="text" placeholder="Country" class="textbox" id="country" />
+		      <br/>
 		       <div class="checkbox">
 		       		<input type="checkbox" class="cb_data"> <label class="cb_data">English</label><input type="checkbox" class="cb_data"> <label class="cb_data">Persian</label>
 		       		<input type="checkbox" class="cb_data"> <label class="cb_data">Russian</label><input type="checkbox" class="cb_data"> <label class="cb_data">Mandarin</label>

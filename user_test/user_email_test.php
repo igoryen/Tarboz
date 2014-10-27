@@ -9,32 +9,41 @@
 
 	       $useremail = isset($_POST['useremail']) ? $_POST['useremail'] : "";
 
-			//$useremail="mary_white1234@gmail.com";
+  		   //$useremail="mary_white1234@gmail.com";
+	       //$userid="lily";
 
-	       if($userid!=""){
+	    if($userid!=""){
 	      
 	    	$userManager = new UserManager();
 
 			$logged = $userManager->getUserByLoginId($userid);
 
-			if($logged->getFirstName()==""){
+			if($logged->getFirstName()==null){
+
 				echo "<font color='green' size='2px'>User Name Available!</font>";
+
 			}
+
 			else{
+
 				echo "<font color='red' size='2px'>User Name Not Available!</font>";
 			}
 
-		  }
+		}
+
 		else{
 
 			$userManager = new UserManager();
 
 			$logged = $userManager->getUserByEmail($useremail);
 
+
 			if($logged->getFirstName()==""){
+
 				echo "<font color='green' size='2px'></font>";
 
 			}
+
 			else{
 				echo "<font color='red' size='2px'>Email Already registered! Please use the forget Password link<br> to retrieve your UserId/Password!</font>";
 			}
