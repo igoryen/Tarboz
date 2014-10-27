@@ -67,6 +67,14 @@ class LocationManager {
     return $result;
   }
 
+  public function getProvinceByCityName($cityname) {
+    $LocationDataAccessor = new LocationDataAccessor();
+
+    $result = $LocationDataAccessor->getProvinceByCityName($cityname);
+
+    return $result;
+  }
+
   public function getProvinceById($provid) {
     $LocationDataAccessor = new LocationDataAccessor();
     $result = $LocationDataAccessor->getProvinceById($provid);
@@ -96,6 +104,33 @@ class LocationManager {
     $result = $LocationDataAccessor->getCityById($cityid);
     return $result;
   } 
+
+   //Filter Cities based on the search keyword 
+  public function searchCity($cityname) {
+      $LocationDataAccessor = new LocationDataAccessor();
+
+      $result = $LocationDataAccessor->searchCity($cityname);
+
+    return $result;
+  } 
+    //Filter Provinces based on the search keyword
+   public function searchProvince($provincename) {
+      $LocationDataAccessor = new LocationDataAccessor();
+
+      $result = $LocationDataAccessor->searchProvince($provincename);
+
+    return $result;
+  } 
+
+    //Filter Countries based on the search keyword
+   public function searchCountry($countryname) {
+      $LocationDataAccessor = new LocationDataAccessor();
+
+      $result = $LocationDataAccessor->searchCountry($countryname);
+
+    return $result;
+  } 
+
 
   public function getCityByName($cityname) {
     $LocationDataAccessor = new LocationDataAccessor();

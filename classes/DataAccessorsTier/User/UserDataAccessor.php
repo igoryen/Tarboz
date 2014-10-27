@@ -109,13 +109,15 @@ class UserDataAccessor {
 
   //for search
   public function getUserByLoginId($loginid) {
-    $query = "SELECT * FROM " . USER . " WHERE usr_email = " . " '".$loginid."' ";
+
+    $query = "SELECT * FROM " . USER . " WHERE usr_login = " . " '".$loginid."' ";
 
     $dbHelper = new DBHelper();
+
     $result = $dbHelper->executeSelect($query);
+
     $user = $this->getUser($result);
 
-    //echo "testing 2:".$user->getFirstName();
     return $user;
   }
 
@@ -138,7 +140,10 @@ class UserDataAccessor {
       $User->setUserType($list['usr_user_type_id']);
       $User->setUserLanguage($list['usr_language']);
       $User->setEmailSub($list['usr_email_subscribed']);
+
     } // while
+
+
     return $User;
   }
 
