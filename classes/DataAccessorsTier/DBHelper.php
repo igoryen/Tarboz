@@ -42,13 +42,10 @@ class DBHelper {
    * @return mysql_result $result
    */
   public function executeSelect($sql) {
-
+    //3
     $this->connectToDB();
-    
-    $result = mysqli_query($this->connection, $sql); // 1
-    
+    $result = mysqli_query($this->connection, $sql); // 1    
     $this->closeConnection();
-
     return $result; // 1
   }
 
@@ -58,6 +55,7 @@ class DBHelper {
       $result = mysqli_query($this->connection, $sql);
     }
     $this->closeConnection();
+    // 4
     return $result;
   }
 

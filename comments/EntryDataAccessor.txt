@@ -50,3 +50,4 @@
 50. echo "<hr>eda::getEntryBrief() entry['lan_lang_name'] == " . $Entry['lan_lang_name'] . "<br>";
 51. echo "<br>eda::query_insert:<br>"; echo $query_insert;
 52. echo "<br>eda::getEntryById() query:<br>" . $query;
+53. NB: the index ('lan_lang_name') is different because the query to get entry is build so that to retrieve the language_name by language_id

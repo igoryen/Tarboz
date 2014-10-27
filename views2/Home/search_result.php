@@ -80,6 +80,7 @@ if (null == $dad->getEntryId()) { // 5
         // 15,16,17,18,19
         open_kids_house($current_lang);
         // 20,21,22
+        $ary['id'] = $dad->getEntryId();
         $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
         make_kid_room($kid_room_array);        
         //23
@@ -97,6 +98,7 @@ if (null == $dad->getEntryId()) { // 5
           // 37, 38
           open_kids_house($current_lang);
           // 20,21,41
+          $ary['id'] = $dad->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
           // 42,43
@@ -109,6 +111,7 @@ if (null == $dad->getEntryId()) { // 5
           $current_lang = $kid->getEntryLanguage();
           $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();          
           //48,20,21,51
+          $ary['id'] = $dad->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(),0 ,55);
           make_kid_room($kid_room_array);          
           // 42,53
@@ -129,6 +132,7 @@ if (null == $dad->getEntryId()) { // 5
           // 37,66
           open_kids_house($current_lang);
           // 20,21,69
+          $ary['id'] = $dad->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
           // 70, 23
@@ -137,6 +141,7 @@ if (null == $dad->getEntryId()) { // 5
         } // 32        
         else{ // 47
           // 20,21,69
+          $ary['id'] = $dad->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
           // 70,23
@@ -152,12 +157,14 @@ else { // 27
   // 71,72
   if ($num_of_kids == 1) {
     // 73
+    $ary['id'] = $dad->getEntryId();
     $ary['language'] = $dad->getEntryLanguage();
     $ary['text'] = substr($dad->getEntryText(), 0, 55);
     dad_house_dad_1($ary);
   }
   elseif ($num_of_kids > 1) { //74
-    // 75    
+    // 75
+    $ary['id'] = $dad->getEntryId();
     $ary['language'] = $dad->getEntryLanguage();
     $ary['text'] = substr($dad->getEntryText(), 0, 55);
     dad_house_dad_1($ary);
@@ -172,6 +179,7 @@ else { // 27
         //15,16,17,18,19
         open_kids_house($current_lang);        
         // 20, 21,22
+        $ary['id'] = $dad->getEntryId();
         $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
         make_kid_room($kid_room_array);
         // 23
@@ -189,6 +197,7 @@ else { // 27
           // 37,38
           open_kids_house($current_lang);          
           // 20,21,41
+          $ary['id'] = $dad->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);          
           // 42,43
@@ -201,6 +210,7 @@ else { // 27
           $current_lang = $kid->getEntryLanguageId();
           $prev_lang = $array_of_kids[$i-1]->getEntryLanguageId();
           //48,20,21,51
+          $ary['id'] = $dad->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);          
           // 42,53
@@ -221,6 +231,7 @@ else { // 27
           // 37,66
           open_kids_house($current_lang);          
           // 20,21,69
+          $ary['id'] = $dad->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
           // 70,23
@@ -229,6 +240,7 @@ else { // 27
         } // 32
         else{ // 47
           // 20,21,69
+          $ary['id'] = $dad->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
           make_kid_room($kid_room_array);
           // 70,23
