@@ -190,6 +190,18 @@ public function getProvinceByName($provincename) {
     return $loc;
   }
 
+public function getProvinceByCityName($Cityname) {
+
+    //Selecting country by City Name
+    $query = "select * from tbl_province where pro_province_id in (select cty_province_id from tbl_city where upper(cty_city_name)  = " . " '".strtoupper($Cityname)."' )";
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $loc = $this->getProvince($result);
+
+    return $loc;
+  }
+
 public function getProvincesByCountryId($countryid) {
 
 
@@ -267,6 +279,46 @@ public function getProvincesByCountryId($countryid) {
 
     return $loc;
   }
+
+  //To Search for Cities
+  public function searchCity($cityname) {
+
+    //Selecting Cities by ProvinceId
+    $query = "select * from tbl_city where upper(cty_city_name) like " . " '".strtoupper('%'.$cityname.'%')."' ";
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $city = $this->getCityList($result);
+
+    return $city;
+  }
+
+    //To filter provinces
+   public function searchProvince($provincename) {
+
+    //Selecting Cities by ProvinceId
+    $query = "select * from tbl_province where upper(pro_province_name) like " . " '".strtoupper('%'.$provincename.'%')."' ";
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $province = $this->getProvinceList($result);
+
+    return $province;
+  }
+
+    //To filter provinces
+  public function searchCountry($countryname) {
+
+    //Selecting Cities by ProvinceId
+    $query = "select * from tbl_country where upper(con_country_name) like " . " '".strtoupper('%'.$countryname.'%')."' ";
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $province = $this->getCountryList($result);
+
+    return $province;
+  }
+
 
 
   //Add New Country
@@ -355,9 +407,11 @@ public function getProvincesByCountryId($countryid) {
     $count = 0;
     
     //$Country="";
+$Country = new Location();
+
     while ($list = mysqli_fetch_assoc($selectResult)){
 
-      $Country = new Location();
+      //$Country = new Location();
       
 
       $Country->setCountryId($list['con_country_id']);
@@ -365,9 +419,9 @@ public function getProvincesByCountryId($countryid) {
       $Country->setCountryCode($list['con_country_code']);
 
       
-    }
+    //}
 
-    //} // while
+    } // while
 
     return $Country;
     
