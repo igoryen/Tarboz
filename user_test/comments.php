@@ -60,7 +60,7 @@
             event.preventDefault();
         });
           
-        $("button").click( function(event) {
+        $("button").click( function(event) { //edit comment
             var this_id = $(this).attr('id');
             var edit_id_num = this_id.substring(this_id.indexOf("_")+1);
             var textarea_id = "#editCommentText_"+edit_id_num;
@@ -86,7 +86,7 @@
                 },
                 success:
                   function(data, status) {
-                    //alert(data);
+                    alert(data);
                     if(data.indexOf("succeed")>0) {                                   
                        location.reload(true);
                     } else if (data.indexOf("fail") >0) {

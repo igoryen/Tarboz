@@ -3,6 +3,8 @@
   require_once BUSINESS_DIR_COMMENT . 'CommentManager.php';
   require_once BUSINESS_DIR_USER. 'User.php';
   require_once BUSINESS_DIR_COMMENT . 'Comment.php';
+  require_once BUSINESS_DIR_BADWORD . 'BadwordManager.php';  
+  require_once BUSINESS_DIR_BADWORD . 'Badword.php';  
 
   session_start();
   $user_logged_in = true;
@@ -24,8 +26,18 @@
 
         $comment_text = isset($_POST['newComment']) ? $_POST['newComment'] : "";
         if ($comment_text != "") {
-          $new_comment = new Comment();
-          $new_comment->setText($comment_text); 
+          
+          //handle badword
+          $bw_handler = new BadwordManager();
+          $bw_list = $bw_handler->getBadWordList();
+          //print_r($bw_list);
+          $replacement = $bw_handler->getReplacementList();
+          //print_r($replacement);
+          $filtered_comment_text = preg_replace($bw_list, $replacement, $comment_text);
+          //echo "new comment filtered comment: ".$filtered_comment_text;
+        
+          $new_comment = new Comment(); 
+          $new_comment->setText($filtered_comment_text); 
           $new_comment->setCreatedBy($user->getUserId());
           $new_comment->setRatingId('');
           //$com_entry_id = $entryId;
