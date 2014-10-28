@@ -238,14 +238,17 @@ class EntryDataAccessor {
     
     //$fatherGottenByVerbatim = new Entry();
     // 21
-    $query = 'SELECT e.ent_entry_id, l.lan_lang_name, e.ent_entry_text
+    $query = 'SELECT 
+                e.ent_entry_id, 
+                l.lan_lang_name, 
+                e.ent_entry_text,
+                e.ent_entry_creator_id
               FROM tbl_entry e, tbl_language l
               WHERE e.ent_entry_language_id = l.lan_language_id
               AND MATCH(e.ent_entry_verbatim)
               AGAINST("'.$verbatim .'" IN BOOLEAN MODE )
               AND e.ent_entry_authen_status_id = 1';
     
-    //25
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query); // 20
     // 26,27
@@ -255,7 +258,11 @@ class EntryDataAccessor {
   }
 
   public function getListOfKidBriefByVerbatim($verbatim) {
-    $query = 'SELECT e.ent_entry_id, l.lan_lang_name, e.ent_entry_text,
+    $query = 'SELECT 
+                e.ent_entry_id, 
+                l.lan_lang_name, 
+                e.ent_entry_text,
+                e.ent_entry_creator_id,
                 MATCH(e.ent_entry_verbatim) 
                 AGAINST("'.$verbatim.'" IN NATURAL LANGUAGE MODE)
                 AS relevance
@@ -293,7 +300,7 @@ class EntryDataAccessor {
 //      $Entries[$count]->setEntryTranslit($list['ent_entry_translit']);
 //      $Entries[$count]->setEntryAuthenStatusId($list['ent_entry_authen_status_id']);
 //      $Entries[$count]->setEntryTranslOf($list['ent_entry_translation_of']);
-//      $Entries[$count]->setEntryUserId($list['ent_entry_creator_id']);
+      $Entries[$count]->setEntryUserId($list['ent_entry_creator_id']);
 //      $Entries[$count]->setEntryMediaId($list['ent_entry_media_id']);
 //      $Entries[$count]->setEntryCommentId($list['ent_entry_comment_id']);
 //      $Entries[$count]->setEntryRatingId($list['ent_entry_rating_id']);
@@ -327,7 +334,7 @@ class EntryDataAccessor {
       //$Entry->setEntryTranslit($ary['ent_entry_translit']);
       //$Entry->setEntryAuthenStatusId($ary[ent_entry_authen_status_id]);
       //$Entry->setEntryTranslOf($ary['ent_entry_translation_of']);
-      //$Entry->setEntryUserId($ary['ent_entry_creator_id']);
+      $Entry->setEntryUserId($ary['ent_entry_creator_id']);
       //$Entry->setEntryMediaId($ary['ent_entry_media_id']);
       //$Entry->setEntryCommentId($ary['ent_entry_comment_id']);
       //$Entry->setEntryRatingId($ary['ent_entry_rating_id']);

@@ -34,7 +34,11 @@ function make_kid_room($kid_room_array){?>
     <div class="kid_profile_link">T</div>
     <div class="kid_dad_link">O</div>
     <div class="kid_votes">+12 -3</div>
-    <div class="kid_added_by">user123</div>
+    <div class="kid_added_by">
+      <a href="userview.php?id=<?php echo $kid_room_array['user']; ?>"><?php
+        echo $kid_room_array['user'];
+      ?></a>
+    </div>
     <div class="is_mom">A</div>
   </div>
  <?php
@@ -110,6 +114,11 @@ function dad_house_dad_0($no_original) { ?>
               <div id="dad_profile_link">O</div>
           <div id="kids_num">18</div>
           <div id="add_kid">+</div>
+          <div class="kid_added_by">
+            <a href="userview.php?id=<?php echo $ary['user']; ?>">
+              <?php echo $ary['user']; ?>
+            </a>
+          </div>
         </div>
       </div><!-- dad_house -->
 
