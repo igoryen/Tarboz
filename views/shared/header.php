@@ -87,6 +87,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
               if(data==1 || data==2){
 
+
                 document.getElementById("ftest").innerHTML="<?php echo LOGIN_SUCCESS; ?>";
                 
                 document.getElementById("forgotpwd").innerHTML="";
