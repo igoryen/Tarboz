@@ -13,3 +13,6 @@
   define('COUNTRY',   'tbl_country');
   define('PROVINCE',  'tbl_province');
   define('CITY',      'tbl_city');
+  define('BADWORD',      'tbl_bad_words');
+
+?>

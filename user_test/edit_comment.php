@@ -3,6 +3,8 @@
   require_once BUSINESS_DIR_COMMENT . 'CommentManager.php';
   require_once BUSINESS_DIR_USER. 'User.php';
   require_once BUSINESS_DIR_COMMENT . 'Comment.php';
+  require_once BUSINESS_DIR_BADWORD . 'BadwordManager.php';  
+  require_once BUSINESS_DIR_BADWORD . 'Badword.php'; 
 
   session_start();
   $user_logged_in = true;
@@ -37,7 +39,16 @@
           //print "edited comment user: ". $edited_comment->getCreatedBy()."<br/>";
           //print "edited comment entry id: ". $edited_comment->getEntryId()."<br/>";
             
-          $edited_comment->setText($comment_text); 
+          //--------handle badword--------------
+          $bw_handler = new BadwordManager();
+          $bw_list = $bw_handler->getBadWordList();
+          //print_r($bw_list);
+          $replacement = $bw_handler->getReplacementList();
+          //print_r($replacement);
+          $filtered_comment_text = preg_replace($bw_list, $replacement, $comment_text);
+          //echo "edit comment filtered comment: ".$filtered_comment_text;
+            
+          $edited_comment->setText($filtered_comment_text); 
           
           $updated_comment = $commentManager->updateComment($edited_comment);
             

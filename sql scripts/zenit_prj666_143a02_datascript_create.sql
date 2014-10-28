@@ -216,3 +216,11 @@ CREATE TABLE `prj666`.`tbl_source` (
  `sou_source_form` VARCHAR(255) NULL,
  `sou_source_time` VARCHAR(255) NULL
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE `prj666`.`tbl_bad_words` (
+  `bw_word` VARCHAR(100) NULL,
+  `bw_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+#--Load bad word list
+LOAD DATA LOCAL INFILE '/BadWordList.txt' INTO TABLE tbl_bad_words 
+LINES TERMINATED BY '\n';
