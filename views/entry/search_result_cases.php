@@ -30,7 +30,10 @@ function close_kids_house(){?>
 // to draw the section for translation X of group of langugae A
 function make_kid_room($kid_room_array){?>
   <div class="kid_room">
-    <div class="kid_text"><?php echo $kid_room_array['text'];   ?></div>
+    <div class="kid_text">
+      <a href="entryview.php?id=<?php echo $kid_room_array['id'];?>">
+      <?php echo $kid_room_array['text'];   ?></a>
+    </div>
     <div class="kid_profile_link">T</div>
     <div class="kid_dad_link">O</div>
     <div class="kid_votes">+12 -3</div>

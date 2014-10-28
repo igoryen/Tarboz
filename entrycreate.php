@@ -45,7 +45,7 @@
         $entry->setEntryCommentId(  '2'); //$_POST['comment_id'];
         $entry->setEntryRatingId(   '1'); //($_POST['rating_id']);
         $entry->setEntryTags(       $_POST['tags']);
-        $entry->setEntryAuthorId(   $_POST['author']);
+        $entry->setEntryAuthorId('1');   //$_POST['author']);
         $entry->setEntrySourceId(   $_POST['source']); 
         $entry->setEntryUse(        $_POST['use']);
         $entry->setEntryHttpLink(   $_POST['link']);
@@ -54,7 +54,7 @@
         // 40
         
         $resultOfEntryUpdate = $em->updateEntry($entry); // 33
-        header("Location: index.php?id=" . $_GET['id']); // 38
+        header("Location:viewentry.php?id=" . $_GET['id']); // 38
         //$query = "UPDATE ..."; // 15
       }
       else{ // 16
