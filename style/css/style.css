@@ -76,7 +76,7 @@ body{
 
 div > nav#navigation > a {
   color: #000000;
-  font-size: 19px;
+  font-size: 15px;
   padding: 10px 20px;
   text-decoration: none;
 }
@@ -98,7 +98,7 @@ display: block;
 /* margin-right: 10%; */
 /* margin-top: 1%; */
 /* margin-top: 18px; */
-padding: 130px;
+padding: 10px;
 /* position: relative; */
 text-align: center;
 /* width: 80%; */

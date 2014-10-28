@@ -29,7 +29,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   <script type="text/javascript" src="plug-in/virtual_keyboard/keyboard.js" charset="UTF-8"></script>
   <!--   End    -->
   <link rel="stylesheet" type="text/css" href="style/css/style.css"/>
-  <link rel="shortcut icon" href="../../images/watermelon8.png"/>
+  <link rel="shortcut icon" href="images/watermelon8.png"/>
    
    <!-- Extra libraries -->
    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -121,15 +121,21 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
     <div id="header">
 
         <div class="header_row">
-          <div class="table-cell" style="text-align: left;"><a href=""><img src="images/logo.png" height="50"></a></div>
+          <div class="table-cell" style="text-align: left;">
+            <a href=""><img src="images/logo.png" height="50"></a>
+          </div>
           <nav id="navigation">
-              <a href="/Tarboz/Views/Home/Index.php">Home</a> 
-              <a href="/Tarboz/views2/Home/search_result.php">Result</a>
-              <a href="/Tarboz/views2/Entry/Index.php">Entry Index</a>
-              <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>
-              <a href="/Tarboz/Views/User/Index.php">User Index</a>     
+              <a href="/Tarboz/index.php">Home</a> 
+              <a href="/Tarboz/searchresult.php">[result]</a>
+              <a href="/Tarboz/entryview.php">[entry view]</a>
+              <a href="/Tarboz/entrycreate.php">Create an Entry</a>
+              <a href="/Tarboz/userviewhtml.php">[user view]</a>
+              <a href="/Tarboz/userview.php">[user view 2]</a>
           </nav>
-          <div class="table-cell" style="text-align: right;"><a href="#" id="call_it" class="login_button">Login</a> </div><div id="user_name"></div>
+          <div class="table-cell" style="text-align: right;">
+            <a href="#" id="call_it" class="login_button">Login</a> 
+          </div>
+          <div id="user_name"></div>
 
           <div style="width:100px;" title="Login Window" id="login">
              <!--start of the login form div-->
