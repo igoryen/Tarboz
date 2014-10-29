@@ -4,7 +4,8 @@ function form_to_edit_entry($entry){
   ?>
   <!-- 1 -->
   <form action="" method="post">
-    
+  <!--<form action="entryview.php" method="post">-->
+  
     <?php    
     //if($_GET['id']){ // 2
       //$em = new EntryManager(); // 3
@@ -33,7 +34,10 @@ Entry/form_to_<mark>edit</mark>_entry.php
         </div>
         
         <div class="entry_create_record_value">
-          <?php echo $entry->getEntryId(); ?>
+          <!--<?php //echo $entry->getEntryId(); ?>-->
+          <input name="id" 
+                 type="text" 
+                 value="<?php echo $entry->getEntryId(); ?>"><!--Lily 141029-->
         </div>
       </div>
       

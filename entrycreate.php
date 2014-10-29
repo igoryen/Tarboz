@@ -4,7 +4,6 @@
 //if(isset($_SESSION['user'])){ // 1  
 
   require("header.php"); 
-  //include "../../config.php";
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   //include_once "lib.php";  // 25
   include_once 'views/entry/form_to_edit_entry.php';
@@ -54,8 +53,11 @@
         // 40
         
         $resultOfEntryUpdate = $em->updateEntry($entry); // 33
-        header("Location:viewentry.php?id=" . $_GET['id']); // 38
-        //$query = "UPDATE ..."; // 15
+        echo "<script type='text/javascript'>
+              window.onload = function () { 
+                top.location.href = 'entryview.php?id={$_GET['id']}'; 
+              };
+             </script>";
       }
       else{ // 16
         // 11
@@ -92,7 +94,7 @@
     } // 6
   }// 4
   else { // 17
-    if($_GET['id']){ // 34
+    if(isset($_GET['id'])){ // 34
       echo "the id of the entry you want to edit is " . $_GET['id'];
       $em = new EntryManager(); // 12
       $entry = $em->getEntryById($_GET['id']); // 36

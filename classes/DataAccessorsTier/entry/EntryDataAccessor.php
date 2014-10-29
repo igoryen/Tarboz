@@ -115,7 +115,7 @@ class EntryDataAccessor {
             . "ent_entry_use = '$use',"
             . "ent_entry_http_link = '$httpLink' "
             . "WHERE ent_entry_id = $entryId";
-    echo "<br>eda::updateEntry() query:<br>" . $query . "<br>";
+    //echo "<br>eda::updateEntry() query:<br>" . $query . "<br>";
     /*
      * using: require_once DB_CONNECTION . 'DBHelper.php';
      */
