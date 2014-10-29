@@ -11,7 +11,7 @@ function form_to_create_entry(){
     //}// 2
 
     ?>
-    Entry/form_to_<mark>create</mark>_entry.php
+    views/entry/form_to_<mark>create</mark>_entry.php
     <div id="entry_create_form">
       
       <div class="entry_create_row">

@@ -1,12 +1,19 @@
   <?php require("header.php");
   
-  //include "config.php";
-  //include "lib.php";
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
 
-$entryId = $_GET['id'];
-//$entryId = 26;
+  if(!isset($_GET['id']) && !isset($_POST['id'])){
+    echo "neither (GET['id']) nor (POST['id'])";
+  }
+  if(isset($_GET['id'])){
+    echo "we have GET[id], it is " . $_GET['id'] . "<br>";
+    $entryId = $_GET['id'];
+  }
+  elseif(isset($_POST['id'])){
+    echo "we have POST[id], it is " . $_POST['id'] . "<br>";
+    $entryId = $_POST['id'];
+  }
 
 $em = new EntryManager();
 $entry = $em->getEntryById($entryId); // 1
