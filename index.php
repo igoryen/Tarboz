@@ -7,7 +7,8 @@
 		<div id="index_table">
 
 			<div id="LeftCol">
-				<object id="obj" type="text/html" data="/Tarboz/1.htm">
+				<object id="obj" type="text/html" 
+                data="views/entry/search_phrase_examples.html">
 				</object>
 			</div><!--LeftCol-->
 
