@@ -32,10 +32,10 @@
 -->
 <div id="wrapper">
 <div id="search">
-  <form>
+  <form action="searchresult.php" method="get"><!--2-->
     <div>
       <div>
-        <input type="text" name="search" class="keyboardInput">
+        <input type="text" name="searchphrase" class="keyboardInput"><!--1-->
         <p style="font-size:20px; ">
         <select name="src_lang">
           <option>Source Language</option>

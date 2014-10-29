@@ -114,7 +114,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   </script>
 
   <title>WWG</title>
-</title>
+
 <body>
   <div id="wrapper">
 
