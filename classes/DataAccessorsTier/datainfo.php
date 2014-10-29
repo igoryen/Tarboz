@@ -7,7 +7,7 @@
   define('COMMENT',         'tbl_comment');
   define('RATING',          'tbl_rating');
   define('REPORT',          'tbl_report');
-  define('SBUSCRIPTION',    'tbl_subscription');
+  define('SUBSCRIPTION',    'tbl_subscription');
   define('PASSWORD_RESET',  'tbl_password_reset');
   define('USER_TYPE',  'tbl_user_type');
   define('COUNTRY',   'tbl_country');
