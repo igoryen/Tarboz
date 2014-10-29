@@ -4,6 +4,25 @@ require_once DATA_ACCESSOR_DIR_SUBSCRIPTION . 'SubscriptionDataAccessor.php';
 
 class SubscriptionManager {
 
+  
+  public function subscribe($email) {
+
+    $subscriptionDataAccessor = new SubscriptionDataAccessor();
+
+    $result = $subscriptionDataAccessor->subscribe($email);
+  
+    return $result;
+  }
+
+  public function unsubscribe($email) {
+
+    $subscriptionDataAccessor = new SubscriptionDataAccessor();
+
+    $result = $subscriptionDataAccessor->unsubscribe($email);
+  
+    return $result;
+  }
+
   public function addSubscription($subscription) {
     $subscriptionDataAccessor = new SubscriptionDataAccessor();
     $last_inserted_id = $subscriptionDataAccessor->addSubscription($subscription);

@@ -179,7 +179,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
           $m_reg="/^[a-zA-Z0-9\.\@\(\)]+$/";
 
           //matchin the pattern and checking if the variable is also not empty
-          if(isset($reset) && preg_match($m_reg,$reset)){
+          if(($reset!="") && preg_match($m_reg,$reset)){
+            echo $reset;
 
             $userLoginManager = new UserLoginManager();
 
