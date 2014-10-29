@@ -36,11 +36,11 @@
 
   		$.post("../../user_test/province_by_city_name.php",
 			              {
-			               // userid: $("#userlogin").val(),
 			                city: $("#city").val(),
-			                province: $("#province").val(),
+			                
 			              },
-		            	function(data,status){
+		            	function(data,status){	
+		            		alert(data);
 
 		                      var mydata = data.split(",");
 
