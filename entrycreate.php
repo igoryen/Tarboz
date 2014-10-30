@@ -74,7 +74,7 @@
         $entry->setEntryTranslit($_POST['translit']);
         $entry->setEntryAuthenStatusId($_POST['authen']);
         $entry->setEntryTranslOf(NULL); // $_POST['transl_of']);
-        $entry->setEntryUserId('3'); //$_POST['creator']);
+        $entry->setEntryUserId($_POST['creator']);
         $entry->setEntryMediaId('1');//($_POST['media_id']);
         $entry->setEntryCommentId('2'); //$_POST['comment_id'];
         $entry->setEntryRatingId('1'); //($_POST['rating_id']);
