@@ -9,9 +9,13 @@ if (!defined('ACCOUNT_KEY')) {
 if (!defined('CACHE_DIRECTORY')) {
     define('CACHE_DIRECTORY', '/tarboz/translate/cache');
 }
+// if (!defined('LANG_CACHE_FILE')) {
+//     define('LANG_CACHE_FILE', 'lang.cache');
+// }
 if (!defined('LANG_CACHE_FILE')) {
-    define('LANG_CACHE_FILE', 'lang.cache');
+    define('LANG_CACHE_FILE', 'en.cache');
 }
+
 if (!defined('ENABLE_CACHE')) {
     define('ENABLE_CACHE', true);
 }

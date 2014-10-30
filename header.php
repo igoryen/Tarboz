@@ -34,6 +34,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
    <!-- Extra libraries -->
    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+   
+   <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+   <script src="plug-in/translate/js/jquery.ajaxLoader.js" type="text/javascript"></script>
+   <script src="plug-in/translate/js/json-jquery.js" type="text/javascript"></script> 
+   
    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
    <script>    
@@ -110,10 +115,42 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
           });//end of the login button onlick event
   
       });
-
+      
   </script>
+  
+  <!-- for translator -->
+  <style>
+div.jquery-ajax-loader {
+	background: #FFFFFF url(img/ajax-loader.gif) no-repeat 50% 50%;
+	opacity: .6;
+	width:250px !important;
+}
 
-  <title>WWG</title>
+div.showdata{
+    width:250px;
+}
+.bgblack{
+    background: white
+}
+.bgwhite {
+    background: #FFFFFF 
+}
+.black {
+    color:black;
+}
+.pl10{
+    padding-left:10px;
+}
+.width500 {
+    width:500px;
+}
+.bdr {
+ border:1px solid black;
+}
+</style>
+
+  <title>Tarboz</title>
+</head>
 
 <body>
   <div id="wrapper">

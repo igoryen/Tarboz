@@ -1,49 +1,45 @@
-<!-- 
-<html>
-<head>
-  <meta charset="UTF-8">
-   /* for the virtual keyboard */
-  <script type="text/javascript" src="/Tarboz/packages/virtual_keyboard/keyboard.js" charset="UTF-8"></script>
-  <link rel="stylesheet" type="text/css" href="/Tarboz/packages/virtual_keyboard/keyboard.css">
+<?php
+// for translator
+require_once('plug-in/translate/config.inc.php');
+require_once('plug-in/translate/class/ServicesJSON.class.php');
+require_once('plug-in/translate/class/MicrosoftTranslator.class.php');
 
-  <link rel="stylesheet" type="text/css" href="/Tarboz/Content/style.css"  />
-  <link rel="shortcut icon" href="/Tarboz/Images/watermelon8.png"/>
-  <title>WWG</title>
-</title>
-<body>
+$translator = new MicrosoftTranslator(ACCOUNT_KEY);
+$selectbox = array('id'=> 'txtLang','name'=>'txtLang');
+$translator->getLanguagesSelectBox($selectbox);
 
-    <div id="header">
-
-      <div class="header_row">
-        <div id="logo"><img src="/Tarboz/Images/logo.png" height="50"></div>
-        <nav id="navigation">
-          <a href="/Tarboz/Views/Home/Index.php">Home</a> 
-          <a href="/Tarboz/Views/Home/Result.php">Result</a> 
-            <a href="/Tarboz/Views/Entry/Index.php">Entry Index</a>    
-            <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>     
-            <a href="/Tarboz/Views/User/Index.php">User Index</a> 
-            <a href="/Tarboz/Views/Login/Index.php">Login</a>
-        </nav>
-       <div id="links"><a href="/Tarboz/Views/Login/Index.php">Login</a></div>
-
-      </div>
-
-      <div class="header_row">
--->
+?>
 <div id="wrapper">
 <div id="search">
-  <form action="searchresult.php" method="get"><!--2-->
     <div>
       <div>
-        <input type="text" name="searchphrase" class="keyboardInput"><!--1-->
+        
+        <input type="text" 
+               name="txtString" 
+               id="txtString" 
+               class="keyboardInput"><!--1-->
+        
+        <?php //echo $translator->response->languageSelectBox; ?>
+        <br>
+        <a class="black pl10" 
+           href="#" 
+           id="getdata-button">Search</a>
+        <div id="loader">&nbsp;</div>
+        
+        <!-- 3 -->
+        <!--<div class="bgwhite width500" id="showdata"></div>-->
+ 
+        
+        
         <p style="font-size:20px; ">
+          <!--
         <select name="src_lang">
           <option>Source Language</option>
           <option>English</option>
           <option>Russian</option>
           <option>Mandarin</option>
           <option>Farsi</option>
-        </select>
+        </select>-->
         <select name="tgt_lang">
           <option>Target Language</option>
           <option>English</option>
@@ -56,7 +52,6 @@
         </p>
     </div>
   </div>
-  </form>
 </div><!--search-->
     <!--</div>header-->
 

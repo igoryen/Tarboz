@@ -22,8 +22,8 @@
 22. pass the mysql_result object to method getEntryBried() in the same object
 23. method is private: to be accessed by member functions only.
 24. convert the mysql_result object into an associative array
-25. echo "<br>TTT<br>eda::getFatherByVerbatim() query:<br>" . $query . "<br>";
-26. echo "<br>eda::getFatherByVerbatim() mysql_result:<br>";
+25. echo "<br>eda::getFatherByVerbatim() query:<br>" . $query . "<br>";
+26. echo "<br>eda::getFatherByVerbatim() mysql_result:<br>" . print_r($result) . "<br>";
 27. $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array);
 28. echo "<br>eda::getFatherByVerbatim() fatherGottenByVerbatim:<br>" . print_r($fatherGottenByVerbatim);
 29. echo "<br>LLL<br>eda::getFatherByVerbatim() fatherGottenByVerbatim->lang:<br>" . print_r($fatherGottenByVerbatim->getEntryLanguage());
