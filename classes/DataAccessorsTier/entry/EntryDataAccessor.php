@@ -62,6 +62,7 @@ class EntryDataAccessor {
       . '", "' . $date
       . '")'; 
     // 51
+    echo "<br>eda::query_insert:<br>"; echo $query_insert;
     $dbHelper = new DBHelper();  // 18
     $last_inserted_id = $dbHelper->executeInsertQuery($query_insert); // 17
     //16
