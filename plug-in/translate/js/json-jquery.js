@@ -25,10 +25,12 @@ $(document).ready(function(){
         var apostrophe = /'/g;
         var dblquotes = /"/g;
         // MySQL: An apostrophe (') inside a string quoted with apostrophes 
-        // may be written as double apostrophes ('').
+        // may be written as two apostrophes ('').
         verbatim = verbatim.replace(apostrophe, "\''"); 
-        verbatim = verbatim.replace(dblquotes, '\\"');
-        alert("verbatim = " + verbatim);
+        // MySQL: Double quotes (") inside a string quoted with double quotes 
+        // may be written two sets of double quotes ("").
+        verbatim = verbatim.replace(dblquotes, '\\""');
+        //alert("verbatim = " + verbatim);
         window.location.href = 'searchresult.php?verbatim='+ verbatim;
       }
 			else
