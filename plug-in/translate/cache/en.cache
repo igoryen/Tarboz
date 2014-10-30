@@ -1,0 +1,11 @@
+{"d":
+  {"results":[{
+
+    "__metadata":{
+
+        "uri":"https://api.datamarket.azure.com/Data.ashx/Bing/MicrosoftTranslator/v1/GetLanguagesForTranslation?$skip=8&$top=1",
+        "type":"Language"},
+
+    "Code":"en"}]
+  }
+}

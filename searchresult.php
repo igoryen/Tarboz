@@ -1,15 +1,20 @@
 <?php 
   require("header.php");
-  //include "config.php";
-  //include "lib.php";
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
   include "views/entry/search_result_cases.php";
   
 // #) get the value of the search phrase from the search page
-$search_phrase = "Happy Birthday to you";
-$verbatim = $_GET['searchphrase'];
-// #) create a verbatim of the search phrase (P1.1.1.)
+if(isset($_GET['verbatim'])){
+  $verbatim = $_GET['verbatim'];
+  //echo "<br>searchresult.php: GET['verbatim'] is set. it's " . $verbatim;
+}
+else{
+  $verbatim = $_GET['verbatim'];
+  //echo "<br>searchresult.php: GET['verbatim'] is NOT set. " . $verbatim;
+}
+
+echo "<br>sr::verbatim is [".$verbatim . "]";
 
 $em = new EntryManager(); // 1
 $dad = $em->getFatherByVerbatim($verbatim); // 2

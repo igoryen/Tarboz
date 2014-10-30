@@ -1,5 +1,18 @@
-<?php require("header.php");
-	  require("search.php");	
+<?php 
+require("header.php");
+
+//TTTTTTTTTTT for the translator TTTTTTTTTTTTTTTTTT
+require_once('plug-in/translate/config.inc.php');
+require_once('plug-in/translate/class/ServicesJSON.class.php');
+require_once('plug-in/translate/class/MicrosoftTranslator.class.php');
+
+
+$translator = new MicrosoftTranslator(ACCOUNT_KEY);
+$selectbox = array('id'=> 'txtLang','name'=>'txtLang');
+$translator->getLanguagesSelectBox($selectbox);
+//LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+require("search.php");
+    
  ?>
 
 	<div id="index_table_container" align="center">
