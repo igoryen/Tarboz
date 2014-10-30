@@ -42,58 +42,95 @@ $user =       $entry->getEntryUserId();
     </div>
     
     <div class="entry_record">
+      <div class="entry_record_title">Language</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryLanguage(); ?></div>
+    </div>
+    
+    <div class="entry_record">
       <div class="entry_record_title">Text</div>
-      <div class="entry_record_value"><?php echo $text; ?></div>
+      <div class="entry_record_value"><?php echo $entry->getEntryText(); ?></div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Verbatim</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryVerbatim(); ?></div>
     </div>
 
     <div class="entry_record">
       <div class="entry_record_title">Translit</div>
-      <div class="entry_record_value"><?php echo $translit; ?></div>
+      <div class="entry_record_value"><?php echo $entry->getEntryTranslit(); ?></div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Authenticity status</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryAuthenStatusId(); ?></div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Translation of</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryTranslOf(); ?></div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Entry added by</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryUserId(); ?></div>
     </div>
 
     <div class="entry_record">
-      <div class="entry_record_title">Video link</div>
-      <div class="entry_record_value">
-        <embed width="420" height="315" src="<?php echo $video_link; ?>">
-      </div>
+      <div class="entry_record_title">Media</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryMediaId(); ?></div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Comment</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryCommentId(); ?></div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Rating</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryRatingId(); ?></div>
+    </div>
+    
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Tags</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryTags(); ?></div>
+    </div>
+
+    <div class="entry_record">
+      <div class="entry_record_title">Author</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryAuthorId(); ?></div>
+    </div>
+
+    <div class="entry_record">
+      <div class="entry_record_title">Source</div>
+      <div class="entry_record_value"><?php echo $entry->getEntrySourceId(); ?></div>
     </div>
 
     <div class="entry_record">
       <div class="entry_record_title">Use</div>
-      <div class="entry_record_value"><?php echo $use; ?></div>
-    </div>
-
-    <div class="entry_record">
-      <div class="entry_record_title">Translated by</div>
-      <div class="entry_record_value"><?php echo $translator; ?></div>
-    </div>
-
-    <div class="entry_record">
-      <div class="entry_record_title">Time</div>
-      <div class="entry_record_value"><?php echo $time; ?></div>
-    </div>
-
-    <div class="entry_record">
-      <div class="entry_record_title">Country</div>
-      <div class="entry_record_value"><?php echo $country; ?></div>
-    </div>
-
-    <div class="entry_record">
-      <div class="entry_record_title">Form</div>
-      <div class="entry_record_value"><?php echo $form; ?></div>
-    </div>
-
-    <div class="entry_record">
-      <div class="entry_record_title">Added by user</div>
-      <div class="entry_record_value"><?php echo $user; ?></div>
-    </div>
-
-    <div class="entry_record">
-      <div class="entry_record_title">Comments</div>
-      <div class="entry_record_value">...</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryUse(); ?></div>
     </div>
     
-    <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
+    <div class="entry_record">
+      <div class="entry_record_title">Video link</div>
+      <div class="entry_record_value">
+        <embed width="420" height="315" src="<?php echo $entry->getEntryHttpLink(); ?>">
+      </div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Creation date</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryCreationDate(); ?></div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Edit</div>
+      <div class="entry_record_value">
+        <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
+      </div>      
+    </div>
+    
     
     
   </div><!--entry_index_container-->
