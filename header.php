@@ -164,8 +164,6 @@ div.showdata{
           </div>
           <nav id="navigation">
               <a href="/Tarboz/index.php">Home</a> 
-              <a href="/Tarboz/searchresult.php">[result]</a>
-              <a href="/Tarboz/entryview.php">[entry view]</a>
               <a href="/Tarboz/entrycreate.php">Create an Entry</a>
               <a href="/Tarboz/userviewhtml.php">[user view]</a>
               <a href="/Tarboz/userview.php">[user view 2]</a>
