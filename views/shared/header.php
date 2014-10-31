@@ -62,6 +62,10 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                   document.getElementById("user_name").innerHTML="";
                   <?php session_destroy(); $user=""; ?>
                 }
+            //alert("username innerHtml: "+$('#user_name').html());
+            if($('#user_name').html() =="") {
+                $('#menu_user_index').css({'display': 'none'});
+            }
 
           });//end if call_it onlick event
 
@@ -97,6 +101,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
                 //When Successful it will print the user's name beside the logout
                 document.getElementById("user_name").innerHTML=username;
+                                    
+                $('#menu_user_index').css({'display': ''});
                 
                 //When logged in successful, it will close the window
                 $( "#login" ).dialog("close");
@@ -127,7 +133,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               <a href="/Tarboz/views2/Home/search_result.php">Result</a>
               <a href="/Tarboz/views2/Entry/Index.php">Entry Index</a>
               <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>
-              <a href="/Tarboz/Views/User/Index.php">User Index</a>     
+              <a href="/Tarboz/Views/User/Index.php" style="display:none;" id="menu_user_index">User Index</a> 
+
           </nav>
           <div class="table-cell" style="text-align: right;"><a href="#" id="call_it" class="login_button">Login</a> </div><div id="user_name"></div>
 

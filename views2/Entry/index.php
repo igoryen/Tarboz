@@ -4,10 +4,12 @@
   include "lib.php";
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
-
-$entryId = $_GET['id'];
+//======Lily modified begin============
+$entryId = isset($_GET['id']) ? $_GET['id'] : "";
 //$entryId = 26;
-
+//print_r($_POST);
+$entryId = isset($_POST['id']) ? $_POST['id'] : "";
+//======Lily modified begin============
 $em = new EntryManager();
 $entry = $em->getEntryById($entryId); // 1
 

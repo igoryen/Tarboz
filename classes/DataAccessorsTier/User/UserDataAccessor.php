@@ -237,8 +237,8 @@ class UserDataAccessor {
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
-    $Users = $this->getUserList($result);
-    return $Users;
+    $User = $this->getUser($result);
+    return $User;
   }
 }
 

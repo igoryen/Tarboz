@@ -3,6 +3,7 @@
   require_once '../config.php';    
   require_once BUSINESS_DIR_COMMENT . 'CommentManager.php';
   require_once BUSINESS_DIR_USER. 'User.php';
+  require_once BUSINESS_DIR_USER. 'UserManager.php';
   require_once BUSINESS_DIR_COMMENT . 'Comment.php';
   require_once BUSINESS_DIR_RATING . 'RatingManager.php';
   require_once BUSINESS_DIR_RATING . 'Rating.php';
@@ -60,7 +61,7 @@
             event.preventDefault();
         });
           
-        $("button").click( function(event) { //edit comment
+        $(".editCommentSub").click( function(event) { //edit comment
             var this_id = $(this).attr('id');
             var edit_id_num = this_id.substring(this_id.indexOf("_")+1);
             var textarea_id = "#editCommentText_"+edit_id_num;
@@ -86,7 +87,7 @@
                 },
                 success:
                   function(data, status) {
-                    alert(data);
+                    //alert(data);
                     if(data.indexOf("succeed")>0) {                                   
                        location.reload(true);
                     } else if (data.indexOf("fail") >0) {
@@ -139,10 +140,10 @@
             var comment_id = this_id.substring(this_id.lastIndexOf("_")+1); //alert("comment id: "+comment_id);
             var is_like = "";
             //alert("inner text: "+$(this).text());
-            if($(this).text() == "Like" ){
+            if($(this).text().trim() == "Like" ){
                 is_like = "Y";
                 $(this).text("Unlike");
-            } else if ($(this).text() == "Unlike") {
+            } else if ($(this).text().trim() == "Unlike") {
                 is_like = "N";
                 $(this).text("Like");
             }
@@ -169,6 +170,59 @@
                   }
             });//end $.ajax()*/
             event.preventDefault();
+        });
+          
+        $('.reportComment').click( function(event) {
+            if ($(this).next().css('display') == 'none') {
+                $(this).next().css({'display': 'block'});
+            } else if ($(this).next().css('display') == 'block') {
+                $(this).next().css({'display': 'none'});
+            }
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_"));
+            var comment_id = this_id.substring(this_id.lastIndexOf("_")+1);
+        });
+          
+        $('button.reportCommentSub').click( function(event) { //add a report
+            var this_id = $(this).attr('id');
+            var entity_id = this_id.substring(this_id.indexOf("_")+1);
+            var entity_for_report = "comment";
+            var textarea_id = "#reportCommentReason_"+entity_id;
+            var hidden_id = "#reportCommentBy_"+entity_id;
+            
+            var report_reason = encodeURIComponent($.trim ($(textarea_id).val() ));
+            var reported_by = encodeURIComponent($(hidden_id).val()); //alert("reported by: "+reported_by);
+            $.ajax({
+               url: "reporting_comment.php",
+               type: "POST",
+               data: {
+                    entityId : entity_id,
+                    entityForReport : entity_for_report,
+                    reportReason : report_reason,
+                    reportedBy: reported_by
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           if(data.indexOf("error")>0 ) {
+                               alert("Mailer error! ");
+                           }
+                           location.reload(true); 
+                       } else if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+            
+        });
+        $('button.reportCommentCancel').click( function(event) {
+            $('.reportComment').next().css({'display': 'none'});            
         });
 
       });
@@ -289,6 +343,12 @@
       $text       =   $coms->getText();
       $rating_id  =   $coms->getRatingId();
       $created_by =   $coms->getCreatedBy();
+        
+      //get the username who created the comment
+      $userManager = new UserManager();
+      $created_user = $userManager->getUserByUserId($created_by);
+      $created_user_name = $created_user->getLogin();
+        
     //define ids for html tags in the loop
       $edit_icon_id = "editIcon_".$id;
       $edit_area_id = "edit_area_".$id;
@@ -298,8 +358,8 @@
       $edit_comment_input_hidden = "editCommentId_".$id;
       $edit_comment_submit = "editCommentSub_".$id;
       $delete_icon_id ="deleteIcon_".$id;
-      $comment_like_id = $created_by."_commentLike_".$id;
-      $comment_unlike_id = $created_by."_commentUnlike_".$id;
+      $comment_like_id = $user_id."_commentLike_".$id;
+
         
       $ratingManager = new RatingManager();
       $rating_content = "";
@@ -310,23 +370,63 @@
                  $ratingManager->hasRatingByEntityDislikeUser("com".$id, $created_by) == 0){
           $rating_content = "Like";
       }
+      $likeRating = $ratingManager->CountRatingByLikeEntity("com".$id);
+      $likeRating = $likeRating > 0 ? $likeRating : "";
+        
+      $comment_report_id = $user_id."_reportCommentId_".$id;
+      
 ?>
     
     <div> 
         <div>
-			<div>The comment is: </div><span id="<?php echo $edit_comment_text_id; ?>"><?php echo $text; ?></span>     
+            <div style="display:table;">
+            <div style="display:table-row;">
+                <div style="display:table-cell;width:110px;"><?php echo $created_user_name.":"; ?> </div>
+                <div style="display:table-cell; width:200px;">
+                    <span id="<?php echo $edit_comment_text_id; ?>" ><?php echo $text; ?></span>  
+                </div>
+                <div style="display:table-cell;">
+                    <span id ="<?php echo $comment_like_id; ?>" name="<?php echo $comment_like_id; ?>" class="comment_like"
+                          style="font-family:Tahoma;font-size:12px;" onmouseover="$(this).css({'cursor': 'pointer'});">
+                              <?php if($rating_content == "Like") { echo $rating_content."&nbsp;".$likeRating; } else {echo $rating_content."&nbsp;"; } ?>
+                    </span>
+                </div>
+            
 <?php if ($user_logged_in && $created_by == $user_id) { ?>
-            <img src="../images/edit.png" alt="Edit Icon" style="width:16px;height:16px" id="<?php echo $edit_icon_id; ?>" 
-                  onmouseover="$(this).css({'cursor': 'pointer'});" 
-                 onclick = "$('#<?php echo $edit_area_id; ?>').css({'display': 'block'});"/>
-            <img src="../images/delete.png" alt="Delete Icon" style="width:16px;height:16px" id="<?php echo $delete_icon_id; ?>" 
-                 class="deleteComment" onmouseover="$(this).css({'cursor': 'pointer'});" 
-                 />
-            <span id ="<?php echo $comment_like_id; ?>" name="<?php echo $comment_like_id; ?>" class="comment_like"
-                  style="font-family:Tahoma;font-size:12px;" onmouseover="$(this).css({'cursor': 'pointer'});"><?php echo $rating_content; ?></span>
-        </div>
-<?php } //end if 
-      if ($user_logged_in && $created_by == $user_id) {       
+                <div style="display:table-cell;">
+                    <img src="../images/edit.png" alt="Edit Icon" style="width:16px;height:16px" id="<?php echo $edit_icon_id; ?>" title="Edit"
+                         onmouseover="$(this).css({'cursor': 'pointer'});" 
+                         onclick = "$('#<?php echo $edit_area_id; ?>').css({'display': 'block'});"/>
+                    <img src="../images/delete.png" alt="Delete Icon" style="width:16px;height:16px" id="<?php echo $delete_icon_id; ?>" title="Delete"
+                         class="deleteComment" onmouseover="$(this).css({'cursor': 'pointer'});"/>
+                </div>
+        
+<?php } //end if ($user_logged_in && $created_by == $user_id)
+      else {   
+?>
+                <div style="display:table-cell; width: 100px; position: relative;">
+                    <img src="../images/arrow-down.png" alt="Arrow Down Icon" style="width:16px;height:16px" id="<?php echo $comment_report_id; ?>" 
+                     class="reportComment" title="Report to Admin" onmouseover="$(this).css({'cursor': 'pointer'});"/>
+                    <div id ="<?php echo 'reportCommentDiv_'.$id;?>" style="display: none; overflow: hidden; position:absolute;">
+                        <form name ="<?php echo 'reportCommentForm_'.$id;?>" id="<?php echo 'reportCommentForm_'.$id;?>" method="POST">
+                            <div>Report reason:</div>
+                            <textarea rows="2" cols="20" name="<?php echo 'reportCommentReason_'.$id; ?>" 
+                                id="<?php echo 'reportCommentReason_'.$id; ?>"></textarea><br/>
+                            <input type="hidden" id="<?php echo 'reportCommentBy_'.$id; ?>" 
+                                   name="<?php echo 'reportCommentBy_'.$id; ?>" 
+                                   value ="<?php echo $user_id; ?>"/>
+                            <button id="<?php echo 'reportCommentSub_'.$id; ?>" name="<?php echo 'reportCommentSub_'.$id; ?>" class="reportCommentSub" type="button" style="font-size:11px;">Submit</button>
+                            <button id="<?php echo 'reportCommentCancel_'.$id; ?>" name="<?php echo 'reportCommentCancel_'.$id; ?>" class="reportCommentCancel" type="button" style="font-size:11px;">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+<?php
+      } //end else if if ($user_logged_in && $created_by == $user_id)
+?>
+            </div> <!--end of table row -->
+            </div> <!--end of table -->
+    
+<?php      if ($user_logged_in && $created_by == $user_id) {       
 ?>
         
         <div id="<?php echo $edit_area_id ?>" class="<?php echo $edit_area_id ?>" style="display:none;">
@@ -336,11 +436,11 @@
                 <input type="hidden" id="<?php echo $edit_comment_input_hidden; ?>" 
                                      name="<?php echo $edit_comment_input_hidden; ?>" 
                                      value ="<?php echo $id; ?>"/>
-                <button id="<?php echo $edit_comment_submit; ?>" name="<?php echo $edit_comment_submit; ?>" class="editComment" type="button" >Submit</button>
+                <button id="<?php echo $edit_comment_submit; ?>" name="<?php echo $edit_comment_submit; ?>" class="editCommentSub" type="button" >Submit</button>
            </form> 
         </div>
         
-<?php } //end if ?>
+<?php } //end if($user_logged_in && $created_by == $user_id) ?>
     </div>        
     <br> 
 <?php
