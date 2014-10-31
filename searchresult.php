@@ -1,50 +1,20 @@
 <?php 
-  require("../Shared/header.php");
-  include "../../config.php";
-  include "lib.php";
+  require("header.php");
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
-  include "search_result_cases.php";
+  include "views/entry/search_result_cases.php";
   
 // #) get the value of the search phrase from the search page
-$search_phrase = "Happy Birthday to you";
+if(isset($_GET['verbatim'])){
+  $verbatim = $_GET['verbatim'];
+  //echo "<br>searchresult.php: GET['verbatim'] is set. it's " . $verbatim;
+}
+else{
+  $verbatim = $_GET['verbatim'];
+  //echo "<br>searchresult.php: GET['verbatim'] is NOT set. " . $verbatim;
+}
 
-// #) create a verbatim of the search phrase (P1.1.1.)
-//======================================================================
-// $verbatim = '';
-// Options of verbatim string for testing. To test, comment out all but one.
-
-// CASE 1: no dad, no kids
-// Original: doesn't exist in the database. Variants: don't exist
-// $verbatim = 'bla bla bla';
-
-// CASE 2: no dad, 6 kids (2 per language)
-// Original: doesn't exist. Variants: 2 English, 2 Russian, 2 Mandarin
-// $verbatim = 'god son loved world life';
-
-// CASE 3: One dad, no kids
-// Original: exists. Variants: don't exist.
-// $verbatim = 'that question';
-
-// CASE 4: one dad, one or more kids
-// Original exists. Variants: exist.
-// 
-// 4A: one dad, 1 English kid
-// Original: Russian. Variants: 1 in English
-// $verbatim = 'boring sad hand';
-//
-// 4B: one dad, 6 kids (2 per language)
-// Original: English. Variants: 2 in English, 2 in Russian, 2 in Mandarin
- $verbatim = 'happy birth day to you';
-//
-// 4C: one dad, 4 kids (2 per language)
-// Original: Russian. Variants: 2 in English, 2 in Mandarin.
-// $verbatim = 'pears apples Katyusha fog river';
-//
-// 4D: one dad, one kid (Russian)
-// Original: Chinese. Variants: 1 in Russian.
-// $verbatim = 'break wok sink boats';
-//=====================================================================
+echo "<br>sr::verbatim is [".$verbatim . "]";
 
 $em = new EntryManager(); // 1
 $dad = $em->getFatherByVerbatim($verbatim); // 2
@@ -80,8 +50,9 @@ if (null == $dad->getEntryId()) { // 5
         // 15,16,17,18,19
         open_kids_house($current_lang);
         // 20,21,22
-        $ary['id'] = $dad->getEntryId();
+        $kid_room_array['id'] = $kid->getEntryId();
         $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
+        $kid_room_array['user'] = $kid->getEntryUserId();
         make_kid_room($kid_room_array);        
         //23
         unset($current_lang);
@@ -98,8 +69,9 @@ if (null == $dad->getEntryId()) { // 5
           // 37, 38
           open_kids_house($current_lang);
           // 20,21,41
-          $ary['id'] = $dad->getEntryId();
+          $kid_room_array['id'] = $kid->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
+          $kid_room_array['user'] = $kid->getEntryUserId();
           make_kid_room($kid_room_array);
           // 42,43
           close_kids_house();
@@ -111,8 +83,9 @@ if (null == $dad->getEntryId()) { // 5
           $current_lang = $kid->getEntryLanguage();
           $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();          
           //48,20,21,51
-          $ary['id'] = $dad->getEntryId();
+          $kid_room_array['id'] = $kid->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(),0 ,55);
+          $kid_room_array['user'] = $kid->getEntryUserId();
           make_kid_room($kid_room_array);          
           // 42,53
           close_kids_house();
@@ -132,8 +105,9 @@ if (null == $dad->getEntryId()) { // 5
           // 37,66
           open_kids_house($current_lang);
           // 20,21,69
-          $ary['id'] = $dad->getEntryId();
+          $kid_room_array['id'] = $kid->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
+          $kid_room_array['user'] = $kid->getEntryUserId();
           make_kid_room($kid_room_array);
           // 70, 23
           unset($current_lang);
@@ -141,8 +115,9 @@ if (null == $dad->getEntryId()) { // 5
         } // 32        
         else{ // 47
           // 20,21,69
-          $ary['id'] = $dad->getEntryId();
+          $kid_room_array['id'] = $kid->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
+          $kid_room_array['user'] = $kid->getEntryUserId();
           make_kid_room($kid_room_array);
           // 70,23
           unset($current_lang);
@@ -160,6 +135,7 @@ else { // 27
     $ary['id'] = $dad->getEntryId();
     $ary['language'] = $dad->getEntryLanguage();
     $ary['text'] = substr($dad->getEntryText(), 0, 55);
+    $ary['user'] = $dad->getEntryUserId();
     dad_house_dad_1($ary);
   }
   elseif ($num_of_kids > 1) { //74
@@ -167,6 +143,7 @@ else { // 27
     $ary['id'] = $dad->getEntryId();
     $ary['language'] = $dad->getEntryLanguage();
     $ary['text'] = substr($dad->getEntryText(), 0, 55);
+    $ary['user'] = $dad->getEntryUserId();
     dad_house_dad_1($ary);
     
     $i = 0;
@@ -179,8 +156,9 @@ else { // 27
         //15,16,17,18,19
         open_kids_house($current_lang);        
         // 20, 21,22
-        $ary['id'] = $dad->getEntryId();
+        $kid_room_array['id'] = $kid->getEntryId();
         $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
+        $kid_room_array['user'] = $kid->getEntryUserId();
         make_kid_room($kid_room_array);
         // 23
         unset($current_lang);
@@ -197,8 +175,9 @@ else { // 27
           // 37,38
           open_kids_house($current_lang);          
           // 20,21,41
-          $ary['id'] = $dad->getEntryId();
+          $kid_room_array['id'] = $kid->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
+          $kid_room_array['user'] = $kid->getEntryUserId();
           make_kid_room($kid_room_array);          
           // 42,43
           close_kids_house();
@@ -210,8 +189,9 @@ else { // 27
           $current_lang = $kid->getEntryLanguageId();
           $prev_lang = $array_of_kids[$i-1]->getEntryLanguageId();
           //48,20,21,51
-          $ary['id'] = $dad->getEntryId();
+          $kid_room_array['id'] = $kid->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
+          $kid_room_array['user'] = $kid->getEntryUserId();
           make_kid_room($kid_room_array);          
           // 42,53
           close_kids_house();
@@ -231,8 +211,9 @@ else { // 27
           // 37,66
           open_kids_house($current_lang);          
           // 20,21,69
-          $ary['id'] = $dad->getEntryId();
+          $kid_room_array['id'] = $kid->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
+          $kid_room_array['user'] = $kid->getEntryUserId();
           make_kid_room($kid_room_array);
           // 70,23
           unset($current_lang);
@@ -240,8 +221,9 @@ else { // 27
         } // 32
         else{ // 47
           // 20,21,69
-          $ary['id'] = $dad->getEntryId();
+          $kid_room_array['id'] = $kid->getEntryId();
           $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
+          $kid_room_array['user'] = $kid->getEntryUserId();
           make_kid_room($kid_room_array);
           // 70,23
           unset($current_lang);
@@ -260,4 +242,4 @@ else { // 27
     </div><!-- village -->
   </div><!-- land -->
 
-<?php require("../Shared/footer.php"); ?>
+<?php require("footer.php"); ?>

@@ -1,6 +1,6 @@
 <?php
-  require("../Shared/header.php");
-  $photo_url = "../../Images/hubert.jpg";
+  require("header.php");
+  $photo_url = "images/hubert.jpg";
   $name = "Hubert Humphrey";
   $country = "Canada";
   $languages = "Russian, English, Pharsi, Mandarin, English";
@@ -68,4 +68,4 @@
     </div><!-- user_profile-->
 
   </div><!--user_profile_container-->
-<?php require("../Shared/footer.php"); ?>
+<?php require("footer.php"); ?>

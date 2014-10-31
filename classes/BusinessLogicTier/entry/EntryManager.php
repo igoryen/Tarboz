@@ -73,7 +73,7 @@ class EntryManager {
     $eda = new EntryDataAccessor();
     //2
     $fatherGottenByVerbatim = $eda->getFatherByVerbatim($verbatim);    
-    //3,4
+    //3
     return $fatherGottenByVerbatim;
   }
 

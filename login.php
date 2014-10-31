@@ -1,5 +1,5 @@
 <?php 
-  require("../Shared/header.php");
+  require("header.php");
 // session_start();
 
 // if(isset($_SESSION['user'])){
@@ -36,5 +36,5 @@
       </div>
     </div>
   </form>
-<?php require("../Shared/footer.php"); ?>
+<?php require("footer.php"); ?>
 

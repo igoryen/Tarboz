@@ -6,6 +6,7 @@ class Subscription {
   private $email;
   private $name;
   private $location_name;
+  private $subscribed;
 
   public function getId() {
     return $this->id;
@@ -37,6 +38,14 @@ class Subscription {
 
   public function setLocationName($location_name) {
     $this->location_name = $location_name;
+  }
+  
+  public function getSubscription() {
+    return $this->subscribed;
+  }
+
+  public function setSubscription($subscribed) {
+    $this->subscribed = $subscribed;
   }
 
 }

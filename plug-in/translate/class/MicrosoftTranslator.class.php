@@ -236,7 +236,7 @@ private function getErrorResponse($response, $reason , $param){
  * @return unknown
  */
 private function getRequest($type)
-{
+{ 
     $this->requestInvoked = $type;
     $text = (!empty($this->textToTranslate)) ? 'Text='.$this->textToTranslate : '';
     $to = (!empty($this->to)) ? $to = '&To='. $this->to : '';

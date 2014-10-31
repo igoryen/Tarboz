@@ -1,5 +1,6 @@
 <?php 
-  	include "../../config.php";
+  	include "config.php";
+    require("header.php"); 
 	require_once BUSINESS_DIR_USER . 'UserManager.php';
 
     $userManager = new UserManager();

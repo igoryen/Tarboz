@@ -3,12 +3,12 @@
 <html>
 <head>
 	<title> Registration Form</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" href="../../plug-in/jqueryui/jquery-ui.css">
-	<script src="../../plug-in/jqueryui/jquery.js"></script>
-	<script src="../../plug-in/jqueryui/jquery-ui.js"></script>
-	<script src="../../plug-in/autocomplete/jquery.js"></script>
-	<script src="../../plug-in/autocomplete/jquery.autocomplete.js"></script>
+  <link rel="stylesheet" type="text/css" href="views/registration/style.css">
+	<link rel="stylesheet" href="plug-in/jqueryui/jquery-ui.css">
+	<script src="plug-in/jqueryui/jquery.js"></script>
+	<script src="plug-in/jqueryui/jquery-ui.js"></script>
+	<script src="plug-in/autocomplete/jquery.js"></script>
+	<script src="plug-in/autocomplete/jquery.autocomplete.js"></script>
 	
 	<link rel="stylesheet" href="./style.css">
 
@@ -26,7 +26,7 @@
 		$(document).ready(function(){
 
 	
-		$("#city").autocomplete("../../user_test/form_search.php?q="+$("#city").val(), {
+		$("#city").autocomplete("user_test/form_search.php?q="+$("#city").val(), {
 
         selectFirst: true
 
@@ -34,13 +34,12 @@
 
 		$("#city").change(function(){	
 
-  		$.post("../../user_test/province_by_city_name.php",
+  		$.post("user_test/province_by_city_name.php",
 			              {
-			               // userid: $("#userlogin").val(),
 			                city: $("#city").val(),
-			                province: $("#province").val(),
 			              },
 		            	function(data,status){
+                          alert(data);
 
 		                      var mydata = data.split(",");
 
@@ -126,7 +125,7 @@
 					else{
 						$("#userid").css("border-color","rgba(0,0,0,.3)"); 
 
-		            	$.post("../../user_test/user_email_test.php",
+		            	$.post("user_test/user_email_test.php",
 			              {
 			               // userid: $("#userlogin").val(),
 			                userid: $("#userid").val(),

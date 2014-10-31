@@ -12,9 +12,9 @@
 12. initialize EntryManager | create an EntryManager object
 13. do the actions to INSERT a new entry/row into the DB. pass the filled class Entry object for database INSERT operation
 14. if user is logged in && we have data in $_POST && that data (i.e. the user input) is valid && we have an entry id delivered in $_GET (i.e. UPDATE operation), then it means we have an UPDATE scenario, because if there is an id then it means it came from the database which means there exists a row/entry with that id already in the DB. 
-15. create a query for UPDATE operation using the id we have
+15.
 16. else if user is logged in && we have data in $_POST && user input is valid BUT we don't have an id in $_GET (i.e. we have an INSERT operation/scenario)
-17. if $_POST has no data
+17. if $_POST has no data, if we come to this page empty-handed (empty-POST-ed), then we know we want to create (INSERT) a new entry (row). 
 18. if data dalidation succeeds, if there is no bad data
 19. What is the language X in which we are creating this new entry?
 20. What is the language X that the user selected?
@@ -22,7 +22,7 @@
 22. create a new entry which is +1 greater than the greatest id number
 23. else if nobody is logged in, if no user is logged in, if the visitor is not logged in
 24. invite the guest to come in through the front door, send the not-logged-in guest to the login page
-25. the file with inclidable functions
+25. the file with includable functions
 26. validation section: where $_POST data is validated and sanitized. Before we touch the values that are sitting in the $_POST we want to make sure it's clean and has no mistakes
 27. table to see the values contained in the $_POST superglobal array
 28. send the id of the newly created entry to the entry profile page to be displayed there
@@ -32,7 +32,7 @@
 32. create an empty Entry object to fill it with values from $_POST
 33. Start the process to update the entry row in the DB using the data passed in the Entry object
 34. if there's nothing in $_POST but $_GET has an ID, then it means that we didn't come here on our own but we were redirected here, and the user wants to EDIT an entry
-35. if there's no POST AND no id, that means we were not redirected to this page but we just came here by pressing the "create new entry" button, then we know that we want to create/compose a brand new entry
+35. if POST is empty AND GET has no id, that means we were not redirected to this page but we just came here by pressing the "create new entry" button, then we know that we want to create/compose (INSERT) a brand new entry (row) from scratch
 36. go to the DB and SELECT the Entry row by id
 37. pass the Entry object filled to the Entry Edit form, and display the Entry Edit form
 38. redirect the user to entry profile page and send it/there the id of the Entry object on which the UPDATE operation has just been done so that the updated Entry object would be displayed for the user to see the result of how he has updated the Entry object

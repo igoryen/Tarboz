@@ -29,11 +29,17 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   <script type="text/javascript" src="plug-in/virtual_keyboard/keyboard.js" charset="UTF-8"></script>
   <!--   End    -->
   <link rel="stylesheet" type="text/css" href="style/css/style.css"/>
-  <link rel="shortcut icon" href="../../images/watermelon8.png"/>
+  <link rel="shortcut icon" href="images/watermelon8.png"/>
    
    <!-- Extra libraries -->
    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+   
+   <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+   <script src="plug-in/translate/js/jquery.ajaxLoader.js" type="text/javascript"></script>
+   <script src="plug-in/translate/js/json-jquery.js" type="text/javascript"></script>
+   <script src="plug-in/translate/js/json-jquery2.js" type="text/javascript"></script>
+   
    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
    <script>    
@@ -116,27 +122,64 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
           });//end of the login button onlick event
   
       });
-
+      
   </script>
+  
+  <!-- for translator -->
+  <style>
+div.jquery-ajax-loader {
+	background: #FFFFFF url(img/ajax-loader.gif) no-repeat 50% 50%;
+	opacity: .6;
+	width:250px !important;
+}
 
-  <title>WWG</title>
-</title>
+div.showdata{
+    width:250px;
+}
+.bgblack{
+    background: white
+}
+.bgwhite {
+    background: #FFFFFF 
+}
+.black {
+    color:black;
+}
+.pl10{
+    padding-left:10px;
+}
+.width500 {
+    width:500px;
+}
+.bdr {
+ border:1px solid black;
+}
+</style>
+
+  <title>Tarboz</title>
+</head>
+
 <body>
   <div id="wrapper">
 
     <div id="header">
 
         <div class="header_row">
-          <div class="table-cell" style="text-align: left;"><a href=""><img src="images/logo.png" height="50"></a></div>
+          <div class="table-cell" style="text-align: left;">
+            <a href=""><img src="images/logo.png" height="50"></a>
+          </div>
           <nav id="navigation">
-              <a href="/Tarboz/Views/Home/Index.php">Home</a> 
-              <a href="/Tarboz/views2/Home/search_result.php">Result</a>
-              <a href="/Tarboz/views2/Entry/Index.php">Entry Index</a>
-              <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>
-              <a href="/Tarboz/Views/User/Index.php" style="display:none;" id="menu_user_index">User Index</a> 
-
+              <a href="/Tarboz/index.php">Home</a> 
+              <a href="/Tarboz/searchresult.php">[result]</a>
+              <a href="/Tarboz/entryview.php">[entry view]</a>
+              <a href="/Tarboz/entrycreate.php">Create an Entry</a>
+              <a href="/Tarboz/userviewhtml.php" style="display:none;" id="menu_user_index">[user view]</a>
+              <a href="/Tarboz/userview.php">[user view 2]</a>
           </nav>
-          <div class="table-cell" style="text-align: right;"><a href="#" id="call_it" class="login_button">Login</a> </div><div id="user_name"></div>
+          <div class="table-cell" style="text-align: right;">
+            <a href="#" id="call_it" class="login_button">Login</a> 
+          </div>
+          <div id="user_name"></div>
 
           <div style="width:100px;" title="Login Window" id="login">
              <!--start of the login form div-->
@@ -180,7 +223,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
           $m_reg="/^[a-zA-Z0-9\.\@\(\)]+$/";
 
           //matchin the pattern and checking if the variable is also not empty
-          if(isset($reset) && preg_match($m_reg,$reset)){
+          if(($reset!="") && preg_match($m_reg,$reset)){
+            echo $reset;
 
             $userLoginManager = new UserLoginManager();
 
