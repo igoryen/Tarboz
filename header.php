@@ -37,7 +37,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
    
    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
    <script src="plug-in/translate/js/jquery.ajaxLoader.js" type="text/javascript"></script>
-   <script src="plug-in/translate/js/json-jquery.js" type="text/javascript"></script> 
+   <script src="plug-in/translate/js/json-jquery.js" type="text/javascript"></script>
+   <script src="plug-in/translate/js/json-jquery2.js" type="text/javascript"></script>
    
    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">

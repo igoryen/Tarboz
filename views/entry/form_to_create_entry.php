@@ -54,11 +54,24 @@ function form_to_create_entry(){
           Text of the phrase <span class="Painted_red">*</span> 
         </div>
         <div class="entry_create_record_value">
-          <textarea name="text" rows="10" cols="50"></textarea>
+          <textarea name="text" 
+                    id="txtString2"  
+                    rows="10" cols="50"></textarea>
         </div>
       </div>
-
+      
       <!-- ent_entry_verbatim will be created automatically -->
+      <div class="entry_create_row">
+        
+        <div class="entry_create_record_title">
+          <a href="#" id="create-verbatim-button">Create verbatim</a><br>
+        </div>
+        <div class="entry_create_record_value">
+          <textarea name="verbatim" 
+                    id="verbatim"  
+                    rows="3" cols="50" readonly ></textarea>
+        </div>
+      </div>      
       
       <!-- ent_entry_translit -->
       <div class="entry_create_row">

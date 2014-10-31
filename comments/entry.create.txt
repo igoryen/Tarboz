@@ -32,7 +32,7 @@
 32. create an empty Entry object to fill it with values from $_POST
 33. Start the process to update the entry row in the DB using the data passed in the Entry object
 34. if there's nothing in $_POST but $_GET has an ID, then it means that we didn't come here on our own but we were redirected here, and the user wants to EDIT an entry
-35. if there's no POST AND no id, that means we were not redirected to this page but we just came here by pressing the "create new entry" button, then we know that we want to create/compose (INSERT) a brand new entry (row) from scratch
+35. if POST is empty AND GET has no id, that means we were not redirected to this page but we just came here by pressing the "create new entry" button, then we know that we want to create/compose (INSERT) a brand new entry (row) from scratch
 36. go to the DB and SELECT the Entry row by id
 37. pass the Entry object filled to the Entry Edit form, and display the Entry Edit form
 38. redirect the user to entry profile page and send it/there the id of the Entry object on which the UPDATE operation has just been done so that the updated Entry object would be displayed for the user to see the result of how he has updated the Entry object
