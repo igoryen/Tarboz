@@ -48,7 +48,7 @@ $user =       $entry->getEntryUserId();
     
     <div class="entry_record">
       <div class="entry_record_title">Text</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryText(); ?></div>
+      <div class="entry_record_value"><?php echo nl2br($entry->getEntryText()); ?></div>
     </div>
     
     <div class="entry_record">
@@ -58,7 +58,7 @@ $user =       $entry->getEntryUserId();
 
     <div class="entry_record">
       <div class="entry_record_title">Translit</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryTranslit(); ?></div>
+      <div class="entry_record_value"><?php echo nl2br($entry->getEntryTranslit()); ?></div>
     </div>
     
     <div class="entry_record">
