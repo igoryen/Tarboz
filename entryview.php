@@ -2,7 +2,7 @@
   
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
-
+  
   if(!isset($_GET['id']) && !isset($_POST['id'])){
     echo "neither (GET['id']) nor (POST['id'])";
   }

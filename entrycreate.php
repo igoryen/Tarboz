@@ -9,13 +9,24 @@
   include_once 'views/entry/form_to_edit_entry.php';
   include_once 'views/entry/form_to_create_entry.php';
   
+  // TTTT for translator TTTTTTTTTTTTTTTTTTTTTTTT
+  require_once('plug-in/translate/config.inc.php');
+  require_once('plug-in/translate/class/ServicesJSON.class.php');
+  require_once('plug-in/translate/class/MicrosoftTranslator.class.php');
+  
+  $translator = new MicrosoftTranslator(ACCOUNT_KEY);
+  $selectbox = array('id'=> 'txtLang','name'=>'txtLang');
+  $translator->getLanguagesSelectBox($selectbox);
+  //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+  
+  
   $user_input_valid = true; // 2
   date_default_timezone_set('America/Toronto');
   //echo "<br>Today: " . date("Y-m-d H:i:s");
   // 3
   $text_error = "";
   //etc...  
-    
+  echo 'entrycreate.php: $_GET[verbatim] is: '. $_GET['verbatim'];
   if($_POST){ // 4
     echo 'entrycreate.php: $_POST is populated';
  
@@ -48,9 +59,9 @@
         $entry->setEntryAuthorId('1');   //$_POST['author']);
         $entry->setEntrySourceId(   $_POST['source']); 
         $entry->setEntryUse(        $_POST['use']);
-        $entry->setEntryHttpLink(   $_POST['link']);
+        $entry->setEntryHttpLink(str_replace("watch?v=", "v/", $_POST['link']));
         // add logic to create today's date
-        $entry->setEntryCreationDate("2014-10-23");
+        //$entry->setEntryCreationDate("2014-10-23");
         // 40
         
         $resultOfEntryUpdate = $em->updateEntry($entry); // 33
@@ -72,7 +83,7 @@
         $entry->setEntryLanguage($_POST['language']); // 30 (?)
         $entry->setEntryText(htmlentities($_POST['text']));
         // create verbatim, for now use 'entry_translit'
-        $entry->setEntryVerbatim(htmlentities($_POST['translit']));
+        $entry->setEntryVerbatim(htmlentities($_POST['verbatim']));
         $entry->setEntryTranslit(htmlentities($_POST['translit']));
         $entry->setEntryAuthenStatusId($_POST['authen']);
         $entry->setEntryTranslOf(NULL); // $_POST['transl_of']);
