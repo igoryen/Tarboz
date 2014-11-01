@@ -86,7 +86,7 @@ class RatingDataAccessor {
     
   public function CountRatingByLikeEntity($entity_id) {
       $query = "SELECT * FROM ".RATING." WHERE rat_entity_id = '".$entity_id.
-               "' AND (rat_like_user_id IS NOT NULL OR rat_like_user_id <> ''";
+               "' AND (rat_like_user_id IS NOT NULL OR rat_like_user_id > 0)";
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
       $ratings_by_like_entity = $this->CountRatings($result);
@@ -95,7 +95,7 @@ class RatingDataAccessor {
     
   public function CountRatingByDislikeEntity($entity_id) {
       $query = "SELECT * FROM ".RATING." WHERE rat_entity_id = '".$entity_id.
-               "' AND (rat_dislike_user_id IS NOT NULL OR rat_dislike_user_id <> ''";
+               "' AND (rat_dislike_user_id IS NOT NULL OR rat_dislike_user_id <> 0)";
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
       $ratings_by_dislike_entity = $this->CountRatings($result);

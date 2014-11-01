@@ -48,3 +48,8 @@ DROP FOREIGN KEY `tblRating_tblUser_rat_rating_like_user_id_FK`,
 DROP FOREIGN KEY `tblRating_tblUser_rat_rating_dislike_user_id_FK`;
 ALTER TABLE `prj666`.`tbl_rating` 
 DROP INDEX `tblRating_tblUser_rat_rating_like_user_id_FK_idx` ;
+
+
+ALTER TABLE `prj666`.`tbl_report` 
+ADD COLUMN `rep_reported_by` INT(11) NULL AFTER `rep_entity_id`,
+ADD COLUMN `rep_reported_on` DATETIME NULL AFTER `rep_reported_by`;

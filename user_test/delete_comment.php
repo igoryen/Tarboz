@@ -23,7 +23,7 @@
     //print_r($_POST);
     if($_POST) {
 
-        $delete_comment_id = isset($_POST['deleteCommentId']) ? $_POST['deleteCommentId'] : "";
+        $delete_comment_id = (isset($_POST['deleteCommentId']) && $_POST['deleteCommentId'] != 'undefined')? $_POST['deleteCommentId'] : "";
         print "post comment id: ". $delete_comment_id."<br/>\n";
         
         if ($delete_comment_id != "") {

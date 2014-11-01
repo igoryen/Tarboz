@@ -25,10 +25,10 @@
     //print_r($_POST);
     if($_POST) {
 
-        $comment_text = isset($_POST['editComment']) ? $_POST['editComment'] : "";
+        $comment_text = (isset($_POST['editComment']) && $_POST['editComment']!='undefined') ? $_POST['editComment'] : "";
         //print "post comment text: ". $comment_text."<br/>\n";
         
-        $edit_comment_id = isset($_POST['editCommentId']) ? $_POST['editCommentId'] : "";
+        $edit_comment_id = (isset($_POST['editCommentId']) && $_POST['editCommentId']!='undefined') ? $_POST['editCommentId'] : "";
         //print "post comment id: ". $edit_comment_id."<br/>\n";
         if ($edit_comment_id != "") {
           $commentManager = new CommentManager();

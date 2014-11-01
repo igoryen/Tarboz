@@ -9,8 +9,14 @@ class ReportManager {
     $last_inserted_id = $reportDataAccessor->addReport($report);
     return $last_inserted_id;
   }
+    
+  public function upateReport($report) {
+    $reportDataAccessor = new ReportDataAccessor();
+    $result = $reportDataAccessor->updateReport($report);
+    return $result;
+  }  
 
-  public function deleteReport($report) {
+  /*public function deleteReport($report) {
     $reportDataAccessor = new ReportDataAccessor();
     $result = $reportDataAccessor->deleteReport($report);
     return $result;
@@ -20,8 +26,14 @@ class ReportManager {
     $reportDataAccessor = new ReportDataAccessor();
     $result = $reportDataAccessor->deleteReportById($report_id);
     return $result;
-  }
+  }*/
 
+  public function getReportById($id) {
+    $reportDataAccessor = new ReportDataAccessor();
+    $result = $reportDataAccessor->getReportById($id);
+    return $result;
+  }
+    
   public function getReportByEntity($entity_for_report) {
     $reportDataAccessor = new ReportDataAccessor();
     $result = $reportDataAccessor->getReportByEntity($entity_for_report);
@@ -33,16 +45,22 @@ class ReportManager {
     $result = $reportDataAccessor->getReportByEntityId($report_entity_id);
     return $result;
   }
-
-  public function getReportById($id) {
+    
+  public function getReportByUser($reported_by) {
     $reportDataAccessor = new ReportDataAccessor();
-    $result = $reportDataAccessor->getReportById($id);
+    $result = $reportDataAccessor->getReportByUser($reported_by);
     return $result;
   }
-
-  public function updateReport($report) {
+    
+  public function getReportByReason($reason) {
     $reportDataAccessor = new ReportDataAccessor();
-    $result = $reportDataAccessor->updateReport($report);
+    $result = $reportDataAccessor->getReportByReason($reason);
+    return $result;
+  }
+  
+  public function sendNoteToAdmin($report) {
+    $reportDataAccessor = new ReportDataAccessor();
+    $result = $reportDataAccessor->email($report);
     return $result;
   }
 

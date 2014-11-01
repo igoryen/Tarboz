@@ -24,7 +24,7 @@
     //print_r($_POST);
     if($_POST) {
 
-        $comment_text = isset($_POST['newComment']) ? $_POST['newComment'] : "";
+        $comment_text =( isset($_POST['newComment']) && $_POST['newComment'] !='undefined'  )? $_POST['newComment'] : "";
         if ($comment_text != "") {
           
           //handle badword
