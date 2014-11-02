@@ -1,6 +1,5 @@
 <?php
 // for translator
-require("header.php");
 require_once('plug-in/translate/config.inc.php');
 require_once('plug-in/translate/class/ServicesJSON.class.php');
 require_once('plug-in/translate/class/MicrosoftTranslator.class.php');
