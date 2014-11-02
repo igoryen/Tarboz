@@ -281,6 +281,17 @@ class EntryDataAccessor {
     $arrayOfKidsGottenByVerbatim = $this->getListOfKidBrief($resultOfSelect);
     return $arrayOfKidsGottenByVerbatim;
   }
+  
+  public function getListOfEntryBriefByLanguage($language){
+    $query ="SELECt e.ent_entry_id, l.lan_lang_name, e.ent_entry_text 
+              FROM tbl_entry e, tbl_language l 
+              WHERE e.ent_entry_language_id = l.lan_language_id 
+              AND LOWER(SUBSTR(l.lan_lang_name, 1, 2)) = '{$language}'";
+    $dbHelper = new DBHelper();
+    $resultOfSelect = $dbHelper->executeSelect($query);
+    $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief($resultOfSelect);
+    return $arrayOfEntryGottenByLanguage;
+  }
 
   /**
    *
@@ -316,6 +327,22 @@ class EntryDataAccessor {
     return $Entries;
   }
 
+  private function getListOfEntryBrief($resultOfSelect) {
+    $Entries[] = new Entry();
+    $count = 0; // 30
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
+      
+      $Entries[] = new Entry(); //31
+      // 32
+      $Entries[$count]->setEntryId($list['ent_entry_id']);
+      $Entries[$count]->setEntryLanguage($list['lan_lang_name']);
+      $Entries[$count]->setEntryText($list['ent_entry_text']);
+      $count++;
+    } // 33
+    // 34,35
+    return $Entries;
+  }
+  
   /**
    * getEntryBrief($resultOfSelect)
    * To retrieve only some fields of one entry for the phrase search result page.
