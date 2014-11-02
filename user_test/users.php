@@ -36,6 +36,7 @@
         ?>
 
         <?php echo "The user is: " . $fname . "<br>"; ?>
+      <?php echo "Location: " . $location . "<br>"; ?>
 
         <?php
       } // end of foreach loop
@@ -93,7 +94,21 @@
 
 //getUserByLanguage
 
+    
+     echo "<br/><br/><b>===USER BY ID</b><br/>";
+
     $userManager = new UserManager();
+    $US = $userManager->getUserByUserId(1);
+    //foreach ($US as $user) {
+      $email = $user->getEmail();
+      $loc = $user->getLocation();
+ $db = $user->getDOB();
+      echo "The Email is: " . $email . "<BR>";
+      echo "LOCATION ID: " . $loc . "<BR>";
+      echo "brith ID: " . $db . "<BR>";
+    //}
+
+    //$userManager = new UserManager();
     $Users = $userManager->getUserByLanguage("English");
 
     echo "<br/><br/><br/><b>USERS BY LANGUAGE</b><br>";

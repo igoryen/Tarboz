@@ -30,6 +30,11 @@ class LocationManager {
     return $Locations;
   }
 
+public function getCountriesNameById($countryid) {
+    $LocationDataAccessor = new LocationDataAccessor();
+    $result = $LocationDataAccessor-> getCountriesNameById($countryid);
+    return $result;      
+}
   public function getCountryByCityName($cityname) {
     $LocationDataAccessor = new LocationDataAccessor();
     $result = $LocationDataAccessor->getCountryByCityName($cityname);

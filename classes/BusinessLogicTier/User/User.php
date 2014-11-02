@@ -87,7 +87,7 @@ class User {
   }
 
   public function setDOB($DOB) {
-    $this->DOB = $DOB;
+    $this->usr_DOB = $DOB;
   }
 
   public function getLocation() {

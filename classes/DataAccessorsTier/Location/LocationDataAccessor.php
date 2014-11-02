@@ -86,6 +86,18 @@ public function getCountries() {
     return $loc;
   }
 
+public function getCountriesNameById($countryid) {
+
+    //Selecting country by City Name
+    $query = "select * from tbl_country where con_country_id=".$countryid;
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $loc = $this->getCountryList($result);
+
+    return $loc;
+  }
+    
   //for search
 public function getCountryByCityName($cityname) {
 
@@ -459,10 +471,9 @@ $Country = new Location();
   private function getCountryList($selectResult) {
     //Counter that keeps count of the users
     $count = 0;
+   
     while ($list = mysqli_fetch_assoc($selectResult)) {
-
-      $Countries[] = new Location();
-
+    $Countries[] = new Location();
       $Countries[$count]->setCountryId($list['con_country_id']);
       $Countries[$count]->setCountryName($list['con_country_name']);
       $Countries[$count]->setCountryCode($list['con_country_code']);
@@ -477,9 +488,9 @@ $Country = new Location();
     //Counter that keeps count of the users
     //$Provinces[] = new Location();
     $count = 0;
+    $Provinces[] = new Location();
+      
     while ($list = mysqli_fetch_assoc($selectResult)) {
-
-      $Provinces[] = new Location();
 
       $Provinces[$count]->setProvinceId($list['pro_province_id']);
       $Provinces[$count]->setProvinceName($list['pro_province_name']);
@@ -519,8 +530,9 @@ $Country = new Location();
   private function getAddressList($selectResult) {
     //Counter that keeps count of the users
     $count = 0;
+    $address[] = new Location();
     while ($list = mysqli_fetch_assoc($selectResult)) {
-      $address[] = new Location();
+        
       $address[$count]->setAddressId($list['loc_location_id']);
       $address[$count]->setAddress($list['loc_address']);
       $address[$count]->setPostalCode($list['loc_postalcode']);
