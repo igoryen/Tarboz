@@ -27,10 +27,10 @@
             $ratingid = $users->getUserRatingId();
             $emailsub = $users->getEmailSub();
 ?>   
-            <div> <a href="userview.php?id=<?php echo $uid ?>&name=<?php echo $fname ?>"><?php echo "".$fname."".$lname  ?></a></div>
-            <div> <a href="userview.php?id=<?php echo $uid ?>&name=<?php echo $fname ?>"><?php echo "".$fname."".$lname  ?></a></div>
-            <div> <a href="userview.php?id=<?php echo $uid ?>&name=<?php echo $fname ?>"><?php echo "".$fname."".$lname  ?></a></div>
-            <div> <a href="userview.php?id=<?php echo $uid ?>&name=<?php echo $fname ?>"><?php echo "".$fname."".$lname  ?></a></div>
+            <div> <a href="other_user.php?id=<?php echo $uid ?>&name=<?php echo $fname ?>"><?php echo "".$fname."".$lname  ?></a></div>
+            <div> <a href="other_user.php?id=<?php echo $uid ?>&name=<?php echo $fname ?>"><?php echo "".$fname."".$lname  ?></a></div>
+            <div> <a href="other_user.php?id=<?php echo $uid ?>&name=<?php echo $fname ?>"><?php echo "".$fname."".$lname  ?></a></div>
+            <div> <a href="other_user.php?id=<?php echo $uid ?>&name=<?php echo $fname ?>"><?php echo "".$fname."".$lname  ?></a></div>
 <?php
         }
      }
