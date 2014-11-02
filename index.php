@@ -12,6 +12,13 @@ $selectbox = array('id'=> 'txtLang','name'=>'txtLang');
 $translator->getLanguagesSelectBox($selectbox);
 //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
 require("search.php");
+
+require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
+
+$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2); // 1
+echo "the language: " . $lang;
+$em = new EntryManager();
+$aryOfEntry = $em->getListOfEntryBriefByLanguage($lang);
     
  ?>
 
@@ -59,19 +66,17 @@ require("search.php");
 							</ol>
 						</td>
 						<td>
-							Original Entries in<br> the Language
-							<ol type="circle">
-								<li>This is a sentence 1</li>
-								<li>This is a sentence 2</li>
-								<li>This is a sentence 3</li>
-								<li>This is a sentence 4</li>
-								<li>This is a sentence 5</li>
-								<li>This is a sentence 6</li>
-								<li>This is a sentence 7</li>
-								<li>This is a sentence 8</li>
-								<li>This is a sentence 9</li>
-								<li>This is a sentence 10</li>
-							</ol>
+              Original Entries in<br> <?php echo $aryOfEntry[0]->getEntryLanguage();?>
+							<ol type="circle"><?php
+              // TODO: add an if() in case the current request does not have the Accept-Language: header 
+                  for($i = 0; $i < 10; $i++) {
+                    echo '<li>';
+                    echo '<a href="entryview.php?id='.$aryOfEntry[$i]->getEntryId() . '">'; 
+                    echo substr($aryOfEntry[$i]->getEntryText(), 0, 15) . '...';
+                    echo '</a>';
+                    echo '</li>';  
+                  }
+							?></ol>
 						</td>
 					</tr>
 					<tr>

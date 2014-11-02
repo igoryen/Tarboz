@@ -2,3 +2,4 @@
 2. To convert the mysql_result object into an associative array
 3. echo "<br>dbh::executeSelect(sql) sql:<br>" . $sql;
 4. echo "<br> dbh::executeQuery() result: " . print_r($result);
+5.
