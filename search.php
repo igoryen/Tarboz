@@ -1,5 +1,6 @@
 <?php
 // for translator
+require("header.php");
 require_once('plug-in/translate/config.inc.php');
 require_once('plug-in/translate/class/ServicesJSON.class.php');
 require_once('plug-in/translate/class/MicrosoftTranslator.class.php');
@@ -14,23 +15,18 @@ $translator->getLanguagesSelectBox($selectbox);
     <div>
       <div>
         
-        <input type="text" 
-               name="txtString" 
-               id="txtString" 
-               class="keyboardInput"><!--1-->
-        
+        <div><input type="text" name="txtString"  id="txtString"  class="keyboardInput"></div><!--1-->
+          <br />
+        <div align="center">
+                <a  class="search_button" href="#" id="getdata-button">Search</a>
+        </div>
         <?php //echo $translator->response->languageSelectBox; ?>
-        <br>
-        <a class="black pl10" 
-           href="#" 
-           id="getdata-button">Search</a>
-        <div id="loader">&nbsp;</div>
+    
+        
         
         <!-- 3 -->
         <!--<div class="bgwhite width500" id="showdata"></div>-->
- 
-        
-        
+         
         <p style="font-size:20px; ">
           <!--
         <select name="src_lang">
