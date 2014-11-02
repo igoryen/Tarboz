@@ -23,7 +23,7 @@
 
             $arrayval[$i]=$countryname;
              
-             echo "The user is: " . $countryname . "<br/>";
+             echo "The user is: testest" . $countryname . "<br/>";
 
 
           } // end of foreach loop
@@ -55,7 +55,7 @@
              
             ?>
 
-            <?php echo "The user is: " . $ProvinceName . "<br>"; ?>
+            <?php echo "The user is: test" . $ProvinceName . "<br>"; ?>
 
             <?php
           } // end of foreach loop
@@ -86,7 +86,7 @@
 
         if ($userCount > 0) {
 
-          foreach ($citybyCountryid as $cities) {
+          foreach ($userCount as $cities) {
 
             $cityid = $cities->getCityId();
             $cityname = $cities->getCityName();

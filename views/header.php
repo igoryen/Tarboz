@@ -1,5 +1,5 @@
 <?php
-  require_once("config.php");
+  require_once("../../config.php");
   // echo "dirname  DOCUMENT_ROOT: " . dirname($_SERVER['DOCUMENT_ROOT']) . "<br>"; 
   // echo "dirname  __FILE__  " . dirname(__FILE__) . "<br>"; 
   // echo "basename  __FILE__ : " . basename(__FILE__) . "<br>"; 
@@ -28,8 +28,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   <link rel="stylesheet" type="text/css" href="plug-in/virtual_keyboard/keyboard.css">
   <script type="text/javascript" src="plug-in/virtual_keyboard/keyboard.js" charset="UTF-8"></script>
   <!--   End    -->
-  <link rel="stylesheet" type="text/css" href="style/css/style.css"/>
-  <link rel="shortcut icon" href="images/watermelon8.png"/>
+  <link rel="stylesheet" type="text/css" href="../../style/css/style.css"/>
+  <link rel="shortcut icon" href="../images/watermelon8.png"/>
    
    <!-- Extra libraries -->
    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -68,10 +68,6 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                   document.getElementById("user_name").innerHTML="";
                   <?php session_destroy(); $user=""; ?>
                 }
-            //alert("username innerHtml: "+$('#user_name').html());
-            if($('#user_name').html() =="") {
-                $('#menu_user_index').css({'display': 'none'});
-            }
 
           });//end if call_it onlick event
 
@@ -86,7 +82,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
            $("#sub").click(function(){
             //To keep count of the number of times, requested
              
-            $.post("user_test/login.php",
+            $.post("../user_test/login.php",
               {
                 userid: $("#userlogin").val(),
                 password: $("#userpassword").val(),
@@ -107,8 +103,6 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
                 //When Successful it will print the user's name beside the logout
                 document.getElementById("user_name").innerHTML=username;
-                                    
-                $('#menu_user_index').css({'display': ''});
                 
                 //When logged in successful, it will close the window
                 $( "#login" ).dialog("close");
@@ -166,13 +160,13 @@ div.showdata{
 
         <div class="header_row">
           <div class="table-cell" style="text-align: left;">
-            <a href=""><img src="images/logo.png" height="50"></a>
+            <a href=""><img src="../../images/logo.png" height="50"></a>
           </div>
           <nav id="navigation">
               <a href="/Tarboz/index.php">Home</a> 
               <a href="/Tarboz/entrycreate.php">Create an Entry</a>
-              <a href="views/profile/profile.php">[user view]</a>
-              <a href="/Tarboz/userview.php">[user view 2]</a>
+              <a href="/Tarboz/userviewhtml.php">[user view]</a>
+              <a href="/views/profile/profile.php">[user view 2]</a>
           </nav>
           <div class="table-cell" style="text-align: right;">
             <a href="#" id="call_it" class="login_button">Login</a> 
