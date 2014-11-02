@@ -1,0 +1,1 @@
+1. echo "<br>entryview.php:: this is an original, i.e. " .$entry->getEntryAuthenStatusId() . "<br>";

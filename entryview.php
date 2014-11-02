@@ -127,7 +127,12 @@ $user =       $entry->getEntryUserId();
     <div class="entry_record">
       <div class="entry_record_title">Edit</div>
       <div class="entry_record_value">
-        <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
+        <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1--><?php
+        if($entry->getEntryAuthenStatusId() == 1){
+          // 1*?>
+        &nbsp;|&nbsp; <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a><?php
+        }
+        ?>
       </div>      
     </div>
     
