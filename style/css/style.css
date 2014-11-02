@@ -111,12 +111,12 @@ background-size: contain;
 /* box-shadow: 2px 1.5px 2px #999; */
 color: #000;
 font-size: 25pt;
-height: 8%;
+height: 48px;
 /* margin: auto; */
 /* margin-left: 2.5%; */
 /* margin-top: 1%; */
 padding-left: 5%;
-width: 83%;
+width: 908px;
 }
 /*
 #searchinput {
@@ -1239,4 +1239,12 @@ div#footer > div > a {
 .user_info_space {
     padding-left: 20px;
     font-size: 20px;
+}
+
+.search_button {
+    background: #12A1FF;
+    padding: 10px 60px;
+    font-size: 20px;
+    color: #ffffff;
+    text-decoration:none; 
 }
