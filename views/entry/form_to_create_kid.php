@@ -1,5 +1,5 @@
 <?php
-function form_to_create_entry(){
+function form_to_create_kid($dad){
   ?>
   <!-- 1 -->
   <form action="" method="post">
@@ -8,14 +8,24 @@ function form_to_create_entry(){
 //    date_default_timezone_set('America/Toronto');
 //    echo "<br>Today: " . date("Y-m-d H:i:s");
     ?>
-    <br>views/entry/form_to_<mark>create</mark>_entry.php
+    <br>views/entry/form_to_<mark>create</mark>_kid.php
     <div id="entry_create_form">
       
       <div class="entry_create_row">
-        <div id="entry_create_form_title">Create entry
+        <div id="entry_create_form_title">Create a translation
           <div class="note">
             Note: fields marked with the red asterisk (<span class="Painted_red">*</span>) are mandatory.
           </div>
+        </div>
+      </div>
+      
+      <!-- ent_entry_text -->
+      <div class="entry_create_row">
+        <div class="entry_create_record_title">Text of the original</div>
+        <div class="entry_create_record_value">
+          <textarea rows="10" cols="50" readonly><?php
+            echo nl2br($dad->getEntryText());
+          ?></textarea>
         </div>
       </div>
       
@@ -85,20 +95,11 @@ function form_to_create_entry(){
 
 
       <!-- entry_authen_status_id -->
-      <div class="entry_create_row">
-        <div class="entry_create_record_title">Authenticity status <span class="Painted_red">*</span> </div>
-        <div class="entry_create_record_value">
-          <select name="authen">
-            <option value="" selected="selected">This phrase is ...</option>
-            <option value="1">Original</option>
-            <option value="2">Translation</option>
-            <option value="3">Unknown</option>
-          </select>
-        </div>
-      </div>
+      <input name="authen" value="2" hidden/><!-- 1 -->
 
       <!-- the value of ent_entry_translation_of will be dealt with separately -->
-      <input name="translOf" value="" hidden/>
+      <input name="translOf" value="<?php echo $dad->getEntryId(); ?>" hidden/>
+      
       <!-- the value of ent_entry_creator_id will be supplied automatically -->
       <!-- the value of ent_entry_media_id will be delivered ... -->
       <!-- the value of ent_entry_comment_id willl be .... -->

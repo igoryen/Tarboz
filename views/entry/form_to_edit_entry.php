@@ -94,7 +94,9 @@ Entry/form_to_<mark>edit</mark>_entry.php
         <div class="entry_create_record_value">
           <textarea name="verbatim" 
                     id="verbatim"  
-                    rows="3" cols="50" readonly ></textarea>
+                    rows="3" cols="50" readonly ><?php
+          echo $entry->getEntryVerbatim();
+                    ?></textarea>
         </div>
       </div>
       
