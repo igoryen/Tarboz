@@ -4,10 +4,12 @@ $(document).ready(function(){
 	//$('#loader').ajaxLoader();
 	$('#getdata-button').live("click", function(){
     	//$('#loader').ajaxLoader();
-    	var text = document.getElementById('txtString').value
+    	var text = document.getElementById('txtString').value;
     	//var lang = document.getElementById('txtLang').value;
+      //alert('text: ' + text);
       var lang = 'en'; // 141029
-    	var json_url = 'translator.php?text='+ text +'&to='+lang;  
+    	var json_url = 'translator.php?text='+ text +'&to='+lang;
+      //alert('json_url: ' + json_url);
 		$.getJSON(json_url, function(data) {	
 			//alert(data); //uncomment this for debug
 			//alert (data.item1+" "+data.item2+" "+data.item3); //further debug
@@ -34,8 +36,9 @@ $(document).ready(function(){
         window.location.href = 'searchresult.php?verbatim='+ verbatim;
       }
 			else
-			$('#showdata').html("<p>Error ="+data.errorReason+"</p>");			
+			//$('#showdata').html("<p>Error ="+data.errorReason+"</p>");
 			//$('#loader').ajaxLoaderRemove();
+        alert("Error ="+data.errorReason);
 		});
 	});
     

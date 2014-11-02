@@ -75,17 +75,15 @@ class EntryDataAccessor {
    * @return $resultOfEntryUpdate
    */
   public function updateEntry($entry) {
+    
     $entryId = $entry->getEntryId();
-    $text = $entry->getEntryText();
-    /*
-     * TODO: create the verbatim of $text using the Bing translator
-     */
-    //$verbatim = $entry->getEntryVerbatim();
+    $text = mysql_real_escape_string($entry->getEntryText());
+    $verbatim = mysql_real_escape_string($entry->getEntryVerbatim());
 
     /*
      * TODO: transliterate the value of $text using ...
      */
-    $translit = $entry->getEntryTranslit();
+    $translit = mysql_real_escape_string($entry->getEntryTranslit());
     //$authsid = $entry->getEntryAuthenStatusId();
     //$translOf = $entry->getEntryTranslOf();
     //$userId = $entry->getEntryUserId();
@@ -102,7 +100,7 @@ class EntryDataAccessor {
      */
     $query = "UPDATE tbl_entry SET "
             . "ent_entry_text = '$text',"
-            //. "ent_entry_verbatim = '$verbatim',"
+            . "ent_entry_verbatim = '$verbatim',"
             . "ent_entry_translit = '$translit',"
             //. "ent_entry_authen_status_id = '$email',"
             //. "ent_entry_translation_of = '$translOf',"
