@@ -64,7 +64,9 @@ Entry/form_to_<mark>edit</mark>_entry.php
           Text of the phrase <span class="Painted_red">*</span> 
         </div>
         <div class="entry_create_record_value">
-          <textarea name="text" rows="10" cols="50"><?php
+          <textarea name="text"
+                    id="txtString2"
+                    rows="10" cols="50"><?php
           echo $entry->getEntryText();
           ?></textarea>
         </div>
@@ -83,27 +85,18 @@ Entry/form_to_<mark>edit</mark>_entry.php
       -->
 
       <!-- ent_entry_verbatim to be created automatically -->
-      <!--
+      <!-- ent_entry_verbatim will be created automatically -->
       <div class="entry_create_row">
+        
         <div class="entry_create_record_title">
-           Verbatim
+          <a href="#" id="create-verbatim-button">Recreate verbatim</a><br>
         </div>
         <div class="entry_create_record_value">
-          <input name="verbatim" 
-                    placeholder="Enter the text of the phrase"/><?php
-//            // if we have an id, then it's an UPDATE operation
-//            if($_GET['id']){
-//              // display the text of the entry gotten by the ID from the DB
-//              print $entry->getEntryText();
-//            } // if it's a CREATE operation
-//            else{
-//              // display the entry's text from the POST
-//              print $_POST['text'];
-//            }
-        ?>
+          <textarea name="verbatim" 
+                    id="verbatim"  
+                    rows="3" cols="50" readonly ></textarea>
         </div>
       </div>
-      -->
       
 
       <!-- ent_entry_translit -->

@@ -26,7 +26,7 @@
   // 3
   $text_error = "";
   //etc...  
-  echo 'entrycreate.php: $_GET[verbatim] is: '. $_GET['verbatim'];
+  //echo 'entrycreate.php: $_GET[verbatim] is: '. $_GET['verbatim'];
   if($_POST){ // 4
     echo 'entrycreate.php: $_POST is populated';
  
@@ -46,9 +46,9 @@
         // 11, 29, 39 
         $entry->setEntryId(         $_GET['id']);
         //$entry->setEntryLanguage($_POST['language']); // 30 (?)
-        $entry->setEntryText(mysql_real_escape_string((($_POST['text']))));
-        //$entry->setEntryVerbatim($_POST['verbatim']);
-        $entry->setEntryTranslit(mysql_real_escape_string((($_POST['translit']))));
+        $entry->setEntryText($_POST['text']);
+        $entry->setEntryVerbatim($_POST['verbatim']);
+        $entry->setEntryTranslit($_POST['translit']);
         //$entry->setEntryAuthenStatusId($_POST['authen']);
         $entry->setEntryTranslOf(   NULL); // $_POST['transl_of']);
         //$entry->setEntryUserId(     '3'); //$_POST['creator']);
