@@ -77,6 +77,7 @@ class UserManager {
   public function getUserByUserId($userid) {
     $userDataAccessor = new UserDataAccessor();
     $users = $userDataAccessor->getUserByUserId($userid);
+      
     return $users;
   }
 

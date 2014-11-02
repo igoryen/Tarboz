@@ -1,5 +1,5 @@
 body{
-  /*background: url("../../images/background.jpg") no-repeat center center fixed;*/ 
+  background: url("../../images/background.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -1151,115 +1151,92 @@ div#footer > div > a {
   top:1px;
 }
 
-/***********************Modify search's Keyboard******************************/
-#keyboardInputMaster tbody tr td table tbody tr td {
-vertical-align: middle;
-padding: 0px 0.45em;
-white-space: pre;
-height: 4em;
-font-family: 'Lucida Console','Arial Unicode MS',monospace;
-border-top: 1px solid #e5e5e5;
-border-right: 1px solid #5d5d5d;
-border-bottom: 1px solid #5d5d5d;
-border-left: 1px solid #e5e5e5;
-background-color: #eeeeee;
-cursor: default;
-min-width: 2.75em;
--webkit-border-radius: 0.2em;
--moz-border-radius: 0.2em;
-border-radius: 0.2em;
--webkit-transition: background-color .15s ease-in-out;
--o-transition: background-color .15s ease-in-out;
-transition: background-color .15s ease-in-out;
-font-size: 2em;
+/******user list view********/
+.userlist_icon:before{
+    content: " ";
+    display: block;
+    background: url("../../images/user_list.png") no-repeat;    
+    width: 20px;
+    height: 20px;
+    float: left;
+    padding: 0px 10px;
+}
+.userlist_icon {
+    width: auto;
+    font-size: 20px;
+    background-color: #00CCFF;
+    padding: 10px;
 }
 
-// space
-#keyboardInputMaster tbody tr td table tbody tr td.space {
-padding: 0px 23em;
+#scroll_list {
+    width:auto;
+    max-height: 500px;
+    line-height:2.5em;
+    font-size: 13px;
+    overflow:auto;
+    background-color:#FCFADD;
+    color:#714D03;
+    padding: 20px 10px;
 }
 
-// us international
-#keyboardInputMaster thead tr th div {
-float: left;
-font-size: 31px !important;
-height: initial;
-font-weight: bold;
-position: relative;
-z-index: 1;
-margin-right: 0.5em;
-cursor: pointer;
-background-color: transparent;
+#scroll_list > div > a:before{
+    content: " ";
+    display: block;
+    background: url("../../images/user.png") no-repeat;    
+    width: 30px;
+    height: 30px;
+    float: left;
+    padding: 0px 3px;
 }
 
-// selection language
-#keyboardInputMaster thead tr th div ol li {
-padding: 0.2em 0.4em;
-cursor: pointer;
-white-space: nowrap;
-width: 12em;
-font-size: 2em;
+/**************profile***************/
+
+.container{
+    display:table;
+    border-collapse: collapse;
+    text-align: left;
+    background: #ffffff;
 }
 
-// selection box
-#keyboardInputMaster thead tr th div ol {
-position: absolute;
-left: 0px;
-top: 90%;
-list-style-type: none;
-overflow-y: auto;
-overflow-x: hidden;
-background-color: #f6f6f6;
-border: 1px solid #999999;
-/*display: none;*/
-text-align: left;
-width: 24em;
-height: 33em;
+.heading {
+    font-weight: bold;
+     display:table-row;
+     font-size: 14px;
+     color:#000000;
 }
 
-#keyboardInputMaster thead tr th div ol li {
-padding: 0.2em 0.4em;
-cursor: pointer;
-white-space: nowrap;
-width: 12em;
-font-size: 2em;
+.col {
+    display:table-cell;
 }
 
-#keyboardInputMaster thead tr th div {
-float: left;
-font-size: 31px !important;
-height: initial;
-font-weight: bold;
-position: relative;
-z-index: 1;
-margin-right: 0.5em;
-cursor: pointer;
-background-color: transparent;
+.col_image {
+    display:table-cell;
+    height: auto;
 }
 
-#keyboardInputMaster thead tr th span, 
-#keyboardInputMaster thead tr th strong, 
-#keyboardInputMaster thead tr th small, 
-#keyboardInputMaster thead tr th big {
-display: inline-block;
-padding: 0px 0.4em;
-/* height: 3em; */
-/* width: 3em; */
-font-size: 25px;
-line-height: 1.4em;
-border-top: 1px solid #e5e5e5;
-border-right: 1px solid #5d5d5d;
-border-bottom: 1px solid #5d5d5d;
-border-left: 1px solid #e5e5e5;
-background-color: #cccccc;
-cursor: pointer;
-margin: 0px 0px 0px 0.3em;
--webkit-border-radius: 0.3em;
--moz-border-radius: 0.3em;
-border-radius: 0.3em;
-vertical-align: middle;
--webkit-transition: background-color .15s ease-in-out;
--o-transition: background-color .15s ease-in-out;
-transition: background-color .15s ease-in-out;
+.col_info {
+    display:table-cell;
+    height: auto;
+    vertical-align: top;
+    width: 600px;
 }
-/*************************************************************************/
+
+.col_userlist {
+    display:table-cell;
+    width: 300px;
+    vertical-align: top;
+}
+
+.col_space {
+    display:table-cell;
+    width: 20px
+}
+
+.row_space {
+    height: 20px;
+}
+
+.user_info_space {
+    padding-left: 20px;
+    font-size: 20px;
+}

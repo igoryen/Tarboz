@@ -126,7 +126,6 @@ class UserDataAccessor {
     $User = new User();
     $count = 0;
     while ($list = mysqli_fetch_assoc($selectResult)) {
-      //usr_user_id,`usr_first_name`, `usr_last_name`, `usr_login`, `usr_password`, `usr_email`, `usr_DOB`, `usr_registration_date`, `usr_user_type_id`, `usr_language`, `usr_email_subscribed`
 
       $User->setUserId($list['usr_user_id']);
       $User->setFirstName($list['usr_first_name']);
@@ -135,11 +134,12 @@ class UserDataAccessor {
       //$User->setUserRatingId($list['']);
       $User->setEmail($list['usr_email']);
       $User->setDOB($list['usr_DOB']);
-      //$User->setLocation($list['']);
+      $User->setLocation($list['usr_location_id']);
       $User->setRegistration_date($list['usr_registration_date']);
       $User->setUserType($list['usr_user_type_id']);
       $User->setUserLanguage($list['usr_language']);
       $User->setEmailSub($list['usr_email_subscribed']);
+      $User->setMediaId($list['usr_media_id']);
 
     } // while
 
@@ -170,11 +170,12 @@ class UserDataAccessor {
       //$Users[$count]->setUserRatingId($list['']);
       $Users[$count]->setEmail($list['usr_email']);
       $Users[$count]->setDOB($list['usr_DOB']);
-      //$Users[$count]->setLocation($list['']);
+      $Users[$count]->setLocation($list['usr_location_id']);
       $Users[$count]->setRegistration_date($list['usr_registration_date']);
       $Users[$count]->setUserType($list['usr_user_type_id']);
       $Users[$count]->setUserLanguage($list['usr_language']);
       $Users[$count]->setEmailSub($list['usr_email_subscribed']);
+      $Users[$count]->setMediaId($list['usr_media_id']);
       $count++;
     } // while
     return $Users;
@@ -237,9 +238,11 @@ class UserDataAccessor {
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
-    $Users = $this->getUserList($result);
+    $Users = $this->getUser($result);
+      
     return $Users;
   }
+
 }
 
 ?>
