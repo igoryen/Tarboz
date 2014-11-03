@@ -66,7 +66,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               else{
                   document.getElementById("call_it").innerHTML="Login";
                   document.getElementById("user_name").innerHTML="";
-                  <?php session_destroy(); $user=""; ?>
+                  
                 }
             //alert("username innerHtml: "+$('#user_name').html());
             if($('#user_name').html() =="") {
@@ -112,7 +112,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                 
                 //When logged in successful, it will close the window
                 $( "#login" ).dialog("close");
-
+                window.location.reload(true);
                 }
                 else {
                   document.getElementById("ftest").innerHTML="<?php echo LOGIN_FAIL; ?>";
@@ -120,6 +120,263 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               });//end of the function(data,status)
 
           });//end of the login button onlick event
+              
+        $("#new_commentSub").click(function(event){
+            //var formdata = $("#new_comment").serialize(); 
+            //alert(formdata);
+            if ($('#user_login_status').val() == "N") {
+                
+                //call login panel
+                $("#forgotpwd").show();
+                //resetting, some of the usertexboxes and the messages
+                document.getElementById("ftest").innerHTML="";
+                $('#userlogin').val('');
+                $('#userpassword').val('');
+                alert("1"+$("#call_it").html());
+                    //resetting the texboxes
+                  if($.trim($("#call_it").html())=="Login"){
+                      $( "#login" ).dialog( "open" );  
+                      alert("use not logged in");
+                    }
+                //alert("username innerHtml: "+$('#user_name').html());
+                if($('#user_name').html() =="") {
+                    $('#menu_user_index').css({'display': 'none'});
+                }
+            } //end if ($('#user_login_status').val() == "N")
+            else {
+                var new_comment = encodeURIComponent($.trim ($('#newComment').val() ));
+                var comment_entity_id = encodeURIComponent($.trim ($('#commentEntityId').val() ));
+                $.ajax({
+                    url: "user_test/new_comment.php",
+                    type: "POST",
+                    data: {
+                             newComment: new_comment,
+                             commentEntityId: comment_entity_id
+                            },
+                    success: 
+                      function(data, status) {
+                        //alert(data);
+                        if (data.indexOf('succeed') >0) {
+                          $('#add_comment_result').html=$.trim ($('#newComment').val() );
+                        } else if (data.indexOf( 'fail') >0) {
+                          alert(data);
+                        }
+                        window.location.reload(true);
+                      },
+                    error:
+                      function() {
+                          alert("ajax error");
+                      }                
+                }); //end $.ajax()
+                event.preventDefault();
+            } //end else
+        });
+          
+        $(".editCommentSub").click( function(event) { //edit comment
+            var this_id = $(this).attr('id');
+            var edit_id_num = this_id.substring(this_id.indexOf("_")+1);
+            var textarea_id = "#editCommentText_"+edit_id_num;
+            var input_hidden_id = "#editCommentId_"+edit_id_num;
+
+            //alert("edit id:"+edit_id_num);
+            //alert("textarea_id: "+textarea_id);
+            //alert("input_hidden_id: "+input_hidden_id);
+            //alert("edit comment text: "+$(textarea_id).val());
+            //alert("edit comment id: "+$(input_hidden_id).val());
+            
+            var editCommentData = encodeURIComponent($.trim ($(textarea_id).val() ));
+            var editCommentId = encodeURIComponent($(input_hidden_id).val());
+
+            $.ajax({
+                url: "user_test/edit_comment.php",
+                type: "POST",
+                cache: false,
+                data: 
+                {
+                    editComment : editCommentData,
+                    editCommentId: editCommentId
+                },
+                success:
+                  function(data, status) {
+                    //alert(data);
+                    if(data.indexOf("succeed")>0) {                                   
+                       location.reload(true);
+                    } else if (data.indexOf("fail") >0) {
+                      alert(data);
+                    }                                
+                  }, //end of function(data, status) and success function
+                error:
+                  function() {
+                    alert("ajax error");  
+                  } 
+                
+             });//end $.ajax()*/
+            event.preventDefault();
+          });
+          
+        $('.deleteComment').click(	function (event) {
+            var delete_comment_id = $(this).attr('id');
+            //alert("delete comment id: "+delete_comment_id);
+            var delete_id = delete_comment_id.substring(delete_comment_id.indexOf("_")+1);
+            //alert("delete id: "+delete_id);
+            $.ajax({
+                url: "user_test/delete_comment.php",
+                type: "POST",
+                data: 
+                {
+                    deleteCommentId : delete_id
+                },
+                success:
+                  function(data, status) {
+                    //alert(data);
+                    if(data.indexOf("succeed")>0) {                                   
+                       location.reload(true);                            
+                    } else if (data.indexOf("fail") >0) {
+                      alert(data);
+                    }                                
+                  }, //end of function(data, status) and success function
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }                 
+            });//end $.ajax()*/
+            event.preventDefault();
+        });
+
+        $('.comment_like').click( function (event) {
+            //$(this).css({'display': 'none'}); 
+            //$(this).next().css({'display': ''})
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_")); //alert("user id: "+user_id);
+            var comment_id = this_id.substring(this_id.lastIndexOf("_")+1); //alert("comment id: "+comment_id);
+            var is_like = "";
+            //alert("inner text: "+$(this).text());
+            if($(this).text().trim() == "Like" ){
+                is_like = "Y";
+                $(this).text("Unlike");
+            } else if ($(this).text().trim() == "Unlike") {
+                is_like = "N";
+                $(this).text("Like");
+            }
+            $.ajax({
+               url: "user_test/comment_rating.php",
+               type: "POST",
+               data: {
+                    commentId : comment_id,
+                    userId : user_id,
+                    isLike : is_like
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           
+                       } else  if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+        });
+          
+        $('.reportComment').click( function(event) {
+            if ($(this).next().css('display') == 'none') {
+                $(this).next().css({'display': 'block'});
+            } else if ($(this).next().css('display') == 'block') {
+                $(this).next().css({'display': 'none'});
+            }
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_"));
+            var comment_id = this_id.substring(this_id.lastIndexOf("_")+1);
+        });
+          
+        $('button.reportCommentSub').click( function(event) { //add a report
+            var this_id = $(this).attr('id');
+            var entity_id = this_id.substring(this_id.indexOf("_")+1);
+            var entity_for_report = "comment";
+            var textarea_id = "#reportCommentReason_"+entity_id;
+            var hidden_id = "#reportCommentBy_"+entity_id;
+            
+            var report_reason = encodeURIComponent($.trim ($(textarea_id).val() ));
+            var reported_by = encodeURIComponent($(hidden_id).val()); //alert("reported by: "+reported_by);
+            $.ajax({
+               url: "user_test/reporting_comment.php",
+               type: "POST",
+               data: {
+                    entityId : entity_id,
+                    entityForReport : entity_for_report,
+                    reportReason : report_reason,
+                    reportedBy: reported_by
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           if(data.indexOf("error")>0 ) {
+                               alert("Mailer error! ");
+                           }
+                           location.reload(true); 
+                       } else if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+            
+        });
+        $('button.reportCommentCancel').click( function(event) {
+            $('.reportComment').next().css({'display': 'none'});            
+        });
+              
+        $('.entry_like').click( function (event) {
+            //$(this).css({'display': 'none'}); 
+            //$(this).next().css({'display': ''})
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_")); //alert("user id: "+user_id);
+            var entry_id = this_id.substring(this_id.lastIndexOf("_")+1); //alert("entry id: "+entry_id);
+            var is_like = "";
+            //alert("inner text: "+$(this).text().trim());
+            if($(this).text().trim().indexOf("Like") >=0 ){
+                is_like = "Y";
+                $(this).text("Unlike");
+                $('.entry_like_num').css({'display': 'none'});
+            } else if ($(this).text().trim() == "Unlike") {
+                is_like = "N";
+                $(this).text("Like");
+                $('.entry_like_num').css({'display': ''});
+            }
+            $.ajax({
+               url: "user_test/entry_rating.php",
+               type: "POST",
+               data: {
+                    entryId : entry_id,
+                    userId : user_id,
+                    isLike : is_like
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           
+                       } else  if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+        });
   
       });
       
@@ -175,9 +432,9 @@ div.showdata{
               <a href="/Tarboz/userview.php">[user view 2]</a>
           </nav>
           <div class="table-cell" style="text-align: right;">
-            <a href="#" id="call_it" class="login_button">Login</a> 
+            <button id="call_it" class="login_button"><?php if(!isset($_SESSION['user']) ) { ?>Login<?php } else { ?>Logout<?php } ?></button> 
           </div>
-          <div id="user_name"></div>
+          <div id="user_name"><?php if(isset($_SESSION['user']) ) echo $_SESSION['user']->getFirstName(); else echo ""; ?></div>
 
           <div style="width:100px;" title="Login Window" id="login">
              <!--start of the login form div-->
@@ -233,7 +490,7 @@ div.showdata{
               echo "sent";
             }
             else {
-              echo "fail";
+              //echo "fail";
             }
 
 
