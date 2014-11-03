@@ -53,6 +53,24 @@ class TranslationRequestDataAccessor{
     return $arrayOfTreqGottenByLang;                
   }
   
+  public function getTreqByEntryId($id){
+    $query = "SELECT
+                r.treq_entry_id,
+                l.lan_lang_name
+              FROM 
+                tbl_transl_request r
+                  STRAIGHT_JOIN
+                tbl_language l
+              WHERE
+                r.treq_target_lang_id = l.lan_language_id
+              AND  
+                r.treq_entry_id = {$id};";
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeQuery($query);
+    $treqGottenByEntryId = $this->getTreq($result);
+    return $treqGottenByEntryId; 
+  }
+  
   private function getListOfTreq($result){
     //echo "<br><br>trda::getListOfTreq() result: "; $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array); print_r(mysql_fetch_assoc($result));
     $Treqs[] = new TranslationRequest();
@@ -69,6 +87,17 @@ class TranslationRequestDataAccessor{
     return $Treqs;
   }
   
+  private function getTreq($result){
+    //echo "<br><br>trda::getListOfTreq() result: "; $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array); print_r(mysql_fetch_assoc($result));
+    $treq = new TranslationRequest();
+    $list = mysqli_fetch_assoc($result);
+    //$Treqs[$count]->setTreqId($list['treq_id']);
+    $treq->setTreqEntryId($list['treq_entry_id']);
+    //$treq->setTreqEntryLine($list['ent_entry_text']);
+    $treq->setTreqLang($list['lan_lang_name']);
+    //$Treqs[$count]->setTreqDate($list['treq_date']);
+    return $treq;
+  }
   
 }
 

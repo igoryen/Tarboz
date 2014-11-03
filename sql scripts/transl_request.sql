@@ -1,3 +1,16 @@
+---
+SELECT
+  r.treq_entry_id,
+  l.lan_lang_name
+FROM 
+  tbl_transl_request r
+    STRAIGHT_JOIN
+  tbl_language l
+WHERE
+  r.treq_target_lang_id = l.lan_language_id
+AND  
+  r.treq_entry_id = 5
+
 --- v5 get 
 
 SELECT 
