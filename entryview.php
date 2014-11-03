@@ -9,7 +9,9 @@
   require_once BUSINESS_DIR_COMMENT . 'Comment.php';
   require_once BUSINESS_DIR_RATING . 'RatingManager.php';
   require_once BUSINESS_DIR_RATING . 'Rating.php';
-
+  require_once BUSINESS_DIR_TRANSLREQ . 'TranslationRequestManager.php';
+  require_once BUSINESS_DIR_TRANSLREQ . 'TranslationRequest.php';
+  
 //Check if user is logged in or not
   
   if(!isset($_GET['id']) && !isset($_POST['id'])){
@@ -83,7 +85,67 @@ $treq = $trm->getTreqByEntryId($entry->getEntryId());
     </div>
     
     <div class="entry_record">
-      <div class="entry_record_title">Comment
+      <div class="entry_record_title">Tags</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryTags(); ?></div>
+    </div>
+
+    <div class="entry_record">
+      <div class="entry_record_title">Author</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryAuthorId(); ?></div>
+    </div>
+
+    <div class="entry_record">
+      <div class="entry_record_title">Source</div>
+      <div class="entry_record_value"><?php echo $entry->getEntrySourceId(); ?></div>
+    </div>
+
+    <div class="entry_record">
+      <div class="entry_record_title">Use</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryUse(); ?></div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Video link</div>
+      <div class="entry_record_value">
+        <embed width="420" height="315" src="<?php echo $entry->getEntryHttpLink(); ?>">
+      </div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Creation date</div>
+      <div class="entry_record_value"><?php echo $entry->getEntryCreationDate(); ?></div>
+    </div>
+    
+    <div class="entry_record">
+      <div class="entry_record_title">Edit</div>
+      <div class="entry_record_value">
+        <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
+      </div>      
+    </div>
+    
+    <?php
+    if($entry->getEntryAuthenStatusId() == 1){
+    // 1*
+  ?><div class="entry_record">
+      <div class="entry_record_title">Translate this into&nbsp;<?php
+        // TODO: What if there are >1 requests (i.e. >1 languages) to translate this entry?
+        $treqLang = $treq->getTreqLang();
+        if(!null == $treqLang){
+          echo $treq->getTreqLang();
+        }else{
+          echo "a language you know";
+          
+   }?></div>
+      <div class="entry_record_value">
+        <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a>
+      </div>
+    </div><?php
+    }?>
+    
+  <!--- comments section start --->
+  
+      <div class="entry_record">
+      <div class="entry_record_title">Comments
 <?php
   $commentManager = new CommentManager();
   $commentsByEntry = $commentManager->getCommentByEntry($entryId);
@@ -248,64 +310,8 @@ $treq = $trm->getTreqByEntryId($entry->getEntryId());
       </div>
     </div>
     
-    
-    <div class="entry_record" style="margin-left:0px">
-      <div class="entry_record_title">Tags</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryTags(); ?></div>
-    </div>
-
-    <div class="entry_record" style="margin-left:0px">
-      <div class="entry_record_title">Author</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryAuthorId(); ?></div>
-    </div>
-
-    <div class="entry_record" style="margin-left:0px">
-      <div class="entry_record_title">Source</div>
-      <div class="entry_record_value"><?php echo $entry->getEntrySourceId(); ?></div>
-    </div>
-
-    <div class="entry_record" style="margin-left:0px">
-      <div class="entry_record_title">Use</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryUse(); ?></div>
-    </div>
-    
-    <div class="entry_record" style="margin-left:0px">
-      <div class="entry_record_title">Video link</div>
-      <div class="entry_record_value">
-        <embed width="420" height="315" src="<?php echo $entry->getEntryHttpLink(); ?>">
-      </div>
-    </div>
-    
-    <div class="entry_record">
-      <div class="entry_record_title">Creation date</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryCreationDate(); ?></div>
-    </div>
-    
-    <div class="entry_record">
-      <div class="entry_record_title">Edit</div>
-      <div class="entry_record_value">
-        <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
-      </div>      
-    </div>
-    
-    <?php
-    if($entry->getEntryAuthenStatusId() == 1){
-    // 1*
-  ?><div class="entry_record">
-      <div class="entry_record_title">Translate this into&nbsp;<?php
-        // TODO: What if there are >1 requests (i.e. >1 languages) to translate this entry?
-        $treqLang = $treq->getTreqLang();
-        if(!null == $treqLang){
-          echo $treq->getTreqLang();
-        }else{
-          echo "a language you know";
-          
-   }?></div>
-      <div class="entry_record_value">
-        <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a>
-      </div>
-    </div><?php
-    }?>
+  
+  <!--- comments section finish --->
     
   </div><!--entry_index_container-->
   
