@@ -331,7 +331,7 @@
   //Edit comment
   echo "<br/><br/><br/><b>************************</b><br>";
   echo "<br/>=======Edit commment and Delete=====<br/><br/> ";
-  $commentManager = new CommentManager();
+  
   $comments = $commentManager->getAllComments();
 
   $commentCount = count($comments);            

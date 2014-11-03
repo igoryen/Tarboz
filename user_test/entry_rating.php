@@ -22,12 +22,12 @@
     //echo "==========\n";
     if($_POST) {
         
-        $comment_id = (isset($_POST['commentId']) && $_POST['commentId'] != 'undefined' ) ? $_POST['commentId'] : "";
+        $entry_id = (isset($_POST['entryId']) && $_POST['entryId'] != 'undefined' ) ? $_POST['entryId'] : "";
         $user_id = (isset($_POST['userId']) && $_POST['userId'] != 'undefined' ) ? $_POST['userId'] : "";
         $is_like = (isset($_POST['isLike']) && $_POST['isLike'] != 'undefined') ? $_POST['isLike'] : "";
               
-        $entity_id = "com".$comment_id;
-        if ($comment_id != "" && $user_id !="" && $user_id > 0) {
+        $entity_id = "ent".$entry_id;
+        if ($entry_id != "" && $user_id !="" && $user_id > 0) {
             $rm = new RatingManager();
             $rating_like_exist = $rm->hasRatingByEntityLikeUser($entity_id, $user_id);
             $rating_dislike_exist = $rm->hasRatingByEntityDislikeUser($entity_id, $user_id);
@@ -99,7 +99,7 @@
                 }*/
             } //end else update a rating
         } else { 
-            echo "Passing comment id and user id are failed.";
+            echo "Passing entry id and user id are failed.";
         } //end if ($comment_id != "" && $user_id !="")
     } else {
         echo "Post a rating is failed.";
