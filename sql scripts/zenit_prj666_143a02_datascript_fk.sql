@@ -73,6 +73,14 @@ ADD CONSTRAINT `tblEntry_tblSource_ent_entry_source_id_FK`
 ALTER TABLE `prj666`.`tbl_entry` 
 ADD FULLTEXT `tblEntry_verbatim_idx` (`ent_entry_verbatim`)COMMENT '';
 
+ALTER TABLE `prj666`.`tbl_entry`
+ADD INDEX `tblEntry_tblTranslRequest_transl_request_id_FK_idx` (`ent_entry_transl_request_id` ASC);
+ALTER TABLE `prj666`.`tbl_entry`
+ADD CONSTRAINT `tblEntry_tblTranslRequest_ent_entry_transl_request_id_FK`
+ FOREIGN KEY (`ent_entry_transl_request_id`)
+ REFERENCES `prj666`.`tbl_transl_request` (`treq_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
 
 # table entry english
 ALTER TABLE `prj666`.`tbl_entry_english`
@@ -263,6 +271,16 @@ ALTER TABLE `prj666`.`tbl_entry_mandarin`
 ADD CONSTRAINT `tblEntryMandarin_tblSource_source_id_FK`
  FOREIGN KEY (`ent_entry_source_id`)
  REFERENCES `prj666`.`tbl_source` (`sou_source_id`)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION;
+
+##------------table translation request ----------------
+ALTER TABLE `prj666`.`tbl_transl_request` 
+ADD INDEX `tblTranslRequest_tblLanguage_lang_id_FK_idx` (`treq_target_lang_id` ASC);
+ALTER TABLE `prj666`.`tbl_transl_request` 
+ADD CONSTRAINT `tblTranslRequest_tblLanguage_treq_target_lang_id_FK`
+ FOREIGN KEY (`treq_target_lang_id`)
+ REFERENCES `prj666`.`tbl_language` (`lan_language_id`)
  ON DELETE NO ACTION
  ON UPDATE NO ACTION;
 
