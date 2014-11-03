@@ -17,4 +17,9 @@ class TranslationRequestManager{
     return $arrayOfTreqGottenByLang;
   }
   
+  public function getTreqByEntryId($id){
+    $trda = new TranslationRequestDataAccessor();
+    $treq = $trda->getTreqByEntryId($id);
+    return $treq;
+  }
 }

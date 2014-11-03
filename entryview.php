@@ -2,6 +2,8 @@
   
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
+  require_once BUSINESS_DIR_TRANSLREQ . "TranslationRequestManager.php";
+  require_once BUSINESS_DIR_TRANSLREQ . "TranslationRequest.php";
   
   if(!isset($_GET['id']) && !isset($_POST['id'])){
     echo "neither (GET['id']) nor (POST['id'])";
@@ -16,18 +18,10 @@
   }
 
 $em = new EntryManager();
+$trm = new TranslationRequestManager();
 $entry = $em->getEntryById($entryId); // 1
+$treq = $trm->getTreqByEntryId($entry->getEntryId());
 
-  
-$text =       $entry->getEntryText();    
-$translit =   $entry->getEntryTranslit();
-$video_link = $entry->getEntryHttpLink();
-$use =        $entry->getEntryUse();
-$translator = $entry->getEntryAuthorId();
-$time =       "late 20th century";
-$country =    "Russia";
-$form =       "song";
-$user =       $entry->getEntryUserId();
 
 //table_to_see_entry_values($entry); // for debugging
 
@@ -127,16 +121,28 @@ $user =       $entry->getEntryUserId();
     <div class="entry_record">
       <div class="entry_record_title">Edit</div>
       <div class="entry_record_value">
-        <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1--><?php
-        if($entry->getEntryAuthenStatusId() == 1){
-          // 1*?>
-        &nbsp;|&nbsp; <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a><?php
-        }
-        ?>
+        <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
       </div>      
     </div>
     
-    
+    <?php
+    if($entry->getEntryAuthenStatusId() == 1){
+    // 1*
+  ?><div class="entry_record">
+      <div class="entry_record_title">Translate this into&nbsp;<?php
+        // TODO: What if there are >1 requests (i.e. >1 languages) to translate this entry?
+        $treqLang = $treq->getTreqLang();
+        if(!null == $treqLang){
+          echo $treq->getTreqLang();
+        }else{
+          echo "a language you know";
+          
+   }?></div>
+      <div class="entry_record_value">
+        <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a>
+      </div>
+    </div><?php
+    }?>
     
   </div><!--entry_index_container-->
   
