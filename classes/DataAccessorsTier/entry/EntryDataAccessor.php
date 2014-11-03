@@ -299,7 +299,7 @@ class EntryDataAccessor {
     $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief($resultOfSelect);
     return $arrayOfEntryGottenByLanguage;
   }
-
+  
   /**
    *
    * @param type $resultOfSelect
