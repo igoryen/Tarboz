@@ -836,7 +836,8 @@ div#footer > div > a {
   color: silver;
   display: block;
   /*font-family: serif "Georgia";*/
-  font-style: italic;
+  /*font-size: smaller;*/
+  /*font-style: italic;*/
   font-weight: bold;
   margin: auto;
   /*margin-left: 10%;*/
@@ -844,6 +845,7 @@ div#footer > div > a {
   padding: 2px;
   padding-left: 5px;
   padding-right: 5px;
+  text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   width: 55%;
 }
 
