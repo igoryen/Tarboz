@@ -68,7 +68,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                   document.getElementById("user_name").innerHTML="";
                   
                 }
-            //alert("username innerHtml: "+$('#user_name').html());
+            //display profile menu when user login 
             if($('#user_name').html() =="") {
                 $('#menu_user_index').css({'display': 'none'});
             }
@@ -107,7 +107,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
                 //When Successful it will print the user's name beside the logout
                 document.getElementById("user_name").innerHTML=username;
-                                    
+                  
+                 //display profile menu when user login                     
                 $('#menu_user_index').css({'display': ''});
                 
                 //When logged in successful, it will close the window
@@ -430,6 +431,8 @@ div.showdata{
               <a href="/Tarboz/entrycreate.php">Create an Entry</a>
               <a href="views/profile/profile.php">[user view]</a>
               <a href="/Tarboz/userview.php">[user view 2]</a>
+<!--              display profile menu when user login -->
+              <a href="views/profile/profile.php" style="display:none;" id="menu_user_index">Profile</a>
           </nav>
           <div class="table-cell" style="text-align: right;">
             <button id="call_it" class="login_button"><?php if(!isset($_SESSION['user']) ) { ?>Login<?php } else { ?>Logout<?php } ?></button> 
@@ -446,10 +449,7 @@ div.showdata{
                     <input type="password" id="userpassword" placeholder="Password" class="login_input">
                  </p>
                  <p>
-                    <!--Login button                     <div><button class="lw_button" id="sub">Login</button></div>            
-                    <div style="top: 9.1em; position: absolute; left: 12em;"><button class="lw_button">Register</button></div>
-                    <div id="or">or</div>-->
-                    <div style="margin-left: 1em;"><button class="lw_button" id="sub">Login</button>
+                    <div style="margin-left: 0.7em;"><button class="lw_button" id="sub">Login</button>
                       <b id="or">or</b>
                         <button class="lw_button">Register</button></div> 
                  </p> 
