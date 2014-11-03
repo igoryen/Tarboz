@@ -87,21 +87,11 @@ div > nav#navigation > a:hover {
 }
 
 #search {
-background: rgba(255,255,255,0.5);
-/* border: ridge 10px magenta; */
-display: block;
-/* display: inline-block; */
-/* height: auto; */
-/* padding: auto; */
-/* margin-bottom: 2%; */
-/* margin-left: 10%; */
-/* margin-right: 10%; */
-/* margin-top: 1%; */
-/* margin-top: 18px; */
-padding: 10px;
-/* position: relative; */
-text-align: center;
-/* width: 80%; */
+    background: rgba(255,255,255,0.5);
+    display: block;
+    padding: 40px 0px;
+    text-align: center;
+    width: 100%; 
 }
 
 #search input[type=text] {
@@ -109,14 +99,13 @@ background: #FFFFFF url(../../images/searchi.png) no-repeat 0% 51%;
 border: 1px solid white;
 background-size: contain;
 /* box-shadow: 2px 1.5px 2px #999; */
-color: #000;
+color: #000000;
 font-size: 25pt;
 height: 48px;
 /* margin: auto; */
 /* margin-left: 2.5%; */
 /* margin-top: 1%; */
-padding-left: 5%;
-width: 908px;
+width: 931px;
 }
 /*
 #searchinput {
@@ -139,8 +128,8 @@ width: 908px;
 border: 2px solid #eeeded;
 margin-top: 1%;
 /* margin-left: 6%; */
-width: 18%;
-height: 38px;
+width: 268px;
+height: 30px;
 font-size: 17px;
 }
 /* ======= start the 3-column table ========*/
@@ -1256,3 +1245,4 @@ div#footer > div > a {
     text-align: justify;
     min-height: 550px;
 }
+

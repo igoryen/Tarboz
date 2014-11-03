@@ -68,7 +68,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                   document.getElementById("user_name").innerHTML="";
                   <?php session_destroy(); $user=""; ?>
                 }
-            //alert("username innerHtml: "+$('#user_name').html());
+            //display profile menu when user login 
             if($('#user_name').html() =="") {
                 $('#menu_user_index').css({'display': 'none'});
             }
@@ -107,7 +107,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
                 //When Successful it will print the user's name beside the logout
                 document.getElementById("user_name").innerHTML=username;
-                                    
+                  
+                 //display profile menu when user login                     
                 $('#menu_user_index').css({'display': ''});
                 
                 //When logged in successful, it will close the window
@@ -173,6 +174,8 @@ div.showdata{
               <a href="/Tarboz/entrycreate.php">Create an Entry</a>
               <a href="views/profile/profile.php">[user view]</a>
               <a href="/Tarboz/userview.php">[user view 2]</a>
+<!--              display profile menu when user login -->
+              <a href="views/profile/profile.php" style="display:none;" id="menu_user_index">Profile</a>
           </nav>
           <div class="table-cell" style="text-align: right;">
             <a href="#" id="call_it" class="login_button">Login</a> 

@@ -72,7 +72,7 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
               Original Entries in<br> <?php echo $aryOfEntry[0]->getEntryLanguage();?>
 							<ol type="circle"><?php
               // TODO: add an if() in case the current request does not have the Accept-Language: header 
-                  for($i = 0; $i < 10; $i++) {
+                  for($i = 0; $i < 3; $i++) {
                     echo '<li>';
                     echo '<a href="entryview.php?id='.$aryOfEntry[$i]->getEntryId() . '">'; 
                     echo substr($aryOfEntry[$i]->getEntryText(), 0, 25) . '...';
