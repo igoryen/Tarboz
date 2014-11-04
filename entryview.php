@@ -168,7 +168,8 @@ $date = $entry->getEntryCreationDate();
       </div>
     </div><?php
     }?>
-    
+<?php
+if($entry->getEntryAuthenStatusId() == 1){?>
     <div class="entry_record">
       <div class="entry_record_title">Request a translation into one of these languages</div>
       <div class="entry_record_value">
@@ -189,7 +190,7 @@ $date = $entry->getEntryCreationDate();
         <span id="treqCreateResponse"></span>
       </div>
     </div>
-
+<?php }?>
   <!--- comments section start --->
   
       <div class="entry_record">
