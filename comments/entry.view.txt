@@ -1,1 +1,2 @@
 1. echo "<br>entryview.php:: this is an original, i.e. " .$entry->getEntryAuthenStatusId() . "<br>";
+2. style="display: none;" - use it to remove the element completely from the document, so it doesn't take up any space. For debugging.
