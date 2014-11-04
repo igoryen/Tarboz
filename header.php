@@ -428,9 +428,9 @@ div.showdata{
             <a href=""><img src="images/logo.png" height="50"></a>
           </div>
           <nav id="navigation">
-              <a href="/Tarboz/index.php">Home</a> 
-              <a href="/Tarboz/entrycreate.php">Create an Entry</a>
-              <a href="views/profile/profile.php">[user view]</a>
+              <a href="index.php">Home</a> 
+              <a href="entrycreate.php">Create an Entry</a>
+              <a href="profile.php">Profile</a>
               <a href="/Tarboz/userview.php">[user view 2]</a>
 <!--              display profile menu when user login -->
               <a href="views/profile/profile.php" style="display:none;" id="menu_user_index">Profile</a>
