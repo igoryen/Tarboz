@@ -1,52 +1,20 @@
 <?php 
   require("header.php");
-  //include "config.php";
-  //include "lib.php";
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
   include "views/entry/search_result_cases.php";
   
 // #) get the value of the search phrase from the search page
-$search_phrase = "Happy Birthday to you";
+if(isset($_GET['verbatim'])){
+  $verbatim = $_GET['verbatim'];
+  //echo "<br>searchresult.php: GET['verbatim'] is set. it's " . $verbatim;
+}
+else{
+  $verbatim = $_GET['verbatim'];
+  //echo "<br>searchresult.php: GET['verbatim'] is NOT set. " . $verbatim;
+}
 
-// #) create a verbatim of the search phrase (P1.1.1.)
-//======================================================================
-// $verbatim = '';
-// Options of verbatim string for testing. To test, comment out all but one.
-
-// CASE 1: no dad, no kids
-// Original: doesn't exist in the database. Variants: don't exist
-// $verbatim = 'bla bla bla';
-
-// CASE 2: no dad, 6 kids (2 per language)
-// Original: doesn't exist. Variants: 2 English, 2 Russian, 2 Mandarin
-// $verbatim = 'god son loved world life';
-
-// CASE 3: One dad, no kids
-// Original: exists. Variants: don't exist.
-// $verbatim = 'that question';
-
-// CASE 4: one dad, one or more kids
-// Original exists. Variants: exist.
-// 
-// 4A: one dad, 1 English kid
-// Original: Russian. Variants: 1 in English
-// $verbatim = 'boring sad hand';
-//
-// 4B: one dad, 6 kids (2 per language)
-// Original: English. Variants: 2 in English, 2 in Russian, 2 in Mandarin
-// $verbatim = 'happy birth day to you';
-//
-// 4C: one dad, 4 kids (2 per language)
-// Original: Russian. Variants: 2 in English, 2 in Mandarin.
- $verbatim = 'pears apples Katyusha fog river';
-//
-// 4D: one dad, one kid (Russian)
-// Original: Chinese. Variants: 1 in Russian.
-// $verbatim = 'break wok sink boats';
-// 
-// $verbatim = "three walk teacher";
-//=====================================================================
+echo "<br>sr::verbatim is [".$verbatim . "]";
 
 $em = new EntryManager(); // 1
 $dad = $em->getFatherByVerbatim($verbatim); // 2

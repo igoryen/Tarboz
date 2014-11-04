@@ -22,8 +22,8 @@
 22. pass the mysql_result object to method getEntryBried() in the same object
 23. method is private: to be accessed by member functions only.
 24. convert the mysql_result object into an associative array
-25. echo "<br>TTT<br>eda::getFatherByVerbatim() query:<br>" . $query . "<br>";
-26. echo "<br>eda::getFatherByVerbatim() mysql_result:<br>";
+25. echo "<br>eda::getFatherByVerbatim() query:<br>" . $query . "<br>";
+26. echo "<br>eda::getFatherByVerbatim() mysql_result:<br>" . print_r($result) . "<br>";
 27. $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array);
 28. echo "<br>eda::getFatherByVerbatim() fatherGottenByVerbatim:<br>" . print_r($fatherGottenByVerbatim);
 29. echo "<br>LLL<br>eda::getFatherByVerbatim() fatherGottenByVerbatim->lang:<br>" . print_r($fatherGottenByVerbatim->getEntryLanguage());
@@ -51,3 +51,5 @@
 51. echo "<br>eda::query_insert:<br>"; echo $query_insert;
 52. echo "<br>eda::getEntryById() query:<br>" . $query;
 53. NB: the index ('lan_lang_name') is different because the query to get entry is build so that to retrieve the language_name by language_id
+
+echo "<br>eda::query_insert:<br>"; echo $query_insert;

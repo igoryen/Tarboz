@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div><h4>Searchphrase examples<h4></div>
+Options of search string for testing the search. 
+<br>to increase accuracy, use only the words that are unique to your phrase and don't include short and common words like 'I', 'you', 'the', 'a'.
+<hr>
+CASE 1: no original, no translations
+<br>Original: doesn't exist in DB. 
+<br>Variants: don't exist
+<br>Search phrase:<br> 
+<b>bla bla bla</b><br>
+
+<hr>
+
+CASE 2: no original, 6 translations (2 per language)
+<br>Original: doesn't exist. 
+<br>Variants: 2 English, 2 Russian, 2 Mandarin
+<br>Search phrase:<br> 
+<b>Бог полюбил мир сына отдал</b><br>
+<b>神愛世人永生  </b><br>
+<b>God loved world, gave son </b><br>
+<hr>
+
+CASE 3: One original, no translations
+<br>Original: exists. 
+<br>Variants: don't exist.
+<br>Search phrase:<br> 
+<b>To be that question</b><br>
+<b>быть или вот вопрос</b><br>
+
+<hr>
+
+CASE 4: one original, one or more translations
+<br>Original exists. 
+<br>Variants: exist.
+<br>4A: one original, 1 English translation
+<br>Original: Russian. Variants: 1 in English
+<br>Search phrase:<br>
+<b>boring sad give hand</b><br>
+<b>скучно грустно некому руку подать</b><br>
+
+<hr>
+
+4B: one original, 6 translations (2 per language)
+<br>Original: English. 
+<br>Variants: 2 in English, 2 in Russian, 2 in Mandarin
+<br>Search phrase:<br> 
+<b>happy birth day to you</b><br>
+<b> 祝,生,日,快,乐 </b><br>
+<b>день рождения тебя</b><br>
+
+<hr>
+
+4C: one original, 4 translations (2 per language)
+<br>Original: Russian. 
+<br>Variants: 2 in English, 2 in Mandarin.
+<br>Search phrase:<br> 
+<b>pears apples Katyusha fog river</b><br>
+<b>яблоки груши катюша</b><br>
+<b>梨,花,河,岸</b><br>
+<hr>
+
+4D: one original, one translation (Russian)
+<br>Original: Chinese. 
+<br>Variants: 1 in Russian.
+<br>Search phrase:<br>
+<b>破,釜,沉,舟 </b><br>
+<b>ломай бей топи </b><br>
+<b>break sink boat</b><br>
+<hr>
+Also:
+<b>three walk teacher</b><br>
+
+  </body>
+</html>

@@ -24,8 +24,9 @@
     //print_r($_POST);
     if($_POST) {
 
-        $comment_text = isset($_POST['newComment']) ? $_POST['newComment'] : "";
-        if ($comment_text != "") {
+        $comment_text =( isset($_POST['newComment']) && $_POST['newComment'] !='undefined'  )? $_POST['newComment'] : "";
+        $comment_entity_id =( isset($_POST['commentEntityId']) && $_POST['commentEntityId'] !='undefined'  )? $_POST['commentEntityId'] : "";
+        if ($comment_text != "" && $comment_entity_id != "") {
           
           //handle badword
           $bw_handler = new BadwordManager();
@@ -40,8 +41,8 @@
           $new_comment->setText($filtered_comment_text); 
           $new_comment->setCreatedBy($user->getUserId());
           $new_comment->setRatingId('');
-          //$com_entry_id = $entryId;
-          $com_entry_id = 'eng2';
+          $com_entry_id = $comment_entity_id;
+          //$com_entry_id = 'eng2';
           $new_comment->setEntryId($com_entry_id);
         
           $commentManager = new CommentManager();

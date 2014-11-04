@@ -82,5 +82,10 @@ class EntryManager {
     $arrayOfKidsGottenByVerbatim = $eda->getListOfKidBriefByVerbatim($verbatim);
     return $arrayOfKidsGottenByVerbatim;
   }
-
+  
+  public function getListOfEntryBriefByLanguage($language){
+    $eda = new EntryDataAccessor();
+    $arrayOfEntryBriefGottenByLanguage = $eda->getListOfEntryBriefByLanguage($language);
+    return $arrayOfEntryBriefGottenByLanguage;
+  }
 }

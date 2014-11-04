@@ -1,62 +1,51 @@
-<!-- 
-<html>
-<head>
-  <meta charset="UTF-8">
-   /* for the virtual keyboard */
-  <script type="text/javascript" src="/Tarboz/packages/virtual_keyboard/keyboard.js" charset="UTF-8"></script>
-  <link rel="stylesheet" type="text/css" href="/Tarboz/packages/virtual_keyboard/keyboard.css">
+<?php
+// for translator
+//require("header.php");
+require_once('plug-in/translate/config.inc.php');
+require_once('plug-in/translate/class/ServicesJSON.class.php');
+require_once('plug-in/translate/class/MicrosoftTranslator.class.php');
+require_once BUSINESS_DIR_LANG . "LanguageManager.php";
+require_once BUSINESS_DIR_LANG . "Language.php";
 
-  <link rel="stylesheet" type="text/css" href="/Tarboz/Content/style.css"  />
-  <link rel="shortcut icon" href="/Tarboz/Images/watermelon8.png"/>
-  <title>WWG</title>
-</title>
-<body>
+$lm = new LanguageManager();
 
-    <div id="header">
+$translator = new MicrosoftTranslator(ACCOUNT_KEY);
+$selectbox = array('id'=> 'txtLang','name'=>'txtLang');
+$translator->getLanguagesSelectBox($selectbox);
 
-      <div class="header_row">
-        <div id="logo"><img src="/Tarboz/Images/logo.png" height="50"></div>
-        <nav id="navigation">
-          <a href="/Tarboz/Views/Home/Index.php">Home</a> 
-          <a href="/Tarboz/Views/Home/Result.php">Result</a> 
-            <a href="/Tarboz/Views/Entry/Index.php">Entry Index</a>    
-            <a href="/Tarboz/Views/Entry/Create.php">Entry Create</a>     
-            <a href="/Tarboz/Views/User/Index.php">User Index</a> 
-            <a href="/Tarboz/Views/Login/Index.php">Login</a>
-        </nav>
-       <div id="links"><a href="/Tarboz/Views/Login/Index.php">Login</a></div>
-
-      </div>
-
-      <div class="header_row">
--->
+?>
 <div id="wrapper">
-<div id="search">
-  <form>
-    <div>
-      <div>
-        <input type="text" name="search" class="keyboardInput">
-        <p style="font-size:20px; ">
-        <select name="src_lang">
-          <option>Source Language</option>
-          <option>English</option>
-          <option>Russian</option>
-          <option>Mandarin</option>
-          <option>Farsi</option>
-        </select>
-        <select name="tgt_lang">
-          <option>Target Language</option>
-          <option>English</option>
-          <option>Russian</option>
-          <option>Mandarin</option>
-          <option>Farsi</option>
-        </select>
-        <b>From:</b> <input type="date" name="startdate" placeholder="Start Date">
-        <b>To:</b> <input type="date" name="enddate" placeholder="End Date">
-        </p>
+<div id="search" >
+  <div align="center">
+  <div style="width:980px;">        
+    <div><input type="text" name="txtString"  id="txtString"  class="keyboardInput"></div><!--1-->
+      <br />
+    <div align="center">
+            <a  class="search_button" href="#" id="getdata-button">Search</a>
     </div>
-  </div>
-  </form>
+    <?php //echo $translator->response->languageSelectBox; ?>
+
+
+
+    <!-- 3 -->
+    <!--<div class="bgwhite width500" id="showdata"></div>-->
+
+    <p style="font-size:20px; text-align: left">
+    <select name="tgt_lang">
+      <option value="">Search in ...</option><?php
+          $langs = $lm->getListOfLang();
+          foreach ($langs as $lang) {
+            echo '<option value="';
+            echo $lang->getLangId();
+            echo '">';
+            echo $lang->getLangName();
+            echo '</option>';
+          }
+  ?></select>
+    <b>From:</b> <input type="date" name="startdate" placeholder="Start Date">
+    <b>To:</b> <input type="date" name="enddate" placeholder="End Date">
+    </p>
+</div></div>
 </div><!--search-->
     <!--</div>header-->
 

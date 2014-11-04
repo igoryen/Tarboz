@@ -36,12 +36,21 @@ class EntryDataAccessor {
     // 15   
     $query_insert = 'INSERT INTO '
       . 'tbl_entry ('
-            . '`ent_entry_language_id`, `ent_entry_text`, `ent_entry_verbatim`, '
-            . '`ent_entry_translit`, `ent_entry_authen_status_id`, '
-            . '`ent_entry_translation_of`, `ent_entry_creator_id`, '
-            . '`ent_entry_media_id`, `ent_entry_comment_id`, '
-            . '`ent_entry_rating_id`, `ent_entry_tags`, `ent_entry_author_id`, '
-            . '`ent_entry_source_id`, `ent_entry_use`, `ent_entry_http_link`, '
+            . '`ent_entry_language_id`, '
+            . '`ent_entry_text`, '
+            . '`ent_entry_verbatim`, '
+            . '`ent_entry_translit`, '
+            . '`ent_entry_authen_status_id`, '
+            . '`ent_entry_translation_of`, '
+            . '`ent_entry_creator_id`, '
+            . '`ent_entry_media_id`, '
+            . '`ent_entry_comment_id`, '
+            . '`ent_entry_rating_id`, '
+            . '`ent_entry_tags`, '
+            . '`ent_entry_author_id`, '
+            . '`ent_entry_source_id`, '
+            . '`ent_entry_use`, '
+            . '`ent_entry_http_link`, '
             . '`ent_entry_creation_date`)'
       . ' VALUES('
       . '"' . $lang
@@ -62,6 +71,7 @@ class EntryDataAccessor {
       . '", "' . $date
       . '")'; 
     // 51
+    echo "<br>eda::query_insert:<br>"; echo $query_insert;
     $dbHelper = new DBHelper();  // 18
     $last_inserted_id = $dbHelper->executeInsertQuery($query_insert); // 17
     //16
@@ -74,17 +84,15 @@ class EntryDataAccessor {
    * @return $resultOfEntryUpdate
    */
   public function updateEntry($entry) {
+    
     $entryId = $entry->getEntryId();
-    $text = $entry->getEntryText();
-    /*
-     * TODO: create the verbatim of $text using the Bing translator
-     */
-    //$verbatim = $entry->getEntryVerbatim();
+    $text = mysql_real_escape_string($entry->getEntryText());
+    $verbatim = mysql_real_escape_string($entry->getEntryVerbatim());
 
     /*
      * TODO: transliterate the value of $text using ...
      */
-    $translit = $entry->getEntryTranslit();
+    $translit = mysql_real_escape_string($entry->getEntryTranslit());
     //$authsid = $entry->getEntryAuthenStatusId();
     //$translOf = $entry->getEntryTranslOf();
     //$userId = $entry->getEntryUserId();
@@ -101,7 +109,7 @@ class EntryDataAccessor {
      */
     $query = "UPDATE tbl_entry SET "
             . "ent_entry_text = '$text',"
-            //. "ent_entry_verbatim = '$verbatim',"
+            . "ent_entry_verbatim = '$verbatim',"
             . "ent_entry_translit = '$translit',"
             //. "ent_entry_authen_status_id = '$email',"
             //. "ent_entry_translation_of = '$translOf',"
@@ -115,7 +123,7 @@ class EntryDataAccessor {
             . "ent_entry_use = '$use',"
             . "ent_entry_http_link = '$httpLink' "
             . "WHERE ent_entry_id = $entryId";
-    echo "<br>eda::updateEntry() query:<br>" . $query . "<br>";
+    //echo "<br>eda::updateEntry() query:<br>" . $query . "<br>";
     /*
      * using: require_once DB_CONNECTION . 'DBHelper.php';
      */
@@ -242,7 +250,7 @@ class EntryDataAccessor {
     
     //$fatherGottenByVerbatim = new Entry();
     // 21
-    $query = 'SELECT 
+    $query = "SELECT 
                 e.ent_entry_id, 
                 l.lan_lang_name, 
                 e.ent_entry_text,
@@ -250,33 +258,33 @@ class EntryDataAccessor {
               FROM tbl_entry e, tbl_language l
               WHERE e.ent_entry_language_id = l.lan_language_id
               AND MATCH(e.ent_entry_verbatim)
-              AGAINST("'.$verbatim .'" IN BOOLEAN MODE )
-              AND e.ent_entry_authen_status_id = 1';
+              AGAINST('".$verbatim ."' IN NATURAL LANGUAGE MODE )
+              AND e.ent_entry_authen_status_id = 1";
     
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query); // 20
-    // 26,27
+    // 25,26,27    
     $fatherGottenByVerbatim = $this->getEntryBrief($result); // 22
     //28,29
     return $fatherGottenByVerbatim;
   }
 
   public function getListOfKidBriefByVerbatim($verbatim) {
-    $query = 'SELECT 
+    $query = "SELECT 
                 e.ent_entry_id, 
                 l.lan_lang_name, 
                 e.ent_entry_text,
                 e.ent_entry_creator_id,
                 MATCH(e.ent_entry_verbatim) 
-                AGAINST("'.$verbatim.'" IN NATURAL LANGUAGE MODE)
+                AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
                 AS relevance
               FROM tbl_entry e, tbl_language l
               WHERE e.ent_entry_language_id = l.lan_language_id 
                 AND MATCH(e.ent_entry_verbatim) 
-                    AGAINST("'.$verbatim.'" IN NATURAL LANGUAGE MODE)
+                    AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
                 AND e.ent_entry_authen_status_id = 2
-              HAVING relevance > 0.5
-              ORDER BY l.lan_lang_name';
+              HAVING relevance >= 1
+              ORDER BY l.lan_lang_name";
 
     $dbHelper = new DBHelper();
     $resultOfSelect = $dbHelper->executeSelect($query);
@@ -284,7 +292,18 @@ class EntryDataAccessor {
     $arrayOfKidsGottenByVerbatim = $this->getListOfKidBrief($resultOfSelect);
     return $arrayOfKidsGottenByVerbatim;
   }
-
+  
+  public function getListOfEntryBriefByLanguage($language){
+    $query ="SELECt e.ent_entry_id, l.lan_lang_name, e.ent_entry_text 
+              FROM tbl_entry e, tbl_language l 
+              WHERE e.ent_entry_language_id = l.lan_language_id 
+              AND LOWER(SUBSTR(l.lan_lang_name, 1, 2)) = '{$language}'";
+    $dbHelper = new DBHelper();
+    $resultOfSelect = $dbHelper->executeSelect($query);
+    $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief($resultOfSelect);
+    return $arrayOfEntryGottenByLanguage;
+  }
+  
   /**
    *
    * @param type $resultOfSelect
@@ -319,6 +338,22 @@ class EntryDataAccessor {
     return $Entries;
   }
 
+  private function getListOfEntryBrief($resultOfSelect) {
+    $Entries[] = new Entry();
+    $count = 0; // 30
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
+      
+      $Entries[] = new Entry(); //31
+      // 32
+      $Entries[$count]->setEntryId($list['ent_entry_id']);
+      $Entries[$count]->setEntryLanguage($list['lan_lang_name']);
+      $Entries[$count]->setEntryText($list['ent_entry_text']);
+      $count++;
+    } // 33
+    // 34,35
+    return $Entries;
+  }
+  
   /**
    * getEntryBrief($resultOfSelect)
    * To retrieve only some fields of one entry for the phrase search result page.

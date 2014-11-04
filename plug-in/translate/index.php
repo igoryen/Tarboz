@@ -6,6 +6,7 @@ require_once('class/MicrosoftTranslator.class.php');
 
 $translator = new MicrosoftTranslator(ACCOUNT_KEY);
 $selectbox = array('id'=> 'txtLang','name'=>'txtLang');
+//echo "search:: $ selectbox: ". print_r($selectbox). "<br>";
 $translator->getLanguagesSelectBox($selectbox);
 
 
@@ -55,8 +56,8 @@ div.showdata{
 <textarea rows="2" cols="60" name="txtString" id="txtString" value="Hello World" ></textarea><br/>
 <?php echo $translator->response->languageSelectBox; ?>
 <a class="black pl10" href="#" id="getdata-button">Translate</a>
-<div id="loader">&nbsp;</div>
-<div class="bgwhite width500" id="showdata"></div>
+<div id="loader">&nbsp;777777</div>
+<div class="bgwhite width500" id="showdata">8888888</div>
 </form>
 
 </body>

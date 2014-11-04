@@ -34,6 +34,12 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
    <!-- Extra libraries -->
    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+   
+   <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+   <script src="plug-in/translate/js/jquery.ajaxLoader.js" type="text/javascript"></script>
+   <script src="plug-in/translate/js/json-jquery.js" type="text/javascript"></script>
+   <script src="plug-in/translate/js/json-jquery2.js" type="text/javascript"></script>
+   
    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
    <script>    
@@ -60,8 +66,12 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               else{
                   document.getElementById("call_it").innerHTML="Login";
                   document.getElementById("user_name").innerHTML="";
-                  <?php session_destroy(); $user=""; ?>
+                  
                 }
+            //display profile menu when user login 
+            if($('#user_name').html() =="") {
+                $('#menu_user_index').css({'display': 'none'});
+            }
 
           });//end if call_it onlick event
 
@@ -84,6 +94,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             function(data,status){
               //this sets the session variable of username inside the variable username
               var username="<?php if(isset($_SESSION['user'])) echo $_SESSION['user']->getFirstName(); ?>"
+              
 
               if(data==1 || data==2){
 
@@ -97,10 +108,13 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
                 //When Successful it will print the user's name beside the logout
                 document.getElementById("user_name").innerHTML=username;
+                  
+                 //display profile menu when user login                     
+                $('#menu_user_index').css({'display': ''});
                 
                 //When logged in successful, it will close the window
                 $( "#login" ).dialog("close");
-
+                window.location.reload(true);
                 }
                 else {
                   document.getElementById("ftest").innerHTML="<?php echo LOGIN_FAIL; ?>";
@@ -108,13 +122,303 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               });//end of the function(data,status)
 
           });//end of the login button onlick event
+              
+        $("#new_commentSub").click(function(event){
+            //var formdata = $("#new_comment").serialize(); 
+            //alert(formdata);
+            if ($('#user_login_status').val() == "N") {
+                
+                //call login panel
+                $("#forgotpwd").show();
+                //resetting, some of the usertexboxes and the messages
+                document.getElementById("ftest").innerHTML="";
+                $('#userlogin').val('');
+                $('#userpassword').val('');
+                alert("1"+$("#call_it").html());
+                    //resetting the texboxes
+                  if($.trim($("#call_it").html())=="Login"){
+                      $( "#login" ).dialog( "open" );  
+                      alert("use not logged in");
+                    }
+                //alert("username innerHtml: "+$('#user_name').html());
+                if($('#user_name').html() =="") {
+                    $('#menu_user_index').css({'display': 'none'});
+                }
+            } //end if ($('#user_login_status').val() == "N")
+            else {
+                var new_comment = encodeURIComponent($.trim ($('#newComment').val() ));
+                var comment_entity_id = encodeURIComponent($.trim ($('#commentEntityId').val() ));
+                $.ajax({
+                    url: "user_test/new_comment.php",
+                    type: "POST",
+                    data: {
+                             newComment: new_comment,
+                             commentEntityId: comment_entity_id
+                            },
+                    success: 
+                      function(data, status) {
+                        //alert(data);
+                        if (data.indexOf('succeed') >0) {
+                          $('#add_comment_result').html=$.trim ($('#newComment').val() );
+                        } else if (data.indexOf( 'fail') >0) {
+                          alert(data);
+                        }
+                        window.location.reload(true);
+                      },
+                    error:
+                      function() {
+                          alert("ajax error");
+                      }                
+                }); //end $.ajax()
+                event.preventDefault();
+            } //end else
+        });
+          
+        $(".editCommentSub").click( function(event) { //edit comment
+            var this_id = $(this).attr('id');
+            var edit_id_num = this_id.substring(this_id.indexOf("_")+1);
+            var textarea_id = "#editCommentText_"+edit_id_num;
+            var input_hidden_id = "#editCommentId_"+edit_id_num;
+
+            //alert("edit id:"+edit_id_num);
+            //alert("textarea_id: "+textarea_id);
+            //alert("input_hidden_id: "+input_hidden_id);
+            //alert("edit comment text: "+$(textarea_id).val());
+            //alert("edit comment id: "+$(input_hidden_id).val());
+            
+            var editCommentData = encodeURIComponent($.trim ($(textarea_id).val() ));
+            var editCommentId = encodeURIComponent($(input_hidden_id).val());
+
+            $.ajax({
+                url: "user_test/edit_comment.php",
+                type: "POST",
+                cache: false,
+                data: 
+                {
+                    editComment : editCommentData,
+                    editCommentId: editCommentId
+                },
+                success:
+                  function(data, status) {
+                    //alert(data);
+                    if(data.indexOf("succeed")>0) {                                   
+                       location.reload(true);
+                    } else if (data.indexOf("fail") >0) {
+                      alert(data);
+                    }                                
+                  }, //end of function(data, status) and success function
+                error:
+                  function() {
+                    alert("ajax error");  
+                  } 
+                
+             });//end $.ajax()*/
+            event.preventDefault();
+          });
+          
+        $('.deleteComment').click(	function (event) {
+            var delete_comment_id = $(this).attr('id');
+            //alert("delete comment id: "+delete_comment_id);
+            var delete_id = delete_comment_id.substring(delete_comment_id.indexOf("_")+1);
+            //alert("delete id: "+delete_id);
+            $.ajax({
+                url: "user_test/delete_comment.php",
+                type: "POST",
+                data: 
+                {
+                    deleteCommentId : delete_id
+                },
+                success:
+                  function(data, status) {
+                    //alert(data);
+                    if(data.indexOf("succeed")>0) {                                   
+                       location.reload(true);                            
+                    } else if (data.indexOf("fail") >0) {
+                      alert(data);
+                    }                                
+                  }, //end of function(data, status) and success function
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }                 
+            });//end $.ajax()*/
+            event.preventDefault();
+        });
+
+        $('.comment_like').click( function (event) {
+            //$(this).css({'display': 'none'}); 
+            //$(this).next().css({'display': ''})
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_")); //alert("user id: "+user_id);
+            var comment_id = this_id.substring(this_id.lastIndexOf("_")+1); //alert("comment id: "+comment_id);
+            var is_like = "";
+            //alert("inner text: "+$(this).text());
+            if($(this).text().trim() == "Like" ){
+                is_like = "Y";
+                $(this).text("Unlike");
+            } else if ($(this).text().trim() == "Unlike") {
+                is_like = "N";
+                $(this).text("Like");
+            }
+            $.ajax({
+               url: "user_test/comment_rating.php",
+               type: "POST",
+               data: {
+                    commentId : comment_id,
+                    userId : user_id,
+                    isLike : is_like
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           
+                       } else  if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+        });
+          
+        $('.reportComment').click( function(event) {
+            if ($(this).next().css('display') == 'none') {
+                $(this).next().css({'display': 'block'});
+            } else if ($(this).next().css('display') == 'block') {
+                $(this).next().css({'display': 'none'});
+            }
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_"));
+            var comment_id = this_id.substring(this_id.lastIndexOf("_")+1);
+        });
+          
+        $('button.reportCommentSub').click( function(event) { //add a report
+            var this_id = $(this).attr('id');
+            var entity_id = this_id.substring(this_id.indexOf("_")+1);
+            var entity_for_report = "comment";
+            var textarea_id = "#reportCommentReason_"+entity_id;
+            var hidden_id = "#reportCommentBy_"+entity_id;
+            
+            var report_reason = encodeURIComponent($.trim ($(textarea_id).val() ));
+            var reported_by = encodeURIComponent($(hidden_id).val()); //alert("reported by: "+reported_by);
+            $.ajax({
+               url: "user_test/reporting_comment.php",
+               type: "POST",
+               data: {
+                    entityId : entity_id,
+                    entityForReport : entity_for_report,
+                    reportReason : report_reason,
+                    reportedBy: reported_by
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           if(data.indexOf("error")>0 ) {
+                               alert("Mailer error! ");
+                           }
+                           location.reload(true); 
+                       } else if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+            
+        });
+        $('button.reportCommentCancel').click( function(event) {
+            $('.reportComment').next().css({'display': 'none'});            
+        });
+              
+        $('.entry_like').click( function (event) {
+            //$(this).css({'display': 'none'}); 
+            //$(this).next().css({'display': ''})
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_")); //alert("user id: "+user_id);
+            var entry_id = this_id.substring(this_id.lastIndexOf("_")+1); //alert("entry id: "+entry_id);
+            var is_like = "";
+            //alert("inner text: "+$(this).text().trim());
+            if($(this).text().trim().indexOf("Like") >=0 ){
+                is_like = "Y";
+                $(this).text("Unlike");
+                $('.entry_like_num').css({'display': 'none'});
+            } else if ($(this).text().trim() == "Unlike") {
+                is_like = "N";
+                $(this).text("Like");
+                $('.entry_like_num').css({'display': ''});
+            }
+            $.ajax({
+               url: "user_test/entry_rating.php",
+               type: "POST",
+               data: {
+                    entryId : entry_id,
+                    userId : user_id,
+                    isLike : is_like
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           
+                       } else  if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+        });
   
       });
-
+      
   </script>
+  <script src="treqCreate.js"></script>
+  
+  <!-- for translator -->
+  <style>
+div.jquery-ajax-loader {
+	background: #FFFFFF url(img/ajax-loader.gif) no-repeat 50% 50%;
+	opacity: .6;
+	width:250px !important;
+}
 
-  <title>WWG</title>
-</title>
+div.showdata{
+    width:250px;
+}
+.bgblack{
+    background: white
+}
+.bgwhite {
+    background: #FFFFFF 
+}
+.black {
+    color:black;
+}
+.pl10{
+    padding-left:10px;
+}
+.width500 {
+    width:500px;
+}
+.bdr {
+ border:1px solid black;
+}
+</style>
+
+  <title>Tarboz</title>
+</head>
+
 <body>
   <div id="wrapper">
 
@@ -125,17 +429,17 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             <a href=""><img src="images/logo.png" height="50"></a>
           </div>
           <nav id="navigation">
-              <a href="/Tarboz/index.php">Home</a> 
-              <a href="/Tarboz/searchresult.php">[result]</a>
-              <a href="/Tarboz/entryview.php">[entry view]</a>
-              <a href="/Tarboz/entrycreate.php">Create an Entry</a>
-              <a href="/Tarboz/userviewhtml.php">[user view]</a>
+              <a href="index.php">Home</a> 
+              <a href="entrycreate.php">Create an Entry</a>
+              <a href="profile.php">Profile</a>
               <a href="/Tarboz/userview.php">[user view 2]</a>
+<!--              display profile menu when user login -->
+              <a href="views/profile/profile.php" style="display:none;" id="menu_user_index">Profile</a>
           </nav>
           <div class="table-cell" style="text-align: right;">
-            <a href="#" id="call_it" class="login_button">Login</a> 
+            <button id="call_it" class="login_button"><?php if(!isset($_SESSION['user']) ) { ?>Login<?php } else { ?>Logout<?php } ?></button> 
           </div>
-          <div id="user_name"></div>
+          <div id="user_name"><?php if(isset($_SESSION['user']) ) echo $_SESSION['user']->getFirstName(); else echo ""; ?></div>
 
           <div style="width:100px;" title="Login Window" id="login">
              <!--start of the login form div-->
@@ -147,10 +451,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                     <input type="password" id="userpassword" placeholder="Password" class="login_input">
                  </p>
                  <p>
-                    <!--Login button                     <div><button class="lw_button" id="sub">Login</button></div>            
-                    <div style="top: 9.1em; position: absolute; left: 12em;"><button class="lw_button">Register</button></div>
-                    <div id="or">or</div>-->
-                    <div style="margin-left: 1em;"><button class="lw_button" id="sub">Login</button>
+                    <div style="margin-left: 0.7em;"><button class="lw_button" id="sub">Login</button>
                       <b id="or">or</b>
                         <button class="lw_button">Register</button></div> 
                  </p> 
@@ -179,7 +480,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
           $m_reg="/^[a-zA-Z0-9\.\@\(\)]+$/";
 
           //matchin the pattern and checking if the variable is also not empty
-          if(isset($reset) && preg_match($m_reg,$reset)){
+          if(($reset!="") && preg_match($m_reg,$reset)){
+            echo $reset;
 
             $userLoginManager = new UserLoginManager();
 
@@ -190,11 +492,12 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               echo "sent";
             }
             else {
-              echo "fail";
+              //echo "fail";
             }
 
 
         ?>
         </div>
+
 
     </div><!--"header"-->

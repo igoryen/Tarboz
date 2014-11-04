@@ -15,6 +15,7 @@ CREATE TABLE `prj666`.`tbl_entry` (
   `ent_entry_source_id` INT NULL,
   `ent_entry_use` VARCHAR(255) NULL,
   `ent_entry_http_link` VARCHAR(255) NULL,
+  `ent_entry_transl_request_id` INT NULL,
   `ent_entry_creation_date` DATE NOT NULL,
   PRIMARY KEY (`ent_entry_id`))
 ENGINE = InnoDB
@@ -224,3 +225,13 @@ CREATE TABLE `prj666`.`tbl_bad_words` (
 #--Load bad word list
 LOAD DATA LOCAL INFILE '/BadWordList.txt' INTO TABLE tbl_bad_words 
 LINES TERMINATED BY '\n';
+
+# translation request table
+CREATE TABLE IF NOT EXISTS `prj666`.`tbl_transl_request` (
+  `treq_id` int(11) NOT NULL AUTO_INCREMENT,
+  `treq_creator_id` INT NOT NULL,
+  `treq_entry_id` int NOT NULL,
+  `treq_target_lang_id` int(11) NOT NULL,
+  `treq_date` date NOT NULL,
+  PRIMARY KEY (`treq_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

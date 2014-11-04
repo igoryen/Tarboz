@@ -8,7 +8,7 @@ body{
   color: #000000;
   display: block;
   font-family: Verdana, Geneva, sans-serif;
-  font-size: 11px;
+  font-size: 16px;
   margin: 0px;
   padding: 0px;
 }
@@ -87,36 +87,26 @@ div > nav#navigation > a:hover {
 }
 
 #search {
-background: rgba(255,255,255,0.5);
-/* border: ridge 10px magenta; */
-display: block;
-/* display: inline-block; */
-/* height: auto; */
-/* padding: auto; */
-/* margin-bottom: 2%; */
-/* margin-left: 10%; */
-/* margin-right: 10%; */
-/* margin-top: 1%; */
-/* margin-top: 18px; */
-padding: 10px;
-/* position: relative; */
-text-align: center;
-/* width: 80%; */
+    background: rgba(255,255,255,0.5);
+    display: block;
+    padding: 40px 0px;
+    text-align: center;
+    width: 100%; 
 }
 
 #search input[type=text] {
-background: #FFFFFF url(../../images/searchi.png) no-repeat 0% 51%;
-border: 1px solid white;
-background-size: contain;
-/* box-shadow: 2px 1.5px 2px #999; */
-color: #000;
-font-size: 25pt;
-height: 8%;
-/* margin: auto; */
-/* margin-left: 2.5%; */
-/* margin-top: 1%; */
-padding-left: 5%;
-width: 83%;
+    background: #FFFFFF url(../../images/searchi.png) no-repeat 0% 51%;
+    border: 1px solid white;
+    background-size: contain;
+    /* box-shadow: 2px 1.5px 2px #999; */
+    color: #000000;
+    font-size: 25pt;
+    height: 48px;
+    /* margin: auto; */
+    /* margin-left: 2.5%; */
+    /* margin-top: 1%; */
+    width: 931px;
+    padding: 0px 0px 0px 60px;
 }
 /*
 #searchinput {
@@ -139,33 +129,33 @@ width: 83%;
 border: 2px solid #eeeded;
 margin-top: 1%;
 /* margin-left: 6%; */
-width: 18%;
-height: 38px;
+width: 268px;
+height: 30px;
 font-size: 17px;
 }
 /* ======= start the 3-column table ========*/
 
 #index_table_container{
   /*border:  ridge 10px #9799ad;*/
-  border-spacing: 10px;
+  border-spacing: 20px;
   /*height: 100%; */
   /*margin-top: 10px;*/
-  margin: 5px auto;
+/*  margin: 5px auto;*/
   /*position: relative;*/
   /*width: 1150px;*/
-  width: 95%;
+/*  width: 95%;*/
 }
 
 #index_table {
   /*border:  ridge 5px blue;*/
-  display: block;
+/*  display: block;*/
   /*left: 0px;*/
-  margin: 5px auto;
+/*  margin: 5px auto;*/
   /*margin-left: 5px auto;*/
   /*margin-right: 5px auto;*/
   /*position: relative;*/
   /*top: 0px;*/
-  width: 95%;
+/*  width: 95%;*/
 }
 
 /* start left column*/
@@ -187,7 +177,7 @@ font-size: 17px;
   text-align: center;
   /*top: 42px;*/
   /*width: 300px;*/ 
-  width: 20%;
+  width: 14%;
 }
 
 #obj{
@@ -211,23 +201,24 @@ font-size: 17px;
   /*height: 422px;*/      
   /*left: 300px;*/
   /*margin: 0 auto;*/
-  margin-right: 35px;
+/*  margin-right: 35px;*/
   /*margin-top: 2%;*/
-  padding: 10px;
+/*  padding: 10px;*/
   /*position: absolute;*/
-  text-align: center;
+/*  text-align: center;*/
   /*top: 42px;*/
   vertical-align: top;
-  width: 40%;/*550px;*/
+/*  width: 40%; (550px;)*/
 }
 
+/*
 #MidCol table{
   border-spacing: 20px;
   color: #999;
   font-size: 12px;
   font-weight: bold;
   margin: 0 auto;
-  margin-top: 1%;
+  margin-top: 10px;
   table-layout: fixed;    
 }
 
@@ -239,12 +230,11 @@ font-size: 17px;
   color: #999;
   text-align: center;
 }
+*/
 
 #MidCol li{
-  margin-left:-10%;
   color:#404040;
   text-align:left;
-  font-size:11px;
   font-weight:normal;
   list-style:none;
 }
@@ -270,7 +260,7 @@ font-size: 17px;
   /*top: 42px;*/
   vertical-align: top;
   /*width: 300px; */
-  width: 20%; 
+  width: 15%;   
 }
 
 /* finish right column*/
@@ -345,7 +335,7 @@ div#footer > div > a {
 
 #login_form{
   padding: 5px;
-  width-:400px; 
+  width:413px; 
   margin-left: auto;
   margin-right: auto;
 }
@@ -405,19 +395,19 @@ div#footer > div > a {
 }
 
 #or {
-  position: absolute;
-  background: #FFFFFF;
-  /*text-shadow: 0 2px 0px #121212;*/
-  color: #000000;
-  width: 47px;
-  height: 47px;
-  text-align: center;
-  border-radius: 50%;
-  font-weight: bold;
-  line-height: 38px;
-  font-size: 13px;
-  margin-left: -2em;
-  margin-top: 2px;
+    position: absolute;
+    background: #FFFFFF;
+    /*text-shadow: 0 2px 0px #121212;*/
+    color: #000000;
+    width: 55px;
+    height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: bold;
+    line-height: 38px;
+    font-size: 13px;
+    margin-left: -2.4em;
+    margin-top: 8px;
 }
 
 .lw_button {
@@ -823,6 +813,9 @@ div#footer > div > a {
 
 
 /* for entry_display.php*/
+#treqResp{
+  font-size: smaller;
+}
 #entry_index_container{
   /*border: ridge 10px blue;*/
   margin: 3px auto;
@@ -847,7 +840,8 @@ div#footer > div > a {
   color: silver;
   display: block;
   /*font-family: serif "Georgia";*/
-  font-style: italic;
+  font-size: smaller;
+  /*font-style: italic;*/
   font-weight: bold;
   margin: auto;
   /*margin-left: 10%;*/
@@ -1151,115 +1145,164 @@ div#footer > div > a {
   top:1px;
 }
 
-/***********************Modify search's Keyboard******************************/
-#keyboardInputMaster tbody tr td table tbody tr td {
-vertical-align: middle;
-padding: 0px 0.45em;
-white-space: pre;
-height: 4em;
-font-family: 'Lucida Console','Arial Unicode MS',monospace;
-border-top: 1px solid #e5e5e5;
-border-right: 1px solid #5d5d5d;
-border-bottom: 1px solid #5d5d5d;
-border-left: 1px solid #e5e5e5;
-background-color: #eeeeee;
-cursor: default;
-min-width: 2.75em;
--webkit-border-radius: 0.2em;
--moz-border-radius: 0.2em;
-border-radius: 0.2em;
--webkit-transition: background-color .15s ease-in-out;
--o-transition: background-color .15s ease-in-out;
-transition: background-color .15s ease-in-out;
-font-size: 2em;
+/******user list view********/
+.userlist_icon:before{
+    content: " ";
+    display: block;
+    background: url("../../images/user_list.png") no-repeat;    
+    width: 20px;
+    height: 20px;
+    float: left;
+    padding: 0px 10px;
+}
+.userlist_icon {
+    width: auto;
+    font-size: 20px;
+    background-color: #00CCFF;
+    padding: 10px;
 }
 
-// space
-#keyboardInputMaster tbody tr td table tbody tr td.space {
-padding: 0px 23em;
+#scroll_list {
+    width:auto;
+    max-height: 500px;
+    line-height:2.5em;
+    font-size: 13px;
+    overflow:auto;
+    background-color:#FCFADD;
+    color:#714D03;
+    padding: 20px 10px;
 }
 
-// us international
-#keyboardInputMaster thead tr th div {
-float: left;
-font-size: 31px !important;
-height: initial;
-font-weight: bold;
+#scroll_list > div > a:before{
+    content: " ";
+    display: block;
+    background: url("../../images/user.png") no-repeat;    
+    width: 30px;
+    height: 30px;
+    float: left;
+    padding: 0px 3px;
+}
+
+/**************profile***************/
+
+.container{
+    display:table;
+    border-collapse: collapse;
+    text-align: left;
+    background: #ffffff;
+}
+
+.heading {
+    font-weight: bold;
+     display:table-row;
+     font-size: 14px;
+     color:#000000;
+}
+
+.col {
+    display:table-cell;
+}
+
+.col_image {
+    display:table-cell;
+    height: auto;
+}
+
+.col_info {
+    display:table-cell;
+    height: auto;
+    vertical-align: top;
+    width: 600px;
+}
+
+.col_userlist {
+    display:table-cell;
+    width: 300px;
+    vertical-align: top;
+}
+
+.col_space {
+    display:table-cell;
+    width: 20px;
+}
+
+.row_space {
+    height: 20px;
+}
+
+.user_info_space {
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+.search_button {
+    background: #12A1FF;
+    padding: 10px 60px;
+    font-size: 20px;
+    color: #ffffff;
+    text-decoration:none; 
+}
+
+.body_width {
+    max-width: 980;
+    background: #F1FFF9;
+    padding: 10px;
+    text-align: justify;
+    min-height: 550px;
+}
+
+#RightCol_Scroll {
+    overflow: auto;
+    max-height: 600px;
+}
+
+/****************for middle of front page*************/
+.t_width_1_3 {
+	width: 33.333%;
+    display: inline-block;
+}
+
+panel_box {
+padding: 15px;
+background: #fafafa;
+color: #666;
+border: 1px solid #e5e5e5;
+border-radius: 4px;
+}
+
+
+.t_panel {
+display: block;
 position: relative;
-z-index: 1;
-margin-right: 0.5em;
-cursor: pointer;
-background-color: transparent;
 }
 
-// selection language
-#keyboardInputMaster thead tr th div ol li {
-padding: 0.2em 0.4em;
-cursor: pointer;
-white-space: nowrap;
-width: 12em;
-font-size: 2em;
+.t_title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 15px;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 400;
+    text-transform: none;
+    background: #12A1FF;
+    color: #ffffff;
+    border-bottom: solid;
+    border-color: #000000;
+    border-width: thin;
+    padding: 8px;
+    
+
 }
 
-// selection box
-#keyboardInputMaster thead tr th div ol {
-position: absolute;
-left: 0px;
-top: 90%;
-list-style-type: none;
-overflow-y: auto;
-overflow-x: hidden;
-background-color: #f6f6f6;
-border: 1px solid #999999;
-/*display: none;*/
-text-align: left;
-width: 24em;
-height: 33em;
+.col_33 {
+    display:table-cell;
+    width: 33%;
+    height: 360px;
+    border-style: solid ;
+    border-color: #000000;
+    border-width: 1px;
+    box-shadow: 5px 5px 5px #888888;
+
 }
 
-#keyboardInputMaster thead tr th div ol li {
-padding: 0.2em 0.4em;
-cursor: pointer;
-white-space: nowrap;
-width: 12em;
-font-size: 2em;
-}
 
-#keyboardInputMaster thead tr th div {
-float: left;
-font-size: 31px !important;
-height: initial;
-font-weight: bold;
-position: relative;
-z-index: 1;
-margin-right: 0.5em;
-cursor: pointer;
-background-color: transparent;
-}
-
-#keyboardInputMaster thead tr th span, 
-#keyboardInputMaster thead tr th strong, 
-#keyboardInputMaster thead tr th small, 
-#keyboardInputMaster thead tr th big {
-display: inline-block;
-padding: 0px 0.4em;
-/* height: 3em; */
-/* width: 3em; */
-font-size: 25px;
-line-height: 1.4em;
-border-top: 1px solid #e5e5e5;
-border-right: 1px solid #5d5d5d;
-border-bottom: 1px solid #5d5d5d;
-border-left: 1px solid #e5e5e5;
-background-color: #cccccc;
-cursor: pointer;
-margin: 0px 0px 0px 0.3em;
--webkit-border-radius: 0.3em;
--moz-border-radius: 0.3em;
-border-radius: 0.3em;
-vertical-align: middle;
--webkit-transition: background-color .15s ease-in-out;
--o-transition: background-color .15s ease-in-out;
-transition: background-color .15s ease-in-out;
-}
-/*************************************************************************/

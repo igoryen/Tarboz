@@ -22,12 +22,12 @@
     //echo "==========\n";
     if($_POST) {
         
-        $comment_id = isset($_POST['commentId']) ? $_POST['commentId'] : "";
-        $user_id = isset($_POST['userId']) ? $_POST['userId'] : "";
-        $is_like = isset($_POST['isLike']) ? $_POST['isLike'] : "";
+        $comment_id = (isset($_POST['commentId']) && $_POST['commentId'] != 'undefined' ) ? $_POST['commentId'] : "";
+        $user_id = (isset($_POST['userId']) && $_POST['userId'] != 'undefined' ) ? $_POST['userId'] : "";
+        $is_like = (isset($_POST['isLike']) && $_POST['isLike'] != 'undefined') ? $_POST['isLike'] : "";
               
         $entity_id = "com".$comment_id;
-        if ($comment_id != "" && $user_id !="") {
+        if ($comment_id != "" && $user_id !="" && $user_id > 0) {
             $rm = new RatingManager();
             $rating_like_exist = $rm->hasRatingByEntityLikeUser($entity_id, $user_id);
             $rating_dislike_exist = $rm->hasRatingByEntityDislikeUser($entity_id, $user_id);

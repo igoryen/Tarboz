@@ -1,0 +1,1 @@
+1. value="2" means this entry is a "kid" (a translation of an entry whose authen status is 1 i.e. "Original").
