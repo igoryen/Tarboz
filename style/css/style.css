@@ -488,6 +488,26 @@ div#footer > div > a {
   /*width: auto;*/
 
 }
+.dad_door{
+  background-color: #3399FF;
+  /*border: ridge 10px blueviolet;*/
+  /*border: 1px solid #c1c1c1;*/
+  border: 1px solid gainsboro;
+  color: silver;
+  /*color: gray;*/
+  /*display: inline-block;*/
+  display: block;
+  float: left;
+  font-weight: bold;
+  margin: auto;
+  padding: 3px;
+  padding-left: 10px;
+  /*position: initial;*/
+  vertical-align: middle;
+  width: 98.5%;
+  /*width: auto;*/
+
+}
 
 #dad_room{
   /*border: ridge 10px brown;*/
@@ -601,7 +621,7 @@ div#footer > div > a {
   padding-left: 5px;
   padding-right: 5px;
   vertical-align: middle; /*50*/
-  width: 50px;
+  width: 60px;
 }
 
 .kid_added_by{
