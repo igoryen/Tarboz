@@ -5,7 +5,7 @@
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
 
-$entryId = $_GET['id'];
+$entryId = isset($_GET['id'])?$_GET['id']:"";
 //$entryId = 26;
 
 $em = new EntryManager();

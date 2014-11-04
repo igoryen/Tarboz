@@ -131,7 +131,7 @@ class EntryDataAccessor {
    */
   public function getEntryById($entryId) {
 
-    $query = 'SELECT 
+    $query = "SELECT 
                 e.ent_entry_id, 
                 l.lan_lang_name, 
                 e.ent_entry_text,
@@ -152,9 +152,13 @@ class EntryDataAccessor {
                 e.ent_entry_creation_date
               FROM tbl_entry e, tbl_language l 
               WHERE e.ent_entry_language_id = l.lan_language_id 
-              AND e.ent_entry_id = ' . $entryId . ';';
+              AND e.ent_entry_id = ". $entryId;
     // 52
     $dbHelper = new DBHelper();
+
+    //********For Test Purpose:(((((())))))
+    //echo $query;
+
     $result = $dbHelper->executeSelect($query);
     // 46
     $entryGottenById = $this->getEntryFull($result);
