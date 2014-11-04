@@ -11,6 +11,8 @@
   require_once BUSINESS_DIR_RATING . 'Rating.php';
   require_once BUSINESS_DIR_TRANSLREQ . 'TranslationRequestManager.php';
   require_once BUSINESS_DIR_TRANSLREQ . 'TranslationRequest.php';
+  require_once BUSINESS_DIR_LANG . "LanguageManager.php";
+  require_once BUSINESS_DIR_LANG . "Language.php";
   
 //Check if user is logged in or not
   
@@ -30,6 +32,7 @@ $em = new EntryManager();
 $trm = new TranslationRequestManager();
 $entry = $em->getEntryById($entryId); // 1
 $treq = $trm->getTreqByEntryId($entry->getEntryId());
+$lm = new LanguageManager();
 
 
 //table_to_see_entry_values($entry); // for debugging
@@ -142,6 +145,25 @@ $treq = $trm->getTreqByEntryId($entry->getEntryId());
     </div><?php
     }?>
     
+    <div class="entry_record">
+      <div class="entry_record_title">Request a translation into one of these languages</div>
+      <div class="entry_record_value">
+        <select name="treqLang">
+          <option value="">Choose a language</option>
+          <?php
+          $langs = $lm->getListOfLang();
+          foreach ($langs as $lang) {
+            echo '<option value="';
+            echo $lang->getLangId();
+            echo '">';
+            echo $lang->getLangName();
+            echo '</option>';
+          }
+      ?></select>
+        <a href="entrycreate.php?id=<?php echo $entryId; ?>">???</a><!-- #1-->
+      </div>
+    </div>
+
   <!--- comments section start --->
   
       <div class="entry_record">
