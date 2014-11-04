@@ -16,6 +16,9 @@ require("search.php");
 require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
 require_once BUSINESS_DIR_TRANSLREQ . "TranslationRequestManager.php";
 
+//require DB_CONNECTION . 'DBHelper.php';
+//require DB_CONNECTION . 'datainfo.php';
+
 $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2); // 1
 //$lang = 'ru';
 //echo "the language: " . $lang;
@@ -24,6 +27,8 @@ $trm = new TranslationRequestManager();
 
 $aryOfEntry = $em->getListOfEntryBriefByLanguage($lang);
 $aryOfTreq = $trm->getListOfTreqByLang($lang);
+
+
     
  ?>
 
@@ -42,17 +47,51 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                             <div class="col_33">
                                <h3 class="t_title">Top 10 Translations</h3>
                                     <ol type="circle">
-                                        <li>This is a sentence 1</li>
-                                        <li>This is a sentence 2</li>
-                                        <li>This is a sentence 3</li>
-                                        <li>This is a sentence 4</li>
-                                        <li>This is a sentence 5</li>
-                                        <li>This is a sentence 6</li>
-                                        <li>This is a sentence 7</li>
-                                        <li>This is a sentence 8</li>
-                                        <li>This is a sentence 9</li>
-                                        <li>This is a sentence 10</li>
+<?php
+    $query =   "SELECT *, count(rating.rat_like_user_id) AS num_like
+                FROM 
+                (SELECT orig.ent_entry_id AS orig_entry_id, orig.ent_entry_text AS orig_phrase, 
+                        trans.ent_entry_id AS trans_entry_id, trans.ent_entry_text AS trans_phrase,
+                        trans.ent_entry_creation_date AS trans_date
+                 FROM 
+                        (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
+                                ent_entry_translation_of, ent_entry_creation_date
+                         FROM tbl_entry where ent_entry_authen_status_id = 1) AS orig
+                 INNER JOIN 
+                        (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
+                                ent_entry_translation_of, ent_entry_creation_date
+                         FROM tbl_entry where ent_entry_authen_status_id = 2) AS trans
+                 ON orig.ent_entry_id = trans.ent_entry_translation_of
+                ) AS sub_entry
+                LEFT JOIN tbl_rating AS rating
+                ON rating.rat_entity_id = CONCAT('ent', sub_entry.trans_entry_id) 
+                   AND rating.rat_like_user_id IS NOT NULL AND rating.rat_like_user_id >0
+                GROUP BY sub_entry.trans_entry_id
+                ORDER BY num_like DESC, sub_entry.trans_date DESC, sub_entry.trans_entry_id ASC";
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $count = 0;
+    while ($list = mysqli_fetch_assoc($result)) {
+        $trans_phrase = $list['trans_phrase'];
+        $orig_phrase = $list['orig_phrase'];
+        $num_like = $list['num_like'];       
+        if ($count< 5) {    
+?>
+                                        <li style = "font-size:11px;"><?php echo $trans_phrase;?>
+                                            <p style="padding-left:5px;"><b>Translation of: </b><?php echo $orig_phrase;?></p>
+                                            <p style="padding-left:5px;"><b>Rating: </b><?php echo $num_like;?></p></li>
+<?php      if($count<4) { ?>
+                                        <hr style="margin-left:-30px; margin-right:10px;"/>
+<?php   
+            }// end if $count<4
+        } //end if  $count <5  
+        $count ++ ;
+    }//end while loop; 
+?>
                                     </ol>
+<?php if ($count >=5) { ?>
+                                    <div><a href="searchresult.php">see more...</a>    </div>
+<?php } //end if $count >=10 ?>
                              </div>
                             <div class="col_33" >
                                        <h3 class="t_title">Help translate these into <?php echo $aryOfTreq[0]->getTreqLang();?></h3>
