@@ -4,6 +4,10 @@
 require_once('plug-in/translate/config.inc.php');
 require_once('plug-in/translate/class/ServicesJSON.class.php');
 require_once('plug-in/translate/class/MicrosoftTranslator.class.php');
+require_once BUSINESS_DIR_LANG . "LanguageManager.php";
+require_once BUSINESS_DIR_LANG . "Language.php";
+
+$lm = new LanguageManager();
 
 $translator = new MicrosoftTranslator(ACCOUNT_KEY);
 $selectbox = array('id'=> 'txtLang','name'=>'txtLang');
@@ -28,12 +32,16 @@ $translator->getLanguagesSelectBox($selectbox);
 
     <p style="font-size:20px; text-align: left">
     <select name="tgt_lang">
-      <option>Target Language</option>
-      <option>English</option>
-      <option>Russian</option>
-      <option>Mandarin</option>
-      <option>Farsi</option>
-    </select>
+      <option value="">Search in ...</option><?php
+          $langs = $lm->getListOfLang();
+          foreach ($langs as $lang) {
+            echo '<option value="';
+            echo $lang->getLangId();
+            echo '">';
+            echo $lang->getLangName();
+            echo '</option>';
+          }
+  ?></select>
     <b>From:</b> <input type="date" name="startdate" placeholder="Start Date">
     <b>To:</b> <input type="date" name="enddate" placeholder="End Date">
     </p>
