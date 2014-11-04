@@ -79,7 +79,7 @@ function make_kid_room($kid_room_array){?>
 
 function dad_house_dad_0($no_original) { ?>
   <div id="dad_house">
-    <div class="door"></div>
+    <div class="dad_door"></div>
     <div id="dad_room">
       <div id="dad_text"><?php echo $no_original; ?></div>
       <div id="dad_profile_link">..</div>
@@ -108,7 +108,7 @@ function dad_house_dad_0($no_original) { ?>
 // for CASE 3: Original: exists. Variants: don't exist.
   function dad_house_dad_1($ary) { ?>
         <div id="dad_house">
-              <div class="door"><?php echo $ary['language']; ?></div>
+              <div class="dad_door"><?php echo $ary['language']; ?></div>
             <div id="dad_room">
               <div id="dad_text">
                 <a href="entryview.php?id=<?php echo $ary['id']?>"><?php 
