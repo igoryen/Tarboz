@@ -86,7 +86,7 @@
     echo "<br/><br/><b>SELECT USER BY NAME</b><br/>";
 
     $userManager = new UserManager();
-    $US = $userManager->getUserByName("JOHN", "SMITH");
+//    $US = $userManager->getUserByName("JOHN", "SMITH");
     foreach ($US as $user) {
       $email = $user->getEmail();
       echo "The Email is: " . $email . "<BR>";
