@@ -41,7 +41,7 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                         <div class="heading">
                             <div class="col_33">
                                <h3 class="t_title">Top 10 Translations</h3>
-                                    <ol type="circle">
+                                    <ul>
                                         <li>This is a sentence 1</li>
                                         <li>This is a sentence 2</li>
                                         <li>This is a sentence 3</li>
@@ -52,11 +52,11 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                         <li>This is a sentence 8</li>
                                         <li>This is a sentence 9</li>
                                         <li>This is a sentence 10</li>
-                                    </ol>
+                                    </ul>
                              </div>
                             <div class="col_33" >
                                        <h3 class="t_title">Help translate these into <?php echo $aryOfTreq[0]->getTreqLang();?></h3>
-                                        <ol type="circle">
+                                        <ul>
                                 <?php
                                               // TODO: add an if() in case the current request does not have the Accept-Language: header 
                                                   for($j = 0; $j < count($aryOfTreq); $j++) {
@@ -66,11 +66,11 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                                     echo '</a>';
                                                     echo '</li>';  
                                 }?>
-                                        </ol>
+                                        </ul>
                              </div>
                             <div class="col_33" >
                                 <h3 class="t_title">Original Entries in <?php echo $aryOfEntry[0]->getEntryLanguage();?></h3>
-                                <ol type="circle">
+                                <ul type="circle">
                                  <?php
                                       // TODO: add an if() in case the current request does not have the Accept-Language: header 
                                           for($i = 0; $i < 3; $i++) {
@@ -81,44 +81,26 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                             echo '</li>';  
                                           }
                                 ?>
-                                </ol>
+                                </ul>
                              </div>
                         </div>
                     </div>
                 </div>    
-                <div align="bottom">
-                   <marquee behavior="alternate" direction="left">
-                        <img src="images/flag/China.png" width="94" height="88"  />
-                        <img src="images/flag/Canada.png" width="94" height="88"  />
-                        <img src="images/flag/India.png" width="94" height="88"  />
-                        <img src="images/flag/Russia.png" width="94" height="88" />
-                        <img src="images/flag/Iraq.png" width="94" height="88" />
-                        <img src="images/flag/France.png" width="94" height="88" />
-                        <img src="images/flag/Uganda.png" width="94" height="88" />
-                        <img src="images/flag/United-Arab-Emirates.png" width="94" height="88" />
-                        <img src="images/flag/United-Kingdom.png" width="94" height="88" />
-                        <img src="images/flag/United-States-of-America.png" width="94" height="88" />
-                        <img src="images/flag/Switzerland.png" width="94" height="88" />
-                        <img src="images/flag/Thailand.png" width="94" height="88" />
-                        <img src="images/flag/Togo.png" width="94" height="88" />
-                        <img src="images/flag/Tonga.png" width="94" height="88" />
-                    </marquee>
-                    <marquee behavior="alternate" direction="right">
-                        <img src="images/flag/Trinidad-and-Tobago.png" width="94" height="88" />
-                        <img src="images/flag/Tunisia.png" width="94" height="88" />
-                        <img src="images/flag/Turkey.png" width="94" height="88" />
-                        <img src="images/flag/Turkmenistan.png" width="94" height="88" />
-                        <img src="images/flag/Tuvalu.png" width="94" height="88" />           
-                        <img src="images/flag/Afghanistan.png" width="94" height="88" />
-                        <img src="images/flag/Albania.png" width="94" height="88" />
-                        <img src="images/flag/Algeria.png" width="94" height="88" />
-                        <img src="images/flag/Antigua-and-Barbuda.png" width="94" height="88" />
-                        <img src="images/flag/Georgia.png" width="94" height="88" />
-                        <img src="images/flag/Grecee.png" width="94" height="88" />
-                        <img src="images/flag/Guinea.png" width="94" height="88" />
-                        <img src="images/flag/Kenya.png" width="94" height="88" />
-                        <img src="images/flag/Jamaica.png" width="94" height="88" />
-                    </marquee>
+                <div >
+                    <h2>Top 3 Contributors</h2>
+							<table id="innertbl">
+								<tr>
+									<td>
+										<img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User001</a>
+									</td>
+									<td>
+										<img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User002</a>
+									</td>
+									<td>
+										<img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User003</a>
+									</td>
+								</tr>
+				     </table><!--innertbl-->
                 </div>
 			</div><!--MidCol-->
 

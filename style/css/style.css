@@ -210,13 +210,14 @@ font-size: 17px;
 /*  width: 40%; (550px;)*/
 }
 
+/*
 #MidCol table{
   border-spacing: 20px;
   color: #999;
   font-size: 12px;
   font-weight: bold;
   margin: 0 auto;
-  margin-top: 1%;
+  margin-top: 10px;
   table-layout: fixed;    
 }
 
@@ -228,12 +229,11 @@ font-size: 17px;
   color: #999;
   text-align: center;
 }
+*/
 
 #MidCol li{
-  margin-left:-10%;
   color:#404040;
   text-align:left;
-/*  font-size:11px;*/
   font-weight:normal;
   list-style:none;
 }
@@ -1295,10 +1295,10 @@ position: relative;
 .col_33 {
     display:table-cell;
     width: 33%;
+    height: 360px;
     border-style: solid ;
     border-color: #000000;
     border-width: 1px;
-    border-radius: 0px 0px 80px;
     box-shadow: 5px 5px 5px #888888;
 
 }
