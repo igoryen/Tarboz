@@ -95,17 +95,18 @@ div > nav#navigation > a:hover {
 }
 
 #search input[type=text] {
-background: #FFFFFF url(../../images/searchi.png) no-repeat 0% 51%;
-border: 1px solid white;
-background-size: contain;
-/* box-shadow: 2px 1.5px 2px #999; */
-color: #000000;
-font-size: 25pt;
-height: 48px;
-/* margin: auto; */
-/* margin-left: 2.5%; */
-/* margin-top: 1%; */
-width: 931px;
+    background: #FFFFFF url(../../images/searchi.png) no-repeat 0% 51%;
+    border: 1px solid white;
+    background-size: contain;
+    /* box-shadow: 2px 1.5px 2px #999; */
+    color: #000000;
+    font-size: 25pt;
+    height: 48px;
+    /* margin: auto; */
+    /* margin-left: 2.5%; */
+    /* margin-top: 1%; */
+    width: 931px;
+    padding: 0px 0px 0px 60px;
 }
 /*
 #searchinput {
