@@ -95,17 +95,18 @@ div > nav#navigation > a:hover {
 }
 
 #search input[type=text] {
-background: #FFFFFF url(../../images/searchi.png) no-repeat 0% 51%;
-border: 1px solid white;
-background-size: contain;
-/* box-shadow: 2px 1.5px 2px #999; */
-color: #000000;
-font-size: 25pt;
-height: 48px;
-/* margin: auto; */
-/* margin-left: 2.5%; */
-/* margin-top: 1%; */
-width: 931px;
+    background: #FFFFFF url(../../images/searchi.png) no-repeat 0% 51%;
+    border: 1px solid white;
+    background-size: contain;
+    /* box-shadow: 2px 1.5px 2px #999; */
+    color: #000000;
+    font-size: 25pt;
+    height: 48px;
+    /* margin: auto; */
+    /* margin-left: 2.5%; */
+    /* margin-top: 1%; */
+    width: 931px;
+    padding: 0px 0px 0px 60px;
 }
 /*
 #searchinput {
@@ -210,13 +211,14 @@ font-size: 17px;
 /*  width: 40%; (550px;)*/
 }
 
+/*
 #MidCol table{
   border-spacing: 20px;
   color: #999;
   font-size: 12px;
   font-weight: bold;
   margin: 0 auto;
-  margin-top: 1%;
+  margin-top: 10px;
   table-layout: fixed;    
 }
 
@@ -228,12 +230,11 @@ font-size: 17px;
   color: #999;
   text-align: center;
 }
+*/
 
 #MidCol li{
-  margin-left:-10%;
   color:#404040;
   text-align:left;
-/*  font-size:11px;*/
   font-weight:normal;
   list-style:none;
 }
@@ -812,6 +813,9 @@ div#footer > div > a {
 
 
 /* for entry_display.php*/
+#treqResp{
+  font-size: smaller;
+}
 #entry_index_container{
   /*border: ridge 10px blue;*/
   margin: 3px auto;
@@ -1275,7 +1279,8 @@ position: relative;
 .t_title {
     margin-top: 0;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 15px;
+    text-align: center;
     line-height: 24px;
     font-weight: 400;
     text-transform: none;
@@ -1292,10 +1297,10 @@ position: relative;
 .col_33 {
     display:table-cell;
     width: 33%;
+    height: 360px;
     border-style: solid ;
     border-color: #000000;
     border-width: 1px;
-    border-radius: 0px 0px 80px;
     box-shadow: 5px 5px 5px #888888;
 
 }

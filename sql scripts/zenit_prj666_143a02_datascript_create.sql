@@ -229,6 +229,7 @@ LINES TERMINATED BY '\n';
 # translation request table
 CREATE TABLE IF NOT EXISTS `prj666`.`tbl_transl_request` (
   `treq_id` int(11) NOT NULL AUTO_INCREMENT,
+  `treq_creator_id` INT NOT NULL,
   `treq_entry_id` int NOT NULL,
   `treq_target_lang_id` int(11) NOT NULL,
   `treq_date` date NOT NULL,

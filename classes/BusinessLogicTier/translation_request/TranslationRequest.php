@@ -3,6 +3,7 @@
 class TranslationRequest{
   // treq = translation request
   private $treq_id;
+  private $treq_creator_id;
   private $treq_entry_id;
   private $treq_entry_line;
   private $treq_target_lang;
@@ -10,6 +11,9 @@ class TranslationRequest{
   
   public function getTreqId(){ return $this->treq_id; }  
   public function setTreqId($x){ $this->treq_id = $x; }
+  
+  public function getTreqCreatorId(){ return $this->treq_creator_id; }  
+  public function setTreqCreatorId($x){ $this->treq_creator_id = $x; }
   
   public function getTreqEntryId(){ return $this->treq_entry_id; }  
   public function setTreqEntryId($x){ $this->treq_entry_id = $x; }

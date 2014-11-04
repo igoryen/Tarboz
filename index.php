@@ -32,13 +32,17 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
     
  ?>
 
-	<div id="index_table_container" align="center">
-        <div>
-			<div id="LeftCol">
-				<object id="obj" type="text/html" 
-                data="views/entry/search_phrase_examples.html">
-				</object>
-			</div><!--LeftCol-->
+<div id="index_table_container" align="center">
+  <div>
+    
+    <!-- left column -->
+    <div id="LeftCol">
+      
+      <object id="obj" 
+              type="text/html" 
+              data="views/entry/search_phrase_examples.html">
+      </object>
+    </div><!--LeftCol-->
 
 			<div id="MidCol">
                 <div>
@@ -161,15 +165,29 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                 </div>
 			</div><!--MidCol-->
 
-			<div id="RightCol">
-                <div id="RightCol_Scroll">
-				What<br><br>a<br><br>life<br><br><br>s<br><br>here<br><br>now:<br><br>testineeg:<br><br><br><br><br><br><br><br>this:<br><br>page<br><br>now<br><br><br>nothign<br><br>else<br> neeg:<br><br><br><br><br><br><br><br>this:<br><br>page<br><br>now<br><br><br>nothign<br><br>else<br> 
-                </div>
-			</div><!--RightCol-->
+      <!-- right column -->
+      <div id="RightCol">
+        <div id="RightCol_Scroll">
+          Testing1<br><br><br><br>
+          Testing2<br><br><br><br>
+          Testing3<br><br><br><br>
+          Testing4<br><br><br><br>
+          Testing5<br><br><br><br>
+          Testing6<br><br><br><br>
+          Testing7<br><br><br><br>
+          Testing8<br><br><br><br>
+          Testing9<br><br><br><br>
+          Testing10<br><br><br><br>
+          Testing11<br><br><br><br>
+          Testing12<br><br><br><br>
+          Testing13<br><br><br><br>
+          Testing14<br><br><br><br>
+        </div>
+      </div><!--RightCol-->
 
-		</div><!--index_table-->
+    </div><!--index_table-->
 
-	</div><!--"index_table_container"-->
+  </div><!--"index_table_container"-->
 
 <?php require("footer.php"); ?>
 

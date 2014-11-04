@@ -33,8 +33,22 @@ $trm = new TranslationRequestManager();
 $entry = $em->getEntryById($entryId); // 1
 $treq = $trm->getTreqByEntryId($entry->getEntryId());
 $lm = new LanguageManager();
+$userId = 3; // the id of the current logged-in user
 
-
+$language = $entry->getEntryLanguage();
+$text = nl2br(trim($entry->getEntryText()));
+$verbatim = $entry->getEntryVerbatim();
+$translit = nl2br(trim($entry->getEntryTranslit()));
+$authen = $entry->getEntryAuthenStatusId();
+$translOf = $entry->getEntryTranslOf();
+$user_id = $entry->getEntryUserId();
+$media = $entry->getEntryMediaId();
+$author = $entry->getEntryAuthorId();
+$source = $entry->getEntrySourceId();
+$tags = trim($entry->getEntryTags());
+$use = trim($entry->getEntryUse());
+$video = trim($entry->getEntryHttpLink());
+$date = $entry->getEntryCreationDate();
 //table_to_see_entry_values($entry); // for debugging
 
   ?>
@@ -44,79 +58,89 @@ $lm = new LanguageManager();
     
     <div class="entry_record">
       <div class="entry_record_title">id</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryId(); ?></div>
+      <div class="entry_record_value"><?php echo $entryId; ?></div>
     </div>
     
     <div class="entry_record">
       <div class="entry_record_title">Language</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryLanguage(); ?></div>
+      <div class="entry_record_value"><?php echo $language; ?></div>
     </div>
     
     <div class="entry_record">
       <div class="entry_record_title">Text</div>
-      <div class="entry_record_value"><?php echo nl2br($entry->getEntryText()); ?></div>
+      <div class="entry_record_value"><?php echo $text; ?></div>
     </div>
     
-    <div class="entry_record">
+    <div class="entry_record" style="display: none;"><!-- 2 -->
       <div class="entry_record_title">Verbatim</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryVerbatim(); ?></div>
+      <div class="entry_record_value"><?php echo $verbatim; ?></div>
     </div>
 
+<?php if(!null == $translit){?>
     <div class="entry_record">
       <div class="entry_record_title">Translit</div>
-      <div class="entry_record_value"><?php echo nl2br($entry->getEntryTranslit()); ?></div>
+      <div class="entry_record_value"><?php echo $translit; ?></div>
     </div>
-    
+<?php }?>
+
     <div class="entry_record">
       <div class="entry_record_title">Authenticity status</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryAuthenStatusId(); ?></div>
+      <div class="entry_record_value"><?php echo $authen; ?></div>
     </div>
-    
+
+<?php if(!null == $translOf){?>
     <div class="entry_record">
       <div class="entry_record_title">Translation of</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryTranslOf(); ?></div>
+      <div class="entry_record_value"><?php echo $translOf; ?></div>
     </div>
+<?php }?>
     
     <div class="entry_record">
       <div class="entry_record_title">Entry added by</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryUserId(); ?></div>
+      <div class="entry_record_value"><?php echo $user_id; ?></div>
     </div>
 
     <div class="entry_record">
       <div class="entry_record_title">Media</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryMediaId(); ?></div>
+      <div class="entry_record_value"><?php echo $media; ?></div>
     </div>
-    
+
+<?php if(!null == $tags){?>
     <div class="entry_record">
       <div class="entry_record_title">Tags</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryTags(); ?></div>
+      <div class="entry_record_value"><?php echo $tags; ?></div>
     </div>
+<?php }?>
 
     <div class="entry_record">
       <div class="entry_record_title">Author</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryAuthorId(); ?></div>
+      <div class="entry_record_value"><?php echo $author; ?></div>
     </div>
 
     <div class="entry_record">
       <div class="entry_record_title">Source</div>
-      <div class="entry_record_value"><?php echo $entry->getEntrySourceId(); ?></div>
+      <div class="entry_record_value"><?php echo $source; ?></div>
     </div>
 
+<?php if(!null == $use){?>
     <div class="entry_record">
       <div class="entry_record_title">Use</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryUse(); ?></div>
+      <div class="entry_record_value"><?php echo $use; ?></div>
     </div>
-    
+<?php }?>
+
+<?php if(!null == $video){?>
     <div class="entry_record">
       <div class="entry_record_title">Video link</div>
       <div class="entry_record_value">
-        <embed width="420" height="315" src="<?php echo $entry->getEntryHttpLink(); ?>">
+        <embed width="420" height="315" src="<?php echo $video; ?>">
       </div>
     </div>
+<?php }?>
     
     <div class="entry_record">
       <div class="entry_record_title">Creation date</div>
-      <div class="entry_record_value"><?php echo $entry->getEntryCreationDate(); ?></div>
+      <div class="entry_record_value"><?php echo $date; ?></div>
     </div>
     
     <div class="entry_record">
@@ -148,8 +172,10 @@ $lm = new LanguageManager();
     <div class="entry_record">
       <div class="entry_record_title">Request a translation into one of these languages</div>
       <div class="entry_record_value">
-        <select name="treqLang">
-          <option value="">Choose a language</option>
+        <select 
+          name="treqLang" 
+          onchange="treqCreate(this.value,<?php echo $userId.",".$entryId; ?>)">
+          <option value="">Select a language:</option>
           <?php
           $langs = $lm->getListOfLang();
           foreach ($langs as $lang) {
@@ -160,7 +186,7 @@ $lm = new LanguageManager();
             echo '</option>';
           }
       ?></select>
-        <a href="entrycreate.php?id=<?php echo $entryId; ?>">???</a><!-- #1-->
+        <span id="treqCreateResponse"></span>
       </div>
     </div>
 
