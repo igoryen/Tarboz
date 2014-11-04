@@ -22,4 +22,11 @@ class TranslationRequestManager{
     $treq = $trda->getTreqByEntryId($id);
     return $treq;
   }
+  
+  public function getTreqBriefById($id){
+    $trda = new TranslationRequestDataAccessor();
+    $treq = $trda->getTreqBriefById($id);
+    return $treq;
+  } 
+  
 }

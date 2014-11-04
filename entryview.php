@@ -33,7 +33,7 @@ $trm = new TranslationRequestManager();
 $entry = $em->getEntryById($entryId); // 1
 $treq = $trm->getTreqByEntryId($entry->getEntryId());
 $lm = new LanguageManager();
-
+$userId = 3; // the id of the current logged-in user
 
 //table_to_see_entry_values($entry); // for debugging
 
@@ -148,8 +148,10 @@ $lm = new LanguageManager();
     <div class="entry_record">
       <div class="entry_record_title">Request a translation into one of these languages</div>
       <div class="entry_record_value">
-        <select name="treqLang">
-          <option value="">Choose a language</option>
+        <select 
+          name="treqLang" 
+          onchange="treqCreate(this.value,<?php echo $userId.",".$entryId; ?>)">
+          <option value="">Select a language:</option>
           <?php
           $langs = $lm->getListOfLang();
           foreach ($langs as $lang) {
@@ -160,7 +162,7 @@ $lm = new LanguageManager();
             echo '</option>';
           }
       ?></select>
-        <a href="entrycreate.php?id=<?php echo $entryId; ?>">???</a><!-- #1-->
+        <span id="treqCreateResponse"></span>
       </div>
     </div>
 

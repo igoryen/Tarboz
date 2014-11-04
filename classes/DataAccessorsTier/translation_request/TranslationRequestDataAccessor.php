@@ -8,21 +8,25 @@ require_once(DB_CONNECTION . 'datainfo.php');
 class TranslationRequestDataAccessor{
   
   public function addTreq($treq){
-    $id = "";
-    $entry_id = "";
-    $lang_id = "";
-    $date = "";
+    
+    $creator_id = $treq->getTreqCreatorId();
+    $entry_id = $treq->getTreqEntryId();
+    $lang_id = $treq->getTreqLang();
+    $date = $treq->getTreqDate();
     
     $insert_query = 'INSERT INTO 
                       tbl_transl_request (
-                        treq_entry_id, 
-                        treq_target_lang_id, 
+                        treq_creator_id,
+                        treq_entry_id,
+                        treq_target_lang_id,
                         treq_date
                       )
-                    VALUES (' .$entry_id
-                       . ","  .$lang_id
-                       . ", '".$date
-                       . "');";
+                    VALUES (' .$creator_id
+                       . ','  .$entry_id
+                       . ','  .$lang_id
+                       . ',"'  .$date // is a string therefore must be surrounded in double quotes
+                       . '");';
+    //echo "<br>trda::addTreq() insert_query:<br>" . $insert_query;
     $dbHelper = new DBHelper();
     $last_inserted_id = $dbHelper->executeInsertQuery($insert_query);
     return $last_inserted_id;
@@ -67,7 +71,25 @@ class TranslationRequestDataAccessor{
                 r.treq_entry_id = {$id};";
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeQuery($query);
-    $treqGottenByEntryId = $this->getTreq($result);
+    $treqGottenByEntryId = $this->getTreqBrief($result);
+    return $treqGottenByEntryId; 
+  }
+  
+  public function getTreqBriefById($id){
+    $query = "SELECT
+                r.treq_entry_id,
+                l.lan_lang_name
+              FROM
+                tbl_transl_request AS r 
+                  STRAIGHT_JOIN
+                tbl_language AS l
+              WHERE
+                r.treq_target_lang_id = l.lan_language_id
+              AND
+                r.treq_id={$id}";
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeQuery($query);
+    $treqGottenByEntryId = $this->getTreqBrief($result);
     return $treqGottenByEntryId; 
   }
   
@@ -87,7 +109,7 @@ class TranslationRequestDataAccessor{
     return $Treqs;
   }
   
-  private function getTreq($result){
+  private function getTreqBrief($result){
     //echo "<br><br>trda::getListOfTreq() result: "; $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array); print_r(mysql_fetch_assoc($result));
     $treq = new TranslationRequest();
     $list = mysqli_fetch_assoc($result);
@@ -98,6 +120,20 @@ class TranslationRequestDataAccessor{
     //$Treqs[$count]->setTreqDate($list['treq_date']);
     return $treq;
   }
+  
+  private function getTreqFull($result){
+    //echo "<br><br>trda::getListOfTreq() result: "; $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array); print_r(mysql_fetch_assoc($result));
+    $treq = new TranslationRequest();
+    $list = mysqli_fetch_assoc($result);
+    $treq->setTreqId(       $list['treq_id']);
+    $treq->setTreqCreatorId($list['treq_creator_id']);
+    $treq->setTreqEntryId(  $list['treq_entry_id']);
+    $treq->setTreqLang(     $list['lan_lang_name']);
+    $treq->setTreqEntryLine($list['ent_entry_text']);
+    $treq->setTreqDate(     $list['treq_date']);
+    return $treq;
+  }
+  
   
 }
 

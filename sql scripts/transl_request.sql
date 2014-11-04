@@ -1,4 +1,38 @@
----
+SELECT
+  r.treq_entry_id,
+  l.lan_lang_name
+FROM
+  tbl_transl_request AS r 
+    STRAIGHT_JOIN
+  tbl_language AS l
+WHERE
+  e.ent_entry_id = r.treq_entry_id
+AND
+  r.treq_target_lang_id = l.lan_language_id
+AND
+  r.treq_id=
+
+---works get full treq by treq id---------------------------
+SELECT 
+  e.ent_entry_id, 
+  e.ent_entry_text, 
+  r.treq_id,
+  r.treq_target_lang_id,
+  l.lan_lang_name
+FROM 
+  tbl_entry AS e 
+    STRAIGHT_JOIN 
+  tbl_transl_request AS r 
+    STRAIGHT_JOIN
+  tbl_language AS l
+WHERE
+  e.ent_entry_id = r.treq_entry_id
+AND
+  r.treq_target_lang_id = l.lan_language_id
+AND
+  r.treq_id= 5
+
+---works ---------------
 SELECT
   r.treq_entry_id,
   l.lan_lang_name

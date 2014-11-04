@@ -812,6 +812,9 @@ div#footer > div > a {
 
 
 /* for entry_display.php*/
+#treqResp{
+  font-size: smaller;
+}
 #entry_index_container{
   /*border: ridge 10px blue;*/
   margin: 3px auto;
