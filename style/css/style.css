@@ -1279,7 +1279,8 @@ position: relative;
 .t_title {
     margin-top: 0;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 15px;
+    text-align: center;
     line-height: 24px;
     font-weight: 400;
     text-transform: none;
