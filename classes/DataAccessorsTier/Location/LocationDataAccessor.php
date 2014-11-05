@@ -139,7 +139,11 @@ public function getCountries() {
 public function getCountriesNameById($countryid) {
 
     //Selecting country by City Name
+<<<<<<< HEAD
     $query = "select * from " .COUNTRY ." where con_country_id= "."'".$countryid."'";
+=======
+    $query = "select * from tbl_country where con_country_id=".$countryid;
+>>>>>>> 584f80e3a83ce39a0360d2878544c296c42c402e
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);

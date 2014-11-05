@@ -15,6 +15,7 @@ class DBHelper {
     return $this->connection;
   }
 
+
   private function connectToDB() {
     // Step 1. Create a Database connection
     $this->connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
@@ -77,6 +78,13 @@ class DBHelper {
     $numOfRows = mysqli_num_rows($result);
     $this->closeConnection();
     return $numOfRows;
+  }
+
+  //A function that receives a string and then escapes the special characters and returns the result.
+  public function EscapeString($mystring){
+
+     return mysqli_real_escape_string($con, $mystring);
+
   }
 
 }

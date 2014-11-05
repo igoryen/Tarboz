@@ -3,10 +3,6 @@
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   require_once BUSINESS_DIR_ENTRY . "Entry.php";
 
-<<<<<<< HEAD
-$entryId = isset($_GET['id'])?$_GET['id']:"";
-//$entryId = 26;
-=======
   require_once BUSINESS_DIR_COMMENT . 'CommentManager.php';
   require_once BUSINESS_DIR_USER. 'User.php';
   require_once BUSINESS_DIR_USER. 'UserManager.php';
@@ -31,7 +27,6 @@ $entryId = isset($_GET['id'])?$_GET['id']:"";
     echo "we have POST[id], it is " . $_POST['id'] . "<br>";
     $entryId = $_POST['id'];
   }
->>>>>>> 490bd8c28cc835390726f878034f6a5d7a6810e4
 
 $em = new EntryManager();
 $trm = new TranslationRequestManager();
@@ -173,7 +168,8 @@ $date = $entry->getEntryCreationDate();
       </div>
     </div><?php
     }?>
-    
+<?php
+if($entry->getEntryAuthenStatusId() == 1){?>
     <div class="entry_record">
       <div class="entry_record_title">Request a translation into one of these languages</div>
       <div class="entry_record_value">
@@ -194,7 +190,7 @@ $date = $entry->getEntryCreationDate();
         <span id="treqCreateResponse"></span>
       </div>
     </div>
-
+<?php }?>
   <!--- comments section start --->
   
       <div class="entry_record">

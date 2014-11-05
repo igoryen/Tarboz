@@ -53,3 +53,40 @@ DROP INDEX `tblRating_tblUser_rat_rating_like_user_id_FK_idx` ;
 ALTER TABLE `prj666`.`tbl_report` 
 ADD COLUMN `rep_reported_by` INT(11) NULL AFTER `rep_entity_id`,
 ADD COLUMN `rep_reported_on` DATETIME NULL AFTER `rep_reported_by`;
+<<<<<<< HEAD
+=======
+
+#-------Insert more data on rating table on Nov 3
+INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
+VALUES ('28', 'ent13', '1', '0', '2014-11-03 07:47:55');
+
+INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
+VALUES ('29', 'ent13', '2', '0', '2014-11-03 08:03:22');
+
+INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
+VALUES ('30', 'ent13', '3', '0', '2014-11-03 08:04:44');
+
+INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
+VALUES ('31', 'ent13', '4', '0', '2014-11-03 08:05:33');
+
+INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
+VALUES ('32', 'ent11', '1', '0', '2014-11-03 08:06:07');
+
+INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
+VALUES ('33', 'ent11', '3', '0', '2014-11-03 08:08:08');
+
+INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
+VALUES ('34', 'ent38', '1', '0', '2014-11-03 08:09:08');
+
+INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
+VALUES ('35', 'ent38', '2', '0', '2014-11-03 08:09:22');
+
+INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
+VALUES ('36', 'ent38', '3', '0', '2014-11-03 08:10:10');
+
+
+
+
+
+
+>>>>>>> 584f80e3a83ce39a0360d2878544c296c42c402e

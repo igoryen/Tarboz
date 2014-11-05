@@ -108,13 +108,7 @@
   }// 4
   else { // 17
     if(isset($_GET['id'])){ // 34
-<<<<<<< HEAD
-      echo "the id of the entry you want to edit is " . $_GET['id'];
-      $em = new EntryManager(); // 12
-      $entry = $em->getEntryById($_GET['id']); // 36
-      form_to_edit_entry($entry); // 37
-      
-=======
+
       if(isset($_GET['a'])){ // 42
         // 48*
         $em = new EntryManager(); // 12
@@ -127,7 +121,6 @@
         $entry = $em->getEntryById($_GET['id']); // 36
         form_to_edit_entry($entry); // 37
       }      
->>>>>>> 490bd8c28cc835390726f878034f6a5d7a6810e4
     }
     else{ // 35
       form_to_create_entry();
