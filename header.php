@@ -420,7 +420,7 @@ div.showdata{
 </head>
 
 <body>
-  <div id="wrapper">
+  <div class="wrapper">
 
     <div id="header">
 
@@ -498,6 +498,4 @@ div.showdata{
 
         ?>
         </div>
-
-
     </div><!--"header"-->

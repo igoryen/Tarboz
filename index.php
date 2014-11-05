@@ -19,7 +19,6 @@ require_once BUSINESS_DIR_TRANSLREQ . "TranslationRequestManager.php";
 //require DB_CONNECTION . 'DBHelper.php';
 //require DB_CONNECTION . 'datainfo.php';
 
->>>>>>> 584f80e3a83ce39a0360d2878544c296c42c402e
 $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2); // 1
 //$lang = 'ru';
 //echo "the language: " . $lang;
@@ -33,10 +32,8 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
 
 <div id="index_table_container" align="center">
   <div>
-    
     <!-- left column -->
     <div id="LeftCol">
-      
       <object id="obj" 
               type="text/html" 
               data="views/entry/search_phrase_examples.html">
@@ -127,60 +124,41 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                         </div>
                     </div>
                 </div>    
-                <div align="bottom">
-                   <marquee behavior="alternate" direction="left">
-                        <img src="images/flag/China.png" width="94" height="88"  />
-                        <img src="images/flag/Canada.png" width="94" height="88"  />
-                        <img src="images/flag/India.png" width="94" height="88"  />
-                        <img src="images/flag/Russia.png" width="94" height="88" />
-                        <img src="images/flag/Iraq.png" width="94" height="88" />
-                        <img src="images/flag/France.png" width="94" height="88" />
-                        <img src="images/flag/Uganda.png" width="94" height="88" />
-                        <img src="images/flag/United-Arab-Emirates.png" width="94" height="88" />
-                        <img src="images/flag/United-Kingdom.png" width="94" height="88" />
-                        <img src="images/flag/United-States-of-America.png" width="94" height="88" />
-                        <img src="images/flag/Switzerland.png" width="94" height="88" />
-                        <img src="images/flag/Thailand.png" width="94" height="88" />
-                        <img src="images/flag/Togo.png" width="94" height="88" />
-                        <img src="images/flag/Tonga.png" width="94" height="88" />
-                    </marquee>
-                    <marquee behavior="alternate" direction="right">
-                        <img src="images/flag/Trinidad-and-Tobago.png" width="94" height="88" />
-                        <img src="images/flag/Tunisia.png" width="94" height="88" />
-                        <img src="images/flag/Turkey.png" width="94" height="88" />
-                        <img src="images/flag/Turkmenistan.png" width="94" height="88" />
-                        <img src="images/flag/Tuvalu.png" width="94" height="88" />           
-                        <img src="images/flag/Afghanistan.png" width="94" height="88" />
-                        <img src="images/flag/Albania.png" width="94" height="88" />
-                        <img src="images/flag/Algeria.png" width="94" height="88" />
-                        <img src="images/flag/Antigua-and-Barbuda.png" width="94" height="88" />
-                        <img src="images/flag/Georgia.png" width="94" height="88" />
-                        <img src="images/flag/Grecee.png" width="94" height="88" />
-                        <img src="images/flag/Guinea.png" width="94" height="88" />
-                        <img src="images/flag/Kenya.png" width="94" height="88" />
-                        <img src="images/flag/Jamaica.png" width="94" height="88" />
-                    </marquee>
+                <div>
+                    <h3>Top 3 Contributors</h3>
+							<table id="innertbl">
+								<tr>
+									<td>
+										<img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User001</a>
+									</td>
+									<td>
+										<img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User002</a>
+									</td>
+									<td>
+										<img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User003</a>
+									</td>
+								</tr>
+				     </table><!--innertbl-->
                 </div>
 			</div><!--MidCol-->
->>>>>>> 584f80e3a83ce39a0360d2878544c296c42c402e
 
       <!-- right column -->
       <div id="RightCol">
         <div id="RightCol_Scroll">
-          Testing1<br><br><br><br>
-          Testing2<br><br><br><br>
-          Testing3<br><br><br><br>
-          Testing4<br><br><br><br>
-          Testing5<br><br><br><br>
-          Testing6<br><br><br><br>
-          Testing7<br><br><br><br>
-          Testing8<br><br><br><br>
-          Testing9<br><br><br><br>
-          Testing10<br><br><br><br>
-          Testing11<br><br><br><br>
-          Testing12<br><br><br><br>
-          Testing13<br><br><br><br>
-          Testing14<br><br><br><br>
+          Testing1<br><br>
+          Testing2<br><br>
+          Testing3<br><br>
+          Testing4<br><br>
+          Testing5<br><br>
+          Testing6<br><br>
+          Testing7<br><br>
+          Testing8<br><br>
+          Testing9<br><br>
+          Testing10<br><br>
+          Testing11<br><br>
+          Testing12<br><br>
+          Testing13<br><br>
+          Testing14<br><br>
         </div>
       </div><!--RightCol-->
 
