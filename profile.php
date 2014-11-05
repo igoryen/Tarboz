@@ -66,11 +66,11 @@
                  </div>
                </div>
                <div class="row_space"></div>
-               <div>John Smith <br />John Smith <br />
+               <div>
+                   John Smith <br />John Smith <br />
                      John Smith <br />John Smith <br />
-                     John Smith <br />John Smith <br />
-                     John Smith <br />John Smith <br />
-                     John Smith <br />John Smith <br /></div>
+                   
+                </div>
                        
              </div>
              <div class="col_space"></div>
@@ -82,3 +82,6 @@
         </div>
     </div>
 </div>
+<?php
+    include "footer.php";
+?>

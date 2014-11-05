@@ -32,10 +32,8 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
 
 <div id="index_table_container" align="center">
   <div>
-    
     <!-- left column -->
     <div id="LeftCol">
-      
       <object id="obj" 
               type="text/html" 
               data="views/entry/search_phrase_examples.html">
