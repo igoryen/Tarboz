@@ -48,7 +48,10 @@
                  <div class="col_info"> 
                     <div style="padding: 0px 0px 0px 20px">
                         <div>
-                            <h1><?php if(isset($fname) && isset($lname)) echo " ".$fname." ".$lname; ?>
+                            <h1><?php if(isset($fname) && isset($lname)) echo " ".$fname." ".$lname; ?> 
+                                <b style="font-size:12px; color: #B6ACE0; float: right; padding: 7px">
+                                    <a href="edit_profile.php?id=<?php echo $id ?>">Edit Profile</a>
+                                </b>
                                 <br /><i style="font-size:10px; color: #B6ACE0">Registed: <?php if(isset($regdate)) echo $regdate ?></i>
                             </h1>
                         </div>
