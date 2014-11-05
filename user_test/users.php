@@ -98,7 +98,7 @@
      echo "<br/><br/><b>===USER BY ID</b><br/>";
 
     $userManager = new UserManager();
-    $US = $userManager->getUserByUserId(1);
+    $US = $userManager->getUserByUserId(2);
     //foreach ($US as $user) {
       $email = $user->getEmail();
       $loc = $user->getLocation();

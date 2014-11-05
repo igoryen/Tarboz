@@ -1,39 +1,5 @@
 <?php 
-//  	include "../../config.php";
-    include "header.php";
-	require_once BUSINESS_DIR_USER . 'UserManager.php';   
-    require_once BUSINESS_DIR_LOCATION . 'LocationManager.php';  
-
-    $userManager = new UserManager();
-    $locationManager = new LocationManager();
-
-    $userId = intval( $_GET["id"]);
-//    if ($userId =="")
-//    {
-//        //redirect to homepage
-//        header("Location: http://localhost/tarboz/");
-//    }
-           $User_Login = $userManager->getUserByUserId($userId);
-    
-                $id  =$User_Login->getUserId();  
-                $fname = $User_Login->getFirstName();
-                $lname = $User_Login->getLastName();
-                $email = $User_Login->getEmail();
-                $language = $User_Login->getUserLanguage();
-                $regdate = $User_Login->getRegistrationDate();
-                $locationId = $User_Login->getLocation();
-                $birth= $User_Login->getDOB();
-                $mediaId = $User_Login->getMediaId();
-
-            $User_Country = $locationManager->getCountriesNameById($locationId);
-            foreach ( $User_Country as $cou) {
-                $Country = $cou->getCountryName();
-            }
-          
-            $User_Province = $locationManager->getProvincesByCountryId($locationId);
-            foreach ( $User_Province as $prov) {
-                $Province = $prov->getProvinceName();
-             }
+    require_once "views/profile/get_user_by_id.php" 
 ?>
 <div align="center">
     <div class="container">
@@ -47,6 +13,9 @@
                     <div style="padding: 0px 0px 0px 20px">
                         <div>
                             <h1><?php echo " ".$fname." ".$lname ?>
+                                <b style="font-size:12px; color: #B6ACE0; float: right; padding: 7px">
+                                    <a href="edit_profile.php?id=<?php echo $id ?>">Edit Profile</a>
+                                </b>
                                 <br /><i style="font-size:10px; color: #B6ACE0">Registed: <?php echo $regdate ?></i>
                             </h1>
                         </div>
