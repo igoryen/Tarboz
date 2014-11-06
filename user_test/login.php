@@ -13,6 +13,12 @@ require_once BUSINESS_DIR_USER_TYPE . 'UserTypeManager.php';
 $userid = isset($_POST['userid']) ? $_POST['userid'] : "";
 $pwd = isset($_POST['password']) ? $_POST['password'] : "";
 
+//checks if the passed variables do not have some crazy slashes..
+if(get_magic_quotes_gpc()){
+   $userid = stripslashes($userid);
+   $pwd = stripslashes($pwd);
+}
+
 //echo $userid . "Testing ";
 
 $userManager = new UserLoginManager();

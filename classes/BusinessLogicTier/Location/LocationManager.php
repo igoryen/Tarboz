@@ -18,6 +18,12 @@ class LocationManager {
     return $last_inserted_id;
   }
 
+
+  public function getUserLocation(){
+      
+
+  }
+
   public function deleteLocation($Locationid) {
     $LocationDataAccessor = new LocationDataAccessor();
     $result = $LocationDataAccessor->deleteLocation($Locationid);

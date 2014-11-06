@@ -79,6 +79,13 @@ class DBHelper {
     return $numOfRows;
   }
 
+  //A function that receives a string and then escapes the special characters and returns the result.
+  public function EscapeString($mystring){
+
+     return mysqli_real_escape_string($con, $mystring);
+
+  }
+
 }
 
 // DBHelper

@@ -93,6 +93,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             function(data,status){
               //this sets the session variable of username inside the variable username
               //var username="<?php if(isset($_SESSION['user'])) echo $_SESSION['user']->getFirstName(); ?>"
+              
 
               if(data==1 || data==2){
 
@@ -387,6 +388,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
       
   </script>
   <script src="treqCreate.js"></script>
+  <script src="entryDelete.js"></script>
   
   <!-- for translator -->
   <style>
@@ -423,7 +425,7 @@ div.showdata{
 </head>
 
 <body>
-  <div id="wrapper">
+  <div class="wrapper">
 
     <div id="header">
 
@@ -501,5 +503,4 @@ div.showdata{
 
         ?>
         </div>
-
     </div><!--"header"-->

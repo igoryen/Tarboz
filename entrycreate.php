@@ -108,6 +108,7 @@
   }// 4
   else { // 17
     if(isset($_GET['id'])){ // 34
+
       if(isset($_GET['a'])){ // 42
         // 48*
         $em = new EntryManager(); // 12

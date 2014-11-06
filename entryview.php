@@ -1,5 +1,4 @@
-  <?php 
-    include_once("header.php");
+  <?php require("header.php");
   
     require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
     require_once BUSINESS_DIR_ENTRY . "Entry.php";
@@ -240,6 +239,42 @@
     </div>
     <!--Display edit end--> 
     <!--Display Translate into--> 
+    <!-- display the Delete button if the logged-in user is the creator of the entry-->
+    <div class="entry_record">
+      <div class="entry_record_title">Delete this entry</div>
+      <div class="entry_record_value">
+        
+        <button id="entryDeleteButton">Delete this entry</button>
+        <span id="entryDeleteResponse" style="display: none"></span>
+        <div id="entryDeleteDialog" style="display: none">
+          Are you sure you want to delete this entry ><?php echo $entryId; ?><<br>
+          <form action="index.php">
+            <button type="submit"
+                    id="entryDeleteConfirm"
+                    onclick="entryDelete(<?php echo $entryId; ?>)">Delete</button>
+            <button name="entryDeleteCancel" 
+                  id="entryDeleteCancel"
+                  onclick="">Cancel</button>
+          </form>
+        </div>
+        
+        
+      </div>
+      <script>
+        $( "#entryDeleteButton" ).click(function() {
+          $( "#entryDeleteDialog" ).show("fast");
+        });
+        $( "#entryDeleteCancel" ).click(function() {
+          $( "#entryDeleteDialog" ).hide("fast");          
+        });
+        $( "#entryDeleteConfirm ").click(function(){
+          $("#entryDeleteResponse").show("fast");
+          $( "#entryDeleteDialog" ).hide("fast");
+        });
+      </script>  
+    </div>
+        
+    
     <?php
         if($entry->getEntryAuthenStatusId() == 1){
         // 1*
@@ -261,6 +296,11 @@
     <?php } //end if($entry->getEntryAuthenStatusId() == 1) ?>
     <!--Display Translate into end-->  
     <!--Display translation request-->
+    
+    
+    
+<?php
+if($entry->getEntryAuthenStatusId() == 1){?>
     <div class="entry_record">
       <div class="entry_record_title">Request a translation into one of these languages</div>
       <div class="entry_record_value">

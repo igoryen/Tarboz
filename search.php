@@ -14,7 +14,6 @@ $selectbox = array('id'=> 'txtLang','name'=>'txtLang');
 $translator->getLanguagesSelectBox($selectbox);
 
 ?>
-<div id="wrapper">
 <div id="search" >
   <div align="center">
   <div style="width:980px;">        
@@ -45,8 +44,6 @@ $translator->getLanguagesSelectBox($selectbox);
     <b>From:</b> <input type="date" name="startdate" placeholder="Start Date">
     <b>To:</b> <input type="date" name="enddate" placeholder="End Date">
     </p>
-</div></div>
-</div><!--search-->
-    <!--</div>header-->
+</div></div></div>
 
     

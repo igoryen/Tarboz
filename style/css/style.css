@@ -13,33 +13,42 @@ body{
   padding: 0px;
 }
 
-#maindiv {
-  /*background: #f8f8f2;*/
-  /*border: dotted 10px red;*/
-  /*height: auto;*/
-  /*height: 100%;*/
-  /*position: relative;
-  width: 98%; */
+ /* always keep footer at bottom */
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -82px;
+}
+
+.wrapper:after {
+    content: "";
+    display: block;
+}
+
+.footer, .wrapper:after {
+    height: 82px;
+}
+.footer{
+  background: rgba(255,255,255,0.5); /*#ffffff*/
+  color: #000000;
+  font-size: 15px;
+  text-align: center;
+
+}
+
+div.footer > div > a {
+  text-decoration: none;
+  color: #000000;
+  font-size:  15px;
+  padding: 0px 10px;
 }
 
 #header{
   background: rgba(255,255,255,0.5); /*#E0E0E0*/
   padding: 12px 0px;
-  /*border: ridge 10px #999;*/
-  /*border: dotted 1px blue;*/
-  /*box-shadow: 5px 5px 5px #888888;*/
-  /*float: left;*/
-  /*height: auto;*/
-  /*margin: auto;*/
-  /*margin-bottom: 1%;*/
-  /*position: relative;
-  width: 95%;*/
 }
 
 .header_row{
-  /*border: ridge 5px orange;*/
   display: table;
-  /*display: block;*/
   margin: auto;
   text-align: center;
   width: 95%;
@@ -51,24 +60,15 @@ body{
 }
 
 #links{
-  /*border: double 5px green; */
   display: table-cell;
-  /*float:right;*/
-  /*height:auto;*/
-  /*margin-right:-4%;*/
   padding-right: 10px;
-  /*position:relative;*/
   text-align: right;
   vertical-align: middle;
   width: 10%;
 }
 
 #navigation{
-  /*border: double 5px blue;*/
   display: table-cell;
-  /*float: right;*/
-  /*height: auto;*/
-  /*margin-top: 11%;*/ 
   margin: 0 auto;
   vertical-align: middle;
   width: 63%;
@@ -98,26 +98,12 @@ div > nav#navigation > a:hover {
     background: #FFFFFF url(../../images/searchi.png) no-repeat 0% 51%;
     border: 1px solid white;
     background-size: contain;
-    /* box-shadow: 2px 1.5px 2px #999; */
     color: #000000;
     font-size: 25pt;
     height: 48px;
-    /* margin: auto; */
-    /* margin-left: 2.5%; */
-    /* margin-top: 1%; */
     width: 931px;
     padding: 0px 0px 0px 60px;
 }
-/*
-#searchinput {
-	background:white;
-	margin-top:20%;
-	height:7%;
-	width:80%;
-	border: 1px solid #0066cc;
-    outline:0; 
-}
-*/
 
 #searchinput img {
   height: 50px;
@@ -133,50 +119,20 @@ width: 268px;
 height: 30px;
 font-size: 17px;
 }
+
 /* ======= start the 3-column table ========*/
-
 #index_table_container{
-  /*border:  ridge 10px #9799ad;*/
   border-spacing: 20px;
-  /*height: 100%; */
-  /*margin-top: 10px;*/
-/*  margin: 5px auto;*/
-  /*position: relative;*/
-  /*width: 1150px;*/
-/*  width: 95%;*/
-}
-
-#index_table {
-  /*border:  ridge 5px blue;*/
-/*  display: block;*/
-  /*left: 0px;*/
-/*  margin: 5px auto;*/
-  /*margin-left: 5px auto;*/
-  /*margin-right: 5px auto;*/
-  /*position: relative;*/
-  /*top: 0px;*/
-/*  width: 95%;*/
 }
 
 /* start left column*/
 #LeftCol{
   background: white;
-  /*border: 2px solid red;*/
   border: 1px solid #c1c1c1;
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell;
-  /*float: left;*/
-  /*height: auto;*/
- /* height: 422px;*/
-  /*left: 0px;*/
-  /*margin-left: 0%;*/
-  /*margin-top: 2%;*/
   padding-left: 5px;
   padding-top: 5px;
-  /*position: absolute;*/
   text-align: center;
-  /*top: 42px;*/
-  /*width: 300px;*/ 
   width: 14%;
 }
 
@@ -185,52 +141,15 @@ font-size: 17px;
 	overflow: hidden;
 	width: 97%;	
 }
-
 /* finish left column*/
-/* start middle column*/
 
+/* start middle column*/
 #MidCol{
   background: white;
-  /*border: 2px solid yellow;*/
   border: 1px solid #c1c1c1;
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell;
-  /*float: left;*/
-  /*height: auto;*/
-  /*height: 50%;*/
-  /*height: 422px;*/      
-  /*left: 300px;*/
-  /*margin: 0 auto;*/
-/*  margin-right: 35px;*/
-  /*margin-top: 2%;*/
-/*  padding: 10px;*/
-  /*position: absolute;*/
-/*  text-align: center;*/
-  /*top: 42px;*/
   vertical-align: top;
-/*  width: 40%; (550px;)*/
 }
-
-/*
-#MidCol table{
-  border-spacing: 20px;
-  color: #999;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 0 auto;
-  margin-top: 10px;
-  table-layout: fixed;    
-}
-
-#MidCol td{
-  border-bottom-left-radius: 2em;
-  border-top-right-radius: 2em;
-  border: 1px solid #999;
-  box-shadow: 2px 1.5px 2px #999;
-  color: #999;
-  text-align: center;
-}
-*/
 
 #MidCol li{
   color:#404040;
@@ -238,101 +157,28 @@ font-size: 17px;
   font-weight:normal;
   list-style:none;
 }
-
 /* finish middle column*/
-/* start right column*/
 
+/* start right column*/
 #RightCol{
   background: white;
-  /*border: 2px solid green;*/
   border: 1px solid #c1c1c1;
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell;
-  /*float: right;*/
-  /*height: 422px;*/
-  /*height: 50%;*/
-  /*left: 850px;*/
-  /*margin-left: 5px;*/
-  /*margin-top:2%;*/
   padding: 10px;
-  /*position: absolute;*/
   text-align: left;
-  /*top: 42px;*/
   vertical-align: top;
-  /*width: 300px; */
   width: 15%;   
 }
-
 /* finish right column*/
+
 /* ====== finish the 3-column table ======= */
 
-#footer{
-  background: rgba(255,255,255,0.5); /*#ffffff*/
-  color: #000000;
-  font-size: 15px;
-  /*background: #E0E0E0;*/
-  /*border: 1px solid #c1c1c1; */
-  /*float: left;*/
-  height: auto;
-  /*height: 10px;*/
-  /*margin-top: 2%;*/
-  /*position: fixed;*/
-  /*position: relative;*/
-  width: 100%;
-  text-align: center;
-  padding: 15px 0px;
-  /* all ways keep footer at bottom */
-  position: absolute;
-  /*bottom: 0;*/
-  left: 0; 
-
-}
-
-div#footer > div > a {
-  text-decoration: none;
-  color: #000000;
-  font-size:  15px;
-  padding: 5px 10px;
-}
-
- /* always keep footer at bottom */
-#wrapper {
-  height: 100%;
-  position: relative;
-}
-
-/*
-#footer p {
-  margin-bottom: 0%;
-  margin-top: 0%;
-}
-*/
-
-/*Footer Links*/
-.flink {
-	text-align:center;
-}
 
 #innertbl img{
 	border-top-right-radius: 2em;
 }
 
 /*---start login.php -------*/
-/*
-#tablecloth{
-  display: table;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  border: solid magenta;
-}
-#placemat{
-  display: table-cell;
-  vertical-align: middle;
-  border: solid blue;
-}
-*/
-
 #login_form{
   padding: 5px;
   width:413px; 
@@ -436,13 +282,10 @@ div#footer > div > a {
   width: 188px;
   text-shadow:0px 1px 0px #263666;
 }
-
 /*--- finish login.php -------*/
 
 /*--- for search_result.php ---*/
 #land{
-  /*background-color: white;*/
-  /*border: ridge 10px fuchsia;*/
   border-spacing: 5px;
   margin: 5px auto;
   padding: 5px;
@@ -450,7 +293,6 @@ div#footer > div > a {
 }
 
 #village{
-  /*border: ridge 10px aqua;*/
   display: block;
   margin: 5px auto;
   width: 95%;
@@ -458,10 +300,7 @@ div#footer > div > a {
 
 #dad_house{
   background-color: white;
-  /*background-color: #d4ddfe;*/
-  /*border: ridge 10px blue;*/
   border: 1px solid #c1c1c1;
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: block;
   margin: 5px auto;
   width: 90%;
@@ -470,28 +309,34 @@ div#footer > div > a {
 
 .door{
   background-color: lavender;
-  /*border: ridge 10px blueviolet;*/
-  /*border: 1px solid #c1c1c1;*/
   border: 1px solid gainsboro;
   color: silver;
-  /*color: gray;*/
-  /*display: inline-block;*/
   display: block;
   float: left;
   font-weight: bold;
   margin: auto;
   padding: 3px;
   padding-left: 10px;
-  /*position: initial;*/
   vertical-align: middle;
   width: 98.5%;
-  /*width: auto;*/
+
+}
+.dad_door{
+  background-color: #3399FF;
+  border: 1px solid gainsboro;
+  color: silver;
+  display: block;
+  float: left;
+  font-weight: bold;
+  margin: auto;
+  padding: 3px;
+  padding-left: 10px;
+  vertical-align: middle;
+  width: 98.5%;
 
 }
 
 #dad_room{
-  /*border: ridge 10px brown;*/
-  /*border: 1px solid #c1c1c1;*/
   display: block;
   margin: auto;
   width: 95%;
@@ -500,11 +345,8 @@ div#footer > div > a {
 
 #dad_text{
   background-color: white;
-  /*border: ridge 10px chartreuse;*/
-  /*border: 1px solid #c1c1c1;*/
   color: black;
   display: table-cell;
-  /*font-family: serif "Georgia";*/
   font-family: sans-serif "Calibri";
   font-size: large;
   vertical-align: middle;
@@ -513,8 +355,6 @@ div#footer > div > a {
 }
 
 #dad_profile_link{
-  /*border: ridge 10px chocolate;*/
-  /*border: 1px solid #c1c1c1;*/
   display: table-cell;
   padding-left: 5px;
   padding-right: 5px;
@@ -523,8 +363,6 @@ div#footer > div > a {
 }
 
 #kids_num{
-  /*border: ridge 10px coral;*/
-  /*border: 1px solid #c1c1c1;*/
   display: table-cell; /* 10 */
   padding-left: 5px;
   padding-right: 5px;
@@ -533,8 +371,6 @@ div#footer > div > a {
 }
 
 #add_kid{
-  /*border: ridge 10px cornflowerblue;*/
-  /*border: 1px solid #c1c1c1;*/
   display: table-cell; /* 10 */
   padding-left: 5px;
   padding-right: 5px;
@@ -544,10 +380,7 @@ div#footer > div > a {
 
 .kids_house{
   background-color: white;
-  /*background-color: #d4ddfe;*/
-  /*border: ridge 10px crimson;*/
   border: 1px solid #c1c1c1;
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: block;
   margin: 5px auto;
   width: 90%;
@@ -555,8 +388,6 @@ div#footer > div > a {
 }
 
 .kid_room{
-  /*border: ridge 10px cyan;*/
-  /*border: 1px solid #c1c1c1;*/
   display: block;
   margin: auto;
   width: 95%;
@@ -564,11 +395,8 @@ div#footer > div > a {
 
 .kid_text{
   background-color: white;
-  /*border: ridge 10px darkgoldenrod;*/
-  /*border: 1px solid #c1c1c1;*/
   color: black;
   display: table-cell;
-  /*font-family: serif "Georgia";*/
   font-family: sans-serif "Calibri";
   font-size: large;
   vertical-align: middle;
@@ -576,8 +404,6 @@ div#footer > div > a {
 }
 
 .kid_profile_link{
-  /*border: ridge 10px darkgreen;*/
-  /*border: 1px solid #c1c1c1;*/
   display: table-cell; /* 10 */
   padding-left: 5px;
   padding-right: 5px;
@@ -586,8 +412,6 @@ div#footer > div > a {
 }
 
 .kid_dad_link{
-  /*border: ridge 10px darkmagenta;*/
-  /*border: 1px solid #c1c1c1;*/
   display: table-cell; /* 10 */
   padding-left: 5px;
   padding-right: 5px;
@@ -595,18 +419,14 @@ div#footer > div > a {
 }
 
 .kid_votes{
-  /*border: ridge 10px darkorange;*/
-  /*border: 1px solid #c1c1c1;*/
   display: table-cell; /* 10 */
   padding-left: 5px;
   padding-right: 5px;
   vertical-align: middle; /*50*/
-  width: 50px;
+  width: 60px;
 }
 
 .kid_added_by{
-  /*border: ridge 10px darkred;*/
-  /*border: 1px solid #c1c1c1;*/
   display: table-cell; /* 10 */
   padding-left: 5px;
   padding-right: 5px;
@@ -615,8 +435,6 @@ div#footer > div > a {
 }
 
 .is_mom{
-  /*border: ridge 10px darkseagreen;*/
-  /*border: 1px solid #c1c1c1;*/
   color: gray;
   display: table-cell; /* 10 */
   padding-left: 5px;
@@ -636,32 +454,20 @@ div#footer > div > a {
   border: solid 1px black;
   font-size: small;
   white-space: nowrap;
-  /*width: 100%;*/         
-  /* "overflow" value must be different from "visible" */          
-  /*overflow: hidden;*/               
-  /*text-overflow: ellipsis;*/
 }
 
 /* --- finish search_result.php --- */
 
-/*=====================================*/
-
 /* start user_profile.css*/
 
 #user_profile_container{
-  /*border: ridge 10px red;*/
   border-spacing: 10px;
-  /*display: block;*/
   margin: 5px auto;
-  /*margin-left: 10%;*/
-  /*margin-right: 10%;*/
-  /*padding: 5px;*/
   width: 98%;
     
 }
 
 #user_profile{
-  /*border: ridge 10px darksalmon;*/
   display: block;
   margin: auto;
   width: 95%;
@@ -669,9 +475,7 @@ div#footer > div > a {
 
 #user_left_panel{
   background-color: white;
-  /*border: ridge 10px green;*/
   border: 1px solid #c1c1c1;
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell;
   padding: 5px;
   vertical-align: top;
@@ -681,19 +485,13 @@ div#footer > div > a {
 #user_middle_panel{
   background-color: gainsboro;
   border: 1px solid #c1c1c1;
-  /*border: ridge 10px orange;*/
-  /*box-shadow: 5px 5px 5px #888888;*/
-  /*display: block;*/
   display: table-cell;
-  /*display: table;*/
   width: 40%;
 }
 
 #user_right_panel{
   background-color: white;
   border: 1px solid #c1c1c1;
-  /*border: ridge 10px blue;*/
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: table-cell; /* 10 */
   padding: 5px;
   vertical-align: top;
@@ -701,37 +499,24 @@ div#footer > div > a {
 }
 
 #user_pers_info{
-  /*border: ridge 10px magenta;*/
-  /*border: 1px solid #c1c1c1;*/
   border-spacing: 5px;
   display: block;
 }
 
 #user_pers_info_photo{
-  /*border: ridge 10px chocolate;*/
-  /*border: 1px solid #c1c1c1;*/
-  /*display: block;*/
   display: table-cell;
   vertical-align: middle;
-  /*width: 100px;*/
 }
 
 #user_pers_info_desc{
-  /*border: ridge 10px cornflowerblue;*/
-  /*display: block;*/
   display: table-cell;
-  /*width: 100px;*/
 }
 
 .user_pers_info_desc_row{
-  /*border: ridge 10px crimson;*/
-  /*border: 1px solid #c1c1c1;*/
   display: block;
 }
 
 .user_pers_info_desc_row_title{
-  /*border: ridge 10px cyan;*/
-  /*border: 1px solid #c1c1c1;*/
   color: gray;
   display: block;
   font-style: italic;
@@ -740,7 +525,6 @@ div#footer > div > a {
 
 .user_pers_info_desc_row_value{
   background-color: white;
-  /*border: ridge 10px darkblue;*/
   border: 1px solid #c1c1c1;
   display: block;
   font-family: serif "Georgia";
@@ -749,13 +533,11 @@ div#footer > div > a {
 }
 
 #user_contrib{
-  /*border: ridge 10px chartreuse;*/
   display: block;
   padding: 5px;
 }
 
 #user_contrib_title{
-  /*border: ridge 10px darkcyan;*/
   color: gray;
   display: block;
   font-style: italic;
@@ -764,7 +546,6 @@ div#footer > div > a {
 
 #user_contrib_values{
   background-color: white;
-  /*border: ridge 10px darkgoldenrod;*/
   border: 1px solid #c1c1c1;
   display: block;
   font-family: serif "Georgia";
@@ -807,8 +588,6 @@ div#footer > div > a {
     padding-left: 5px;
     padding-right: 5px;
 }
-
-
 /* finish user_profile.css*/
 
 
@@ -817,7 +596,6 @@ div#footer > div > a {
   font-size: smaller;
 }
 #entry_index_container{
-  /*border: ridge 10px blue;*/
   margin: 3px auto;
   width: 98%;
 }
@@ -831,21 +609,12 @@ div#footer > div > a {
 }
 
 .entry_record_title{
-  /*background: rgba(255,255,255,0.5);*/
   background-color: lavender;
-  /*border: ridge 10px red;*/
-  /*border: 1px solid #c1c1c1;*/
-  /*color: black;*/
-  /*color: gray;*/
   color: silver;
   display: block;
-  /*font-family: serif "Georgia";*/
   font-size: smaller;
-  /*font-style: italic;*/
   font-weight: bold;
   margin: auto;
-  /*margin-left: 10%;*/
-  /*margin-right: 10%;*/
   padding: 2px;
   padding-left: 5px;
   padding-right: 5px;
@@ -854,15 +623,11 @@ div#footer > div > a {
 
 .entry_record_value{
   background: white;
-  /*border: ridge 10px orange;*/
   border: 1px solid #c1c1c1;
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: block;
   font-family: serif "Georgia";
   font-size: large;
   margin: auto;
-  /*margin-left: 10%;*/
-  /*margin-right: 10%;*/
   padding: 2px;
   padding-left: 5px;
   padding-right: 5px;
@@ -873,17 +638,13 @@ div#footer > div > a {
 
 /* start entry_create.php */
 #entry_create_form{
-  /*border: ridge 10px red;*/
   margin: 5px;
   margin-left: 20%;
   margin-right: 20%;
-  /*padding: 50px;*/
 }
 
 #entry_create_form_title{
   background-color: lavender;
-  /*border: 1px solid #c1c1c1;*/
-  /*display: block;*/
   color: gray;
   font-size: large;
   padding: 2px;
@@ -891,10 +652,8 @@ div#footer > div > a {
 
 .entry_create_row{
   background-color: white;
-  /*border: ridge 10px blue;*/
   border-left: 1px solid #c1c1c1;
   border-right: 1px solid #c1c1c1;
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: block;
   margin-left: 80px;
   margin-right: 80px;
@@ -905,21 +664,16 @@ div#footer > div > a {
 
 .entry_create_buttons{
   background-color: lavender;
-  /*border: ridge 10px blue;*/
   border-left: 1px solid #c1c1c1;
   border-right: 1px solid #c1c1c1;
-  /*box-shadow: 5px 5px 5px #888888;*/
   display: block;
   margin-left: 80px;
   margin-right: 80px;
   padding: 5px;
-  /*margin: auto;*/
 
 }
 
 .entry_create_record_title{
-  /*border: ridge 10px green;*/
-  /*border: 1px solid #c1c1c1;*/
   display: table-cell;
   padding-left: 5px;
   vertical-align: top;
@@ -927,8 +681,6 @@ div#footer > div > a {
 }
 
 .entry_create_record_value{
-  /*border: ridge 10px orange;*/
-  /*border: 1px solid #c1c1c1;*/
   display: table-cell;
 }
 
@@ -1052,10 +804,6 @@ div#footer > div > a {
 /* finish for entry_display.php*/
 
 /* for entry_create.php */
-
-#authors{
-  /*display: inline;*/
-}
 
 #entry_source_label{
   /*display: table-cell;*/
@@ -1270,7 +1018,6 @@ border: 1px solid #e5e5e5;
 border-radius: 4px;
 }
 
-
 .t_panel {
 display: block;
 position: relative;
@@ -1290,8 +1037,6 @@ position: relative;
     border-color: #000000;
     border-width: thin;
     padding: 8px;
-    
-
 }
 
 .col_33 {
@@ -1302,7 +1047,12 @@ position: relative;
     border-color: #000000;
     border-width: 1px;
     box-shadow: 5px 5px 5px #888888;
-
 }
+
+html {
+    height: 100%;
+}
+
+
 
 

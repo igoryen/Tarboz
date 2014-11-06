@@ -34,6 +34,56 @@ class LocationDataAccessor {
     takes a User object and inserts it into the data
     ----------------------------------------------- */
 
+public function getuserLocation(){
+  $ip="";
+    //Retrieving user ip
+    $client  = @$_SERVER['HTTP_CLIENT_IP'];
+    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+    $remote  = $_SERVER['REMOTE_ADDR'];
+
+    if(filter_var($client, FILTER_VALIDATE_IP))
+    {
+        $ip = $client;
+    }
+    elseif(filter_var($forward, FILTER_VALIDATE_IP))
+    {
+        $ip = $forward;
+    }
+    else
+    {
+        $ip = $remote;
+    }
+
+    $location = new Location();
+
+    //A request goes to the geobytes.com and retrieves us the user information, based on his/her browser
+    $tags = get_meta_tags('http://www.geobytes.com/IpLocator.htm?GetLocation&template=php3.txt&IpAddress='.$ip());
+
+    $countryname    =  $location->setCountryName($tags['country']);
+    $provincename   =  $location->setProvinceName($tags['region']);
+    $cityname       =  $location->setCityName($tags['city']);
+
+    $country_res    =   $this->getCountryByName($countryname);
+    $province_res   =   $this->getProvinceByName($provincename);
+    $city_res       =   $this->getCityByName($cityname);
+
+    //If the information is not in the databse, then add it
+    if($country_res->getCountryName()=="" && $province_res->getProvinceName()=="" && $city_res->getCityName()==""){
+
+        $this-addLocation($location);
+
+    }
+    else if($country_res->getCountryName()!="" && $province_res->getProvinceName()=="" && $city_res->getCityName()==""){ 
+
+      
+
+
+    }
+
+
+
+} 
+
 public function addLocation($location) {
 
   	$countryname=$location->CountryName();
@@ -90,6 +140,7 @@ public function getCountriesNameById($countryid) {
 
     //Selecting country by City Name
     $query = "select * from tbl_country where con_country_id=".$countryid;
+
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -280,14 +331,26 @@ public function getProvincesByCountryId($countryid) {
 
    //**********************************************
   //Get city by id
-  public function getCityByName($cityid) {
+  public function getCityByName($cityname) {
 
     //Selecting Cities by ProvinceId
-    $query = "select * from tbl_city where upper(cty_city_name)= " . " '".strtoupper($cityid)."' ";
+    $query = "select * from tbl_city where upper(cty_city_name)= " . " '".strtoupper($cityname)."' ";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
     $loc = $this->getCity($result);
+
+    return $loc;
+  }
+
+  public function getCountryByName($countryname) {
+
+    //Selecting Cities by ProvinceId
+    $query = "select * from tbl_country where upper(con_country_name)= " . " '".strtoupper($countryname)."' ";
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $loc = $this->getCountry($result);
 
     return $loc;
   }
