@@ -27,7 +27,7 @@
         $comment_text =( isset($_POST['newComment']) && $_POST['newComment'] !='undefined'  )? $_POST['newComment'] : "";
         $comment_entity_id =( isset($_POST['commentEntityId']) && $_POST['commentEntityId'] !='undefined'  )? $_POST['commentEntityId'] : "";
         if ($comment_text != "" && $comment_entity_id != "") {
-          
+          $comment_text = rawurldecode($comment_text); //decode the url
           //handle badword
           $bw_handler = new BadwordManager();
           $bw_list = $bw_handler->getBadWordList();

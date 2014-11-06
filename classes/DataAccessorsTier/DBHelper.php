@@ -15,7 +15,7 @@ class DBHelper {
     return $this->connection;
   }
 
-  private function connectToDB() {
+  public function connectToDB() {
     // Step 1. Create a Database connection
     $this->connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
             or die("Error, failed to connect" . mysqli_error($this->connection));
@@ -30,7 +30,7 @@ class DBHelper {
     Close database connection
     --------------------------------- */
 
-  private function closeConnection() {
+  public function closeConnection() {
     // Step 5. Close connection
     if (isset($this->connection)) {
       mysqli_close($this->connection);

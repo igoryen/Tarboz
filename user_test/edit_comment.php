@@ -31,6 +31,7 @@
         $edit_comment_id = (isset($_POST['editCommentId']) && $_POST['editCommentId']!='undefined') ? $_POST['editCommentId'] : "";
         //print "post comment id: ". $edit_comment_id."<br/>\n";
         if ($edit_comment_id != "") {
+          $comment_text = rawurldecode($comment_text); //decode the url
           $commentManager = new CommentManager();
           $edited_comment = $commentManager->getCommentById($edit_comment_id);
           //print "edited comment id: ". $edited_comment->getId()."<br/>";
