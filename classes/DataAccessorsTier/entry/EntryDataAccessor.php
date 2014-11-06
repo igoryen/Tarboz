@@ -193,6 +193,15 @@ class EntryDataAccessor {
     $resultOfDelete = $dbHelper->executeQuery($query); //47
     return $resultOfDelete;
   }
+  
+  public function deleteEntryVirtual($entryId){
+    $query = "UPDATE ". ENTRY 
+           . " SET ent_entry_deleted = 1 "
+           . "WHERE ent_entry_id = '{$entryId}'";
+    $dbHelper = new DBHelper();
+    $resultOfDelete = $dbHelper->executeQuery($query); //47
+    return $resultOfDelete;
+  }
 
   public function getAllFathers() {
     // a 'father' is the entry from which all translations are made
@@ -201,6 +210,7 @@ class EntryDataAccessor {
     $query = "SELECT * "
             . "FROM " . ENTRY
             . "WHERE ent_entry_authen_status_id = 'o'"
+            . " AND e.ent_entry_deleted = 0"
             . " ORDER BY ent_entry_id DESC";
     $resultOfSelect = $dbHelper->executeQuery($query);
     $Users = $this->getListOfFathers($resultOfSelect);
@@ -259,6 +269,7 @@ class EntryDataAccessor {
               WHERE e.ent_entry_language_id = l.lan_language_id
               AND MATCH(e.ent_entry_verbatim)
               AGAINST('".$verbatim ."' IN NATURAL LANGUAGE MODE )
+              AND e.ent_entry_deleted = 0
               AND e.ent_entry_authen_status_id = 1";
     
     $dbHelper = new DBHelper();
@@ -283,6 +294,7 @@ class EntryDataAccessor {
                 AND MATCH(e.ent_entry_verbatim) 
                     AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
                 AND e.ent_entry_authen_status_id = 2
+                AND e.ent_entry_deleted = 0
               HAVING relevance >= 1
               ORDER BY l.lan_lang_name";
 
@@ -297,6 +309,7 @@ class EntryDataAccessor {
     $query ="SELECt e.ent_entry_id, l.lan_lang_name, e.ent_entry_text 
               FROM tbl_entry e, tbl_language l 
               WHERE e.ent_entry_language_id = l.lan_language_id 
+              AND e.ent_entry_deleted = 0
               AND LOWER(SUBSTR(l.lan_lang_name, 1, 2)) = '{$language}'";
     $dbHelper = new DBHelper();
     $resultOfSelect = $dbHelper->executeSelect($query);
