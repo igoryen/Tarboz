@@ -13,10 +13,9 @@
 require_once BUSINESS_DIR_USER. 'User.php';
 require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 
-session_start();
+session_start(); 
 
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : ""; 
-
 
 //echo $user->getFirstName();
 //echo $_SESSION['user']->getFirstName();
@@ -66,7 +65,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               else{
                   document.getElementById("call_it").innerHTML="Login";
                   document.getElementById("user_name").innerHTML="";
-                  
+                  window.location="user_test/logout.php";
                 }
             //display profile menu when user login 
             if($('#user_name').html() =="") {
@@ -93,7 +92,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               },
             function(data,status){
               //this sets the session variable of username inside the variable username
-              var username="<?php if(isset($_SESSION['user'])) echo $_SESSION['user']->getFirstName(); ?>"
+              //var username="<?php if(isset($_SESSION['user'])) echo $_SESSION['user']->getFirstName(); ?>"
               
 
               if(data==1 || data==2){
@@ -107,7 +106,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                 document.getElementById("call_it").innerHTML="Logout";
 
                 //When Successful it will print the user's name beside the logout
-                document.getElementById("user_name").innerHTML=username;
+                //document.getElementById("user_name").innerHTML=username;
                   
                  //display profile menu when user login                     
                 $('#menu_user_index').css({'display': ''});
@@ -134,11 +133,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                 document.getElementById("ftest").innerHTML="";
                 $('#userlogin').val('');
                 $('#userpassword').val('');
-                alert("1"+$("#call_it").html());
+                //alert("1"+$("#call_it").html());
                     //resetting the texboxes
                   if($.trim($("#call_it").html())=="Login"){
                       $( "#login" ).dialog( "open" );  
-                      alert("use not logged in");
+                      //alert("use not logged in");
                     }
                 //alert("username innerHtml: "+$('#user_name').html());
                 if($('#user_name').html() =="") {
@@ -349,11 +348,16 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             if($(this).text().trim().indexOf("Like") >=0 ){
                 is_like = "Y";
                 $(this).text("Unlike");
-                $('.entry_like_num').css({'display': 'none'});
+               
+                var like_num = parseInt($('.entry_like_num').html().trim())+1; //alert(like_num);
+                $('.entry_like_num').text(like_num+" ");
+                //$('.entry_like_num').css({'display': 'none'});
             } else if ($(this).text().trim() == "Unlike") {
                 is_like = "N";
                 $(this).text("Like");
-                $('.entry_like_num').css({'display': ''});
+                var like_num = parseInt($('.entry_like_num').html().trim())-1; //alert(like_num);
+                $('.entry_like_num').text(like_num+" ");
+                //$('.entry_like_num').css({'display': ''});
             }
             $.ajax({
                url: "user_test/entry_rating.php",
