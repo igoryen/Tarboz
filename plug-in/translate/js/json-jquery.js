@@ -2,7 +2,8 @@ $(document).ready(function(){
     //alert(document.getElementById('txtLang').value);
 	//attach a jQuery live event to the button
 	//$('#loader').ajaxLoader();
-	$('#getdata-button').live("click", function(){
+  $('#getdata-button').click(function(){
+  //$('#getdata-button').live("click", function(){
     	//$('#loader').ajaxLoader();
     	var text = document.getElementById('txtString').value;
     	//var lang = document.getElementById('txtLang').value;
@@ -33,15 +34,25 @@ $(document).ready(function(){
         // may be written two sets of double quotes ("").
         verbatim = verbatim.replace(dblquotes, '\\""');
         //alert("verbatim = " + verbatim);
-        window.location.href = 'searchresult.php?verbatim='+ verbatim;
+        //window.location.href = 'searchresult.php?verbatim='+ verbatim;
+//        $('#showdata').html(verbatim);
+        $('#showdata').append(verbatim);
       }
 			else
 			//$('#showdata').html("<p>Error ="+data.errorReason+"</p>");
 			//$('#loader').ajaxLoaderRemove();
-        alert("Error ="+data.errorReason);
-		});
-	});
+        //alert("Error ="+data.errorReason);
+        $('#showdata').append(" ");// at least something to trigger the change in the DOM tree
+		}); // getJSON
     
+	}); // ('#getdata-button')
+    //-----------------------------------------
+    $("#txtString").keypress(function(e){
+      if(e.which == 13){//Enter key pressed
+        $('#getdata-button').click();//Trigger search button click event
+      }
+    });
+    //-------------------------------------------
     $("textarea").blur(function() {
         //$('#loader').ajaxLoader();
     	var text = document.getElementById('txtString').value

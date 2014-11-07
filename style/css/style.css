@@ -1,5 +1,5 @@
 body{
-  background: url("../../images/background.jpg") no-repeat center center fixed; 
+  /*background: url("../../images/background.jpg") no-repeat center center fixed;*/ 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -115,9 +115,9 @@ div > nav#navigation > a:hover {
 border: 2px solid #eeeded;
 margin-top: 1%;
 /* margin-left: 6%; */
-width: 268px;
+width: 140px;
 height: 30px;
-font-size: 17px;
+font-size: 15px;
 }
 
 /* ======= start the 3-column table ========*/
@@ -985,7 +985,7 @@ font-size: 17px;
 
 .search_button {
     background: #12A1FF;
-    padding: 10px 60px;
+    padding: 10px 40px;
     font-size: 20px;
     color: #ffffff;
     text-decoration:none; 

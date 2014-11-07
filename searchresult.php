@@ -5,16 +5,20 @@
   include "views/entry/search_result_cases.php";
   
 // #) get the value of the search phrase from the search page
-if(isset($_GET['verbatim'])){
-  $verbatim = $_GET['verbatim'];
+if(isset($_GET['v'])){
+  $verbatim = $_GET['v'];
   //echo "<br>searchresult.php: GET['verbatim'] is set. it's " . $verbatim;
 }
 else{
-  $verbatim = $_GET['verbatim'];
+  $verbatim = $_GET['v'];
   //echo "<br>searchresult.php: GET['verbatim'] is NOT set. " . $verbatim;
 }
 
-echo "<br>sr::verbatim is [".$verbatim . "]";
+echo "<br>sr::verbatim: ".$verbatim . "";
+echo "<br>sr::language is >".$_GET['l']."<";
+echo "<br>sr::auth: >".$_GET['a']."<";
+echo "<br>sr::from: >".$_GET['f']."<";
+echo "<br>sr::to: >".$_GET['t']."<";
 
 $em = new EntryManager(); // 1
 $dad = $em->getFatherByVerbatim($verbatim); // 2

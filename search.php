@@ -18,19 +18,15 @@ $translator->getLanguagesSelectBox($selectbox);
   <div align="center">
   <div style="width:980px;">        
     <div><input type="text" name="txtString"  id="txtString"  class="keyboardInput"></div><!--1-->
-      <br />
-    <div align="center">
-            <a  class="search_button" href="#" id="getdata-button">Search</a>
-    </div>
     <?php //echo $translator->response->languageSelectBox; ?>
 
 
 
     <!-- 3 -->
-    <!--<div class="bgwhite width500" id="showdata"></div>-->
+    <div class="bgwhite width500" id="showdata"></div>
 
     <p style="font-size:20px; text-align: left">
-    <select name="tgt_lang">
+    <select name="tgt_lang" id="tgtlang">
       <option value="">Search in ...</option><?php
           $langs = $lm->getListOfLang();
           foreach ($langs as $lang) {
@@ -39,11 +35,47 @@ $translator->getLanguagesSelectBox($selectbox);
             echo '">';
             echo $lang->getLangName();
             echo '</option>';
-          }
-  ?></select>
-    <b>From:</b> <input type="date" name="startdate" placeholder="Start Date">
-    <b>To:</b> <input type="date" name="enddate" placeholder="End Date">
+          }?></select>
+    <b>Authen:</b> 
+    <select name="auth" id="authst">
+      <option value="">Select one:</option>
+      <option value="1">Original</option>
+      <option value="2">Translation</option>
+    </select>  
+    <b>From:</b> <input type="date" id="fromdate" name="startdate">
+    <b>To:</b> <input type="date" id="todate" name="enddate">
+    <a  class="search_button" href="#" id="getdata-button">Search</a>
     </p>
-</div></div></div>
-
+</div></div>
+    <script>
+      $("#showdata").bind("DOMSubtreeModified", function() {
+        //alert("tree changed");
+        var lang = document.getElementById("tgtlang").value;
+        var auth = document.getElementById("authst").value;
+        var from = document.getElementById("fromdate").value;
+        var to = document.getElementById("todate").value;
+        var verbatim = document.getElementById("showdata").innerHTML; 
+        
+        // using POST
+//        $.post('searchresult.php',{
+//            tgtlang: lang,
+//            auth: auth,
+//            from: from,
+//            to: to,
+//            verbatim: verbatim
+//          },function(response){
+//            $('#showdata').html(response);
+//          });
+          
+        // using GET
+        window.location.href ='searchresult2.php'+
+          '?l=' + lang +
+          '&a=' + auth +
+          '&f=' + from +
+          '&t=' + to +
+          '&v='+ verbatim;          
+      });
+    </script>
+    
+</div>
     
