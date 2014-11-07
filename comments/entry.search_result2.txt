@@ -1,0 +1,12 @@
+1. if entry is a dad
+2. take down dad's ID
+3. look for the dad's kids. Look at every entry to see if it belongs to the dad
+4. if the current entry is a kid of the dad
+5. add this kid/entry to the bottom of family
+6. sort by language: alphabetically
+7. sort by authenticity status: dads at the top, kids below
+8. take every entry returned from the DB
+9. start a family
+10. sort the kids by their languages
+11. push the dad to the top of the family
+12. add the family to the array of families
