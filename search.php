@@ -19,7 +19,7 @@ $translator->getLanguagesSelectBox($selectbox);
   <div style="width:980px;">        
     <div><input type="text" name="txtString"  id="txtString"  class="keyboardInput"></div><!--1-->
     <div style="height:40px; text-align:center; ">
-        <a  class="search_button" href="#" id="getdata-button">Search</a>
+        <button  class="search_button" id="getdata-button" style="cursor:pointer;">Search</button>
     </div>
     <?php //echo $translator->response->languageSelectBox; ?>
 
@@ -27,7 +27,7 @@ $translator->getLanguagesSelectBox($selectbox);
     <!--<div class="bgwhite width500" id="showdata"></div>-->
 
     <p style="width: 965px; font-size:20px; text-align: left; margin:-12px 0px 8px 20px;">
-    <select name="tgt_lang">
+    <select id="tgt_lang" name="tgt_lang">
       <option value="">Search in ...</option><?php
           $langs = $lm->getListOfLang();
           foreach ($langs as $lang) {
@@ -38,8 +38,8 @@ $translator->getLanguagesSelectBox($selectbox);
             echo '</option>';
           }
   ?></select>
-    <b style="font-size: 16px;">From:</b> <input type="date" name="startdate" placeholder="Start Date">
-    <b style="font-size: 16px;">To:</b> <input type="date" name="enddate" placeholder="End Date">
+    <b style="font-size: 16px;">From:</b> <input type="date" id="startdate" name="startdate" placeholder="Start Date">
+    <b style="font-size: 16px;">To:</b> <input type="date" id="enddate" name="enddate" placeholder="End Date">
     </p>
 </div></div></div>
 

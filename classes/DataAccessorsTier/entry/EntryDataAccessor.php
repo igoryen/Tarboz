@@ -267,11 +267,11 @@ class EntryDataAccessor {
                 e.ent_entry_creator_id
               FROM tbl_entry e, tbl_language l
               WHERE e.ent_entry_language_id = l.lan_language_id
-              AND MATCH(e.ent_entry_verbatim)
-              AGAINST('".$verbatim ."' IN NATURAL LANGUAGE MODE )
-              AND e.ent_entry_deleted = 0
-              AND e.ent_entry_authen_status_id = 1";
-    
+                AND MATCH(e.ent_entry_verbatim)
+                AGAINST('".$verbatim ."' IN NATURAL LANGUAGE MODE )
+                AND e.ent_entry_deleted = 0
+                AND e.ent_entry_authen_status_id = 1";
+    //echo "</br>EDA getFatherByVerbatim query: ".$query;
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query); // 20
     // 25,26,27    
@@ -281,7 +281,7 @@ class EntryDataAccessor {
   }
 
   public function getListOfKidBriefByVerbatim($verbatim) {
-    $query = "SELECT 
+    /*$query = "SELECT 
                 e.ent_entry_id, 
                 l.lan_lang_name, 
                 e.ent_entry_text,
@@ -296,8 +296,23 @@ class EntryDataAccessor {
                 AND e.ent_entry_authen_status_id = 2
                 AND e.ent_entry_deleted = 0
               HAVING relevance >= 1
+              ORDER BY l.lan_lang_name";*/
+    $query = "SELECT 
+                e.ent_entry_id, 
+                l.lan_lang_name, 
+                e.ent_entry_text,
+                e.ent_entry_creator_id,
+                MATCH(e.ent_entry_verbatim) 
+                AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
+                AS relevance
+              FROM tbl_entry e, tbl_language l
+              WHERE e.ent_entry_language_id = l.lan_language_id 
+                AND MATCH(e.ent_entry_verbatim) 
+                AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
+                AND e.ent_entry_authen_status_id = 2
+                AND e.ent_entry_deleted = 0
               ORDER BY l.lan_lang_name";
-    
+    //echo "</br>EDA getListOfKidBriefByVerbatim query: ".$query;
     $dbHelper = new DBHelper();
     $resultOfSelect = $dbHelper->executeSelect($query);
     // the current EntryDataAccessor object = $this
