@@ -1,5 +1,6 @@
 body{
-  background: url("../../images/background.jpg") no-repeat center center fixed; 
+/*  background: url("../../images/background.jpg") no-repeat center center fixed; */
+  background: #D9E0E3;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -1001,7 +1002,7 @@ font-size: 17px;
 
 #RightCol_Scroll {
     overflow: auto;
-    max-height: 600px;
+    max-height: 669px;
 }
 
 /****************for middle of front page*************/
@@ -1025,7 +1026,7 @@ position: relative;
 
 .t_title {
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     font-size: 15px;
     text-align: center;
     line-height: 24px;
@@ -1056,3 +1057,8 @@ html {
 
 
 
+
+.mid_scoll {
+    overflow: auto;
+    max-height: 400px;
+}

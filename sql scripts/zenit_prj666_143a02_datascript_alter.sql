@@ -111,11 +111,9 @@ INSERT INTO `prj666`.`tbl_media_type` (`mtp_media_type_id`, `mtp_name`) VALUES (
 
 UPDATE `prj666`.`tbl_entry` SET `ent_entry_media_id`='3' WHERE `ent_entry_id`='5';
 
+UPDATE `prj666`.`tbl_city` SET `cty_province_id` = '1' WHERE `tbl_city`.`cty_city_id` = 1;
 
 
 
 
 
-
-
->>>>>>> 584f80e3a83ce39a0360d2878544c296c42c402e

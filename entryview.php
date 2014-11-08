@@ -317,7 +317,7 @@ if($entry->getEntryAuthenStatusId() == 1){?>
             echo $lang->getLangName();
             echo '</option>';
           }
-      ?></select>
+                                         }?></select>
         <span id="treqCreateResponse"></span>
       </div>
     </div>
