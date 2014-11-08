@@ -37,8 +37,7 @@ DROP INDEX `tblRating_tblUser_rat_rating_like_user_id_FK_idx` ;
 ALTER TABLE `prj666`.`tbl_report` 
 ADD COLUMN `rep_reported_by` INT(11) NULL AFTER `rep_entity_id`,
 ADD COLUMN `rep_reported_on` DATETIME NULL AFTER `rep_reported_by`;
-<<<<<<< HEAD
-=======
+
 
 #-------Insert more data on rating table on Nov 3
 INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
@@ -113,9 +112,9 @@ UPDATE `prj666`.`tbl_entry` SET `ent_entry_media_id`='3' WHERE `ent_entry_id`='5
 
 
 
+UPDATE `prj666`.`tbl_user` SET `usr_location_id` = '1' WHERE `tbl_user`.`usr_user_id` = 1;
+
+ALTER TABLE `prj666`.`tbl_entry` 
+ADD COLUMN `ent_entry_deleted` INT NULL DEFAULT 0 AFTER `ent_entry_creation_date`;
 
 
-
-
-
->>>>>>> 584f80e3a83ce39a0360d2878544c296c42c402e
