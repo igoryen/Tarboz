@@ -12,33 +12,27 @@ class UserDataAccessor {
 
   public function addUser($user) {
 
+    $uid = $user->getUserId();
+    $fname = $user->getFirstName();
+    $lname = $user->getLastName();
+    $pwd = $user->getPassword();
+    $loginid = $user->getLogin();
+    $email = $user->getEmail();
+    $dob = $user->getDOB();
+    $language = $user->getUserLanguage();
+    $usertype = $user->getUserType();
+    $regdate = $user->getRegistrationDate();
+    $location = $user->getLocation();
+    $mediaid = $user->getMediaId();
+    $ratingid = $user->getUserRatingId();
+    $emailsub = $user->getEmailSub();
+
+    $query_insert = "INSERT INTO USER VALUES('', '$fname', '$lname','$loginid','$pwd','$ratingid','$mediaid','$email','$dob','$location','$regdate','$usertype','$language','$emailsub')";
+
     $dbHelper = new DBHelper();
-
-    //All the data members are being passed through the escape string function
-    $uid      = $dbHelper->EscapeString($user->getUserId());
-    $fname    = $dbHelper->EscapeString($user->getFirstName());
-    $lname    = $dbHelper->EscapeString($user->getLastName());
-    //First escape the string, and then change it to hash
-    $pwd      = sha1($user->getPassword());
-    $loginid  = $dbHelper->EscapeString($user->getLogin());
-    $email    = $dbHelper->EscapeString($user->getEmail());
-    $dob      = $dbHelper->EscapeString($user->getDOB());
-    $language = $dbHelper->EscapeString($user->getUserLanguage());
-    $usertype = $dbHelper->EscapeString($user->getUserType());
-    $regdate  = $dbHelper->EscapeString($user->getRegistrationDate());
-    $location = $dbHelper->EscapeString($user->getLocation());
-
-    //Null for now, because we do not need it..
-    $mediaid  = null;//$dbHelper->EscapeString($user->getMediaId();
-    $ratingid = null;//$dbHelper->EscapeString($user->getUserRatingId());
-    $emailsub = null;//$dbHelper->EscapeString($user->getEmailSub());
-
-    $query_insert = "INSERT INTO ".USER. " VALUES('', '$fname', '$lname','$loginid','$pwd','$ratingid','$mediaid','$email','$dob','$location','$regdate','$usertype','$language','$emailsub')";
-    $result = $dbHelper->executeInsertQuery($query_insert);
-
-    //$last_inserted_id = mysql_insert_id();
-
-    return $result;//which will return the last inserted id
+    $result = $dbHelper->executeQuery($query_insert);
+    $last_inserted_id = mysql_insert_id();
+    return $last_inserted_id;
   }
 
   public function updateUser($user) {
@@ -73,19 +67,6 @@ class UserDataAccessor {
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeQuery($query);
-    return $result;
-  }
-
-  //This function will take 2 parameters, userid and usertype,and then update the usertypeid
-  public function UpdateUserType($userid,$usertype) {
-
-    $query = "UPDATE " .USER. " SET
-      usr_user_type_id    = '".$usertype."'
-      WHERE usr_user_id = '".$userid."'";
-
-    $dbHelper = new DBHelper();
-    $result = $dbHelper->executeQuery($query);
-
     return $result;
   }
 
@@ -174,31 +155,6 @@ class UserDataAccessor {
     $result = $dbHelper->executeQuery($query);
     $Users = $this->getUserList($result);
     return $Users;
-  }
-
-    //An email is passed to it, to be returned a better data
-   public function getUserByHashData($email) {
-    $dbHelper = new DBHelper();
-    $query = "SELECT * FROM " . USER . " ORDER BY usr_user_id DESC";
-    $result = $dbHelper->executeQuery($query);
-    $userid = $this->compareHash($result,$email);
-    return $userid;
-  }
-
-  //This function will compare the hashed, email to the email address in the database, and then
-  //return the user ID.
-  private function compareHash($selectResult,$email) {
-
-    $userid="";
-    while ($list = mysqli_fetch_assoc($selectResult)) {
-      if(sha1($list['usr_email'])==$email){
-
-            $userid = $list['usr_user_id'];
-      }
-
-      //$count++;
-    } // while
-    return $userid;
   }
 
   private function getUserList($selectResult) {

@@ -8,25 +8,11 @@ require_once DATA_ACCESSOR_DIR_USER . 'UserDataAccessor.php';
 
 class UserManager {
 
-
-  public function UpdateUserType($userid,$usertype){
-    $userDataAccessor = new userDataAccessor();
-    $updated = $userDataAccessor->UpdateUserType($userid,$usertype);
-    return $updated;
-  }
-
   //well be a function that adds the user data to the database
   public function addUser($user) {
     $userDataAccessor = new userDataAccessor();
     $last_inserted_id = $userDataAccessor->addUser($user);
     return $last_inserted_id;
-  }
-
-  //It will take an email, and then hash, it and then compare to other emails
-  public function getUserByHashData($email) {
-    $userDataAccessor = new UserDataAccessor();
-    $result = $userDataAccessor->getUserByHashData($email);
-    return $result;
   }
 
   //if user requests password change

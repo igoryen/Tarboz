@@ -23,7 +23,7 @@ $end_date = isset($_GET['enddate']) ? $_GET['enddate'] : "";
 //echo "<br>sr::search text is [".$search_text . "]</br>";
 //echo "<br>sr::target language is [".$tgt_lang . "]</br>";
 //echo "<br>sr::from date is [".$from_date . "]</br>";
-//secho "<br>sr::end date is [".$end_date . "]</br>";
+//echo "<br>sr::end date is [".$end_date . "]</br>";
 
 $em = new EntryManager(); // 1
 $dad = $em->getFatherByVerbatim($verbatim); // 2
@@ -39,7 +39,7 @@ $array_of_kids = $em->getListOfKidBriefByVerbatim($verbatim); // 3
 <?php
 
 if (trim($search_text) == "" ) { //browse mode if there is no search words
-    //include "browseresult.php";
+    include "browseresult.php";
     
 } else {    //search mode mode if there are search words
 

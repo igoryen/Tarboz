@@ -314,6 +314,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-datepicker .ui-datepicker-buttonpane button {
 	float: right;
+	margin: .5em .2em .4em;
 	cursor: pointer;
 	padding: .2em .6em .3em .6em;
 	width: auto;
