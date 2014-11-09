@@ -4,6 +4,9 @@
 	require_once BUSINESS_DIR_USER . 'UserManager.php';   
     require_once BUSINESS_DIR_LOCATION . 'LocationManager.php';  
 
+    require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
+    require_once BUSINESS_DIR_TRANSLREQ . "TranslationRequestManager.php";
+
     $userManager = new UserManager();
     $locationManager = new LocationManager();
 //    $user_logged_in = true;
@@ -43,12 +46,8 @@
              //get Country Name
              $country = $locationManager->getCountriesNameById($countryId);
              foreach ( $country as $cou) {
-               $userCountry = $cou->getCountryName();
+               $CountryName = $cou->getCountryName();
              }
-          
-      } else {
-//         header("Location: http://localhost/tarboz/");   
-      }
 ?>
 <div align="center">
     <div class="container">
@@ -63,7 +62,9 @@
                         <div>
                             <h1><?php if(isset($fname) && isset($lname)) echo " ".$fname." ".$lname; ?> 
                                 <b style="font-size:12px; color: #B6ACE0; float: right; padding: 7px">
+                                    <?php if($user_id == $id) { ?>
                                     <a href="edit_profile.php?id=<?php echo $id ?>">Edit Profile</a>
+                                    <?php } ?>
                                 </b>
                                 <br /><i style="font-size:10px; color: #B6ACE0">Registed: <?php if(isset($regdate)) echo $regdate ?></i>
                             </h1>
@@ -77,17 +78,30 @@
                         <hr />
                         <div><img src="images/location.png" alt="">
                             <span class="user_info_space">
-                                <?php if(isset($Province) || isset($Country) || isset($Address) || isset($CityName) || isset($PostalCode)){
-                                             echo $Address.",".$CityName."<br />"; ?>
+                                <?php 
+                                         if( isset($Address) ){
+                                             echo $Address.","; 
+                                         }
+                                         if(isset($CityName) ){
+                                              echo $CityName."<br />"; 
+                                         }
+                                ?>
                                 <span style="padding-left:55px" >
                                 <?php
-                                             echo $ProvinceName.",".$userCountry."<br />";                        
+                                        if(isset($ProvinceName)) {
+                                             echo $ProvinceName.",";     
+                                        }
+                                        if(isset($CountryName)) {
+                                             echo $CountryName."<br />";     
+                                        }
                                 ?>
                                 </span>
                                 <span style="padding-left:55px" >
                                 <?php
+                                    if(isset($PostalCode)){
                                              echo $PostalCode;
-                                      }                         
+                                      }           
+                                           
                                 ?>
                                 </span>
                             </span></div>
@@ -120,5 +134,9 @@
     </div>
 </div>
 <?php
+      } else {
+//         header("Location: http://localhost/tarboz/");   
+           echo '<h1 style="text-align: center;">The Page Not Found</h1>';
+      }
     include "footer.php";
 ?>

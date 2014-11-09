@@ -13,6 +13,9 @@
 //        //redirect to homepage
 //        header("Location: http://localhost/tarboz/");
 //    }
+    if (isset($_SESSION['user'])) {
+          $user = $_SESSION['user'];
+          $user_id = $user->getUserId();
            $User_Login = $userManager->getUserByUserId($userId);
     
                 $id  =$User_Login->getUserId();  
@@ -25,13 +28,29 @@
                 $birth= $User_Login->getDOB();
                 $mediaId = $User_Login->getMediaId();
 
-            $User_Country = $locationManager->getCountriesNameById($locationId);
-            foreach ( $User_Country as $cou) {
-                $Country = $cou->getCountryName();
+            // get location
+            $location = $locationManager->getLocationBylocationId($locationId);
+            foreach (  $location as $loc) {
+                $Address    = $loc->getAddress();
+                $PostalCode = $loc->getPostalCode();
+                $cityid     = $loc->getCityId();
+                
             }
+
+            // get city name 
+            $city = $locationManager->getCityById($cityid);
+                $CityName = $city->getCityName();
+                $provId   = $city->getProvinceId();
           
-            $User_Province = $locationManager->getProvincesByCountryId($locationId);
-            foreach ( $User_Province as $prov) {
-                $Province = $prov->getProvinceName();
+            //get province name
+            $province = $locationManager->getProvinceById($provId);
+                $ProvinceName =  $province->getProvinceName();
+                $countryId    =  $province->getCountryId();
+          
+             //get Country Name
+             $country = $locationManager->getCountriesNameById($countryId);
+             foreach ( $country as $cou) {
+               $CountryName = $cou->getCountryName();
              }
+    }
 ?>

@@ -53,17 +53,16 @@ class UserDataAccessor {
     $emailsub = $user->getEmailSub();
 
     //usr_user_id,`usr_first_name`, `usr_last_name`, `usr_login`, `usr_password`, `usr_email`, `usr_DOB`, `usr_registration_date`, `usr_user_type_id`, `usr_language`, `usr_email_subscribed`
-    $query = "UPDATE USER SET
-
-        usr_first_name        = '$fname',
-        usr_last_name         = '$lname',
-        usr_login             =   '$loginid',
-        usr_email             =   '$email',
-        usr_DOB             = '$dob',
-        usr_user_type_id      = '$usertype',
-        usr_email_subscribed  =   '$emailsub',
-
-        WHERE usr_user_id = '$uid'";
+//        usr_user_type_id      = '$usertype',
+//        usr_email_subscribed  =   '$emailsub',
+//        usr_login             =   '$loginid',
+    $query = "UPDATE ".USER." SET
+        usr_first_name = '".$fname.
+        "', usr_last_name = '".$lname.
+        "', usr_email = '".$email.
+        "', usr_DOB = '".$dob.
+        "', usr_language = '".$language.
+        "' WHERE usr_user_id = '".$uid."'";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeQuery($query);

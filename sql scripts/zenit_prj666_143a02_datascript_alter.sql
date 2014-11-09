@@ -113,6 +113,9 @@ UPDATE `prj666`.`tbl_entry` SET `ent_entry_media_id`='3' WHERE `ent_entry_id`='5
 
 UPDATE `prj666`.`tbl_city` SET `cty_province_id` = '1' WHERE `tbl_city`.`cty_city_id` = 1;
 
+INSERT INTO `tbl_city`(`cty_city_id`, `cty_city_name`, `cty_province_id`) VALUES (1,'Toronto',1);
+INSERT INTO `tbl_city`(`cty_city_id`, `cty_city_name`, `cty_province_id`) VALUES (2,'Maykop',2); INSERT INTO `tbl_city`(`cty_city_id`, `cty_city_name`, `cty_province_id`) VALUES (3,'Luoyang',3);
+
 
 
 
