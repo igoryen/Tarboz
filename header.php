@@ -523,7 +523,8 @@ div.showdata{
                  <p>
                     <div style="margin-left: 0.7em;"><button class="lw_button" id="sub">Login</button>
                       <b id="or">or</b>
-                        <button class="lw_button">Register</button></div> 
+                        <a href="registration.php"><button class="lw_button">Register</button></a>
+                    </div> 
                  </p> 
                  <p id="ftest"></p>
                  <p style="margin-left: 1em;" id="forgotpwd"></p>
