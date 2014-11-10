@@ -22,7 +22,7 @@ $emailid          = $user_info['emailid'];
 $pass             = $user_info['password'];
 $user_insert_id   = ""; 
 
-//contains the city Ids, it will get us the location, limit in an hour
+//contains the city Ids, it will get us the location 
 //$cityid = $userManager->getuserLocation();
 
 $cityid='1';
@@ -69,7 +69,7 @@ if(count($count_prof)>0){
 }
 
 $body = "Dear ".$userfname.","."<br> Thank you for registering with Tarboz.com.<br>We are glad you are with us
-Please follow the link below, to reset your password.<br>"."http://tarboz.com/Registered.php?activate=".sha1($emailid);
+Please follow the link below, to reset your password.<br>"."http://tarboz.com/Registered.php/?activate=".sha1($emailid);
 
 //public function email($email, $username, $body,$Subject)
 if($allworks){

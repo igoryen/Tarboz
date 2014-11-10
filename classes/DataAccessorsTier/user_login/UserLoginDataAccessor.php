@@ -19,7 +19,23 @@ class UserLoginDataAccessor {
     30. pass a query statment and get the data
     40. returns the user
     ------------------------------ */
+  //it accepts dob as yyyymmdd/ nothing in between  
+  public function getUserByDOB($dob) {
 
+    $user = new User();
+
+    $query = "SELECT * FROM " . USER . " WHERE replace(usr_dob,'-','')*99999 =  '$dob'";
+    echo $query;
+
+    $dbHelper = new DBHelper(); // 20
+
+    $result = $dbHelper->executeSelect($query); // 30
+
+    $user = $this->getUser($result);
+
+    return $user;
+  }
+    
   public function user_Login($loginid, $pwd) {
     $user = new User();
 
