@@ -93,4 +93,35 @@ class EntryManager {
     $arrayOfEntryBriefGottenByLanguage = $eda->getListOfEntryBriefByLanguage($language);
     return $arrayOfEntryBriefGottenByLanguage;
   }
+    
+  public function getDadEntryListByLangDate($in_lang, $in_from_date, $in_end_date){
+    $eda = new EntryDataAccessor();
+    $arrayOfEntry = $eda->getDadEntryListByLangDate($in_lang, $in_from_date, $in_end_date);
+    return $arrayOfEntry;
+  }
+    
+  public function getKidEntryListByDadLangDate($dad_entryId, $in_lang, $in_from_date, $in_end_date){
+    $eda = new EntryDataAccessor();
+    $arrayOfEntry = $eda->getKidEntryListByDadLangDate($dad_entryId, $in_lang, $in_from_date, $in_end_date);
+    return $arrayOfEntry;
+  }
+    
+  public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_date) {
+    $eda = new EntryDataAccessor();
+    $arrayOfEntry = $eda->getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_date);
+    return $arrayOfEntry;
+  }
+    
+  public function getOriginalKidsNum($entryId){
+    $eda = new EntryDataAccessor();
+    $numOfKids = $eda->getOriginalKidsNum($entryId);
+    return $numOfKids;
+  }
+    
+  public function getEntryLikeNumByEntry($entryId) {
+    $eda = new EntryDataAccessor();
+    $numOfLikes = $eda->getEntryLikeNumByEntry($entryId);
+    return $numOfLikes;
+  }
+    
 }

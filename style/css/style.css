@@ -102,11 +102,11 @@ div > nav#navigation > a:hover {
     border: 1px solid white;
     background-size: contain;
     color: #000000;
-    font-size: 25pt;
+    font-size: 20pt;
     height: 36px;
     width: 888px;
     padding: 0px 0px 0px 60px;
-	margin-bottom: 20px;
+	margin-bottom: 8px;
 }
 
 #searchinput img {
@@ -994,7 +994,7 @@ font-size: 17px;
 
 .search_button {
     background: #12A1FF;
-    padding: 8px 60px;
+    padding: 5px 60px 5px 60px;
     font-size: 16px;
     color: #ffffff;
     text-decoration:none;	

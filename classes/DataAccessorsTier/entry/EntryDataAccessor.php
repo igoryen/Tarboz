@@ -267,11 +267,11 @@ class EntryDataAccessor {
                 e.ent_entry_creator_id
               FROM tbl_entry e, tbl_language l
               WHERE e.ent_entry_language_id = l.lan_language_id
-              AND MATCH(e.ent_entry_verbatim)
-              AGAINST('".$verbatim ."' IN NATURAL LANGUAGE MODE )
-              AND e.ent_entry_deleted = 0
-              AND e.ent_entry_authen_status_id = 1";
-    
+                AND MATCH(e.ent_entry_verbatim)
+                AGAINST('".$verbatim ."' IN NATURAL LANGUAGE MODE )
+                AND e.ent_entry_deleted = 0
+                AND e.ent_entry_authen_status_id = 1";
+    //echo "</br>EDA getFatherByVerbatim query: ".$query;
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query); // 20
     // 25,26,27    
@@ -281,7 +281,7 @@ class EntryDataAccessor {
   }
 
   public function getListOfKidBriefByVerbatim($verbatim) {
-    $query = "SELECT 
+    /*$query = "SELECT 
                 e.ent_entry_id, 
                 l.lan_lang_name, 
                 e.ent_entry_text,
@@ -296,8 +296,23 @@ class EntryDataAccessor {
                 AND e.ent_entry_authen_status_id = 2
                 AND e.ent_entry_deleted = 0
               HAVING relevance >= 1
+              ORDER BY l.lan_lang_name";*/
+    $query = "SELECT 
+                e.ent_entry_id, 
+                l.lan_lang_name, 
+                e.ent_entry_text,
+                e.ent_entry_creator_id,
+                MATCH(e.ent_entry_verbatim) 
+                AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
+                AS relevance
+              FROM tbl_entry e, tbl_language l
+              WHERE e.ent_entry_language_id = l.lan_language_id 
+                AND MATCH(e.ent_entry_verbatim) 
+                AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
+                AND e.ent_entry_authen_status_id = 2
+                AND e.ent_entry_deleted = 0
               ORDER BY l.lan_lang_name";
-    
+    //echo "</br>EDA getListOfKidBriefByVerbatim query: ".$query;
     $dbHelper = new DBHelper();
     $resultOfSelect = $dbHelper->executeSelect($query);
     // the current EntryDataAccessor object = $this
@@ -431,5 +446,161 @@ class EntryDataAccessor {
     } // while
     return $Entry;
   }
+    
+  public function getDadEntryListByLangDate($in_lang, $in_from_date, $in_end_date) {
+      $from_date = $in_from_date != "" ? $in_from_date : "2000-01-01";
+      $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
+      if ($in_lang =="") {
+        $query = "SELECT e.*, l.lan_lang_name 
+                  FROM tbl_entry e
+                  INNER JOIN tbl_language l 
+                  ON e.ent_entry_language_id = l.lan_language_id 
+                  WHERE ent_entry_authen_status_id =1 AND 
+                        e.ent_entry_creation_date >= '".$from_date."' AND 
+                        e.ent_entry_creation_date <= '".$end_date."'
+                  ORDER BY e.ent_entry_language_id, e.ent_entry_creation_date DESC";  
+      } else {
+        $query = "SELECT e.*, l.lan_lang_name 
+                  FROM tbl_entry e
+                  INNER JOIN tbl_language l 
+                  ON e.ent_entry_language_id = l.lan_language_id 
+                  WHERE ent_entry_authen_status_id =1 AND 
+                        e.ent_entry_language_id = '".$in_lang."' AND 
+                        e.ent_entry_creation_date >= '".$from_date."' AND 
+                        e.ent_entry_creation_date <= '".$end_date."'
+                  ORDER BY e.ent_entry_language_id, e.ent_entry_creation_date DESC"; 
+      }
+      
+      //echo "<br/>EAD getDadEntryListByLangDate query: ".$query;
+      $dbHelper = new DBHelper();
+      $resultOfSelect = $dbHelper->executeSelect($query);
+      $arrayOfEntryByLangDate = $this->getListOfEntrySearch($resultOfSelect);
+      return $arrayOfEntryByLangDate;
+      
+  }
 
+  public function getKidEntryListByDadLangDate($dad_entryId, $in_lang, $in_from_date, $in_end_date) {
+      $from_date = $in_from_date != "" ? $in_from_date : "2000-01-01";
+      $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
+      if ($in_lang =="") {
+        $query = "SELECT e.*, l.lan_lang_name 
+                  FROM tbl_entry e
+                  INNER JOIN tbl_language l 
+                  ON e.ent_entry_language_id = l.lan_language_id 
+                  WHERE e.ent_entry_authen_status_id =2 AND 
+                        e.ent_entry_translation_of = '".$dad_entryId."' AND
+                        e.ent_entry_creation_date >= '".$from_date."' AND  
+                        e.ent_entry_creation_date <= '".$end_date."'
+                  ORDER BY e.ent_entry_language_id, e.ent_entry_creation_date DESC";  
+      } else {
+        $query = "SELECT e.*, l.lan_lang_name 
+                  FROM tbl_entry e
+                  INNER JOIN tbl_language l 
+                  ON e.ent_entry_language_id = l.lan_language_id 
+                  WHERE ent_entry_authen_status_id =2 AND 
+                        e.ent_entry_translation_of = '".$dad_entryId."' AND
+                        e.ent_entry_language_id = '".$in_lang."' AND 
+                        e.ent_entry_creation_date >= '".$from_date."' AND 
+                        e.ent_entry_creation_date <= '".$end_date."'
+                  ORDER BY e.ent_entry_language_id, e.ent_entry_creation_date DESC"; 
+      }
+      
+      //echo "<br/>EAD getKidEntryListByDadLangDate query: ".$query;
+      $dbHelper = new DBHelper();
+      $resultOfSelect = $dbHelper->executeSelect($query);
+      $arrayOfEntryByLangDate = $this->getOriginalKidsNum($dad_entryId) > 0 ? $this->getListOfEntrySearch($resultOfSelect)
+                                                                        : array();
+      return $arrayOfEntryByLangDate;
+      
+  }
+
+public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_date) {
+      $from_date = $in_from_date != "" ? $in_from_date : "2000-01-01";
+      $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
+      if ($in_lang =="") {
+        $query = "SELECT e.*, l.lan_lang_name 
+                  FROM tbl_entry e
+                  INNER JOIN tbl_language l 
+                  ON e.ent_entry_language_id = l.lan_language_id 
+                  WHERE ent_entry_authen_status_id =2 AND 
+                        e.ent_entry_creation_date >= '".$from_date."' AND 
+                        e.ent_entry_creation_date <= '".$end_date."'
+                  ORDER BY e.ent_entry_language_id, e.ent_entry_creation_date DESC";  
+      } else {
+        $query = "SELECT e.*, l.lan_lang_name 
+                  FROM tbl_entry e
+                  INNER JOIN tbl_language l 
+                  ON e.ent_entry_language_id = l.lan_language_id 
+                  WHERE ent_entry_authen_status_id =2 AND 
+                        e.ent_entry_language_id = '".$in_lang."' AND 
+                        e.ent_entry_creation_date >= '".$from_date."' AND 
+                        e.ent_entry_creation_date <= '".$end_date."' AND 
+                        (e.ent_entry_translation_of IS NULL OR NOT(ent_entry_translation_of > ''))
+                  ORDER BY e.ent_entry_language_id, e.ent_entry_creation_date DESC"; 
+      }
+      
+      //echo "<br/>EAD getEntryListByNoDadLangDate query: ".$query;
+      $dbHelper = new DBHelper();
+      $resultOfSelect = $dbHelper->executeSelect($query);
+      $arrayOfEntryByLangDate = $this->getListOfEntrySearch($resultOfSelect);
+      return $arrayOfEntryByLangDate;
+      
+  }
+    
+  private function getListOfEntrySearch($resultOfSelect) {
+    $Entries[] = array();
+    $count = 0; 
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) {       
+      $Entries[$count] = new Entry(); 
+      $Entries[$count]->setEntryId(             $list['ent_entry_id']);
+      $Entries[$count]->setEntryLanguage(       $list['lan_lang_name']); 
+      $Entries[$count]->setEntryText(           $list['ent_entry_text']);
+      $Entries[$count]->setEntryVerbatim(       $list['ent_entry_verbatim']);
+      $Entries[$count]->setEntryTranslit(       $list['ent_entry_translit']);
+      $Entries[$count]->setEntryAuthenStatusId( $list['ent_entry_authen_status_id']);
+      $Entries[$count]->setEntryTranslOf(       $list['ent_entry_translation_of']);
+      $Entries[$count]->setEntryUserId(         $list['ent_entry_creator_id']);
+      $Entries[$count]->setEntryCreationDate(   $list['ent_entry_creation_date']);
+      $count++;
+    } 
+    
+    return $Entries;
+  }
+    
+  public function getOriginalKidsNum($entryId) {
+      $query = "SELECT * 
+                FROM tbl_entry
+                WHERE ent_entry_authen_status_id = 2 AND 
+                ent_entry_translation_of = '".$entryId."' 
+                ORDER BY ent_entry_language_id, ent_entry_creation_date DESC";
+      //echo "<br/>EAD getOriginalKidsNum query: ".$query;
+      $dbHelper = new DBHelper();
+      $resultOfSelect = $dbHelper->executeSelect($query);
+      $entries = array();
+      $count = 0;
+        while ($list = mysqli_fetch_assoc($resultOfSelect)) {
+            $entries[$count] = new Entry();
+            $count++;
+        }
+        return count($entries);      
+  }
+    
+  public function getEntryLikeNumByEntry($entryId) {
+      $query = "SELECT count(rating.rat_like_user_id) AS likeNum
+                FROM tbl_entry AS entry INNER JOIN tbl_rating AS rating
+                ON rating.rat_entity_id = CONCAT('ent', '".$entryId."') 
+                    AND rating.rat_like_user_id IS NOT NULL AND rating.rat_like_user_id >0
+                GROUP BY entry.ent_entry_id 
+                HAVING entry.ent_entry_id='".$entryId."'";
+      //echo "<br/>EAD getEntryLikeNum query: ".$query;
+      $dbHelper = new DBHelper();
+      $resultOfSelect = $dbHelper->executeSelect($query);
+      $like_num = "";
+      $count = 0;
+        while ($list = mysqli_fetch_assoc($resultOfSelect)) {
+            $like_num = $list['likeNum'];
+            $count++;
+        }
+        return $like_num;      
+  }
 }
