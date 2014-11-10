@@ -8,8 +8,6 @@
   // $pathInPieces = explode('\\', dirname(__FILE__));
   // $root = "/" . $pathInPieces[3];
 
-
-
 require_once BUSINESS_DIR_USER. 'User.php';
 require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 
@@ -425,26 +423,40 @@ div.showdata{
 </head>
 
 <body>
-  <div class="wrapper">
+
 
     <div id="header">
 
         <div class="header_row">
-          <div class="table-cell" style="text-align: left;">
+          <div class="table-cell" style="text-align: left; vertical-align: text-top;">
             <a href=""><img src="images/logo.png" height="50"></a>
           </div>
-          <nav id="navigation">
-              <a href="index.php">Home</a> 
-              <a href="entrycreate.php">Create an Entry</a>
-              <a href="profile.php">Profile</a>
-              <a href="/Tarboz/userview.php">[user view 2]</a>
-<!--              display profile menu when user login -->
-              <a href="views/profile/profile.php" style="display:none;" id="menu_user_index">Profile</a>
-          </nav>
-          <div class="table-cell" style="text-align: right;">
+          <div class="table-cell" style="width:1000;">
+              <!--Search bar start-->
+              <?php require("search.php");?>
+              
+              <!--Search bar end-->
+              <nav id="navigation">
+                  <a href="index.php" >Home</a> 
+                  <a href="entrycreate.php">Create an Entry</a>
+                  <!--
+                  <a href="profile.php">Profile</a>
+                  <a href="/Tarboz/userview.php">[user view 2]</a>
+                  -->
+    <!--              display profile menu when user login -->
+                  <a href="profile.php" style="display:<?php if(!isset($_SESSION['user']) ) echo 'none'; else echo ''; ?>;" id="menu_user_index">Profile</a>
+              </nav>
+          </div>
+          <div class="table-cell" style="vertical-align: top;">
+          <div class="table-row" style="padding-top:3px;">
             <button id="call_it" class="login_button"><?php if(!isset($_SESSION['user']) ) { ?>Login<?php } else { ?>Logout<?php } ?></button> 
           </div>
-          <div id="user_name"><?php if(isset($_SESSION['user']) ) echo $_SESSION['user']->getFirstName(); else echo ""; ?></div>
+          <div id="user_name" class="table-row" style="padding-top:5px;">
+              
+              <?php if(isset($_SESSION['user']) ) echo "Welcome <a href='profile.php'>".$_SESSION['user']->getFirstName()."</a> !"; else echo ""; ?>
+
+          </div>
+          </div>
 
           <div style="width:100px;" title="Login Window" id="login">
              <!--start of the login form div-->

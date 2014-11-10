@@ -247,7 +247,7 @@
         <button id="entryDeleteButton">Delete this entry</button>
         <span id="entryDeleteResponse" style="display: none"></span>
         <div id="entryDeleteDialog" style="display: none">
-          Are you sure you want to delete this entry ><?php echo $entryId; ?><<br>
+          Are you sure you want to delete this entry ><?php echo $entryId; ?><br/>
           <form action="index.php">
             <button type="submit"
                     id="entryDeleteConfirm"
@@ -256,9 +256,7 @@
                   id="entryDeleteCancel"
                   onclick="">Cancel</button>
           </form>
-        </div>
-        
-        
+        </div>        
       </div>
       <script>
         $( "#entryDeleteButton" ).click(function() {
@@ -299,8 +297,7 @@
     
     
     
-<?php
-if($entry->getEntryAuthenStatusId() == 1){?>
+    <?php if($entry->getEntryAuthenStatusId() == 1){?>
     <div class="entry_record">
       <div class="entry_record_title">Request a translation into one of these languages</div>
       <div class="entry_record_value">
@@ -317,7 +314,8 @@ if($entry->getEntryAuthenStatusId() == 1){?>
             echo $lang->getLangName();
             echo '</option>';
           }
-      ?></select>
+        } ?>
+        </select>
         <span id="treqCreateResponse"></span>
       </div>
     </div>
@@ -490,6 +488,15 @@ if($entry->getEntryAuthenStatusId() == 1){?>
       </div><!--entry_record_value-->
     </div><!--entry_record_value-->
     <!--- rating section end --->  
+      
+    <!--- report section start --->  
+    <div class="entry_record">
+      <div class="entry_record_title">Entry Report</div>
+      <div class="entry_record_value">
+          
+      </div><!--entry_record_value-->
+    </div><!--entry_record_value--> 
+    <!--- report section end --->  
  
 </div> <!--entry_index_container-->
 
