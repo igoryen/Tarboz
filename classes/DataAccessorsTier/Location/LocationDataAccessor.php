@@ -20,7 +20,7 @@
 
 //get Country by Province
 //get country by specific province
-
+ech
 //Add City
 require_once DB_CONNECTION . 'DBHelper.php';
 
@@ -88,7 +88,7 @@ public function getuserLocation(){
     //If the information is not in the databse, then add it
     if($country_res->getCountryName()=="" && $province_res->getProvinceName()=="" && $city_res->getCityName()==""){
         $city_id = $this->addLocation($location);
-        //echo "All Empty Result";
+        echo "All Empty Result";
       }
     else if($country_res->getCountryName()!="" && $province_res->getProvinceName()=="" && $city_res->getCityName()==""){ 
       $provinceid = addProvince($provincename,$country_res->getCountryId());
