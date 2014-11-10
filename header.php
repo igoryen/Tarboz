@@ -381,7 +381,60 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             });//end $.ajax()*/
             event.preventDefault();
         });
-  
+        //==========Report Entry start=========
+        $('.reportEntry').click( function(event) {
+            if ($(this).next().css('display') == 'none') {
+                $(this).next().css({'display': 'block'});
+            } else if ($(this).next().css('display') == 'block') {
+                $(this).next().css({'display': 'none'});
+            }
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_"));
+            var entry_id = this_id.substring(this_id.lastIndexOf("_")+1);
+        });
+          
+        $('button.reportEntrySub').click( function(event) { //add a report
+            var this_id = $(this).attr('id');
+            var entity_id = this_id.substring(this_id.indexOf("_")+1);
+            var entity_for_report = "entry";
+            var textarea_id = "#reportEntryReason_"+entity_id;
+            var hidden_id = "#reportEntryBy_"+entity_id;
+            
+            var report_reason = encodeURIComponent($.trim ($(textarea_id).val() ));
+            var reported_by = encodeURIComponent($(hidden_id).val()); //alert("reported by: "+reported_by);
+            $.ajax({
+               url: "user_test/reporting_entry.php",
+               type: "POST",
+               data: {
+                    entityId : entity_id,
+                    entityForReport : entity_for_report,
+                    reportReason : report_reason,
+                    reportedBy: reported_by
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           if(data.indexOf("error")>0 ) {
+                               alert("Mailer error! ");
+                           }
+                           location.reload(true); 
+                       } else if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+            
+        });
+        $('button.reportEntryCancel').click( function(event) {
+            $('.reportEntry').next().css({'display': 'none'});            
+        });
+               
       });
       
   </script>

@@ -174,6 +174,6 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
     </div><!--index_table-->
 
   </div><!--"index_table_container"-->
-</div> <!--end wrapper div>
+</div> <!--end wrapper div-->
 <?php require("footer.php"); ?>
 

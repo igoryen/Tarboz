@@ -278,7 +278,8 @@
         // 1*
     ?>
     <div class="entry_record">
-      <div class="entry_record_title">Translate this into&nbsp;<?php
+      <div class="entry_record_title">Translate this into&nbsp;
+	  <?php
         // TODO: What if there are >1 requests (i.e. >1 languages) to translate this entry?
         $treqLang = $treq->getTreqLang();
         if(!null == $treqLang){
@@ -294,9 +295,6 @@
     <?php } //end if($entry->getEntryAuthenStatusId() == 1) ?>
     <!--Display Translate into end-->  
     <!--Display translation request-->
-    
-    
-    
     <?php if($entry->getEntryAuthenStatusId() == 1){?>
     <div class="entry_record">
       <div class="entry_record_title">Request a translation into one of these languages</div>
@@ -313,12 +311,13 @@
             echo '">';
             echo $lang->getLangName();
             echo '</option>';
-          }
-        } ?>
+          } ?>
+		
         </select>
         <span id="treqCreateResponse"></span>
       </div>
     </div>
+	<?php } //end if?>
     <!--Display translation request end-->
     <!--- comments section start --->
   
@@ -482,7 +481,7 @@
           $likeRating = $likeRating > 0 ? $likeRating : "";
       ?>
         <span id ="<?php echo $user_id."_entryLike_".$entryId; ?>" name="<?php echo $user_id."_entryLike_".$entryId; ?>" class="entry_like"
-              onmouseover="$(this).css({'cursor': 'pointer'});"><?php echo $like_entry."&nbsp;"; ?></span>
+              style="cursor: pointer; color: #0066cc;"><?php echo $like_entry."&nbsp;"; ?></span>
         <span>Entry | </span>
         <span class="entry_like_num" style="display:'';"><?php echo $likeRating; ?> </span><span><?php if($likeRating>0) echo "LIKE(S)";?></span>
       </div><!--entry_record_value-->
@@ -493,6 +492,23 @@
     <div class="entry_record">
       <div class="entry_record_title">Entry Report</div>
       <div class="entry_record_value">
+          <!--start report entry div-->
+            <div style="display:table-cell; ">
+                <div id="<?php echo $user_id."_reportEntryId_".$entryId; ?>" 
+                     class="reportEntry" title="Report to Admin" style="cursor: pointer; color: #0066cc;">Report this entry</div>
+                <div id ="<?php echo 'reportEntryDiv_'.$entryId;?>" style="display: none; ">
+                    <form name ="<?php echo 'reportEntryForm_'.$entryId;?>" id="<?php echo 'reportEntryForm_'.$entryId;?>" method="POST">
+                        <div style="font-size:14px; margin-top:5px;">Reason:</div>
+                        <textarea rows="2" cols="20" name="<?php echo 'reportEntryReason_'.$entryId; ?>" 
+                                  id="<?php echo 'reportEntryReason_'.$entryId; ?>"></textarea><br/>
+                        <input type="hidden" id="<?php echo 'reportEntryBy_'.$entryId; ?>" 
+                               name="<?php echo 'reportEntryBy_'.$entryId; ?>" 
+                               value ="<?php echo $user_id; ?>"/>
+                        <button id="<?php echo 'reportEntrySub_'.$entryId; ?>" name="<?php echo 'reportEntrySub_'.$entryId; ?>" class="reportEntrySub" type="button" style="font-size:11px;">Submit</button>
+                        <button id="<?php echo 'reportEntryCancel_'.$entryId; ?>" name="<?php echo 'reportEntryCancel_'.$entryId; ?>" class="reportEntryCancel" type="button" style="font-size:11px;">Cancel</button>
+                    </form>
+                </div> <!--end report entry div inner-->
+            </div> <!--end table cell for report en-->
           
       </div><!--entry_record_value-->
     </div><!--entry_record_value--> 

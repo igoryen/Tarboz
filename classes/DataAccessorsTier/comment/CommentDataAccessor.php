@@ -67,7 +67,7 @@
             "' WHERE com_comment_id = '".$id."'";
       }
       //print "CommentDataAccess update query ".$query_update."<br/>";
-      $dbHelper = new DBHelper();
+
       $result = $dbHelper->executeQuery($query_update);
       return $result;
 
