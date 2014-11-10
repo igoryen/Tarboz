@@ -3,18 +3,15 @@ require_once 'config.php';
 require_once BUSINESS_DIR_USER . 'UserManager.php';
 require_once BUSINESS_DIR_LANG_PROF . 'LanguageProfManager.php';
 
-require("header.php");
-
-
+//require("header.php");
 /*
 	The purpose of this file is to give the user a message of their account being registered
 	and also let the user activate their account through this page aswell
 */
 
 $activate = isset($_GET['activate'])?$_GET['activate']:"";
-
+//echo "Activating: ".$activate;
 if($activate==""){
-		
 ?>
 <div style="height:40%;width:60%;background-color:rgba(255,255,255,0.6);;margin:0 auto;">
 <br><span style="font-size:25px;font-family:verdana;margin-left:3%;weight:bold;">Account successfully created</span>
