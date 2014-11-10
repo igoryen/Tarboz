@@ -80,7 +80,7 @@
              <div class="col_space"></div>
             <div class="col_userlist">
 <?php
-    include "user_list.php";
+    include "/views/profile/user_list.php";
 ?>
             </div>
         </div>
