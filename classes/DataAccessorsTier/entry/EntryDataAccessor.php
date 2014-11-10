@@ -223,12 +223,12 @@ class EntryDataAccessor {
    * @return array of class Entry objects
    */
   private function getListOfFathers($resultOfSelect) {
-    $Entries[] = new Entry();
+    $Entries[] = array();
     //
     $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
 
-      $Entries[] = new Entry(); // 31
+      $Entries[$count] = new Entry(); // 31
       // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryText($list['ent_entry_text']);
@@ -430,6 +430,17 @@ class EntryDataAccessor {
       $Entry->setEntryCreationDate(   $list['ent_entry_creation_date']);
     } // while
     return $Entry;
+  }
+
+  // get entry by user id
+  public function getEntryByUserId($UserId) {
+
+    $query = "SELECT * FROM tbl_entry WHERE ent_entry_creator_id = '".$UserId."'";
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $entryListById = $this->getListOfFathers($result);
+    return $entryListById;
+      
   }
 
 }

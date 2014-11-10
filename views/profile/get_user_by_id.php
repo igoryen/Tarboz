@@ -4,8 +4,12 @@
 	require_once BUSINESS_DIR_USER . 'UserManager.php';   
     require_once BUSINESS_DIR_LOCATION . 'LocationManager.php';  
 
+    require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
+    require_once BUSINESS_DIR_ENTRY . "Entry.php";
+
     $userManager = new UserManager();
     $locationManager = new LocationManager();
+    $EntryManager = new EntryManager();
 
     $userId = intval( $_GET["id"]);
 //    if ($userId =="")

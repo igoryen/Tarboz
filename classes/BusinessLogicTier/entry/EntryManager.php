@@ -93,4 +93,11 @@ class EntryManager {
     $arrayOfEntryBriefGottenByLanguage = $eda->getListOfEntryBriefByLanguage($language);
     return $arrayOfEntryBriefGottenByLanguage;
   }
+    
+  // get entry by user ids  
+  public function getEntryByUserId($UserId) {
+    $eda = new EntryDataAccessor();
+    $entryGottenByUserId = $eda->getEntryByUserId($UserId);
+    return $entryGottenByUserId;
+  }
 }

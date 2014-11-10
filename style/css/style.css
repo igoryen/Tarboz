@@ -1054,11 +1054,27 @@ html {
     height: 100%;
 }
 
-
-
-
-
 .mid_scoll {
     overflow: auto;
     max-height: 400px;
+}
+
+.entryList, .entry_header {
+    width: 700px;
+    margin: 0;
+    border: 1px solid #D9E0E3;
+    padding: 9px 5px 10px;
+    font-size: 14px;
+    display: block;
+    text-align: left;
+}
+
+.entryList {  
+    border-radius: 0 0 3px 3px;   
+}
+
+.entry_header {
+    background-color: #D9E0E3;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 0;
 }
