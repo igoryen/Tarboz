@@ -297,7 +297,7 @@ class EntryDataAccessor {
                 AND e.ent_entry_deleted = 0
               HAVING relevance >= 1
               ORDER BY l.lan_lang_name";
-
+    
     $dbHelper = new DBHelper();
     $resultOfSelect = $dbHelper->executeSelect($query);
     // the current EntryDataAccessor object = $this
@@ -323,11 +323,11 @@ class EntryDataAccessor {
    * @return array of Entry objects
    */
   private function getListOfKidBrief($resultOfSelect) {
-    $Entries[] = new Entry();
+    $Entries[] = array(); //$Entries[] = new Entry(); 
     $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
       
-      $Entries[] = new Entry(); //31
+      $Entries[$count] = new Entry(); //31
       // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryLanguage($list['lan_lang_name']); // 19
@@ -356,7 +356,7 @@ class EntryDataAccessor {
     $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
       
-      $Entries[] = new Entry(); //31
+      $Entries[$count] = new Entry(); //31
       // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryLanguage($list['lan_lang_name']);
