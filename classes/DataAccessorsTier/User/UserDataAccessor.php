@@ -6,9 +6,6 @@ require_once BUSINESS_DIR_USER . 'User.php';
 require_once(DB_CONNECTION . 'datainfo.php');
 
 class UserDataAccessor {
-  /* ----------------------------------------------
-    takes a User object and inserts it into the data
-    ----------------------------------------------- */
 
   public function addUser($user) {
 

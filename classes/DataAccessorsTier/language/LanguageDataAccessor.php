@@ -41,7 +41,6 @@ class LanguageDataAccessor{
 
   }
 
-  //get one language
   private function getLanguage($selectResult) {
 
     $lang = new Language();

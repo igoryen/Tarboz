@@ -48,22 +48,22 @@ $prof = [];
 $count_prof = count($user_info['mylanguage']);
 $i = 0;
 if(count($count_prof)>0){
+
   for($i=0;$i<$count_prof;$i++){
 
-    $lprof[] = new LanguageProf();
+      $lprof[] = new LanguageProf();
 
-    $lprof[$i]->setLanguageId($user_info['mylanguage'][$i]);
+      $lprof[$i]->setLanguageId($user_info['mylanguage'][$i]);
 
-    $lprof[$i]->setProf($user_info['proficient'][$i]);
+      $lprof[$i]->setProf($user_info['proficient'][$i]);
 
-    $lprof[$i]->setUserId($user_insert_id);
+      $lprof[$i]->setUserId($user_insert_id);
 
-    if($LProfManager->AddProficient($lprof[$i])){
+      if($LProfManager->AddProficient($lprof[$i])){
 
-      $allworks=true;
-      //echo '1';
-    }
-
+        $allworks=true;
+        //echo '1';
+      }
 
   }
 }

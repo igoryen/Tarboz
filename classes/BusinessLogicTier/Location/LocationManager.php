@@ -8,7 +8,6 @@ require_once DATA_ACCESSOR_DIR_Location . 'LocationDataAccessor.php';
 
 class LocationManager {
 
-
   //will return the city id..
   public function getuserLocation() {
 

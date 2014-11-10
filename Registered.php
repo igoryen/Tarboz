@@ -13,7 +13,7 @@ require("header.php");
 
 $activate = isset($_GET['activate'])?$_GET['activate']:"";
 
-if(!isset($activate)){
+if($activate==""){
 		
 ?>
 <div style="height:40%;width:60%;background-color:rgba(255,255,255,0.6);;margin:0 auto;">

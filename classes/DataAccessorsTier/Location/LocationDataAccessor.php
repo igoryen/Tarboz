@@ -1,27 +1,5 @@
 <?php 
-//getcountry by name
-//get Province By name
-//get City By Name;
 
-//get country by province
-//select province, and get the country in return
-
-//get province by city
-//get city and return the province
-
-//get Cities by Country
-// get all the cities in specific country
-
-//get Provinces by Country
-//get all provinces for specific country
-
-//get Country by City
-//get country for specific city
-
-//get Country by Province
-//get country by specific province
-
-//Add City
 require_once DB_CONNECTION . 'DBHelper.php';
 
 require_once BUSINESS_DIR_LOCATION . 'Location.php';

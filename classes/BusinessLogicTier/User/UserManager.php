@@ -8,7 +8,6 @@ require_once DATA_ACCESSOR_DIR_USER . 'UserDataAccessor.php';
 
 class UserManager {
 
-
   public function UpdateUserType($userid,$usertype){
     $userDataAccessor = new userDataAccessor();
     $updated = $userDataAccessor->UpdateUserType($userid,$usertype);

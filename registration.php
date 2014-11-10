@@ -16,17 +16,17 @@ $LanguageList = $Language->getLanguages();
   	<link rel="stylesheet" type="text/css" href="views/registration/style.css">
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-		<!-- for date picking purpose-->
+	<!-- for date picking purpose-->
 	<script>
 
-		$(document).ready(function(){
+	  $(document).ready(function(){
 
-			var works=true;	
+		var works=true;	
 
-			//Coding for the captcha, to see if the user has typed the correct text
-			$('#mycaptcha').on('keyup',function(){
+		//Coding for the captcha, to see if the user has typed the correct text
+		$('#mycaptcha').on('keyup',function(){
 
-				if($('#mycaptcha').val().length>=5){
+			if($('#mycaptcha').val().length>=5){
 
 				$.post("user_test/captcha_check.php",
 					{
@@ -35,17 +35,16 @@ $LanguageList = $Language->getLanguages();
 					},
 					function(data,status){
 					
-					if(data==0){
-						document.getElementById("final_error").innerHTML="Captcha did not match";
-						works=false;
-						
-				    }
-				    if(data==1){
-				    	works=true;
-				    	document.getElementById("final_error").innerHTML="";
-				    }
+						if(data==0){
+							document.getElementById("final_error").innerHTML="Captcha did not match";
+							works=false;	
+						}
+						if(data==1){
+							works=true;
+							document.getElementById("final_error").innerHTML="";
+						}
 
-		    	});
+					});
 			}
 
 			});
@@ -84,13 +83,17 @@ $LanguageList = $Language->getLanguages();
                    works=true;
                    //A jquery function, that goes through the array of selects and then adds them to the array called arrLang
                    $('[id=lang]').each(function (i, item) {
+				   
 		                   var lang = $(item).val();
 		                   arrLang.push(lang);
+						   
                		});
                    	//A jquery function, that goes through the array of select prof and then adds them to the array called arrprf
                     $('[id=prof]').each(function (i, item) {
+					
 		                   var prof = $(item).val();
 		                   arrPrf.push(prof);
+						   
                		});
                 	var data0 = {fname: fname, mlname : lname, userid : uid,password:pwd, emailid : email, mylanguage : arrLang, proficient : arrPrf, dob : yearsel+"-"+monthsel+"-"+daysel};
                 	//var json = JSON2.stringify(data0 ); 
@@ -330,7 +333,7 @@ $LanguageList = $Language->getLanguages();
 		    </ul>
 
 		    <form class="form" action="one.php" method="post">
-		    	<span class="error_box" id="fname_error"></span>
+		      <span class="error_box" id="fname_error"></span>
 		      <input type="text" placeholder="First Name" class="textbox" id="fname"/>
 		      <span class="error_box" id="lname_error"></span>
 		      <input type="text" placeholder="Last Name" class="textbox" id="lname"/>

@@ -4,6 +4,7 @@ require_once DATA_ACCESSOR_DIR_LANG . 'LanguageDataAccessor.php';
 
 class LanguageManager{
 
+
   public function getLanguages(){
 
       $language = new LanguageDataAccessor();
