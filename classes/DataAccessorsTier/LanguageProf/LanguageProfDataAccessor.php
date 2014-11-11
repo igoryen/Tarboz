@@ -6,7 +6,6 @@ require_once(DB_CONNECTION . 'datainfo.php');
 
 class LanguageProfDataAccessor{
 
-
   public function getProficiencyByLanguageId($LangId){
 
     $dbHelper = new DBHelper();
@@ -77,4 +76,5 @@ class LanguageProfDataAccessor{
     
     return $langs;
   }
+
 }

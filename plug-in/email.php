@@ -22,7 +22,6 @@ function email($email, $username, $body,$Subject) {
     $mail->Subject = $Subject;
     $mail->Body    = $body;
     
-
     //if Email was not sent it should return a true bool to the user
     if($mail->send()) {
       $mail->ClearAddresses();

@@ -1,11 +1,8 @@
 <?php
-
 require_once DB_CONNECTION . 'DBHelper.php';
 require_once BUSINESS_DIR_ENTRY . 'Entry.php';
 require_once(DB_CONNECTION . 'datainfo.php');
-
 class EntryDataAccessor {
-
   /**
    *
    * @param type $entry
@@ -77,7 +74,6 @@ class EntryDataAccessor {
     //16
     return $last_inserted_id;
   }
-
   /**
    *
    * @param type $entry
@@ -88,7 +84,6 @@ class EntryDataAccessor {
     $entryId = $entry->getEntryId();
     $text = mysql_real_escape_string($entry->getEntryText());
     $verbatim = mysql_real_escape_string($entry->getEntryVerbatim());
-
     /*
      * TODO: transliterate the value of $text using ...
      */
@@ -131,14 +126,12 @@ class EntryDataAccessor {
     $resultOfEntryUpdate = $dbHelper->executeQuery($query);
     return $resultOfEntryUpdate;
   }
-
   /**
    *
    * @param type $entryId
    * @return type $entryGottenById
    */
   public function getEntryById($entryId) {
-
     $query = "SELECT 
                 e.ent_entry_id, 
                 l.lan_lang_name, 
@@ -163,23 +156,19 @@ class EntryDataAccessor {
               AND e.ent_entry_id = ". $entryId;
     // 52
     $dbHelper = new DBHelper();
-
     //********For Test Purpose:(((((())))))
     //echo $query;
-
     $result = $dbHelper->executeSelect($query);
     // 46
     $entryGottenById = $this->getEntryFull($result);
     return $entryGottenById;
   }
-
   /*
     public function getEntrySetByVerbatim($verbatim) {
     // for SELECT use Full-Text Search Functions
     $query = "SELECT "
     }
    */
-
   /**
    *
    * @param type $entryId
@@ -188,7 +177,6 @@ class EntryDataAccessor {
   public function deleteEntry($entryId) {
     $query = "DELETE FROM ENTRY "
             . "WHERE ent_entry_id = $entryId";
-
     $dbHelper = new DBHelper();
     $resultOfDelete = $dbHelper->executeQuery($query); //47
     return $resultOfDelete;
@@ -202,10 +190,8 @@ class EntryDataAccessor {
     $resultOfDelete = $dbHelper->executeQuery($query); //47
     return $resultOfDelete;
   }
-
   public function getAllFathers() {
     // a 'father' is the entry from which all translations are made
-
     $dbHelper = new DBHelper();
     $query = "SELECT * "
             . "FROM " . ENTRY
@@ -216,7 +202,6 @@ class EntryDataAccessor {
     $Users = $this->getListOfFathers($resultOfSelect);
     return $Users;
   }
-
   /**
    *
    * @param type $resultOfSelect
@@ -227,8 +212,12 @@ class EntryDataAccessor {
     //
     $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
+<<<<<<< HEAD
 
       $Entries[$count] = new Entry(); // 31
+=======
+      $Entries[] = new Entry(); // 31
+>>>>>>> 99fdbcc30cdc0a614b3decf4dbf27d7fc4135485
       // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryText($list['ent_entry_text']);
@@ -249,7 +238,6 @@ class EntryDataAccessor {
     } // while
     return $Entries;
   }
-
 // used to search the database for the "father" using a verbatim string
   /**
    * 
@@ -279,7 +267,6 @@ class EntryDataAccessor {
     //28,29
     return $fatherGottenByVerbatim;
   }
-
   public function getListOfKidBriefByVerbatim($verbatim) {
     /*$query = "SELECT 
                 e.ent_entry_id, 
@@ -365,7 +352,6 @@ class EntryDataAccessor {
     // 34,35
     return $Entries;
   }
-
   private function getListOfEntryBrief($resultOfSelect) {
     $Entries[] = new Entry();
     $count = 0; // 30
@@ -413,7 +399,6 @@ class EntryDataAccessor {
       //48,49,50
     return $Entry;
   }
-
   /**
    * getEntryFull($resultOfSelect)
    * To retrieve ALL the fields of one entry for the entry profile page.
@@ -478,7 +463,6 @@ class EntryDataAccessor {
       return $arrayOfEntryByLangDate;
       
   }
-
   public function getKidEntryListByDadLangDate($dad_entryId, $in_lang, $in_from_date, $in_end_date) {
       $from_date = $in_from_date != "" ? $in_from_date : "2000-01-01";
       $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
@@ -513,6 +497,7 @@ class EntryDataAccessor {
       return $arrayOfEntryByLangDate;
       
   }
+<<<<<<< HEAD
 
   // get entry by user id
   public function getEntryByUserId($UserId) {
@@ -525,6 +510,8 @@ class EntryDataAccessor {
       
   }
 
+=======
+>>>>>>> 99fdbcc30cdc0a614b3decf4dbf27d7fc4135485
 public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_date) {
       $from_date = $in_from_date != "" ? $in_from_date : "2000-01-01";
       $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
@@ -614,5 +601,9 @@ public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_dat
         }
         return $like_num;      
   }
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> 99fdbcc30cdc0a614b3decf4dbf27d7fc4135485

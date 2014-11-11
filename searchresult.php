@@ -60,18 +60,18 @@ if (trim($search_text) == "" ) { //browse mode if there is no search words
       else { //found search
         // 9
         $i = 0; // 10
-        
+        $kidsNum = count($array_of_kids);
         foreach($array_of_kids as $kid){ // 24
           // 11,12
-          if($kid == reset($array_of_kids)){
+          if($kid == $array_of_kids[0]){
              
             // 13,14
             $current_lang = $kid->getEntryLanguage();
             //$next_lang = $array_of_kids[$i+1]->getEntryLanguage();
-            if (next($array_of_kids) === false) {
+            if ($array_of_kids[$i+1] === false) {
                 $next_lang = "";
             } else {
-                $kid_next = next($array_of_kids);
+                $kid_next = $array_of_kids[$i+1];
                 $next_lang = $kid_next->getEntryLanguage();
             }
             // 15,16,17,18,19
@@ -81,12 +81,12 @@ if (trim($search_text) == "" ) { //browse mode if there is no search words
             $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
             $kid_room_array['user'] = $kid->getEntryUserId();
             make_kid_room($kid_room_array); 
-            close_kids_house();
+            //close_kids_house();
             //23
             unset($current_lang);
             unset($next_lang);
           }// 12
-          elseif($kid == end($array_of_kids)){ // 25
+          elseif($kid == $array_of_kids[$kidsNum-1]){ // 25
             // 26,14,28,29
             $prev_lang = $array_of_kids[$i-1]->getEntryLanguage();
             $current_lang = $kid->getEntryLanguage();
@@ -137,7 +137,7 @@ if (trim($search_text) == "" ) { //browse mode if there is no search words
               $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
               $kid_room_array['user'] = $kid->getEntryUserId();
               make_kid_room($kid_room_array);
-              close_kids_house();
+              //close_kids_house();
               // 70, 23
               unset($current_lang);
               unset($prev_lang);
@@ -148,6 +148,7 @@ if (trim($search_text) == "" ) { //browse mode if there is no search words
               $kid_room_array['text'] = substr($kid->getEntryText(), 0, 55);
               $kid_room_array['user'] = $kid->getEntryUserId();
               make_kid_room($kid_room_array);
+                
               // 70,23
               unset($current_lang);
               unset($prev_lang);

@@ -10,31 +10,23 @@ require PHP_MAILER.'PHPMailerAutoload.php';
 class ReportDataAccessor {
 
   public function addReport($report) {
-    $dbHelper = new DBHelper();
-    $dbHelper->connectToDB();
 
-    //$id = $report->getId();
-    $reason = mysqli_real_escape_string($dbHelper->getConnection(), $report->getReason());
-    $dbHelper->closeConnection();
+    $id = $report->getId();
+    $reason = $report->getReason();
     $entity_for_report = $report->getEntityForReport();
     $entity_id = $report->getEntityId();
     $reported_by = $report->getReportedBy();
 
     $query_insert = "INSERT INTO ".REPORT." (rep_reason, rep_entity_for_report, rep_entity_id, rep_reported_by, rep_reported_on) 
                      VALUES ('".$reason."', '".$entity_for_report."', '".$entity_id."', '".$reported_by."', NOW())";
-
+    $dbHelper = new DBHelper();
     $last_inserted_id = $dbHelper->executeInsertQuery($query_insert);
     return $last_inserted_id;
   }
 
   public function updateReport($report) {
-    $dbHelper = new DBHelper();
-    $dbHelper->connectToDB();
-      
     $id = $report->getId();
-    $reason = mysqli_real_escape_string($dbHelper->getConnection(),$report->getReason());
-    $dbHelper->closeConnection();
-      
+    $reason = $report->getReason();
     $entity_for_report = $report->getEntityForReport();
     $entity_id = $report->getEntityId();
     $reported_by = $report->getReportedBy();
@@ -48,6 +40,7 @@ class ReportDataAccessor {
         rep_reported_on = '".$curr_datetime."'   
         WHERE rep_report_id = '".$id."'";
 
+    $dbHelper = new DBHelper();
     $result = $dbHelper->executeQuery($query_update);
     return $result;
   }

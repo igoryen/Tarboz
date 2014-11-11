@@ -15,7 +15,8 @@ class DBHelper {
     return $this->connection;
   }
 
-  public function connectToDB() {
+
+  private function connectToDB() {
     // Step 1. Create a Database connection
     $this->connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
             or die("Error, failed to connect" . mysqli_error($this->connection));
@@ -30,7 +31,7 @@ class DBHelper {
     Close database connection
     --------------------------------- */
 
-  public function closeConnection() {
+  private function closeConnection() {
     // Step 5. Close connection
     if (isset($this->connection)) {
       mysqli_close($this->connection);
@@ -81,8 +82,13 @@ class DBHelper {
 
   //A function that receives a string and then escapes the special characters and returns the result.
   public function EscapeString($mystring){
+    $this->connectToDB();
 
-     return mysqli_real_escape_string($con, $mystring);
+    $escapestring=mysqli_real_escape_string($this->connection, $mystring);  
+
+    $this->closeConnection();
+    
+     return $escapestring;
 
   }
 

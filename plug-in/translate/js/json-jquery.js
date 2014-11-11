@@ -2,7 +2,7 @@ $(document).ready(function(){
     //alert(document.getElementById('txtLang').value);
 	//attach a jQuery live event to the button
 	//$('#loader').ajaxLoader();
-	$('#getdata-button').click( function(){
+	$('#getdata-button').live("click", function(){
         //alert("here");
     	//$('#loader').ajaxLoader();
     	var text = encodeURIComponent(document.getElementById('txtString').value);

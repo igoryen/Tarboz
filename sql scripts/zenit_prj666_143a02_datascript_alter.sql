@@ -119,3 +119,8 @@ UPDATE `prj666`.`tbl_user` SET `usr_location_id` = '1' WHERE `tbl_user`.`usr_use
 
 ALTER TABLE `prj666`.`tbl_entry` 
 ADD COLUMN `ent_entry_deleted` INT NULL DEFAULT 0 AFTER `ent_entry_creation_date`;
+
+UPDATE `prj666`.`tbl_user_type` SET `utp_usertype_id`='5', `utp_type_name`='banned' WHERE `utp_usertype_id`='4';
+UPDATE `prj666`.`tbl_user_type` SET `utp_usertype_id`='4', `utp_type_name`='inactive' WHERE `utp_usertype_id`='3';
+INSERT INTO `prj666`.`tbl_user_type` (`utp_usertype_id`, `utp_type_name`) VALUES ('6', 'noconfirmed');
+

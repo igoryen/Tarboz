@@ -8,6 +8,17 @@ require_once DATA_ACCESSOR_DIR_Location . 'LocationDataAccessor.php';
 
 class LocationManager {
 
+  //will return the city id..
+  public function getuserLocation() {
+
+    $LocationDataAccessor = new LocationDataAccessor();
+
+    $City_id = $LocationDataAccessor->getuserLocation();
+
+    return $City_id;
+  }
+
+
   //well be a function that adds the Location data to the database
   public function addLocation($Location) {
 
@@ -16,12 +27,6 @@ class LocationManager {
     $last_inserted_id = $LocationDataAccessor->addLocation($Location);
 
     return $last_inserted_id;
-  }
-
-
-  public function getUserLocation(){
-      
-
   }
 
   public function deleteLocation($Locationid) {
