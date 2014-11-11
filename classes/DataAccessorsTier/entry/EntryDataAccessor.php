@@ -212,12 +212,8 @@ class EntryDataAccessor {
     //
     $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-<<<<<<< HEAD
 
       $Entries[$count] = new Entry(); // 31
-=======
-      $Entries[] = new Entry(); // 31
->>>>>>> 99fdbcc30cdc0a614b3decf4dbf27d7fc4135485
       // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryText($list['ent_entry_text']);
@@ -497,7 +493,6 @@ class EntryDataAccessor {
       return $arrayOfEntryByLangDate;
       
   }
-<<<<<<< HEAD
 
   // get entry by user id
   public function getEntryByUserId($UserId) {
@@ -510,8 +505,6 @@ class EntryDataAccessor {
       
   }
 
-=======
->>>>>>> 99fdbcc30cdc0a614b3decf4dbf27d7fc4135485
 public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_date) {
       $from_date = $in_from_date != "" ? $in_from_date : "2000-01-01";
       $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
@@ -601,9 +594,5 @@ public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_dat
         }
         return $like_num;      
   }
-<<<<<<< HEAD
 
 }
-=======
-}
->>>>>>> 99fdbcc30cdc0a614b3decf4dbf27d7fc4135485
