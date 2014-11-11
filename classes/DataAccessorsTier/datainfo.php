@@ -15,7 +15,7 @@
   define('CITY',            'tbl_city');
   define('BADWORD',         'tbl_bad_words');
   define('LANGUAGE',        'tbl_language');
-  define('LANGUAGE_PROF',        'language_proficiency');
+  define('LANGUAGE_PROF',   'tbl_language_proficiency');
 
   
 

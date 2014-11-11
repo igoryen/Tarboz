@@ -34,48 +34,52 @@ $User->setFirstName($userfname);
 $User->setLastName($userlname);
 $User->setLogin($userid);
 $User->setEmail($emailid);
+$User->setPassword($pass);
 $User->setDOB($dob);
 $User->setLocation($cityid);
 $User->setRegistration_date(date("Y-m-d"));
 $User->setUserType(4);
       
 $user_insert_id =$userManager->addUser($User);
+//echo $user_insert_id;
+if($user_insert_id){
       
-$cityid='4';
-
-$prof = [];
-
-$count_prof = count($user_info['mylanguage']);
-$i = 0;
-if(count($count_prof)>0){
-
-  for($i=0;$i<$count_prof;$i++){
-
-      $lprof[] = new LanguageProf();
-
-      $lprof[$i]->setLanguageId($user_info['mylanguage'][$i]);
-
-      $lprof[$i]->setProf($user_info['proficient'][$i]);
-
-      $lprof[$i]->setUserId($user_insert_id);
-
-      if($LProfManager->AddProficient($lprof[$i])){
-
-        $allworks=true;
-        //echo '1';
+    //$cityid='4';
+    
+    $prof = [];
+    
+    $count_prof = count($user_info['mylanguage']);
+    $i = 0;
+    if(count($count_prof)>0){
+    
+      for($i=0;$i<$count_prof;$i++){
+    
+          $lprof[] = new LanguageProf();
+    
+          $lprof[$i]->setLanguageId($user_info['mylanguage'][$i]);
+    
+          $lprof[$i]->setProf($user_info['proficient'][$i]);
+    
+          $lprof[$i]->setUserId($user_insert_id);
+    
+          if($LProfManager->AddProficient($lprof[$i])){
+    
+            $allworks=true;
+            //echo '1';
+          }
+    
       }
+    }
+    
+    $body = "Dear ".$userfname.","."<br> Thank you for registering with Tarboz.com.<br>We are glad you are with us
+    Please follow the link below, to reset your password.<br>"."http://tarboz.com/Registered.php/?activate=".sha1($emailid);
+    
+    //public function email($email, $username, $body,$Subject)
+    if($allworks){
+    
+      if(email($emailid,$userid,$body,"Tarboz.com new Account")) echo '1';
+    }
 
-  }
 }
-
-$body = "Dear ".$userfname.","."<br> Thank you for registering with Tarboz.com.<br>We are glad you are with us
-Please follow the link below, to reset your password.<br>"."http://tarboz.com/Registered.php/?activate=".sha1($emailid);
-
-//public function email($email, $username, $body,$Subject)
-if($allworks){
-
-  if(email($emailid,$userid,$body,"Tarboz.com new Account")) echo '1';
-}
-
 
 ?>
