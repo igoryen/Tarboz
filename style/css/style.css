@@ -33,6 +33,7 @@ body{
   color: #000000;
   font-size: 15px;
   text-align: center;
+  margin-top:30px;
 
 }
 
@@ -71,8 +72,9 @@ div.footer > div > a {
 #navigation{
   display: table-cell;
   margin: 0 auto;
-  vertical-align: middle;
-  width: 63%;
+  text-align: left;
+  width: 980px;
+  font-weight: bold;
 }
 
 div > nav#navigation > a {
@@ -90,9 +92,10 @@ div > nav#navigation > a:hover {
 #search {
     background: rgba(255,255,255,0.5);
     display: block;
-    padding: 40px 0px;
+    padding: 10px 0px 3px 0px;
     text-align: center;
-    width: 100%; 
+    width: 980px; 
+	margin-bottom:10px;
 }
 
 #search input[type=text] {
@@ -100,10 +103,11 @@ div > nav#navigation > a:hover {
     border: 1px solid white;
     background-size: contain;
     color: #000000;
-    font-size: 25pt;
-    height: 48px;
-    width: 931px;
+    font-size: 20pt;
+    height: 36px;
+    width: 888px;
     padding: 0px 0px 0px 60px;
+	margin-bottom: 8px;
 }
 
 #searchinput img {
@@ -288,23 +292,24 @@ font-size: 17px;
 /*--- for search_result.php ---*/
 #land{
   border-spacing: 5px;
-  margin: 5px auto;
+  margin-left: 65px;
   padding: 5px;
-  width: 98%;
+  width: 85%;
 }
 
 #village{
   display: block;
   margin: 5px auto;
-  width: 95%;
+  width: 85%;
 }
 
 #dad_house{
   background-color: white;
   border: 1px solid #c1c1c1;
-  display: block;
+  display: table;
   margin: 5px auto;
-  width: 90%;
+  width: 100%;
+  text-align:left;
 
 }
 
@@ -312,7 +317,7 @@ font-size: 17px;
   background-color: lavender;
   border: 1px solid gainsboro;
   color: silver;
-  display: block;
+  display: table-row;
   float: left;
   font-weight: bold;
   margin: auto;
@@ -320,13 +325,13 @@ font-size: 17px;
   padding-left: 10px;
   vertical-align: middle;
   width: 98.5%;
-
+  overflow: hidden;
 }
 .dad_door{
   background-color: #3399FF;
   border: 1px solid gainsboro;
   color: silver;
-  display: block;
+  display: table-row;
   float: left;
   font-weight: bold;
   margin: auto;
@@ -334,11 +339,12 @@ font-size: 17px;
   padding-left: 10px;
   vertical-align: middle;
   width: 98.5%;
+  overflow: hidden; 
 
 }
 
 #dad_room{
-  display: block;
+  display: table-row;
   margin: auto;
   width: 95%;
 
@@ -347,49 +353,50 @@ font-size: 17px;
 #dad_text{
   background-color: white;
   color: black;
-  display: table-cell;
+  display: inline-block;
   font-family: sans-serif "Calibri";
   font-size: large;
   vertical-align: middle;
-  width: 500px;
+  min-width: 600px;
 
 }
 
 #dad_profile_link{
-  display: table-cell;
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle;
-  width: 5px;
+  width: auto;
 }
 
 #kids_num{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle;
-  width: 5px;
+  width: auto;
+  cursor: alias;
 }
 
 #add_kid{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
-  width: 5px;
+  width: auto;
 }
 
 .kids_house{
   background-color: white;
   border: 1px solid #c1c1c1;
-  display: block;
+  display: table;
   margin: 5px auto;
-  width: 90%;
+  width: 100%;
 
 }
 
 .kid_room{
-  display: block;
+  display: table-row;
   margin: auto;
   width: 95%;
 }
@@ -397,50 +404,52 @@ font-size: 17px;
 .kid_text{
   background-color: white;
   color: black;
-  display: table-cell;
+  display: inline-block;
   font-family: sans-serif "Calibri";
   font-size: large;
   vertical-align: middle;
-  width: 500px;
+  min-width: 600px;
 }
 
 .kid_profile_link{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle;
-  width: 5px;
+  width: auto;
 }
 
 .kid_dad_link{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
+  width: auto;
 }
 
 .kid_votes{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
   width: 60px;
 }
 
 .kid_added_by{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
   width: 100px;
 }
 
 .is_mom{
   color: gray;
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
+  width: auto;
 }
 
 .no_dad_no_kids{
@@ -571,7 +580,7 @@ font-size: 17px;
 }
 
 #user_name{
-    font-size: large;
+    font-size: middle;
     font-weight: bold;  
 }
 
@@ -986,10 +995,10 @@ font-size: 17px;
 
 .search_button {
     background: #12A1FF;
-    padding: 10px 60px;
-    font-size: 20px;
+    padding: 5px 60px 5px 60px;
+    font-size: 16px;
     color: #ffffff;
-    text-decoration:none; 
+    text-decoration:none;	
 }
 
 .body_width {

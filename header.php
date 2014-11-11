@@ -8,8 +8,6 @@
   // $pathInPieces = explode('\\', dirname(__FILE__));
   // $root = "/" . $pathInPieces[3];
 
-
-
 require_once BUSINESS_DIR_USER. 'User.php';
 require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 
@@ -383,7 +381,60 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             });//end $.ajax()*/
             event.preventDefault();
         });
-  
+        //==========Report Entry start=========
+        $('.reportEntry').click( function(event) {
+            if ($(this).next().css('display') == 'none') {
+                $(this).next().css({'display': 'block'});
+            } else if ($(this).next().css('display') == 'block') {
+                $(this).next().css({'display': 'none'});
+            }
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_"));
+            var entry_id = this_id.substring(this_id.lastIndexOf("_")+1);
+        });
+          
+        $('button.reportEntrySub').click( function(event) { //add a report
+            var this_id = $(this).attr('id');
+            var entity_id = this_id.substring(this_id.indexOf("_")+1);
+            var entity_for_report = "entry";
+            var textarea_id = "#reportEntryReason_"+entity_id;
+            var hidden_id = "#reportEntryBy_"+entity_id;
+            
+            var report_reason = encodeURIComponent($.trim ($(textarea_id).val() ));
+            var reported_by = encodeURIComponent($(hidden_id).val()); //alert("reported by: "+reported_by);
+            $.ajax({
+               url: "user_test/reporting_entry.php",
+               type: "POST",
+               data: {
+                    entityId : entity_id,
+                    entityForReport : entity_for_report,
+                    reportReason : report_reason,
+                    reportedBy: reported_by
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           if(data.indexOf("error")>0 ) {
+                               alert("Mailer error! ");
+                           }
+                           location.reload(true); 
+                       } else if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+            
+        });
+        $('button.reportEntryCancel').click( function(event) {
+            $('.reportEntry').next().css({'display': 'none'});            
+        });
+               
       });
       
   </script>
@@ -425,26 +476,40 @@ div.showdata{
 </head>
 
 <body>
-  <div class="wrapper">
+
 
     <div id="header">
 
         <div class="header_row">
-          <div class="table-cell" style="text-align: left;">
+          <div class="table-cell" style="text-align: left; vertical-align: text-top;">
             <a href=""><img src="images/logo.png" height="50"></a>
           </div>
-          <nav id="navigation">
-              <a href="index.php">Home</a> 
-              <a href="entrycreate.php">Create an Entry</a>
-              <a href="profile.php">Profile</a>
-              <a href="/Tarboz/userview.php">[user view 2]</a>
-<!--              display profile menu when user login -->
-              <a href="views/profile/profile.php" style="display:none;" id="menu_user_index">Profile</a>
-          </nav>
-          <div class="table-cell" style="text-align: right;">
+          <div class="table-cell" style="width:1000;">
+              <!--Search bar start-->
+              <?php require("search.php");?>
+              
+              <!--Search bar end-->
+              <nav id="navigation">
+                  <a href="index.php" >Home</a> 
+                  <a href="entrycreate.php">Create an Entry</a>
+                  <!--
+                  <a href="profile.php">Profile</a>
+                  <a href="/Tarboz/userview.php">[user view 2]</a>
+                  -->
+    <!--              display profile menu when user login -->
+                  <a href="profile.php" style="display:<?php if(!isset($_SESSION['user']) ) echo 'none'; else echo ''; ?>;" id="menu_user_index">Profile</a>
+              </nav>
+          </div>
+          <div class="table-cell" style="vertical-align: top;">
+          <div class="table-row" style="padding-top:3px;">
             <button id="call_it" class="login_button"><?php if(!isset($_SESSION['user']) ) { ?>Login<?php } else { ?>Logout<?php } ?></button> 
           </div>
-          <div id="user_name"><?php if(isset($_SESSION['user']) ) echo $_SESSION['user']->getFirstName(); else echo ""; ?></div>
+          <div id="user_name" class="table-row" style="padding-top:5px;">
+              
+              <?php if(isset($_SESSION['user']) ) echo "Welcome <a href='profile.php'>".$_SESSION['user']->getFirstName()."</a> !"; else echo ""; ?>
+
+          </div>
+          </div>
 
           <div style="width:100px;" title="Login Window" id="login">
              <!--start of the login form div-->

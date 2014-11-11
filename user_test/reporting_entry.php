@@ -53,7 +53,7 @@
           $new_report_id = $reportManager->addReport($new_report);
             
           if($new_report_id >0) {
-              echo "Adding a new comment succeeded.";
+              echo "Adding a new report succeeded.";
               
               //send a notification to admin
               $rm = new ReportManager();
@@ -62,7 +62,7 @@
               
               echo $result;              
           } else {
-                echo "Adding a new comment failed.";
+                echo "Adding a new report failed.";
           }
           
         } else {

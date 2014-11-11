@@ -31,16 +31,13 @@ function close_kids_house(){?>
 function make_kid_room($kid_room_array){?>
   <div class="kid_room">
     <div class="kid_text">
-      <a href="entryview.php?id=<?php echo $kid_room_array['id'];?>">
-      <?php echo $kid_room_array['text'];   ?></a>
+      <a href="entryview.php?id=<?php echo $kid_room_array['id'];?>"><?php echo $kid_room_array['text'];?></a>
     </div>
-    <div class="kid_profile_link">T</div>
+    <div class="kid_profile_link">Translation</div>
     <div class="kid_dad_link">O</div>
-    <div class="kid_votes">+12 -3</div>
+    <div class="kid_votes"><span style="cursor: alias;" title="12 users like">+12</span> <span style="cursor: alias;" title="3 users dislike">-3</span></div>
     <div class="kid_added_by">
-      <a href="userview.php?id=<?php echo $kid_room_array['user']; ?>"><?php
-        echo $kid_room_array['user'];
-      ?></a>
+      <a href="profile.php?id=<?php echo $kid_room_array['user']; ?>"><?php echo $kid_room_array['user'];?></a>
     </div>
     <div class="is_mom">A</div>
   </div>
@@ -72,7 +69,7 @@ function make_kid_room($kid_room_array){?>
           <div class="is_mom"></div>
         </div>
 
-      </div><!-- kids_house -->
+      <!-- </div> kids_house -->
 
   }
   ?>
@@ -95,8 +92,8 @@ function dad_house_dad_0($no_original) { ?>
     <div class="door"></div>
     <div class="kid_room">
       <div class="kid_text"><?php echo $no_kids; ?></div>
-      <div class="kid_profile_link">T</div>
-      <div class="kid_dad_link">O</div>
+      <div class="kid_profile_link">Translation</div>
+      <div class="kid_dad_link">Original</div>
       <div class="kid_votes">+12 -3</div>
       <div class="kid_added_by">user123</div>
       <div class="is_mom">A</div>
@@ -108,22 +105,20 @@ function dad_house_dad_0($no_original) { ?>
 // for CASE 3: Original: exists. Variants: don't exist.
   function dad_house_dad_1($ary) { ?>
         <div id="dad_house">
-              <div class="dad_door"><?php echo $ary['language']; ?></div>
+            <div class="dad_door"><span><?php echo $ary['language']; ?></span></div>
             <div id="dad_room">
               <div id="dad_text">
-                <a href="entryview.php?id=<?php echo $ary['id']?>"><?php 
-              echo $ary['text']; 
-              ?></a></div>
-              <div id="dad_profile_link">O</div>
-          <div id="kids_num">18</div>
-          <div id="add_kid">+</div>
-          <div class="kid_added_by">
-            <a href="userview.php?id=<?php echo $ary['user']; ?>">
-              <?php echo $ary['user']; ?>
-            </a>
-          </div>
-        </div>
-      </div><!-- dad_house -->
+                <a href="entryview.php?id=<?php echo $ary['id']?>"><?php echo $ary['text']; ?></a>
+              </div>
+              <div id="dad_profile_link">Original</div>
+              <div style="display:inline-block;width:50px"></div>
+              <div id="kids_num" title="There are 1 translations for this phrase">1</div>
+              <div id="add_kid"><a href="entrycreate.php" title="Add a new translation">+</a></div>
+              <div class="kid_added_by">
+                <a href="profile.php?id=<?php echo $ary['user']; ?>"><?php echo $ary['user']; ?></a>
+              </div>
+            </div>
+         </div><!-- dad_house -->
 
         <?php }
         ?>

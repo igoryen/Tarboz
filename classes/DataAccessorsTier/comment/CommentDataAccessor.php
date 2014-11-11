@@ -55,7 +55,7 @@
           $query_update = "UPDATE ".COMMENT." SET 
             com_text = '".$text.
             "', com_rating_id = '".$rating_id.
-            "', com_created_on = '".$curr_datetime.
+//            "', com_created_on = '".$curr_datetime.
               
     //      "', com_created_by = '".$created_by.
     //      "', com_entry_id = '".$entry_id.
@@ -63,11 +63,11 @@
       } else {
           $query_update = "UPDATE ".COMMENT." SET 
             com_text = '".$text.
-            "', com_created_on = '".$curr_datetime.
+  //          "', com_created_on = '".$curr_datetime.
             "' WHERE com_comment_id = '".$id."'";
       }
       //print "CommentDataAccess update query ".$query_update."<br/>";
-      $dbHelper = new DBHelper();
+
       $result = $dbHelper->executeQuery($query_update);
       return $result;
 
