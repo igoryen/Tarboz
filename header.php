@@ -434,6 +434,10 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         $('button.reportEntryCancel').click( function(event) {
             $('.reportEntry').next().css({'display': 'none'});            
         });
+          
+        if($('#user_name').text().trim() !="" && $('#regSuccessMsg').text().indexOf("Thank you for activating your account")>=0) {
+            window.location.href = "index.php";
+        }
                
       });
       

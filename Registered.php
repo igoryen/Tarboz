@@ -3,14 +3,16 @@ require_once 'config.php';
 require_once BUSINESS_DIR_USER . 'UserManager.php';
 require_once BUSINESS_DIR_LANG_PROF . 'LanguageProfManager.php';
 
-//require("header.php");
+require("header.php");
+
 /*
 	The purpose of this file is to give the user a message of their account being registered
 	and also let the user activate their account through this page aswell
 */
 
+
 $activate = isset($_GET['activate'])?$_GET['activate']:"";
-//echo "Activating: ".$activate;
+
 if($activate==""){
 ?>
 <div style="height:40%;width:60%;background-color:rgba(255,255,255,0.6);;margin:0 auto;">
@@ -26,7 +28,7 @@ else{
 	$userid = $userdata->getUserByHashData($activate);
 
 	if($userdata->UpdateUserType($userid,$usertype)){
-		Echo "<p style='color:white;font-size:12px;'>Thank you for activating your account. Please use your userid and password to login</p>";
+		Echo "<p id='regSuccessMsg' style='color:white;font-size:12px;'>Thank you for activating your account. Please use your userid and password to login</p>";
 	}
 	
 	
