@@ -94,7 +94,7 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                             ?>
                                     </ol>
                                     <?php if ($count >=10) { ?>
-                                    <div style="text-align:right" ><a href="searchresult.php">see more...</a></div>
+                                    <div style="text-align:right" ><a href="browseresult.php?toptranslation=y">see more...</a></div>
                                     <?php } //end if $count >=10 ?>
                                      <br />
                                  </div>
