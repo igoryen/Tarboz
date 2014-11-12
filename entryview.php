@@ -311,13 +311,11 @@
             echo '">';
             echo $lang->getLangName();
             echo '</option>';
-          } ?>
-		
-        </select>
+          }
+                                         }?></select>
         <span id="treqCreateResponse"></span>
       </div>
     </div>
-	<?php } //end if?>
     <!--Display translation request end-->
     <!--- comments section start --->
   

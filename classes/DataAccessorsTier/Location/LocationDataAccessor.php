@@ -485,6 +485,17 @@ public function getProvincesByCountryId($countryid) {
     return $loc;
   }
 
+  //for profile page
+  public function getLocationBylocationId($locationId) {
+
+    $query = "select * from tbl_location where loc_location_id = ".$locationId;
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $loc = $this->getAddressList($result);
+
+    return $loc;
+  }
   //***********************************************************************************************
   //PRIVATE FUNCTIONS
   //***********************************************************************************************

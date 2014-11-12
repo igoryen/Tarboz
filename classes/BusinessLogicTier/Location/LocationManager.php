@@ -189,6 +189,12 @@ public function getCountriesNameById($countryid) {
     $result = $LocationDataAccessor->getAddressesByCityId($cityid);
     return $result;
   } 
+  //for profile page   
+  public function getLocationBylocationId($locationId) {
+    $LocationDataAccessor = new LocationDataAccessor();
+    $result = $LocationDataAccessor->getLocationBylocationId($locationId);
+    return $result;
+  } 
 
 }
 

@@ -208,11 +208,12 @@ class EntryDataAccessor {
    * @return array of class Entry objects
    */
   private function getListOfFathers($resultOfSelect) {
-    $Entries[] = new Entry();
+    $Entries[] = array();
     //
     $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-      $Entries[] = new Entry(); // 31
+
+      $Entries[$count] = new Entry(); // 31
       // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryText($list['ent_entry_text']);
@@ -492,6 +493,18 @@ class EntryDataAccessor {
       return $arrayOfEntryByLangDate;
       
   }
+
+  // get entry by user id
+  public function getEntryByUserId($UserId) {
+
+    $query = "SELECT * FROM tbl_entry WHERE ent_entry_creator_id = '".$UserId."'";
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $entryListById = $this->getListOfFathers($result);
+    return $entryListById;
+      
+  }
+
 public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_date) {
       $from_date = $in_from_date != "" ? $in_from_date : "2000-01-01";
       $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
@@ -581,4 +594,5 @@ public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_dat
         }
         return $like_num;      
   }
+
 }

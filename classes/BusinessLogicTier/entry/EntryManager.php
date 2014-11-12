@@ -89,7 +89,14 @@ class EntryManager {
     return $arrayOfEntryBriefGottenByLanguage;
   }
     
-    public function getDadEntryListByLangDate($in_lang, $in_from_date, $in_end_date){
+  // get entry by user ids  
+  public function getEntryByUserId($UserId) {
+    $eda = new EntryDataAccessor();
+    $entryGottenByUserId = $eda->getEntryByUserId($UserId);
+    return $entryGottenByUserId;
+  }
+
+  public function getDadEntryListByLangDate($in_lang, $in_from_date, $in_end_date){
     $eda = new EntryDataAccessor();
     $arrayOfEntry = $eda->getDadEntryListByLangDate($in_lang, $in_from_date, $in_end_date);
     return $arrayOfEntry;
