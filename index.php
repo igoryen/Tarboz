@@ -11,7 +11,7 @@ $translator = new MicrosoftTranslator(ACCOUNT_KEY);
 $selectbox = array('id'=> 'txtLang','name'=>'txtLang');
 $translator->getLanguagesSelectBox($selectbox);
 //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-require("search.php");
+//require("search.php");
 
 require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
 require_once BUSINESS_DIR_TRANSLREQ . "TranslationRequestManager.php";
@@ -29,10 +29,10 @@ $aryOfEntry = $em->getListOfEntryBriefByLanguage($lang);
 $aryOfTreq = $trm->getListOfTreqByLang($lang);
     
  ?>
-
+<div class="wrapper">
 <div id="index_table_container" align="center">
+  <!-- left column -->
   <div>
-    <!-- left column -->
     <div id="LeftCol">
       <object id="obj" 
               type="text/html" 
@@ -45,56 +45,66 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                         <div class="heading">
                             <div class="col_33">
                                <h3 class="t_title">Top 10 Translations</h3>
-                                    <ol type="circle">
-<?php
-    $query =   "SELECT *, count(rating.rat_like_user_id) AS num_like
-                FROM 
-                (SELECT orig.ent_entry_id AS orig_entry_id, orig.ent_entry_text AS orig_phrase, 
-                        trans.ent_entry_id AS trans_entry_id, trans.ent_entry_text AS trans_phrase,
-                        trans.ent_entry_creation_date AS trans_date
-                 FROM 
-                        (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
-                                ent_entry_translation_of, ent_entry_creation_date
-                         FROM tbl_entry where ent_entry_authen_status_id = 1) AS orig
-                 INNER JOIN 
-                        (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
-                                ent_entry_translation_of, ent_entry_creation_date
-                         FROM tbl_entry where ent_entry_authen_status_id = 2) AS trans
-                 ON orig.ent_entry_id = trans.ent_entry_translation_of
-                ) AS sub_entry
-                LEFT JOIN tbl_rating AS rating
-                ON rating.rat_entity_id = CONCAT('ent', sub_entry.trans_entry_id) 
-                   AND rating.rat_like_user_id IS NOT NULL AND rating.rat_like_user_id >0
-                GROUP BY sub_entry.trans_entry_id
-                ORDER BY num_like DESC, sub_entry.trans_date DESC, sub_entry.trans_entry_id ASC";
-    $dbHelper = new DBHelper();
-    $result = $dbHelper->executeSelect($query);
-    $count = 0;
-    while ($list = mysqli_fetch_assoc($result)) {
-        $trans_phrase = $list['trans_phrase'];
-        $orig_phrase = $list['orig_phrase'];
-        $num_like = $list['num_like'];       
-        if ($count< 5) {    
-?>
-                                        <li style = "font-size:11px;"><?php echo $trans_phrase;?>
-                                            <p style="padding-left:5px;"><b>Translation of: </b><?php echo $orig_phrase;?></p>
-                                            <p style="padding-left:5px;"><b>Rating: </b><?php echo $num_like;?></p></li>
-<?php      if($count<4) { ?>
-                                        <hr style="margin-left:-30px; margin-right:10px;"/>
-<?php   
-            }// end if $count<4
-        } //end if  $count <5  
-        $count ++ ;
-    }//end while loop; 
-?>
+                                 <div class="mid_scoll">
+                                     <br />
+                                    <ol type="circle" style="padding: 0px 5px; margin-top:0px">
+                                        <!-Display top 10 translations-->
+                                        <?php
+                                            $query =   "SELECT *, count(rating.rat_like_user_id) AS num_like
+                                                        FROM 
+                                                        (SELECT orig.ent_entry_id AS orig_entry_id, orig.ent_entry_text AS orig_phrase, 
+                                                                trans.ent_entry_id AS trans_entry_id, trans.ent_entry_text AS trans_phrase,
+                                                                trans.ent_entry_creation_date AS trans_date
+                                                         FROM 
+                                                                (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
+                                                                        ent_entry_translation_of, ent_entry_creation_date
+                                                                 FROM tbl_entry where ent_entry_authen_status_id = 1) AS orig
+                                                         INNER JOIN 
+                                                                (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
+                                                                        ent_entry_translation_of, ent_entry_creation_date
+                                                                 FROM tbl_entry where ent_entry_authen_status_id = 2) AS trans
+                                                         ON orig.ent_entry_id = trans.ent_entry_translation_of
+                                                        ) AS sub_entry
+                                                        LEFT JOIN tbl_rating AS rating
+                                                        ON rating.rat_entity_id = CONCAT('ent', sub_entry.trans_entry_id) 
+                                                           AND rating.rat_like_user_id IS NOT NULL AND rating.rat_like_user_id >0
+                                                        GROUP BY sub_entry.trans_entry_id
+                                                        ORDER BY num_like DESC, sub_entry.trans_date DESC, sub_entry.trans_entry_id ASC";
+                                            $dbHelper = new DBHelper();
+                                            $result = $dbHelper->executeSelect($query);
+                                            $count = 0;
+                                            while ($list = mysqli_fetch_assoc($result)) {
+                                                $trans_phrase = $list['trans_phrase'];
+                                                $orig_phrase = $list['orig_phrase'];
+                                                $trans_entry_id = $list['trans_entry_id'];
+                                                $num_like = $list['num_like'];       
+                                                if ($count< 10) {    
+                                        ?>
+                                        <li>
+                                            <a href="entryview.php?id=<?php echo $trans_entry_id;?>"><?php echo substr($trans_phrase, 0, 88);?>
+                                            </a>
+                                            <p style="text-align:right"><span><?php echo $num_like;?></span><span> Likes</span></p></li>
+                                            <?php      if($count<9) { ?>
+                                            <hr />
+                                            <?php   
+                                                        }// end if $count<4
+                                                    } //end if  $count <5  
+                                                    $count ++ ;
+                                                }//end while loop; 
+                                            ?>
                                     </ol>
-<?php if ($count >=5) { ?>
-                                    <div><a href="searchresult.php">see more...</a>    </div>
-<?php } //end if $count >=10 ?>
+                                    <?php if ($count >=10) { ?>
+                                    <div style="text-align:right" ><a href="browseresult.php?toptranslation=y">see more...</a></div>
+                                    <?php } //end if $count >=10 ?>
+                                     <br />
+                                 </div>
                              </div>
+                            <!--end of display top 10 translation-->
                             <div class="col_33" >
                                        <h3 class="t_title">Help translate these into <?php echo $aryOfTreq[0]->getTreqLang();?></h3>
-                                        <ol type="circle">
+                                <div class="mid_scoll">
+                                        <br />
+                                    <ol type="circle" style="padding: 0px 5px; margin-top:0px">
                                 <?php
                                               // TODO: add an if() in case the current request does not have the Accept-Language: header 
                                                   for($j = 0; $j < count($aryOfTreq); $j++) {
@@ -104,46 +114,53 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                                     echo '</a>';
                                                     echo '</li>';  
                                 }?>
-                                        </ol>
+                                    </ol>
+                                </div>
                              </div>
                             <div class="col_33" >
                                 <h3 class="t_title">Original Entries in <?php echo $aryOfEntry[0]->getEntryLanguage();?></h3>
-                                <ol type="circle">
-                                 <?php
-                                      // TODO: add an if() in case the current request does not have the Accept-Language: header 
-                                          for($i = 0; $i < 3; $i++) {
-                                            echo '<li>';
-                                            echo '<a href="entryview.php?id='.$aryOfEntry[$i]->getEntryId() . '">'; 
-                                            echo substr($aryOfEntry[$i]->getEntryText(), 0, 25) . '...';
-                                            echo '</a>';
-                                            echo '</li>';  
-                                          }
-                                ?>
-                                </ol>
-                             </div>
-                        </div>
-                    </div>
-                </div>    
-                <div>
-                    <h3>Top 3 Contributors</h3>
-							<table id="innertbl">
-								<tr>
-									<td>
-										<img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User001</a>
-									</td>
-									<td>
-										<img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User002</a>
-									</td>
-									<td>
-										<img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User003</a>
-									</td>
-								</tr>
-				     </table><!--innertbl-->
+                                <div class="mid_scoll">
+                                 <br />
+                                    <ol type="circle" style="padding: 0px 5px; margin-top:0px">
+                         <?php
+                              // TODO: add an if() in case the current request does not have the Accept-Language: header 
+                                  for($i = 0; $i < 3; $i++) {
+                                    echo '<li>';
+                                    echo '<a href="entryview.php?id='.$aryOfEntry[$i]->getEntryId() . '">'; 
+                                    echo substr($aryOfEntry[$i]->getEntryText(), 0, 25) . '...';
+                                    echo '</a>';
+                                    echo '</li>';  
+                                  }
+                        ?>
+                        </ol>
+                     </div>
                 </div>
-			</div><!--MidCol-->
+            </div>
+        </div>    
+        <div>
+            <h3>Top 4 Contributors</h3>
+			<table id="innertbl">
+                <tr>
+                    <td>
+                        <img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User001</a>
+                    </td>
+                    <td>
+                        <img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User002</a>
+                    </td>
+                    <td>
+                        <img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User003</a>
+                    </td>
+                    <td>
+                        <img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User004</a>
+                    </td>
+                </tr>
+            </table><!--innertbl-->
+          </div>
+        </div>
+    </div><!--MidCol-->
 
       <!-- right column -->
-      <div id="RightCol">
+    <div id="RightCol">
         <div id="RightCol_Scroll">
           Testing1<br><br>
           Testing2<br><br>
@@ -160,11 +177,11 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
           Testing13<br><br>
           Testing14<br><br>
         </div>
-      </div><!--RightCol-->
+    </div><!--RightCol-->
 
     </div><!--index_table-->
 
   </div><!--"index_table_container"-->
-
+</div> <!--end wrapper div-->
 <?php require("footer.php"); ?>
 

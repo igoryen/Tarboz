@@ -50,6 +50,7 @@ function is_full2($family){
   foreach($family as $entry){
     return (!null == $entry->getEntryId());
   }
+  //return !null == $family[1]->getEntryId();
   // if entry is good (i.e. not null), then return TRUE
   
 }
@@ -74,17 +75,17 @@ if(isset($_GET['l'])){
 }
 
 if($_GET['l']===''){ $_GET['l'] = null;}
-echo "<br>sr::GET[l] was nulled, it is: <b>" . ($_GET['l']) . "</b>";
+//echo "<br>sr::GET[l] was nulled, it is: <b>" . ($_GET['l']) . "</b>";
 
-echo "<br>sr::verbatim: >".$verbatim . "<";
+//echo "<br>sr::verbatim: >".$verbatim . "<";
 $v = $verbatim;
-echo "<br>sr::language: >".$_GET['l']."<";
+//echo "<br>sr::language: >".$_GET['l']."<";
 $l = $_GET['l'];
-echo "<br>sr::from: >".$_GET['f']."<";
+//echo "<br>sr::from: >".$_GET['f']."<";
 $f = $_GET['f'];
-echo "<br>sr::to: >".$_GET['t']."<";
+//echo "<br>sr::to: >".$_GET['t']."<";
 $t = $_GET['t'];
-echo "<br>sr::auth: >".$_GET['a']."<";
+//echo "<br>sr::auth: >".$_GET['a']."<";
 $a = $_GET['a'];
 //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
 
@@ -147,6 +148,7 @@ foreach($entries as $entry){
 foreach($entries as $entry){
 //  IF ENTRY IS A DAD
   if($entry->getEntryAuthenStatusId()==1){
+    //echo "<br>we have a dad!   ";
 //    PUT THE DAD ASIDE
     $dad = $entry;
 //    CREATE A FAMILY ARRAY
@@ -156,6 +158,7 @@ foreach($entries as $entry){
     foreach($non_orphans as $i => $non_orphan){
 //      IF NON-ORPHAN MATCHES THE DAD
       if($non_orphan->getEntryTranslOf() == $dad->getEntryId()){
+        //echo "<br>we have a kid!  ";
 //        ADD THE NON-ORPHAN TO THE FAMILY ARRAY
         array_push($family, $non_orphan);
         unset($non_orphans[$i]);
@@ -224,76 +227,131 @@ usort($orphans, 'cmpLang');
   
 //[DISPLAY THE ARRAYS]
 //IF NONE OF THE ARRAYS IS FULL
-if((!is_object(reset($families))) 
+if((!is_array(reset($families))) 
         && (!is_object(reset($dads))) 
         && (!is_object(reset($non_orphans))) 
         && (!is_object(reset($orphans)))){
   echo "<br><i>no results</i><rb>";
 }
+//var_dump($families);
 //DISPLAY THE FAMILIES ARRAY
-if(is_object(reset($families))){
-  echo "<mark>";
-  echo "ORIGINALS AND THEIR TRANSLATIONS ('FAMILIES') (originals with 1 or more translations)";
-  echo "</mark>";
-  echo "<br>";
+if(is_array(reset($families))){
+  //echo "<mark>";
+  $ary['text'] = "Originals with their translations";
+  $ary['tipid'] = 'families';
+  section_heading($ary);
+  //echo "</mark>";
+  //echo "<br>";
   $ff = 1;
+  open_families_house();
   foreach($families as $family){
-    echo "family " . $ff;
-    echo "<br>";
+    //echo "family " . $ff;
+    open_family_apartment();
     $f = 1;
+    //$dad_id = "";
     foreach($family as $entry){
-      echo $f .". ". substr($entry->getEntryText(),0,60);
-      echo "<br>";
+      if($entry->getEntryAuthenStatusId() == 1){
+        //$dad_id = $entry->getEntryId();
+        $ary['id'] = $entry->getEntryId();
+        $ary['language'] = $entry->getEntryLanguage();
+        $ary['text'] = $entry->getEntryText();
+        $ary['user'] = $entry->getEntryUserId();
+        make_family_dad_room($ary);
+        //open_kids_house2();
+      }
+      else{
+        $ary['id'] = $entry->getEntryId();
+        $ary['language'] = $entry->getEntryLanguage();
+        $ary['text'] = $entry->getEntryText();
+        $ary['dad'] = $entry->getEntryTranslOf();
+        $ary['user'] = $entry->getEntryUserId();
+        //dad_house_dad_1($ary);
+        make_family_kid_room($ary);
+      }
+      //echo $f .". ". substr($entry->getEntryText(),0,60);
+      //echo "<br>";
       $f++;
     }
-    echo "<br>";
-    echo "<hr>";
+    close_family_apartment();
+    //close_kids_house();
     $ff++;
   }
-  echo "<hr>";
+  close_families_house();
 }
 
 //DISPLAY THE DADS ARRAY
 if(is_object(reset($dads))){
-  echo "<mark>";
-  echo "ORIGINALS ('DADS') (originals whose translations don't exist in the db or were not retrieved)";
-  echo "</mark>";
-  echo "<br>";
+  
+  $ary['text'] = "Originals";
+  $ary['tipid'] = 'dads';
+  section_heading($ary);
+//  echo "<mark>";
+//  echo "ORIGINALS ('DADS') (originals whose translations don't exist in the db or were not retrieved)";
+//  echo "</mark>";
+//  echo "<br>";
   $d = 1;
   foreach($dads as $dad){
-    echo $d .". ". substr($dad->getEntryText(),0,60);
-    echo "<br>";
+    $ary['id'] = $dad->getEntryId();
+    $ary['language'] = $dad->getEntryLanguage();
+    //$ary['text'] = substr($dad->getEntryText(), 0, 55);
+    $ary['text'] = $dad->getEntryText();
+    $ary['user'] = $dad->getEntryUserId();
+    dad_house_dad_1($ary);
+    //echo $d .". ". substr($dad->getEntryText(),0,60);
+    //echo "<br>";
     $d++;
   }
-  echo "<hr>";
   
 }
 //DISPLAY THE KIDS ARRAY
 if(is_object(reset($non_orphans))){
-  echo "<mark>";
-  echo "TRANSlATIONS WITHOUT ORIGINALS ('KIDS') (translations whose originals exist in the DB but were not returned in this search)";
-  echo "</mark>";
-  echo "<br>";
+  $ary['text'] = "Translations without originals";
+  $ary['tipid'] = 'kids';
+  section_heading($ary);
+//  echo "<mark>";
+//  echo "TRANSlATIONS WITHOUT ORIGINALS ('KIDS') ()";
+//  echo "</mark>";
+//  echo "<br>";
+  open_kids_house2();
   $k = 1;
   foreach($non_orphans as $non_orphan){
-    echo $k .". ". substr($non_orphan->getEntryText(),0,60);
-    echo "<br>";
+    $ary['id'] = $non_orphan->getEntryId();
+    $ary['language'] = $non_orphan->getEntryLanguage();
+    $ary['text'] = $non_orphan->getEntryText();
+    $ary['user'] = $non_orphan->getEntryUserId();
+    //dad_house_dad_1($ary);
+    make_kid_room($ary);
+    //echo $k .". ". substr($non_orphan->getEntryText(),0,60);
+    //echo "<br>";
     $k++;
   }
-  echo "<hr>";
+  //echo "<hr>";
+  close_kids_house();
 }
 if(is_object(reset($orphans))){
-  echo "<mark>";
-  //DISPLAY THE ORPHANS ARRAY
-  echo "TRANSLATIONS WHOSE ORIGINALS ARE NOT IN OUR DB ('ORPHANS') (translations whose originals do not exist in the DB)";
-  echo "</mark>";
-  echo "<br>";
+  $ary['text'] = "Translations whose originals are not in our database";
+  $ary['tipid'] = 'orphans';
+  section_heading($ary);
+//  echo "<mark>";
+//  //DISPLAY THE ORPHANS ARRAY
+//  echo "TRANSLATIONS WHOSE ORIGINALS ARE NOT IN OUR DB ('ORPHANS') (translations whose originals do not exist in the DB)";
+//  echo "</mark>";
+//  echo "<br>";
+  open_kids_house2();
   $o = 1;
   foreach($orphans as $orphan){
-    echo $o .". ". substr($orphan->getEntryText(),0,60);
-    echo "<br>";
+    //echo $o .". ". substr($orphan->getEntryText(),0,60);
+    //echo "<br>";
+    $ary['id'] = $orphan->getEntryId();
+    $ary['language'] = $orphan->getEntryLanguage();
+    $ary['text'] = $orphan->getEntryText();
+    $ary['dad'] = $entry->getEntryTranslOf();
+    $ary['user'] = $orphan->getEntryUserId();
+    //dad_house_dad_1($ary);
+    make_kid_room($ary);
     $o++;
   }
+  close_kids_house();
 }
 ?>
     </div><!-- village -->

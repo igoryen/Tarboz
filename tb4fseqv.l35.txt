@@ -1,0 +1,57 @@
+﻿Merge branch 'master' of https://github.com/hzahoori/Tarboz into issue#201
+
+Conflicts:
+	classes/BusinessLogicTier/entry/EntryManager.php
+	classes/DataAccessorsTier/entry/EntryDataAccessor.php
+	sql scripts/zenit_prj666_143a02_datascript_alter.sql
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch issue#201
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   Register_action.php
+#	modified:   Registered.php
+#	modified:   agreement.html
+#	modified:   browseresult.php
+#	modified:   classes/BusinessLogicTier/Location/Location.php
+#	modified:   classes/BusinessLogicTier/Location/LocationManager.php
+#	modified:   classes/BusinessLogicTier/User/UserManager.php
+#	modified:   classes/BusinessLogicTier/entry/EntryManager.php
+#	modified:   classes/BusinessLogicTier/language/Language.php
+#	modified:   classes/BusinessLogicTier/language/LanguageManager.php
+#	modified:   classes/BusinessLogicTier/user_login/UserLoginManager.php
+#	modified:   classes/DataAccessorsTier/DBHelper.php
+#	modified:   classes/DataAccessorsTier/LanguageProf/LanguageProfDataAccessor.php
+#	modified:   classes/DataAccessorsTier/Location/LocationDataAccessor.php
+#	modified:   classes/DataAccessorsTier/User/UserDataAccessor.php
+#	modified:   classes/DataAccessorsTier/comment/CommentDataAccessor.php
+#	modified:   classes/DataAccessorsTier/datainfo.php
+#	modified:   classes/DataAccessorsTier/entry/EntryDataAccessor.php
+#	modified:   classes/DataAccessorsTier/language/LanguageDataAccessor.php
+#	modified:   classes/DataAccessorsTier/report/ReportDataAccessor.php
+#	modified:   classes/DataAccessorsTier/user_login/UserLoginDataAccessor.php
+#	modified:   config.php
+#	modified:   header.php
+#	modified:   plug-in/captcha.php
+#	modified:   plug-in/email.php
+#	modified:   plug-in/jqueryui/jquery-ui.css
+#	modified:   plug-in/jqueryui/jquery-ui.structure.css
+#	modified:   plug-in/jqueryui/jquery-ui.structure.min.css
+#	modified:   plug-in/translate/js/json-jquery.js
+#	modified:   registration.php
+#	modified:   search.php
+#	modified:   searchresult.php
+#	modified:   sha1.php
+#	modified:   sql scripts/zenit_prj666_143a02_datascript_alter.sql
+#	modified:   test.php
+#	new file:   user_test/captcha_check.php
+#
+

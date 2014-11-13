@@ -1,6 +1,6 @@
 body{
-  /*background: url("../../images/background.jpg") no-repeat center center fixed;*/ 
-  background-color: lightblue;
+/*  background: url("../../images/background.jpg") no-repeat center center fixed; */
+  background: #D9E0E3;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -13,6 +13,55 @@ body{
   margin: 0px;
   padding: 0px;
 }
+
+/*START of Question Mark Tooltip*/
+
+span.question {
+  cursor: pointer;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #89A4CC;
+  line-height: 16px;
+  color: White;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+}
+span.question:hover { background-color: #3D6199; }
+div.tooltip {
+  background-color: #3D6199;
+  color: White;
+  position: absolute;
+  left: 25px;
+  top: -25px;
+  z-index: 1000000;
+  width: 250px;
+  border-radius: 5px;
+}
+div.tooltip:before {
+  border-color: transparent #3D6199 transparent transparent;
+  border-right: 6px solid #3D6199;
+  border-style: solid;
+  border-width: 6px 6px 6px 0px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  line-height: 0;
+  position: absolute;
+  top: 40%;
+  left: -6px;
+}
+div.tooltip p {
+  margin: 10px;
+  color: White;
+}
+
+/*END of Question Mark Tooltip*/
+
 .search2{
   /*border: solid 1px gray;*/
   /*border-color: gray;*/
@@ -39,6 +88,7 @@ body{
   color: #000000;
   font-size: 15px;
   text-align: center;
+  margin-top:30px;
 
 }
 
@@ -77,8 +127,9 @@ div.footer > div > a {
 #navigation{
   display: table-cell;
   margin: 0 auto;
-  vertical-align: middle;
-  width: 63%;
+  text-align: left;
+  width: 980px;
+  font-weight: bold;
 }
 
 div > nav#navigation > a {
@@ -96,9 +147,10 @@ div > nav#navigation > a:hover {
 #search {
     background: rgba(255,255,255,0.5);
     display: block;
-    padding: 40px 0px;
+    padding: 10px 0px 3px 0px;
     text-align: center;
-    width: 100%; 
+    width: 980px; 
+	margin-bottom:10px;
 }
 
 #search input[type=text] {
@@ -106,10 +158,11 @@ div > nav#navigation > a:hover {
     border: 1px solid white;
     background-size: contain;
     color: #000000;
-    font-size: 25pt;
-    height: 48px;
-    width: 931px;
+    font-size: 20pt;
+    height: 36px;
+    width: 888px;
     padding: 0px 0px 0px 60px;
+	margin-bottom: 8px;
 }
 
 #searchinput img {
@@ -292,17 +345,39 @@ font-size: 15px;
 /*--- finish login.php -------*/
 
 /*--- for search_result.php ---*/
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+.section_heading{
+  font-size: large;
+  color: blue;
+}
+
 #land{
   border-spacing: 5px;
-  margin: 5px auto;
+  margin-left: 85px;
   padding: 5px;
-  width: 98%;
+  width: 85%;
 }
 
 #village{
   display: block;
   margin: 5px auto;
-  width: 95%;
+  width: 85%;
 }
 .family{
   background-color: white;
@@ -317,9 +392,10 @@ font-size: 15px;
 #dad_house{
   background-color: white;
   border: 1px solid #c1c1c1;
-  display: block;
+  display: table;
   margin: 5px auto;
-  width: 90%;
+  width: 100%;
+  text-align:left;
 
 }
 
@@ -327,7 +403,7 @@ font-size: 15px;
   background-color: lavender;
   border: 1px solid gainsboro;
   color: silver;
-  display: block;
+  display: table-row;
   float: left;
   font-weight: bold;
   margin: auto;
@@ -335,13 +411,13 @@ font-size: 15px;
   padding-left: 10px;
   vertical-align: middle;
   width: 98.5%;
-
+  overflow: hidden;
 }
 .dad_door{
   background-color: #3399FF;
   border: 1px solid gainsboro;
   color: silver;
-  display: block;
+  display: table-row;
   float: left;
   font-weight: bold;
   margin: auto;
@@ -349,11 +425,12 @@ font-size: 15px;
   padding-left: 10px;
   vertical-align: middle;
   width: 98.5%;
+  overflow: hidden; 
 
 }
 
 #dad_room{
-  display: block;
+  display: table-row;
   margin: auto;
   width: 95%;
 
@@ -362,49 +439,64 @@ font-size: 15px;
 #dad_text{
   background-color: white;
   color: black;
-  display: table-cell;
+  display: inline-block;
   font-family: sans-serif "Calibri";
   font-size: large;
+  font-weight: bold;
   vertical-align: middle;
-  width: 500px;
+  min-width: 500px;
+  max-width: 400px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
 }
 
 #dad_profile_link{
-  display: table-cell;
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle;
-  width: 5px;
+  width: auto;
 }
 
 #kids_num{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle;
-  width: 5px;
+  width: auto;
+  cursor: alias;
 }
 
 #add_kid{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
-  width: 5px;
+  width: auto;
 }
 
 .kids_house{
   background-color: white;
   border: 1px solid #c1c1c1;
-  display: block;
+  display: table;
   margin: 5px auto;
-  width: 90%;
+  width: 100%;
+
+}
+
+.families_house{
+  background-color: lavender;
+  border: 1px solid #c1c1c1;
+  display: table;
+  margin: 5px auto;
+  width: 100%;
 
 }
 
 .kid_room{
-  display: block;
+  display: table-row;
   margin: auto;
   width: 95%;
 }
@@ -412,50 +504,56 @@ font-size: 15px;
 .kid_text{
   background-color: white;
   color: black;
-  display: table-cell;
+  display: inline-block;
   font-family: sans-serif "Calibri";
   font-size: large;
   vertical-align: middle;
-  width: 500px;
+  min-width: 500px;
+  max-width: 400px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .kid_profile_link{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle;
-  width: 5px;
+  width: auto;
 }
 
 .kid_dad_link{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
+  width: auto;
 }
 
 .kid_votes{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
   width: 60px;
 }
 
 .kid_added_by{
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
   width: 100px;
 }
 
 .is_mom{
   color: gray;
-  display: table-cell; /* 10 */
-  padding-left: 5px;
-  padding-right: 5px;
+  display: inline-block; /* 10 */
+  margin-left: 5px;
+  margin-right: 5px;
   vertical-align: middle; /*50*/
+  width: auto;
 }
 
 .no_dad_no_kids{
@@ -586,7 +684,7 @@ font-size: 15px;
 }
 
 #user_name{
-    font-size: large;
+    font-size: middle;
     font-weight: bold;  
 }
 
@@ -1001,10 +1099,10 @@ font-size: 15px;
 
 .search_button {
     background: #12A1FF;
-    padding: 10px 40px;
-    font-size: 20px;
+    padding: 5px 60px 5px 60px;
+    font-size: 16px;
     color: #ffffff;
-    text-decoration:none; 
+    text-decoration:none;	
 }
 
 .body_width {
@@ -1017,7 +1115,7 @@ font-size: 15px;
 
 #RightCol_Scroll {
     overflow: auto;
-    max-height: 600px;
+    max-height: 669px;
 }
 
 /****************for middle of front page*************/
@@ -1041,7 +1139,7 @@ position: relative;
 
 .t_title {
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     font-size: 15px;
     text-align: center;
     line-height: 24px;
@@ -1069,6 +1167,27 @@ html {
     height: 100%;
 }
 
+.mid_scoll {
+    overflow: auto;
+    max-height: 400px;
+}
 
+.entryList, .entry_header {
+    width: 700px;
+    margin: 0;
+    border: 1px solid #D9E0E3;
+    padding: 9px 5px 10px;
+    font-size: 14px;
+    display: block;
+    text-align: left;
+}
 
+.entryList {  
+    border-radius: 0 0 3px 3px;   
+}
 
+.entry_header {
+    background-color: #D9E0E3;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 0;
+}

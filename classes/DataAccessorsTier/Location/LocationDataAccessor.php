@@ -1,27 +1,5 @@
 <?php 
-//getcountry by name
-//get Province By name
-//get City By Name;
 
-//get country by province
-//select province, and get the country in return
-
-//get province by city
-//get city and return the province
-
-//get Cities by Country
-// get all the cities in specific country
-
-//get Provinces by Country
-//get all provinces for specific country
-
-//get Country by City
-//get country for specific city
-
-//get Country by Province
-//get country by specific province
-
-//Add City
 require_once DB_CONNECTION . 'DBHelper.php';
 
 require_once BUSINESS_DIR_LOCATION . 'Location.php';
@@ -34,6 +12,14 @@ class LocationDataAccessor {
     takes a User object and inserts it into the data
     ----------------------------------------------- */
 
+private function getLocationByIp($ip){
+     //A request goes to the geobytes.com and retrieves us the user information, based on his/her browser
+  return get_meta_tags('http://www.geobytes.com/IpLocator.htm?GetLocation&template=php3.txt&IpAddress='.$ip);
+    
+}
+
+//A function, that finds the user's present location and then inserts it in the database if doesn't exist
+//if exists, then return the city id to the user
 public function getuserLocation(){
   $ip="";
     //Retrieving user ip
@@ -54,39 +40,57 @@ public function getuserLocation(){
         $ip = $remote;
     }
 
+    //$tags = $this->getLocationByIp($ip);
+    $tags=get_meta_tags('http://www.geobytes.com/IpLocator.htm?GetLocation&template=php3.txt&IpAddress='.$ip);
+
     $location = new Location();
 
-    //A request goes to the geobytes.com and retrieves us the user information, based on his/her browser
-    $tags = get_meta_tags('http://www.geobytes.com/IpLocator.htm?GetLocation&template=php3.txt&IpAddress='.$ip());
+    $city_id="";
+    //getting the values from the tags
+    $location->setCountryName($tags['country']);
+    $location->setProvinceName($tags['region']);
+    $location->setCityName($tags['city']);
 
-    $countryname    =  $location->setCountryName($tags['country']);
-    $provincename   =  $location->setProvinceName($tags['region']);
-    $cityname       =  $location->setCityName($tags['city']);
+    //passing the values to the variables
+    $countryname    =  $location->getCountryName();
+    $provincename   =  $location->getProvinceName();
+    $cityname       =  $location->getCityName();
 
+    //Finding if the countries, and cities already exist
     $country_res    =   $this->getCountryByName($countryname);
     $province_res   =   $this->getProvinceByName($provincename);
     $city_res       =   $this->getCityByName($cityname);
 
+
+
     //If the information is not in the databse, then add it
     if($country_res->getCountryName()=="" && $province_res->getProvinceName()=="" && $city_res->getCityName()==""){
-
-        $this-addLocation($location);
-
-    }
+        $city_id = $this->addLocation($location);
+        echo "All Empty Result";
+      }
     else if($country_res->getCountryName()!="" && $province_res->getProvinceName()=="" && $city_res->getCityName()==""){ 
+      $provinceid = addProvince($provincename,$country_res->getCountryId());
+      addCity($cityname,$provinceid);
+      }
+    else if($country_res->getCountryName()!="" && $province_res->getProvinceName()!="" && $city_res->getCityName()==""){ 
 
+      $provinceid = addProvince($provincename,$country_res->getCountryId());
+
+      $city_id = addCity($cityname);
       
-
-
+    }
+    else{
+        $cityres = $this->getCityByName($cityname);
+        $city_id  =  $cityres->getCityId();
     }
 
-
-
-} 
+      //Return city Id at the end
+     return $city_id;
+  } 
 
 public function addLocation($location) {
 
-  	$countryname=$location->CountryName();
+  	$countryname=$location->getCountryName();
 
   	$provincename=$location->getProvinceName();
 
@@ -94,30 +98,32 @@ public function addLocation($location) {
 
   	$countrycode=$location->getCountryCode();
 
-    $query_insert = "INSERT INTO" .COUNTRY ."VALUES('', '".$countryname."','".$countrycode."')";
+    $query_insert = "INSERT INTO " .COUNTRY ." VALUES('', '".$countryname."','".$countrycode."')";
 
     $dbHelper = new DBHelper();
-    $result = $dbHelper->executeQuery($query_insert);
 
-    $country_id = mysql_insert_id();
+    $result_country = $dbHelper->executeInsertQuery($query_insert);
+    if($result_country) { echo "Data Inserted";}
+    $country_id = $result_country;
 
     //INSERTING DATA INTO THE PROVINCE TABLE
 
-    $query_insert = "INSERT INTO" .PROVINCE ."VALUES('', '".$provincename."','".$country_id."')";
+    $query_insert = "INSERT INTO " .PROVINCE ." VALUES('', '".$provincename."','".$country_id."')";
 
     $dbHelper = new DBHelper();
-    $result = $dbHelper->executeQuery($query_insert);
 
-    $province_id = mysql_insert_id();
+    $result_province = $dbHelper->executeInsertQuery($query_insert);
+
+    $province_id = $result_province;
 
     //INSERTING DATA INTO THE CITY TABLE
 
-    $query_insert = "INSERT INTO" .CITY ."VALUES('', '".$cityname."','".$province_id."')";
+    $query_insert = "INSERT INTO " .CITY ." VALUES('', '".$cityname."','".$province_id."')";
 
     $dbHelper = new DBHelper();
-    $result = $dbHelper->executeQuery($query_insert);
+    $result_city = $dbHelper->executeInsertQuery($query_insert);
 
-    $city_id = mysql_insert_id();
+    $city_id = $result_city;
 
     //returns the city id
     return $city_id;
@@ -127,7 +133,7 @@ public function addLocation($location) {
 public function getCountries() {
 
     //Selecting country by City Name
-    $query = "select * from tbl_country order by con_country_name ASC";
+    $query = "select * from " .COUNTRY ." order by con_country_name ASC";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -138,9 +144,7 @@ public function getCountries() {
 
 public function getCountriesNameById($countryid) {
 
-    //Selecting country by City Name
-    $query = "select * from tbl_country where con_country_id=".$countryid;
-
+    $query = "select * from " .COUNTRY ." where con_country_id= "."'".$countryid."'";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -153,12 +157,12 @@ public function getCountriesNameById($countryid) {
 public function getCountryByCityName($cityname) {
 
   	//Selecting country by City Name
-    $query = "select * from tbl_country c 
-    inner join tbl_province pro
+    $query = "select * from " .COUNTRY ." c 
+    inner join " .PROVINCE ." pro
     on c.con_country_id = pro.pro_country_id
     where pro.pro_province_id 
     in
-    (select cty_province_id from tbl_city where upper(cty_city_name)= " . " '".strtoupper($cityname)."' )";
+    (select cty_province_id from " .CITY ." where upper(cty_city_name)= " . " '".strtoupper($cityname)."' )";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -171,12 +175,12 @@ public function getCountryByCityName($cityname) {
 public function getCountryByCityId($cityid) {
 
     //Selecting country by City Name
-    $query = "select * from tbl_country c 
-    inner join tbl_province pro
+    $query = "select * from " .COUNTRY ." c 
+    inner join " .PROVINCE ." pro
     on c.con_country_id = pro.pro_country_id
     where pro.pro_province_id 
     in
-    (select cty_province_id from tbl_city where cty_city_id = " . " '".$cityid."' )";
+    (select cty_province_id from " .CITY ." where cty_city_id = " . " '".$cityid."' )";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -189,8 +193,8 @@ public function getCountryByCityId($cityid) {
 public function getCountryByProvinceName($provname) {
 
     //Selecting country by City Name
-    $query = "select * from tbl_country c
-    inner join tbl_province pro
+    $query = "select * from " .COUNTRY ." c
+    inner join " .PROVINCE ." pro
     on 
     c.con_country_id = pro.pro_country_id
     where upper(pro.pro_province_name) =  " . " '".strtoupper($provname)."'";
@@ -205,8 +209,8 @@ public function getCountryByProvinceName($provname) {
 public function getCountryByProvinceId($provid) {
 
     //Selecting country by City Name
-    $query = "select * from tbl_country where con_country_id in 
-            (select pro_country_id from tbl_province where pro_province_id = " . " '".$provid."')";
+    $query = "select * from " .COUNTRY ." where con_country_id in 
+            (select pro_country_id from " .PROVINCE ." where pro_province_id = " . " '".$provid."')";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -218,9 +222,9 @@ public function getCountryByProvinceId($provid) {
   public function getProvincesByCountryName($countryname) {
 
     //Selecting country by City Name
-    $query = "select * from tbl_province pro
+    $query = "select * from " .PROVINCE ." pro
     where pro.Pro_country_id=
-    (select con_country_id from tbl_country where upper(con_country_name) = " . " '".strtoupper($countryname)."' )";
+    (select con_country_id from " .COUNTRY ." where upper(con_country_name) = " . " '".strtoupper($countryname)."' )";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -232,7 +236,7 @@ public function getCountryByProvinceId($provid) {
   public function getProvinceById($provinceId) {
 
     //Selecting country by City Name
-    $query = "select * from tbl_province where pro_province_id  = " . " '".$provinceId."'";
+    $query = "select * from " .PROVINCE ." where pro_province_id  = " . " '".$provinceId."'";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -244,7 +248,7 @@ public function getCountryByProvinceId($provid) {
 public function getProvinceByName($provincename) {
 
     //Selecting country by City Name
-    $query = "select * from tbl_province where upper(pro_province_name)  = " . " '".strtoupper($provincename)."' ";
+    $query = "select * from " .PROVINCE ." where upper(pro_province_name)  = " . " '".strtoupper($provincename)."' ";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -256,7 +260,7 @@ public function getProvinceByName($provincename) {
 public function getProvinceByCityName($Cityname) {
 
     //Selecting country by City Name
-    $query = "select * from tbl_province where pro_province_id in (select cty_province_id from tbl_city where upper(cty_city_name)  = " . " '".strtoupper($Cityname)."' )";
+    $query = "select * from ".PROVINCE." where pro_province_id in (select cty_province_id from " .CITY ." where upper(cty_city_name)  = " . " '".strtoupper($Cityname)."' )";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -269,8 +273,7 @@ public function getProvincesByCountryId($countryid) {
 
 
     //Selecting country by City Name
-    $query = "select * from tbl_province
-            where pro_country_id  = ". " '".$countryid."' ";
+    $query = "select * from ".PROVINCE." where pro_country_id  = ". " '".$countryid."' ";
 
     $dbHelper = new DBHelper();
      
@@ -285,8 +288,8 @@ public function getProvincesByCountryId($countryid) {
   public function getCitiesByCountryId($countryid) {
 
     //Selecting Cities by countryid
-    $query = "select * from tbl_city where cty_province_id in 
-             (select pro_province_id  from tbl_province
+    $query = "select * from " .CITY ." where cty_province_id in 
+             (select pro_province_id  from ".PROVINCE." 
               where pro_country_id = " . " '".$countryid."')";
     $dbHelper = new DBHelper();
 
@@ -304,7 +307,7 @@ public function getProvincesByCountryId($countryid) {
   public function getCitiesByProvinceId($provinceid) {
 
     //Selecting Cities by ProvinceId
-    $query = "select * from tbl_city
+    $query = "select * from " .CITY ."
               where cty_province_id = " . " '".$provinceid."'";
 
     $dbHelper = new DBHelper();
@@ -320,7 +323,7 @@ public function getProvincesByCountryId($countryid) {
   public function getCityById($cityid) {
 
     //Selecting Cities by ProvinceId
-    $query = "select * from tbl_city where cty_city_id= " . " '".$cityid."'";
+    $query = "select * from " .CITY ." where cty_city_id= " . " '".$cityid."'";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -334,7 +337,7 @@ public function getProvincesByCountryId($countryid) {
   public function getCityByName($cityname) {
 
     //Selecting Cities by ProvinceId
-    $query = "select * from tbl_city where upper(cty_city_name)= " . " '".strtoupper($cityname)."' ";
+    $query = "select * from " .CITY ." where upper(cty_city_name)= " . " '".strtoupper($cityname)."' ";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -344,13 +347,16 @@ public function getProvincesByCountryId($countryid) {
   }
 
   public function getCountryByName($countryname) {
+    echo $countryname;
 
     //Selecting Cities by ProvinceId
-    $query = "select * from tbl_country where upper(con_country_name)= " . " '".strtoupper($countryname)."' ";
+    $query = "select * from " .COUNTRY ." where upper(con_country_name)= " . " '".strtoupper($countryname)."' ";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
     $loc = $this->getCountry($result);
+    echo 'CountryName: '.$loc->getCountryName().'<br>'.$query;
+    echo $countryname;
 
     return $loc;
   }
@@ -359,7 +365,7 @@ public function getProvincesByCountryId($countryid) {
   public function searchCity($cityname) {
 
     //Selecting Cities by ProvinceId
-    $query = "select * from tbl_city where upper(cty_city_name) like " . " '".strtoupper('%'.$cityname.'%')."' ";
+    $query = "select * from " .CITY ." where upper(cty_city_name) like " . " '".strtoupper('%'.$cityname.'%')."' ";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -372,7 +378,7 @@ public function getProvincesByCountryId($countryid) {
    public function searchProvince($provincename) {
 
     //Selecting Cities by ProvinceId
-    $query = "select * from tbl_province where upper(pro_province_name) like " . " '".strtoupper('%'.$provincename.'%')."' ";
+    $query = "select * from ".PROVINCE." where upper(pro_province_name) like " . " '".strtoupper('%'.$provincename.'%')."' ";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -385,7 +391,7 @@ public function getProvincesByCountryId($countryid) {
   public function searchCountry($countryname) {
 
     //Selecting Cities by ProvinceId
-    $query = "select * from tbl_country where upper(con_country_name) like " . " '".strtoupper('%'.$countryname.'%')."' ";
+    $query = "select * from " .COUNTRY ." where upper(con_country_name) like " . " '".strtoupper('%'.$countryname.'%')."' ";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -400,7 +406,7 @@ public function getProvincesByCountryId($countryid) {
   public function addCountry($countryname,$country_code) {
 
     //Selecting Cities by ProvinceId
-    $query = "insert into tbl_country values('' ,'".$countryname."','".$country_code."')";
+    $query = "insert into " .COUNTRY ." values('' ,'".$countryname."','".$country_code."')";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -413,26 +419,29 @@ public function getProvincesByCountryId($countryid) {
   public function addProvince($provincename,$countryid) {
 
     //Selecting Cities by ProvinceId
-    $query = "insert into tbl_country values('' ,'".$provincename."','".$countryid."')";
+    $query = "insert into " .COUNTRY ." values('' ,'".$provincename."','".$countryid."')";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
-    //$loc = $this->getUser($result);
-
-    return $result;
+    
+    $last_inserted_id = mysql_insert_id();
+    return $last_inserted_id;
   }
 
   //Add New Province
   public function addCity($cityname,$provinceid) {
 
     
-    $query = "insert into tbl_city values('' ,'".$cityname."','".$provinceid."')";
+    $query = "insert into " .CITY ." values('' ,'".$cityname."','".$provinceid."')";
 
     $dbHelper = new DBHelper();
-    $result = $dbHelper->executeSelect($query);
-    //$loc = $this->getUser($result);
 
-    return $result;
+    $result = $dbHelper->executeSelect($query);
+
+    $last_inserted_id = mysql_insert_id();
+
+    return $last_inserted_id;
+
   }
 
   //Add New Province
@@ -443,18 +452,20 @@ public function getProvincesByCountryId($countryid) {
     $postalcode =  $loc->getPostalCode();
 
     //inserting address to the database
-    $query = "insert into tbl_location values('' ,'".$address."','".$postalcode."','".$city."','')";
+    $query = "insert into ".LOCATION." values('' ,'".$address."','".$postalcode."','".$city."','')";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
+    $last_inserted_id = mysql_insert_id();
 
-    return $result;
+    //Returns the province id
+    return $last_inserted_id;
   }
 
   public function getAddressByPostalCode($postalcode) {
 
     
-    $query = "select * from tbl_location where upper(replace(loc_postalcode,' ','')) = " . " '".strtoupper(str_replace(' ', '',$postalcode))."'";
+    $query = "select * from ".LOCATION." where upper(replace(loc_postalcode,' ','')) = " . " '".strtoupper(str_replace(' ', '',$postalcode))."'";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -465,7 +476,7 @@ public function getProvincesByCountryId($countryid) {
 
   public function getAddressesByCityId($cityid) {
 
-    $query = "select * from tbl_location where loc_city_id = " . " '".$cityid."'";
+    $query = "select * from tbl_loc".LOCATION."ation where loc_city_id = " . " '".$cityid."'";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
@@ -474,6 +485,17 @@ public function getProvincesByCountryId($countryid) {
     return $loc;
   }
 
+  //for profile page
+  public function getLocationBylocationId($locationId) {
+
+    $query = "select * from ".LOCATION." where loc_location_id = ".$locationId;
+
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeSelect($query);
+    $loc = $this->getAddressList($result);
+
+    return $loc;
+  }
   //***********************************************************************************************
   //PRIVATE FUNCTIONS
   //***********************************************************************************************
@@ -551,16 +573,15 @@ $Country = new Location();
     //Counter that keeps count of the users
     //$Provinces[] = new Location();
     $count = 0;
-    $Provinces[] = new Location();
+
+    //$Provinces[] = ""new Location()"";
       
     while ($list = mysqli_fetch_assoc($selectResult)) {
-
+      $Provinces[] = new Location();
       $Provinces[$count]->setProvinceId($list['pro_province_id']);
       $Provinces[$count]->setProvinceName($list['pro_province_name']);
       $Provinces[$count]->setCountryId($list['pro_country_id']);
-
       
-     
       $count++;
 
     } // while

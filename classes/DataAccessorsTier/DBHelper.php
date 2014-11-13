@@ -44,7 +44,7 @@ class DBHelper {
    */
   public function executeSelect($sql) {
     //3*
-    echo "<br>dbh::executeSelect(sql) sql:<br>" . $sql;
+    //echo "<br>dbh::executeSelect(sql) sql:<br>" . $sql;
     $this->connectToDB();
     $result = mysqli_query($this->connection, $sql); // 1    
     $this->closeConnection();
@@ -83,8 +83,13 @@ class DBHelper {
 
   //A function that receives a string and then escapes the special characters and returns the result.
   public function EscapeString($mystring){
+    $this->connectToDB();
 
-     return mysqli_real_escape_string($con, $mystring);
+    $escapestring=mysqli_real_escape_string($this->connection, $mystring);  
+
+    $this->closeConnection();
+    
+     return $escapestring;
 
   }
 

@@ -8,22 +8,6 @@ ALTER TABLE `prj666`.`tbl_comment`
 ADD COLUMN `com_created_on` DATETIME NULL AFTER `com_is_visible`;
 
 
-
-ALTER TABLE `prj666`.`tbl_entry_english` 
-DROP FOREIGN KEY `tblEntryEnglish_tblComment_ent_entry_comment_id_FK`;
-ALTER TABLE `prj666`.`tbl_entry_english` 
-DROP INDEX `tblEntryEng_tblComment_commentid_FK_idx` ;
-
-ALTER TABLE `prj666`.`tbl_entry_mandarin` 
-DROP FOREIGN KEY `tblEntryMandarin_tblComment_commentId_FK`;
-ALTER TABLE `prj666`.`tbl_entry_mandarin` 
-DROP INDEX `tblEntryMandarin_tblComment_comment_id_FK_idx` ;
-
-ALTER TABLE `prj666`.`tbl_entry_russian` 
-DROP FOREIGN KEY `tblEntryRussian_tblComment_ent_entry_commentId_FK`;
-ALTER TABLE `prj666`.`tbl_entry_russian` 
-DROP INDEX `tblEntryRussian_tblComment_comment_id_FK_idx` ;
-
 UPDATE prj666.tbl_comment
 SET com_entry_id = 'eng1' ;
 
@@ -53,8 +37,7 @@ DROP INDEX `tblRating_tblUser_rat_rating_like_user_id_FK_idx` ;
 ALTER TABLE `prj666`.`tbl_report` 
 ADD COLUMN `rep_reported_by` INT(11) NULL AFTER `rep_entity_id`,
 ADD COLUMN `rep_reported_on` DATETIME NULL AFTER `rep_reported_by`;
-<<<<<<< HEAD
-=======
+
 
 #-------Insert more data on rating table on Nov 3
 INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
@@ -84,9 +67,60 @@ VALUES ('35', 'ent38', '2', '0', '2014-11-03 08:09:22');
 INSERT INTO `prj666`.`tbl_rating` (`rat_rating_id`, `rat_entity_id`, `rat_like_user_id`, `rat_dislike_user_id`, `rat_created_on`) 
 VALUES ('36', 'ent38', '3', '0', '2014-11-03 08:10:10');
 
+ALTER TABLE `prj666`.`tbl_comment` 
+DROP FOREIGN KEY `tblComment_tblRating_com_comment_rating_id_FK`;
+ALTER TABLE `prj666`.`tbl_comment` 
+DROP INDEX `tblComment_tblRating_com_comment_rating_id_FK_idx` ;
+
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-01' WHERE `ent_entry_id`='2';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-02' WHERE `ent_entry_id`='3';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-03' WHERE `ent_entry_id`='4';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-04' WHERE `ent_entry_id`='5';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-05' WHERE `ent_entry_id`='6';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-06' WHERE `ent_entry_id`='7';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-07' WHERE `ent_entry_id`='8';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-08' WHERE `ent_entry_id`='9';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-09' WHERE `ent_entry_id`='11';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-10' WHERE `ent_entry_id`='12';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-11' WHERE `ent_entry_id`='13';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-12' WHERE `ent_entry_id`='14';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-13' WHERE `ent_entry_id`='24';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-14' WHERE `ent_entry_id`='26';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-15' WHERE `ent_entry_id`='27';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-16' WHERE `ent_entry_id`='28';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-17' WHERE `ent_entry_id`='29';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-18' WHERE `ent_entry_id`='32';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-19' WHERE `ent_entry_id`='33';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-20' WHERE `ent_entry_id`='34';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-21' WHERE `ent_entry_id`='36';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-22' WHERE `ent_entry_id`='37';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-23' WHERE `ent_entry_id`='38';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-24' WHERE `ent_entry_id`='39';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-25' WHERE `ent_entry_id`='40';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-26' WHERE `ent_entry_id`='41';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-27' WHERE `ent_entry_id`='42';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-28' WHERE `ent_entry_id`='52';
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-29' WHERE `ent_entry_id`='53';
 
 
 
+INSERT INTO `prj666`.`tbl_media` (`med_media_id`, `med_name`, `med_desc`, `med_author`, `med_media_type_id`) VALUES ('3', 'Lunyu', 'text', 'Kongzi', '4');
 
+INSERT INTO `prj666`.`tbl_media_type` (`mtp_media_type_id`, `mtp_name`) VALUES ('4', 'text');
 
->>>>>>> 584f80e3a83ce39a0360d2878544c296c42c402e
+UPDATE `prj666`.`tbl_entry` SET `ent_entry_media_id`='3' WHERE `ent_entry_id`='5';
+
+UPDATE `prj666`.`tbl_city` SET `cty_province_id` = '1' WHERE `tbl_city`.`cty_city_id` = 1;
+
+INSERT INTO `tbl_city`(`cty_city_id`, `cty_city_name`, `cty_province_id`) VALUES (1,'Toronto',1);
+INSERT INTO `tbl_city`(`cty_city_id`, `cty_city_name`, `cty_province_id`) VALUES (2,'Maykop',2); INSERT INTO `tbl_city`(`cty_city_id`, `cty_city_name`, `cty_province_id`) VALUES (3,'Luoyang',3);
+
+UPDATE `prj666`.`tbl_user` SET `usr_location_id` = '1' WHERE `tbl_user`.`usr_user_id` = 1;
+
+ALTER TABLE `prj666`.`tbl_entry` 
+ADD COLUMN `ent_entry_deleted` INT NULL DEFAULT 0 AFTER `ent_entry_creation_date`;
+
+UPDATE `prj666`.`tbl_user_type` SET `utp_usertype_id`='5', `utp_type_name`='banned' WHERE `utp_usertype_id`='4';
+UPDATE `prj666`.`tbl_user_type` SET `utp_usertype_id`='4', `utp_type_name`='inactive' WHERE `utp_usertype_id`='3';
+INSERT INTO `prj666`.`tbl_user_type` (`utp_usertype_id`, `utp_type_name`) VALUES ('6', 'noconfirmed');
+

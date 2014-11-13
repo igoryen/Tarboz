@@ -16,7 +16,13 @@
       $users= $userDataAccessor->Login($userid,$password);
       return $users;  
     }
-    
+  
+    public function getUserByDOB($dob){
+      $userDataAccessor = new UserLoginDataAccessor();
+      $users= $userDataAccessor->getUserByDOB($dob);
+      return $users;  
+    }
+
   //Note: I should check for authorization aswell,..
   public function userLogin($user,$pwd){     
 

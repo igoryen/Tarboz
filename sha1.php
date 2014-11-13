@@ -1,6 +1,6 @@
 <?php
 
-echo sha1("prj");
+echo sha1("42know)you");
 
 echo '<br>'.str_replace(' ', '', 'Hello Dear Brother how are you');
 

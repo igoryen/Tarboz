@@ -8,15 +8,12 @@
   // $pathInPieces = explode('\\', dirname(__FILE__));
   // $root = "/" . $pathInPieces[3];
 
-
-
 require_once BUSINESS_DIR_USER. 'User.php';
 require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 
-session_start();
+session_start(); 
 
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : ""; 
-
 
 //echo $user->getFirstName();
 //echo $_SESSION['user']->getFirstName();
@@ -66,7 +63,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               else{
                   document.getElementById("call_it").innerHTML="Login";
                   document.getElementById("user_name").innerHTML="";
-                  
+                  window.location="user_test/logout.php";
                 }
             //display profile menu when user login 
             if($('#user_name').html() =="") {
@@ -93,7 +90,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
               },
             function(data,status){
               //this sets the session variable of username inside the variable username
-              var username="<?php if(isset($_SESSION['user'])) echo $_SESSION['user']->getFirstName(); ?>"
+              //var username="<?php if(isset($_SESSION['user'])) echo $_SESSION['user']->getFirstName(); ?>"
               
 
               if(data==1 || data==2){
@@ -107,7 +104,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                 document.getElementById("call_it").innerHTML="Logout";
 
                 //When Successful it will print the user's name beside the logout
-                document.getElementById("user_name").innerHTML=username;
+                //document.getElementById("user_name").innerHTML=username;
                   
                  //display profile menu when user login                     
                 $('#menu_user_index').css({'display': ''});
@@ -134,11 +131,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                 document.getElementById("ftest").innerHTML="";
                 $('#userlogin').val('');
                 $('#userpassword').val('');
-                alert("1"+$("#call_it").html());
+                //alert("1"+$("#call_it").html());
                     //resetting the texboxes
                   if($.trim($("#call_it").html())=="Login"){
                       $( "#login" ).dialog( "open" );  
-                      alert("use not logged in");
+                      //alert("use not logged in");
                     }
                 //alert("username innerHtml: "+$('#user_name').html());
                 if($('#user_name').html() =="") {
@@ -349,11 +346,16 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             if($(this).text().trim().indexOf("Like") >=0 ){
                 is_like = "Y";
                 $(this).text("Unlike");
-                $('.entry_like_num').css({'display': 'none'});
+               
+                var like_num = parseInt($('.entry_like_num').html().trim())+1; //alert(like_num);
+                $('.entry_like_num').text(like_num+" ");
+                //$('.entry_like_num').css({'display': 'none'});
             } else if ($(this).text().trim() == "Unlike") {
                 is_like = "N";
                 $(this).text("Like");
-                $('.entry_like_num').css({'display': ''});
+                var like_num = parseInt($('.entry_like_num').html().trim())-1; //alert(like_num);
+                $('.entry_like_num').text(like_num+" ");
+                //$('.entry_like_num').css({'display': ''});
             }
             $.ajax({
                url: "user_test/entry_rating.php",
@@ -379,12 +381,70 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             });//end $.ajax()*/
             event.preventDefault();
         });
-  
+        //==========Report Entry start=========
+        $('.reportEntry').click( function(event) {
+            if ($(this).next().css('display') == 'none') {
+                $(this).next().css({'display': 'block'});
+            } else if ($(this).next().css('display') == 'block') {
+                $(this).next().css({'display': 'none'});
+            }
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_"));
+            var entry_id = this_id.substring(this_id.lastIndexOf("_")+1);
+        });
+          
+        $('button.reportEntrySub').click( function(event) { //add a report
+            var this_id = $(this).attr('id');
+            var entity_id = this_id.substring(this_id.indexOf("_")+1);
+            var entity_for_report = "entry";
+            var textarea_id = "#reportEntryReason_"+entity_id;
+            var hidden_id = "#reportEntryBy_"+entity_id;
+            
+            var report_reason = encodeURIComponent($.trim ($(textarea_id).val() ));
+            var reported_by = encodeURIComponent($(hidden_id).val()); //alert("reported by: "+reported_by);
+            $.ajax({
+               url: "user_test/reporting_entry.php",
+               type: "POST",
+               data: {
+                    entityId : entity_id,
+                    entityForReport : entity_for_report,
+                    reportReason : report_reason,
+                    reportedBy: reported_by
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           if(data.indexOf("error")>0 ) {
+                               alert("Mailer error! ");
+                           }
+                           location.reload(true); 
+                       } else if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+            
+        });
+        $('button.reportEntryCancel').click( function(event) {
+            $('.reportEntry').next().css({'display': 'none'});            
+        });
+          
+        if($('#user_name').text().trim() !="" && $('#regSuccessMsg').text().indexOf("Thank you for activating your account")>=0) {
+            window.location.href = "index.php";
+        }
+               
       });
       
   </script>
   <script src="treqCreate.js"></script>
   <script src="entryDelete.js"></script>
+  <script src="questionMarkTooltips.js"></script>
   
   <!-- for translator -->
   <style>
@@ -421,26 +481,40 @@ div.showdata{
 </head>
 
 <body>
-  <div class="wrapper">
+
 
     <div id="header">
 
         <div class="header_row">
-          <div class="table-cell" style="text-align: left;">
+          <div class="table-cell" style="text-align: left; vertical-align: text-top;">
             <a href=""><img src="images/logo.png" height="50"></a>
           </div>
-          <nav id="navigation">
-              <a href="index.php">Home</a> 
-              <a href="entrycreate.php">Create an Entry</a>
-              <a href="profile.php">Profile</a>
-              <a href="/Tarboz/userview.php">[user view 2]</a>
-<!--              display profile menu when user login -->
-              <a href="views/profile/profile.php" style="display:none;" id="menu_user_index">Profile</a>
-          </nav>
-          <div class="table-cell" style="text-align: right;">
+          <div class="table-cell" style="width:1000;">
+              <!--Search bar start-->
+              <?php require("search.php");?>
+              
+              <!--Search bar end-->
+              <nav id="navigation">
+                  <a href="index.php" >Home</a> 
+                  <a href="entrycreate.php">Create an Entry</a>
+                  <!--
+                  <a href="profile.php">Profile</a>
+                  <a href="/Tarboz/userview.php">[user view 2]</a>
+                  -->
+    <!--              display profile menu when user login -->
+                  <a href="profile.php" style="display:<?php if(!isset($_SESSION['user']) ) echo 'none'; else echo ''; ?>;" id="menu_user_index">Profile</a>
+              </nav>
+          </div>
+          <div class="table-cell" style="vertical-align: top;">
+          <div class="table-row" style="padding-top:3px;">
             <button id="call_it" class="login_button"><?php if(!isset($_SESSION['user']) ) { ?>Login<?php } else { ?>Logout<?php } ?></button> 
           </div>
-          <div id="user_name"><?php if(isset($_SESSION['user']) ) echo $_SESSION['user']->getFirstName(); else echo ""; ?></div>
+          <div id="user_name" class="table-row" style="padding-top:5px;">
+              
+              <?php if(isset($_SESSION['user']) ) echo "Welcome <a href='profile.php'>".$_SESSION['user']->getFirstName()."</a> !"; else echo ""; ?>
+
+          </div>
+          </div>
 
           <div style="width:100px;" title="Login Window" id="login">
              <!--start of the login form div-->
@@ -454,7 +528,8 @@ div.showdata{
                  <p>
                     <div style="margin-left: 0.7em;"><button class="lw_button" id="sub">Login</button>
                       <b id="or">or</b>
-                        <button class="lw_button">Register</button></div> 
+                        <a href="registration.php"><button class="lw_button">Register</button></a>
+                    </div> 
                  </p> 
                  <p id="ftest"></p>
                  <p style="margin-left: 1em;" id="forgotpwd"></p>

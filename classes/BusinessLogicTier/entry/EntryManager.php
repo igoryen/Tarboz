@@ -38,11 +38,6 @@ class EntryManager {
     return $resultOfEntryDelete;
   }
 
-  public function deleteEntryVirtual($entryId) {
-    $eda = new EntryDataAccessor();
-    $resultOfEntryDelete = $eda->deleteEntryVirtual($entryId);
-    return $resultOfEntryDelete;
-  }
   /**
    *
    * @param type $entryId
@@ -99,4 +94,42 @@ class EntryManager {
     $arrayOfEntryBriefGottenBySearch = $eda->getListOfEntryBriefBySearch($v,$l,$f,$t,$a);
     return $arrayOfEntryBriefGottenBySearch;
   }
+    
+  // get entry by user ids  
+  public function getEntryByUserId($UserId) {
+    $eda = new EntryDataAccessor();
+    $entryGottenByUserId = $eda->getEntryByUserId($UserId);
+    return $entryGottenByUserId;
+  }
+
+  public function getDadEntryListByLangDate($in_lang, $in_from_date, $in_end_date){
+    $eda = new EntryDataAccessor();
+    $arrayOfEntry = $eda->getDadEntryListByLangDate($in_lang, $in_from_date, $in_end_date);
+    return $arrayOfEntry;
+  }
+    
+  public function getKidEntryListByDadLangDate($dad_entryId, $in_lang, $in_from_date, $in_end_date){
+    $eda = new EntryDataAccessor();
+    $arrayOfEntry = $eda->getKidEntryListByDadLangDate($dad_entryId, $in_lang, $in_from_date, $in_end_date);
+    return $arrayOfEntry;
+  }
+    
+  public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_date) {
+    $eda = new EntryDataAccessor();
+    $arrayOfEntry = $eda->getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_date);
+    return $arrayOfEntry;
+  }
+    
+  public function getOriginalKidsNum($entryId){
+    $eda = new EntryDataAccessor();
+    $numOfKids = $eda->getOriginalKidsNum($entryId);
+    return $numOfKids;
+  }
+    
+  public function getEntryLikeNumByEntry($entryId) {
+    $eda = new EntryDataAccessor();
+    $numOfLikes = $eda->getEntryLikeNumByEntry($entryId);
+    return $numOfLikes;
+  }
+    
 }

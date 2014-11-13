@@ -20,15 +20,14 @@ $translator->getLanguagesSelectBox($selectbox);
     <div><input type="text" name="txtString"  id="txtString"  class="keyboardInput"></div><!--1-->
     <?php //echo $translator->response->languageSelectBox; ?>
 
-
-
     <!-- 3 -->
-    <div class="bgwhite width500" id="showdata"></div>
+  
 
     <p style="font-size:20px; text-align: left">
     <select name="tgt_lang" id="tgtlang">
       <option value="">Search in ...</option><?php
-          $langs = $lm->getListOfLang();
+          //$langs = $lm->getListOfLang();
+          $langs = $lm->getLanguages();
           foreach ($langs as $lang) {
             echo '<option value="';
             echo $lang->getLangId();

@@ -31,7 +31,7 @@
         
         if ($report_reason != "" && $entity_for_report !="" 
             && $entity_id!="" && $reported_by!="" ) {
-          
+          $report_reason = rawurldecode($report_reason); 
           //handle badword
           $bw_handler = new BadwordManager();
           $bw_list = $bw_handler->getBadWordList();

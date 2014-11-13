@@ -5,45 +5,60 @@ $(document).ready(function(){
   $('#getdata-button').click(function(){
   //$('#getdata-button').live("click", function(){
     	//$('#loader').ajaxLoader();
-    	var text = document.getElementById('txtString').value;
+    	var text = encodeURIComponent(document.getElementById('txtString').value);
+        var tgtlang = $('#tgtlang').val();
+        var auth = $('#authst').val();
+        var from = $('#fromdate').val();
+        var to = $('#todate').val();
     	//var lang = document.getElementById('txtLang').value;
-      //alert('text: ' + text);
-      var lang = 'en'; // 141029
-    	var json_url = 'translator.php?text='+ text +'&to='+lang;
-      //alert('json_url: ' + json_url);
+        //alert("text: " + text +";<br/> target language:"+tgt_lang+";<br/>from date:"+from_date+";<br/>end date:"+end_date);
+        var lang = 'en'; // 141029
+        var json_url = 'translator.php?text='+ text +'&to='+lang;
+        //alert('json_url: ' + json_url);
+        
 		$.getJSON(json_url, function(data) {	
+            var verbatim = "";
 			//alert(data); //uncomment this for debug
 			//alert (data.item1+" "+data.item2+" "+data.item3); //further debug
-			if(data.translation){
+		    if(data.translation){
 			//$('#showdata').html("<p class='bdr'>"+data.translation+"</p>");
-      //
-        // remove the surrounding xml tags from the string
-        var verbatim = data.translation;
-        var left = /<string xmlns[^>]+\>[^A-Za-z0-9_ ]*/g;
-        var right = /\<\/string\>/g;
-        var verbatim = verbatim.replace(left, '');
-        verbatim = verbatim.replace(right, '');
-        verbatim = verbatim.replace(/\s/g, ", ");
-        
-        var apostrophe = /'/g;
-        var dblquotes = /"/g;
-        // MySQL: An apostrophe (') inside a string quoted with apostrophes 
-        // may be written as two apostrophes ('').
-        verbatim = verbatim.replace(apostrophe, "\''"); 
-        // MySQL: Double quotes (") inside a string quoted with double quotes 
-        // may be written two sets of double quotes ("").
-        verbatim = verbatim.replace(dblquotes, '\\""');
-        //alert("verbatim = " + verbatim);
-        //window.location.href = 'searchresult.php?verbatim='+ verbatim;
-//        $('#showdata').html(verbatim);
-        $('#showdata').append(verbatim);
-      }
-			else
-			//$('#showdata').html("<p>Error ="+data.errorReason+"</p>");
-			//$('#loader').ajaxLoaderRemove();
-        //alert("Error ="+data.errorReason);
-        $('#showdata').append(" ");// at least something to trigger the change in the DOM tree
-		}); // getJSON
+                    
+            // remove the surrounding xml tags from the string
+            verbatim = data.translation;
+            var left = /<string xmlns[^>]+\>[^A-Za-z0-9_ ]*/g;
+            var right = /\<\/string\>/g;
+            var verbatim = verbatim.replace(left, '');
+            verbatim = verbatim.replace(right, '');
+            verbatim = verbatim.replace(/\s/g, ", ");
+            
+            var apostrophe = /'/g;
+            var dblquotes = /"/g;
+            // MySQL: An apostrophe (') inside a string quoted with apostrophes 
+            // may be written as two apostrophes ('').
+            verbatim = verbatim.replace(apostrophe, "\''"); 
+            // MySQL: Double quotes (") inside a string quoted with double quotes 
+            // may be written two sets of double quotes ("").
+            verbatim = verbatim.replace(dblquotes, '\\""');
+            //alert("verbatim = " + verbatim);
+            //window.location.href = 'searchresult.php?verbatim='+ verbatim+'&searchtext='+text
+             //                                     +'&fromdate='+from_date+'&todate='+to_date;
+            }
+		    else {
+			  //$('#showdata').html("<p>Error ="+data.errorReason+"</p>");
+			  //$('#loader').ajaxLoaderRemove();
+              //alert("Error ="+data.errorReason);
+            } 
+            //alert("verbatim2: "+verbatim);
+//            window.location.href = 'searchresult.php?v='+ verbatim+'&searchtext='+text
+//                                   +'&tgtlang='+tgt_lang+'&fromdate='+from_date+'&enddate='+end_date;
+            window.location.href ='searchresult4.php'+
+              '?l=' + tgtlang +
+              '&a=' + auth +
+              '&f=' + from +
+              '&t=' + to +
+              '&v='+ verbatim; 
+            
+		});
     
 	}); // ('#getdata-button')
     //-----------------------------------------
