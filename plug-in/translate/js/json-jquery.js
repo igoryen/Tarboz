@@ -51,7 +51,7 @@ $(document).ready(function(){
             //alert("verbatim2: "+verbatim);
 //            window.location.href = 'searchresult.php?v='+ verbatim+'&searchtext='+text
 //                                   +'&tgtlang='+tgt_lang+'&fromdate='+from_date+'&enddate='+end_date;
-            window.location.href ='searchresult4.php'+
+            window.location.href ='searchresult.php'+
               '?l=' + tgtlang +
               '&a=' + auth +
               '&f=' + from +
