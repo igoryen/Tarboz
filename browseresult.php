@@ -31,7 +31,7 @@
         $result = $dbHelper->executeSelect($query);
         $count = 0;
 ?>
-    <div id="toptranslationtable" style="display:table; width=88%; margin:20px 0px 10px 135px;background-color:#efe8f6; border:1px solid #c1c1c1;">
+    <div id="toptranslationtable" style="display:table; width=88%; margin:20px 0px 10px 15%;background-color:#efe8f6; border:1px solid #c1c1c1;">
         <div id="toptranslationth" style="display:table-header; height:40px;color:#017699;">
             <div id="toptranslationthTrans" style="display:inline-block; width:400px; font-weight:bold; 
                                                     padding-top:8px; text-align: center;">

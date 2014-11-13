@@ -16,6 +16,9 @@
   define('BADWORD',         'tbl_bad_words');
   define('LANGUAGE',        'tbl_language');
   define('LANGUAGE_PROF',   'tbl_language_proficiency');
+  define('ENTRY',           'tbl_entry');
+  define('LOCATION',        'tbl_location');
+  define('TRANS_REQUEST',   'tbl_transl_request');
 
   
 
