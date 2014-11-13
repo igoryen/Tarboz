@@ -5,12 +5,12 @@
   include "views/entry/search_result_cases.php";
   
 // #) get the value of the search phrase from the search page
-if(isset($_GET['verbatim'])){
-  $verbatim = $_GET['verbatim'];
+if(isset($_GET['v'])){
+  $verbatim = $_GET['v'];
   //echo "<br>searchresult.php: GET['verbatim'] is set. it's " . $verbatim;
 }
 else{
-  $verbatim = $_GET['verbatim'];
+  $verbatim = $_GET['v'];
   //echo "<br>searchresult.php: GET['verbatim'] is NOT set. " . $verbatim;
 }
 

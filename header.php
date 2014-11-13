@@ -444,6 +444,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   </script>
   <script src="treqCreate.js"></script>
   <script src="entryDelete.js"></script>
+  <script src="questionMarkTooltips.js"></script>
   
   <!-- for translator -->
   <style>

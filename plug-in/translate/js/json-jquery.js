@@ -2,13 +2,14 @@ $(document).ready(function(){
     //alert(document.getElementById('txtLang').value);
 	//attach a jQuery live event to the button
 	//$('#loader').ajaxLoader();
-	$('#getdata-button').live("click", function(){
-        //alert("here");
+  $('#getdata-button').click(function(){
+  //$('#getdata-button').live("click", function(){
     	//$('#loader').ajaxLoader();
     	var text = encodeURIComponent(document.getElementById('txtString').value);
-        var tgt_lang = $('#tgt_lang').val();
-        var from_date = $('#startdate').val();
-        var end_date = $('#enddate').val();
+        var tgtlang = $('#tgtlang').val();
+        var auth = $('#authst').val();
+        var from = $('#fromdate').val();
+        var to = $('#todate').val();
     	//var lang = document.getElementById('txtLang').value;
         //alert("text: " + text +";<br/> target language:"+tgt_lang+";<br/>from date:"+from_date+";<br/>end date:"+end_date);
         var lang = 'en'; // 141029
@@ -48,12 +49,25 @@ $(document).ready(function(){
               //alert("Error ="+data.errorReason);
             } 
             //alert("verbatim2: "+verbatim);
-            window.location.href = 'searchresult.php?verbatim='+ verbatim+'&searchtext='+text
-                                   +'&tgtlang='+tgt_lang+'&fromdate='+from_date+'&enddate='+end_date; 
+//            window.location.href = 'searchresult.php?v='+ verbatim+'&searchtext='+text
+//                                   +'&tgtlang='+tgt_lang+'&fromdate='+from_date+'&enddate='+end_date;
+            window.location.href ='searchresult4.php'+
+              '?l=' + tgtlang +
+              '&a=' + auth +
+              '&f=' + from +
+              '&t=' + to +
+              '&v='+ verbatim; 
             
 		});
-	});
     
+	}); // ('#getdata-button')
+    //-----------------------------------------
+    $("#txtString").keypress(function(e){
+      if(e.which == 13){//Enter key pressed
+        $('#getdata-button').click();//Trigger search button click event
+      }
+    });
+    //-------------------------------------------
     $("textarea").blur(function() {
         //$('#loader').ajaxLoader();
     	var text = document.getElementById('txtString').value

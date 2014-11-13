@@ -44,6 +44,7 @@ class DBHelper {
    */
   public function executeSelect($sql) {
     //3*
+    //echo "<br>dbh::executeSelect(sql) sql:<br>" . $sql;
     $this->connectToDB();
     $result = mysqli_query($this->connection, $sql); // 1    
     $this->closeConnection();
