@@ -68,7 +68,7 @@ $translator->getLanguagesSelectBox($selectbox);
 //          });
           
         // using GET
-        window.location.href ='searchresult2.php'+
+        window.location.href ='searchresult4.php'+
           '?l=' + lang +
           '&a=' + auth +
           '&f=' + from +

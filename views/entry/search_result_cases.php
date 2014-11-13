@@ -6,7 +6,7 @@ function no_dad_no_kids($text) { ?>
     <?php echo $text; ?>
   </div>
 
-<?php 
+<?php
 }?>
 
 
@@ -15,17 +15,17 @@ function no_dad_no_kids($text) { ?>
 function open_kids_house($kids_house_lang){?>
   <div class="kids_house">
     <div class="door"><?php echo $kids_house_lang;  ?></div>
-<?php 
+<?php
 }?>
-    
+
 <?php
 // to draw the end of the section of a group of translations
 function close_kids_house(){?>
   </div><!-- kids_house -->
-<?php 
+<?php
 }?>
-    
-    
+
+
 <?php
 // to draw the section for translation X of group of langugae A
 function make_kid_room($kid_room_array){?>
@@ -46,9 +46,31 @@ function make_kid_room($kid_room_array){?>
   </div>
  <?php
 }?>
-    
-    
-    
+
+
+
+<?php
+// to draw the section for translation X of group of langugae A
+function make_dad_room($dad_room_array){?>
+  <div class="kid_room">
+    <div class="kid_text">
+      <a href="entryview.php?id=<?php echo $dad_room_array['id'];?>">
+      <?php echo $dad_room_array['text'];   ?></a>
+    </div>
+    <div class="kid_profile_link">O</div>
+    <div class="kid_dad_link">T</div>
+    <div class="kid_votes">+12 -3</div>
+    <div class="kid_added_by">
+      <a href="userview.php?id=<?php echo $dad_room_array['user']; ?>"><?php
+        echo $dad_room_array['user'];
+      ?></a>
+    </div>
+    <div class="is_mom">A</div>
+  </div>
+ <?php
+}?>
+
+
 <?php
 // for CASE 2: Original: doesn't exist. Variants: 2 English, 2 Russian, 2 Mandarin
   function no_dad_kids_many($ar_a){?>
@@ -73,9 +95,9 @@ function make_kid_room($kid_room_array){?>
         </div>
 
       </div><!-- kids_house -->
-
+<?php
   }
-  ?>
+
 
 function dad_house_dad_0($no_original) { ?>
   <div id="dad_house">
@@ -111,8 +133,8 @@ function dad_house_dad_0($no_original) { ?>
               <div class="dad_door"><?php echo $ary['language']; ?></div>
             <div id="dad_room">
               <div id="dad_text">
-                <a href="entryview.php?id=<?php echo $ary['id']?>"><?php 
-              echo $ary['text']; 
+                <a href="entryview.php?id=<?php echo $ary['id']?>"><?php
+              echo $ary['text'];
               ?></a></div>
               <div id="dad_profile_link">O</div>
           <div id="kids_num">18</div>
@@ -125,5 +147,25 @@ function dad_house_dad_0($no_original) { ?>
         </div>
       </div><!-- dad_house -->
 
-        <?php }
-        ?>
+<?php }
+?>
+
+<?php
+// open family
+function open_family(){?>
+  <div class="family">
+<?php
+}
+
+function close_family($family_text){?>
+  <br>
+  <p>........<i><?php echo substr($family_text, 0, 50);?></i></p>
+  </div><!-- family -->
+  <br>
+<?php
+}
+
+  function close_family2(){?>
+  </div><!-- family -->
+<?php
+}?>
