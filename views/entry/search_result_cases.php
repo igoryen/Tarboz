@@ -71,7 +71,7 @@ function make_kid_room($kid_room_array){?>
     </div>
     <div class="kid_profile_link"><span class="question" id="tran">T</span></div>
     <div class="kid_dad_link">
-      O
+      <a href="entryview.php?id=<?php echo $kid_room_array['dad'];?>">O</a>
     </div>
     <div class="kid_votes"><span style="cursor: alias;" title="12 users like">+12</span> <span style="cursor: alias;" title="3 users dislike">-3</span></div>
     <div class="kid_added_by">
@@ -93,7 +93,7 @@ function make_family_kid_room($kid_room_array){?>
     </div>
     <div class="kid_profile_link"><span class="question" id="tran">T</span></div>
     <div class="kid_dad_link">
-      <a href="entryview.php?id=<?php echo $kid_room_array['id'];?>">O</a>
+      <a href="entryview.php?id=<?php echo $kid_room_array['dad'];?>">O</a>
     </div>
     <div class="kid_votes"><span style="cursor: alias;" title="12 users like">+12</span> <span style="cursor: alias;" title="3 users dislike">-3</span></div>
     <div class="kid_added_by">

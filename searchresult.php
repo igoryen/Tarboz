@@ -303,7 +303,7 @@ if(is_object(reset($dads))){
   }
   
 }
-//DISPLAY THE KIDS ARRAY
+//DISPLAY THE KIDS ARRAY (OR NON-ORPHANS)
 if(is_object(reset($non_orphans))){
   $ary['text'] = "Translations without originals";
   $ary['tipid'] = 'kids';
@@ -319,6 +319,7 @@ if(is_object(reset($non_orphans))){
     $ary['language'] = $non_orphan->getEntryLanguage();
     $ary['text'] = $non_orphan->getEntryText();
     $ary['user'] = $non_orphan->getEntryUserId();
+    $ary['dad'] = $non_orphan->getEntryTranslOf();
     //dad_house_dad_1($ary);
     make_kid_room($ary);
     //echo $k .". ". substr($non_orphan->getEntryText(),0,60);
