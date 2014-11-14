@@ -2,6 +2,8 @@
 require_once DB_CONNECTION . 'DBHelper.php';
 require_once BUSINESS_DIR_ENTRY . 'Entry.php';
 require_once(DB_CONNECTION . 'datainfo.php');
+require_once DB_CONNECTION . 'constants.php';
+
 class EntryDataAccessor {
   /**
    *
@@ -80,24 +82,29 @@ class EntryDataAccessor {
    * @return $resultOfEntryUpdate
    */
   public function updateEntry($entry) {
-
+    //TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+    $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
+            or die("Error, failed to connect" . mysqli_error($this->connection));
+    $con->set_charset("utf8");
+    if (mysqli_connect_errno()) {
+      echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+    //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
     $entryId = $entry->getEntryId();
-    $text = mysql_real_escape_string($entry->getEntryText());
-    $verbatim = mysql_real_escape_string($entry->getEntryVerbatim());
-    /*
-     * TODO: transliterate the value of $text using ...
-     */
-    $translit = mysql_real_escape_string($entry->getEntryTranslit());
+
+    $text =     mysqli_real_escape_string($con, $entry->getEntryText());
+    $verbatim = mysqli_real_escape_string($con, $entry->getEntryVerbatim());
+    $translit = mysqli_real_escape_string($con, $entry->getEntryTranslit());
     //$authsid = $entry->getEntryAuthenStatusId();
     //$translOf = $entry->getEntryTranslOf();
     //$userId = $entry->getEntryUserId();
     // $mediaSet = $entry->getMediaSet();
     // $commentId = $entry->;
     // $ratingId = $entry->getEntryRatingId();
-    $tags = $entry->getEntryTags();
-    $authorId = $entry->getEntryAuthorId();
+    $tags =     mysqli_real_escape_string($con, $entry->getEntryTags());
+    $authorId = mysqli_real_escape_string($con, $entry->getEntryAuthorId());
     $sourceId = $entry->getEntrySourceId();
-    $use = $entry->getEntryUse();
+    $use =      mysqli_real_escape_string($con, $entry->getEntryUse());
     $httpLink = $entry->getEntryHttpLink();
     /*
      * Compose the MySQL link
@@ -122,9 +129,17 @@ class EntryDataAccessor {
     /*
      * using: require_once DB_CONNECTION . 'DBHelper.php';
      */
-    $dbHelper = new DBHelper();
-    $resultOfEntryUpdate = $dbHelper->executeQuery($query);
-    return $resultOfEntryUpdate;
+    //TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+    if (!mysqli_query($con,$query)) {
+      die('Error: ' . mysqli_error($con));
+    }    
+    if ($con) {
+      $result = mysqli_query($con, $query);
+    }    
+    mysqli_close($con);
+    //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+    
+    return $result;
   }
   /**
    *
