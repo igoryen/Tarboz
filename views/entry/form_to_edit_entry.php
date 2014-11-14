@@ -1,6 +1,9 @@
 <?php
+require_once BUSINESS_DIR_LANG . "LanguageManager.php";
+require_once BUSINESS_DIR_LANG . "Language.php";
 
 function form_to_edit_entry($entry){
+  $lm = new LanguageManager();
   $auth = $entry->getEntryAuthenStatusId();
   $status = ($auth == 1 ? '1' : "not 1");
   echo "<br>ftee:: status = " . $status;
@@ -20,7 +23,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
     <div id="entry_create_form">
       
       <div class="entry_create_row">
-        <div id="entry_create_form_title">Create entry
+        <div id="entry_create_form_title">Edit an entry
           <div class="note">
             Note: fields marked with the red asterisk (<span class="Painted_red">*</span>) are mandatory.
           </div>
@@ -34,14 +37,27 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <!--<?php //echo $entry->getEntryId(); ?>-->
           <input name="id" 
                  type="text" 
-                 value="<?php echo $entry->getEntryId(); ?>" readonly hidden/><!--Lily 141029-->
+                 value="<?php echo $entry->getEntryId(); ?>" readonly /><!--Lily 141029-->
         </div>
       </div>      
       <!-- lan_lang_name -->
       <div class="entry_create_row">
         <div class="entry_create_record_title">Language of origin</div>
         <div class="entry_create_record_value">
-          <?php echo $entry->getEntryLanguage(); ?>
+          <select name="langid">
+            <option value="">This is in ...</option><?php
+              //$langs = $lm->getListOfLang();
+              $langs = $lm->getLanguages();
+              $lang_of_this_entry = $entry->getEntryLanguage();
+              foreach ($langs as $lang) {
+                echo '<option value="';
+                echo $lang->getLangId();
+                echo '"';
+                echo $lang->getLangName() == $lang_of_this_entry ? ' selected="selected"' : '';
+                echo '>';
+                echo $lang->getLangName();
+                echo '</option>';
+       }?></select>
         </div>
       </div>
 
@@ -116,18 +132,17 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <div class="entry_create_row">
         <div class="entry_create_record_title">Authenticity status</div>
         <div class="entry_create_record_value">
-          <select name="authen">
-            <option value="">This entry is</option>
-            <option value="1"<?php 
-              echo $entry->getEntryAuthenStatusId() == 1 ? ' selected="selected"' : '';
-                    ?>>Original</option>
-            <option value="2"<?php 
-              echo $entry->getEntryAuthenStatusId() == 2 ? ' selected="selected"' : '';
-                    ?>>Translation</option>
-            <option value="3"<?php 
-              echo $entry->getEntryAuthenStatusId() == 3 ? ' selected="selected"' : '';
-                    ?>>Unknown</option>
-          </select>
+          <input name="authen"
+                 type="text"
+                 value="<?php 
+                 if($entry->getEntryAuthenStatusId() == 1){
+                   echo "original";
+                 }
+                 elseif($entry->getEntryAuthenStatusId() == 2){
+                   echo "translation";
+                 }
+                 elseif($entry->getEntryAuthenStatusId() == 3)
+                   echo "unknown";?>" readonly=""/>
         </div>
       </div>
 

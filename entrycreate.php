@@ -44,7 +44,7 @@
         $entry = new Entry(); // 32
         // 11, 29, 39 
         $entry->setEntryId(         $_GET['id']);
-        //$entry->setEntryLanguage($_POST['language']); // 30 (?)
+        $entry->setEntryLanguageId($_POST['langid']); // 30 (?)
         $entry->setEntryText($_POST['text']);
         $entry->setEntryVerbatim($_POST['verbatim']);
         $entry->setEntryTranslit($_POST['translit']);
@@ -77,7 +77,7 @@
         $entry = new Entry(); // 32
         // 11, 29
         //$entry->setEntryId($_POST['id']);
-        $entry->setEntryLanguage($_POST['language']); // 30 (?)
+        $entry->setEntryLanguageId($_POST['langid']); // 30 (?)
         $entry->setEntryText(htmlentities($_POST['text']));
         $entry->setEntryVerbatim(htmlentities($_POST['verbatim']));
         $entry->setEntryTranslit(htmlentities($_POST['translit']));
