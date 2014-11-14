@@ -3,6 +3,7 @@
 class Entry {
 
   private $entry_id; // 1
+  private $entry_language_id;
   private $entry_language; // 13
   private $entry_text; // 2
   private $entry_verbatim; // 3
@@ -27,6 +28,14 @@ class Entry {
 
   public function setEntryId($x) {
     $this->entry_id = $x;
+  }
+
+  public function getEntryLanguageId() {
+    return $this->entry_language_id;
+  }
+
+  public function setEntryLanguageId($x) {
+    $this->entry_language_id = $x;
   }
 
    public function getEntryLanguage() {

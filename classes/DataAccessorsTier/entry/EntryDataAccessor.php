@@ -13,7 +13,7 @@ class EntryDataAccessor {
   public function addEntry($entry) {
 
     $id =         $entry->getEntryId();
-    $lang =       $entry->getEntryLanguage();
+    $langid =     $entry->getEntryLanguageId();
     $text =       $entry->getEntryText(); // 1
     // TODO: create the verbatim of $text using the Bing translator
     $verbatim =   $entry->getEntryVerbatim(); // 2
@@ -52,7 +52,7 @@ class EntryDataAccessor {
             . '`ent_entry_http_link`, '
             . '`ent_entry_creation_date`)'
       . ' VALUES('
-      . '"' . $lang
+      . '"' . $langid
       . '", "' . $text
       . '", "' . $verbatim
       . '", "' . $translit
@@ -91,7 +91,8 @@ class EntryDataAccessor {
     }
     //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
     $entryId = $entry->getEntryId();
-
+    
+    $lang_id =  $entry->getEntryLanguageId();
     $text =     mysqli_real_escape_string($con, $entry->getEntryText());
     $verbatim = mysqli_real_escape_string($con, $entry->getEntryVerbatim());
     $translit = mysqli_real_escape_string($con, $entry->getEntryTranslit());
@@ -110,6 +111,7 @@ class EntryDataAccessor {
      * Compose the MySQL link
      */
     $query = "UPDATE ".ENTRY." SET "
+            . "ent_entry_language_id = '$lang_id',"
             . "ent_entry_text = '$text',"
             . "ent_entry_verbatim = '$verbatim',"
             . "ent_entry_translit = '$translit',"
