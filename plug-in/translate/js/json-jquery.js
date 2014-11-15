@@ -2,6 +2,9 @@ $(document).ready(function(){
     //alert(document.getElementById('txtLang').value);
 	//attach a jQuery live event to the button
 	//$('#loader').ajaxLoader();
+    $("#searchDialog").dialog({
+        autoOpen: false
+    });
   $('#getdata-button').click(function(){
   //$('#getdata-button').live("click", function(){
     	//$('#loader').ajaxLoader();
@@ -11,10 +14,15 @@ $(document).ready(function(){
         var from = $('#fromdate').val();
         var to = $('#todate').val();
     	//var lang = document.getElementById('txtLang').value;
-        //alert("text: " + text +";<br/> target language:"+tgt_lang+";<br/>from date:"+from_date+";<br/>end date:"+end_date);
+        //alert("text: " + text +";<br/> target language:"+tgtlang+";<br/>from date:"+from+";<br/>end date:"+to);
         var lang = 'en'; // 141029
         var json_url = 'translator.php?text='+ text +'&to='+lang;
         //alert('json_url: ' + json_url);
+        if (tgtlang=="" && from=="" && to=="" && text=="") { 
+            //$('#searchDialog').css({'display': 'block'});
+            $( "#searchDialog" ).dialog("open");
+
+        }
         
 		$.getJSON(json_url, function(data) {	
             var verbatim = "";
@@ -51,13 +59,14 @@ $(document).ready(function(){
             //alert("verbatim2: "+verbatim);
 //            window.location.href = 'searchresult.php?v='+ verbatim+'&searchtext='+text
 //                                   +'&tgtlang='+tgt_lang+'&fromdate='+from_date+'&enddate='+end_date;
+            if (!(tgtlang=="" && from=="" && to=="" && verbatim=="") ){
             window.location.href ='searchresult.php'+
               '?l=' + tgtlang +
               '&a=' + auth +
               '&f=' + from +
               '&t=' + to +
               '&v='+ verbatim; 
-            
+           }   
 		});
     
 	}); // ('#getdata-button')

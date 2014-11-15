@@ -123,12 +123,14 @@
     <div class="entry_record">
       <div class="entry_record_title">Entry added by</div>
       <div class="entry_record_value">
-    <?php 
-        //echo $user_id."</br>"; 
-        $userManager = new UserManager();
-        $user = $userManager->getUserByUserId($user_id);
-        echo $user->getFirstName()." ".$user->getLastName();
-    ?>
+          <a href="other_user.php?id=<?php echo $user_id;?>">
+            <?php 
+                //echo $user_id."</br>"; 
+                $userManager = new UserManager();
+                $user = $userManager->getUserByUserId($user_id);
+                echo $user->getFirstName()." ".$user->getLastName();
+            ?>
+          </a>
       </div>
     </div>
     <!--Display user name who added this entry end-->
@@ -304,18 +306,19 @@
           onchange="treqCreate(this.value,<?php echo $userId.",".$entryId; ?>)">
           <option value="">Select a language:</option>
           <?php
-          $langs = $lm->getListOfLang();
+          $langs = $lm->getLanguages();
           foreach ($langs as $lang) {
             echo '<option value="';
             echo $lang->getLangId();
             echo '">';
             echo $lang->getLangName();
             echo '</option>';
-          }
-                                         }?></select>
+          } ?>
+          </select>
         <span id="treqCreateResponse"></span>
       </div>
     </div>
+    <?php } //end if($entry->getEntryAuthenStatusId() == 1)?>
     <!--Display translation request end-->
     <!--- comments section start --->
   
@@ -379,7 +382,7 @@
 
       <div> <!--div2-->
         <div style="display:table;">
-          <div style="display:table-row;"><?php echo $created_user_name.":"; ?> </div>
+          <div style="display:table-row;"><a href="other_user.php?id=<?php echo $created_by;?>"><?php echo $created_user_name.":"; ?></a> </div>
           <div style="display:table-row;">
             <div style="display:table-cell; width:280px; padding-left:10px;">
                 <span id="<?php echo $edit_comment_text_id; ?>" style="display:'';"><?php echo $text; ?></span>  
@@ -451,10 +454,10 @@
         ?> 
         <!--add a new comment form-->
         <form name="new_comment" id="new_comment" >
-          <textarea rows="3" cols="45" name="newComment" id="newComment"></textarea><br/>
+          <textarea rows="3" cols="45" name="newComment" id="newComment" ></textarea><br/>
           <input type="hidden" id = "commentEntityId" name = "commentEntityId" value ="<?php echo $entryId;?>"/>
           <input type="hidden" id = "user_login_status" name = "user_login_status" value ="<?php echo $user_logged_status;?>"/>
-          <button id="new_commentSub" name="new_commentSub" type="button">Comment</button>
+          <button id="new_commentSub" name="new_commentSub" type="button" <?php if ($user_logged_in == false) echo " disabled"; ?> style="margin-top:5px;">Comment</button>
         </form>  
      </div> <!--entry_record_value-->
    </div> <!--entry_record_value-->

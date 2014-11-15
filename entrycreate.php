@@ -19,7 +19,12 @@
   $translator->getLanguagesSelectBox($selectbox);
   //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   
-  
+  $user_id = "";
+  if (isset($_SESSION['user'])) {
+      $user = $_SESSION['user'];
+      $user_id = $user->getUserId();
+      echo "user id==".$user_id;
+  }
   $user_input_valid = true; // 2
   date_default_timezone_set('America/Toronto');
   // 3, 53*
@@ -51,6 +56,7 @@
         //$entry->setEntryAuthenStatusId($_POST['authen']);
         $entry->setEntryTranslOf(   NULL); // $_POST['transl_of']);
         //$entry->setEntryUserId(     '3'); //$_POST['creator']);
+        $entry->setEntryUserId($user_id);
         $entry->setEntryMediaId(    '1');//($_POST['media_id']);
         $entry->setEntryCommentId(  '2'); //$_POST['comment_id'];
         $entry->setEntryRatingId(   '1'); //($_POST['rating_id']);
@@ -83,7 +89,8 @@
         $entry->setEntryTranslit(htmlentities($_POST['translit']));
         $entry->setEntryAuthenStatusId($_POST['authen']);
         $entry->setEntryTranslOf($_POST['translOf']);
-        $entry->setEntryUserId('3');//$_POST['creator']);
+        //$entry->setEntryUserId('3');//$_POST['creator']);
+        $entry->setEntryUserId($user_id);
         $entry->setEntryMediaId('1');//($_POST['media_id']);
         $entry->setEntryCommentId('2'); //$_POST['comment_id'];
         $entry->setEntryRatingId('1'); //($_POST['rating_id']);

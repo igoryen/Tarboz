@@ -75,7 +75,9 @@ function make_kid_room($kid_room_array){?>
     </div>
     <div class="kid_votes"><span style="cursor: alias;" title="12 users like">+12</span> <span style="cursor: alias;" title="3 users dislike">-3</span></div>
     <div class="kid_added_by">
-      <a href="profile.php?id=<?php echo $kid_room_array['user']; ?>"><?php echo $kid_room_array['user'];?></a>
+      <a href="profile.php?id=<?php echo $kid_room_array['user']; ?>">
+          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin();;?>
+      </a>
     </div>
     <div class="is_mom">A</div>
   </div>
@@ -97,7 +99,9 @@ function make_family_kid_room($kid_room_array){?>
     </div>
     <div class="kid_votes"><span style="cursor: alias;" title="12 users like">+12</span> <span style="cursor: alias;" title="3 users dislike">-3</span></div>
     <div class="kid_added_by">
-      <a href="profile.php?id=<?php echo $kid_room_array['user']; ?>"><?php echo $kid_room_array['user'];?></a>
+      <a href="profile.php?id=<?php echo $kid_room_array['user']; ?>">
+          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin();;?>
+      </a>
     </div>
     <div class="is_mom">A</div>
   </div>
@@ -118,9 +122,9 @@ function make_dad_room($dad_room_array){?>
     <div class="kid_dad_link">T</div>
     <div class="kid_votes">+12 -3</div>
     <div class="kid_added_by">
-      <a href="userview.php?id=<?php echo $dad_room_array['user']; ?>"><?php
-        echo $dad_room_array['user'];
-      ?></a>
+      <a href="userview.php?id=<?php echo $dad_room_array['user']; ?>">
+        <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($dad_room_array['user'])->getLogin();;?>
+      </a>
     </div>
     <div class="is_mom">A</div>
   </div>
@@ -218,7 +222,9 @@ function dad_house_dad_0($no_original) { ?>
               <div id="kids_num" title="There are 1 translations for this phrase">1</div>
               <div id="add_kid"><a href="entrycreate.php" title="Add a new translation">+</a></div>
               <div class="kid_added_by">
-                <a href="profile.php?id=<?php echo $ary['user']; ?>"><?php echo $ary['user']; ?></a>
+                <a href="profile.php?id=<?php echo $ary['user']; ?>">
+                    <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getLogin();;?>
+                </a>
               </div>
             </div>
          <!--</div> dad_house -->

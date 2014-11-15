@@ -43,7 +43,7 @@ $translator->getLanguagesSelectBox($selectbox);
     </select>  
     <b>From:</b> <input type="date" id="fromdate" name="startdate">
     <b>To:</b> <input type="date" id="todate" name="enddate">
-    <a  class="search_button" href="#" id="getdata-button">Search</a>
+    <button  class="search_button" href="#" id="getdata-button">Search</button>
     </p>
 </div></div>
     <script>
@@ -67,7 +67,7 @@ $translator->getLanguagesSelectBox($selectbox);
 //          });
           
         // using GET
-        window.location.href ='searchresult4.php'+
+        window.location.href ='searchresult.php'+
           '?l=' + lang +
           '&a=' + auth +
           '&f=' + from +
@@ -77,4 +77,8 @@ $translator->getLanguagesSelectBox($selectbox);
     </script>
     
 </div>
+  <div id="searchDialog" title="Search Alert!" style="display:none;">
+    <p>Please input the search phrase or select targe language, from date or to date!</p>   
+  </div>
+
     
