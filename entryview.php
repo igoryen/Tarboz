@@ -33,7 +33,15 @@
     $entry = $em->getEntryById($entryId); // 1
     $treq = $trm->getTreqByEntryId($entry->getEntryId());
     $lm = new LanguageManager();
-    $userId = 3; // the id of the current logged-in user
+    //$userId = 3; // the id of the current logged-in user
+    $loggedIn_userId = "";
+    $loggedIn_userType = "";
+    if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+        $loggedIn_userId = $user->getUserId();
+        $loggedIn_userType = $user->getUserType();
+          //echo "logged in user id==".$loggedIn_userId;
+    }
     
     $language = $entry->getEntryLanguage();
     $text = nl2br(trim($entry->getEntryText()));
@@ -232,16 +240,19 @@
       <div class="entry_record_value"><?php echo $date; ?></div>
     </div>
     <!--Display creation date end --> 
-    <!--Display edit--> 
+    <!--Display edit-->  
+    <?php if ($loggedIn_userId == $user_id || $loggedIn_userType == "1") { ?>
     <div class="entry_record">
       <div class="entry_record_title">Edit</div>
       <div class="entry_record_value">
         <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
       </div>      
     </div>
+    <?php } ?>
     <!--Display edit end--> 
-    <!--Display Translate into--> 
-    <!-- display the Delete button if the logged-in user is the creator of the entry-->
+
+    <!-- display the Delete entry-->
+    <?php if ($loggedIn_userId == $user_id || $loggedIn_userType == "1") { ?>
     <div class="entry_record">
       <div class="entry_record_title">Delete this entry</div>
       <div class="entry_record_value">
@@ -273,8 +284,9 @@
         });
       </script>  
     </div>
-        
-    
+    <?php } ?>
+     <!-- end display the Delete entry-->   
+        <!--Display Translate into--> 
     <?php
         if($entry->getEntryAuthenStatusId() == 1){
         // 1*
