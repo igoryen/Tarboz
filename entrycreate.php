@@ -50,9 +50,9 @@
         // 11, 29, 39 
         $entry->setEntryId(         $_GET['id']);
         $entry->setEntryLanguageId($_POST['langid']); // 30 (?)
-        $entry->setEntryText($_POST['text']);
+        $entry->setEntryText(htmlentities($_POST['text']));
         $entry->setEntryVerbatim($_POST['verbatim']);
-        $entry->setEntryTranslit($_POST['translit']);
+        $entry->setEntryTranslit(htmlentities($_POST['translit']));
         //$entry->setEntryAuthenStatusId($_POST['authen']);
         $entry->setEntryTranslOf(   NULL); // $_POST['transl_of']);
         //$entry->setEntryUserId(     '3'); //$_POST['creator']);
@@ -60,11 +60,11 @@
         $entry->setEntryMediaId(    '1');//($_POST['media_id']);
         $entry->setEntryCommentId(  '2'); //$_POST['comment_id'];
         $entry->setEntryRatingId(   '1'); //($_POST['rating_id']);
-        $entry->setEntryTags(       $_POST['tags']);
+        $entry->setEntryTags(htmlentities($_POST['tags']));
         $entry->setEntryAuthorId('1');   //$_POST['author']);
-        $entry->setEntrySourceId(   $_POST['source']); 
-        $entry->setEntryUse(        $_POST['use']);
-        $entry->setEntryHttpLink(str_replace("watch?v=", "v/", $_POST['link']));
+        $entry->setEntrySourceId(htmlentities($_POST['source'])); 
+        $entry->setEntryUse(htmlentities($_POST['use']));
+        $entry->setEntryHttpLink(htmlentities(str_replace("watch?v=", "v/", $_POST['link'])));
         // 40*, 50
         
         $resultOfEntryUpdate = $em->updateEntry($entry); // 33
@@ -94,11 +94,11 @@
         $entry->setEntryMediaId('1');//($_POST['media_id']);
         $entry->setEntryCommentId('2'); //$_POST['comment_id'];
         $entry->setEntryRatingId('1'); //($_POST['rating_id']);
-        $entry->setEntryTags($_POST['tags']);
+        $entry->setEntryTags(htmlentities($_POST['tags']));
         $entry->setEntryAuthorId('1');//$_POST['author']);
         $entry->setEntrySourceId('1');//$_POST['source']); 
-        $entry->setEntryUse($_POST['use']);
-        $entry->setEntryHttpLink(str_replace("watch?v=", "v/", $_POST['link'])); //43
+        $entry->setEntryUse(htmlentities($_POST['use']));
+        $entry->setEntryHttpLink(htmlentities(str_replace("watch?v=", "v/", $_POST['link']))); //43
         $entry->setEntryCreationDate(date("Y-m-d H:i:s"));
         
         $id = $em->createEntry($entry); // 13
