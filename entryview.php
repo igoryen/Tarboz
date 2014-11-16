@@ -69,7 +69,7 @@
     
     <div class="entry_record">
       <div class="entry_record_title">Text</div>
-      <div class="entry_record_value"><?php echo $text; ?></div>
+      <div class="entry_record_value_for_text"><?php echo $text; ?></div>
     </div>
     
     <div class="entry_record" style="display: none;"><!-- 2 -->

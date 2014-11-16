@@ -740,6 +740,17 @@ a:active {
   background: white;
   border: 1px solid #c1c1c1;
   display: block;
+  font-size: medium;
+  margin: auto;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 55%;
+}
+.entry_record_value_for_text{
+  background: white;
+  border: 1px solid #c1c1c1;
+  display: block;
   font-family: serif "Georgia";
   font-size: large;
   margin: auto;
