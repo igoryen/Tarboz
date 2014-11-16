@@ -63,14 +63,20 @@
     </div>
     
     <div class="entry_record">
-      <div class="entry_record_title">Language</div>
+      <div class="entry_record_title">
+        Language
+        <span class="question" id="entryviewlang" >?</span>
+      </div>
       <div class="entry_record_value"><?php echo $language; ?></div>
     </div>
     
     
     <!--Display authenticity status-->
     <div class="entry_record">
-      <div class="entry_record_title">Authenticity status</div>
+      <div class="entry_record_title">
+        Authenticity status
+        <span class="question" id="entryviewauthen" >?</span>
+      </div>
       <div class="entry_record_value">
     <?php 
         //echo $authen."</br>"; 
@@ -88,7 +94,10 @@
     
     
     <div class="entry_record">
-      <div class="entry_record_title">Text</div>
+      <div class="entry_record_title">
+        Text
+        <span class="question" id="entryviewtext" >?</span>
+      </div>
       <div class="entry_record_value_for_text"><?php echo $text; ?></div>
     </div>
     
@@ -96,7 +105,10 @@
     <!--Display video--> 
     <?php if(!null == $video){?>
         <div class="entry_record">
-          <div class="entry_record_title">Video link</div>
+          <div class="entry_record_title">
+            Video link
+            <span class="question" id="entryviewvideo" >?</span>
+          </div>
           <div class="entry_record_value">
             <embed width="420" height="315" src="<?php echo $video; ?>">
           </div>
@@ -107,7 +119,10 @@
     
 <?php if(!null == $translit){?>
     <div class="entry_record">
-      <div class="entry_record_title">Translit</div>
+      <div class="entry_record_title">
+        Translit
+        <span class="question" id="entrytranslit" >?</span>
+      </div>
       <div class="entry_record_value"><?php echo $translit; ?></div>
     </div>
 <?php }?>
@@ -143,7 +158,10 @@
     <!--Display use--> 
     <?php if(!null == $use){?>
         <div class="entry_record">
-          <div class="entry_record_title">Use</div>
+          <div class="entry_record_title">
+            Use
+            <span class="question" id="entryuse" >?</span>
+          </div>
           <div class="entry_record_value"><?php echo $use; ?></div>
         </div>
     <?php }?>
@@ -164,6 +182,7 @@
         }else{
           echo "a language you know";          
         } //end else ?>
+        <span class="question" id="entrytranslate" >?</span>
       </div>
       <div class="entry_record_value">
         <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a>
@@ -196,7 +215,10 @@
     
     <!--Display user name who added this entry-->
     <div class="entry_record">
-      <div class="entry_record_title">Entry added by</div>
+      <div class="entry_record_title">
+        Entry added by
+        <span class="question" id="entryaddedby" >?</span>
+      </div>
       <div class="entry_record_value">
     <?php 
         //echo $user_id."</br>"; 
@@ -211,7 +233,10 @@
     
     <!--Display creation date--> 
     <div class="entry_record">
-      <div class="entry_record_title">Creation date</div>
+      <div class="entry_record_title">
+        Creation date
+        <span class="question" id="entrydate" >?</span>
+      </div>
       <div class="entry_record_value"><?php echo $date; ?></div>
     </div>
     <!--Display creation date end --> 
@@ -219,7 +244,10 @@
     
     <!--Display media-->
     <div class="entry_record">
-      <div class="entry_record_title">Media</div>
+      <div class="entry_record_title">
+        Media
+        <span class="question" id="entrymedia" >?</span>
+      </div>
       <div class="entry_record_value">
     <?php 
         echo $media."</br>";

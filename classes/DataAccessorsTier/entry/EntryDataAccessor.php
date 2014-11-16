@@ -353,7 +353,7 @@ class EntryDataAccessor {
                   e.ent_entry_language_id = l.lan_language_id
                 AND
                   e.ent_entry_translation_of = '{$dad_id}'";
-      echo "eda::getListOfKidBriefByDadId(), query=" . $query;
+      //echo "eda::getListOfKidBriefByDadId(), query=" . $query;
       $dbHelper = new DBHelper();
       $resultOfSelect = $dbHelper->executeSelect($query);
       $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief2($resultOfSelect);
