@@ -120,7 +120,7 @@
 
 
     <!--Display author name--> 
-<?php if ($authors !== "" || $authors !== null){ ?>
+<?php if ($authors !== "" && $authors !== null){ ?>
     <div class="entry_record">
       <div class="entry_record_title">Author(s)</div>
       <div class="entry_record_value">
