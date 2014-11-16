@@ -7,9 +7,13 @@
     require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
     require_once BUSINESS_DIR_ENTRY . "Entry.php";
 
+    require_once BUSINESS_DIR_RATING . 'RatingManager.php';
+    require_once BUSINESS_DIR_RATING . 'Rating.php';
+
     $userManager = new UserManager();
     $locationManager = new LocationManager();
     $EntryManager = new EntryManager();
+    $Rating          = new RatingManager();
 
     $userId = intval( $_GET["id"]);
 //    if ($userId =="")

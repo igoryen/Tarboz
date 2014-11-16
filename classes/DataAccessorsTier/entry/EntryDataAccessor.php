@@ -230,6 +230,7 @@ class EntryDataAccessor {
       $Entries[$count]->setEntrySourceId($list['ent_entry_source_id']);
       $Entries[$count]->setEntryUse($list['ent_entry_use']);
       $Entries[$count]->setEntryHttpLink($list['ent_entry_http_link']);
+      $Entries[$count]->setEntryCreationDate($list['ent_entry_creation_date']);
       $count++;
     } // while
     return $Entries;
