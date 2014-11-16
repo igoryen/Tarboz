@@ -723,6 +723,10 @@ a:active {
   width: 60%;
 }
 
+.button_room{
+  display: table-cell;
+}
+
 .entry_record_title{
   background-color: lavender;
   color: silver;
