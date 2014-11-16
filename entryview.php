@@ -312,18 +312,22 @@
 
     <!--Display edit--> 
     <div class="entry_record">
-      <div class="entry_record_title">Edit</div>
-      <div class="entry_record_value">
-        <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
-      </div>      
-    </div>
-    <!--Display edit end--> 
-    <!--Display Translate into--> 
-    <!-- display the Delete button if the logged-in user is the creator of the entry-->
-    <div class="entry_record">
-      <div class="entry_record_title">Delete this entry</div>
+      <div class="entry_record_title">Control</div>
       <div class="entry_record_value">
         
+        <div class="button_room">
+          <!-- the Edit Entry button -->
+          <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
+          &nbsp;
+        </div>
+        <div class="button_room">
+          <!-- the Delete Entry button --> 
+          
+    <!--Display edit end--> 
+    
+    <!--Display Translate into--> 
+    <!-- display the Delete button if the logged-in user is the creator of the entry-->
+    
         <button id="entryDeleteButton">Delete this entry</button>
         <span id="entryDeleteResponse" style="display: none"></span>
         <div id="entryDeleteDialog" style="display: none">
@@ -336,8 +340,7 @@
                   id="entryDeleteCancel"
                   onclick="">Cancel</button>
           </form>
-        </div>        
-      </div>
+        </div>
       <script>
         $( "#entryDeleteButton" ).click(function() {
           $( "#entryDeleteDialog" ).show("fast");
@@ -350,8 +353,9 @@
           $( "#entryDeleteDialog" ).hide("fast");
         });
       </script>  
-    </div>
-        
+    </div><!-- Edit button room -->
+    </div><!-- entry record value -->
+    </div><!-- Entry record-->
     
 
     
