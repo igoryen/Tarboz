@@ -12,6 +12,7 @@ CREATE TABLE `prj666`.`tbl_entry` (
   `ent_entry_rating_id` INT NULL,
   `ent_entry_tags` VARCHAR(255) NULL,
   `ent_entry_author_id` INT NULL,
+  `ent_entry_authors` VARCHAR(255) NULL,
   `ent_entry_source_id` INT NULL,
   `ent_entry_use` VARCHAR(255) NULL,
   `ent_entry_http_link` VARCHAR(255) NULL,

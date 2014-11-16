@@ -129,7 +129,7 @@ function form_to_create_kid($dad){
       <div class="entry_create_row">
         <div class="entry_create_record_title">This was written by</div>
         <div class="entry_create_record_value">
-          <textarea name="author" rows="2" cols="50"></textarea>
+          <textarea name="authors" rows="2" cols="50"></textarea>
         </div>
       </div>
 
