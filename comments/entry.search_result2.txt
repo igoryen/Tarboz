@@ -1,0 +1,83 @@
+1. if entry is a dad
+2. take down dad's ID
+3. look for the dad's kids. Look at every entry to see if it belongs to the dad
+4. if the current entry is a kid of the dad
+5. add this kid/entry to the bottom of family
+6. sort the entries in the array by language: alphabetically
+7. sort by authenticity status: dads at the top, kids below
+8. touch (look at) every entry returned from the DB
+9. start a family
+10. sort the kids by their languages
+11. push the dad to the top of the family
+12. add the family to the array of families
+13.---------------
+echo "<hr>count(array_filter(entries)): " . count(array_filter($entries));
+echo "<hr>count(entries): " . count($entries);
+echo "<br>array_filter(family)...";
+14. echo "<hr>count(entries): " . count($entries);
+15.---------------
+display the dad entry
+tbl_head(); tbl_row($dad); tbl_foot();
+16. ---------------
+echo "<br>created family[].";
+echo "<br>count(family) = " . count($family);
+echo "<br>created family[]. count(array_filter(family)) = " . count(array_filter($family));
+echo "<br>Beginning to look for kids among [count(entries)]: " . count($entries).'<br>';
+17. ----------------
+echo "<br><b>1 kid is found for entry ".$dad->getEntryId();
+echo " (with translOf = ".$entry->getEntryTranslOf().")</b>";
+18. echo "<br>Entry is non-null (id=".$entry->getEntryId() . "), therefore, adding it to the family";
+19. -------------
+echo "<br>Search for kids done. count(family) = ". count($family)."!";
+echo "<br>1 or more kids found! The family is not empty";
+//echo "<br>count(family)>0, it's " . count($family);
+echo ". <mark>Therefore</mark>, <b>sorting family kids by language</b>";
+20. ------------
+echo "<br>displaying family kids sorted by language</b>";
+tbl_head();
+foreach($family as $entry){
+  tbl_row($entry);
+}
+tbl_foot();
+echo "END displaying family kids sorted by language</b>";
+21. echo "<hr><mark>Entry " . $cc . "</mark>";
+22. echo "<br>array_filter(family, 'is_full')";
+23. echo "<br>Added the dad to the top of the family";
+24. ---------------
+echo "<br>displaying family: dad and kids</b>";
+tbl_head();
+foreach($family as $entry){
+  tbl_row($entry);
+}
+tbl_foot();
+echo "END displaying family: dad and kids</b>";
+25. echo "<br>Search for kids done. count(family) = ". count($family).". No kids found!";
+26. echo "<br>array_filter(family, 'is_full')";
+27. echo "<br>Added the single dad to the empty family";
+28. ---------------------
+echo "<br>displaying family: dad and kids</b>";
+tbl_head();
+foreach($family as $entry){
+  tbl_row($entry);
+}
+tbl_foot();
+echo "END displaying family: dad and kids</b>";
+29. echo "<br>Now the count(family): " . count($family)."<br>";
+30. add this family to array of families
+31. echo "<br>Added the family to the bottom of the array of families";
+32. echo "<br>Nulled the family array";
+33. I did this because otherwise all the entries get accumulated in it
+34. add dad on top, push dad to the top of the family
+35. leave only full entries in the family (remove all the empties)
+36. (gathering orphans:) if the next entry in the outmost loop is not a dad but a kid that is an orphan (has no dad, its translOf == null)
+37. if the next entry is not empty
+38. if the next entry is a dad
+39. if the next entry is a kid
+40. if the next entry is a kid and it is last in the queue
+41. if the family has only 1 member (i.e. the dad)
+42. if the family has 1 or more members (i.e. the dad and 1 or more kids)
+43. if the next entry is a kid and it is last in the queue, and its language different from the previous
+44. if the next entry is a kid and it is last in the queue, and its language is the same as the previous
+45. if the next entry is a kid and it is NOT last in the queue
+46. if the next entry is a kid and it is NOT last in the queue, and its language is diff from the prev
+47. if the next entry is a kid and it is NOT last in the queue, and its language is same as the prev

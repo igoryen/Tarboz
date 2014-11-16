@@ -1,5 +1,11 @@
 <?php
+require_once BUSINESS_DIR_LANG . "LanguageManager.php";
+require_once BUSINESS_DIR_LANG . "Language.php";
+
+
+
 function form_to_create_kid($dad){
+  $lm = new LanguageManager();
   ?>
   <!-- 1 -->
   <form action="" method="post">
@@ -35,12 +41,17 @@ function form_to_create_kid($dad){
       <div class="entry_create_row">
         <div class="entry_create_record_title">In what language? <span class="Painted_red">*</span></div>
         <div class="entry_create_record_value">
-          <select name="language">
-            <option value="" selected="selected">This is in ...</option>
-            <option value="3">Chinese</option><!-- 4 -->
-            <option value="1">English</option>
-            <option value="2">Russian</option>
-          </select>
+          <select name="langid">
+            <option value="">This will be in ...</option><?php
+              //$langs = $lm->getListOfLang();
+              $langs = $lm->getLanguages();
+              foreach ($langs as $lang) {
+              echo '<option value="';
+              echo $lang->getLangId();
+              echo '">';
+              echo $lang->getLangName();
+              echo '</option>';
+       }?></select>
         </div>
       </div>
 

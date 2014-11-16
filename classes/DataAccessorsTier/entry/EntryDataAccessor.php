@@ -2,6 +2,8 @@
 require_once DB_CONNECTION . 'DBHelper.php';
 require_once BUSINESS_DIR_ENTRY . 'Entry.php';
 require_once(DB_CONNECTION . 'datainfo.php');
+require_once DB_CONNECTION . 'constants.php';
+
 class EntryDataAccessor {
   /**
    *
@@ -9,9 +11,9 @@ class EntryDataAccessor {
    * @return type $last_inserted_id (the ID generated in the last query)
    */
   public function addEntry($entry) {
-    
+
     $id =         $entry->getEntryId();
-    $lang =       $entry->getEntryLanguage();
+    $langid =     $entry->getEntryLanguageId();
     $text =       $entry->getEntryText(); // 1
     // TODO: create the verbatim of $text using the Bing translator
     $verbatim =   $entry->getEntryVerbatim(); // 2
@@ -29,10 +31,10 @@ class EntryDataAccessor {
     $use =        $entry->getEntryUse(); // 13
     $link =       $entry->getEntryHttpLink(); // 14
     $date =       $entry->getEntryCreationDate();
-       
-    // 15   
+
+    // 15
     $query_insert = 'INSERT INTO '
-      . 'tbl_entry ('
+      .ENTRY. ' ('
             . '`ent_entry_language_id`, '
             . '`ent_entry_text`, '
             . '`ent_entry_verbatim`, '
@@ -50,7 +52,7 @@ class EntryDataAccessor {
             . '`ent_entry_http_link`, '
             . '`ent_entry_creation_date`)'
       . ' VALUES('
-      . '"' . $lang
+      . '"' . $langid
       . '", "' . $text
       . '", "' . $verbatim
       . '", "' . $translit
@@ -66,7 +68,7 @@ class EntryDataAccessor {
       . '", "' . $use
       . '", "' . $link
       . '", "' . $date
-      . '")'; 
+      . '")';
     // 51
     echo "<br>eda::query_insert:<br>"; echo $query_insert;
     $dbHelper = new DBHelper();  // 18
@@ -80,29 +82,36 @@ class EntryDataAccessor {
    * @return $resultOfEntryUpdate
    */
   public function updateEntry($entry) {
-    
+    //TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+    $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
+            or die("Error, failed to connect" . mysqli_error($this->connection));
+    $con->set_charset("utf8");
+    if (mysqli_connect_errno()) {
+      echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+    //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
     $entryId = $entry->getEntryId();
-    $text = mysql_real_escape_string($entry->getEntryText());
-    $verbatim = mysql_real_escape_string($entry->getEntryVerbatim());
-    /*
-     * TODO: transliterate the value of $text using ...
-     */
-    $translit = mysql_real_escape_string($entry->getEntryTranslit());
+    
+    $lang_id =  $entry->getEntryLanguageId();
+    $text =     mysqli_real_escape_string($con, $entry->getEntryText());
+    $verbatim = mysqli_real_escape_string($con, $entry->getEntryVerbatim());
+    $translit = mysqli_real_escape_string($con, $entry->getEntryTranslit());
     //$authsid = $entry->getEntryAuthenStatusId();
     //$translOf = $entry->getEntryTranslOf();
     //$userId = $entry->getEntryUserId();
     // $mediaSet = $entry->getMediaSet();
     // $commentId = $entry->;
     // $ratingId = $entry->getEntryRatingId();
-    $tags = $entry->getEntryTags();
-    $authorId = $entry->getEntryAuthorId();
+    $tags =     mysqli_real_escape_string($con, $entry->getEntryTags());
+    $authorId = mysqli_real_escape_string($con, $entry->getEntryAuthorId());
     $sourceId = $entry->getEntrySourceId();
-    $use = $entry->getEntryUse();
+    $use =      mysqli_real_escape_string($con, $entry->getEntryUse());
     $httpLink = $entry->getEntryHttpLink();
     /*
      * Compose the MySQL link
      */
-    $query = "UPDATE tbl_entry SET "
+    $query = "UPDATE ".ENTRY." SET "
+            . "ent_entry_language_id = '$lang_id',"
             . "ent_entry_text = '$text',"
             . "ent_entry_verbatim = '$verbatim',"
             . "ent_entry_translit = '$translit',"
@@ -122,9 +131,17 @@ class EntryDataAccessor {
     /*
      * using: require_once DB_CONNECTION . 'DBHelper.php';
      */
-    $dbHelper = new DBHelper();
-    $resultOfEntryUpdate = $dbHelper->executeQuery($query);
-    return $resultOfEntryUpdate;
+    //TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+    if (!mysqli_query($con,$query)) {
+      die('Error: ' . mysqli_error($con));
+    }    
+    if ($con) {
+      $result = mysqli_query($con, $query);
+    }    
+    mysqli_close($con);
+    //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+    
+    return $result;
   }
   /**
    *
@@ -132,9 +149,10 @@ class EntryDataAccessor {
    * @return type $entryGottenById
    */
   public function getEntryById($entryId) {
-    $query = "SELECT 
-                e.ent_entry_id, 
-                l.lan_lang_name, 
+
+    $query = "SELECT
+                e.ent_entry_id,
+                l.lan_lang_name,
                 e.ent_entry_text,
                 e.ent_entry_text,
                 e.ent_entry_verbatim,
@@ -151,7 +169,7 @@ class EntryDataAccessor {
                 e.ent_entry_use,
                 e.ent_entry_http_link,
                 e.ent_entry_creation_date
-              FROM tbl_entry e, tbl_language l 
+              FROM ".ENTRY." e, ".LANGUAGE." l 
               WHERE e.ent_entry_language_id = l.lan_language_id 
               AND e.ent_entry_id = ". $entryId;
     // 52
@@ -175,15 +193,15 @@ class EntryDataAccessor {
    * @return type $resultOfDelete
    */
   public function deleteEntry($entryId) {
-    $query = "DELETE FROM ENTRY "
-            . "WHERE ent_entry_id = $entryId";
+    $query = "DELETE FROM ".ENTRY. 
+             " WHERE ent_entry_id = $entryId";
     $dbHelper = new DBHelper();
     $resultOfDelete = $dbHelper->executeQuery($query); //47
     return $resultOfDelete;
   }
-  
+
   public function deleteEntryVirtual($entryId){
-    $query = "UPDATE ". ENTRY 
+    $query = "UPDATE ". ENTRY
            . " SET ent_entry_deleted = 1 "
            . "WHERE ent_entry_id = '{$entryId}'";
     $dbHelper = new DBHelper();
@@ -237,20 +255,20 @@ class EntryDataAccessor {
   }
 // used to search the database for the "father" using a verbatim string
   /**
-   * 
+   *
    * @param string $verbatim
    * @return type
    */
   public function getFatherByVerbatim($verbatim) {
-    
+
     //$fatherGottenByVerbatim = new Entry();
     // 21
-    $query = "SELECT 
-                e.ent_entry_id, 
-                l.lan_lang_name, 
+    $query = "SELECT
+                e.ent_entry_id,
+                l.lan_lang_name,
                 e.ent_entry_text,
                 e.ent_entry_creator_id
-              FROM tbl_entry e, tbl_language l
+              FROM ".ENTRY." e, ".LANGUAGE." l
               WHERE e.ent_entry_language_id = l.lan_language_id
                 AND MATCH(e.ent_entry_verbatim)
                 AGAINST('".$verbatim ."' IN NATURAL LANGUAGE MODE )
@@ -259,7 +277,7 @@ class EntryDataAccessor {
     //echo "</br>EDA getFatherByVerbatim query: ".$query;
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query); // 20
-    // 25,26,27    
+    // 25,26,27
     $fatherGottenByVerbatim = $this->getEntryBrief($result); // 22
     //28,29
     return $fatherGottenByVerbatim;
@@ -270,12 +288,12 @@ class EntryDataAccessor {
                 l.lan_lang_name, 
                 e.ent_entry_text,
                 e.ent_entry_creator_id,
-                MATCH(e.ent_entry_verbatim) 
+                MATCH(e.ent_entry_verbatim)
                 AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
                 AS relevance
               FROM tbl_entry e, tbl_language l
-              WHERE e.ent_entry_language_id = l.lan_language_id 
-                AND MATCH(e.ent_entry_verbatim) 
+              WHERE e.ent_entry_language_id = l.lan_language_id
+                AND MATCH(e.ent_entry_verbatim)
                     AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
                 AND e.ent_entry_authen_status_id = 2
                 AND e.ent_entry_deleted = 0
@@ -289,7 +307,7 @@ class EntryDataAccessor {
                 MATCH(e.ent_entry_verbatim) 
                 AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
                 AS relevance
-              FROM tbl_entry e, tbl_language l
+              FROM ".ENTRY." e, ".LANGUAGE." l
               WHERE e.ent_entry_language_id = l.lan_language_id 
                 AND MATCH(e.ent_entry_verbatim) 
                 AGAINST('".$verbatim."' IN NATURAL LANGUAGE MODE)
@@ -303,10 +321,11 @@ class EntryDataAccessor {
     $arrayOfKidsGottenByVerbatim = $this->getListOfKidBrief($resultOfSelect);
     return $arrayOfKidsGottenByVerbatim;
   }
-  
+
   public function getListOfEntryBriefByLanguage($language){
+
     $query ="SELECt e.ent_entry_id, l.lan_lang_name, e.ent_entry_text 
-              FROM tbl_entry e, tbl_language l 
+              FROM ".ENTRY." e, ".LANGUAGE." l 
               WHERE e.ent_entry_language_id = l.lan_language_id 
               AND e.ent_entry_deleted = 0
               AND LOWER(SUBSTR(l.lan_lang_name, 1, 2)) = '{$language}'";
@@ -315,7 +334,330 @@ class EntryDataAccessor {
     $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief($resultOfSelect);
     return $arrayOfEntryGottenByLanguage;
   }
-  
+  //---------------------------------------------
+  public function getListOfEntryBriefBySearch($v,$l,$f,$t,$a){
+    if($v==NULL){ // if no verbatim
+    //echo "<br>eda::getListOfEntryBriefBySearch(): no verbatim";
+      if ($l==NULL) { // if no language
+        //echo "<br>eda::getListOfEntryBriefBySearch(): no language";
+        if($f==NULL || $t==NULL){
+          /*if no time frame, then #1-2. no search*/
+          //echo "<br>eda::getListOfEntryBriefBySearch(): no time frame";
+          //echo "<br>eda::getListOfEntryBriefBySearch(): no authen";
+        }
+        elseif($f!==NULL && $t!==NULL){ // if HAVE time frame
+          //echo "<br>eda::getListOfEntryBriefBySearch(): case 3: we have a time frame";
+          if($a==null){
+            /*#3*/
+            //echo "<br>eda::getListOfEntryBriefBySearch(): no authen";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e, tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'";
+          }
+          else{
+            /* #4 */
+            //echo "<br>eda::getListOfEntryBriefBySearch(): case 4: authen + time frame";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e, tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'
+                      AND
+                        e.ent_entry_authen_status_id = {$a}";
+          }
+        } // have time frame
+      } // no language
+      else{ // if we HAVE language
+        //echo "<br>eda::getListOfEntryBriefBySearch(): l!==NULL";
+        if($f==NULL || $t==NULL){ // if no time frame
+          //echo "<br>eda::getListOfEntryBriefBySearch(): f==NULL || t==NULL";
+          if($a==NULL){ // if no auth
+            // #5 - only target language
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 5: target language";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e, tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        e.ent_entry_language_id = {$l}";
+          }
+          else{ // if we HAVE auth
+            //echo "<br>eda::getListOfEntryBriefBySearch(): a!==NULL";
+            // #6 - target language + authenticity status
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 6: target language + authenticity status";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e,
+                        tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        e.ent_entry_language_id = {$l}
+                      AND
+                        e.ent_entry_authen_status_id = {$a}";
+          }
+        } // if no dateframe
+        else{ //if we HAVE time frame
+          //echo "<br>eda::getListOfEntryBriefBySearch(): we have time frame";
+          if($a==NULL){ // if no auth
+            // #7 - language + time frame
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 7: language + time frame";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e, tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        e.ent_entry_language_id = {$l}
+                      AND
+                        e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'";
+          }
+          else{ // if HAVE auth
+            // #8 - language + time frame + auth
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 8: language + time frame + auth";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e,
+                        tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        e.ent_entry_language_id = {$l}
+                      AND
+                        e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'
+                      AND
+                        e.ent_entry_authen_status_id = {$a}";
+          }
+
+        }
+      }
+    } // #1-16. if no verbatim
+    else{//#17. if we HAVE verbatim
+      if ($l==NULL) { // if no language
+        if($f==NULL || $t==NULL){ // if no time frame
+          if($a==NULL){ // if no auth
+            //#9 - search phrase
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 9: verbatim";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e,
+                        tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        MATCH(e.ent_entry_verbatim)
+                        AGAINST('{$v}' IN NATURAL LANGUAGE MODE )";
+
+          }
+          else{ // if we HAVE auth
+            // #10 - search phrase + authen
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 10: search phrase + authen";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e,
+                        tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        MATCH(e.ent_entry_verbatim)
+                        AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
+                      AND
+                        e.ent_entry_authen_status_id = {$a}";
+          }
+          // #1-2. no search
+        }
+        elseif($f!==NULL && $t!==NULL){ // if HAVE time frame
+          if($a==null){ //if NO auth
+            // #11 - verbatim + time frame
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 11: verbatim + time frame";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e, tbl_language l
+                      WHERE
+                       e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        MATCH(e.ent_entry_verbatim)
+                        AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
+                      AND
+                        e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'";
+          }
+          else{ // if we HAVE auth
+            // #12 - verbatim + time frame + authen
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 12: verbatim + time frame + authen";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e,
+                        tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        MATCH(e.ent_entry_verbatim)
+                        AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
+                      AND
+                        e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'
+                      AND
+                        e.ent_entry_authen_status_id = {$a}";
+          }
+        }
+      } // no language
+      else{ // if we HAVE language
+        if($f==NULL || $t==NULL){ // if no time frame
+          if($a==NULL){ // if no auth
+            // #13 - verbatim + language
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 13: verbatim + language";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e,
+                        tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        MATCH(e.ent_entry_verbatim)
+                        AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
+                      AND
+                        e.ent_entry_language_id = {$l}";
+
+          }
+          else{ // if we HAVE auth
+            // #14 - verbatim + language + authen
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 14";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e, tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        MATCH(e.ent_entry_verbatim)
+                        AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
+                      AND
+                        e.ent_entry_language_id = {$l}
+                      AND
+                        e.ent_entry_authen_status_id = {$a}";
+          }
+        } // if no dateframe
+        else{ //if we HAVE time frame
+          if($a==NULL){ // if no auth
+            // #15 - verbatim + language + time frame
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 15: verbatim + language + time frame";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e,
+                        tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        MATCH(e.ent_entry_verbatim)
+                        AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
+                      AND
+                        e.ent_entry_language_id = {$l}
+                      AND
+                        e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'";
+          }
+          else{ // if HAVE auth
+            // #16 - verbatim + language + time frame + authen
+            //echo "<br>eda::getListOfEntryBriefBySearch() case 16: verbatim + language + time frame + authen";
+            $query = "SELECT
+                        e.ent_entry_id,
+                        l.lan_lang_name,
+                        e.ent_entry_text,
+                        e.ent_entry_authen_status_id,
+                        e.ent_entry_translation_of
+                      FROM
+                        tbl_entry e,
+                        tbl_language l
+                      WHERE
+                        e.ent_entry_language_id = l.lan_language_id
+                      AND
+                        MATCH(e.ent_entry_verbatim)
+                        AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
+                      AND
+                        e.ent_entry_authen_status_id = {$a}
+                      AND
+                        e.ent_entry_language_id = {$l}
+                      AND
+                        e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'";
+          }
+        }
+      }
+    }//#17-32
+    $dbHelper = new DBHelper();
+    $resultOfSelect = $dbHelper->executeSelect($query);
+    $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief2($resultOfSelect);
+    return $arrayOfEntryGottenByLanguage;
+  }
+  //---------------------------------------------
   /**
    *
    * @param type $resultOfSelect
@@ -325,7 +667,7 @@ class EntryDataAccessor {
     $Entries[] = array(); //$Entries[] = new Entry(); 
     $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
-      
+   
       $Entries[$count] = new Entry(); //31
       // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
@@ -353,8 +695,8 @@ class EntryDataAccessor {
     $Entries[] = new Entry();
     $count = 0; // 30
     while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
-      
-      $Entries[$count] = new Entry(); //31
+
+      $Entries[] = new Entry(); //31
       // 32
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryLanguage($list['lan_lang_name']);
@@ -364,7 +706,25 @@ class EntryDataAccessor {
     // 34,35
     return $Entries;
   }
-  
+
+  private function getListOfEntryBrief2($resultOfSelect) {
+    $Entries[] = new Entry();
+    $count = 0; // 30
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
+
+      $Entries[] = new Entry(); //31
+      // 32
+      $Entries[$count]->setEntryId($list['ent_entry_id']);
+      $Entries[$count]->setEntryLanguage($list['lan_lang_name']);
+      $Entries[$count]->setEntryText($list['ent_entry_text']);
+      $Entries[$count]->setEntryAuthenStatusId($list['ent_entry_authen_status_id']);
+      $Entries[$count]->setEntryTranslOf($list['ent_entry_translation_of']);
+      $count++;
+    } // 33
+    // 34,35
+    return $Entries;
+  }
+
   /**
    * getEntryBrief($resultOfSelect)
    * To retrieve only some fields of one entry for the phrase search result page.
@@ -434,8 +794,8 @@ class EntryDataAccessor {
       $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
       if ($in_lang =="") {
         $query = "SELECT e.*, l.lan_lang_name 
-                  FROM tbl_entry e
-                  INNER JOIN tbl_language l 
+                  FROM ".ENTRY." e
+                  INNER JOIN ".LANGUAGE." l 
                   ON e.ent_entry_language_id = l.lan_language_id 
                   WHERE ent_entry_authen_status_id =1 AND 
                         e.ent_entry_creation_date >= '".$from_date."' AND 
@@ -443,8 +803,8 @@ class EntryDataAccessor {
                   ORDER BY e.ent_entry_language_id, e.ent_entry_creation_date DESC";  
       } else {
         $query = "SELECT e.*, l.lan_lang_name 
-                  FROM tbl_entry e
-                  INNER JOIN tbl_language l 
+                  FROM ".ENTRY." e
+                  INNER JOIN ".LANGUAGE." l 
                   ON e.ent_entry_language_id = l.lan_language_id 
                   WHERE ent_entry_authen_status_id =1 AND 
                         e.ent_entry_language_id = '".$in_lang."' AND 
@@ -465,8 +825,8 @@ class EntryDataAccessor {
       $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
       if ($in_lang =="") {
         $query = "SELECT e.*, l.lan_lang_name 
-                  FROM tbl_entry e
-                  INNER JOIN tbl_language l 
+                  FROM ".ENTRY." e
+                  INNER JOIN ".LANGUAGE." l 
                   ON e.ent_entry_language_id = l.lan_language_id 
                   WHERE e.ent_entry_authen_status_id =2 AND 
                         e.ent_entry_translation_of = '".$dad_entryId."' AND
@@ -475,8 +835,8 @@ class EntryDataAccessor {
                   ORDER BY e.ent_entry_language_id, e.ent_entry_creation_date DESC";  
       } else {
         $query = "SELECT e.*, l.lan_lang_name 
-                  FROM tbl_entry e
-                  INNER JOIN tbl_language l 
+                  FROM ".ENTRY." e
+                  INNER JOIN ".LANGUAGE." l 
                   ON e.ent_entry_language_id = l.lan_language_id 
                   WHERE ent_entry_authen_status_id =2 AND 
                         e.ent_entry_translation_of = '".$dad_entryId."' AND
@@ -498,7 +858,7 @@ class EntryDataAccessor {
   // get entry by user id
   public function getEntryByUserId($UserId) {
 
-    $query = "SELECT * FROM tbl_entry WHERE ent_entry_creator_id = '".$UserId."'";
+    $query = "SELECT * FROM ".ENTRY." WHERE ent_entry_creator_id = '".$UserId."'";
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeSelect($query);
     $entryListById = $this->getListOfFathers($result);
@@ -511,8 +871,8 @@ public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_dat
       $end_date = $in_end_date != "" ? $in_end_date : "2100-01-01";
       if ($in_lang =="") {
         $query = "SELECT e.*, l.lan_lang_name 
-                  FROM tbl_entry e
-                  INNER JOIN tbl_language l 
+                  FROM ".ENTRY." e
+                  INNER JOIN ".LANGUAGE." l 
                   ON e.ent_entry_language_id = l.lan_language_id 
                   WHERE ent_entry_authen_status_id =2 AND 
                         e.ent_entry_creation_date >= '".$from_date."' AND 
@@ -520,8 +880,8 @@ public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_dat
                   ORDER BY e.ent_entry_language_id, e.ent_entry_creation_date DESC";  
       } else {
         $query = "SELECT e.*, l.lan_lang_name 
-                  FROM tbl_entry e
-                  INNER JOIN tbl_language l 
+                  FROM ".ENTRY." e
+                  INNER JOIN ".LANGUAGE." l 
                   ON e.ent_entry_language_id = l.lan_language_id 
                   WHERE ent_entry_authen_status_id =2 AND 
                         e.ent_entry_language_id = '".$in_lang."' AND 
@@ -561,7 +921,7 @@ public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_dat
     
   public function getOriginalKidsNum($entryId) {
       $query = "SELECT * 
-                FROM tbl_entry
+                FROM ".ENTRY."
                 WHERE ent_entry_authen_status_id = 2 AND 
                 ent_entry_translation_of = '".$entryId."' 
                 ORDER BY ent_entry_language_id, ent_entry_creation_date DESC";
@@ -579,7 +939,7 @@ public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_dat
     
   public function getEntryLikeNumByEntry($entryId) {
       $query = "SELECT count(rating.rat_like_user_id) AS likeNum
-                FROM tbl_entry AS entry INNER JOIN tbl_rating AS rating
+                FROM ".ENTRY." AS entry INNER JOIN ".RATING." AS rating
                 ON rating.rat_entity_id = CONCAT('ent', '".$entryId."') 
                     AND rating.rat_like_user_id IS NOT NULL AND rating.rat_like_user_id >0
                 GROUP BY entry.ent_entry_id 

@@ -30,6 +30,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
    
    <!-- Extra libraries -->
    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="scripts/jquery-1.11.1.min.js"></script>
    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
    
    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
@@ -444,6 +445,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   </script>
   <script src="treqCreate.js"></script>
   <script src="entryDelete.js"></script>
+  <script src="questionMarkTooltips.js"></script>
   
   <!-- for translator -->
   <style>
@@ -510,7 +512,12 @@ div.showdata{
           </div>
           <div id="user_name" class="table-row" style="padding-top:5px;">
               
-              <?php if(isset($_SESSION['user']) ) echo "Welcome <a href='profile.php'>".$_SESSION['user']->getFirstName()."</a> !"; else echo ""; ?>
+              <?php 
+              if(isset($_SESSION['user']) ) {
+                echo "Welcome <a href='profile.php'>".$_SESSION['user']->getFirstName()."</a> !"; 
+              }else{
+                echo ""; 
+              }?>
 
           </div>
           </div>
@@ -525,11 +532,14 @@ div.showdata{
                     <input type="password" id="userpassword" placeholder="Password" class="login_input">
                  </p>
                  <p>
-                    <div style="margin-left: 0.7em;"><button class="lw_button" id="sub">Login</button>
+                    <div style="margin-left: 0.7em;">
+                      <button class="lw_button" id="sub">Login</button>
                       <b id="or">or</b>
-                        <a href="registration.php"><button class="lw_button">Register</button></a>
+                      <a href="registration.php">
+                        <button class="lw_button">Register</button>
+                      </a>
                     </div> 
-                 </p> 
+                 </p>
                  <p id="ftest"></p>
                  <p style="margin-left: 1em;" id="forgotpwd"></p>
               </div>

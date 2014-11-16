@@ -14,8 +14,8 @@ class TranslationRequestDataAccessor{
     $lang_id = $treq->getTreqLang();
     $date = $treq->getTreqDate();
     
-    $insert_query = 'INSERT INTO 
-                      tbl_transl_request (
+    $insert_query = 'INSERT INTO  
+                      '.TRANS_REQUEST.' (
                         treq_creator_id,
                         treq_entry_id,
                         treq_target_lang_id,
@@ -37,12 +37,12 @@ class TranslationRequestDataAccessor{
                 e.ent_entry_id, 
                 e.ent_entry_text, 
                 l.lan_lang_name
-              FROM 
-                tbl_entry AS e 
+              FROM  
+                ".ENTRY." AS e 
+                  STRAIGHT_JOIN  
+                ".TRANS_REQUEST." AS r 
                   STRAIGHT_JOIN 
-                tbl_transl_request AS r 
-                  STRAIGHT_JOIN
-                tbl_language AS l
+                ".LANGUAGE." AS l
               WHERE
                 e.ent_entry_id = r.treq_entry_id
               AND
@@ -62,9 +62,9 @@ class TranslationRequestDataAccessor{
                 r.treq_entry_id,
                 l.lan_lang_name
               FROM 
-                tbl_transl_request r
-                  STRAIGHT_JOIN
-                tbl_language l
+                ".TRANS_REQUEST." r
+                  STRAIGHT_JOIN 
+                ".LANGUAGE." l
               WHERE
                 r.treq_target_lang_id = l.lan_language_id
               AND  
@@ -79,10 +79,10 @@ class TranslationRequestDataAccessor{
     $query = "SELECT
                 r.treq_entry_id,
                 l.lan_lang_name
-              FROM
-                tbl_transl_request AS r 
-                  STRAIGHT_JOIN
-                tbl_language AS l
+              FROM 
+                ".TRANS_REQUEST." AS r  
+                  STRAIGHT_JOIN 
+                ".LANGUAGE." AS l 
               WHERE
                 r.treq_target_lang_id = l.lan_language_id
               AND
