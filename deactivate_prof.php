@@ -25,6 +25,7 @@
 ?>
 <div align="center" style="padding-top: 200px">
     <h1><img src="images/sad.png" alt="unhappy" /> We are sorry. You are leaving.</h1>
+    <h1><img src="images/sad.png" alt="unhappy" /> We are sorry. You are leaving.</h1>
     
     <h2>Are sure you want to cancle you account?</h2>
     <form action="deactivate_prof.php?id=<?php echo $userId ?>" method="POST">
