@@ -153,17 +153,28 @@ foreach($entries as $entry){
     $dad = $entry;
 //    CREATE A FAMILY ARRAY
     $family[] = new Entry();
-//
-//    LOOP THROUGH NON_ORPHANS
-    foreach($non_orphans as $i => $non_orphan){
-//      IF NON-ORPHAN MATCHES THE DAD
-      if($non_orphan->getEntryTranslOf() == $dad->getEntryId()){
-        //echo "<br>we have a kid!  ";
-//        ADD THE NON-ORPHAN TO THE FAMILY ARRAY
-        array_push($family, $non_orphan);
-        unset($non_orphans[$i]);
-      }
+    
+    //TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+    //option 2: get the dad's kids from the database
+    $kids = $em->getListOfKidBriefByDadId($dad->getEntryId());
+    foreach($kids as $kid){
+      array_push($family, $kid);
     }
+    //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+    
+    //TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+    //option 2: get the dad's kids from the database
+//    LOOP THROUGH NON_ORPHANS
+//    foreach($non_orphans as $i => $non_orphan){
+////      IF NON-ORPHAN MATCHES THE DAD
+//      if($non_orphan->getEntryTranslOf() == $dad->getEntryId()){
+//        //echo "<br>we have a kid!  ";
+////        ADD THE NON-ORPHAN TO THE FAMILY ARRAY
+//        array_push($family, $non_orphan);
+//        unset($non_orphans[$i]);
+//      }
+//    }
+    //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
     // REMOVE THE EMPTIES
     $family = array_filter($family, 'is_full');
 //    IF THE FAMILY ARRAY COMES UP EMPTY //dad's kids either don't exist in the db or were not retrieved
