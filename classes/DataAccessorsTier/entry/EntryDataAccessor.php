@@ -337,6 +337,28 @@ class EntryDataAccessor {
     $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief($resultOfSelect);
     return $arrayOfEntryGottenByLanguage;
   }
+  
+  
+    public function getListOfKidBriefByDadId($dad_id){
+   
+      $query = "SELECT
+                  e.ent_entry_id,
+                  l.lan_lang_name,
+                  e.ent_entry_text,
+                  e.ent_entry_authen_status_id,
+                  e.ent_entry_translation_of
+                FROM
+                  tbl_entry e, tbl_language l
+                WHERE
+                  e.ent_entry_language_id = l.lan_language_id
+                AND
+                  e.ent_entry_translation_of = '{$dad_id}'";
+      echo "eda::getListOfKidBriefByDadId(), query=" . $query;
+      $dbHelper = new DBHelper();
+      $resultOfSelect = $dbHelper->executeSelect($query);
+      $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief2($resultOfSelect);
+      return $arrayOfEntryGottenByLanguage;
+    }
   //---------------------------------------------
   public function getListOfEntryBriefBySearch($v,$l,$f,$t,$a){
     if($v==NULL){ // if no verbatim
@@ -710,6 +732,7 @@ class EntryDataAccessor {
     return $Entries;
   }
 
+  // this method returns more fields than `getListOfEntryBrief` 
   private function getListOfEntryBrief2($resultOfSelect) {
     $Entries[] = new Entry();
     $count = 0; // 30

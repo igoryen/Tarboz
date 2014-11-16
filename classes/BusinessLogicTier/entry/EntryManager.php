@@ -95,6 +95,13 @@ class EntryManager {
     return $arrayOfEntryBriefGottenBySearch;
   }
     
+  
+  public function getListOfKidBriefByDadId($dad_id){   
+    $eda = new EntryDataAccessor();
+    $arrayOfKidBriefGottenByDadId = $eda->getListOfKidBriefByDadId($dad_id);
+    return $arrayOfKidBriefGottenByDadId;
+  }
+  
   // get entry by user ids  
   public function getEntryByUserId($UserId) {
     $eda = new EntryDataAccessor();
