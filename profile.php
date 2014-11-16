@@ -8,11 +8,14 @@
     require_once BUSINESS_DIR_ENTRY . "Entry.php";
     require_once BUSINESS_DIR_TRANSLREQ . "TranslationRequestManager.php";
 
-    $userManager = new UserManager();
+    require_once BUSINESS_DIR_RATING . 'RatingManager.php';
+    require_once BUSINESS_DIR_RATING . 'Rating.php';
+
+    $userManager     = new UserManager();
     $locationManager = new LocationManager();
-    $EntryManager = new EntryManager();
-//    $user_logged_in = true;
-//
+    $EntryManager    = new EntryManager();
+    $Rating          = new RatingManager();
+
       if (isset($_SESSION['user'])) {
           $user = $_SESSION['user'];
           $user_id = $user->getUserId();
@@ -27,16 +30,16 @@
                 $birth= $User_Login->getDOB();
                 $mediaId = $User_Login->getMediaId();
           
-            // get location
-            $location = $locationManager->getLocationBylocationId($locationId);
-            foreach (  $location as $loc) {
-                $Address    = $loc->getAddress();
-                $PostalCode = $loc->getPostalCode();
-                $cityid     = $loc->getCityId();
-            }
-          
+//            // get location
+//            $location = $locationManager->getLocationBylocationId($locationId);
+//            foreach (  $location as $loc) {
+//                $Address    = $loc->getAddress();
+//                $PostalCode = $loc->getPostalCode();
+//                $cityid     = $loc->getCityId();
+//            }
+         
             // get city name 
-            $city = $locationManager->getCityById($cityid);
+            $city = $locationManager->getCityById($locationId);
                 $CityName = $city->getCityName();
                 $provId   = $city->getProvinceId();
           

@@ -344,6 +344,7 @@ font-size: 15px;
 }
 /*--- finish login.php -------*/
 
+
 /*--- for search_result.php ---*/
 
 a:link {
@@ -1116,6 +1117,14 @@ a:active {
 #RightCol_Scroll {
     overflow: auto;
     max-height: 669px;
+}
+
+.profile_input {
+  width: 280px;
+  line-height: 30px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  margin-top: 10px
 }
 
 /****************for middle of front page*************/
