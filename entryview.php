@@ -73,7 +73,7 @@
       <div class="entry_record_title">Authenticity status</div>
       <div class="entry_record_value">
     <?php 
-        echo $authen."</br>"; 
+        //echo $authen."</br>"; 
         $query = "SELECT * FROM tbl_authen_status WHERE athn_authen_status_id = '".$authen."'";
         $dbHelper = new DBHelper();
         $result = $dbHelper->executeSelect($query);
