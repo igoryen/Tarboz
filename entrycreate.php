@@ -55,7 +55,7 @@
         $entry->setEntryCommentId(  '2'); //$_POST['comment_id'];
         $entry->setEntryRatingId(   '1'); //($_POST['rating_id']);
         $entry->setEntryTags(htmlentities($_POST['tags']));
-        $entry->setEntryAuthorId('1');   //$_POST['author']);
+        $entry->setEntryAuthors(htmlentities($_POST['authors']));
         $entry->setEntrySourceId(htmlentities($_POST['source'])); 
         $entry->setEntryUse(htmlentities($_POST['use']));
         $entry->setEntryHttpLink(htmlentities(str_replace("watch?v=", "v/", $_POST['link'])));
@@ -88,7 +88,7 @@
         $entry->setEntryCommentId('2'); //$_POST['comment_id'];
         $entry->setEntryRatingId('1'); //($_POST['rating_id']);
         $entry->setEntryTags(htmlentities($_POST['tags']));
-        $entry->setEntryAuthorId('1');//$_POST['author']);
+        $entry->setEntryAuthors(htmlentities($_POST['authors']));
         $entry->setEntrySourceId('1');//$_POST['source']); 
         $entry->setEntryUse(htmlentities($_POST['use']));
         $entry->setEntryHttpLink(htmlentities(str_replace("watch?v=", "v/", $_POST['link']))); //43

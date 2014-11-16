@@ -26,7 +26,8 @@ class EntryDataAccessor {
     $commentId =  $entry->getEntryCommentId(); // 8
     $ratingId =   $entry->getEntryRatingId(); // 9
     $tags =       $entry->getEntryTags(); //10
-    $authorId =   $entry->getEntryAuthorId(); // 11
+    //$authorId =   $entry->getEntryAuthorId(); // 11
+    $authors =    $entry->getEntryAuthors(); 
     $sourceId =   $entry->getEntrySourceId(); // 12
     $use =        $entry->getEntryUse(); // 13
     $link =       $entry->getEntryHttpLink(); // 14
@@ -46,7 +47,7 @@ class EntryDataAccessor {
             . '`ent_entry_comment_id`, '
             . '`ent_entry_rating_id`, '
             . '`ent_entry_tags`, '
-            . '`ent_entry_author_id`, '
+            . '`ent_entry_authors`, '
             . '`ent_entry_source_id`, '
             . '`ent_entry_use`, '
             . '`ent_entry_http_link`, '
@@ -63,7 +64,7 @@ class EntryDataAccessor {
       . '", "' . $commentId
       . '", "' . $ratingId
       . '", "' . $tags
-      . '", "' . $authorId
+      . '", "' . $authors
       . '", "' . $sourceId
       . '", "' . $use
       . '", "' . $link
@@ -103,7 +104,8 @@ class EntryDataAccessor {
     // $commentId = $entry->;
     // $ratingId = $entry->getEntryRatingId();
     $tags =     mysqli_real_escape_string($con, $entry->getEntryTags());
-    $authorId = mysqli_real_escape_string($con, $entry->getEntryAuthorId());
+    //$authorId = mysqli_real_escape_string($con, $entry->getEntryAuthorId());
+    $authors = mysqli_real_escape_string($con, $entry->getEntryAuthors());
     $sourceId = $entry->getEntrySourceId();
     $use =      mysqli_real_escape_string($con, $entry->getEntryUse());
     $httpLink = $entry->getEntryHttpLink();
@@ -123,6 +125,7 @@ class EntryDataAccessor {
             //  . "ent_entry_rating_id = '',"
             . "ent_entry_tags = '$tags',"
             //. "ent_entry_author_id = '$authorId',"
+            . "ent_entry_authors = '$authors',"
             . "ent_entry_source_id = '$sourceId',"
             . "ent_entry_use = '$use',"
             . "ent_entry_http_link = '$httpLink' "
@@ -164,7 +167,7 @@ class EntryDataAccessor {
                 e.ent_entry_comment_id,
                 e.ent_entry_rating_id,
                 e.ent_entry_tags,
-                e.ent_entry_author_id,
+                e.ent_entry_authors,
                 e.ent_entry_source_id,
                 e.ent_entry_use,
                 e.ent_entry_http_link,
@@ -780,7 +783,8 @@ class EntryDataAccessor {
       $Entry->setEntryCommentId(      $list['ent_entry_comment_id']);
       $Entry->setEntryRatingId(       $list['ent_entry_rating_id']);
       $Entry->setEntryTags(           $list['ent_entry_tags']);
-      $Entry->setEntryAuthorId(       $list['ent_entry_author_id']);
+      //$Entry->setEntryAuthorId(       $list['ent_entry_author_id']);
+      $Entry->setEntryAuthors(        $list['ent_entry_authors']);
       $Entry->setEntrySourceId(       $list['ent_entry_source_id']);
       $Entry->setEntryUse(            $list['ent_entry_use']);
       $Entry->setEntryHttpLink(       $list['ent_entry_http_link']);

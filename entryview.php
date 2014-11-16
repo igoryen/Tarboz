@@ -43,7 +43,8 @@
     $translOf = $entry->getEntryTranslOf();
     $user_id = $entry->getEntryUserId();
     $media = $entry->getEntryMediaId();
-    $author = $entry->getEntryAuthorId();
+    //$author = $entry->getEntryAuthorId();
+    $authors = $entry->getEntryAuthors();
     $source = $entry->getEntrySourceId();
     $tags = trim($entry->getEntryTags());
     $use = trim($entry->getEntryUse());
@@ -167,25 +168,31 @@
       </div>
     </div>
     <!--Display tags end--> 
-    <!--Display author name--> 
+    
     <?php } //end if (!null == $tags)?>
-
+    
+    
+    <!--Display author name--> 
+<?php if ($authors !== ""){ ?>
     <div class="entry_record">
-      <div class="entry_record_title">Author</div>
+      <div class="entry_record_title">Author(s)</div>
       <div class="entry_record_value">
     <?php 
-        echo $author."</br>";
-        $query = "SELECT * FROM tbl_author WHERE aut_author_id = '".$author."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $author_name = $list['aut_author_name'];
-            echo $author_name;
-        }
+        echo $authors."</br>";
+//        $query = "SELECT * FROM tbl_author WHERE aut_author_id = '".$author."'";
+//        $dbHelper = new DBHelper();
+//        $result = $dbHelper->executeSelect($query);
+//        while ($list = mysqli_fetch_assoc($result)) {
+//            $author_name = $list['aut_author_name'];
+//            echo $author_name;
+//        }
     ?>
       </div>
     </div>
     <!--Display author name end--> 
+<?php } ?>
+        
+    
     <!--Display source-->      
     <div class="entry_record">
       <div class="entry_record_title">Source</div>
