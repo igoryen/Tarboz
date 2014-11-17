@@ -136,7 +136,8 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                      </div>
                 </div>
             </div>
-        </div>    
+        </div> 
+        <!--
         <div>
             <h3>Top 4 Contributors</h3>
 			<table id="innertbl">
@@ -154,8 +155,9 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                         <img src="images/topuser.jpg" caption="User001" width="60px" height="auto"><br><br><a href="#">User004</a>
                     </td>
                 </tr>
-            </table><!--innertbl-->
+            </table>
           </div>
+        -->
         </div>
     </div><!--MidCol-->
 

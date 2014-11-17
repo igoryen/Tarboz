@@ -81,7 +81,7 @@
       $curr_datetime  = date('Y-m-d H:i:s');
       //$query_delete = "DELETE FROM ".COMMENT." WHERE com_comment_id = ".$comment_id;
       $query_delete = "UPDATE ".COMMENT." SET com_is_visible = 'N', com_created_on = '".$curr_datetime."' WHERE com_comment_id = '".$comment_id."'";
-      print ("CommentDataAccessor->deleteComment- query: ".$query_delete);
+      //print ("CommentDataAccessor->deleteComment- query: ".$query_delete);
         $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query_delete);
       return $result;
@@ -135,7 +135,7 @@
     }
 
     public function getCommentByEntry($comment_entry_id) {
-      echo "<br/>CommentDataAccessor entry id: ".$comment_entry_id."<br/><br/>";
+      //echo "<br/>CommentDataAccessor entry id: ".$comment_entry_id."<br/><br/>";
       $query = "SELECT * FROM ".COMMENT." WHERE com_entry_id = '".$comment_entry_id."' AND com_is_visible='Y' ORDER BY com_created_on DESC";
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);

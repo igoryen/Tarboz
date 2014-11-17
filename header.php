@@ -113,10 +113,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                 //When logged in successful, it will close the window
                 $( "#login" ).dialog("close");
                 window.location.reload(true);
-                }
-                else {
+                
+               }
+               else {
                   document.getElementById("ftest").innerHTML="<?php echo LOGIN_FAIL; ?>";
-                } 
+               } 
               });//end of the function(data,status)
 
           });//end of the login button onlick event
@@ -124,24 +125,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         $("#new_commentSub").click(function(event){
             //var formdata = $("#new_comment").serialize(); 
             //alert(formdata);
-            if ($('#user_login_status').val() == "N") {
-                
-                //call login panel
-                $("#forgotpwd").show();
-                //resetting, some of the usertexboxes and the messages
-                document.getElementById("ftest").innerHTML="";
-                $('#userlogin').val('');
-                $('#userpassword').val('');
-                //alert("1"+$("#call_it").html());
-                    //resetting the texboxes
-                  if($.trim($("#call_it").html())=="Login"){
-                      $( "#login" ).dialog( "open" );  
-                      //alert("use not logged in");
-                    }
-                //alert("username innerHtml: "+$('#user_name').html());
-                if($('#user_name').html() =="") {
-                    $('#menu_user_index').css({'display': 'none'});
-                }
+            if ($('#user_login_status').val() == "N") {               
+
             } //end if ($('#user_login_status').val() == "N")
             else {
                 var new_comment = encodeURIComponent($.trim ($('#newComment').val() ));
@@ -439,7 +424,27 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         if($('#user_name').text().trim() !="" && $('#regSuccessMsg').text().indexOf("Thank you for activating your account")>=0) {
             window.location.href = "index.php";
         }
-               
+        
+        $('#newComment').focus( function(event) {
+            //call login panel
+            $("#forgotpwd").show();
+            //resetting, some of the usertexboxes and the messages
+            document.getElementById("ftest").innerHTML="";
+            $('#userlogin').val('');
+            $('#userpassword').val('');
+            //alert("1"+$("#call_it").html());
+                //resetting the texboxes
+              if($.trim($("#call_it").html())=="Login"){
+                  $( "#login" ).dialog( "open" );  
+                  //alert("use not logged in");
+                }
+            //alert("username innerHtml: "+$('#user_name').html());
+            if($('#user_name').html() =="") {
+                $('#menu_user_index').css({'display': 'none'});
+            }
+            
+        });
+     
       });
       
   </script>
@@ -482,22 +487,18 @@ div.showdata{
 </head>
 
 <body>
-
+    <div>
+        <input type="hidden" id="direct_create_entry" name="direct_create_entry" value="N" />
+    </div>
 
     <div id="header">
 
         <div class="header_row">
           <div class="table-cell" style="text-align: left; vertical-align: text-top;">
-            <a href=""><img src="images/logo.png" height="50"></a>
-          </div>
-          <div class="table-cell" style="width:1000;">
-              <!--Search bar start-->
-              <?php require("search.php");?>
-              
-              <!--Search bar end-->
-              <nav id="navigation">
-                  <a href="index.php" >Home</a> 
-                  <a href="entrycreate.php">Create an Entry</a>
+            <a href="index.php"><img src="images/logo.png" height="50"></a><br/>
+            <nav id="navigation">
+                  <a href="index.php" >Home</a> <br/><br/>
+                  <a href="entrycreate.php" id="menu_create_entry" style="display:<?php if(!isset($_SESSION['user']) ) echo 'none'; else echo ''; ?>;">Create an Entry</a><br/><br/>
                   <!--
                   <a href="profile.php">Profile</a>
                   <a href="/Tarboz/userview.php">[user view 2]</a>
@@ -505,6 +506,12 @@ div.showdata{
     <!--              display profile menu when user login -->
                   <a href="profile.php" style="display:<?php if(!isset($_SESSION['user']) ) echo 'none'; else echo ''; ?>;" id="menu_user_index">Profile</a>
               </nav>
+          </div>
+          <div class="table-cell" style="width:1000;">
+              <!--Search bar start-->
+              <?php require("search.php");?>              
+              <!--Search bar end-->
+
           </div>
           <div class="table-cell" style="vertical-align: top;">
           <div class="table-row" style="padding-top:3px;">

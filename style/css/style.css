@@ -114,6 +114,7 @@ div.footer > div > a {
 .table-cell{
   display: table-cell;
   vertical-align: middle;
+  width: 15%;
 }
 
 #links{
@@ -128,15 +129,16 @@ div.footer > div > a {
   display: table-cell;
   margin: 0 auto;
   text-align: left;
-  width: 980px;
   font-weight: bold;
 }
 
 div > nav#navigation > a {
   color: #000000;
   font-size: 15px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   text-decoration: none;
+  margin: 15px 8px;
+  border-radius: 5px;
 }
 
 div > nav#navigation > a:hover {
@@ -150,7 +152,6 @@ div > nav#navigation > a:hover {
     padding: 10px 0px 3px 0px;
     text-align: center;
     width: 980px; 
-	margin-bottom:10px;
 }
 
 #search input[type=text] {
@@ -162,7 +163,6 @@ div > nav#navigation > a:hover {
     height: 36px;
     width: 888px;
     padding: 0px 0px 0px 60px;
-	margin-bottom: 8px;
 }
 
 #searchinput img {
@@ -174,7 +174,7 @@ div > nav#navigation > a:hover {
 #search select, input[type=date] {
 border: 2px solid #eeeded;
 margin-top: 1%;
-/* margin-left: 6%; */
+margin-left: 8px;
 width: 140px;
 height: 30px;
 font-size: 15px;
@@ -1115,10 +1115,12 @@ a:active {
 
 .search_button {
     background: #12A1FF;
-    padding: 5px 60px 5px 60px;
+    padding: 5px 40px 5px 40px;
     font-size: 16px;
     color: #ffffff;
     text-decoration:none;	
+    margin-left: 5px;
+    border-radius: 7px;
 }
 
 .body_width {
