@@ -6,6 +6,7 @@
   pbody.innerHTML = "This is a pop-up! Click outside to close."
   p.show(150,150,200,50,document.body)
 }</script>
+<br />
 <div align="center">
     <div class="container">
         <div class="heading">
@@ -13,7 +14,9 @@
                <div style="box-shadow: 10px 7px 5px #888888;">
                  <div class="col_image">
                      <div><img src="images/large_user.png" width="240"/></div>
-                     <div><span><a href="deactivate_prof.php?id=<?php echo $id ?>" >Deactivate</a></span></div>
+                     <div><?php if($user_id == $id) { ?><span>         
+                         <a href="deactivate_prof.php?id=<?php echo $id ?>" >Deactivate</a></span><?php } ?>
+                     </div>                   
                  </div>
                  <div class="col_info"> 
                     <div style="padding: 0px 0px 0px 20px">

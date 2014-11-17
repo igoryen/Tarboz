@@ -487,6 +487,7 @@ div.showdata{
 </head>
 
 <body>
+    <div class="wrapper">
     <div>
         <input type="hidden" id="direct_create_entry" name="direct_create_entry" value="N" />
     </div>
@@ -517,7 +518,7 @@ div.showdata{
           <div class="table-row" style="padding-top:3px;">
             <button id="call_it" class="login_button"><?php if(!isset($_SESSION['user']) ) { ?>Login<?php } else { ?>Logout<?php } ?></button> 
           </div>
-          <div id="user_name" class="table-row" style="padding-top:5px;">
+          <div id="user_name" class="table-row" style="padding-top:5px; font-size: 12px;">
               
               <?php 
               if(isset($_SESSION['user']) ) {
