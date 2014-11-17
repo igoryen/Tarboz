@@ -277,13 +277,13 @@
       <div class="entry_record_value">
     <?php 
         echo $tags."</br>";
-        $query = "SELECT * FROM tbl_entry WHERE ent_entry_id = '".$tags."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $entry_tag_desc = $list['ent_entry_tags'];
-            echo $entry_tag_desc;
-        }
+//        $query = "SELECT * FROM tbl_entry WHERE ent_entry_id = '".$tags."'";
+//        $dbHelper = new DBHelper();
+//        $result = $dbHelper->executeSelect($query);
+//        while ($list = mysqli_fetch_assoc($result)) {
+//            $entry_tag_desc = $list['ent_entry_tags'];
+//            echo $entry_tag_desc;
+//        }
     ?>
       </div>
     </div>
