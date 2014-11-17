@@ -166,6 +166,7 @@ function form_to_create_kid($dad){
         <!-- 5 -->
         <button name ="submit" type="submit">Submit</button>
         <button type="reset">Reset</button>
+        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />
       </div>
 
     </div>
