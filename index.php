@@ -29,7 +29,6 @@ $aryOfEntry = $em->getListOfEntryBriefByLanguage($lang);
 $aryOfTreq = $trm->getListOfTreqByLang($lang);
     
  ?>
-<div class="wrapper">
 <div id="index_table_container" align="center">
   <!-- left column -->
   <div>
@@ -184,6 +183,5 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
     </div><!--index_table-->
 
   </div><!--"index_table_container"-->
-</div> <!--end wrapper div-->
 <?php require("footer.php"); ?>
 

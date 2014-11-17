@@ -72,7 +72,7 @@ div.tooltip p {
  /* always keep footer at bottom */
 .wrapper {
   min-height: 100%;
-  margin-bottom: -82px;
+  margin-bottom: -112px;
 }
 
 .wrapper:after {
@@ -84,7 +84,7 @@ div.tooltip p {
     height: 82px;
 }
 .footer{
-  background: rgba(255,255,255,0.5); /*#ffffff*/
+  background: #3B8DFF; /*#ffffff*/
   color: #000000;
   font-size: 15px;
   text-align: center;
@@ -100,7 +100,7 @@ div.footer > div > a {
 }
 
 #header{
-  background: rgba(255,255,255,0.5); /*#E0E0E0*/
+  background: #3B8DFF; /*#E0E0E0*/
   padding: 12px 0px;
 }
 
@@ -108,7 +108,7 @@ div.footer > div > a {
   display: table;
   margin: auto;
   text-align: center;
-  width: 95%;
+  padding: 0px 10px;
 }
 
 .table-cell{
@@ -142,8 +142,8 @@ div > nav#navigation > a {
 }
 
 div > nav#navigation > a:hover {
-  background: #14ACF3;
-  color: #FCFCFC !important;
+  background: #D9E0E3;
+  color: #3B8DFF !important;
 }
 
 #search {
