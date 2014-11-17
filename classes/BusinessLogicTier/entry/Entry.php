@@ -16,6 +16,7 @@ class Entry {
   private $entry_rating_id; // 9
   private $entry_tags;
   private $entry_author_id; // 10
+  private $entry_authors;
   private $entry_source_id; // 11
   private $entry_use; // 12
   private $entry_http_link; //12
@@ -153,6 +154,14 @@ class Entry {
 
   public function setEntryAuthorId($a) {
     $this->entry_author_id = $a;
+  }
+  
+  public function getEntryAuthors() {
+    return $this->entry_authors;
+  }
+
+  public function setEntryAuthors($a) {
+    $this->entry_authors = $a;
   }
 
   /* --------------------------------------

@@ -129,7 +129,7 @@ function form_to_create_kid($dad){
       <div class="entry_create_row">
         <div class="entry_create_record_title">This was written by</div>
         <div class="entry_create_record_value">
-          <textarea name="author" rows="2" cols="50"></textarea>
+          <textarea name="authors" rows="2" cols="50"></textarea>
         </div>
       </div>
 
@@ -166,6 +166,7 @@ function form_to_create_kid($dad){
         <!-- 5 -->
         <button name ="submit" type="submit">Submit</button>
         <button type="reset">Reset</button>
+        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />
       </div>
 
     </div>

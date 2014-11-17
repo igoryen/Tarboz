@@ -104,7 +104,8 @@ class UserDataAccessor {
   }
 
   public function deleteUser($userid) {
-    $query = "DELETE FROM ".USER." WHERE usr_user_id = $userid";
+
+    $query = "DELETE FROM ".USER." WHERE usr_user_id = '".$userid."'";
 
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeQuery($query);

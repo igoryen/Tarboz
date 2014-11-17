@@ -344,6 +344,7 @@ font-size: 15px;
 }
 /*--- finish login.php -------*/
 
+
 /*--- for search_result.php ---*/
 
 a:link {
@@ -722,6 +723,10 @@ a:active {
   width: 60%;
 }
 
+.button_room{
+  display: table-cell;
+}
+
 .entry_record_title{
   background-color: lavender;
   color: silver;
@@ -736,6 +741,17 @@ a:active {
 }
 
 .entry_record_value{
+  background: white;
+  border: 1px solid #c1c1c1;
+  display: block;
+  font-size: medium;
+  margin: auto;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 55%;
+}
+.entry_record_value_for_text{
   background: white;
   border: 1px solid #c1c1c1;
   display: block;
@@ -1118,6 +1134,14 @@ a:active {
 #RightCol_Scroll {
     overflow: auto;
     max-height: 669px;
+}
+
+.profile_input {
+  width: 280px;
+  line-height: 30px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  margin-top: 10px
 }
 
 /****************for middle of front page*************/

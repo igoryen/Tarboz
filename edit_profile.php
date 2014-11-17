@@ -18,58 +18,58 @@
                             </div>
                              <div>
                                  <label>First Name</label><br />
-                                <input name="fname" value="<?php echo $fname; ?>" />
+                                 <input class="profile_input" name="fname" value="<?php echo $fname; ?>" />
                             </div>
-                            <hr />
+                           
                             <div>
-                                <label>Last Name</label><br />
-                            <input name="lname" value="<?php echo $lname; ?>" />
+                                 <label>Last Name</label><br />
+                                 <input class="profile_input" name="lname" value="<?php echo $lname; ?>" />
                             </div>
-                        <hr />
+                            
                             <div>
                                  <label>Birth</label><br />
-                                <input name="birth" value="<?php echo $birth; ?>" />
+                                 <input class="profile_input" name="birth" value="<?php echo $birth; ?>" />
                             </div>
-                        <hr />                               
-                        <div>
-                             <label>Language</label><br />
-                             <input name="language" value="<?php echo $language; ?>" />
-                        </div>
-                        <hr />
-                        <div>
-                             <label>Email</label><br />
-                             <input name="email" value="<?php echo $email; ?>" />
-                        </div>
-                        <hr />
-                        <div>
-                            <label>Address</label><br />
-                             <input name="address" value="<?php echo $Address; ?>" />
-                        </div>
-                        <hr />
-                        <div>
-                            <label>City</label><br />
-                             <input name="city" value="<?php echo $CityName; ?>" />
-                        </div>
-                        <hr />
-                        <div>
-                            <label>Province</label><br />
-                             <input name="province" value="<?php echo $ProvinceName; ?>" />
-                        </div>
-                        <hr />
-                        <div>
-                            <label>Country</label><br />
-                             <input name="country" value="<?php echo $CountryName; ?>" />
-                        </div>
-                            <hr />
-                        <div>
-                            <label>PostalCode</label><br />
-                             <input name="country" value="<?php echo $PostalCode; ?>" />
-                         </div>
-                        <hr />
-                        <div>
-                            <input type="submit" name="Submit" value="update" /> 
-                        </div>
-                    </div>    
+                                                       
+                            <div>
+                                 <label>Language</label><br />
+                                 <input class="profile_input" name="language" value="<?php echo $language; ?>" />
+                            </div>
+                           
+                            <div>
+                                 <label>Email</label><br />
+                                 <input class="profile_input" name="email" value="<?php echo $email; ?>" />
+                            </div>
+                            
+                            <div>
+                                <label>Address</label><br />
+                                 <input class="profile_input" name="address" value="<?php echo $Address; ?>" />
+                            </div>
+                        
+                            <div>
+                                <label>City</label><br />
+                                 <input class="profile_input" name="city" value="<?php echo $CityName; ?>" />
+                            </div>
+                            
+                            <div>
+                                <label>Province</label><br />
+                                 <input class="profile_input" name="province" value="<?php echo $ProvinceName; ?>" />
+                            </div>
+                            
+                            <div>
+                                <label>Country</label><br />
+                                 <input class="profile_input" name="country" value="<?php echo $CountryName; ?>" />
+                            </div>
+                               
+                            <div>
+                                <label>PostalCode</label><br />
+                                 <input class="profile_input" name="country" value="<?php echo $PostalCode; ?>" />
+                             </div>
+                           
+                            <div>
+                                <input class="search_button" style="padding: 10px 115px; "type="submit" name="Submit" value="update" /> 
+                            </div>
+                        </div>    
                     </form>
                  </div>
                </div>
@@ -86,3 +86,6 @@
         </div>
     </div>
 </div>
+<?php   
+    require_once "footer.php"; 
+?>

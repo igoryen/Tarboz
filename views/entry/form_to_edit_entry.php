@@ -184,6 +184,18 @@ Entry/form_to_<mark>edit</mark>_entry.php
         </div>
       </div>-->
 
+          
+      <!-- ent_entry_authors-->
+      <div class="entry_create_row">
+        <div class="entry_create_record_title">
+           Authors
+        </div>
+        <div class="entry_create_record_value">
+          <input name="authors" type="text" size="50" value="<?php
+            echo $entry->getEntryAuthors();
+          ?>"/>
+        </div>
+      </div>
 
 
       <!-- ent_entry_source_id -->
@@ -222,6 +234,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <div class="entry_create_buttons">
         <!-- 5 -->
         <button name ="submit" type="submit">Submit</button>
+        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />
       </div>
 
     </div>

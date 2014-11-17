@@ -51,7 +51,8 @@
     $translOf = $entry->getEntryTranslOf();
     $user_id = $entry->getEntryUserId();
     $media = $entry->getEntryMediaId();
-    $author = $entry->getEntryAuthorId();
+    //$author = $entry->getEntryAuthorId();
+    $authors = $entry->getEntryAuthors();
     $source = $entry->getEntrySourceId();
     $tags = trim($entry->getEntryTags());
     $use = trim($entry->getEntryUse());
@@ -64,39 +65,29 @@
   <div id="entry_index_container">    
     <mark>index</mark>.php
     
-    <div class="entry_record">
+    <div class="entry_record" style="display: none;">
       <div class="entry_record_title">id</div>
       <div class="entry_record_value"><?php echo $entryId; ?></div>
     </div>
     
     <div class="entry_record">
-      <div class="entry_record_title">Language</div>
+      <div class="entry_record_title">
+        Language
+        <span class="question" id="entryviewlang" >?</span>
+      </div>
       <div class="entry_record_value"><?php echo $language; ?></div>
     </div>
     
-    <div class="entry_record">
-      <div class="entry_record_title">Text</div>
-      <div class="entry_record_value"><?php echo $text; ?></div>
-    </div>
     
-    <div class="entry_record" style="display: none;"><!-- 2 -->
-      <div class="entry_record_title">Verbatim</div>
-      <div class="entry_record_value"><?php echo $verbatim; ?></div>
-    </div>
-
-    <?php if(!null == $translit){?>
-    <div class="entry_record">
-      <div class="entry_record_title">Translit</div>
-      <div class="entry_record_value"><?php echo $translit; ?></div>
-    </div>
-    <?php }?>
-
     <!--Display authenticity status-->
     <div class="entry_record">
-      <div class="entry_record_title">Authenticity status</div>
+      <div class="entry_record_title">
+        Authenticity status
+        <span class="question" id="entryviewauthen" >?</span>
+      </div>
       <div class="entry_record_value">
     <?php 
-        echo $authen."</br>"; 
+        //echo $authen."</br>"; 
         $query = "SELECT * FROM tbl_authen_status WHERE athn_authen_status_id = '".$authen."'";
         $dbHelper = new DBHelper();
         $result = $dbHelper->executeSelect($query);
@@ -108,6 +99,108 @@
       </div>
     </div>
     <!--Display authenticity status end-->
+    
+    
+    <div class="entry_record">
+      <div class="entry_record_title">
+        Text
+        <span class="question" id="entryviewtext" >?</span>
+      </div>
+      <div class="entry_record_value_for_text"><?php echo $text; ?></div>
+    </div>
+    
+    
+    <!--Display video--> 
+    <?php if(!null == $video){?>
+        <div class="entry_record">
+          <div class="entry_record_title">
+            Video link
+            <span class="question" id="entryviewvideo" >?</span>
+          </div>
+          <div class="entry_record_value">
+            <embed width="420" height="315" src="<?php echo $video; ?>">
+          </div>
+        </div>
+    <?php }?>
+    <!--Display video end--> 
+    
+    
+<?php if(!null == $translit){?>
+    <div class="entry_record">
+      <div class="entry_record_title">
+        Translit
+        <span class="question" id="entrytranslit" >?</span>
+      </div>
+      <div class="entry_record_value"><?php echo $translit; ?></div>
+    </div>
+<?php }?>
+    
+    
+    <div class="entry_record" style="display: none;"><!-- 2 -->
+      <div class="entry_record_title">Verbatim</div>
+      <div class="entry_record_value"><?php echo $verbatim; ?></div>
+    </div>
+
+
+    <!--Display author name--> 
+<?php if ($authors !== "" && $authors !== null){ ?>
+    <div class="entry_record">
+      <div class="entry_record_title">Author(s)</div>
+      <div class="entry_record_value">
+    <?php 
+        echo $authors."</br>";
+//        $query = "SELECT * FROM tbl_author WHERE aut_author_id = '".$author."'";
+//        $dbHelper = new DBHelper();
+//        $result = $dbHelper->executeSelect($query);
+//        while ($list = mysqli_fetch_assoc($result)) {
+//            $author_name = $list['aut_author_name'];
+//            echo $author_name;
+//        }
+    ?>
+      </div>
+    </div>
+<?php } ?>
+    <!--Display author name end--> 
+
+    
+    <!--Display use--> 
+    <?php if(!null == $use){?>
+        <div class="entry_record">
+          <div class="entry_record_title">
+            Use
+            <span class="question" id="entryuse" >?</span>
+          </div>
+          <div class="entry_record_value"><?php echo $use; ?></div>
+        </div>
+    <?php }?>
+    <!--Display use end--> 
+    
+    
+<?php
+  if($entry->getEntryAuthenStatusId() == 1){
+        // 1*
+    ?>
+    <div class="entry_record">
+      <div class="entry_record_title">Translate this into&nbsp;
+	  <?php
+        // TODO: What if there are >1 requests (i.e. >1 languages) to translate this entry?
+        $treqLang = $treq->getTreqLang();
+        if(!null == $treqLang){
+          echo $treq->getTreqLang();
+        }else{
+          echo "a language you know";          
+        } //end else ?>
+        <span class="question" id="entrytranslate" >?</span>
+      </div>
+      <div class="entry_record_value">
+        <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a>
+      </div>
+    </div>
+    <?php } //end if($entry->getEntryAuthenStatusId() == 1) ?>
+    <!--Display Translate into end-->  
+    
+    
+
     <!--Display translation of /original phrase-->
     <?php if(!null == $translOf){?>
     <div class="entry_record">
@@ -127,24 +220,42 @@
     </div>
     <?php }?>
     <!--Display translation of /original phrase end-->  
+    
     <!--Display user name who added this entry-->
     <div class="entry_record">
-      <div class="entry_record_title">Entry added by</div>
+      <div class="entry_record_title">
+        Entry added by
+        <span class="question" id="entryaddedby" >?</span>
+      </div>
       <div class="entry_record_value">
-          <a href="other_user.php?id=<?php echo $user_id;?>">
-            <?php 
-                //echo $user_id."</br>"; 
-                $userManager = new UserManager();
-                $user = $userManager->getUserByUserId($user_id);
-                echo $user->getFirstName()." ".$user->getLastName();
-            ?>
-          </a>
+    <?php 
+        //echo $user_id."</br>"; 
+        $userManager = new UserManager();
+        $user = $userManager->getUserByUserId($user_id);
+        echo $user->getFirstName()." ".$user->getLastName();
+    ?>
       </div>
     </div>
     <!--Display user name who added this entry end-->
+    
+    
+    <!--Display creation date--> 
+    <div class="entry_record">
+      <div class="entry_record_title">
+        Creation date
+        <span class="question" id="entrydate" >?</span>
+      </div>
+      <div class="entry_record_value"><?php echo $date; ?></div>
+    </div>
+    <!--Display creation date end --> 
+    
+    
     <!--Display media-->
     <div class="entry_record">
-      <div class="entry_record_title">Media</div>
+      <div class="entry_record_title">
+        Media
+        <span class="question" id="entrymedia" >?</span>
+      </div>
       <div class="entry_record_value">
     <?php 
         echo $media."</br>";
@@ -177,25 +288,13 @@
       </div>
     </div>
     <!--Display tags end--> 
-    <!--Display author name--> 
+    
     <?php } //end if (!null == $tags)?>
+    
+    
 
-    <div class="entry_record">
-      <div class="entry_record_title">Author</div>
-      <div class="entry_record_value">
-    <?php 
-        echo $author."</br>";
-        $query = "SELECT * FROM tbl_author WHERE aut_author_id = '".$author."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $author_name = $list['aut_author_name'];
-            echo $author_name;
-        }
-    ?>
-      </div>
-    </div>
-    <!--Display author name end--> 
+        
+    
     <!--Display source-->      
     <div class="entry_record">
       <div class="entry_record_title">Source</div>
@@ -215,99 +314,53 @@
       </div>
     </div>
     <!--Display source end--> 
-    <!--Display use--> 
-    <?php if(!null == $use){?>
-        <div class="entry_record">
-          <div class="entry_record_title">Use</div>
-          <div class="entry_record_value"><?php echo $use; ?></div>
-        </div>
-    <?php }?>
-    <!--Display use end--> 
-      
-    <!--Display video--> 
-    <?php if(!null == $video){?>
-        <div class="entry_record">
-          <div class="entry_record_title">Video link</div>
-          <div class="entry_record_value">
-            <embed width="420" height="315" src="<?php echo $video; ?>">
-          </div>
-        </div>
-    <?php }?>
-    <!--Display video end--> 
-    <!--Display creation date--> 
-    <div class="entry_record">
-      <div class="entry_record_title">Creation date</div>
-      <div class="entry_record_value"><?php echo $date; ?></div>
-    </div>
-    <!--Display creation date end --> 
-    <!--Display edit-->  
-    <?php if ($loggedIn_userId == $user_id || $loggedIn_userType == "1") { ?>
-    <div class="entry_record">
-      <div class="entry_record_title">Edit</div>
-      <div class="entry_record_value">
-        <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
-      </div>      
-    </div>
-    <?php } ?>
-    <!--Display edit end--> 
 
-    <!-- display the Delete entry-->
+      
+
+
+    <!--Display Control-->  
     <?php if ($loggedIn_userId == $user_id || $loggedIn_userType == "1") { ?>
     <div class="entry_record">
-      <div class="entry_record_title">Delete this entry</div>
+      <div class="entry_record_title">Control</div>
       <div class="entry_record_value">
         
-        <button id="entryDeleteButton">Delete this entry</button>
-        <span id="entryDeleteResponse" style="display: none"></span>
-        <div id="entryDeleteDialog" style="display: none">
-          Are you sure you want to delete this entry ><?php echo $entryId; ?><br/>
-          <form action="index.php">
-            <button type="submit"
-                    id="entryDeleteConfirm"
-                    onclick="entryDelete(<?php echo $entryId; ?>)">Delete</button>
-            <button name="entryDeleteCancel" 
-                  id="entryDeleteCancel"
-                  onclick="">Cancel</button>
-          </form>
-        </div>        
-      </div>
-      <script>
-        $( "#entryDeleteButton" ).click(function() {
-          $( "#entryDeleteDialog" ).show("fast");
-        });
-        $( "#entryDeleteCancel" ).click(function() {
-          $( "#entryDeleteDialog" ).hide("fast");          
-        });
-        $( "#entryDeleteConfirm ").click(function(){
-          $("#entryDeleteResponse").show("fast");
-          $( "#entryDeleteDialog" ).hide("fast");
-        });
-      </script>  
-    </div>
+        <div class="button_room">
+          <!-- the Edit Entry button -->
+          <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
+          &nbsp;
+        </div><!-- Edit button room -->
+        <div class="button_room"> <!-- the Delete Entry button --> 
+            <button id="entryDeleteButton">Delete this entry</button>
+            <span id="entryDeleteResponse" style="display: none"></span>
+            <div id="entryDeleteDialog" style="display: none">
+              Are you sure you want to delete this entry ><?php echo $entryId; ?><br/>
+              <form action="index.php">
+                <button type="submit"
+                        id="entryDeleteConfirm"
+                        onclick="entryDelete(<?php echo $entryId; ?>)">Delete</button>
+                <button name="entryDeleteCancel" 
+                      id="entryDeleteCancel"
+                      onclick="">Cancel</button>
+              </form>
+            </div>
+            <script>
+                $( "#entryDeleteButton" ).click(function() {
+                  $( "#entryDeleteDialog" ).show("fast");
+                });
+                $( "#entryDeleteCancel" ).click(function() {
+                  $( "#entryDeleteDialog" ).hide("fast");          
+                });
+                $( "#entryDeleteConfirm ").click(function(){
+                  $("#entryDeleteResponse").show("fast");
+                  $( "#entryDeleteDialog" ).hide("fast");
+                });
+            </script> 
+        </div>  <!-- the Delete Entry button -->       
+      </div><!-- entry record value -->
+    </div><!-- Entry record-->    
     <?php } ?>
-     <!-- end display the Delete entry-->   
-        <!--Display Translate into--> 
-    <?php
-        if($entry->getEntryAuthenStatusId() == 1){
-        // 1*
-    ?>
-    <div class="entry_record">
-      <div class="entry_record_title">Translate this into&nbsp;
-	  <?php
-        // TODO: What if there are >1 requests (i.e. >1 languages) to translate this entry?
-        $treqLang = $treq->getTreqLang();
-        if(!null == $treqLang){
-          echo $treq->getTreqLang();
-        }else{
-          echo "a language you know";          
-        } //end else ?>
-      </div>
-      <div class="entry_record_value">
-        <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a>
-      </div>
-    </div>
-    <?php } //end if($entry->getEntryAuthenStatusId() == 1) ?>
-    <!--Display Translate into end-->  
+     <!-- end display the Control entry-->   
+    
     <!--Display translation request-->
     <?php if($entry->getEntryAuthenStatusId() == 1){?>
     <div class="entry_record">
