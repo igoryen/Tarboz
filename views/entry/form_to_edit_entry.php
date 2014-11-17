@@ -234,6 +234,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <div class="entry_create_buttons">
         <!-- 5 -->
         <button name ="submit" type="submit">Submit</button>
+        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />
       </div>
 
     </div>
