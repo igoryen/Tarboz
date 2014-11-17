@@ -341,14 +341,14 @@ class EntryDataAccessor {
   
     public function getListOfKidBriefByDadId($dad_id){
    
-      $query = "SELECT
-                  e.ent_entry_id,
+      $query = "SELECT e.*, l.lan_lang_name ".
+/*                  e.ent_entry_id,
                   l.lan_lang_name,
                   e.ent_entry_text,
                   e.ent_entry_authen_status_id,
-                  e.ent_entry_translation_of
-                FROM
-                  tbl_entry e, tbl_language l
+                  e.ent_entry_translation_of */
+               " FROM
+                  ".ENTRY." e, ".LANGUAGE." l 
                 WHERE
                   e.ent_entry_language_id = l.lan_language_id
                 AND
@@ -369,13 +369,13 @@ class EntryDataAccessor {
           /*if no time frame, then #1-2. no search*/
           //echo "<br>eda::getListOfEntryBriefBySearch(): no time frame";
           //echo "<br>eda::getListOfEntryBriefBySearch(): no authen";
-         $query = "SELECT
-                e.ent_entry_id,
+         $query = "SELECT e.*, l.lan_lang_name ".
+/*                e.ent_entry_id,
                 l.lan_lang_name,
                 e.ent_entry_text,
                 e.ent_entry_authen_status_id,
-                e.ent_entry_translation_of
-              FROM
+                e.ent_entry_translation_of */
+             " FROM
                 ".ENTRY." e, ".LANGUAGE." l";
         }
         elseif($f!==NULL && $t!==NULL){ // if HAVE time frame
@@ -677,7 +677,7 @@ class EntryDataAccessor {
         }
       }
     }//#17-32
-    $dbHelper = new DBHelper();
+    $dbHelper = new DBHelper(); 
     $resultOfSelect = $dbHelper->executeSelect($query);
     $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief2($resultOfSelect);
     return $arrayOfEntryGottenByLanguage;
