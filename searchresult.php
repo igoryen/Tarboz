@@ -159,6 +159,14 @@ foreach($entries as $entry){
     $kids = $em->getListOfKidBriefByDadId($dad->getEntryId());
     foreach($kids as $kid){
       array_push($family, $kid);
+      // DELETE THE KID FROM NON-ORPHANS
+      foreach($non_orphans as $i => $non_orphan){
+        // IF THE RETRIEVED KID IS AMONG THE NON-ORPHANS
+        if($non_orphan->getEntryId() == $kid->getEntryId()){
+          //DELETE THE NON-ORPHAN SO THAT IT'S NOT USED BELOW
+          unset($non_orphans[$i]);
+        }
+      }
     }
     //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
     
