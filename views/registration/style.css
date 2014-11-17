@@ -18,6 +18,7 @@ a{
   text-align:center;
 }
 
+/*
 #bg{
   position:relative;
   top:20px;
@@ -28,6 +29,22 @@ a{
   margin-left:auto;
   margin-right:auto; 
   border:#fff 15px solid;
+}
+*/
+
+#bg {
+  background: #D9E0E3;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  color: #000000;
+  display: block;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 16px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .module{
@@ -99,13 +116,15 @@ a{
 
 
 .textbox{
-  height:50px;
-  width:100%;
-  border-radius:3px;
-  border:rgba(0,0,0,.3) 2px solid;
+  height:45px;
+  width:99%;
+  border-radius:0px;
+  border: 3px solid #bdc7d8;
   box-sizing:border-box;
-  padding:10px;
+  padding:5px;
   margin-bottom:30px;
+  font-size: 18px;
+  color:#000000;    
 }
 
 .textbox:focus{
@@ -138,27 +157,69 @@ a{
 
 .checkbox:focus{
   outline:none;
-   border:rgba(24,149,215,1) 2px solid;
-   color:rgba(24,149,215,1);
+  border:rgba(24,149,215,1) 2px solid;
+  color:rgba(24,149,215,1);
 }
 
 .button{
-  height:50px;
+  height:45px;
   width:100%;
   border-radius:3px;
   border:rgba(0,0,0,.3) 0px solid;
   box-sizing:border-box;
-  padding:10px;
+  padding: 5px;
   margin-bottom:30px;
-  background:#90c843;
-  color:#FFF;
-  font-weight:bold;
-  font-size: 12pt;
+  background: #12A1FF;
+  color: #ffffff;
+  font-size: 16pt;
   transition:background .4s;
   cursor:pointer;
 }
 
 .button:hover{
-  background:#80b438;
-  
+  background:#2A6DFF;  
+}
+
+.date_box {
+    font-size: 18px;         
+    height: 40px;
+    padding: 4px;
+    border: 3px solid #bdc7d8;
+}
+
+.language_box {
+    font-size: 18px;         
+    height: 40px;
+    padding: 4px;
+    margin-bottom: 8px;
+    border: 3px solid #bdc7d8;
+}
+
+.add_button {
+    font-size: 18px;         
+    height: 40px;
+    padding: 5px;
+    width: 99%;
+    background: #12A1FF;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.add_button:hover{
+    background:#2A6DFF; 
+}
+
+.agreement_box {
+    position: relative; 
+    text-align: justify; 
+    overflow:auto;
+    height:150px; 
+    width:348px;  
+    font-size:10px; 
+    padding: 7px; 
+    border: 3px solid #bdc7d8;
+}
+
+.checkbox {
+    padding: 2px;
 }

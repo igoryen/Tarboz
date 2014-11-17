@@ -319,11 +319,11 @@ $LanguageList = $Language->getLanguages();
 		});//end of document ready
 
 	</script>
-
+    <link rel="shortcut icon" href="images/watermelon8.png"/>
 </head>
-<body>
+<body id="bg">
 	
-	<div id="bg">
+	<div>
 		  <div class="module">
 		    <ul>
 		      <li class="tab activeTab"><img src="http://i.imgur.com/Fk1Urva.png" alt="" class="icon"/></li>
@@ -332,6 +332,7 @@ $LanguageList = $Language->getLanguages();
 		      <li class="tab" ><img src="http://i.imgur.com/LCCJ06E.png" alt="" class="icon"/></li>
 		    </ul>
 
+<!--             <div>Sign Up</div>-->
 		    <form class="form" action="one.php" method="post">
 		      <span class="error_box" id="fname_error"></span>
 		      <input type="text" placeholder="First Name" class="textbox" id="fname"/>
@@ -345,45 +346,42 @@ $LanguageList = $Language->getLanguages();
 		      <input type="password" placeholder="Password" class="textbox" id="pwd1"/>
 		      <input type="password" placeholder="Retype Password" class="textbox" id="pwd2"/>
 		      <label>Date of Birth</label>
-		      <select id="dayselect">
+		      <select id="dayselect" class="date_box">
 		      	<option selected=selected>Day</option>
 		      </select>
-		      <select id="monthselect">
+		      <select id="monthselect" class="date_box">
 		      	<option selected=selected>Month</option>
 		      </select>
 
-		      <select id="yearselect">
+		      <select id="yearselect" class="date_box">
 		      	<option selected=selected>Year</option>
 		      </select>
 		      <br/>
 		       <div class="lang_profeciency">
-		       		<div style="margin-top:5%;float:left;margin-right:20%;margin-left:3">Language<br>
-                      <select id="lang" name="Languages_Select">
+		       		<div style="margin: 5% 50px 0px 0px;float:left; margin-right: 50px;">Language<br>
+                      <select id="lang" name="Languages_Select" class="language_box">
                       	<?php
                       	foreach ($LanguageList as $lang) { ?>
                       	<option value='<?php echo $lang->getLangId();?>'><?php echo $lang->getLangName();?></option>
                       	<?php  }  ?>
                       </select>
 		       		</div>
-		       	    <div style="float:left;margin-top:5%;">Proficiency&nbsp; &nbsp; <input type="button" value="Add"  id="Add"/><br>
-		       	    	<select id="prof">
+		       	    <div style="float:left;margin-top:5%;">Proficiency<br>
+		       	    	<select id="prof" class="language_box">
                       	<option>Native</option>
                       	<option>Advanced</option>
                       	<option>Professional</option>
                       	<option>Intermediate</option>
                       </select>
 		       	    </div>
-		       	    <br><br><br><br>
 		       </div>
-		       <div>&nbsp;</div>
-		       <div id="agreement" style="height:100px;width:400px;overflow:scroll;font-size:10px;position: relative;">
+		       <div><input class="add_button" type="button" value="+ Add More"  id="Add"/></div>
+		       <div id="agreement" class="agreement_box">
 		       </div>
 		       <a href="#" id="load_agreement" style="font-size:10px;margin-top:0px;">Load the Agreement in seperate page </a>
-		       <input type="checkbox" name="agree" id="agree_box"><label style="font-size:10px;margin-top:0px;font-weight:bold;">I agree to the term and conditions of Tarboz.com</label>
+		       <input type="checkbox" name="agree" id="agree_box" ><label style="font-size:10px;margin-top:0px;font-weight:bold;"> I agree to the term and conditions of Tarboz.com</label>
 		       <br/>
-		       <center>
 		       	<input type="text" name="captcha" placeholder="Type the text here" id="mycaptcha"> <img src = "plug-in/captcha.php" style="margin-bottom:-1.5%;" id="captchapic">
-		       </center>
 		       <br/>
 		       <span id="final_error"></span>
 		       <br>
