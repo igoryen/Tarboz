@@ -206,17 +206,8 @@
     <div class="entry_record">
       <div class="entry_record_title">Translation of</div>
       <div class="entry_record_value">
-    <?php 
-        echo $translOf."</br>"; 
-        $query = "SELECT * FROM tbl_entry WHERE ent_entry_id = '".$translOf."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $entry_orig_text = $list['ent_entry_text'];
-            echo $entry_orig_text;
-        }
-    ?>
-    </div>
+        <a href="entryview.php?id=<?php echo $translOf; ?>"><i>See the original</i></a>
+      </div>
     </div>
     <?php }?>
     <!--Display translation of /original phrase end-->  
