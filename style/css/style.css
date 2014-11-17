@@ -752,15 +752,17 @@ a:active {
   width: 55%;
 }
 .entry_record_value_for_text{
-  background: white;
+  background: LightGoldenRodYellow;
   border: 1px solid #c1c1c1;
   display: block;
   font-family: serif "Georgia";
   font-size: large;
   margin: auto;
-  padding: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   padding-left: 5px;
   padding-right: 5px;
+  text-shadow: 2px 2px 2px lightgray;
   width: 55%;
 }
 
@@ -1196,6 +1198,9 @@ html {
 .mid_scoll {
     overflow: auto;
     max-height: 400px;
+    background: LightGoldenRodYellow;
+    font-family: serif "Georgia";
+    text-shadow: 2px 1px 2px lightgray;
 }
 
 .entryList, .entry_header {
