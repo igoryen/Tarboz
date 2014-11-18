@@ -80,7 +80,7 @@ function make_kid_room($kid_room_array){?>
         <span style="cursor: alias;" title="<?php echo $kid_room_array['dislikes'];?> users dislike">-<?php echo $kid_room_array['dislikes'];?></span></div>
     <div class="kid_added_by">
       <a href="other_user.php?id=<?php echo $kid_room_array['user']; ?>">
-          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getLastName();?>
+          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin();//echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getLastName();?>
       </a>
     </div>
     <div class="is_mom">A</div>
@@ -107,7 +107,7 @@ function make_family_kid_room($kid_room_array){?>
     </div>
     <div class="kid_added_by">
       <a href="other_user.php?id=<?php echo $kid_room_array['user']; ?>">
-          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getFirstName();?>
+          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin();//echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getFirstName();?>
       </a>
     </div>
     <div class="is_mom">A</div>
@@ -134,7 +134,7 @@ function make_dad_room($dad_room_array){?>
 //            $userMan = new UserManager(); echo $userMan->getUserByUserId($dad_room_array['user'])->getLogin();
                                         
           ?>
-          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($dad_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($dad_room_array['user'])->getFirstName();?>
+          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($dad_room_array['user'])->getLogin();//echo $userMan->getUserByUserId($dad_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($dad_room_array['user'])->getFirstName();?>
       </a>
     </div>
     <div class="is_mom">A</div>
@@ -212,7 +212,7 @@ function dad_house_dad_0($no_original) { ?>
               <div id="add_kid"><a href="entrycreate.php" title="Add a new translation">+</a></div>
               <div class="kid_added_by">
                 <a href="other_user.php?id=<?php echo $ary['user']; ?>">
-                    <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
+                    <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getLogin();//echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
                 </a>
               </div>
             </div>
@@ -236,7 +236,7 @@ function dad_house_dad_0($no_original) { ?>
               <div id="add_kid"><a href="entrycreate.php" title="Add a new translation">+</a></div>
               <div class="kid_added_by">
                 <a href="other_user.php?id=<?php echo $ary['user']; ?>">
-                    <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
+                    <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getLogin();//echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
                 </a>
               </div>
             </div>
