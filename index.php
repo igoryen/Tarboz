@@ -81,10 +81,10 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                                 if ($count< 10) {    
                                         ?>
                                         <li>
-                                            <div>
-                                                <a href="entryview.php?id=<?php echo $trans_entry_id;?>" class="text_shortcut"><?php echo substr($trans_phrase, 0, 30);?> ...</a>
-                                                <span style="float:right"><?php echo $num_like;?> Likes</span>
-                                            </div>
+<!--                                            <div>-->
+                                                <div  class="text_shortcut"><a href="entryview.php?id=<?php echo $trans_entry_id;?>"><?php echo $trans_phrase;?></a></div>
+<!--                                                <span style="float:right; postion:"><div><?php echo $num_like;?> Likes</div></span>-->
+<!--                                            </div>-->
                                         </li>
                                             <?php      if($count<9) { ?>
 <!--                                            <hr />-->
@@ -110,10 +110,12 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                               // TODO: add an if() in case the current request does not have the Accept-Language: header 
                                                   for($j = 0; $j < count($aryOfTreq)-1; $j++) {
                                                     echo '<li class="trans_list">';
+                                                    echo '<div  class="text_shortcut">';  
                                                     echo '<a href="entryview.php?id='.$aryOfTreq[$j]->getTreqEntryId() . '">'; 
-                                                    echo substr($aryOfTreq[$j]->getTreqEntryLine(), 0, 25) . '...';
+                                                    echo $aryOfTreq[$j]->getTreqEntryLine();
                                                     echo '</a>';
 //                                                    echo '<span style="float:right">'.$num_like.' Likes</span>';
+                                                    echo '</div>';  
                                                     echo '</li>';  
                                 }?>
                                     </ol>
@@ -127,9 +129,11 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                               // TODO: add an if() in case the current request does not have the Accept-Language: header 
                                   for($i = 0; $i < 3; $i++) {
                                     echo '<li>';
+                                    echo '<div  class="text_shortcut">';   
                                     echo '<a href="entryview.php?id='.$aryOfEntry[$i]->getEntryId() . '">'; 
-                                    echo substr($aryOfEntry[$i]->getEntryText(), 0, 25) . '...';
+                                    echo $aryOfEntry[$i]->getEntryText();
                                     echo '</a>';
+                                    echo '</div>';   
                                     echo '</li>';  
                                   }
                         ?>
