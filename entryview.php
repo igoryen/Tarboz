@@ -185,7 +185,7 @@
         // 1*
     ?>
     <div class="entry_record">
-      <div class="entry_record_title">Translate this into&nbsp;
+      <div class="entry_record_title">Translate this into
 	  <?php
         // TODO: What if there are >1 requests (i.e. >1 languages) to translate this entry?
         $treqLang = $treq->getTreqLang();
@@ -235,9 +235,13 @@
     <?php 
         //echo $user_id."</br>"; 
         $userManager = new UserManager();
-        $user = $userManager->getUserByUserId($user_id);
-        echo $user->getFirstName()." ".$user->getLastName();
+        $user  = $userManager->getUserByUserId($user_id);
+        $fname = $user->getFirstName();
+        $lname = $user->getLastName();
     ?>
+          <a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
+              <?php echo $fname." ".$lname; ?>
+          </a>
       </div>
     </div>
     <!--Display user name who added this entry end-->

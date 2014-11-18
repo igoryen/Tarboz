@@ -62,8 +62,10 @@
             
             $userManager = new UserManager();
             $added_user = $userManager->getUserByUserId($trans_creator_id);
-            $added_user_name = $added_user->getLogin();
+//            $added_user_name = $added_user->getLogin();
             $fname = $added_user->getFirstName();
+            $lname = $added_user->getLastName();
+            $added_user_name = $fname." ".$lname;
             if ($count>= 10) {  
         ?>
           <div id="toptranslationtr" style="display:table-row; width:300px; padding: 5px; 
@@ -78,7 +80,7 @@
               </div>
               <div id="toptranslationtdCreator" style="display:inline-block;width:120px;vertical-align: top; 
                                                        margin: 5px;height:100px; padding: 10px; text-align: left;">
-                    <a href="profile.php?id=<?php echo $trans_creator_id;?>&name=<?php echo $fname;?>" style="color:#000000;" ><?php echo $added_user_name;?></a>
+                    <a href="other_user.php?id=<?php echo $trans_creator_id;?>&name=<?php echo $fname;?>" style="color:#000000;" ><?php echo $added_user_name;?></a>
               </div>
               <div id="toptranslationtdLikeNum" style="display:inline-block;width:50px;vertical-align: top; 
                                                        margin: 5px;height:100px; padding: 10px; text-align: left;">
