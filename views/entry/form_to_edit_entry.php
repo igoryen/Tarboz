@@ -31,7 +31,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
       </div>      
       
       <!-- ent_entry_id -->
-      <div class="entry_create_row">
+      <div class="entry_create_row" style="display: none;">
         <div class="entry_create_record_title">Id</div>
         <div class="entry_create_record_value">
           <!--<?php //echo $entry->getEntryId(); ?>-->
