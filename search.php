@@ -54,6 +54,7 @@ $translator->getLanguagesSelectBox($selectbox);
         var from = document.getElementById("fromdate").value;
         var to = document.getElementById("todate").value;
         var verbatim = document.getElementById("showdata").innerHTML; 
+        var searchStr = document.getElementById("txtString").innerHTML; 
         
         // using POST
 //        $.post('searchresult.php',{
@@ -72,7 +73,8 @@ $translator->getLanguagesSelectBox($selectbox);
           '&a=' + auth +
           '&f=' + from +
           '&t=' + to +
-          '&v='+ verbatim;          
+          '&v='+ verbatim +
+          '&s=' + searchStr;          
       });
     </script>
     

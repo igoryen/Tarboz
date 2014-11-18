@@ -87,8 +87,34 @@ $f = $_GET['f'];
 $t = $_GET['t'];
 //echo "<br>sr::auth: >".$_GET['a']."<";
 $a = $_GET['a'];
-//LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
 
+$s = $_GET['s'];
+//LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+if($s != "") {
+?>
+    <script> $('#txtString').val("<?php echo $s; ?>");</script>
+<?php
+}
+if($l !="") {
+?>
+    <script> $('#tgtlang').val("<?php echo $l; ?>");</script>
+<?php
+}
+if($a !="") {
+?>
+    <script> $('#authst').val("<?php echo $a; ?>");</script>
+<?php  
+}
+if($f != "") {
+?>
+    <script> $('#fromdate').val("<?php echo $f; ?>");</script>
+<?php
+}
+if($t != "") {
+?>
+    <script> $('#todate').val("<?php echo $t; ?>");</script>
+<?php
+}
 $em = new EntryManager();
 
 

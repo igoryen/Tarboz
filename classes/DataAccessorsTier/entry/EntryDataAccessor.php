@@ -997,7 +997,7 @@ public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_dat
       $query = "SELECT count(rating.rat_dislike_user_id) AS dislikeNum
                 FROM ".ENTRY." AS entry INNER JOIN ".RATING." AS rating
                 ON rating.rat_entity_id = CONCAT('ent', '".$entryId."') 
-                    AND rating.rat_dislike_user_id IS NOT NULL AND rating.rat_like_user_id >0
+                    AND rating.rat_dislike_user_id IS NOT NULL AND rating.rat_dislike_user_id >0
                 GROUP BY entry.ent_entry_id 
                 HAVING entry.ent_entry_id='".$entryId."'";
       //echo "<br/>EAD getEntryDislikeNum query: ".$query;
