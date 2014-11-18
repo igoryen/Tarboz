@@ -14,8 +14,10 @@
     $locationManager = new LocationManager();
     $EntryManager = new EntryManager();
     $Rating          = new RatingManager();
-
+    
     $userId = intval( $_GET["id"]);
+    // for profile update permission 
+    $user_id = 0;
 //    if ($userId =="")
 //    {
 //        //redirect to homepage
@@ -24,6 +26,7 @@
     if (isset($_SESSION['user'])) {
           $user = $_SESSION['user'];
           $user_id = $user->getUserId();
+    } 
            $User_Login = $userManager->getUserByUserId($userId);
     
                 $id  =$User_Login->getUserId();  
@@ -60,5 +63,5 @@
              foreach ( $country as $cou) {
                $CountryName = $cou->getCountryName();
              }
-    }
+
 ?>
