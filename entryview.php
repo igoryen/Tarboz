@@ -33,6 +33,10 @@
     $entry = $em->getEntryById($entryId); // 1
     $treq = $trm->getTreqByEntryId($entry->getEntryId());
     $lm = new LanguageManager();
+    
+    $um = new UserManager();
+    
+    
     //$userId = 3; // the id of the current logged-in user
     $loggedIn_userId = "";
     $loggedIn_userType = "";
@@ -50,6 +54,7 @@
     $authen = $entry->getEntryAuthenStatusId();
     $translOf = $entry->getEntryTranslOf();
     $user_id = $entry->getEntryUserId();
+    $user_login = $um->getUserByUserId($user_id)->getLogin();
     $media = $entry->getEntryMediaId();
     //$author = $entry->getEntryAuthorId();
     $authors = $entry->getEntryAuthors();
@@ -210,17 +215,8 @@
     <div class="entry_record">
       <div class="entry_record_title">Translation of</div>
       <div class="entry_record_value">
-    <?php 
-        echo $translOf."</br>"; 
-        $query = "SELECT * FROM tbl_entry WHERE ent_entry_id = '".$translOf."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $entry_orig_text = $list['ent_entry_text'];
-            echo $entry_orig_text;
-        }
-    ?>
-    </div>
+        <a href="entryview.php?id=<?php echo $translOf; ?>"><i>See the original</i></a>
+      </div>
     </div>
     <?php }?>
     <!--Display translation of /original phrase end-->  
@@ -232,6 +228,7 @@
         <span class="question" id="entryaddedby" >?</span>
       </div>
       <div class="entry_record_value">
+
     <?php 
         //echo $user_id."</br>"; 
         $userManager = new UserManager();
@@ -242,6 +239,7 @@
           <a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
               <?php echo $fname." ".$lname; ?>
           </a>
+<!--        <a href="profile.php?id=<?php echo $user_id; ?>"><?php echo $user_login; ?></a>-->
       </div>
     </div>
     <!--Display user name who added this entry end-->
@@ -266,7 +264,7 @@
       </div>
       <div class="entry_record_value">
     <?php 
-        echo $media."</br>";
+        //echo $media."</br>";
         $query = "SELECT * FROM tbl_media WHERE med_media_id = '".$media."'";
         $dbHelper = new DBHelper();
         $result = $dbHelper->executeSelect($query);
@@ -308,7 +306,7 @@
       <div class="entry_record_title">Source</div>
       <div class="entry_record_value">
     <?php 
-        echo $source."</br>";
+        //echo $source."</br>";
         $query = "SELECT * FROM tbl_source WHERE sou_source_id = '".$source."'";
         $dbHelper = new DBHelper();
         $result = $dbHelper->executeSelect($query);
@@ -324,8 +322,6 @@
     <!--Display source end--> 
 
       
-
-
     <!--Display Control-->  
     <?php if ($loggedIn_userId == $user_id || $loggedIn_userType == "1") { ?>
     <div class="entry_record">
@@ -538,48 +534,72 @@
       
    <!--- rating section start --->     
     <div class="entry_record">
-      <div class="entry_record_title">Entry Like</div>
+      <div class="entry_record_title">Do you like this entry?</div>
       <div class="entry_record_value">
+       
       <?php
           //get the like number
           $rm = new RatingManager();
           $like_entry = "";
           if ($rm->hasRatingByEntityLikeUser("ent".$entryId, $user_id) ==1) {
               $like_entry = "Unlike";
-          } else if ($rm->hasRatingByEntityDislikeUser("ent".$entryId, $user_id) == 1 || 
-                     $rm->hasRatingByEntityLikeUser("ent".$entryId, $user_id) == 0 || 
-                     $rm->hasRatingByEntityDislikeUser("ent".$entryId, $user_id) == 0){
+          } else if ($rm->hasRatingByEntityDislikeUser("ent".$entryId, $user_id) == 1  
+          //         ||  $rm->hasRatingByEntityLikeUser("ent".$entryId, $user_id) == 0  
+          //         ||  $rm->hasRatingByEntityDislikeUser("ent".$entryId, $user_id) == 0
+                    ){
               $like_entry = "Like";
+          } else {
+              $like_entry = "";
           }
           $likeRating = $rm->CountRatingByLikeEntity("ent".$entryId);
-          $likeRating = $likeRating > 0 ? $likeRating : "";
+          $likeRating = $likeRating > 0 ? $likeRating : 0;
+          $dislikeRating = $rm->CountRatingByDislikeEntity("ent".$entryId);
+          $dislikeRating = $dislikeRating > 0 ? $dislikeRating : 0;
+
+          if ($like_entry != "") {
       ?>
-        <span id ="<?php echo $user_id."_entryLike_".$entryId; ?>" name="<?php echo $user_id."_entryLike_".$entryId; ?>" class="entry_like"
-              style="cursor: pointer; color: #0066cc;"><?php echo $like_entry."&nbsp;"; ?></span>
-        <span>Entry | </span>
-        <span class="entry_like_num" style="display:'';"><?php echo $likeRating; ?> </span><span><?php if($likeRating>0) echo "LIKE(S)";?></span>
+        <div style="display:inline-block; width: 280px;">
+            <span id ="<?php echo $user_id."_entryLike_".$entryId; ?>" name="<?php echo $user_id."_entryLike_".$entryId; ?>" class="entry_like"
+                style="cursor: pointer; color: #0066cc;"><?php echo $like_entry."&nbsp;"; ?></span>
+        </div>
+      <?php
+          } else { ?>
+        <div style="display:inline-block; width: 280px;">
+            <span id ="<?php echo $user_id."_entryLike_".$entryId; ?>" name="<?php echo $user_id."_entryLike_".$entryId; ?>" class="entry_like"
+                  style="cursor: pointer; color: #0066cc;">Like</span>
+            <span> | </span>
+            <span id ="<?php echo $user_id."_disentryLike_".$entryId; ?>" name="<?php echo $user_id."_disentryLike_".$entryId; ?>" class="entry_dislike"
+                  style="cursor: pointer; color: #0066cc;">Dislike</span>
+        </div>        
+      <?php  }
+      ?>
+        <span class="entry_like_num" style="display:''; font-size:12px; margin-left: 20px;"><?php echo $likeRating; ?> </span>
+        <span style="font-size:12px;"><?php echo "Like(s)";?></span>
+        <span> | </span>
+        <span class="entry_dislike_num" style="display:''; font-size:12px;"><?php echo $dislikeRating; ?> </span>
+        <span style="font-size:12px;"><?php echo "Dislike(s)";?></span>
       </div><!--entry_record_value-->
     </div><!--entry_record_value-->
     <!--- rating section end --->  
       
     <!--- report section start --->  
     <div class="entry_record">
-      <div class="entry_record_title">Entry Report</div>
+      <div class="entry_record_title">Report this entry</div>
       <div class="entry_record_value">
           <!--start report entry div-->
             <div style="display:table-cell; ">
                 <div id="<?php echo $user_id."_reportEntryId_".$entryId; ?>" 
-                     class="reportEntry" title="Report to Admin" style="cursor: pointer; color: #0066cc;">Report this entry</div>
+                     class="reportEntry" title="Report to Admin" style="cursor: pointer; color: #0066cc;">Report</div>
                 <div id ="<?php echo 'reportEntryDiv_'.$entryId;?>" style="display: none; ">
                     <form name ="<?php echo 'reportEntryForm_'.$entryId;?>" id="<?php echo 'reportEntryForm_'.$entryId;?>" method="POST">
-                        <div style="font-size:14px; margin-top:5px;">Reason:</div>
-                        <textarea rows="2" cols="20" name="<?php echo 'reportEntryReason_'.$entryId; ?>" 
+                        <div style="font-size:14px; margin-top:5px;">Please input the reason:</div>
+                        <textarea rows="2" cols="40" name="<?php echo 'reportEntryReason_'.$entryId; ?>" 
                                   id="<?php echo 'reportEntryReason_'.$entryId; ?>"></textarea><br/>
                         <input type="hidden" id="<?php echo 'reportEntryBy_'.$entryId; ?>" 
                                name="<?php echo 'reportEntryBy_'.$entryId; ?>" 
                                value ="<?php echo $user_id; ?>"/>
-                        <button id="<?php echo 'reportEntrySub_'.$entryId; ?>" name="<?php echo 'reportEntrySub_'.$entryId; ?>" class="reportEntrySub" type="button" style="font-size:11px;">Submit</button>
-                        <button id="<?php echo 'reportEntryCancel_'.$entryId; ?>" name="<?php echo 'reportEntryCancel_'.$entryId; ?>" class="reportEntryCancel" type="button" style="font-size:11px;">Cancel</button>
+                        <button id="<?php echo 'reportEntrySub_'.$entryId; ?>" name="<?php echo 'reportEntrySub_'.$entryId; ?>" class="reportEntrySub" type="button" style="font-size:12px; margin-top:8px;">Submit</button>
+                        <button id="<?php echo 'reportEntryCancel_'.$entryId; ?>" name="<?php echo 'reportEntryCancel_'.$entryId; ?>" class="reportEntryCancel" type="button" style="font-size:12px;margin-top:8px;">Cancel</button>
                     </form>
                 </div> <!--end report entry div inner-->
             </div> <!--end table cell for report en-->

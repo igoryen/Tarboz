@@ -322,7 +322,8 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         });
               
         $('.entry_like').click( function (event) {
-            //$(this).css({'display': 'none'}); 
+            $(this).next().css({'display': 'none'});
+            $('.entry_dislike').css({'display': 'none'}); 
             //$(this).next().css({'display': ''})
             var this_id = $(this).attr('id');
             var user_id = this_id.substring(0,this_id.indexOf("_")); //alert("user id: "+user_id);
@@ -335,12 +336,19 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                
                 var like_num = parseInt($('.entry_like_num').html().trim())+1; //alert(like_num);
                 $('.entry_like_num').text(like_num+" ");
+                if (parseInt($('.entry_dislike_num').text().trim()) > 0) {
+                    var dislike_num = parseInt($('.entry_dislike_num').text().trim())-1; 
+                    $('.entry_dislike_num').text(dislike_num+" ");
+                } 
+                
                 //$('.entry_like_num').css({'display': 'none'});
             } else if ($(this).text().trim() == "Unlike") {
                 is_like = "N";
                 $(this).text("Like");
                 var like_num = parseInt($('.entry_like_num').html().trim())-1; //alert(like_num);
                 $('.entry_like_num').text(like_num+" ");
+                var dislike_num = parseInt($('.entry_dislike_num').text().trim())+1; 
+                $('.entry_dislike_num').text(dislike_num+" ");
                 //$('.entry_like_num').css({'display': ''});
             }
             $.ajax({
@@ -366,6 +374,49 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                   }
             });//end $.ajax()*/
             event.preventDefault();
+        });
+        $('.entry_dislike').click( function (event) {
+            $(this).prev().css({'display': 'none'});
+            $(this).css({'display': 'none'}); 
+            var this_id = $(this).attr('id');
+            var user_id = this_id.substring(0,this_id.indexOf("_")); //alert("user id: "+user_id);
+            var entry_id = this_id.substring(this_id.lastIndexOf("_")+1); //alert("entry id: "+entry_id);
+            var is_like = "";
+
+            is_like = "N";
+            //alert("=="+$('.entry_dislike_num').text().trim()+"==");
+            var dislike_num = 0;
+            if ($('.entry_dislike_num').text().trim() != "") {
+                dislike_num = parseInt($('.entry_dislike_num').text().trim())+1; 
+            } else {
+                dislike_num++;
+            }
+            $('.entry_dislike_num').text(dislike_num+" ");
+
+            $.ajax({
+               url: "user_test/entry_rating.php",
+               type: "POST",
+               data: {
+                    entryId : entry_id,
+                    userId : user_id,
+                    isLike : is_like
+                },
+                success:
+                   function(data, status) {
+                       //alert(data);
+                       if(data.indexOf("succeed")>0) {
+                           
+                       } else  if (data.indexOf("fail") >0){
+                           alert(data);
+                       }
+                   },
+                error:
+                  function() {
+                    alert("ajax error");  
+                  }
+            });//end $.ajax()*/
+            event.preventDefault();
+            
         });
         //==========Report Entry start=========
         $('.reportEntry').click( function(event) {
@@ -444,6 +495,54 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             }
             
         });
+        //subscribe and unsubscribe 
+        $("#subscribeDialog").dialog({
+            autoOpen: false
+        });
+        $("#subscribeLink").click( function(event) {
+            $( "#subscribeDialog" ).dialog("open");
+        });
+        $("#unsubscribeLink").click( function(event) {
+            $( "#unsubscribeDialog" ).dialog("open");
+        });          
+        $("#unsubscribeDialog").dialog({
+            autoOpen: false
+        });
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        $("#sub_email_id").keydown(function(){
+			//comparing the above regex to the value in the texbox, if not from the box then send error
+		 	if(!emailReg.test($("#sub_email_id").val())){		 				
+		 		//fill the textbox label with error
+	            document.getElementById("sub_error").innerHTML="<font color='red' size='2px' family='verdana'>invalid Email</font>";
+	            $("#sub_email").css("border-color","rgba(255,0,0,.6)"); 
+	            //Disable submit button
+	            $('#submitbtn').attr('disabled','disabled'); 
+	        }
+	        else{
+	            document.getElementById("sub_error").innerHTML="<font color='red' size='2px' family='verdana'></font>";
+	            $("#sub_email").css("border-color","rgba(255,0,0,.6)"); 
+	            //Disable submit button
+	            $('#submitbtn').attr('disabled',''); 
+	
+	       }
+		});
+
+	  $("#usub_email_id").keydown(function(){
+			//comparing the above regex to the value in the texbox, if not from the box then send error
+		 	if(!emailReg.test($("#usub_email_id").val())){		 				
+		 		//fill the textbox label with error
+	            document.getElementById("usub_error").innerHTML="<font color='red' size='2px' family='verdana'>invalid Email</font>";
+	            $("#sub_email").css("border-color","rgba(255,0,0,.6)"); 
+	            //Disable submit button
+	            $('#usubmitbtn').attr('disabled','disabled'); 
+	         }
+	         else{
+	            document.getElementById("usub_error").innerHTML="<font color='red' size='2px' family='verdana'></font>";
+	            $("#usub_email").css("border-color","rgba(255,0,0,.6)"); 
+	            //Disable submit button
+	            $('#usubmitbtn').attr('disabled',''); 
+	         }
+		});
      
       });
       

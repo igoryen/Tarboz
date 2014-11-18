@@ -159,6 +159,14 @@ foreach($entries as $entry){
     $kids = $em->getListOfKidBriefByDadId($dad->getEntryId());
     foreach($kids as $kid){
       array_push($family, $kid);
+      // DELETE THE KID FROM NON-ORPHANS
+      foreach($non_orphans as $i => $non_orphan){
+        // IF THE RETRIEVED KID IS AMONG THE NON-ORPHANS
+        if($non_orphan->getEntryId() == $kid->getEntryId()){
+          //DELETE THE NON-ORPHAN SO THAT IT'S NOT USED BELOW
+          unset($non_orphans[$i]);
+        }
+      }
     }
     //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
     
@@ -267,6 +275,8 @@ if(is_array(reset($families))){
         $ary['language'] = $entry->getEntryLanguage();
         $ary['text'] = $entry->getEntryText();
         $ary['user'] = $entry->getEntryUserId();
+        $em = new EntryManager();
+        $ary['kidsnum'] = $em->getOriginalKidsNum($ary['id'])!= "" ? $em->getOriginalKidsNum($ary['id']) : 0;
         make_family_dad_room($ary);
         //open_kids_house2();
       }
@@ -276,6 +286,9 @@ if(is_array(reset($families))){
         $ary['text'] = $entry->getEntryText();
         $ary['dad'] = $entry->getEntryTranslOf();
         $ary['user'] = $entry->getEntryUserId();
+        $em = new EntryManager();
+        $ary['likes'] =  $em->getEntryLikeNumByEntry($ary['id']) != "" ? $em->getEntryLikeNumByEntry($ary['id']) : 0;
+        $ary['dislikes'] = $em->getEntryDislikeNumByEntry($ary['id']) != "" ? $em->getEntryDislikeNumByEntry($ary['id']) : 0;
         //dad_house_dad_1($ary);
         make_family_kid_room($ary);
       }
@@ -307,6 +320,8 @@ if(is_object(reset($dads))){
     //$ary['text'] = substr($dad->getEntryText(), 0, 55);
     $ary['text'] = $dad->getEntryText();
     $ary['user'] = $dad->getEntryUserId();
+    $em = new EntryManager();
+    $ary['kidsnum'] = $em->getOriginalKidsNum($ary['id'])!= "" ? $em->getOriginalKidsNum($ary['id']) : 0;
     dad_house_dad_1($ary);
     //echo $d .". ". substr($dad->getEntryText(),0,60);
     //echo "<br>";
@@ -326,11 +341,15 @@ if(is_object(reset($non_orphans))){
   open_kids_house2();
   $k = 1;
   foreach($non_orphans as $non_orphan){
+    
     $ary['id'] = $non_orphan->getEntryId();
     $ary['language'] = $non_orphan->getEntryLanguage();
     $ary['text'] = $non_orphan->getEntryText();
     $ary['user'] = $non_orphan->getEntryUserId();
     $ary['dad'] = $non_orphan->getEntryTranslOf();
+    $em = new EntryManager();
+    $ary['likes'] =  $em->getEntryLikeNumByEntry($ary['id']) != "" ? $em->getEntryLikeNumByEntry($ary['id']) : 0;
+    $ary['dislikes'] = $em->getEntryDislikeNumByEntry($ary['id']) != "" ? $em->getEntryDislikeNumByEntry($ary['id']) : 0;
     //dad_house_dad_1($ary);
     make_kid_room($ary);
     //echo $k .". ". substr($non_orphan->getEntryText(),0,60);
@@ -356,9 +375,12 @@ if(is_object(reset($orphans))){
     //echo "<br>";
     $ary['id'] = $orphan->getEntryId();
     $ary['language'] = $orphan->getEntryLanguage();
-    $ary['text'] = $orphan->getEntryText();
-    $ary['dad'] = $entry->getEntryTranslOf();
+    $ary['text'] = $orphan->getEntryText(); 
+    $ary['dad'] = $orphan->getEntryTranslOf();
     $ary['user'] = $orphan->getEntryUserId();
+    $em = new EntryManager();
+    $ary['likes'] =  $em->getEntryLikeNumByEntry($ary['id']) != "" ? $em->getEntryLikeNumByEntry($ary['id']) : 0;
+    $ary['dislikes'] = $em->getEntryDislikeNumByEntry($ary['id']) != "" ? $em->getEntryDislikeNumByEntry($ary['id']) : 0;
     //dad_house_dad_1($ary);
     make_kid_room($ary);
     $o++;
