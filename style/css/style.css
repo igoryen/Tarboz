@@ -728,16 +728,14 @@ a:active {
 }
 
 .entry_record_title{
-  background-color: lavender;
-  color: silver;
+  background-color: rgba(13,31,56,0.8);
+  color: #ffffff;
   display: block;
   font-size: smaller;
   font-weight: bold;
   margin: auto;
-  padding: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 55%;
+  padding: 6px;
+  width: 500px;
 }
 
 .entry_record_value{
@@ -746,10 +744,8 @@ a:active {
   display: block;
   font-size: medium;
   margin: auto;
-  padding: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 55%;
+  padding: 5px;
+  width: 500px;
 }
 .entry_record_value_for_text{
   background: LightGoldenRodYellow;
@@ -763,7 +759,7 @@ a:active {
   padding-left: 5px;
   padding-right: 5px;
   text-shadow: 2px 2px 2px lightgray;
-  width: 55%;
+  width: 500;
 }
 
 /*finish entry_display.php*/

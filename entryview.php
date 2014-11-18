@@ -20,7 +20,7 @@
     echo "neither (GET['id']) nor (POST['id'])";
     }
     if(isset($_GET['id'])){
-    echo "we have GET[id], it is " . $_GET['id'] . "<br>";
+//    echo "we have GET[id], it is " . $_GET['id'] . "<br>";
     $entryId = $_GET['id'];
     }
     elseif(isset($_POST['id'])){
@@ -68,13 +68,17 @@
   ?>
 
   <div id="entry_index_container">    
+<!--
     <mark>index</mark>.php
     
     <div class="entry_record" style="display: none;">
       <div class="entry_record_title">id</div>
-      <div class="entry_record_value"><?php echo $entryId; ?></div>
+      <div class="entry_record_value">
+          <?php echo $entryId; ?>
+        </div>
     </div>
-    
+-->
+      
     <div class="entry_record">
       <div class="entry_record_title">
         Language
@@ -123,7 +127,7 @@
             <span class="question" id="entryviewvideo" >?</span>
           </div>
           <div class="entry_record_value">
-            <embed width="420" height="315" src="<?php echo $video; ?>">
+            <embed width="500" height="315" src="<?php echo $video; ?>">
           </div>
         </div>
     <?php }?>
