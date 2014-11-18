@@ -47,8 +47,7 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                             <div class="col_33">
                                <h3 class="t_title">Top 10 Translations</h3>
                                  <div class="mid_scoll">
-                                     <br />
-                                    <ol type="circle" style="padding: 0px 5px; margin-top:0px">
+                                    <ol type="circle" style="padding: 0px 5px; margin: 0px">
                                         <!-Display top 10 translations-->
                                         <?php
                                             $query =   "SELECT *, count(rating.rat_like_user_id) AS num_like
@@ -82,11 +81,13 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                                 if ($count< 10) {    
                                         ?>
                                         <li>
-                                            <a href="entryview.php?id=<?php echo $trans_entry_id;?>"><?php echo substr($trans_phrase, 0, 88);?>
-                                            </a>
-                                            <p style="text-align:right"><span><?php echo $num_like;?></span><span> Likes</span></p></li>
+<!--                                            <div>-->
+                                                <div  class="text_shortcut"><a href="entryview.php?id=<?php echo $trans_entry_id;?>"><?php echo $trans_phrase;?></a></div>
+<!--                                                <span style="float:right; postion:"><div><?php echo $num_like;?> Likes</div></span>-->
+<!--                                            </div>-->
+                                        </li>
                                             <?php      if($count<9) { ?>
-                                            <hr />
+<!--                                            <hr />-->
                                             <?php   
                                                         }// end if $count<4
                                                     } //end if  $count <5  
@@ -104,15 +105,17 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                             <div class="col_33" >
                                        <h3 class="t_title">Help translate these into <?php echo $aryOfTreq[0]->getTreqLang();?></h3>
                                 <div class="mid_scoll">
-                                        <br />
                                     <ol type="circle" style="padding: 0px 5px; margin-top:0px">
                                 <?php
                                               // TODO: add an if() in case the current request does not have the Accept-Language: header 
-                                                  for($j = 0; $j < count($aryOfTreq); $j++) {
-                                                    echo '<li>';
+                                                  for($j = 0; $j < count($aryOfTreq)-1; $j++) {
+                                                    echo '<li class="trans_list">';
+                                                    echo '<div  class="text_shortcut">';  
                                                     echo '<a href="entryview.php?id='.$aryOfTreq[$j]->getTreqEntryId() . '">'; 
-                                                    echo substr($aryOfTreq[$j]->getTreqEntryLine(), 0, 25) . '...';
+                                                    echo $aryOfTreq[$j]->getTreqEntryLine();
                                                     echo '</a>';
+//                                                    echo '<span style="float:right">'.$num_like.' Likes</span>';
+                                                    echo '</div>';  
                                                     echo '</li>';  
                                 }?>
                                     </ol>
@@ -121,15 +124,16 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                             <div class="col_33" >
                                 <h3 class="t_title">Original Entries in <?php echo $aryOfEntry[0]->getEntryLanguage();?></h3>
                                 <div class="mid_scoll">
-                                 <br />
                                     <ol type="circle" style="padding: 0px 5px; margin-top:0px">
                          <?php
                               // TODO: add an if() in case the current request does not have the Accept-Language: header 
                                   for($i = 0; $i < 3; $i++) {
                                     echo '<li>';
+                                    echo '<div  class="text_shortcut">';   
                                     echo '<a href="entryview.php?id='.$aryOfEntry[$i]->getEntryId() . '">'; 
-                                    echo substr($aryOfEntry[$i]->getEntryText(), 0, 25) . '...';
+                                    echo $aryOfEntry[$i]->getEntryText();
                                     echo '</a>';
+                                    echo '</div>';   
                                     echo '</li>';  
                                   }
                         ?>

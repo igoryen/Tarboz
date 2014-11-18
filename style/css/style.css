@@ -216,6 +216,9 @@ font-size: 15px;
   text-align:left;
   font-weight:normal;
   list-style:none;
+  padding: 10px 0px;    
+  margin: 0px;    
+  border-bottom: 2px solid #676A8A;
 }
 /* finish middle column*/
 
@@ -545,7 +548,7 @@ a:active {
   margin-left: 5px;
   margin-right: 5px;
   vertical-align: middle; /*50*/
-  width: 100px;
+  width: 200px;
 }
 
 .is_mom{
@@ -728,16 +731,14 @@ a:active {
 }
 
 .entry_record_title{
-  background-color: lavender;
-  color: silver;
+  background-color: rgba(13,31,56,0.8);
+  color: #ffffff;
   display: block;
   font-size: smaller;
   font-weight: bold;
   margin: auto;
-  padding: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 55%;
+  padding: 6px;
+  width: 500px;
 }
 
 .entry_record_value{
@@ -746,10 +747,8 @@ a:active {
   display: block;
   font-size: medium;
   margin: auto;
-  padding: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 55%;
+  padding: 5px;
+  width: 500px;
 }
 .entry_record_value_for_text{
   background: LightGoldenRodYellow;
@@ -763,7 +762,7 @@ a:active {
   padding-left: 5px;
   padding-right: 5px;
   text-shadow: 2px 2px 2px lightgray;
-  width: 55%;
+  width: 500;
 }
 
 /*finish entry_display.php*/
@@ -1189,6 +1188,7 @@ position: relative;
     border-color: #000000;
     border-width: 1px;
     box-shadow: 5px 5px 5px #888888;
+    background: LightGoldenRodYellow;
 }
 
 html {
@@ -1203,6 +1203,7 @@ html {
     text-shadow: 2px 1px 2px lightgray;
 }
 
+/**entry page**/
 .entryList, .entry_header {
     width: 700px;
     margin: 0;
@@ -1222,3 +1223,11 @@ html {
     border-radius: 3px 3px 0 0;
     border-bottom: 0;
 }
+/****front page******/
+.text_shortcut {
+    white-space: nowrap; 
+    width: 15em; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
