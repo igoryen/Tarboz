@@ -42,7 +42,10 @@ Entry/form_to_<mark>edit</mark>_entry.php
       </div>      
       <!-- lan_lang_name -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Language of origin</div>
+        <div class="entry_create_record_title">
+          Language
+          <span class="question" id="entrycreatelang" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <select name="langid">
             <option value="">This is in ...</option><?php
@@ -77,7 +80,8 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <!-- ent_entry_text -->
       <div class="entry_create_row">
         <div class="entry_create_record_title">
-          Text of the phrase <span class="Painted_red">*</span> 
+          Text <span class="Painted_red">*</span>
+          <span class="question" id="entrycreatetext" >?</span> 
         </div>
         <div class="entry_create_record_value">
           <textarea name="text"
@@ -105,7 +109,10 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <div class="entry_create_row">
         
         <div class="entry_create_record_title">
-          <a href="#" id="create-verbatim-button">Recreate verbatim</a><br>
+          <a href="#" id="create-verbatim-button">Recreate<br>verbatim</a>
+          <span class="Painted_red">*</span>
+          <span class="question" id="entryrecreateverbatim" >?</span>
+          <br>
         </div>
         <div class="entry_create_record_value">
           <textarea name="verbatim" 
@@ -119,7 +126,10 @@ Entry/form_to_<mark>edit</mark>_entry.php
 
       <!-- ent_entry_translit -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Transliteration</div>
+        <div class="entry_create_record_title">
+          Transliteration
+          <span class="question" id="entrycreatetranslit" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <textarea name="translit" rows="10" cols="50"><?php
           echo $entry->getEntryTranslit();
@@ -130,7 +140,10 @@ Entry/form_to_<mark>edit</mark>_entry.php
 
       <!-- entry_authen_status_id -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Authenticity status</div>
+        <div class="entry_create_record_title">
+          Authenticity
+          <span class="question" id="entrycreateauthen" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <input name="authen"
                  type="text"
@@ -150,7 +163,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
       
       <!-- the value of ent_entry_creator_id will be supplied automatically -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Added by (user name)</div>
+        <div class="entry_create_record_title">Added by</div>
         <div class="entry_create_record_value">
           <input name="creator" value="<?php echo $entry->getEntryUserId(); ?>"/>
         </div>
@@ -163,7 +176,10 @@ Entry/form_to_<mark>edit</mark>_entry.php
 
       <!-- ent_entry_tags -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Tags</div>
+        <div class="entry_create_record_title">
+          Tags
+          <span class="question" id="entrycreatetags" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <input name="tags" type="text" size="50" value="<?php
             echo $entry->getEntryTags();
@@ -189,6 +205,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <div class="entry_create_row">
         <div class="entry_create_record_title">
            Authors
+          <span class="question" id="entrycreateauthors" >?</span>
         </div>
         <div class="entry_create_record_value">
           <input name="authors" type="text" size="50" value="<?php
@@ -211,7 +228,10 @@ Entry/form_to_<mark>edit</mark>_entry.php
 
       <!-- ent_entry_use -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Phrase use</div>
+        <div class="entry_create_record_title">
+          Phrase use
+          <span class="question" id="entrycreateuse" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <input name="use" value="<?php 
             echo $entry->getEntryUse(); 
@@ -222,7 +242,10 @@ Entry/form_to_<mark>edit</mark>_entry.php
 
       <!-- ent_entry_http_link -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Http link</div>
+        <div class="entry_create_record_title">
+          Http link
+          <span class="question" id="entrycreatelink" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <input name="link" type="text" size="50" value="<?php
           echo $entry->getEntryHttpLink();
