@@ -139,4 +139,10 @@ class EntryManager {
     return $numOfLikes;
   }
     
+  public function getEntryDislikeNumByEntry($entryId) {
+    $eda = new EntryDataAccessor();
+    $numOfDislikes = $eda->getEntryDislikeNumByEntry($entryId);
+    return $numOfDislikes;
+  }
+    
 }
