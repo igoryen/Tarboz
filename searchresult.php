@@ -321,7 +321,6 @@ if(is_object(reset($dads))){
     $ary['text'] = $dad->getEntryText();
     $ary['user'] = $dad->getEntryUserId();
     $em = new EntryManager();
-    $em = new EntryManager();
     $ary['kidsnum'] = $em->getOriginalKidsNum($ary['id'])!= "" ? $em->getOriginalKidsNum($ary['id']) : 0;
     dad_house_dad_1($ary);
     //echo $d .". ". substr($dad->getEntryText(),0,60);
@@ -376,8 +375,8 @@ if(is_object(reset($orphans))){
     //echo "<br>";
     $ary['id'] = $orphan->getEntryId();
     $ary['language'] = $orphan->getEntryLanguage();
-    $ary['text'] = $orphan->getEntryText();
-    $ary['dad'] = $entry->getEntryTranslOf();
+    $ary['text'] = $orphan->getEntryText(); 
+    $ary['dad'] = $orphan->getEntryTranslOf();
     $ary['user'] = $orphan->getEntryUserId();
     $em = new EntryManager();
     $ary['likes'] =  $em->getEntryLikeNumByEntry($ary['id']) != "" ? $em->getEntryLikeNumByEntry($ary['id']) : 0;
