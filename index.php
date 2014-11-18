@@ -17,6 +17,8 @@ require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
 require_once BUSINESS_DIR_TRANSLREQ . "TranslationRequestManager.php";
 require_once BUSINESS_DIR_SUBSCRIPTION . 'Subscription.php';
 require_once BUSINESS_DIR_SUBSCRIPTION . 'SubscriptionManager.php';
+require_once BUSINESS_DIR_USER. 'User.php';
+require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 
 //require DB_CONNECTION . 'DBHelper.php';
 //require DB_CONNECTION . 'datainfo.php';
@@ -170,50 +172,23 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
     <div id="RightCol">
         <div id="RightCol_Scroll">
           <div id="subscribeLink" style="cursor: pointer; color: #0066cc; font-size: 13px;">Subscribe a newsletter</div><br>
-            
           <div id="subscribeDialog" title="Subscribe A Newsletter!" style="display:none;">
-            <form action="" method="post">
+            <form action="user_test/subscribe.php" method="post">
 	           <label>Email: </label><input type="text" name="sub_email" id="sub_email_id">
+               <input type="hidden" id="sub_success" name="sub_success" value="N">
 	           <input type="Submit" value="Subscribe" id="submitbtn" style="margin-top: 15px;">
-	           <span id="sub_error"></span>
+               
             </form>   
           </div>
-         <div id="unsubscribeLink" style="cursor: pointer; color: #0066cc; font-size: 13px;">Unsubscribe a newsletter</div><br><br>
-         <div id="unsubscribeDialog" title="Unsubscribe A Newsletter!" style="display:none;  width: 500px;">
-            <form action="" method="post">
+          <div id="unsubscribeLink" style="cursor: pointer; color: #0066cc; font-size: 13px;">Unsubscribe a newsletter</div><br>
+          <div id="unsubscribeDialog" title="Unsubscribe A Newsletter!" style="display:none;  width: 500px;">
+            <form action="user_test/subscribe.php" method="post">
                 <label>Email: </label><input type="text" name="usub_email" id="usub_email_id">
-                <input type="Submit" value="UnSubscribe" id="usubmitbtn" style="margin-top: 15px;">
-                <span id="usub_error"></span>
+                <input type="hidden" id="unsub_success" name="unsub_success" value="N">
+                <input type="Submit" value="UnSubscribe" id="usubmitbtn" style="margin-top: 15px;"></br>
             </form> 
           </div>
-          <?php
-
-            $sub_email = isset($_POST['sub_email']) ? $_POST['sub_email'] : "";
-            $usub_email = isset($_POST['usub_email']) ? $_POST['usub_email'] : "";
-            
-            $subscribe = new SubscriptionManager();
-            
-            if($sub_email!=""){
-            
-                $subscribed = $subscribe->subscribe($sub_email);
-            
-                if($subscribed)
-                    echo "Subscribed successfully";
-                else
-                    echo "Failed successfully";
-            }
-            else if($usub_email!=""){
-            
-                $subscribed = $subscribe->unsubscribe($usub_email);
-            
-                if($subscribed)
-                    echo "UnSubscribed successfully";
-                else
-                    echo "Email does not exist";
-            }
-        ?>
-          
-        </div>
+         </div> <!--did="RightCol_Scroll"--> 
     </div><!--RightCol-->
 
     </div><!--index_table-->

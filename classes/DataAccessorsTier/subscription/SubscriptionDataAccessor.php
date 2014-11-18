@@ -21,7 +21,7 @@ public function unsubscribe($email) {
 
     //to unsubscribe the email
     $query_update = "UPDATE ".SUBSCRIPTION." SET
-    subscribed = 0
+    sub_subscribed = 0
     WHERE sub_email_address = '".$email."' ";
 
     $result = $dbHelper->executeQuery($query_update);
@@ -47,7 +47,7 @@ public function subscribe($email) {
     if($emailexist->getId()!=""){
 
     $query_update = "UPDATE ".SUBSCRIPTION." SET
-    subscribed = 1
+    sub_subscribed = 1
     WHERE sub_email_address = '".$email."' ";
 
     $result = $dbHelper->executeQuery($query_update);
@@ -56,8 +56,8 @@ public function subscribe($email) {
     }
     else{
 
-    $query_insert = " INSERT INTO ". SUBSCRIPTION." VALUES ('', '$email',null,null,1)";
-
+    $query_insert = " INSERT INTO ". SUBSCRIPTION." (sub_email_address, sub_subscribed) VALUES ('".$email."', 1)";
+    //echo "SDA insert query: ".$query_insert;
     $result = $dbHelper->executeQuery($query_insert);
     
     return $result;
@@ -75,7 +75,8 @@ public function subscribe($email) {
     $name = $subscription->getName();
     $location_name = $subscription->getLocationName();
 
-    $query_insert = "INSERT INTO". SUBSCRIPTION." VALUES ('', $email, $name, $location_name)";
+    $query_insert = "INSERT INTO". SUBSCRIPTION." (sub_sub_email_address, sub_name, sub_location_name) 
+                    VALUES ('".$email."', '".$name."', '".$location_name."')";
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeQuery($query_insert);
     $last_inserted_id = mysql_insert_id();
@@ -173,13 +174,53 @@ public function subscribe($email) {
         $subscribe->setEmail($list['sub_email_address']);
         $subscribe->setName($list['sub_name']);
         $subscribe->setLocationName($list['sub_location_name']);
-        $subscribe->setSubscription($list['subscribed']);
+        $subscribe->setSubscription($list['sub_subscribed']);
 
     } // while
 
 
     return $subscribe;
   }
+    
+      //A private function that takes, email,username and resetcode
+  public function email($email,$body,$subject) {
+    $returnMsg = "";
+      
+  //  echo $body_text;
+    $mail = new PHPMailer;
+    $body=$body;
+
+    $mail->isSMTP();
+    $mail->Host = "ssl://smtp.gmail.com"; 
+    $mail->SingleTo = true;
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = 465;
+    $mail->SMTPAuth = true;
+    $mail->Username = 'tarboz.com@gmail.com';
+    $mail->Password = 'habibtarboz';
+    $mail->setFrom ('tarboz.com@gmail.com', 'Tarboz.com NewsLetter');
+    $mail->addReplyTo('lfan9@myseneca.ca', 'Tarboz.com Newsletter');
+    $mail->addAddress($email, 'Tarboz Newsletter Subscriber');
+    $mail->WordWrap = 50;
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body    = $body;
+    
+
+    //if Email was not sent it should return a true bool to the user
+    if(!$mail->send()) {
+      //$mail->ClearAddresses();
+       $returnMsg = "Mailer Error!";
+    } else {
+       $returnMsg = "Message sent!";
+    }
+
+
+    //successfully sent, then it should sent a true bool
+    return $returnMsg;
+
+  }
+
 
 }
 

@@ -43,7 +43,7 @@ class SubscriptionManager {
 
   public function getSubscriptionByEmail($subscription_email) {
     $subscriptionDataAccessor = new SubscriptionDataAccessor();
-    $result = $subscriptionDataAccessor->getSubscriptionByEntity($subscription_email);
+    $result = $subscriptionDataAccessor->getSubscriptionByEmail($subscription_email);
     return $result;
   }
 
@@ -55,19 +55,25 @@ class SubscriptionManager {
 
   public function getSubscriptionByLocation($subscriber_location) {
     $subscriptionDataAccessor = new SubscriptionDataAccessor();
-    $result = $subscriptionDataAccessor->getSubscriptionByEntityId($subscriber_location);
+    $result = $subscriptionDataAccessor->getSubscriptionByLocation($subscriber_location);
     return $result;
   }
 
   public function getSubscriptionByName($subscriber_name) {
     $subscriptionDataAccessor = new SubscriptionDataAccessor();
-    $result = $subscriptionDataAccessor->getSubscriptionByEntityId($subscriber_name);
+    $result = $subscriptionDataAccessor->getSubscriptionByName($subscriber_name);
     return $result;
   }
 
   public function updateSubscription($subscription) {
     $subscriptionDataAccessor = new SubscriptionDataAccessor();
     $result = $subscriptionDataAccessor->updateSubscription($subscription);
+    return $result;
+  }
+
+  public function sendEmail($email,$body,$subject) {
+    $subscriptionDataAccessor = new SubscriptionDataAccessor();
+    $result = $subscriptionDataAccessor->email($email, $body, $subject);
     return $result;
   }
 

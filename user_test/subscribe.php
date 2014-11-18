@@ -9,7 +9,7 @@
 require_once '../config.php';
 require_once BUSINESS_DIR_SUBSCRIPTION . 'Subscription.php';
 require_once BUSINESS_DIR_SUBSCRIPTION . 'SubscriptionManager.php';
-
+include PHP_MAILER.'PHPMailerAutoload.php';
 ?>
 
 <form action="" method="post">
@@ -35,19 +35,52 @@ if($sub_email!=""){
 
 	$subscribed = $subscribe->subscribe($sub_email);
 
-	if($subscribed)
-		echo "Subscribed successfully";
-	else
+	if($subscribed) {
+		echo "Subscribed successfully"; 
+        $sub_body = "
+<html>
+<head>
+  <title>Tarboz Newsletter Subscription</title>
+</head>
+<body>
+        Dear subscriber, 
+           <p>Thank you for subscribe out news letter. This is to confirm your subscription. Please note we have your permission to send you newsletters periodically.</p>
+           <p>To unsubscribe newsletter, please click <a href='localhost/tarboz'>here</a>.</p>
+           <br/>
+           Yours truly,<br/>
+           Tarboz Newsletter
+</body>
+</html>";
+        $sub_subject ="Tarboz Newsletter Subscription";
+        $subscribe->sendEmail($sub_email, $sub_body, $sub_subject);
+	} else
 		echo "Failed successfully";
+    header("Location: ../index.php");
 }
 else if($usub_email!=""){
 
 	$subscribed = $subscribe->unsubscribe($usub_email);
 
-	if($subscribed)
+	if($subscribed) {
 		echo "UnSubscribed successfully";
-	else
+        $usub_body ="
+<html>
+<head>
+  <title>Tarboz Newsletter UnSubscription</title>
+</head>
+<body> 
+           <p>Your email address has been removed from our mailing list. You are no longer receiving our newsletters.</p>
+           <p>To re-subscribe newsletter, please click <a href='localhost/tarboz'>here</a>.</p>
+           <br/>
+           Yours truly,<br/>
+           Tarboz Newsletter
+</body>
+</html>";
+        $usub_subject ="Tarboz Newsletter UnSubscription";
+        $subscribe->sendEmail($usub_email, $usub_body, $usub_subject);
+	} else
 		echo "Email does not exist";
+    header("Location: ../index.php");
 }
 
 ?>
