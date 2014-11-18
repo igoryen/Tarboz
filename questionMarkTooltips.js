@@ -21,7 +21,9 @@ var entry_media = "What kind of media...";
 var entry_create_lang = "The language in which you are creating this entry";
 var entry_create_text = "Enter the text of the entry here";
 var entry_create_verbatim = "Click this link to create a verbatim of the entry. "
-        +"It is used for search"; 
+        +"It is used for search";
+var entry_recreate_verbatim = "Click this link to re-create the verbatim of the entry. "
+        +"It is used for search"
 var entry_create_translit = "Add a transliterated text here (using the Latin letters) to help those "
         +"who would like to know how to pronounce your entry";
 var entry_create_authen = "Indicate the authencitity status of the entry: "+
@@ -35,6 +37,12 @@ var kid_create_original = "The text of the original entry for which you are "
         + "creating this translation";
 
 $(document).ready(function () {
+  
+  $("span#entryrecreateverbatim").hover(function () {
+    $(this).append('<div class="tooltip"><p>'+entry_recreate_verbatim+'</p></div>');
+  }, function () {
+    $("div.tooltip").remove();
+  });
   
   $("span#kidcreateoriginal").hover(function () {
     $(this).append('<div class="tooltip"><p>'+kid_create_original+'</p></div>');
