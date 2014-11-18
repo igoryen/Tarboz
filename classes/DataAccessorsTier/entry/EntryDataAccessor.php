@@ -992,5 +992,24 @@ public function getEntryListByNoDadLangDate($in_lang, $in_from_date, $in_end_dat
         }
         return $like_num;      
   }
+    
+ public function getEntryDislikeNumByEntry($entryId) {
+      $query = "SELECT count(rating.rat_dislike_user_id) AS dislikeNum
+                FROM ".ENTRY." AS entry INNER JOIN ".RATING." AS rating
+                ON rating.rat_entity_id = CONCAT('ent', '".$entryId."') 
+                    AND rating.rat_dislike_user_id IS NOT NULL AND rating.rat_like_user_id >0
+                GROUP BY entry.ent_entry_id 
+                HAVING entry.ent_entry_id='".$entryId."'";
+      //echo "<br/>EAD getEntryDislikeNum query: ".$query;
+      $dbHelper = new DBHelper();
+      $resultOfSelect = $dbHelper->executeSelect($query);
+      $dislike_num = "";
+      $count = 0;
+        while ($list = mysqli_fetch_assoc($resultOfSelect)) {
+            $dislike_num = $list['dislikeNum'];
+            $count++;
+        }
+        return $dislike_num;      
+  }
 
 }
