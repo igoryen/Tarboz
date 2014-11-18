@@ -162,7 +162,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <!-- the value of ent_entry_translation_of will be supplied automatically -->
       
       <!-- the value of ent_entry_creator_id will be supplied automatically -->
-      <div class="entry_create_row">
+      <div class="entry_create_row" style="display: none;">
         <div class="entry_create_record_title">Added by</div>
         <div class="entry_create_record_value">
           <input name="creator" value="<?php echo $entry->getEntryUserId(); ?>"/>
