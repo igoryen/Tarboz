@@ -12,7 +12,7 @@ function form_to_create_entry(){
 //    date_default_timezone_set('America/Toronto');
 //    echo "<br>Today: " . date("Y-m-d H:i:s");
     ?>
-    <br>views/entry/form_to_<mark>create</mark>_entry.php
+<!--    <br>views/entry/form_to_<mark>create</mark>_entry.php-->
     <div id="entry_create_form">
       
       <div class="entry_create_row">

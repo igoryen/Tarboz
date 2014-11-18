@@ -23,7 +23,7 @@
   if (isset($_SESSION['user'])) {
       $user = $_SESSION['user'];
       $user_id = $user->getUserId();
-      echo "user id==".$user_id;
+//      echo "user id==".$user_id;
   }
   $user_input_valid = true; // 2
   date_default_timezone_set('America/Toronto');
