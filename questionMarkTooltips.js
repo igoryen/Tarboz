@@ -31,8 +31,16 @@ var entry_create_authors = "The author(s) of the phrase, those who hold "
         +"the copyright to the phrase";
 var entry_create_use = "How and when people use the phrase";
 var entry_create_link = "The link to a video which shows the phrase pronounced";
+var kid_create_original = "The text of the original entry for which you are "
+        + "creating this translation";
 
 $(document).ready(function () {
+  
+  $("span#kidcreateoriginal").hover(function () {
+    $(this).append('<div class="tooltip"><p>'+kid_create_original+'</p></div>');
+  }, function () {
+    $("div.tooltip").remove();
+  });
   
   $("span#entrycreatelink").hover(function () {
     $(this).append('<div class="tooltip"><p>'+entry_create_link+'</p></div>');

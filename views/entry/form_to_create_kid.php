@@ -27,7 +27,10 @@ function form_to_create_kid($dad){
       
       <!-- ent_entry_text -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Text of the original</div>
+        <div class="entry_create_record_title">
+          Original
+          <span class="question" id="kidcreateoriginal" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <textarea rows="10" cols="50" readonly><?php
             echo nl2br($dad->getEntryText());
@@ -39,7 +42,10 @@ function form_to_create_kid($dad){
       
       <!-- language -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">In what language? <span class="Painted_red">*</span></div>
+        <div class="entry_create_record_title">
+          Language <span class="Painted_red">*</span>
+          <span class="question" id="entrycreatelang" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <select name="langid">
             <option value="">This will be in ...</option><?php
@@ -72,7 +78,8 @@ function form_to_create_kid($dad){
       <!-- ent_entry_text -->
       <div class="entry_create_row">
         <div class="entry_create_record_title">
-          Text of the phrase <span class="Painted_red">*</span> 
+          Text <span class="Painted_red">*</span>
+          <span class="question" id="entrycreatetext" >?</span>
         </div>
         <div class="entry_create_record_value">
           <textarea name="text" 
@@ -85,7 +92,10 @@ function form_to_create_kid($dad){
       <div class="entry_create_row">
         
         <div class="entry_create_record_title">
-          <a href="#" id="create-verbatim-button">Create verbatim</a><br>
+          <a href="#" id="create-verbatim-button">Create verbatim</a>
+          <span class="Painted_red">*</span>
+          <span class="question" id="entrycreateverbatim" >?</span>
+          <br>
         </div>
         <div class="entry_create_record_value">
           <textarea name="verbatim" 
@@ -97,7 +107,8 @@ function form_to_create_kid($dad){
       <!-- ent_entry_translit -->
       <div class="entry_create_row">
         <div class="entry_create_record_title">
-          Transliteration <span class="Painted_red">*</span> 
+          Transliteration
+          <span class="question" id="entrycreatetranslit" >?</span>
         </div>
         <div class="entry_create_record_value">
           <textarea name="translit" rows="10" cols="50"></textarea>
@@ -118,7 +129,10 @@ function form_to_create_kid($dad){
 
       <!-- ent_entry_tags -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Tags</div>
+        <div class="entry_create_record_title">
+          Tags
+          <span class="question" id="entrycreatetags" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <textarea name="tags" rows="2" cols="50"></textarea>
         </div>
@@ -127,7 +141,10 @@ function form_to_create_kid($dad){
 
       <!-- ent_entry_author_id -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">This was written by</div>
+        <div class="entry_create_record_title">
+          Authors
+          <span class="question" id="entrycreateauthors" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <textarea name="authors" rows="2" cols="50"></textarea>
         </div>
@@ -146,7 +163,10 @@ function form_to_create_kid($dad){
 
       <!-- ent_entry_use -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Phrase use</div>
+        <div class="entry_create_record_title">
+          Phrase use
+          <span class="question" id="entrycreateuse" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <textarea name="use" rows="2" cols="50"></textarea>
         </div>
@@ -155,7 +175,10 @@ function form_to_create_kid($dad){
 
       <!-- ent_entry_http_link -->
       <div class="entry_create_row">
-        <div class="entry_create_record_title">Http link</div>
+        <div class="entry_create_record_title">
+          Http link
+          <span class="question" id="entrycreatelink" >?</span>
+        </div>
         <div class="entry_create_record_value">
           <textarea name="link" rows="2" cols="50"></textarea>      
         </div>
