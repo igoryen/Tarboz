@@ -70,9 +70,11 @@ function make_kid_room($kid_room_array){?>
       &bull;&nbsp;<a href="entryview.php?id=<?php echo $kid_room_array['id'];?>"><?php echo $kid_room_array['text'];?></a>
     </div>
     <div class="kid_profile_link"><span class="question" id="tran">T</span></div>
+    <?php if( !is_null($kid_room_array['dad']) ) { ?>
     <div class="kid_dad_link">
       <a href="entryview.php?id=<?php echo $kid_room_array['dad'];?>">O</a>
     </div>
+    <?php } ?>
     <div class="kid_votes">
         <span style="cursor: alias;" title="<?php echo $kid_room_array['likes'];?> users like">+<?php echo $kid_room_array['likes'];?></span> 
         <span style="cursor: alias;" title="<?php echo $kid_room_array['dislikes'];?> users dislike">-<?php echo $kid_room_array['dislikes'];?></span></div>
