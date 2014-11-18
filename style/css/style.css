@@ -216,6 +216,9 @@ font-size: 15px;
   text-align:left;
   font-weight:normal;
   list-style:none;
+  padding: 10px 0px;    
+  margin: 0px;    
+  border-bottom: 2px solid #676A8A;
 }
 /* finish middle column*/
 
@@ -1185,6 +1188,7 @@ position: relative;
     border-color: #000000;
     border-width: 1px;
     box-shadow: 5px 5px 5px #888888;
+    background: LightGoldenRodYellow;
 }
 
 html {
@@ -1199,6 +1203,7 @@ html {
     text-shadow: 2px 1px 2px lightgray;
 }
 
+/**entry page**/
 .entryList, .entry_header {
     width: 700px;
     margin: 0;
@@ -1218,3 +1223,10 @@ html {
     border-radius: 3px 3px 0 0;
     border-bottom: 0;
 }
+/****front page******/
+.text_shortcut {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
