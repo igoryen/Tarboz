@@ -216,7 +216,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
 
 
       <!-- ent_entry_source_id -->
-      <div class="entry_create_row">
+      <div class="entry_create_row" style="display:none;">
         <div class="entry_create_record_title">Source [enter 1]</div>
         <div class="entry_create_record_value">
           <input name="source" type="text" size="50" value="<?php
