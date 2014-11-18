@@ -65,7 +65,8 @@ $(document).ready(function(){
               '&a=' + auth +
               '&f=' + from +
               '&t=' + to +
-              '&v='+ verbatim; 
+              '&v='+ verbatim +
+              '&s=' + text; 
            }   
 		});
     
