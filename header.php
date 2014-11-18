@@ -508,21 +508,22 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
         $("#unsubscribeDialog").dialog({
             autoOpen: false
         });
-        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w]{1,4})*$/;
         $("#sub_email_id").keydown(function(){
 			//comparing the above regex to the value in the texbox, if not from the box then send error
-		 	if(!emailReg.test($("#sub_email_id").val())){		 				
+		 	if(!emailReg.test($("#sub_email_id").val().trim())){		 				
 		 		//fill the textbox label with error
 	            document.getElementById("sub_error").innerHTML="<font color='red' size='2px' family='verdana'>invalid Email</font>";
 	            $("#sub_email").css("border-color","rgba(255,0,0,.6)"); 
 	            //Disable submit button
-	            $('#submitbtn').attr('disabled','disabled'); 
+	            $('#submitbtn').prop('disabled', true); 
 	        }
 	        else{
 	            document.getElementById("sub_error").innerHTML="<font color='red' size='2px' family='verdana'></font>";
 	            $("#sub_email").css("border-color","rgba(255,0,0,.6)"); 
 	            //Disable submit button
-	            $('#submitbtn').attr('disabled',''); 
+	            $('#submitbtn').prop('disabled', false); 
 	
 	       }
 		});
@@ -534,13 +535,13 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 	            document.getElementById("usub_error").innerHTML="<font color='red' size='2px' family='verdana'>invalid Email</font>";
 	            $("#sub_email").css("border-color","rgba(255,0,0,.6)"); 
 	            //Disable submit button
-	            $('#usubmitbtn').attr('disabled','disabled'); 
+	            $('#usubmitbtn').prop('disabled', true); 
 	         }
 	         else{
 	            document.getElementById("usub_error").innerHTML="<font color='red' size='2px' family='verdana'></font>";
 	            $("#usub_email").css("border-color","rgba(255,0,0,.6)"); 
 	            //Disable submit button
-	            $('#usubmitbtn').attr('disabled',''); 
+	            $('#usubmitbtn').prop('disabled', false); 
 	         }
 		});
      
