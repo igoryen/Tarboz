@@ -236,10 +236,12 @@
         $fname = $user->getFirstName();
         $lname = $user->getLastName();
     ?>
-          <a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
+      <!--<a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
               <?php echo $fname." ".$lname; ?>
+          </a> -->
+         <a href="other_user.php?id=<?php echo $user_id; ?>&name=<?php echo $fname;?>" style="color:#000000;">
+             <?php echo $user_login; ?>
           </a>
-<!--        <a href="profile.php?id=<?php echo $user_id; ?>"><?php echo $user_login; ?></a>-->
       </div>
     </div>
     <!--Display user name who added this entry end-->
@@ -456,13 +458,14 @@
             <div style="display:table-cell; width:280px; padding-left:10px;">
                 <span id="<?php echo $edit_comment_text_id; ?>" style="display:'';"><?php echo $text; ?></span>  
             </div>
+            <?php if ($user_logged_in ) { //check if user logged in or not ?>
             <div style="display:table-cell;">
                 <span id ="<?php echo $comment_like_id; ?>" name="<?php echo $comment_like_id; ?>" class="comment_like"
                       style="font-family:Tahoma;font-size:12px;" onmouseover="$(this).css({'cursor': 'pointer'});"><?php if($rating_content == "Like") { echo $rating_content."&nbsp;".$likeRating; } else {echo $rating_content."&nbsp;"; } ?>
                 </span>
             </div>
             
-            <?php if ($user_logged_in && $created_by == $user_id) { //show edit and delete icon if user is logged in?>
+            <?php if ($created_by == $user_id) { //show edit and delete icon if user is logged in?>
             <div style="display:table-cell;">
                 <img src="images/edit.png" alt="Edit Icon" style="width:16px;height:16px" id="<?php echo $edit_icon_id; ?>" title="Edit"
                      onmouseover="$(this).css({'cursor': 'pointer'});" 
@@ -471,9 +474,7 @@
                          class="deleteComment" onmouseover="$(this).css({'cursor': 'pointer'});"/>
             </div>
         
-            <?php } //end if ($user_logged_in && $created_by == $user_id)
-                  else {   //show report icon if user is not logged in
-            ?>
+            <?php } //if ($created_by == $user_id)  ?>
             <div style="display:table-cell; width: 100px; position: relative;">
                 <img src="images/arrow-down.png" alt="Arrow Down Icon" style="width:16px;height:16px" id="<?php echo $comment_report_id; ?>" 
                      class="reportComment" title="Report to Admin" onmouseover="$(this).css({'cursor': 'pointer'});"/>
@@ -491,7 +492,7 @@
                 </div> <!--end report comment div-->
             </div> <!--end table cell for report comment-->
             <?php
-                  } //end else if if ($user_logged_in && $created_by == $user_id)
+                  } //end if ($user_logged_in)
             ?>
             </div> <!--end of table row -->
             </div> <!--end of table -->
@@ -532,7 +533,8 @@
    </div> <!--entry_record_value-->
    <!--- comments section finish --->
       
-   <!--- rating section start --->     
+   <!--- rating section start --->
+   <?php if($user_logged_in) {  //check if user logged in, if yes, show rating and report part?>
     <div class="entry_record">
       <div class="entry_record_title">Do you like this entry?</div>
       <div class="entry_record_value">
@@ -607,7 +609,7 @@
       </div><!--entry_record_value-->
     </div><!--entry_record_value--> 
     <!--- report section end --->  
- 
+ <?php } //end if ($user_logged_in) ?>
 </div> <!--entry_index_container-->
 
   
