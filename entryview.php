@@ -33,6 +33,10 @@
     $entry = $em->getEntryById($entryId); // 1
     $treq = $trm->getTreqByEntryId($entry->getEntryId());
     $lm = new LanguageManager();
+    
+    $um = new UserManager();
+    
+    
     //$userId = 3; // the id of the current logged-in user
     $loggedIn_userId = "";
     $loggedIn_userType = "";
@@ -50,6 +54,7 @@
     $authen = $entry->getEntryAuthenStatusId();
     $translOf = $entry->getEntryTranslOf();
     $user_id = $entry->getEntryUserId();
+    $user_login = $um->getUserByUserId($user_id)->getLogin();
     $media = $entry->getEntryMediaId();
     //$author = $entry->getEntryAuthorId();
     $authors = $entry->getEntryAuthors();
@@ -219,12 +224,7 @@
         <span class="question" id="entryaddedby" >?</span>
       </div>
       <div class="entry_record_value">
-    <?php 
-        //echo $user_id."</br>"; 
-        $userManager = new UserManager();
-        $user = $userManager->getUserByUserId($user_id);
-        echo $user->getFirstName()." ".$user->getLastName();
-    ?>
+        <a href="profile.php?id=<?php echo $user_id; ?>"><?php echo $user_login; ?></a>
       </div>
     </div>
     <!--Display user name who added this entry end-->
