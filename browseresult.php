@@ -31,17 +31,18 @@
         $result = $dbHelper->executeSelect($query);
         $count = 0;
 ?>
-    <div id="toptranslationtable" style="display:table; width=88%; margin:20px 0px 10px 15%;background-color:#efe8f6; border:1px solid #c1c1c1;">
-        <div id="toptranslationth" style="display:table-header; height:40px;color:#017699;">
-            <div id="toptranslationthTrans" style="display:inline-block; width:400px; font-weight:bold; 
+<div align="center">
+    <div id="toptranslationtable" style="display:table; width=1000px; background-color:#3B8DFF; color: #000000; border:1px solid #A99F9F;">
+        <div id="toptranslationth" style="display:table-header; height:40px; color: #ffffff;">
+            <div id="toptranslationthTrans" style="display:inline-block; width:420px; font-weight:bold; 
                                                     padding-top:8px; text-align: center;">
                 Translation
             </div>   
-            <div id="toptranslationthOrig" style="display:inline-block; width:400px; font-weight:bold;
+            <div id="toptranslationthOrig" style="display:inline-block; width:420px; font-weight:bold;
                                                     padding-top:8px;  text-align: center;">
                 Original Phrase
             </div>
-            <div id="toptranslationthCreator" style="display:inline-block; width:120px; font-weight:bold;
+            <div id="toptranslationthCreator" style="display:inline-block; width:130px; font-weight:bold;
                                                         padding-top:8px;  text-align: center;">
                 Added By
             </div>
@@ -62,24 +63,25 @@
             $userManager = new UserManager();
             $added_user = $userManager->getUserByUserId($trans_creator_id);
             $added_user_name = $added_user->getLogin();
+            $fname = $added_user->getFirstName();
             if ($count>= 10) {  
         ?>
           <div id="toptranslationtr" style="display:table-row; width:300px; padding: 5px; 
-                <?php if($count%2 == 0) { echo 'background-color: #ffffff;';} else {echo 'background-color:#f3eef8 ;';} ?>">
+                <?php if($count%2 == 0) { echo 'background-color: #ffffff;';} else {echo 'background-color:#B5BBF2;';} ?>">
               <div id="toptranslationtdTrans" style="display:inline-block;width:400px;vertical-align: top; 
-                                                     margin: 5px; height:100px; overflow:auto;">
-                    <a href="entryview.php?id=<?php echo $trans_entry_id;?>" ><?php echo $trans_phrase;?></a>
+                                                     margin: 5px; height:100px; overflow:auto; padding: 10px; text-align: left;">
+                    <a href="entryview.php?id=<?php echo $trans_entry_id;?>" style="color:#000000;"><?php echo $trans_phrase;?></a>
               </div>  
-              <div id="toptranslationtdOrig" style="display:inline-block;width:400px;vertical-align: top; 
-                                                    margin: 5px;height:100px; overflow:auto;">
-                    <a href="entryview.php?id=<?php echo $orig_entry_id;?>" ><?php echo $orig_phrase;?></a>
+              <div id="toptranslationtdOrig" style="display:inline-block; width:400px;vertical-align: top; 
+                                                    margin: 5px;height:100px; overflow:auto; padding: 10px; text-align: left;">
+                    <a href="entryview.php?id=<?php echo $orig_entry_id;?>" style="color:#000000;" ><?php echo $orig_phrase;?></a>
               </div>
               <div id="toptranslationtdCreator" style="display:inline-block;width:120px;vertical-align: top; 
-                                                       margin: 5px;height:100px;">
-                    <a href="profile.php?id=<?php echo $trans_creator_id;?>" ><?php echo $added_user_name;?></a>
+                                                       margin: 5px;height:100px; padding: 10px; text-align: left;">
+                    <a href="profile.php?id=<?php echo $trans_creator_id;?>&name=<?php echo $fname;?>" style="color:#000000;" ><?php echo $added_user_name;?></a>
               </div>
               <div id="toptranslationtdLikeNum" style="display:inline-block;width:50px;vertical-align: top; 
-                                                       margin: 5px;height:100px;">
+                                                       margin: 5px;height:100px; padding: 10px; text-align: left;">
                     <?php echo $num_like;?>
               </div>
           </div><!--end div id="toptranslationtr"-->
@@ -89,6 +91,7 @@
         } //end while loop ?>
 
     </div> <!--end div toptranslationtable  -->
+</div>
 <?php 
     require("footer.php");  
     } //end if ($top_translation == "y") 
