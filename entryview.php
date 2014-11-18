@@ -190,7 +190,7 @@
         // 1*
     ?>
     <div class="entry_record">
-      <div class="entry_record_title">Translate this into&nbsp;
+      <div class="entry_record_title">Translate this into
 	  <?php
         // TODO: What if there are >1 requests (i.e. >1 languages) to translate this entry?
         $treqLang = $treq->getTreqLang();
@@ -228,7 +228,18 @@
         <span class="question" id="entryaddedby" >?</span>
       </div>
       <div class="entry_record_value">
-        <a href="profile.php?id=<?php echo $user_id; ?>"><?php echo $user_login; ?></a>
+
+    <?php 
+        //echo $user_id."</br>"; 
+        $userManager = new UserManager();
+        $user  = $userManager->getUserByUserId($user_id);
+        $fname = $user->getFirstName();
+        $lname = $user->getLastName();
+    ?>
+          <a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
+              <?php echo $fname." ".$lname; ?>
+          </a>
+<!--        <a href="profile.php?id=<?php echo $user_id; ?>"><?php echo $user_login; ?></a>-->
       </div>
     </div>
     <!--Display user name who added this entry end-->
