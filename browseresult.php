@@ -62,10 +62,10 @@
             
             $userManager = new UserManager();
             $added_user = $userManager->getUserByUserId($trans_creator_id);
-//            $added_user_name = $added_user->getLogin();
+            $added_user_name = $added_user->getLogin();
             $fname = $added_user->getFirstName();
             $lname = $added_user->getLastName();
-            $added_user_name = $fname." ".$lname;
+            //$added_user_name = $fname." ".$lname;
             if ($count>= 10) {  
         ?>
           <div id="toptranslationtr" style="display:table-row; width:300px; padding: 5px; 
