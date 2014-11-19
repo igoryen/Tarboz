@@ -94,17 +94,6 @@ VALUES(1, 3);
 INSERT INTO `prj666`.`tbl_sublangbridge` (`slb_subscribe_id`, `slb_language_id`)
 VALUES(2, 2);
 
-#----tbl_author table
-INSERT INTO `prj666`.`tbl_author` (`aut_author_name`, `aut_author_time`, `aut_author_geo`)
-VALUES('William Shakespeare','', 'Britain');
-INSERT INTO `prj666`.`tbl_author` (`aut_author_name`, `aut_author_time`, `aut_author_geo`)
-VALUES('Alexander Pushkin',  '1799-1837','Russia');
-INSERT INTO `prj666`.`tbl_author` (`aut_author_name`, `aut_author_time`, `aut_author_geo`)
-VALUES('unknown', 'unknown', 'China');
-INSERT INTO `prj666`.`tbl_author` (`aut_author_name`, `aut_author_time`, `aut_author_geo`)
-VALUES('Mikhail Lermontov','', 'Russia');
-INSERT INTO `prj666`.`tbl_author` (`aut_author_name`, `aut_author_time`, `aut_author_geo`)
-VALUES('Confucius/Kongzi', 'China', 'B.C. 500\'s');
 
 #----tbl_source table
 INSERT INTO `prj666`.`tbl_source` (`sou_source_name`, `sou_source_form`, `sou_source_time`)
