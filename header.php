@@ -599,6 +599,9 @@ div.showdata{
             <a href="index.php"><img src="images/logo.png" height="50"></a><br/>
             <nav id="navigation">
                   <a href="index.php" >Home</a> <br/><br/>
+                <?php if(!isset($_SESSION['user']) ) { ?>
+                  <a href="registration.php">Register</a>
+                <?php } ?>
                   <a href="entrycreate.php" id="menu_create_entry" style="display:<?php if(!isset($_SESSION['user']) ) echo 'none'; else echo ''; ?>;">Create an Entry</a><br/><br/>
                   <!--
                   <a href="profile.php">Profile</a>
