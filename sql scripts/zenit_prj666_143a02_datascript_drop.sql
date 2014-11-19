@@ -4,7 +4,6 @@ DROP TABLE `prj666`.`tbl_entry_mandarin`;
 DROP TABLE `prj666`.`tbl_entry_russian`;
 DROP TABLE `prj666`.`tbl_user`;
 DROP TABLE `prj666`.`tbl_authen_status`;
-DROP TABLE `prj666`.`tbl_author`;
 DROP TABLE `prj666`.`tbl_city`;
 DROP TABLE `prj666`.`tbl_comment`;
 DROP TABLE `prj666`.`tbl_country`;

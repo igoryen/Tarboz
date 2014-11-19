@@ -103,9 +103,6 @@ UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-28' WHERE `en
 UPDATE `prj666`.`tbl_entry` SET `ent_entry_creation_date`='2014-10-29' WHERE `ent_entry_id`='53';
 
 
-
-INSERT INTO `prj666`.`tbl_media` (`med_media_id`, `med_name`, `med_desc`, `med_author`, `med_media_type_id`) VALUES ('3', 'Lunyu', 'text', 'Kongzi', '4');
-
 INSERT INTO `prj666`.`tbl_media_type` (`mtp_media_type_id`, `mtp_name`) VALUES ('4', 'text');
 
 UPDATE `prj666`.`tbl_entry` SET `ent_entry_media_id`='3' WHERE `ent_entry_id`='5';
