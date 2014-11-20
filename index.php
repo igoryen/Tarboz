@@ -84,8 +84,8 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                         ?>
                                         <li>
 <!--                                            <div>-->
-                                                <div  class="text_shortcut"><a href="entryview.php?id=<?php echo $trans_entry_id;?>"><?php echo $trans_phrase;?></a></div>
-<!--                                                <span style="float:right; postion:"><div><?php echo $num_like;?> Likes</div></span>-->
+                                                <div  class="text_shortcut"><a href="entryview.php?id=<?php echo $trans_entry_id;?>"><?php echo $trans_phrase;?></a><span style="float:right; postion:"><?php echo $num_like;?> Likes</span></div>
+                                                
 <!--                                            </div>-->
                                         </li>
                                             <?php      if($count<9) { ?>
