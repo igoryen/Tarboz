@@ -1226,7 +1226,7 @@ html {
 /****front page******/
 .text_shortcut {
     white-space: nowrap; 
-    width: 15em; 
+    width: 19em; 
     overflow: hidden;
     text-overflow: ellipsis; 
 }
