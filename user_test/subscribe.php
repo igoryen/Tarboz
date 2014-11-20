@@ -43,9 +43,9 @@ if($sub_email!=""){
   <title>Tarboz Newsletter Subscription</title>
 </head>
 <body>
-        Dear subscriber, 
+        <b>Dear subscriber</b>, 
            <p>Thank you for subscribe out news letter. This is to confirm your subscription. Please note we have your permission to send you newsletters periodically.</p>
-           <p>To unsubscribe newsletter, please click <a href='localhost/tarboz'>here</a>.</p>
+           <p>To unsubscribe newsletter, please click <a href='http://zenit.senecac.on.ca:9086/tarboz'>here</a>.</p>
            <br/>
            Yours truly,<br/>
            Tarboz Newsletter
@@ -70,7 +70,7 @@ else if($usub_email!=""){
 </head>
 <body> 
            <p>Your email address has been removed from our mailing list. You are no longer receiving our newsletters.</p>
-           <p>To re-subscribe newsletter, please click <a href='localhost/tarboz'>here</a>.</p>
+           <p>To re-subscribe newsletter, please click <a href='http://zenit.senecac.on.ca:9086/tarboz'>here</a>.</p>
            <br/>
            Yours truly,<br/>
            Tarboz Newsletter

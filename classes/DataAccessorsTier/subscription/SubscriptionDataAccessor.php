@@ -204,7 +204,8 @@ public function subscribe($email) {
     $mail->WordWrap = 50;
     $mail->isHTML(true);
     $mail->Subject = $subject;
-    $mail->Body    = $body;
+    $mail->msgHTML($body);
+    //$mail->Body    = $body;
     
 
     //if Email was not sent it should return a true bool to the user
