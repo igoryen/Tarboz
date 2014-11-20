@@ -205,12 +205,6 @@ CREATE TABLE `prj666`.`tbl_report` (
  PRIMARY KEY (`rep_report_id`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE `prj666`.`tbl_author` (
- `aut_author_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
- `aut_author_name` VARCHAR(100) NULL,
- `aut_author_time` VARCHAR(45) NULL,
- `aut_author_geo` VARCHAR(45) NULL
-) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE `prj666`.`tbl_source` (
  `sou_source_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
