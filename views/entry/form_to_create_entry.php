@@ -6,6 +6,7 @@ function form_to_create_entry(){
   $lm = new LanguageManager();
   ?>
   <!-- 1 -->
+ <div align="center">
   <form action="" method="post">
     
     <?php    
@@ -182,16 +183,17 @@ function form_to_create_entry(){
         </div>
       </div>    
 
-
-      <div class="entry_create_buttons">
-        <!-- 5 -->
-        <button name ="submit" type="submit">Submit</button>
-        <button type="reset">Reset</button>
-        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />
-      </div>
-
+      <div class="entry_create_row">
+          <div class="entry_create_buttons">
+            <!-- 5 -->
+            <button name ="submit" type="submit" class="en_button">Submit</button>
+            <button type="reset"  class="en_button">Reset</button>
+    <!--        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />-->
+          </div>
+      </div>      
+        
     </div>
   </form>
-
+</div>
 <?php 
 }
