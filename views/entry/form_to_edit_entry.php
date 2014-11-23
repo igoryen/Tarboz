@@ -3,6 +3,7 @@ require_once BUSINESS_DIR_LANG . "LanguageManager.php";
 require_once BUSINESS_DIR_LANG . "Language.php";
 
 function form_to_edit_entry($entry){
+  $x = "Hi!";
   $lm = new LanguageManager();
   $auth = $entry->getEntryAuthenStatusId();
   $status = ($auth == 1 ? '1' : "not 1");
@@ -61,6 +62,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
                 echo $lang->getLangName();
                 echo '</option>';
        }?></select>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -89,6 +91,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
                     rows="10" cols="50"><?php
           echo $entry->getEntryText();
           ?></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -120,6 +123,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
                     rows="3" cols="50" readonly ><?php
           echo $entry->getEntryVerbatim();
                     ?></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
       
@@ -134,6 +138,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <textarea name="translit" rows="10" cols="50"><?php
           echo $entry->getEntryTranslit();
           ?></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -184,6 +189,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <input name="tags" type="text" size="50" value="<?php
             echo $entry->getEntryTags();
           ?>"/>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -211,6 +217,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <input name="authors" type="text" size="50" value="<?php
             echo $entry->getEntryAuthors();
           ?>"/>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -236,6 +243,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <input name="use" value="<?php 
             echo $entry->getEntryUse(); 
           ?>">
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -249,7 +257,8 @@ Entry/form_to_<mark>edit</mark>_entry.php
         <div class="entry_create_record_value">
           <input name="link" type="text" size="50" value="<?php
           echo $entry->getEntryHttpLink();
-          ?>"/>      
+          ?>"/>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>    
 

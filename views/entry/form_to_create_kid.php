@@ -5,6 +5,7 @@ require_once BUSINESS_DIR_LANG . "Language.php";
 
 
 function form_to_create_kid($dad){
+  $x = "Hi!";
   $lm = new LanguageManager();
   ?>
   <!-- 1 -->
@@ -58,6 +59,7 @@ function form_to_create_kid($dad){
               echo $lang->getLangName();
               echo '</option>';
        }?></select>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -85,6 +87,7 @@ function form_to_create_kid($dad){
           <textarea name="text" 
                     id="txtString2"  
                     rows="10" cols="50"></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
       
@@ -101,6 +104,7 @@ function form_to_create_kid($dad){
           <textarea name="verbatim" 
                     id="verbatim"  
                     rows="3" cols="50" readonly ></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>      
       
@@ -112,6 +116,7 @@ function form_to_create_kid($dad){
         </div>
         <div class="entry_create_record_value">
           <textarea name="translit" rows="10" cols="50"></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -135,6 +140,7 @@ function form_to_create_kid($dad){
         </div>
         <div class="entry_create_record_value">
           <textarea name="tags" rows="2" cols="50"></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -147,6 +153,7 @@ function form_to_create_kid($dad){
         </div>
         <div class="entry_create_record_value">
           <textarea name="authors" rows="2" cols="50"></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -169,6 +176,7 @@ function form_to_create_kid($dad){
         </div>
         <div class="entry_create_record_value">
           <textarea name="use" rows="2" cols="50"></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>
 
@@ -180,7 +188,8 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreatelink" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="link" rows="2" cols="50"></textarea>      
+          <textarea name="link" rows="2" cols="50"></textarea>
+          <strong><?php echo $x; ?></strong>
         </div>
       </div>    
 

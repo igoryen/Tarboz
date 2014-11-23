@@ -31,11 +31,155 @@
   $text_error = "";
   //etc...  
   // 51*
+  // 54
+  $err_messages = array(
+      "langid"    => "",
+      "text"      => "",
+      "verbatim"  => "",
+      "translit"  => "",
+      "authen"    => "",
+      "translOf"  => "",
+      "tags"      => "",
+      "authors"   => "",
+      "use"       => "",
+      "link"      => ""
+  );
+  
   if($_POST){ // 4
     // 44*, 45*
-    //------------------------------------------
-    // 26
-    //------------------------------------------    
+    // 26 ------------------------------------------
+    //========================================================================
+    // regex for latin and non-latin characters. Surround with single quotes
+    // for unicode explanation, see: http://www.regular-expressions.info/unicode.html
+    //........................................
+    $non_lat = '\p{Common}\p{Cyrillic}\p{Han}';
+    //........................................
+    // the 4 mandatory fields
+    $rgx_for_langid =      '/^[0-9]+$/'; // only digits
+    $rgx_for_authen =      '/^[0-9]+$/'; // only digits
+    $rgx_for_verbatim =    '/^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.']+$/'; // latin only
+    $rgx_for_text =        '/^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.'\p{N}'.$non_lat.']+$/u';
+    // the non-mandatory fields
+    $rgx_for_translOf = "/^$|^[0-9]+$/"; // empty or same as langid
+    $rgx_for_translit = '/^$|^[\p{L}'.'\p{M}'.'\p{P}'.'\p{Z}]+$/u'; // empty or latin only
+    $rgx_for_tags =     '/^$|^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.'\p{N}'.$non_lat.']+$/u';
+    $rgx_for_authors =  '/^$|^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.'\p{N}'.$non_lat.']+$/u';
+    $rgx_for_use =      '/^$|^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.'\p{N}'.$non_lat.']+$/u';
+    $rgx_for_source =   "";
+    //............................................
+    // regex for the link
+    // the regex borrowed from: http://stackoverflow.com/questions/3717115/regular-expression-for-youtube-links
+    //$rgx_for_link = "~(^$)?|(?:https?://)?(?:www\.)?youtu(?:be\.com/watch\?(?:.*?&(?:amp;)?)?v=|\.be/)([\w‌​\-]+)(?:&(?:amp;)?[\w\?=]*)?~";
+    //$rgx_for_link = "/https:\/\/(?:www\.)?youtu(?:be\.com/watch\?v=|\.be/)(\w*)(&(amp;)?[\w\?=]*)?/";
+    //$rgx_for_link = "/^(http(?:s)?\:\/\/[a-zA-Z0-9\-]+(?:\.[a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,6}(?:\/?|(?:\/[\w\-]+)*)(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/";
+    $rgx_for_link = "/^$|^https?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%\"\,\{\}\\|\\\^\[\]`]+)?$/";
+    //............................................
+    $rgx_for_ = "";
+    
+    
+    // for tbl_entry :: ent_entry_language_id
+    echo "<br>checking langid";
+    if(!preg_match($rgx_for_langid, $_POST['langid'])){
+      //$errmsg_for_langid = "Language is invalid";
+      $err_messages['langid'] = "Language is invalid";
+      echo " oops!";
+      $user_input_valid = false;
+    }
+    // for tbl_entry :: ent_entry_text
+    echo "<br>checking text";
+    if(!preg_match($rgx_for_text, $_POST['text'])){
+      //$errmsg_for_text = "Text is invalid";
+      $err_messages['text'] = "Text is invalid";
+      echo " oops!";
+      $user_input_valid = false;
+    }
+    // for tbl_entry :: ent_entry_verbatim
+    echo "<br>checking verbatim";
+    if(!preg_match($rgx_for_verbatim, $_POST['verbatim'])){
+      //$errmsg_for_verbatim = "Verbatim is invalid";
+      $err_messages['verbatim'] = "Verbatim is invalid";
+      echo " oops!";
+      $user_input_valid = false;
+    }
+    // for tbl_entry :: ent_entry_translit
+    echo "<br>checking translit";
+    if(!preg_match($rgx_for_translit, $_POST['translit'])){
+      //$errmsg_for_translit = "Transliteration is invalid";
+      $err_messages['translit'] = "Transliteration is invalid";
+      echo " oops!";
+      $user_input_valid = false;
+    }
+    // for tbl_entry :: ent_entry_authen_status_id
+    echo "<br>checking authen";
+    if(isset($_POST['authen'])){
+      echo " - authen is set: " . $_POST['authen'];
+      if(!preg_match($rgx_for_authen, $_POST['authen'])){
+        //$errmsg_for_authen = "Authenticity status is invalid";
+        $err_messages['authen'] =  "Authenticity status is invalid";
+        echo " oops!";
+        $user_input_valid = false;
+      }
+    }
+    
+    // for tbl_entry :: ent_entry_translation_of
+    echo "<br>checking translOf";
+    if(isset($_POST['translOf'])){
+      if(!preg_match($rgx_for_translOf, $_POST['translOf'])){
+        //$errmsg_for_translOf = "translOf is invalid";
+        $err_messages['translOf'] = "translOf is invalid";
+        echo " oops!";
+        $user_input_valid = false;
+      }
+    }
+    
+    // for tbl_entry :: ent_entry_creator_id
+
+    // for tbl_entry :: ent_entry_media_id
+
+    // for tbl_entry :: ent_entry_comment_id
+
+    // for tbl_entry :: ent_entry_rating_id
+
+    // for tbl_entry :: ent_entry_tags
+    echo "<br>checking tags";
+    if(!preg_match($rgx_for_tags, $_POST['tags'])){
+      //$errmsg_for_tags = "Tags text is invalid";
+      $err_messages['tags'] = "Tags text is invalid";
+      echo " oops!";
+      $user_input_valid = false;
+    }
+    // for tbl_entry :: ent_entry_authors
+    echo "<br>checking authors";
+    if(!preg_match($rgx_for_authors, $_POST['authors'])){
+      //$errmsg_for_authors = "Authors text is invalid";
+      $err_messages['authors'] = "Authors text is invalid";
+      echo " oops!";
+      $user_input_valid = false;
+    }
+    // for tbl_entry :: ent_entry_source_id
+//    if(!preg_match($rgx_for_source, $_POST['source'])){
+//      $errmsg_for_source = "Authenticity status is invalid";
+//      $user_input_valid = false;
+//    }
+    // for tbl_entry :: ent_entry_use
+    echo "<br>checking use";
+    if(!preg_match($rgx_for_use, $_POST['use'])){
+      //$errmsg_for_use = "use is invalid";
+      $err_messages['use'] = "use is invalid";
+      echo " oops!";
+      $user_input_valid = false;
+    }
+    // for tbl_entry :: ent_entry_http_link
+    echo "<br>checking link";
+    if(!preg_match($rgx_for_link, trim($_POST['link']))){
+      //$errmsg_for_link = "link is invalid";
+      $err_messages['link'] = "link is invalid";
+      echo " oops!";
+      $user_input_valid = false;
+    }
+    // for tbl_entry :: ent_entry_creation_date
+
+    // end of 26 ---------------------------------------    
 
     if($user_input_valid){ // 6       
             
@@ -112,6 +256,25 @@
         
       } // 16
     } // 6
+    else{ // if user's input is invalid
+      if(isset($_GET['id'])){
+        if(isset($_GET['a'])){
+          // 48*
+          $em = new EntryManager(); // 12
+          $dad = $em->getEntryById($_GET['id']); // 36
+          form_to_create_kid($dad);
+        }
+        else{
+          //49*
+          $em = new EntryManager(); // 12
+          $entry = $em->getEntryById($_GET['id']); // 36
+          form_to_edit_entry($entry); // 37
+        }
+      }
+      else{
+        form_to_create_entry($err_messages);
+      }
+    }
   }// 4
   else { // 17
     if(isset($_GET['id'])){ // 34
@@ -130,7 +293,7 @@
       }      
     }
     else{ // 35
-      form_to_create_entry();
+      form_to_create_entry($err_messages);
     }
 
 }
