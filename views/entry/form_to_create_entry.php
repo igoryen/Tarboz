@@ -1,20 +1,24 @@
 <?php
 require_once BUSINESS_DIR_LANG . "LanguageManager.php";
 require_once BUSINESS_DIR_LANG . "Language.php";
+require_once BUSINESS_DIR_AUTHEN . "Authen.php";
+require_once BUSINESS_DIR_AUTHEN . "AuthenManager.php";
 
-function form_to_create_entry(){
+function form_to_create_entry($err_messages){
+  //$errmsg_for_ = "Hi!";
   $lm = new LanguageManager();
+  $am = new AuthenManager();
   ?>
   <!-- 1 -->
   <form action="" method="post">
-    
-    <?php    
+
+    <?php
 //    date_default_timezone_set('America/Toronto');
 //    echo "<br>Today: " . date("Y-m-d H:i:s");
     ?>
 <!--    <br>views/entry/form_to_<mark>create</mark>_entry.php-->
     <div id="entry_create_form">
-      
+
       <div class="entry_create_row">
         <div id="entry_create_form_title">Create an entry
           <div class="note">
@@ -22,9 +26,9 @@ function form_to_create_entry(){
           </div>
         </div>
       </div>
-      
-      
-      
+
+
+
       <!-- language -->
       <div class="entry_create_row">
         <div class="entry_create_record_title">
@@ -36,16 +40,69 @@ function form_to_create_entry(){
             <option value="">This will be in ...</option><?php
               //$langs = $lm->getListOfLang();
               $langs = $lm->getLanguages();
-              foreach ($langs as $lang) {
-                echo '<option value="';
-                echo $lang->getLangId();
-                echo '">';
-                echo $lang->getLangName();
-                echo '</option>';
+              if(isset($_POST['langid'])){
+                $this_langid = $_POST['langid'];
+                foreach ($langs as $lang) {
+                  echo '<option value="';
+                  echo $lang->getLangId();
+                  echo '"';
+                  echo $this_langid == $lang->getLangId() ? ' selected="selected"' : '';
+                  echo '">';
+                  echo $lang->getLangName();
+                  echo '</option>';
+                }
+              }
+              else{
+                foreach ($langs as $lang) {
+                  echo '<option value="';
+                  echo $lang->getLangId();
+                  echo '">';
+                  echo $lang->getLangName();
+                  echo '</option>';
+                }
               }
         ?></select>
+          <strong><?php echo $err_messages['langid']; ?></strong>
         </div>
       </div>
+
+
+      <!-- entry_authen_status_id -->
+      <div class="entry_create_row">
+        <div class="entry_create_record_title">Authenticity
+          <span class="Painted_red">*</span>
+          <span class="question" id="entrycreateauthen" >?</span>
+        </div>
+        <div class="entry_create_record_value">
+          <select name="authen" id="inputAuthen">
+            <option value="">This phrase is ...</option><?php
+              $authens = $am->getAuthens();
+              if(isset($_POST['authen'])){
+                $this_authen_id = $_POST['authen'];
+                foreach ($authens as $authen) {
+                  echo '<option value="';
+                  echo $authen->getAuthenId();
+                  echo '"';
+                  echo $this_authen_id == $authen->getAuthenId() ? ' selected="selected"' : '';
+                  echo '">';
+                  echo $authen->getAuthenName();
+                  echo '</option>';
+                }
+              }
+              else{
+                foreach ($authens as $authen) {
+                  echo '<option value="';
+                  echo $authen->getAuthenId();
+                  echo '">';
+                  echo $authen->getAuthenName();
+                  echo '</option>';
+                }
+       }?></select>
+          <strong><?php echo $err_messages['authen']; ?></strong>
+        </div>
+      </div>
+
+
 
       <!-- Not sure if we need this
       <div class="entry_create_row">
@@ -68,15 +125,20 @@ function form_to_create_entry(){
           <span class="question" id="entrycreatetext" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="text" 
-                    id="txtString2"  
-                    rows="10" cols="50"></textarea>
+          <textarea name="text"
+                    id="txtString2"
+                    rows="10" cols="50"><?php
+            if(isset($_POST['text'])){
+              echo $_POST['text'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['text']; ?></strong>
         </div>
       </div>
-      
+
       <!-- ent_entry_verbatim will be created automatically -->
       <div class="entry_create_row">
-        
+
         <div class="entry_create_record_title">
           <a href="#" id="create-verbatim-button">Create verbatim</a>
           <span class="Painted_red">*</span>
@@ -84,12 +146,17 @@ function form_to_create_entry(){
           <br>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="verbatim" 
-                    id="verbatim"  
-                    rows="3" cols="50" readonly ></textarea>
+          <textarea name="verbatim"
+                    id="verbatim"
+                    rows="3" cols="50" readonly ><?php
+            if(isset($_POST['verbatim'])){
+              echo $_POST['verbatim'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['verbatim']; ?></strong>
         </div>
-      </div>      
-      
+      </div>
+
       <!-- ent_entry_translit -->
       <div class="entry_create_row">
         <div class="entry_create_record_title">
@@ -97,26 +164,17 @@ function form_to_create_entry(){
           <span class="question" id="entrycreatetranslit" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="translit" rows="10" cols="50"></textarea>
+          <textarea name="translit" rows="10" cols="50"><?php
+            if(isset($_POST['translit'])){
+              echo $_POST['translit'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['translit']; ?></strong>
         </div>
       </div>
 
 
-      <!-- entry_authen_status_id -->
-      <div class="entry_create_row">
-        <div class="entry_create_record_title">Authenticity 
-          <span class="Painted_red">*</span> 
-          <span class="question" id="entrycreateauthen" >?</span>
-        </div>
-        <div class="entry_create_record_value">
-          <select name="authen">
-            <option value="" selected="selected">This phrase is ...</option>
-            <option value="1">Original</option>
-            <option value="2">Translation</option>
-            <option value="3">Unknown</option>
-          </select>
-        </div>
-      </div>
+
 
       <!-- the value of ent_entry_translation_of will be dealt with separately -->
       <input name="translOf" value="" hidden/>
@@ -132,7 +190,12 @@ function form_to_create_entry(){
           <span class="question" id="entrycreatetags" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="tags" rows="2" cols="50"></textarea>
+          <textarea name="tags" rows="2" cols="50"><?php
+            if(isset($_POST['tags'])){
+              echo $_POST['tags'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['tags']; ?></strong>
         </div>
       </div>
 
@@ -144,7 +207,12 @@ function form_to_create_entry(){
           <span class="question" id="entrycreateauthors" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="authors" rows="2" cols="50"></textarea>
+          <textarea name="authors" rows="2" cols="50"><?php
+            if(isset($_POST['authors'])){
+              echo $_POST['authors'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['authors']; ?></strong>
         </div>
       </div>
 
@@ -154,7 +222,7 @@ function form_to_create_entry(){
 <!--      <div class="entry_create_row">
         <div class="entry_create_record_title">Source [enter 1]</div>
         <div class="entry_create_record_value">
-          <input name="source" type="text" size="50"/>      
+          <input name="source" type="text" size="50"/>
         </div>
       </div>-->
 
@@ -166,7 +234,12 @@ function form_to_create_entry(){
           <span class="question" id="entrycreateuse" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="use" rows="2" cols="50"></textarea>
+          <textarea name="use" rows="2" cols="50"><?php
+            if(isset($_POST['use'])){
+              echo $_POST['use'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['use']; ?></strong>
         </div>
       </div>
 
@@ -178,9 +251,14 @@ function form_to_create_entry(){
           <span class="question" id="entrycreatelink" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="link" rows="2" cols="50"></textarea>      
+          <textarea name="link" rows="2" cols="50"><?php
+            if(isset($_POST['link'])){
+              echo trim($_POST['link']);
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['link']; ?></strong>
         </div>
-      </div>    
+      </div>
 
 
       <div class="entry_create_buttons">
@@ -193,5 +271,5 @@ function form_to_create_entry(){
     </div>
   </form>
 
-<?php 
+<?php
 }

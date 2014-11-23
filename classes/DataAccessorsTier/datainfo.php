@@ -19,6 +19,7 @@
   define('ENTRY',           'tbl_entry');
   define('LOCATION',        'tbl_location');
   define('TRANS_REQUEST',   'tbl_transl_request');
+  define('AUTHEN',          'tbl_authen_status');
 
   
 

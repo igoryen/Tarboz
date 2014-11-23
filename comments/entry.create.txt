@@ -51,3 +51,4 @@
 51. echo 'entrycreate.php: $_GET[verbatim] is: '. $_GET['verbatim'];
 52. echo "<br> entrycreate.php: the result of the insert query = ". $id;
 53. echo "<br>Today: " . date("Y-m-d H:i:s");
+54. create an array to put validation error messages for all forms that deal with entry creation and editing. Create it outside of all the conditions, so its scope is global and it can be used in any condition.
