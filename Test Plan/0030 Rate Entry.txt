@@ -1,0 +1,9 @@
+Rating entries:
+A logged-in user can like/dislike an entry.
+ 
+After clicking ¡®Like¡¯, the total like number will increase 1. And the user can unlike this entry again.
+ 
+If the user unlikes the entry again, the total like number will increase 1, and total dislike number will increase 1.
+After clicking ¡®Dislike¡¯, the total dislike number will decrease 1. And the user can like this entry again
+ 
+If the user like this entry again, the total dislike number will increase 1, and total like number will increase 1.

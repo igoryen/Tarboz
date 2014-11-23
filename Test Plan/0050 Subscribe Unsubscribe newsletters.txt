@@ -1,0 +1,5 @@
+Subscribe newsletters
+Click ¡®Subscribe a newsletters¡¯ on the home page, it pops up a window, user inputs the email address, then click submit button. A subscription notification email will be sent to the input email. The input email address is added to email list.
+
+Unsubscribe newsletters
+Click ¡®Unsubscribe a newsletters¡¯ on the home page, it pops up a window, user inputs the email address, then click submit button. An unsubscription notification email will be sent to the input email. The input email address is removed from email list.

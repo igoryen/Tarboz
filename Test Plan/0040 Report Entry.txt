@@ -1,0 +1,4 @@
+Report Entries:
+A logged-in user can like/dislike an entry if feeling it contains any improper content.
+
+Click ¡®Report¡¯ text to report the entry. Input the report reason and then hit submit button. An email will send the admin.

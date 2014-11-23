@@ -1,0 +1,18 @@
+Comment entries:
+Only logged-in user can make a comment on the entries.
+ 
+And the use can edit, delete his/her own comments, and can like and report own comments and other users¡¯ comments.
+1. Make a comment:
+Input your comment and click submit button to make a comment. Please note any bad words will be filtered and replaced with '!!'.
+
+2. Edit comment:
+Clicking  pencil icon, it will show editable comment, and make changes in comment, then click submit button. The comment will be updated.
+ 
+3. Delete comment:
+Clicking cross icon to delete a comment.
+
+4. Like comment:
+Click ¡®Like¡¯ text to like the comment.
+
+5. Report comment:
+Click down-arrow icon to report the comment. Input the report reason and then hit submit button. An email will send the admin.
