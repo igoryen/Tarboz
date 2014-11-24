@@ -2,7 +2,7 @@
 require_once BUSINESS_DIR_LANG . "LanguageManager.php";
 require_once BUSINESS_DIR_LANG . "Language.php";
 
-function form_to_edit_entry($entry){
+function form_to_edit_entry($entry, $err_messages){
   $x = "Hi!";
   $lm = new LanguageManager();
   $auth = $entry->getEntryAuthenStatusId();
@@ -12,8 +12,8 @@ function form_to_edit_entry($entry){
   <!-- 1 -->
   <form action="" method="post">
   <!--<form action="entryview.php" method="post">-->
-  
-    <?php    
+
+    <?php
     //if($_GET['id']){ // 2
       //$em = new EntryManager(); // 3
       //$entry = $em->getEntryById($_GET['id']);
@@ -22,25 +22,33 @@ function form_to_edit_entry($entry){
     ?>
 Entry/form_to_<mark>edit</mark>_entry.php
     <div id="entry_create_form">
-      
+
       <div class="entry_create_row">
-        <div id="entry_create_form_title">Edit an entry
-          <div class="note">
+        <div id="entry_create_form_title">Editing <?php
+          if($entry->getEntryAuthenStatusId() == 1){
+            echo 'the Original';
+            echo ' ("'. substr($entry->getEntryText(), 0, 30) .'...")';
+          }
+          if($entry->getEntryAuthenStatusId() == 2){
+            echo "the Translation";
+            echo ' ("'. substr($entry->getEntryText(), 0, 30) .'...")';
+          }
+        ?><div class="note">
             Note: fields marked with the red asterisk (<span class="Painted_red">*</span>) are mandatory.
           </div>
         </div>
-      </div>      
-      
+      </div>
+
       <!-- ent_entry_id -->
       <div class="entry_create_row" style="display: none;">
         <div class="entry_create_record_title">Id</div>
         <div class="entry_create_record_value">
           <!--<?php //echo $entry->getEntryId(); ?>-->
-          <input name="id" 
-                 type="text" 
+          <input name="id"
+                 type="text"
                  value="<?php echo $entry->getEntryId(); ?>" readonly /><!--Lily 141029-->
         </div>
-      </div>      
+      </div>
       <!-- lan_lang_name -->
       <div class="entry_create_row">
         <div class="entry_create_record_title">
@@ -62,7 +70,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
                 echo $lang->getLangName();
                 echo '</option>';
        }?></select>
-          <strong><?php echo $x; ?></strong>
+          <strong><?php echo $err_messages['langid']; ?></strong>
         </div>
       </div>
 
@@ -83,7 +91,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <div class="entry_create_row">
         <div class="entry_create_record_title">
           Text <span class="Painted_red">*</span>
-          <span class="question" id="entrycreatetext" >?</span> 
+          <span class="question" id="entrycreatetext" >?</span>
         </div>
         <div class="entry_create_record_value">
           <textarea name="text"
@@ -91,15 +99,15 @@ Entry/form_to_<mark>edit</mark>_entry.php
                     rows="10" cols="50"><?php
           echo $entry->getEntryText();
           ?></textarea>
-          <strong><?php echo $x; ?></strong>
+          <strong><?php echo $err_messages['text']; ?></strong>
         </div>
       </div>
 
-      <!-- commented out because we are not creating 
+      <!-- commented out because we are not creating
       the dad and a kid together, but either the dad OR a kid
       <div class="entry_create_row">
         <div class="entry_create_record_title">
-           Translation <span class="Painted_red">*</span> 
+           Translation <span class="Painted_red">*</span>
         </div>
         <div class="entry_create_record_value">
           <textarea rows="4" cols="50" placeholder="Enter the translation of the phrase"></textarea>
@@ -110,7 +118,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <!-- ent_entry_verbatim to be created automatically -->
       <!-- ent_entry_verbatim will be created automatically -->
       <div class="entry_create_row">
-        
+
         <div class="entry_create_record_title">
           <a href="#" id="create-verbatim-button">Recreate<br>verbatim</a>
           <span class="Painted_red">*</span>
@@ -118,15 +126,15 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <br>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="verbatim" 
-                    id="verbatim"  
+          <textarea name="verbatim"
+                    id="verbatim"
                     rows="3" cols="50" readonly ><?php
           echo $entry->getEntryVerbatim();
                     ?></textarea>
-          <strong><?php echo $x; ?></strong>
+          <strong><?php echo $err_messages['verbatim']; ?></strong>
         </div>
       </div>
-      
+
 
       <!-- ent_entry_translit -->
       <div class="entry_create_row">
@@ -138,13 +146,13 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <textarea name="translit" rows="10" cols="50"><?php
           echo $entry->getEntryTranslit();
           ?></textarea>
-          <strong><?php echo $x; ?></strong>
+          <strong><?php echo $err_messages['translit']; ?></strong>
         </div>
       </div>
 
 
       <!-- entry_authen_status_id -->
-      <div class="entry_create_row">
+      <div class="entry_create_row" style="display: none;">
         <div class="entry_create_record_title">
           Authenticity
           <span class="question" id="entrycreateauthen" >?</span>
@@ -152,20 +160,20 @@ Entry/form_to_<mark>edit</mark>_entry.php
         <div class="entry_create_record_value">
           <input name="authen"
                  type="text"
-                 value="<?php 
+                 value="<?php
                  if($entry->getEntryAuthenStatusId() == 1){
-                   echo "original";
+                   echo "1";
                  }
                  elseif($entry->getEntryAuthenStatusId() == 2){
-                   echo "translation";
+                   echo "2";
                  }
                  elseif($entry->getEntryAuthenStatusId() == 3)
-                   echo "unknown";?>" readonly=""/>
+                   echo "3";?>" readonly=""/>
         </div>
       </div>
 
       <!-- the value of ent_entry_translation_of will be supplied automatically -->
-      
+
       <!-- the value of ent_entry_creator_id will be supplied automatically -->
       <div class="entry_create_row" style="display: none;">
         <div class="entry_create_record_title">Added by</div>
@@ -173,8 +181,8 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <input name="creator" value="<?php echo $entry->getEntryUserId(); ?>"/>
         </div>
       </div>
-      
-      
+
+
       <!-- the value of ent_entry_media_id will be delivered ... -->
       <!-- the value of ent_entry_comment_id willl be .... -->
       <!-- the value of ent_entry_rating_id willl be .... -->
@@ -189,7 +197,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <input name="tags" type="text" size="50" value="<?php
             echo $entry->getEntryTags();
           ?>"/>
-          <strong><?php echo $x; ?></strong>
+          <strong><?php echo $err_messages['tags']; ?></strong>
         </div>
       </div>
 
@@ -206,7 +214,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
         </div>
       </div>-->
 
-          
+
       <!-- ent_entry_authors-->
       <div class="entry_create_row">
         <div class="entry_create_record_title">
@@ -217,7 +225,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <input name="authors" type="text" size="50" value="<?php
             echo $entry->getEntryAuthors();
           ?>"/>
-          <strong><?php echo $x; ?></strong>
+          <strong><?php echo $err_messages['authors']; ?></strong>
         </div>
       </div>
 
@@ -228,7 +236,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
         <div class="entry_create_record_value">
           <input name="source" type="text" size="50" value="<?php
           echo $entry->getEntrySourceId();
-          ?>"/>      
+          ?>"/>
         </div>
       </div>
 
@@ -240,10 +248,10 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <span class="question" id="entrycreateuse" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <input name="use" value="<?php 
-            echo $entry->getEntryUse(); 
+          <input name="use" value="<?php
+            echo $entry->getEntryUse();
           ?>">
-          <strong><?php echo $x; ?></strong>
+          <strong><?php echo $err_messages['use']; ?></strong>
         </div>
       </div>
 
@@ -258,9 +266,9 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <input name="link" type="text" size="50" value="<?php
           echo $entry->getEntryHttpLink();
           ?>"/>
-          <strong><?php echo $x; ?></strong>
+          <strong><?php echo $err_messages['link']; ?></strong>
         </div>
-      </div>    
+      </div>
 
 
       <div class="entry_create_buttons">

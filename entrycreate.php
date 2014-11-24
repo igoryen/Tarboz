@@ -44,7 +44,7 @@
       "use"       => "",
       "link"      => ""
   );
-  
+
   if($_POST){ // 4
     // 44*, 45*
     // 26 ------------------------------------------
@@ -81,7 +81,7 @@
     echo "<br>checking langid";
     if(!preg_match($rgx_for_langid, $_POST['langid'])){
       //$errmsg_for_langid = "Language is invalid";
-      $err_messages['langid'] = "Language is invalid";
+      $err_messages['langid'] = "Language tested invalid";
       echo " oops!";
       $user_input_valid = false;
     }
@@ -268,7 +268,7 @@
           //49*
           $em = new EntryManager(); // 12
           $entry = $em->getEntryById($_GET['id']); // 36
-          form_to_edit_entry($entry); // 37
+          form_to_edit_entry($entry, $err_messages); // 37
         }
       }
       else{
@@ -289,7 +289,7 @@
         //49*
         $em = new EntryManager(); // 12
         $entry = $em->getEntryById($_GET['id']); // 36
-        form_to_edit_entry($entry); // 37
+        form_to_edit_entry($entry, $err_messages); // 37
       }      
     }
     else{ // 35
