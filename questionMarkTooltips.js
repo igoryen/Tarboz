@@ -30,7 +30,8 @@ var entry_create_authen = "Indicate the authencitity status of the entry: "+
         +"is it an original entry or a translation/version of an original";
 var entry_create_tags = "Drop a few key words. They will be used for search";
 var entry_create_authors = "The author(s) of the phrase, those who hold "
-        +"the copyright to the phrase";
+        + "the copyright to the phrase. If this is a translation"
+        + "then please mention the name(s) of the translator(s).";
 var entry_create_use = "How and when people use the phrase";
 var entry_create_link = "The link to a video which shows the phrase pronounced";
 var kid_create_original = "The text of the original entry for which you are "

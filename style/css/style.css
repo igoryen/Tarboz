@@ -731,7 +731,7 @@ a:active {
 }
 
 .entry_record_title{
-  background-color: rgba(13,31,56,0.8);
+  background-color: #3697FF;
   color: #ffffff;
   display: block;
   font-size: smaller;
@@ -771,6 +771,7 @@ a:active {
 #entry_create_form{
   margin: 5px;
   width: 800px; 
+  height: auto
   text-align: right;
 }
 
@@ -809,11 +810,12 @@ a:active {
   display: table-cell;
   padding-right: 5px;
   vertical-align: top;
-  width: 180px;
+  width: 200px;
 }
 
 .entry_create_record_value{
   display: table-cell;
+  text-align: left;
 }
 
 .entry_create_record_title_explanation{
@@ -1228,7 +1230,7 @@ html {
 /****front page******/
 .text_shortcut {
     white-space: nowrap; 
-    width: 19em; 
+    width: 17em; 
     overflow: hidden;
     text-overflow: ellipsis; 
 }

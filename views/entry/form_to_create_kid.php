@@ -4,17 +4,20 @@ require_once BUSINESS_DIR_LANG . "Language.php";
 
 
 
-function form_to_create_kid($dad){
+function form_to_create_kid($dad, $err_messages){
+  $x = "Hi!";
   $lm = new LanguageManager();
   ?>
   <!-- 1 -->
-  <form action="" method="post">
+ <div align="center">
+     <div style="width: 850px">
+  <form action="" method="post" style="text-align: right; display: block;">
     
     <?php    
 //    date_default_timezone_set('America/Toronto');
 //    echo "<br>Today: " . date("Y-m-d H:i:s");
     ?>
-    <br>views/entry/form_to_<mark>create</mark>_kid.php
+<!--    <br>views/entry/form_to_<mark>create</mark>_kid.php-->
     <div id="entry_create_form">
       
       <div class="entry_create_row">
@@ -51,13 +54,29 @@ function form_to_create_kid($dad){
             <option value="">This will be in ...</option><?php
               //$langs = $lm->getListOfLang();
               $langs = $lm->getLanguages();
-              foreach ($langs as $lang) {
-              echo '<option value="';
-              echo $lang->getLangId();
-              echo '">';
-              echo $lang->getLangName();
-              echo '</option>';
-       }?></select>
+              if(isset($_POST['langid'])){
+                $this_langid = $_POST['langid'];
+                foreach ($langs as $lang) {
+                  echo '<option value="';
+                  echo $lang->getLangId();
+                  echo '"';
+                  echo $this_langid == $lang->getLangId() ? ' selected="selected"' : '';
+                  echo '">';
+                  echo $lang->getLangName();
+                  echo '</option>';
+                }
+              }
+              else{
+                foreach ($langs as $lang) {
+                  echo '<option value="';
+                  echo $lang->getLangId();
+                  echo '">';
+                  echo $lang->getLangName();
+                  echo '</option>';
+                }
+              }
+        ?></select>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['langid']; ?></strong>
         </div>
       </div>
 
@@ -84,7 +103,12 @@ function form_to_create_kid($dad){
         <div class="entry_create_record_value">
           <textarea name="text" 
                     id="txtString2"  
-                    rows="10" cols="50"></textarea>
+                    rows="10" cols="50"><?php
+            if(isset($_POST['text'])){
+              echo $_POST['text'];
+            }
+        ?></textarea><br />
+          <strong style="color: #FF365D;"><?php echo $err_messages['text']; ?></strong>
         </div>
       </div>
       
@@ -100,7 +124,12 @@ function form_to_create_kid($dad){
         <div class="entry_create_record_value">
           <textarea name="verbatim" 
                     id="verbatim"  
-                    rows="3" cols="50" readonly ></textarea>
+                    rows="3" cols="50" readonly ><?php
+            if(isset($_POST['verbatim'])){
+              echo $_POST['verbatim'];
+            }
+        ?></textarea><br />
+          <strong style=" color: #FF365D;"><?php echo $err_messages['verbatim']; ?></strong>
         </div>
       </div>      
       
@@ -111,7 +140,12 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreatetranslit" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="translit" rows="10" cols="50"></textarea>
+          <textarea name="translit" rows="10" cols="50"><?php
+            if(isset($_POST['translit'])){
+              echo $_POST['translit'];
+            }
+        ?></textarea>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['translit']; ?></strong>
         </div>
       </div>
 
@@ -134,7 +168,12 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreatetags" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="tags" rows="2" cols="50"></textarea>
+          <textarea name="tags" rows="2" cols="50"><?php
+            if(isset($_POST['tags'])){
+              echo $_POST['tags'];
+            }
+        ?></textarea>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['tags']; ?></strong>
         </div>
       </div>
 
@@ -146,7 +185,12 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreateauthors" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="authors" rows="2" cols="50"></textarea>
+          <textarea name="authors" rows="2" cols="50"><?php
+            if(isset($_POST['authors'])){
+              echo $_POST['authors'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['authors']; ?></strong>
         </div>
       </div>
 
@@ -168,7 +212,12 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreateuse" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="use" rows="2" cols="50"></textarea>
+          <textarea name="use" rows="2" cols="50"><?php
+            if(isset($_POST['use'])){
+              echo $_POST['use'];
+            }
+        ?></textarea>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['use']; ?></strong>
         </div>
       </div>
 
@@ -180,20 +229,26 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreatelink" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="link" rows="2" cols="50"></textarea>      
+          <textarea name="link" rows="2" cols="50"><?php
+            if(isset($_POST['link'])){
+              echo trim($_POST['link']);
+            }
+        ?></textarea>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['link']; ?></strong>
         </div>
       </div>    
 
 
-      <div class="entry_create_buttons">
+      <div class="entry_create_buttons" style="margin-left: 70px; margin-right: 70px;">
         <!-- 5 -->
-        <button name ="submit" type="submit">Submit</button>
-        <button type="reset">Reset</button>
-        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />
+        <button name ="submit" type="submit" class="en_button">Submit</button>
+        <button type="reset" class="en_button">Reset</button>
+<!--        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />-->
       </div>
 
     </div>
   </form>
-
+</div>
+</div>
 <?php 
 }

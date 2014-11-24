@@ -374,7 +374,7 @@
       <div class="entry_record_value">
         <select 
           name="treqLang" 
-          onchange="treqCreate(this.value,<?php echo $userId.",".$entryId; ?>)">
+          onchange="treqCreate(this.value,<?php echo $user_id.','.$entryId; ?>)">
           <option value="">Select a language:</option>
           <?php
           $langs = $lm->getLanguages();
