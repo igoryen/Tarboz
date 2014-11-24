@@ -231,9 +231,14 @@ function dad_house_dad_0($no_original) { ?>
                 <a href="entryview.php?id=<?php echo $ary['id']?>"><?php echo $ary['text']; ?></a>
               </div>
               <div id="dad_profile_link"><span class="question" id="orig">O</span></div>
+              <div id="kids_num" 
+                   title="There are <?php echo $ary['kidsnum']; ?> translations for this phrase">
+                <?php echo $ary['kidsnum']; ?>
+              </div>
+              <div id="add_kid">
+                <a href="entrycreate.php" title="Add a new translation">+</a>
+              </div>
               <div style="display:inline-block;width:50px"></div>
-              <div id="kids_num" title="There are <?php echo $ary['kidsnum']; ?> translations for this phrase"><?php echo $ary['kidsnum']; ?></div>
-              <div id="add_kid"><a href="entrycreate.php" title="Add a new translation">+</a></div>
               <div class="kid_added_by">
                 <a href="other_user.php?id=<?php echo $ary['user']; ?>">
                     <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getLogin();//echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
