@@ -61,7 +61,7 @@
     $rgx_for_text =        '/^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.'\p{N}'.$non_lat.']+$/u';
     // the non-mandatory fields
     $rgx_for_translOf = "/^$|^[0-9]+$/"; // empty or same as langid
-    $rgx_for_translit = '/^$|^[\p{L}'.'\p{M}'.'\p{P}'.'\p{Z}]+$/u'; // empty or latin only
+    $rgx_for_translit = '/^$|^[\p{L}'.'\p{M}'.'\p{P}'.$non_lat.'\p{Z}]+$/u'; // empty or latin only
     $rgx_for_tags =     '/^$|^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.'\p{N}'.$non_lat.']+$/u';
     $rgx_for_authors =  '/^$|^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.'\p{N}'.$non_lat.']+$/u';
     $rgx_for_use =      '/^$|^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.'\p{N}'.$non_lat.']+$/u';
