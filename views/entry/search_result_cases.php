@@ -83,7 +83,10 @@ function make_kid_room($kid_room_array){?>
           <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin();//echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getLastName();?>
       </a>
     </div>
-    <div class="is_mom">A</div>
+    <div class="en_creadate" title="When this entry was added">
+      <?php echo $kid_room_array['creadate']; ?>
+    </div>
+    <!--<div class="is_mom">A</div>-->
   </div>
  <?php
 }?>
@@ -110,7 +113,10 @@ function make_family_kid_room($kid_room_array){?>
           <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin();//echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getFirstName();?>
       </a>
     </div>
-    <div class="is_mom">A</div>
+    <div class="en_creadate" title="When this entry was added">
+      <?php echo $kid_room_array['creadate']; ?>
+    </div>
+<!--    <div class="is_mom">A</div>-->
   </div>
  <?php
 }?>
@@ -215,6 +221,9 @@ function dad_house_dad_0($no_original) { ?>
                     <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getLogin();//echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
                 </a>
               </div>
+              <div class="en_creadate" title="When this entry was added">
+                <?php echo $ary['creadate']; ?>
+              </div>
             </div>
          </div><!-- dad_house -->
 
@@ -243,6 +252,10 @@ function dad_house_dad_0($no_original) { ?>
                 <a href="other_user.php?id=<?php echo $ary['user']; ?>">
                     <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getLogin();//echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
                 </a>
+              </div>
+              <div class="en_creadate"
+                   title="When this entry was added">
+                     <?php echo $ary['creadate']; ?>
               </div>
             </div>
          <!--</div> dad_house -->
