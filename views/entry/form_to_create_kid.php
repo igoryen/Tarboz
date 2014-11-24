@@ -4,7 +4,7 @@ require_once BUSINESS_DIR_LANG . "Language.php";
 
 
 
-function form_to_create_kid($dad){
+function form_to_create_kid($dad, $err_messages){
   $x = "Hi!";
   $lm = new LanguageManager();
   ?>
@@ -52,14 +52,29 @@ function form_to_create_kid($dad){
             <option value="">This will be in ...</option><?php
               //$langs = $lm->getListOfLang();
               $langs = $lm->getLanguages();
-              foreach ($langs as $lang) {
-              echo '<option value="';
-              echo $lang->getLangId();
-              echo '">';
-              echo $lang->getLangName();
-              echo '</option>';
-       }?></select>
-          <strong><?php echo $x; ?></strong>
+              if(isset($_POST['langid'])){
+                $this_langid = $_POST['langid'];
+                foreach ($langs as $lang) {
+                  echo '<option value="';
+                  echo $lang->getLangId();
+                  echo '"';
+                  echo $this_langid == $lang->getLangId() ? ' selected="selected"' : '';
+                  echo '">';
+                  echo $lang->getLangName();
+                  echo '</option>';
+                }
+              }
+              else{
+                foreach ($langs as $lang) {
+                  echo '<option value="';
+                  echo $lang->getLangId();
+                  echo '">';
+                  echo $lang->getLangName();
+                  echo '</option>';
+                }
+              }
+        ?></select>
+          <strong><?php echo $err_messages['langid']; ?></strong>
         </div>
       </div>
 
@@ -86,8 +101,12 @@ function form_to_create_kid($dad){
         <div class="entry_create_record_value">
           <textarea name="text" 
                     id="txtString2"  
-                    rows="10" cols="50"></textarea>
-          <strong><?php echo $x; ?></strong>
+                    rows="10" cols="50"><?php
+            if(isset($_POST['text'])){
+              echo $_POST['text'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['text']; ?></strong>
         </div>
       </div>
       
@@ -103,8 +122,12 @@ function form_to_create_kid($dad){
         <div class="entry_create_record_value">
           <textarea name="verbatim" 
                     id="verbatim"  
-                    rows="3" cols="50" readonly ></textarea>
-          <strong><?php echo $x; ?></strong>
+                    rows="3" cols="50" readonly ><?php
+            if(isset($_POST['verbatim'])){
+              echo $_POST['verbatim'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['verbatim']; ?></strong>
         </div>
       </div>      
       
@@ -115,8 +138,12 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreatetranslit" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="translit" rows="10" cols="50"></textarea>
-          <strong><?php echo $x; ?></strong>
+          <textarea name="translit" rows="10" cols="50"><?php
+            if(isset($_POST['translit'])){
+              echo $_POST['translit'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['translit']; ?></strong>
         </div>
       </div>
 
@@ -139,8 +166,12 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreatetags" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="tags" rows="2" cols="50"></textarea>
-          <strong><?php echo $x; ?></strong>
+          <textarea name="tags" rows="2" cols="50"><?php
+            if(isset($_POST['tags'])){
+              echo $_POST['tags'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['tags']; ?></strong>
         </div>
       </div>
 
@@ -152,8 +183,12 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreateauthors" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="authors" rows="2" cols="50"></textarea>
-          <strong><?php echo $x; ?></strong>
+          <textarea name="authors" rows="2" cols="50"><?php
+            if(isset($_POST['authors'])){
+              echo $_POST['authors'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['authors']; ?></strong>
         </div>
       </div>
 
@@ -175,8 +210,12 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreateuse" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="use" rows="2" cols="50"></textarea>
-          <strong><?php echo $x; ?></strong>
+          <textarea name="use" rows="2" cols="50"><?php
+            if(isset($_POST['use'])){
+              echo $_POST['use'];
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['use']; ?></strong>
         </div>
       </div>
 
@@ -188,8 +227,12 @@ function form_to_create_kid($dad){
           <span class="question" id="entrycreatelink" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <textarea name="link" rows="2" cols="50"></textarea>
-          <strong><?php echo $x; ?></strong>
+          <textarea name="link" rows="2" cols="50"><?php
+            if(isset($_POST['link'])){
+              echo trim($_POST['link']);
+            }
+        ?></textarea>
+          <strong><?php echo $err_messages['link']; ?></strong>
         </div>
       </div>    
 

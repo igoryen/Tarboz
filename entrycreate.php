@@ -57,7 +57,7 @@
     // the 4 mandatory fields
     $rgx_for_langid =      '/^[0-9]+$/'; // only digits
     $rgx_for_authen =      '/^[0-9]+$/'; // only digits
-    $rgx_for_verbatim =    '/^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.']+$/'; // latin only
+    $rgx_for_verbatim =    '/^[0-9\p{L}'.'\p{M}'.'\p{P}'.'\p{Z}'.']+$/u';
     $rgx_for_text =        '/^[0-9A-Za-z'.'\p{P}'.'\p{Z}'.'\p{N}'.$non_lat.']+$/u';
     // the non-mandatory fields
     $rgx_for_translOf = "/^$|^[0-9]+$/"; // empty or same as langid
@@ -262,7 +262,7 @@
           // 48*
           $em = new EntryManager(); // 12
           $dad = $em->getEntryById($_GET['id']); // 36
-          form_to_create_kid($dad);
+          form_to_create_kid($dad, $err_messages);
         }
         else{
           //49*
@@ -283,7 +283,7 @@
         // 48*
         $em = new EntryManager(); // 12
         $dad = $em->getEntryById($_GET['id']); // 36
-        form_to_create_kid($dad);
+        form_to_create_kid($dad, $err_messages);
         
       }else{ // 47
         //49*
