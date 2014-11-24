@@ -29,8 +29,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
   <link rel="shortcut icon" href="images/watermelon8.png"/>
    
    <!-- Extra libraries -->
-   <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-   <script src="scripts/jquery-1.11.1.min.js"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
    
    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
