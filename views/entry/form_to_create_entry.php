@@ -266,7 +266,8 @@ function form_to_create_entry($err_messages){
           <div class="entry_create_buttons">
             <!-- 5 -->
             <button name ="submit" type="submit" class="en_button">Submit</button>
-            <button type="reset"  class="en_button">Reset</button>
+            <button type="reset"  class="en_button"
+                    onclick="window.location='entrycreate.php';">Reset</button>
     <!--        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />-->
           </div>
       </div>      
