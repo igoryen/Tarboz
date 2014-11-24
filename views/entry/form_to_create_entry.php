@@ -10,7 +10,9 @@ function form_to_create_entry($err_messages){
   $am = new AuthenManager();
   ?>
   <!-- 1 -->
-  <form action="" method="post">
+ <div align="center">
+     <div style="width: 850px">
+  <form action="" method="post" style="text-align: right; display: block;">
 
     <?php
 //    date_default_timezone_set('America/Toronto');
@@ -62,7 +64,7 @@ function form_to_create_entry($err_messages){
                 }
               }
         ?></select>
-          <strong><?php echo $err_messages['langid']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['langid']; ?></strong>
         </div>
       </div>
 
@@ -98,7 +100,7 @@ function form_to_create_entry($err_messages){
                   echo '</option>';
                 }
        }?></select>
-          <strong><?php echo $err_messages['authen']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['authen']; ?></strong>
         </div>
       </div>
 
@@ -131,8 +133,8 @@ function form_to_create_entry($err_messages){
             if(isset($_POST['text'])){
               echo $_POST['text'];
             }
-        ?></textarea>
-          <strong><?php echo $err_messages['text']; ?></strong>
+        ?></textarea><br />
+          <strong style=" color: #FF365D;"><?php echo $err_messages['text']; ?></strong>
         </div>
       </div>
 
@@ -153,7 +155,7 @@ function form_to_create_entry($err_messages){
               echo $_POST['verbatim'];
             }
         ?></textarea>
-          <strong><?php echo $err_messages['verbatim']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['verbatim']; ?></strong>
         </div>
       </div>
 
@@ -169,7 +171,7 @@ function form_to_create_entry($err_messages){
               echo $_POST['translit'];
             }
         ?></textarea>
-          <strong><?php echo $err_messages['translit']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['translit']; ?></strong>
         </div>
       </div>
 
@@ -195,7 +197,7 @@ function form_to_create_entry($err_messages){
               echo $_POST['tags'];
             }
         ?></textarea>
-          <strong><?php echo $err_messages['tags']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['tags']; ?></strong>
         </div>
       </div>
 
@@ -212,7 +214,7 @@ function form_to_create_entry($err_messages){
               echo $_POST['authors'];
             }
         ?></textarea>
-          <strong><?php echo $err_messages['authors']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['authors']; ?></strong>
         </div>
       </div>
 
@@ -256,20 +258,23 @@ function form_to_create_entry($err_messages){
               echo trim($_POST['link']);
             }
         ?></textarea>
-          <strong><?php echo $err_messages['link']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['link']; ?></strong>
         </div>
       </div>
 
-
-      <div class="entry_create_buttons">
-        <!-- 5 -->
-        <button name ="submit" type="submit">Submit</button>
-        <button type="reset">Reset</button>
-        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />
-      </div>
-
+      <div class="entry_create_row">
+          <div class="entry_create_buttons">
+            <!-- 5 -->
+            <button name ="submit" type="submit" class="en_button">Submit</button>
+            <button type="reset"  class="en_button">Reset</button>
+    <!--        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />-->
+          </div>
+      </div>      
+        
     </div>
   </form>
+</div>
+</div>
 
 <?php
 }

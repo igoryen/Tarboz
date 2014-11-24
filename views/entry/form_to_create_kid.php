@@ -9,13 +9,15 @@ function form_to_create_kid($dad, $err_messages){
   $lm = new LanguageManager();
   ?>
   <!-- 1 -->
-  <form action="" method="post">
+ <div align="center">
+     <div style="width: 850px">
+  <form action="" method="post" style="text-align: right; display: block;">
     
     <?php    
 //    date_default_timezone_set('America/Toronto');
 //    echo "<br>Today: " . date("Y-m-d H:i:s");
     ?>
-    <br>views/entry/form_to_<mark>create</mark>_kid.php
+<!--    <br>views/entry/form_to_<mark>create</mark>_kid.php-->
     <div id="entry_create_form">
       
       <div class="entry_create_row">
@@ -74,7 +76,7 @@ function form_to_create_kid($dad, $err_messages){
                 }
               }
         ?></select>
-          <strong><?php echo $err_messages['langid']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['langid']; ?></strong>
         </div>
       </div>
 
@@ -105,8 +107,8 @@ function form_to_create_kid($dad, $err_messages){
             if(isset($_POST['text'])){
               echo $_POST['text'];
             }
-        ?></textarea>
-          <strong><?php echo $err_messages['text']; ?></strong>
+        ?></textarea><br />
+          <strong style="color: #FF365D;"><?php echo $err_messages['text']; ?></strong>
         </div>
       </div>
       
@@ -126,8 +128,8 @@ function form_to_create_kid($dad, $err_messages){
             if(isset($_POST['verbatim'])){
               echo $_POST['verbatim'];
             }
-        ?></textarea>
-          <strong><?php echo $err_messages['verbatim']; ?></strong>
+        ?></textarea><br />
+          <strong style=" color: #FF365D;"><?php echo $err_messages['verbatim']; ?></strong>
         </div>
       </div>      
       
@@ -143,7 +145,7 @@ function form_to_create_kid($dad, $err_messages){
               echo $_POST['translit'];
             }
         ?></textarea>
-          <strong><?php echo $err_messages['translit']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['translit']; ?></strong>
         </div>
       </div>
 
@@ -171,7 +173,7 @@ function form_to_create_kid($dad, $err_messages){
               echo $_POST['tags'];
             }
         ?></textarea>
-          <strong><?php echo $err_messages['tags']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['tags']; ?></strong>
         </div>
       </div>
 
@@ -215,7 +217,7 @@ function form_to_create_kid($dad, $err_messages){
               echo $_POST['use'];
             }
         ?></textarea>
-          <strong><?php echo $err_messages['use']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['use']; ?></strong>
         </div>
       </div>
 
@@ -232,20 +234,21 @@ function form_to_create_kid($dad, $err_messages){
               echo trim($_POST['link']);
             }
         ?></textarea>
-          <strong><?php echo $err_messages['link']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['link']; ?></strong>
         </div>
       </div>    
 
 
-      <div class="entry_create_buttons">
+      <div class="entry_create_buttons" style="margin-left: 70px; margin-right: 70px;">
         <!-- 5 -->
-        <button name ="submit" type="submit">Submit</button>
-        <button type="reset">Reset</button>
-        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />
+        <button name ="submit" type="submit" class="en_button">Submit</button>
+        <button type="reset" class="en_button">Reset</button>
+<!--        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />-->
       </div>
 
     </div>
   </form>
-
+</div>
+</div>
 <?php 
 }

@@ -97,7 +97,7 @@
                              </span>
                              <span style="float: right"><?php echo $likeRating; ?> LIKE(S)</span>
                         </div>
-                         <div class="entryList"><a href=entryview.php?id="<?php echo $entryId; ?>" > <?php echo $content; ?> </a></div>
+                         <div class="entryList"><a href=entryview.php?id=<?php echo $entryId; ?> > <?php echo $content; ?> </a></div>
                     </div> 
                  
 <?php

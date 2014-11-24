@@ -7,10 +7,12 @@ function form_to_edit_entry($entry, $err_messages){
   $lm = new LanguageManager();
   $auth = $entry->getEntryAuthenStatusId();
   $status = ($auth == 1 ? '1' : "not 1");
-  echo "<br>ftee:: status = " . $status;
+//  echo "<br>ftee:: status = " . $status;
   ?>
   <!-- 1 -->
-  <form action="" method="post">
+ <div align="center">
+     <div style="width: 850px">
+  <form action="" method="post" style="text-align: right; display: block;">
   <!--<form action="entryview.php" method="post">-->
 
     <?php
@@ -20,7 +22,7 @@ function form_to_edit_entry($entry, $err_messages){
     //}// 2
 
     ?>
-Entry/form_to_<mark>edit</mark>_entry.php
+<!--Entry/form_to_<mark>edit</mark>_entry.php-->
     <div id="entry_create_form">
 
       <div class="entry_create_row">
@@ -70,7 +72,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
                 echo $lang->getLangName();
                 echo '</option>';
        }?></select>
-          <strong><?php echo $err_messages['langid']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['langid']; ?></strong>
         </div>
       </div>
 
@@ -98,8 +100,8 @@ Entry/form_to_<mark>edit</mark>_entry.php
                     id="txtString2"
                     rows="10" cols="50"><?php
           echo $entry->getEntryText();
-          ?></textarea>
-          <strong><?php echo $err_messages['text']; ?></strong>
+          ?></textarea><br />
+          <strong style=" color: #FF365D;"><?php echo $err_messages['text']; ?></strong>
         </div>
       </div>
 
@@ -120,7 +122,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
       <div class="entry_create_row">
 
         <div class="entry_create_record_title">
-          <a href="#" id="create-verbatim-button">Recreate<br>verbatim</a>
+          <a href="#" id="create-verbatim-button">Recreate verbatim</a>
           <span class="Painted_red">*</span>
           <span class="question" id="entryrecreateverbatim" >?</span>
           <br>
@@ -130,8 +132,8 @@ Entry/form_to_<mark>edit</mark>_entry.php
                     id="verbatim"
                     rows="3" cols="50" readonly ><?php
           echo $entry->getEntryVerbatim();
-                    ?></textarea>
-          <strong><?php echo $err_messages['verbatim']; ?></strong>
+                    ?></textarea><br />
+          <strong style=" color: #FF365D;"><?php echo $err_messages['verbatim']; ?></strong>
         </div>
       </div>
 
@@ -146,7 +148,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <textarea name="translit" rows="10" cols="50"><?php
           echo $entry->getEntryTranslit();
           ?></textarea>
-          <strong><?php echo $err_messages['translit']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['translit']; ?></strong>
         </div>
       </div>
 
@@ -197,7 +199,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <input name="tags" type="text" size="50" value="<?php
             echo $entry->getEntryTags();
           ?>"/>
-          <strong><?php echo $err_messages['tags']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['tags']; ?></strong>
         </div>
       </div>
 
@@ -225,7 +227,7 @@ Entry/form_to_<mark>edit</mark>_entry.php
           <input name="authors" type="text" size="50" value="<?php
             echo $entry->getEntryAuthors();
           ?>"/>
-          <strong><?php echo $err_messages['authors']; ?></strong>
+          <strong style=" color: #FF365D;"><?php echo $err_messages['authors']; ?></strong>
         </div>
       </div>
 
@@ -271,14 +273,16 @@ Entry/form_to_<mark>edit</mark>_entry.php
       </div>
 
 
-      <div class="entry_create_buttons">
+      <div class="entry_create_buttons" style="margin-left: 70px; margin-right: 70px;">
         <!-- 5 -->
-        <button name ="submit" type="submit">Submit</button>
-        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />
+        <button name ="submit" type="submit" class="en_button" >Submit</button>
+        <input type="button" value="Back" onclick="window.history.go(-1); return false;" class="en_button"/>
       </div>
 
     </div>
   </form>
+</div>
+</div>
 <?php
-
 }
+?>
