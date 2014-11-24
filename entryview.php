@@ -339,15 +339,15 @@
             <button id="entryDeleteButton">Delete this entry</button>
             <span id="entryDeleteResponse" style="display: none"></span>
             <div id="entryDeleteDialog" style="display: none">
-              Are you sure you want to delete this entry ><?php echo $entryId; ?><br/>
+              Really delete this entry?<?php //echo $entryId; ?>
               <form action="index.php">
                 <button type="submit"
                         id="entryDeleteConfirm"
-                        onclick="entryDelete(<?php echo $entryId; ?>)">Delete</button>
-                <button name="entryDeleteCancel" 
-                      id="entryDeleteCancel"
-                      onclick="">Cancel</button>
+                        onclick="entryDelete(<?php echo $entryId; ?>)">Yes, delete it.</button>
               </form>
+              <button name="entryDeleteCancel" 
+                    id="entryDeleteCancel"
+                    onclick="">No. Cancel</button>
             </div>
             <script>
                 $( "#entryDeleteButton" ).click(function() {
