@@ -4,7 +4,8 @@ $(document).ready(function(){
   //$('#loader').ajaxLoader();
   $('#create-verbatim-button').live("click", function(){
       //$('#loader').ajaxLoader();
-      var text = document.getElementById('txtString2').value
+      var text = document.getElementById('txtString2').value;
+      text = text.replace(/(\r\n|\n|\r)/gm," "); // replace line breaks with commas
       //var lang = document.getElementById('txtLang').value;
       var lang = 'en'; // 141029
       var json_url = 'translator.php?text='+ text +'&to='+lang;  
@@ -21,6 +22,7 @@ $(document).ready(function(){
         var verbatim = verbatim.replace(left, '');
         verbatim = verbatim.replace(right, '');
         verbatim = verbatim.replace(/\s/g, ", ");
+        verbatim = verbatim.replace(/(\r\n|\n|\r)/gm,", "); // replace line breaks with commas
         
         var apostrophe = /'/g;
         var dblquotes = /"/g;

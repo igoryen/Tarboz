@@ -37,7 +37,8 @@ $(document).ready(function(){
             var right = /\<\/string\>/g;
             var verbatim = verbatim.replace(left, '');
             verbatim = verbatim.replace(right, '');
-            verbatim = verbatim.replace(/\s/g, ", ");
+            verbatim = verbatim.replace(/\s/g, ", "); // replace spaces with commas
+            verbatim = verbatim.replace(/(\r\n|\n|\r)/gm,", "); // replace line breaks with commas
             
             var apostrophe = /'/g;
             var dblquotes = /"/g;
