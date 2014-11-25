@@ -368,7 +368,9 @@
      <!-- end display the Control entry-->   
     
     <!--Display translation request-->
-    <?php if($entry->getEntryAuthenStatusId() == 1){?>
+    <?php 
+    if(isset($_SESSION['user'])){
+    if($entry->getEntryAuthenStatusId() == 1){?>
     <div class="entry_record">
       <div class="entry_record_title">Request a translation into one of these languages</div>
       <div class="entry_record_value">
@@ -389,7 +391,8 @@
         <span id="treqCreateResponse"></span>
       </div>
     </div>
-    <?php } //end if($entry->getEntryAuthenStatusId() == 1)?>
+    <?php } //end if($entry->getEntryAuthenStatusId() == 1)
+    }?>
     <!--Display translation request end-->
     <!--- comments section start --->
   

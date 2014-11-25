@@ -2,6 +2,9 @@
 
 //session_start();
 //if(isset($_SESSION['user'])){ // 1  
+if(!isset($_SESSION['user'])){
+  header('Location: index.php');
+}
 
   require("header.php"); 
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
