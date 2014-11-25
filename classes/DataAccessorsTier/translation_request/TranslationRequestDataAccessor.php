@@ -58,6 +58,7 @@ class TranslationRequestDataAccessor{
   }
   
   public function getTreqByEntryId($id){
+    //echo "<br>trda::getTreqByEntryId, id = " .$id;
     $query = "SELECT
                 r.treq_entry_id,
                 l.lan_lang_name
@@ -69,9 +70,42 @@ class TranslationRequestDataAccessor{
                 r.treq_target_lang_id = l.lan_language_id
               AND  
                 r.treq_entry_id = {$id};";
+    //echo "<br>trda::getTreqByEntryId, sql = " .$query;
     $dbHelper = new DBHelper();
     $result = $dbHelper->executeQuery($query);
     $treqGottenByEntryId = $this->getTreqBrief($result);
+    return $treqGottenByEntryId; 
+  }
+  
+  public function getTreqAllColumnsByEntryId($id){
+    //echo "<br>trda::getTreqByEntryId, id = " .$id;
+    $query = "SELECT 
+                *
+              FROM 
+                ".TRANS_REQUEST." 
+              WHERE
+                treq_entry_id = {$id};";
+    echo "<br>trda::getTreqFullByEntryId, sql = " .$query;
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeQuery($query);
+    $treqGottenByEntryId = $this->getTreqAllColumns($result);
+    return $treqGottenByEntryId; 
+  }
+  
+  public function getTreqAllColumnsByEntryIdAndLangId($entry_id, $lang_id){
+    //echo "<br>trda::getTreqByEntryId, id = " .$entry_id;
+    $query = "SELECT 
+                *
+              FROM 
+                ".TRANS_REQUEST." 
+              WHERE
+                treq_entry_id = {$entry_id}
+              AND
+                treq_target_lang_id = {$lang_id}";
+    //echo "<br>trda::getTreqFullByEntryId, sql = " .$query;
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeQuery($query);
+    $treqGottenByEntryId = $this->getTreqAllColumns($result);
     return $treqGottenByEntryId; 
   }
   
@@ -130,6 +164,17 @@ class TranslationRequestDataAccessor{
     $treq->setTreqEntryId(  $list['treq_entry_id']);
     $treq->setTreqLang(     $list['lan_lang_name']);
     $treq->setTreqEntryLine($list['ent_entry_text']);
+    $treq->setTreqDate(     $list['treq_date']);
+    return $treq;
+  }
+  private function getTreqAllColumns($result){
+    //echo "<br><br>trda::getListOfTreq() result: "; $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array); print_r(mysql_fetch_assoc($result));
+    $treq = new TranslationRequest();
+    $list = mysqli_fetch_assoc($result);
+    $treq->setTreqId(       $list['treq_id']);
+    $treq->setTreqCreatorId($list['treq_creator_id']);
+    $treq->setTreqEntryId(  $list['treq_entry_id']);
+    $treq->setTreqLangId(   $list['treq_target_lang_id']);
     $treq->setTreqDate(     $list['treq_date']);
     return $treq;
   }

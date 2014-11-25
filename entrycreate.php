@@ -78,56 +78,56 @@
     
     
     // for tbl_entry :: ent_entry_language_id
-    echo "<br>checking langid";
+    //echo "<br>checking langid";
     if(!preg_match($rgx_for_langid, $_POST['langid'])){
       //$errmsg_for_langid = "Language is invalid";
       $err_messages['langid'] = "Language tested invalid";
-      echo " oops!";
+      //echo " oops!";
       $user_input_valid = false;
     }
     // for tbl_entry :: ent_entry_text
-    echo "<br>checking text";
+    //echo "<br>checking text";
     if(!preg_match($rgx_for_text, $_POST['text'])){
       //$errmsg_for_text = "Text is invalid";
       $err_messages['text'] = "Text is invalid";
-      echo " oops!";
+      //echo " oops!";
       $user_input_valid = false;
     }
     // for tbl_entry :: ent_entry_verbatim
-    echo "<br>checking verbatim";
+    //echo "<br>checking verbatim";
     if(!preg_match($rgx_for_verbatim, $_POST['verbatim'])){
       //$errmsg_for_verbatim = "Verbatim is invalid";
       $err_messages['verbatim'] = "Verbatim is invalid";
-      echo " oops!";
+      //echo " oops!";
       $user_input_valid = false;
     }
     // for tbl_entry :: ent_entry_translit
-    echo "<br>checking translit";
+    //echo "<br>checking translit";
     if(!preg_match($rgx_for_translit, $_POST['translit'])){
       //$errmsg_for_translit = "Transliteration is invalid";
       $err_messages['translit'] = "Transliteration is invalid";
-      echo " oops!";
+      //echo " oops!";
       $user_input_valid = false;
     }
     // for tbl_entry :: ent_entry_authen_status_id
-    echo "<br>checking authen";
+    //echo "<br>checking authen";
     if(isset($_POST['authen'])){
-      echo " - authen is set: " . $_POST['authen'];
+      //echo " - authen is set: " . $_POST['authen'];
       if(!preg_match($rgx_for_authen, $_POST['authen'])){
         //$errmsg_for_authen = "Authenticity status is invalid";
         $err_messages['authen'] =  "Authenticity status is invalid";
-        echo " oops!";
+        //echo " oops!";
         $user_input_valid = false;
       }
     }
     
     // for tbl_entry :: ent_entry_translation_of
-    echo "<br>checking translOf";
+    //echo "<br>checking translOf";
     if(isset($_POST['translOf'])){
       if(!preg_match($rgx_for_translOf, $_POST['translOf'])){
         //$errmsg_for_translOf = "translOf is invalid";
         $err_messages['translOf'] = "translOf is invalid";
-        echo " oops!";
+        //echo " oops!";
         $user_input_valid = false;
       }
     }
@@ -141,19 +141,19 @@
     // for tbl_entry :: ent_entry_rating_id
 
     // for tbl_entry :: ent_entry_tags
-    echo "<br>checking tags";
+    //echo "<br>checking tags";
     if(!preg_match($rgx_for_tags, $_POST['tags'])){
       //$errmsg_for_tags = "Tags text is invalid";
       $err_messages['tags'] = "Tags text is invalid";
-      echo " oops!";
+      //echo " oops!";
       $user_input_valid = false;
     }
     // for tbl_entry :: ent_entry_authors
-    echo "<br>checking authors";
+    //echo "<br>checking authors";
     if(!preg_match($rgx_for_authors, $_POST['authors'])){
       //$errmsg_for_authors = "Authors text is invalid";
       $err_messages['authors'] = "Authors text is invalid";
-      echo " oops!";
+      //echo " oops!";
       $user_input_valid = false;
     }
     // for tbl_entry :: ent_entry_source_id
@@ -162,19 +162,19 @@
 //      $user_input_valid = false;
 //    }
     // for tbl_entry :: ent_entry_use
-    echo "<br>checking use";
+    //echo "<br>checking use";
     if(!preg_match($rgx_for_use, $_POST['use'])){
       //$errmsg_for_use = "use is invalid";
       $err_messages['use'] = "use is invalid";
-      echo " oops!";
+      //echo " oops!";
       $user_input_valid = false;
     }
     // for tbl_entry :: ent_entry_http_link
-    echo "<br>checking link";
+    //echo "<br>checking link";
     if(!preg_match($rgx_for_link, trim($_POST['link']))){
       //$errmsg_for_link = "link is invalid";
       $err_messages['link'] = "link is invalid";
-      echo " oops!";
+      //echo " oops!";
       $user_input_valid = false;
     }
     // for tbl_entry :: ent_entry_creation_date
