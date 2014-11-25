@@ -15,6 +15,15 @@ function cmpLang($a, $b){
   return strcmp($a->getEntryLanguage(), $b->getEntryLanguage());
 }
 
+function cmpDate($a, $b){
+  return strcmp($b->getEntryCreationDate(), $a->getEntryCreationDate());
+}
+
+function cmpDate2($a, $b){
+//  return strcmp($a[0]->getEntryCreationDate(), $b[0]->getEntryCreationDate());
+  return strcmp($b[0]->getEntryCreationDate(), $a[0]->getEntryCreationDate());
+}
+
 function tbl_head(){
   echo "<table class='search2'>";
   echo "<tr class='gray'>";
@@ -254,14 +263,21 @@ $non_orphans = array_filter($non_orphans, 'is_full');
 $orphans = array_filter($orphans, 'is_full');
 //-----------------------------------
 //[SORT THE ARRAYS]
+//SORT FAMILIES BY DAD'S DATE
+usort($families, 'cmpDate2');
 //SORT THE DADS BY LANGUAGE
-usort($dads, 'cmpLang');
+//usort($dads, 'cmpLang');
+//SORT THE DADS BY DATE
+usort($dads, 'cmpDate');
 //SORT THE KIDS BY LANGUAGE
 //usort($kids, 'cmpLang');
-usort($non_orphans, 'cmpLang');
+//usort($non_orphans, 'cmpLang');
+// SORT THE KIDS BY DATE
+usort($non_orphans, 'cmpDate');
 //SORT THE ORPHANS BY LANGUAGE
-usort($orphans, 'cmpLang');
-
+//usort($orphans, 'cmpLang');
+// SORT THE ORPHANS BY DATE
+usort($orphans, 'cmpDate');
 
 //var_dump($families);
 
