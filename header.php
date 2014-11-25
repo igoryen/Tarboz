@@ -241,7 +241,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
             } else if ($(this).text().trim() == "Unlike") {
                 is_like = "N";
                 $(this).text("Like");
-            }
+            }       
             $.ajax({
                url: "user_test/comment_rating.php",
                type: "POST",
@@ -254,8 +254,12 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                    function(data, status) {
                        //alert(data);
                        if(data.indexOf("succeed")>0) {
+                           var comment_like_num = data.substring(data.lastIndexOf("=")+1);  
+                           var next_id = "#"+user_id+"_commentLikeNum_"+comment_id;                             
+                           comment_like_num = comment_like_num > 0 ? comment_like_num : ""; 
+                           $(next_id).text(comment_like_num);
                            
-                       } else  if (data.indexOf("fail") >0){
+                       } else if (data.indexOf("fail") >0){
                            alert(data);
                        }
                    },
