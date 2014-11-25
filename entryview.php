@@ -464,7 +464,7 @@
                 <span id ="<?php echo $comment_like_id; ?>" name="<?php echo $comment_like_id; ?>" class="comment_like"
                       style="font-family:Tahoma;font-size:12px;" onmouseover="$(this).css({'cursor': 'pointer'});"><?php echo $rating_content."&nbsp;"?> 
                 </span>
-                <span id ="<?php echo $comment_likeNum_id; ?>" name="<?php echo $comment_likeNum_id; ?>" style="font-family:Tahoma;font-size:12px;" ><?php echo $likeRating;?></span>
+                <span id ="<?php echo $comment_likeNum_id; ?>" title ="<?php echo $likeRating;?> likes" style="font-family:Tahoma;font-size:12px;cursor:alias;" ><?php echo $likeRating;?></span>
             </div>
             
             <?php if ($created_by == $user_id) { //show edit and delete icon if user is logged in?>
