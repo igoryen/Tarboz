@@ -36,7 +36,7 @@ function form_to_create_kid($dad, $err_messages){
         </div>
         <div class="entry_create_record_value">
           <textarea rows="10" cols="50" readonly><?php
-            echo nl2br($dad->getEntryText());
+            echo $dad->getEntryText();
           ?></textarea>
         </div>
       </div>
