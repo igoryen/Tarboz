@@ -5,7 +5,7 @@
     <br />
     <div>
         <a href="index.php">Home</a> 
-        <a href="views/Home/about.php">About Us</a> 
+        <a href="about.php">About Us</a> 
         <a href="index.php">Contact Us</a>    
     </div>
     <br />  
