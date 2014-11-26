@@ -2,11 +2,7 @@
 
 //session_start();
 //if(isset($_SESSION['user'])){ // 1  
-if(!isset($_SESSION['user'])){
-  header('Location: index.php');
-}
-
-  require("header.php"); 
+  require("header.php"); // session is started in header.php
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
   //include_once "lib.php";  // 25
   include_once 'views/entry/form_to_edit_entry.php';
@@ -27,6 +23,9 @@ if(!isset($_SESSION['user'])){
       $user = $_SESSION['user'];
       $user_id = $user->getUserId();
 //      echo "user id==".$user_id;
+  }
+  else{
+    header('Location: index.php');
   }
   $user_input_valid = true; // 2
   date_default_timezone_set('America/Toronto');
