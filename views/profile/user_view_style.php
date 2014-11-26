@@ -27,7 +27,7 @@
                                     <a href="edit_profile.php?id=<?php echo $id ?>">Edit Profile</a>
                                     <?php } ?>
                                 </b>
-                                <br /><i style="font-size:10px; color: #B6ACE0">Registed: <?php if(isset($regdate)) echo $regdate ?></i> 
+                                <br /><i style="font-size:10px; color: #B6ACE0">Registered: <?php if(isset($regdate)) echo $regdate ?></i> 
                             </h1>
                         </div>
                         <div style="font-size: 16px; color: #534E66;">
