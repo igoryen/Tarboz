@@ -314,18 +314,18 @@
           &nbsp;
         </div><!-- Edit button room -->
         <div class="button_room"> <!-- the Delete Entry button --> 
-            <button id="entryDeleteButton">Delete this entry</button>
+            <button id="entryDeleteButton" class="en_button" style="width: 150px; font-size: 14px;">Delete this entry</button>
             <span id="entryDeleteResponse" style="display: none"></span>
             <div id="entryDeleteDialog" style="display: none">
               Really delete this entry?<?php //echo $entryId; ?>
-              <form action="index.php">
+              <span><form action="index.php">
                 <button type="submit"
                         id="entryDeleteConfirm"
                         onclick="entryDelete(<?php echo $entryId; ?>)">Yes, delete it.</button>
-              </form>
-              <button name="entryDeleteCancel" 
+              </form></span>
+              <span><button name="entryDeleteCancel" 
                     id="entryDeleteCancel"
-                    onclick="">No. Cancel</button>
+                    onclick="">No. Cancel</button></span>
             </div>
             <script>
                 $( "#entryDeleteButton" ).click(function() {
@@ -508,7 +508,7 @@
           <textarea rows="3" cols="45" name="newComment" id="newComment" ></textarea><br/>
           <input type="hidden" id = "commentEntityId" name = "commentEntityId" value ="<?php echo $entryId;?>"/>
           <input type="hidden" id = "user_login_status" name = "user_login_status" value ="<?php echo $user_logged_status;?>"/>
-          <button id="new_commentSub" name="new_commentSub" type="button" <?php if ($user_logged_in == false) echo " disabled"; ?> style="margin-top:5px;">Comment</button>
+          <button id="new_commentSub" name="new_commentSub" class="search_button" type="button" <?php if ($user_logged_in == false) echo " disabled"; ?> style="margin-top:5px;">Comment</button>
         </form>  
      </div> <!--entry_record_value-->
    </div> <!--entry_record_value-->
