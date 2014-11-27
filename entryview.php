@@ -78,6 +78,37 @@
         </div>
     </div>
 -->
+        <!--Display user name who added this entry-->
+    <div class="entry_record">
+<!--
+      <div class="entry_record_title">
+        Entry added by
+        <span class="question" id="entryaddedby" >?</span>
+      </div>
+-->
+      <div class="entry_record_value" style="background: LightGoldenRodYellow">
+
+    <?php 
+        //echo $user_id."</br>"; 
+        $userManager = new UserManager();
+        $user  = $userManager->getUserByUserId($user_id);
+        $fname = $user->getFirstName();
+        $lname = $user->getLastName();
+    ?>
+      <!--<a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
+              <?php echo $fname." ".$lname; ?>
+          </a> -->
+         <span style="color: #939690">
+             <a href="other_user.php?id=<?php echo $user_id; ?>&name=<?php echo $fname;?>" style="color:#000000;">
+              <?php echo $user_login; ?>
+             </a>
+             created this entry at <?php echo $date; ?>
+        </span>
+      </div>
+    </div>
+    <!--Display user name who added this entry end-->
+    
+    
       
     <div class="entry_record">
       <div class="entry_record_title">
@@ -127,7 +158,7 @@
             <span class="question" id="entryviewvideo" >?</span>
           </div>
           <div class="entry_record_value">
-            <embed width="500" height="315" src="<?php echo $video; ?>">
+            <embed width="700" height="400" src="<?php echo $video; ?>">
           </div>
         </div>
     <?php }?>
@@ -220,43 +251,6 @@
     </div>
     <?php }?>
     <!--Display translation of /original phrase end-->  
-    
-    <!--Display user name who added this entry-->
-    <div class="entry_record">
-      <div class="entry_record_title">
-        Entry added by
-        <span class="question" id="entryaddedby" >?</span>
-      </div>
-      <div class="entry_record_value">
-
-    <?php 
-        //echo $user_id."</br>"; 
-        $userManager = new UserManager();
-        $user  = $userManager->getUserByUserId($user_id);
-        $fname = $user->getFirstName();
-        $lname = $user->getLastName();
-    ?>
-      <!--<a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
-              <?php echo $fname." ".$lname; ?>
-          </a> -->
-         <a href="other_user.php?id=<?php echo $user_id; ?>&name=<?php echo $fname;?>" style="color:#000000;">
-             <?php echo $user_login; ?>
-          </a>
-      </div>
-    </div>
-    <!--Display user name who added this entry end-->
-    
-    
-    <!--Display creation date--> 
-    <div class="entry_record">
-      <div class="entry_record_title">
-        Creation date
-        <span class="question" id="entrydate" >?</span>
-      </div>
-      <div class="entry_record_value"><?php echo $date; ?></div>
-    </div>
-    <!--Display creation date end --> 
-    
     
     <!--Display media-->
     <div class="entry_record">
