@@ -106,45 +106,25 @@
         </span>
       </div>
     </div>
-    <!--Display user name who added this entry end-->
-    
-    
-      
-    <div class="entry_record">
-      <div class="entry_record_title">
-        Language
-        <span class="question" id="entryviewlang" >?</span>
-      </div>
-      <div class="entry_record_value"><?php echo $language; ?></div>
-    </div>
-    
-    
-    <!--Display authenticity status-->
-    <div class="entry_record">
-      <div class="entry_record_title">
-        Authenticity status
-        <span class="question" id="entryviewauthen" >?</span>
-      </div>
-      <div class="entry_record_value">
-    <?php 
-        //echo $authen."</br>"; 
-        $query = "SELECT * FROM tbl_authen_status WHERE athn_authen_status_id = '".$authen."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $authen_status = $list['athn_stat_name'];
-            echo $authen_status;
-        }
-    ?>
-      </div>
-    </div>
-    <!--Display authenticity status end-->
-    
+    <!--Display user name who added this entry end-->    
     
     <div class="entry_record">
       <div class="entry_record_title">
-        Text
-        <span class="question" id="entryviewtext" >?</span>
+        <span>Language: <?php echo $language; ?></span>  
+        <span> (
+        <?php 
+            //echo $authen."</br>"; 
+            $query = "SELECT * FROM tbl_authen_status WHERE athn_authen_status_id = '".$authen."'";
+            $dbHelper = new DBHelper();
+            $result = $dbHelper->executeSelect($query);
+            while ($list = mysqli_fetch_assoc($result)) {
+                $authen_status = $list['athn_stat_name'];
+                echo $authen_status;
+            }
+        ?>  ) 
+         <span class="question" id="entryviewauthen" >?</span>
+        </span>  
+
       </div>
       <div class="entry_record_value_for_text"><?php echo $text; ?></div>
     </div>
