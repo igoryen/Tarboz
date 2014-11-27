@@ -233,6 +233,7 @@
     <!--Display translation of /original phrase end-->  
     
     <!--Display media-->
+<!--
     <div class="entry_record">
       <div class="entry_record_title">
         Media
@@ -241,16 +242,17 @@
       <div class="entry_record_value">
     <?php 
         //echo $media."</br>";
-        $query = "SELECT * FROM tbl_media WHERE med_media_id = '".$media."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $media_desc = $list['med_desc'];
-            echo $media_desc;
-        }
+//        $query = "SELECT * FROM tbl_media WHERE med_media_id = '".$media."'";
+//        $dbHelper = new DBHelper();
+//        $result = $dbHelper->executeSelect($query);
+//        while ($list = mysqli_fetch_assoc($result)) {
+//            $media_desc = $list['med_desc'];
+//            echo $media_desc;
+//        }
     ?>
       </div>
     </div>
+-->
     <!--Display media end-->
     <!--Display tags-->     
     <?php if(!null == $tags){?>
@@ -278,23 +280,25 @@
         
     
     <!--Display source-->      
+<!--
     <div class="entry_record">
       <div class="entry_record_title">Source</div>
       <div class="entry_record_value">
     <?php 
         //echo $source."</br>";
-        $query = "SELECT * FROM tbl_source WHERE sou_source_id = '".$source."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $source_name = $list['sou_source_name'];
-            $source_form = $list['sou_source_form'];
-            $source_desc = $source_name."(".$source_form.")";
-            echo $source_desc;
-        }
+//        $query = "SELECT * FROM tbl_source WHERE sou_source_id = '".$source."'";
+//        $dbHelper = new DBHelper();
+//        $result = $dbHelper->executeSelect($query);
+//        while ($list = mysqli_fetch_assoc($result)) {
+//            $source_name = $list['sou_source_name'];
+//            $source_form = $list['sou_source_form'];
+//            $source_desc = $source_name."(".$source_form.")";
+//            echo $source_desc;
+//        }
     ?>
       </div>
     </div>
+-->
     <!--Display source end--> 
 
       
