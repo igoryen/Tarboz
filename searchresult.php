@@ -424,6 +424,7 @@ if(is_object(reset($orphans))){
     $ary['text'] = $orphan->getEntryText(); 
     $ary['dad'] = $orphan->getEntryTranslOf();
     $ary['user'] = $orphan->getEntryUserId();
+    $ary['creadate'] = $orphan->getEntryCreationDate();
     $em = new EntryManager();
     $ary['likes'] =  $em->getEntryLikeNumByEntry($ary['id']) != "" ? $em->getEntryLikeNumByEntry($ary['id']) : 0;
     $ary['dislikes'] = $em->getEntryDislikeNumByEntry($ary['id']) != "" ? $em->getEntryDislikeNumByEntry($ary['id']) : 0;
