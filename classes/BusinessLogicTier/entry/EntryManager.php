@@ -38,6 +38,12 @@ class EntryManager {
     return $resultOfEntryDelete;
   }
 
+  public function deleteEntryVirtual($entryId) {
+    $eda = new EntryDataAccessor();
+    $resultOfEntryDelete = $eda->deleteEntryVirtual($entryId);
+    return $resultOfEntryDelete;
+  }  
+  
   /**
    *
    * @param type $entryId
