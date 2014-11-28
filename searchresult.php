@@ -292,7 +292,27 @@ if((!is_array(reset($families)))
         && (!is_object(reset($dads))) 
         && (!is_object(reset($non_orphans))) 
         && (!is_object(reset($orphans)))){
-  echo "<br><i>no results</i><rb>";
+?>
+        <div>
+            <h3>Search Results</h3>
+            <div>Oops! Your search for "<span style="color:#251E4C; font-weight: bold; font-size: 20px;"><?php echo $s ?></span>" did not match any contents.</div>
+            <h4>Suggetions:</h4>
+            <div>
+                <ul>
+                    <li>Make sure all words are spelled correctly</li>
+                    <li>Try different keywords</li>
+                    <li>Put spaces between words</li>
+                    <li>
+                        <?php if (isset($_SESSION['user'])) { ?>
+                            Or you may <a href="entrycreate.php">create this entry</a> for translations     
+                        <?php } else { ?>     
+                            Or <a href="registration.php">Sign Up</a> an account for create this entry
+                        <?php } ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+<?php        
 }
 //var_dump($families);
 //DISPLAY THE FAMILIES ARRAY
