@@ -24,9 +24,7 @@
       $user_id = $user->getUserId();
 //      echo "user id==".$user_id;
   }
-  else{
-    header('Location: index.php');
-  }
+
   $user_input_valid = true; // 2
   date_default_timezone_set('America/Toronto');
   // 3, 53*

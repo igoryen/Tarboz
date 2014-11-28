@@ -212,8 +212,14 @@
         } //end else ?>
         <span class="question" id="entrytranslate" >?</span>
       </div>
-      <div class="entry_record_value">
+      <div class="entry_record_value"><?php
+        if (isset($_SESSION['user'])) {?>
         <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a>
+        <?php
+        }
+        else{
+          echo "<i>Please login to create an entry</i>";
+        }?>
       </div>
     </div>
     <?php } //end if($entry->getEntryAuthenStatusId() == 1) ?>
