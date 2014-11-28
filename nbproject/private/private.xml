@@ -3,21 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/Tarboz/plug-in/translate/js/json-jquery2.js</file>
+            <file>file:/C:/wamp/www/Tarboz/classes/BusinessLogicTier/entry/EntryManager.php</file>
+            <file>file:/C:/wamp/www/Tarboz/searchresult.php</file>
+            <file>file:/C:/wamp/www/Tarboz/classes/DataAccessorsTier/entry/EntryDataAccessor.php</file>
             <file>file:/C:/wamp/www/Tarboz/entrycreate.php</file>
-            <file>file:/C:/wamp/www/Tarboz/views/entry/form_to_create_kid.php</file>
-            <file>file:/C:/wamp/www/Tarboz/header.php</file>
-            <file>file:/C:/wamp/www/Tarboz/registration.php</file>
-            <file>file:/C:/wamp/www/Tarboz/views/entry/form_to_edit_entry.php</file>
-            <file>file:/C:/wamp/www/Tarboz/classes/DataAccessorsTier/datainfo.php</file>
-            <file>file:/C:/wamp/www/Tarboz/classes/BusinessLogicTier/authen/Authen.php</file>
-            <file>file:/C:/wamp/www/Tarboz/plug-in/translate/js/json-jquery.js</file>
-            <file>file:/C:/wamp/www/Tarboz/views/entry/form_to_create_entry.php</file>
-            <file>file:/C:/wamp/www/Tarboz/classes/DataAccessorsTier/authen/AuthenDataAccessor.php</file>
-            <file>file:/C:/wamp/www/Tarboz/config.php</file>
+            <file>file:/C:/wamp/www/Tarboz/views/entry/search_result_cases.php</file>
             <file>file:/C:/wamp/www/Tarboz/classes/DataAccessorsTier/DBHelper.php</file>
-            <file>file:/C:/wamp/www/Tarboz/classes/BusinessLogicTier/authen/AuthenManager.php</file>
-            <file>file:/C:/wamp/www/Tarboz/classes/DataAccessorsTier/constants.php</file>
         </group>
     </open-files>
 </project-private>
