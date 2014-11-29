@@ -40,6 +40,7 @@ $translator->getLanguagesSelectBox($selectbox);
       <option value="">Select one:</option>
       <option value="1">Original</option>
       <option value="2">Translation</option>
+      <option value="3">Unknown</option>
     </select>  
     <b>From:</b> <input type="date" id="fromdate" name="startdate">
     <b>To:</b> <input type="date" id="todate" name="enddate">

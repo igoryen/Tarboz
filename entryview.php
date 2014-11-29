@@ -421,15 +421,16 @@
               $edit_comment_submit = "editCommentSub_".$id;
               $delete_icon_id ="deleteIcon_".$id;
               $comment_like_id = $user_id."_commentLike_".$id;
+              $comment_likeNum_id = $user_id."_commentLikeNum_".$id;
         
             //ratings    
               $ratingManager = new RatingManager();
-              $rating_content = "";
-              if ($ratingManager->hasRatingByEntityLikeUser("com".$id, $created_by) ==1) {
+              $rating_content = ""; 
+              if ($ratingManager->hasRatingByEntityLikeUser("com".$id, $user_id) ==1) {
                   $rating_content = "Unlike";
-              } else if ($ratingManager->hasRatingByEntityDislikeUser("com".$id, $created_by) == 1 || 
-                         $ratingManager->hasRatingByEntityLikeUser("com".$id, $created_by) == 0 || 
-                         $ratingManager->hasRatingByEntityDislikeUser("com".$id, $created_by) == 0){
+              } else if ($ratingManager->hasRatingByEntityDislikeUser("com".$id, $user_id) == 1 || 
+                         $ratingManager->hasRatingByEntityLikeUser("com".$id, $user_id) == 0 || 
+                         $ratingManager->hasRatingByEntityDislikeUser("com".$id, $user_id) == 0){
                   $rating_content = "Like";
               }
               $likeRating = $ratingManager->CountRatingByLikeEntity("com".$id);
@@ -448,8 +449,9 @@
             <?php if ($user_logged_in ) { //check if user logged in or not ?>
             <div style="display:table-cell;">
                 <span id ="<?php echo $comment_like_id; ?>" name="<?php echo $comment_like_id; ?>" class="comment_like"
-                      style="font-family:Tahoma;font-size:12px;" onmouseover="$(this).css({'cursor': 'pointer'});"><?php if($rating_content == "Like") { echo $rating_content."&nbsp;".$likeRating; } else {echo $rating_content."&nbsp;"; } ?>
+                      style="font-family:Tahoma;font-size:12px;" onmouseover="$(this).css({'cursor': 'pointer'});"><?php echo $rating_content."&nbsp;"?> 
                 </span>
+                <span id ="<?php echo $comment_likeNum_id; ?>" title ="<?php echo $likeRating;?> likes" style="font-family:Tahoma;font-size:12px;cursor:alias;" ><?php echo $likeRating;?></span>
             </div>
             
             <?php if ($created_by == $user_id) { //show edit and delete icon if user is logged in?>

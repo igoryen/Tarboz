@@ -55,7 +55,7 @@
                     $new_rating_id = $new_rm->addRating($new_rating);
                     
                     if($new_rating_id >0) {
-                        echo "Adding a new rating succeeded.";
+                        echo "Adding a new rating succeeded.";                        
                     } else {
                         echo "Adding a new rating failed.";
                     }          
@@ -93,6 +93,7 @@
                     //$_SESSION["updated_rating"] = $edited_rating;
                     //print "edited comment text: ". $_SESSION["updated_comment"]->getText()."<br/>\n";
                     echo "Updating rating #".$edited_rating->getId() ." succeeded.";
+                    echo "like_num=".$ratingManager->CountRatingByLikeEntity($entity_id);
                     }
                /* } else {
                     echo "Passing comment id and user id are failed.";
