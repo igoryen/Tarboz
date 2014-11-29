@@ -36,7 +36,7 @@ function form_to_create_kid($dad, $err_messages){
         </div>
         <div class="entry_create_record_value">
           <textarea rows="10" cols="50" readonly><?php
-            echo nl2br($dad->getEntryText());
+            echo $dad->getEntryText();
           ?></textarea>
         </div>
       </div>
@@ -242,7 +242,9 @@ function form_to_create_kid($dad, $err_messages){
       <div class="entry_create_buttons" style="margin-left: 70px; margin-right: 70px;">
         <!-- 5 -->
         <button name ="submit" type="submit" class="en_button">Submit</button>
-        <button type="reset" class="en_button">Reset</button>
+        <button type="reset" class="en_button"
+                onclick="window.location='entrycreate.php?id=<?php 
+                  echo $dad->getEntryId(); ?>&a=t';">Reset</button>
 <!--        <input type="button" value="Back" onclick="window.history.go(-1); return false;" />-->
       </div>
 

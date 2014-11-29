@@ -78,42 +78,53 @@
         </div>
     </div>
 -->
-      
+        <!--Display user name who added this entry-->
     <div class="entry_record">
+<!--
       <div class="entry_record_title">
-        Language
-        <span class="question" id="entryviewlang" >?</span>
+        Entry added by
+        <span class="question" id="entryaddedby" >?</span>
       </div>
-      <div class="entry_record_value"><?php echo $language; ?></div>
-    </div>
-    
-    
-    <!--Display authenticity status-->
-    <div class="entry_record">
-      <div class="entry_record_title">
-        Authenticity status
-        <span class="question" id="entryviewauthen" >?</span>
-      </div>
-      <div class="entry_record_value">
+-->
+      <div class="entry_record_value" style="background: LightGoldenRodYellow">
+
     <?php 
-        //echo $authen."</br>"; 
-        $query = "SELECT * FROM tbl_authen_status WHERE athn_authen_status_id = '".$authen."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $authen_status = $list['athn_stat_name'];
-            echo $authen_status;
-        }
+        //echo $user_id."</br>"; 
+        $userManager = new UserManager();
+        $user  = $userManager->getUserByUserId($user_id);
+        $fname = $user->getFirstName();
+        $lname = $user->getLastName();
     ?>
+      <!--<a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
+              <?php echo $fname." ".$lname; ?>
+          </a> -->
+         <span style="color: #939690">
+             <a href="other_user.php?id=<?php echo $user_id; ?>&name=<?php echo $fname;?>" style="color:#000000;">
+              <?php echo $user_login; ?>
+             </a>
+             created this entry at <?php echo $date; ?>
+        </span>
       </div>
     </div>
-    <!--Display authenticity status end-->
-    
+    <!--Display user name who added this entry end-->    
     
     <div class="entry_record">
       <div class="entry_record_title">
-        Text
-        <span class="question" id="entryviewtext" >?</span>
+        <span>Language: <?php echo $language; ?></span>  
+        <span> (
+        <?php 
+            //echo $authen."</br>"; 
+            $query = "SELECT * FROM tbl_authen_status WHERE athn_authen_status_id = '".$authen."'";
+            $dbHelper = new DBHelper();
+            $result = $dbHelper->executeSelect($query);
+            while ($list = mysqli_fetch_assoc($result)) {
+                $authen_status = $list['athn_stat_name'];
+                echo $authen_status;
+            }
+        ?>  ) 
+         <span class="question" id="entryviewauthen" >?</span>
+        </span>  
+
       </div>
       <div class="entry_record_value_for_text"><?php echo $text; ?></div>
     </div>
@@ -127,7 +138,7 @@
             <span class="question" id="entryviewvideo" >?</span>
           </div>
           <div class="entry_record_value">
-            <embed width="500" height="315" src="<?php echo $video; ?>">
+            <embed width="700" height="400" src="<?php echo $video; ?>">
           </div>
         </div>
     <?php }?>
@@ -201,8 +212,14 @@
         } //end else ?>
         <span class="question" id="entrytranslate" >?</span>
       </div>
-      <div class="entry_record_value">
+      <div class="entry_record_value"><?php
+        if (isset($_SESSION['user'])) {?>
         <a href="entrycreate.php?id=<?php echo $entryId; ?>&a=t">Create a translation</a>
+        <?php
+        }
+        else{
+          echo "<i>Please login to create an entry</i>";
+        }?>
       </div>
     </div>
     <?php } //end if($entry->getEntryAuthenStatusId() == 1) ?>
@@ -221,44 +238,8 @@
     <?php }?>
     <!--Display translation of /original phrase end-->  
     
-    <!--Display user name who added this entry-->
-    <div class="entry_record">
-      <div class="entry_record_title">
-        Entry added by
-        <span class="question" id="entryaddedby" >?</span>
-      </div>
-      <div class="entry_record_value">
-
-    <?php 
-        //echo $user_id."</br>"; 
-        $userManager = new UserManager();
-        $user  = $userManager->getUserByUserId($user_id);
-        $fname = $user->getFirstName();
-        $lname = $user->getLastName();
-    ?>
-      <!--<a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
-              <?php echo $fname." ".$lname; ?>
-          </a> -->
-         <a href="other_user.php?id=<?php echo $user_id; ?>&name=<?php echo $fname;?>" style="color:#000000;">
-             <?php echo $user_login; ?>
-          </a>
-      </div>
-    </div>
-    <!--Display user name who added this entry end-->
-    
-    
-    <!--Display creation date--> 
-    <div class="entry_record">
-      <div class="entry_record_title">
-        Creation date
-        <span class="question" id="entrydate" >?</span>
-      </div>
-      <div class="entry_record_value"><?php echo $date; ?></div>
-    </div>
-    <!--Display creation date end --> 
-    
-    
     <!--Display media-->
+<!--
     <div class="entry_record">
       <div class="entry_record_title">
         Media
@@ -267,16 +248,17 @@
       <div class="entry_record_value">
     <?php 
         //echo $media."</br>";
-        $query = "SELECT * FROM tbl_media WHERE med_media_id = '".$media."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $media_desc = $list['med_desc'];
-            echo $media_desc;
-        }
+//        $query = "SELECT * FROM tbl_media WHERE med_media_id = '".$media."'";
+//        $dbHelper = new DBHelper();
+//        $result = $dbHelper->executeSelect($query);
+//        while ($list = mysqli_fetch_assoc($result)) {
+//            $media_desc = $list['med_desc'];
+//            echo $media_desc;
+//        }
     ?>
       </div>
     </div>
+-->
     <!--Display media end-->
     <!--Display tags-->     
     <?php if(!null == $tags){?>
@@ -304,23 +286,25 @@
         
     
     <!--Display source-->      
+<!--
     <div class="entry_record">
       <div class="entry_record_title">Source</div>
       <div class="entry_record_value">
     <?php 
         //echo $source."</br>";
-        $query = "SELECT * FROM tbl_source WHERE sou_source_id = '".$source."'";
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        while ($list = mysqli_fetch_assoc($result)) {
-            $source_name = $list['sou_source_name'];
-            $source_form = $list['sou_source_form'];
-            $source_desc = $source_name."(".$source_form.")";
-            echo $source_desc;
-        }
+//        $query = "SELECT * FROM tbl_source WHERE sou_source_id = '".$source."'";
+//        $dbHelper = new DBHelper();
+//        $result = $dbHelper->executeSelect($query);
+//        while ($list = mysqli_fetch_assoc($result)) {
+//            $source_name = $list['sou_source_name'];
+//            $source_form = $list['sou_source_form'];
+//            $source_desc = $source_name."(".$source_form.")";
+//            echo $source_desc;
+//        }
     ?>
       </div>
     </div>
+-->
     <!--Display source end--> 
 
       
@@ -336,18 +320,18 @@
           &nbsp;
         </div><!-- Edit button room -->
         <div class="button_room"> <!-- the Delete Entry button --> 
-            <button id="entryDeleteButton">Delete this entry</button>
+            <button id="entryDeleteButton" class="en_button" style="width: 150px; font-size: 14px;">Delete this entry</button>
             <span id="entryDeleteResponse" style="display: none"></span>
             <div id="entryDeleteDialog" style="display: none">
-              Are you sure you want to delete this entry ><?php echo $entryId; ?><br/>
-              <form action="index.php">
+              Really delete this entry?<?php //echo $entryId; ?>
+              <span><form action="index.php">
                 <button type="submit"
                         id="entryDeleteConfirm"
-                        onclick="entryDelete(<?php echo $entryId; ?>)">Delete</button>
-                <button name="entryDeleteCancel" 
-                      id="entryDeleteCancel"
-                      onclick="">Cancel</button>
-              </form>
+                        onclick="entryDelete(<?php echo $entryId; ?>)">Yes, delete it.</button>
+              </form></span>
+              <span><button name="entryDeleteCancel" 
+                    id="entryDeleteCancel"
+                    onclick="">No. Cancel</button></span>
             </div>
             <script>
                 $( "#entryDeleteButton" ).click(function() {
@@ -368,7 +352,9 @@
      <!-- end display the Control entry-->   
     
     <!--Display translation request-->
-    <?php if($entry->getEntryAuthenStatusId() == 1){?>
+    <?php 
+    if(isset($_SESSION['user'])){
+    if($entry->getEntryAuthenStatusId() == 1){?>
     <div class="entry_record">
       <div class="entry_record_title">Request a translation into one of these languages</div>
       <div class="entry_record_value">
@@ -389,7 +375,8 @@
         <span id="treqCreateResponse"></span>
       </div>
     </div>
-    <?php } //end if($entry->getEntryAuthenStatusId() == 1)?>
+    <?php } //end if($entry->getEntryAuthenStatusId() == 1)
+    }?>
     <!--Display translation request end-->
     <!--- comments section start --->
   
@@ -529,7 +516,7 @@
           <textarea rows="3" cols="45" name="newComment" id="newComment" ></textarea><br/>
           <input type="hidden" id = "commentEntityId" name = "commentEntityId" value ="<?php echo $entryId;?>"/>
           <input type="hidden" id = "user_login_status" name = "user_login_status" value ="<?php echo $user_logged_status;?>"/>
-          <button id="new_commentSub" name="new_commentSub" type="button" <?php if ($user_logged_in == false) echo " disabled"; ?> style="margin-top:5px;">Comment</button>
+          <button id="new_commentSub" name="new_commentSub" class="search_button" type="button" <?php if ($user_logged_in == false) echo " disabled"; ?> style="margin-top:5px;">Comment</button>
         </form>  
      </div> <!--entry_record_value-->
    </div> <!--entry_record_value-->

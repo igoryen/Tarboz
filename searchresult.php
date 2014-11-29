@@ -15,6 +15,15 @@ function cmpLang($a, $b){
   return strcmp($a->getEntryLanguage(), $b->getEntryLanguage());
 }
 
+function cmpDate($a, $b){
+  return strcmp($b->getEntryCreationDate(), $a->getEntryCreationDate());
+}
+
+function cmpDate2($a, $b){
+//  return strcmp($a[0]->getEntryCreationDate(), $b[0]->getEntryCreationDate());
+  return strcmp($b[0]->getEntryCreationDate(), $a[0]->getEntryCreationDate());
+}
+
 function tbl_head(){
   echo "<table class='search2'>";
   echo "<tr class='gray'>";
@@ -254,14 +263,21 @@ $non_orphans = array_filter($non_orphans, 'is_full');
 $orphans = array_filter($orphans, 'is_full');
 //-----------------------------------
 //[SORT THE ARRAYS]
+//SORT FAMILIES BY DAD'S DATE
+usort($families, 'cmpDate2');
 //SORT THE DADS BY LANGUAGE
-usort($dads, 'cmpLang');
+//usort($dads, 'cmpLang');
+//SORT THE DADS BY DATE
+usort($dads, 'cmpDate');
 //SORT THE KIDS BY LANGUAGE
 //usort($kids, 'cmpLang');
-usort($non_orphans, 'cmpLang');
+//usort($non_orphans, 'cmpLang');
+// SORT THE KIDS BY DATE
+usort($non_orphans, 'cmpDate');
 //SORT THE ORPHANS BY LANGUAGE
-usort($orphans, 'cmpLang');
-
+//usort($orphans, 'cmpLang');
+// SORT THE ORPHANS BY DATE
+usort($orphans, 'cmpDate');
 
 //var_dump($families);
 
@@ -276,7 +292,27 @@ if((!is_array(reset($families)))
         && (!is_object(reset($dads))) 
         && (!is_object(reset($non_orphans))) 
         && (!is_object(reset($orphans)))){
-  echo "<br><i>no results</i><rb>";
+?>
+        <div>
+            <h3>Search Results</h3>
+            <div>Oops! Your search for "<span style="color:#251E4C; font-weight: bold; font-size: 20px;"><?php echo $s ?></span>" did not match any contents.</div>
+            <h4>Suggetions:</h4>
+            <div>
+                <ul>
+                    <li>Make sure all words are spelled correctly</li>
+                    <li>Try different keywords</li>
+                    <li>Put spaces between words</li>
+                    <li>
+                        <?php if (isset($_SESSION['user'])) { ?>
+                            Or you may <a href="entrycreate.php">create this entry</a> for translations     
+                        <?php } else { ?>     
+                            Or <a href="registration.php">Sign Up</a> an account for create this entry
+                        <?php } ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+<?php        
 }
 //var_dump($families);
 //DISPLAY THE FAMILIES ARRAY
@@ -303,6 +339,7 @@ if(is_array(reset($families))){
         $ary['user'] = $entry->getEntryUserId();
         $em = new EntryManager();
         $ary['kidsnum'] = $em->getOriginalKidsNum($ary['id'])!= "" ? $em->getOriginalKidsNum($ary['id']) : 0;
+        $ary['creadate'] = $entry->getEntryCreationDate();
         make_family_dad_room($ary);
         //open_kids_house2();
       }
@@ -315,6 +352,7 @@ if(is_array(reset($families))){
         $em = new EntryManager();
         $ary['likes'] =  $em->getEntryLikeNumByEntry($ary['id']) != "" ? $em->getEntryLikeNumByEntry($ary['id']) : 0;
         $ary['dislikes'] = $em->getEntryDislikeNumByEntry($ary['id']) != "" ? $em->getEntryDislikeNumByEntry($ary['id']) : 0;
+        $ary['creadate'] = $entry->getEntryCreationDate();
         //dad_house_dad_1($ary);
         make_family_kid_room($ary);
       }
@@ -346,6 +384,7 @@ if(is_object(reset($dads))){
     //$ary['text'] = substr($dad->getEntryText(), 0, 55);
     $ary['text'] = $dad->getEntryText();
     $ary['user'] = $dad->getEntryUserId();
+    $ary['creadate'] = $dad->getEntryCreationDate();
     $em = new EntryManager();
     $ary['kidsnum'] = $em->getOriginalKidsNum($ary['id'])!= "" ? $em->getOriginalKidsNum($ary['id']) : 0;
     dad_house_dad_1($ary);
@@ -373,6 +412,7 @@ if(is_object(reset($non_orphans))){
     $ary['text'] = $non_orphan->getEntryText();
     $ary['user'] = $non_orphan->getEntryUserId();
     $ary['dad'] = $non_orphan->getEntryTranslOf();
+    $ary['creadate'] = $non_orphan->getEntryCreationDate();
     $em = new EntryManager();
     $ary['likes'] =  $em->getEntryLikeNumByEntry($ary['id']) != "" ? $em->getEntryLikeNumByEntry($ary['id']) : 0;
     $ary['dislikes'] = $em->getEntryDislikeNumByEntry($ary['id']) != "" ? $em->getEntryDislikeNumByEntry($ary['id']) : 0;
@@ -404,6 +444,7 @@ if(is_object(reset($orphans))){
     $ary['text'] = $orphan->getEntryText(); 
     $ary['dad'] = $orphan->getEntryTranslOf();
     $ary['user'] = $orphan->getEntryUserId();
+    $ary['creadate'] = $orphan->getEntryCreationDate();
     $em = new EntryManager();
     $ary['likes'] =  $em->getEntryLikeNumByEntry($ary['id']) != "" ? $em->getEntryLikeNumByEntry($ary['id']) : 0;
     $ary['dislikes'] = $em->getEntryDislikeNumByEntry($ary['id']) != "" ? $em->getEntryDislikeNumByEntry($ary['id']) : 0;

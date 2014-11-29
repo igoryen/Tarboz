@@ -548,9 +548,19 @@ a:active {
   margin-left: 5px;
   margin-right: 5px;
   vertical-align: middle; /*50*/
-  width: 200px;
+  width: 100px;
 }
 
+.en_creadate{
+  color: gray;
+  display: inline-block; /* 10 */
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: small;
+  margin-left: 5px;
+  margin-right: 5px;
+  vertical-align: middle; /*50*/
+  width: 100px;
+}
 .is_mom{
   color: gray;
   display: inline-block; /* 10 */
@@ -738,7 +748,7 @@ a:active {
   font-weight: bold;
   margin: auto;
   padding: 6px;
-  width: 500px;
+  width: 700px;
 }
 
 .entry_record_value{
@@ -748,7 +758,7 @@ a:active {
   font-size: medium;
   margin: auto;
   padding: 5px;
-  width: 500px;
+  width: 700px;
 }
 .entry_record_value_for_text{
   background: LightGoldenRodYellow;
@@ -762,7 +772,7 @@ a:active {
   padding-left: 5px;
   padding-right: 5px;
   text-shadow: 2px 2px 2px lightgray;
-  width: 500;
+  width: 700px;
 }
 
 /*finish entry_display.php*/

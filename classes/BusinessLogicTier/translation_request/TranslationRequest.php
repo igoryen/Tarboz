@@ -7,6 +7,7 @@ class TranslationRequest{
   private $treq_entry_id;
   private $treq_entry_line;
   private $treq_target_lang;
+  private $treq_target_lang_id;
   private $treq_date;
   
   public function getTreqId(){ return $this->treq_id; }  
@@ -23,6 +24,9 @@ class TranslationRequest{
   
   public function getTreqLang(){ return $this->treq_target_lang; }  
   public function setTreqLang($x){ $this->treq_target_lang = $x; }
+  
+  public function getTreqLangId(){ return $this->treq_target_lang_id; }
+  public function setTreqLangId($x){ $this->treq_target_lang_id = $x; }
   
   public function getTreqDate(){ return $this->treq_date; }  
   public function setTreqDate($x){ $this->treq_date = $x; }

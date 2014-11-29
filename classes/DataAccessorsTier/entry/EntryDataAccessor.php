@@ -3,6 +3,7 @@ require_once DB_CONNECTION . 'DBHelper.php';
 require_once BUSINESS_DIR_ENTRY . 'Entry.php';
 require_once(DB_CONNECTION . 'datainfo.php');
 require_once DB_CONNECTION . 'constants.php';
+require_once BUSINESS_DIR_TRANSLREQ . 'TranslationRequestManager.php';
 
 class EntryDataAccessor {
   /**
@@ -11,7 +12,8 @@ class EntryDataAccessor {
    * @return type $last_inserted_id (the ID generated in the last query)
    */
   public function addEntry($entry) {
-
+    $trm = new TranslationRequestManager();
+    
     $id =         $entry->getEntryId();
     $langid =     $entry->getEntryLanguageId();
     $text =       $entry->getEntryText(); // 1
@@ -71,10 +73,34 @@ class EntryDataAccessor {
       . '", "' . $date
       . '")';
     // 51
-    echo "<br>eda::query_insert:<br>"; echo $query_insert;
+    //echo "<br>eda::query_insert:<br>"; echo $query_insert;
     $dbHelper = new DBHelper();  // 18
     $last_inserted_id = $dbHelper->executeInsertQuery($query_insert); // 17
     //16
+    //..............................................................
+    // if this is a kid, delete the treq for its dad if exists
+    if(!null == $translOf){ // if the entry being created has a dad (i.e. is a kid)
+      //echo "<br>eda::translOf = " . $translOf;
+      // look into the treq table, see if there's a treq for this entry and for this $langid
+      $treq = $trm->getTreqAllColumnsByEntryIdAndLangId($translOf, $langid);
+      
+      $treq_id = $treq->getTreqId();
+      $treq_entry_id = $treq->getTreqEntryId();
+      //$treq_lang_id = $treq->getTreqLangId();
+      //echo "<br>eda::AddEntry - treq id = " . $treq_id;
+      //echo "<br>eda::AddEntry - treq entry id = " . $treq_entry_id;
+      //echo "<br>eda::AddEntry - treq lang id = " . $treq_lang_id;
+      // if there is/are, delete it/them
+      if(!null == $treq_entry_id){
+        $treq_delete_sql = 'DELETE FROM '.TRANS_REQUEST
+          .' WHERE treq_id = '.$treq_id.';';
+        //echo "<br>eda::AddEntry - treq delete sql = " . $treq_delete_sql;
+        $dbHelper->executeQuery($treq_delete_sql);
+      }
+      
+    }
+    
+    //..............................................................
     return $last_inserted_id;
   }
   /**
@@ -207,6 +233,7 @@ class EntryDataAccessor {
     $query = "UPDATE ". ENTRY
            . " SET ent_entry_deleted = 1 "
            . "WHERE ent_entry_id = '{$entryId}'";
+    //echo "<br>eda::deleteEntryVirtual. Query = " . $query;
     $dbHelper = new DBHelper();
     $resultOfDelete = $dbHelper->executeQuery($query); //47
     return $resultOfDelete;
@@ -393,6 +420,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'";
           }
@@ -409,6 +438,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'
                       AND
@@ -433,6 +464,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         e.ent_entry_language_id = {$l}";
           }
@@ -450,6 +483,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         e.ent_entry_language_id = {$l}
                       AND
@@ -471,6 +506,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         e.ent_entry_language_id = {$l}
                       AND
@@ -489,6 +526,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         e.ent_entry_language_id = {$l}
                       AND
@@ -516,6 +555,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         MATCH(e.ent_entry_verbatim)
                         AGAINST('{$v}' IN NATURAL LANGUAGE MODE )";
@@ -534,6 +575,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         MATCH(e.ent_entry_verbatim)
                         AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
@@ -556,6 +599,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                        e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         MATCH(e.ent_entry_verbatim)
                         AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
@@ -575,6 +620,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         MATCH(e.ent_entry_verbatim)
                         AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
@@ -600,6 +647,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         MATCH(e.ent_entry_verbatim)
                         AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
@@ -620,6 +669,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         MATCH(e.ent_entry_verbatim)
                         AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
@@ -643,6 +694,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         MATCH(e.ent_entry_verbatim)
                         AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
@@ -664,6 +717,8 @@ class EntryDataAccessor {
                         ".ENTRY." e, ".LANGUAGE." l 
                       WHERE
                         e.ent_entry_language_id = l.lan_language_id
+                      AND 
+                        e.ent_entry_deleted = 0
                       AND
                         MATCH(e.ent_entry_verbatim)
                         AGAINST('{$v}' IN NATURAL LANGUAGE MODE )
