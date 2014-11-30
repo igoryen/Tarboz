@@ -16,8 +16,9 @@
   $treq->setTreqEntryId($entryid);
   $treq->setTreqLang($langid);
   $treq->setTreqDate(date('Y-m-d'));
-  
+  //var_dump($treq);
   $treq_id = $trm->createTreq($treq);
+  //echo "<br>treq_id " . $treq_id;
   $treqbrief = $trm->getTreqBriefById($treq_id);
-
-  echo "<span id='treqResp'><b>".$treqbrief->getTreqLang() . "</b> translation requested</span>";
+  //var_dump($treqbrief);
+  echo "<span id='treqResp'><b>".$treqbrief[0]->getTreqLang() . "</b> translation requested</span>";

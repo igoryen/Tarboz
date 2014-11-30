@@ -145,6 +145,17 @@ class TranslationRequestDataAccessor{
   
   private function getTreqBrief($result){
     //echo "<br><br>trda::getListOfTreq() result: "; $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array); print_r(mysql_fetch_assoc($result));
+    $treqs[] = new TranslationRequest();
+    $count = 0;
+    while($list = mysqli_fetch_assoc($result)){
+      $treqs[] = new TranslationRequest();
+      
+      $treqs[$count]->setTreqEntryId($list['treq_entry_id']);
+      $treqs[$count]->setTreqLang($list['lan_lang_name']);
+      $count++;
+    }
+    return $treqs;
+    /*
     $treq = new TranslationRequest();
     $list = mysqli_fetch_assoc($result);
     //$Treqs[$count]->setTreqId($list['treq_id']);
@@ -153,6 +164,8 @@ class TranslationRequestDataAccessor{
     $treq->setTreqLang($list['lan_lang_name']);
     //$Treqs[$count]->setTreqDate($list['treq_date']);
     return $treq;
+     * 
+     */
   }
   
   private function getTreqFull($result){
