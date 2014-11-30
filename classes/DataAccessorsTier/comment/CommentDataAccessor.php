@@ -88,7 +88,7 @@
     }
       
     public function getAllComments() {
-      $query = "SELECT * FROM ".COMMENT." WHERE com_is_visible='Y' ORDER BY com_created_on DESC";
+      $query = "SELECT * FROM ".COMMENT." WHERE com_is_visible='Y' ORDER BY com_created_on";
       //print("CommentDataAccessor->getAllComments->$query ");
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
@@ -98,7 +98,7 @@
     }
       
     public function getAllCommentsByDate() {
-      $query = "SELECT * FROM ".COMMENT." WHERE com_is_visible='Y' ORDER BY com_created_on DESC";
+      $query = "SELECT * FROM ".COMMENT." WHERE com_is_visible='Y' ORDER BY com_created_on";
       //print("CommentDataAccessor->getAll Comments->$query ");
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
@@ -108,7 +108,7 @@
     }
 
     public function getCommentById($comment_id) {
-      $query = "SELECT * FROM ".COMMENT." WHERE com_comment_id = ".$comment_id." AND com_is_visible='Y' ORDER BY com_created_on DESC";
+      $query = "SELECT * FROM ".COMMENT." WHERE com_comment_id = ".$comment_id." AND com_is_visible='Y' ORDER BY com_created_on";
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
@@ -117,7 +117,7 @@
     }
 
     public function getCommentByUser($comment_created_by) {
-      $query = "SELECT * FROM ".COMMENT." WHERE com_created_by = ".$comment_created_by." AND com_is_visible='Y' ORDER BY com_created_on DESC";
+      $query = "SELECT * FROM ".COMMENT." WHERE com_created_by = ".$comment_created_by." AND com_is_visible='Y' ORDER BY com_created_on";
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
@@ -126,7 +126,7 @@
     }
 
     public function getCommentByRating($comment_rating_id) {
-      $query = "SELECT * FROM ".COMMENT." WHERE com_rating_id = ".$comment_rating_id." AND com_is_visible='Y' ORDER BY com_created_on DESC";
+      $query = "SELECT * FROM ".COMMENT." WHERE com_rating_id = ".$comment_rating_id." AND com_is_visible='Y' ORDER BY com_created_on";
 
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
@@ -136,7 +136,7 @@
 
     public function getCommentByEntry($comment_entry_id) {
       //echo "<br/>CommentDataAccessor entry id: ".$comment_entry_id."<br/><br/>";
-      $query = "SELECT * FROM ".COMMENT." WHERE com_entry_id = '".$comment_entry_id."' AND com_is_visible='Y' ORDER BY com_created_on DESC";
+      $query = "SELECT * FROM ".COMMENT." WHERE com_entry_id = '".$comment_entry_id."' AND com_is_visible='Y' ORDER BY com_created_on";
       $dbHelper = new DBHelper();
       $result = $dbHelper->executeQuery($query);
       $comments_by_entry = $this->getCommentList($result);
