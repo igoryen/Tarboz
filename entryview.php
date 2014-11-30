@@ -31,7 +31,8 @@
     $em = new EntryManager();
     $trm = new TranslationRequestManager();
     $entry = $em->getEntryById($entryId); // 1
-    $treq = $trm->getTreqByEntryId($entry->getEntryId());
+    $treqs = $trm->getTreqByEntryId($entry->getEntryId());
+
     $lm = new LanguageManager();
     
     $um = new UserManager();
@@ -201,15 +202,21 @@
         // 1*
     ?>
     <div class="entry_record">
-      <div class="entry_record_title">Translate this into
-	  <?php
+      <div class="entry_record_title">Translate this entry into <?php
         // TODO: What if there are >1 requests (i.e. >1 languages) to translate this entry?
-        $treqLang = $treq->getTreqLang();
-        if(!null == $treqLang){
-          echo $treq->getTreqLang();
-        }else{
-          echo "a language you know";          
-        } //end else ?>
+        $treqLang = $treqs[0]->getTreqLang();
+        //echo "<br>treqLang[0] = " . $treqLang;
+        if(!null==$treqs[0]->getTreqLang()){
+          //echo "<br>array is not empty";
+          //echo "People have asked to translate this entry into ";
+          foreach($treqs as $treq){
+            $treqLang = $treq->getTreqLang();
+            if($treqLang != null || $treqLang != ""){
+              //echo "-lang not null >";
+              echo $treqLang . " or ";
+            }            
+          }       
+        } //end else ?> a language you know 
         <span class="question" id="entrytranslate" >?</span>
       </div>
       <div class="entry_record_value"><?php
