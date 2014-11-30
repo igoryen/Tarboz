@@ -443,7 +443,7 @@
         <div style="display:table;">
           <div style="display:table-row;"><a href="other_user.php?id=<?php echo $created_by;?>"><?php echo $created_user_name.":"; ?></a> </div>
           <div style="display:table-row;">
-            <div style="display:table-cell; width:280px; padding-left:10px;">
+            <div style="display:table-cell; width:480px; padding-left:10px;">
                 <span id="<?php echo $edit_comment_text_id; ?>" style="display:'';"><?php echo $text; ?></span>  
             </div>
             <?php if ($user_logged_in ) { //check if user logged in or not ?>
