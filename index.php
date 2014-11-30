@@ -60,11 +60,11 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                                          FROM 
                                                                 (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
                                                                         ent_entry_translation_of, ent_entry_creation_date
-                                                                 FROM tbl_entry where ent_entry_authen_status_id = 1) AS orig
+                                                                 FROM tbl_entry where ent_entry_authen_status_id = 1 AND ent_entry_deleted = 0) AS orig
                                                          INNER JOIN 
                                                                 (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
                                                                         ent_entry_translation_of, ent_entry_creation_date
-                                                                 FROM tbl_entry where ent_entry_authen_status_id = 2) AS trans
+                                                                 FROM tbl_entry where ent_entry_authen_status_id = 2 AND ent_entry_deleted = 0) AS trans
                                                          ON orig.ent_entry_id = trans.ent_entry_translation_of
                                                         ) AS sub_entry
                                                         LEFT JOIN tbl_rating AS rating
