@@ -24,6 +24,9 @@ require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 //require DB_CONNECTION . 'datainfo.php';
 
 $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2); // 1
+if($lang == 'zh'){
+  $lang = 'ch';
+}
 //$lang = 'ru';
 //echo "the language: " . $lang;
 $em = new EntryManager();
@@ -129,7 +132,8 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                     <ol type="circle" style="padding: 0px 5px; margin-top:0px">
                          <?php
                               // TODO: add an if() in case the current request does not have the Accept-Language: header 
-                                  for($i = 0; $i < 3; $i++) {
+                                  $arysize = sizeof($aryOfEntry) > 10 ? 10 : sizeof($aryOfEntry);
+                                  for($i = 0; $i < $arysize; $i++) {
                                     echo '<li>';
                                     echo '<div  class="text_shortcut">';   
                                     echo '<a href="entryview.php?id='.$aryOfEntry[$i]->getEntryId() . '">'; 
