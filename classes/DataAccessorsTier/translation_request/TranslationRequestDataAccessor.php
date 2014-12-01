@@ -109,6 +109,24 @@ class TranslationRequestDataAccessor{
     return $treqGottenByEntryId; 
   }
   
+  public function getListOfTreqByEntryIdAndLangId($entryid, $langid){
+    $query = "SELECT 
+                treq_entry_id,
+                treq_target_lang_id,
+                treq_date
+              FROM 
+                ".TRANS_REQUEST." 
+              WHERE 
+                treq_entry_id = {$entryid}
+              AND
+                treq_target_lang_id = {$langid}";
+    //echo "<br>trda::getListOfTreqByEntryIdAndLangId. query = " . $query;
+    $dbHelper = new DBHelper();
+    $result = $dbHelper->executeQuery($query);
+    $treqs = $this->getListOfTreqBrief($result);
+    return $treqs;
+  }
+  
   public function getTreqBriefById($id){
     $query = "SELECT
                 r.treq_entry_id,
@@ -143,8 +161,34 @@ class TranslationRequestDataAccessor{
     return $Treqs;
   }
   
+  private function getListOfTreqBrief($result){
+    //echo "<br><br>trda::getListOfTreq() result: "; $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array); print_r(mysql_fetch_assoc($result));
+    $treqs[] = new TranslationRequest();
+    $count = 0;
+    while($list = mysqli_fetch_assoc($result)){
+      $treqs[] = new TranslationRequest();
+      
+      $treqs[$count]->setTreqEntryId($list['treq_entry_id']);
+      $treqs[$count]->setTreqLangId($list['treq_target_lang_id']);
+      $treqs[$count]->setTreqDate($list['treq_date']);
+      $count++;
+    }
+    return $treqs;
+  }
+  
   private function getTreqBrief($result){
     //echo "<br><br>trda::getListOfTreq() result: "; $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array); print_r(mysql_fetch_assoc($result));
+    $treqs[] = new TranslationRequest();
+    $count = 0;
+    while($list = mysqli_fetch_assoc($result)){
+      $treqs[] = new TranslationRequest();
+      
+      $treqs[$count]->setTreqEntryId($list['treq_entry_id']);
+      $treqs[$count]->setTreqLang($list['lan_lang_name']);
+      $count++;
+    }
+    return $treqs;
+    /*
     $treq = new TranslationRequest();
     $list = mysqli_fetch_assoc($result);
     //$Treqs[$count]->setTreqId($list['treq_id']);
@@ -153,6 +197,8 @@ class TranslationRequestDataAccessor{
     $treq->setTreqLang($list['lan_lang_name']);
     //$Treqs[$count]->setTreqDate($list['treq_date']);
     return $treq;
+     * 
+     */
   }
   
   private function getTreqFull($result){

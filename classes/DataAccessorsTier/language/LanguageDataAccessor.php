@@ -25,6 +25,16 @@ class LanguageDataAccessor{
     return $Language->getLangId();
 
   }
+  
+  public function getLanguageById($langid){
+    $dbHelper = new DBHelper();
+    //to escape the strings for inserting
+    $lang_id = $dbHelper->EscapeString($langid);
+    $query = "SELECT * FROM ".LANGUAGE." where lan_language_id = ".$lang_id;
+    $result = $dbHelper->executeQuery($query);
+    $Language = $this->getLanguage($result); // 1
+    return $Language;
+  }
 
   
   public function getLanguages(){

@@ -352,13 +352,17 @@ class EntryDataAccessor {
     return $arrayOfKidsGottenByVerbatim;
   }
 
+  // get a list of Original Entries by Language
   public function getListOfEntryBriefByLanguage($language){
 
     $query ="SELECt e.ent_entry_id, l.lan_lang_name, e.ent_entry_text 
+              , e.ent_entry_creation_date, e.ent_entry_authen_status_id
               FROM ".ENTRY." e, ".LANGUAGE." l 
               WHERE e.ent_entry_language_id = l.lan_language_id 
               AND e.ent_entry_deleted = 0
-              AND LOWER(SUBSTR(l.lan_lang_name, 1, 2)) = '{$language}'";
+              AND e.ent_entry_authen_status_id = 1
+              AND LOWER(SUBSTR(l.lan_lang_name, 1, 2)) = '{$language}'"
+              . "ORDER BY e.ent_entry_creation_date DESC";
     $dbHelper = new DBHelper();
     $resultOfSelect = $dbHelper->executeSelect($query);
     $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief($resultOfSelect);

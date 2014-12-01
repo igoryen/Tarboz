@@ -18,7 +18,7 @@ $(document).ready(function(){
         var lang = 'en'; // 141029
         var json_url = 'translator.php?text='+ text +'&to='+lang;
         //alert('json_url: ' + json_url);
-        if (tgtlang=="" && from=="" && to=="" && text=="") { 
+        if (tgtlang=="" && (from=="" || to=="") && text=="") { 
             //$('#searchDialog').css({'display': 'block'});
             $( "#searchDialog" ).dialog("open");
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
             //alert("verbatim2: "+verbatim);
 //            window.location.href = 'searchresult.php?v='+ verbatim+'&searchtext='+text
 //                                   +'&tgtlang='+tgt_lang+'&fromdate='+from_date+'&enddate='+end_date;
-            if (!(tgtlang=="" && from=="" && to=="" && verbatim=="") ){
+            if (!(tgtlang=="" && (from=="" || to=="") && verbatim=="") ){
             window.location.href ='searchresult.php'+
               '?l=' + tgtlang +
               '&a=' + auth +

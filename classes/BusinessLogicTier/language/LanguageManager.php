@@ -22,5 +22,9 @@ class LanguageManager{
 
   		return $lang_id;
   }
-  
+  public function getLanguageById($langid){
+    $lda = new LanguageDataAccessor();
+    $lang = $lda->getLanguageById($langid);
+    return $lang;
+  }
 }
