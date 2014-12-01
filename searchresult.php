@@ -300,13 +300,17 @@ if((!is_array(reset($families)))
             <div>
                 <ul>
                     <li>Make sure all words are spelled correctly</li>
-                    <li>Try different keywords</li>
-                    <li>Put spaces between words</li>
+                    <li>Try a sentence, e.g. <i>I’ve got a feeling we’re not in Kansas anymore</i></li>
+                    <li>Try different keywords, separated by commas or periods, e.g. <i>feeling, Kansas</i></li>
+                    <li>Avoid common words like <i>a, the, not, in, I</i>. 
+                      This will increase search accuracy</li>
+                    <li>Search by language and authenticity ("original", "translation") </li>
                     <li>
                         <?php if (isset($_SESSION['user'])) { ?>
-                            Or you may <a href="entrycreate.php">create this entry</a> for translations     
+                          If you still can't find anything 
+                            <a href="entrycreate.php">add your phrase as a new entry</a>     
                         <?php } else { ?>     
-                            Or <a href="registration.php">Sign Up</a> an account for create this entry
+                            Or <a href="registration.php">Sign Up</a> for an account to create this entry
                         <?php } ?>
                     </li>
                 </ul>
