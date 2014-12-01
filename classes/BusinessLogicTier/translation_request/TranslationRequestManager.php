@@ -23,6 +23,12 @@ class TranslationRequestManager{
     return $treq;
   }
   
+  public function getListOfTreqByEntryIdAndLangId($entryid, $langid){
+    $trda = new TranslationRequestDataAccessor();
+    $treqs = $trda->getListOfTreqByEntryIdAndLangId($entryid, $langid);
+    return $treqs;
+  }
+  
   public function getTreqAllColumnsByEntryId($id){
     $trda = new TranslationRequestDataAccessor();
     $treq = $trda->getTreqAllColumnsByEntryId($id);
