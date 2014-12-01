@@ -81,7 +81,12 @@ $translator->getLanguagesSelectBox($selectbox);
     
 </div>
   <div id="searchDialog" title="Search Alert!" style="display:none;">
-    <p>Please input the search phrase or select targe language, from date or to date!</p>   
+    <p>Please input at least <b>one</b> of these:</p>
+    <ul>
+      <li>a search phrase</li>
+      <li>a search language</li>
+      <li>a time frame (<b>From:</b> and <b>To:</b>)</li>
+    </ul>
   </div>
 
     
