@@ -12,7 +12,8 @@ var entry_lang = "The language in which this entry was originally created";
 var entry_authen = "Whether this entry is an original or a translation of an original";
 var entry_text = "The text of the entry";
 var entry_video = "A video that demonstrates how to pronounce the phrase";
-var entry_translit = "The text transliterated using the Latin alphabet to help with the pronunciation";
+var entry_translit = "The text transliterated using the Latin alphabet or "
+        + "the IPA (International Phonetic Alphabet) to help with the pronunciation";
 var entry_use = "When and why people use this phrase";
 var entry_translate = "If you can, create a translation of this entry in another language";
 var entry_added_by = "The user who added this entry to the database";
@@ -33,11 +34,34 @@ var entry_create_authors = "The author(s) of the phrase, those who hold "
         + "the copyright to the phrase. If this is a translation"
         + "then please mention the name(s) of the translator(s).";
 var entry_create_use = "How and when people use the phrase";
-var entry_create_link = "The link to a video which shows the phrase pronounced";
+var entry_create_link = "Copy the link to the YouTube video which shows "
+        + "how to pronounce the phrase and paste it here";
 var kid_create_original = "The text of the original entry for which you are "
         + "creating this translation";
+var top_10_trans = "The most popular translations we have";
+var to_be_translated = "The entries that users are asking to translate "
+        + "into this language";
+var showcase_originals = "Original entries that were recently added by users";
 
 $(document).ready(function () {
+
+  $("span#showcaseoriginals").hover(function () {
+    $(this).append('<div class="tooltip"><p>'+showcase_originals+'</p></div>');
+  }, function () {
+    $("div.tooltip").remove();
+  }); 
+
+  $("span#tobetranslated").hover(function () {
+    $(this).append('<div class="tooltip"><p>'+to_be_translated+'</p></div>');
+  }, function () {
+    $("div.tooltip").remove();
+  }); 
+  
+  $("span#top10trans").hover(function () {
+    $(this).append('<div class="tooltip"><p>'+top_10_trans+'</p></div>');
+  }, function () {
+    $("div.tooltip").remove();
+  });  
   
   $("span#entryrecreateverbatim").hover(function () {
     $(this).append('<div class="tooltip"><p>'+entry_recreate_verbatim+'</p></div>');

@@ -51,10 +51,13 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                     <div class="container" style="border-collapse: inherit; width: 99%; font-size: 20px;">
                         <div class="heading">
                             <div class="col_33">
-                               <h3 class="t_title">Top 10 Translations</h3>
+                               <h3 class="t_title">
+                                 Top 10 Translations
+                                 <span class="question" id="top10trans" >?</span>
+                               </h3>
                                  <div class="mid_scoll">
                                     <ol type="circle" style="padding: 0px 5px; margin: 0px">
-                                        <!-Display top 10 translations-->
+                                        <!--Display top 10 translations-->
                                         <?php
                                             $query =   "SELECT *, count(rating.rat_like_user_id) AS num_like
                                                         FROM 
@@ -109,7 +112,10 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                              </div>
                             <!--end of display top 10 translation-->
                             <div class="col_33" >
-                                       <h3 class="t_title">Help translate these into <?php echo $aryOfTreq[0]->getTreqLang();?></h3>
+                              <h3 class="t_title">
+                                To be put into <?php echo $aryOfTreq[0]->getTreqLang();?>
+                                <span class="question" id="tobetranslated" >?</span>
+                              </h3>
                                 <div class="mid_scoll">
                                     <ol type="circle" style="padding: 0px 5px; margin-top:0px">
                                 <?php
@@ -128,7 +134,10 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
                                 </div>
                              </div>
                             <div class="col_33" >
-                                <h3 class="t_title">Original Entries in <?php echo $aryOfEntry[0]->getEntryLanguage();?></h3>
+                                <h3 class="t_title">
+                                  Original Entries in <?php echo $aryOfEntry[0]->getEntryLanguage();?>
+                                  <span class="question" id="showcaseoriginals" >?</span>
+                                </h3>
                                 <div class="mid_scoll">
                                     <ol type="circle" style="padding: 0px 5px; margin-top:0px">
                          <?php
