@@ -40,10 +40,11 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
   <!-- left column -->
   <div>
     <div id="LeftCol">
-      <object id="obj" 
-              type="text/html" 
-              data="views/entry/search_phrase_examples.html">
-      </object>
+      <img src="images/ad_temp/a.jpg" /><br>&nbsp;
+      <img src="images/ad_temp/f.jpg" /><br>&nbsp;
+      <img src="images/ad_temp/c.png" /><br>&nbsp;
+      <img src="images/ad_temp/d.jpeg" /><br>&nbsp;
+      <img src="images/ad_temp/e.jpg" /><br>&nbsp;
     </div><!--LeftCol-->
 			<div id="MidCol">
                 <div>
