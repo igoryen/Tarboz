@@ -196,9 +196,9 @@ function form_to_edit_entry($entry, $err_messages){
           <span class="question" id="entrycreatetags" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <input name="tags" type="text" size="50" value="<?php
+          <textarea name="tags" rows="2" cols="50"><?php
             echo $entry->getEntryTags();
-          ?>"/>
+        ?></textarea>
           <strong style=" color: #FF365D;"><?php echo $err_messages['tags']; ?></strong>
         </div>
       </div>
@@ -224,9 +224,9 @@ function form_to_edit_entry($entry, $err_messages){
           <span class="question" id="entrycreateauthors" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <input name="authors" type="text" size="50" value="<?php
+          <textarea name="authors" rows="2" cols="50"><?php
             echo $entry->getEntryAuthors();
-          ?>"/>
+            ?></textarea>
           <strong style=" color: #FF365D;"><?php echo $err_messages['authors']; ?></strong>
         </div>
       </div>
@@ -250,9 +250,9 @@ function form_to_edit_entry($entry, $err_messages){
           <span class="question" id="entrycreateuse" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <input name="use" value="<?php
+          <textarea name="use" rows="2" cols="50"><?php
             echo $entry->getEntryUse();
-          ?>">
+        ?></textarea>
           <strong><?php echo $err_messages['use']; ?></strong>
         </div>
       </div>
@@ -265,9 +265,9 @@ function form_to_edit_entry($entry, $err_messages){
           <span class="question" id="entrycreatelink" >?</span>
         </div>
         <div class="entry_create_record_value">
-          <input name="link" type="text" size="50" value="<?php
+          <textarea name="link" rows="2" cols="50"><?php
           echo $entry->getEntryHttpLink();
-          ?>"/>
+        ?></textarea>
           <strong><?php echo $err_messages['link']; ?></strong>
         </div>
       </div>
