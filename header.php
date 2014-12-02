@@ -79,7 +79,23 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
           }); //end of forgotpwd onlick event function
 
-            
+                     $("#forgotbtn").click(function(){
+            //To keep count of the number of times, requested
+             
+            $.post("user_test/forgot_password.php",
+              {
+                forgot_email: $("#forgotemail").val(),
+              },
+            function(data,status){
+                if(data==0){  
+                 document.getElementById("forgot_error").innerHTML="<?php echo EMAIL_DOESNOT_EXIST; ?>";
+                }
+                if(data==1){
+                    document.getElementById("forgot_error").innerHTML="<?php echo EMAIL_EXIST_CONFIRMATION_SENT; ?>";
+                }
+              });
+            });  
+          
            $("#sub").click(function(){
             //To keep count of the number of times, requested
              
@@ -113,6 +129,12 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
                 $( "#login" ).dialog("close");
                 window.location.reload(true);
                 
+               }
+               else if(data==4){
+                  document.getElementById("ftest").innerHTML="<?php echo USER_INACTIVE; ?>"; 
+               }
+                else if(data==4){
+                  document.getElementById("ftest").innerHTML="<?php echo USER_INACTIVE; ?>"; 
                }
                else {
                   document.getElementById("ftest").innerHTML="<?php echo LOGIN_FAIL; ?>";
@@ -663,7 +685,7 @@ div.showdata{
 
                   Email Address <input type="text" id="forgotemail">
                    <button id="forgotbtn">Forgot</button> 
-                   <p>Please type the email address associated with your account in the above box</p>
+                   <p id="forgot_error">Please type the email address associated with your account in the above box</p>
               </div>
           </div>
         <!--  <div id="links"><a href="/Tarboz/Views/Login/Index.php">Login</a></div>-->
@@ -680,18 +702,26 @@ div.showdata{
 
           //matchin the pattern and checking if the variable is also not empty
           if(($reset!="") && preg_match($m_reg,$reset)){
-            echo $reset;
+              
 
             $userLoginManager = new UserLoginManager();
-
+              
             $logged = $userLoginManager->getLoginReset($reset);
             }
 
             if (isset($logged)) {
-              echo "sent";
+              ?>
+            <script>
+                alert("<?php echo $logged ?>");
+            </script>
+            <?php
             }
-            else {
-              //echo "fail";
+            if(!isset($logged) && $reset!="") {
+             ?>
+            <script>
+                alert("You have provided wrong information"); 
+           </script>
+            <?php
             }
 
 

@@ -66,14 +66,19 @@ ALL THE MESSAGES THIS POINT BELLOW:
 define('LOGIN_SUCCESS', 'You are Logged in Successfully!');
 define('LOGIN_FAIL', 'User name or password is wrong Please try again');
 define('LOGOUT','LOGOUT');
+define('USER_INACTIVE', 'Your Account is InActive, Please Activate it from your Email and try again');
+define('USER_BANNED', 'Sorry your account has been suspended due to continous reports, Please conact admin for clarification');
+define('EMAIL_DOESNOT_EXIST','The Email that you provided does not exist in our system, please either register or retype your email');
+define('EMAIL_EXIST_CONFIRMATION_SENT','Thanks for providing your email, please check your email and confirm your forgot request! and you will receive your new password');
 
-define('PASSWORD_RESET_LOC','tarboz.com');
+define('PASSWORD_RESET_LOC','http://zenit.senecac.on.ca:9086/tarboz');
 
 define('SUCCESS_USER_RIGHT', '1');
 define('SUCCESS_ADMIN_RIGHT', '2');
 define('FAILURE_BANNED', '3');
 define('FAILURE_NOT_CONFIRMED', '4');
 define('FAIL', '0');
+
 
 
 ?>

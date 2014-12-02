@@ -84,6 +84,8 @@ public function ForgotPassword($useremail){
 
         //will return 0 or 1, if had already requested he/she will get 1, which means he/she has to do it again
         $requested_before = $password_reset->getResetRequest();
+          
+          
 
       }
 
@@ -132,12 +134,10 @@ public function ForgotPassword($useremail){
             //if its not 0, it means it was requested by someone previously
             $userLoginDataAccessor->deleteRequestCode($user_login);
 
-            echo "Sorry, you have already requested!! Please goto the login page and re-request for a password reset, Thank you";   
+            return "Sorry, you have already requested!! Please goto the login page and re-request for a password reset, Thank you";   
 
         }
 
-
-    //  return false;
 
     }
 
