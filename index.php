@@ -191,7 +191,7 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
 	           <label>Email: </label><input type="text" name="sub_email" id="sub_email_id">
                <input type="hidden" id="sub_success" name="sub_success" value="N">
 	           <input type="Submit" value="Subscribe" id="submitbtn" style="margin-top: 15px;">
-               
+               <span id="sub_error"></span>
             </form>   
           </div>
           <div id="unsubscribeLink" style="cursor: pointer; color: #0066cc; font-size: 13px;">Unsubscribe a newsletter</div><br>
@@ -199,7 +199,8 @@ $aryOfTreq = $trm->getListOfTreqByLang($lang);
             <form action="user_test/subscribe.php" method="post">
                 <label>Email: </label><input type="text" name="usub_email" id="usub_email_id">
                 <input type="hidden" id="unsub_success" name="unsub_success" value="N">
-                <input type="Submit" value="UnSubscribe" id="usubmitbtn" style="margin-top: 15px;"></br>
+                <input type="Submit" value="UnSubscribe" id="usubmitbtn" style="margin-top: 15px;">
+              <span id="usub_error"></span>
             </form> 
           </div>
          </div> <!--did="RightCol_Scroll"--> 
