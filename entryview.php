@@ -66,6 +66,16 @@
     $date = $entry->getEntryCreationDate();
     //table_to_see_entry_values($entry); // for debugging
 
+      $user_logged_in = true;
+      //$user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
+      $user_id = "";
+      if (isset($_SESSION['user'])) {
+          $user = $_SESSION['user'];
+          $user_id = $user->getUserId();
+      } else {
+        $user_logged_in = false;
+      }
+
   ?>
 
   <div id="entry_index_container">    
@@ -100,9 +110,11 @@
               <?php echo $fname." ".$lname; ?>
           </a> -->
          <span style="color: #939690">
+             <?php if ($user_logged_in ) { ?>
              <a href="other_user.php?id=<?php echo $user_id; ?>&name=<?php echo $fname;?>" style="color:#000000;">
               <?php echo $user_login; ?>
              </a>
+          <?php } else { echo $user_login; }?>
              created this entry at <?php echo $date; ?>
         </span>
       </div>
@@ -394,15 +406,7 @@
           $commentManager = new CommentManager();
           $commentsByEntry = $commentManager->getCommentByEntry($entryId);
         
-          $user_logged_in = true;
-          //$user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
-          $user_id = "";
-          if (isset($_SESSION['user'])) {
-              $user = $_SESSION['user'];
-              $user_id = $user->getUserId();
-          } else {
-            $user_logged_in = false;
-          }
+
         
           $commentCount = count($commentsByEntry);
           if ($commentCount > 0) {
@@ -448,7 +452,11 @@
 
       <div> <!--div2-->
         <div style="display:table;">
-          <div style="display:table-row;"><a href="other_user.php?id=<?php echo $created_by;?>"><?php echo $created_user_name.":"; ?></a> </div>
+          <div style="display:table-row;">
+              <?php if ($user_logged_in ) { ?>
+              <a href="other_user.php?id=<?php echo $created_by;?>"><?php echo $created_user_name.":"; ?></a> 
+              <?php } else { echo $created_user_name.":"; } ?>
+          </div>
           <div style="display:table-row;">
             <div style="display:table-cell; width:480px; padding-left:10px;">
                 <span id="<?php echo $edit_comment_text_id; ?>" style="display:'';"><?php echo $text; ?></span>  
