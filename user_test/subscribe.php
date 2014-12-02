@@ -36,7 +36,10 @@ if($sub_email!=""){
 	$subscribed = $subscribe->subscribe($sub_email);
 
 	if($subscribed) {
-		echo "Subscribed successfully"; 
+		//echo "Subscribed successfully"; 
+        ?>
+    <script>alert("Subscribed successfully");</script>
+    <?php
         $sub_body = "
 <html>
 <head>
@@ -54,7 +57,10 @@ if($sub_email!=""){
         $sub_subject ="Tarboz Newsletter Subscription";
         $subscribe->sendEmail($sub_email, $sub_body, $sub_subject);
 	} else
-		echo "Failed successfully";
+        ?>
+     <script>alert("Subscription Failed");</script>
+    <?php
+		//echo "Failed successfully";
     header("Location: ../index.php");
 }
 else if($usub_email!=""){

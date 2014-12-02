@@ -41,11 +41,14 @@
     //$userId = 3; // the id of the current logged-in user
     $loggedIn_userId = "";
     $loggedIn_userType = "";
+	$user_logged_in = true;
     if (isset($_SESSION['user'])) {
         $user = $_SESSION['user'];
         $loggedIn_userId = $user->getUserId();
         $loggedIn_userType = $user->getUserType();
           //echo "logged in user id==".$loggedIn_userId;
+    } else {
+        $user_logged_in = false;
     }
     
     $language = $entry->getEntryLanguage();
@@ -66,15 +69,15 @@
     $date = $entry->getEntryCreationDate();
     //table_to_see_entry_values($entry); // for debugging
 
-      $user_logged_in = true;
+      //$user_logged_in = true;
       //$user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
-      $user_id = "";
-      if (isset($_SESSION['user'])) {
-          $user = $_SESSION['user'];
-          $user_id = $user->getUserId();
-      } else {
-        $user_logged_in = false;
-      }
+      //$user_id = "";
+      //if (isset($_SESSION['user'])) {
+          //$user = $_SESSION['user'];
+          //$user_id = $user->getUserId();
+      //} else {
+      //  $user_logged_in = false;
+      //}
 
   ?>
 
@@ -405,9 +408,7 @@
       <?php
           $commentManager = new CommentManager();
           $commentsByEntry = $commentManager->getCommentByEntry($entryId);
-        
-
-        
+                
           $commentCount = count($commentsByEntry);
           if ($commentCount > 0) {
             foreach($commentsByEntry as $coms){
@@ -431,23 +432,23 @@
               $edit_comment_input_hidden = "editCommentId_".$id;
               $edit_comment_submit = "editCommentSub_".$id;
               $delete_icon_id ="deleteIcon_".$id;
-              $comment_like_id = $user_id."_commentLike_".$id;
-              $comment_likeNum_id = $user_id."_commentLikeNum_".$id;
+              $comment_like_id = $loggedIn_userId."_commentLike_".$id;
+              $comment_likeNum_id = $loggedIn_userId."_commentLikeNum_".$id;
         
             //ratings    
               $ratingManager = new RatingManager();
               $rating_content = ""; 
-              if ($ratingManager->hasRatingByEntityLikeUser("com".$id, $user_id) ==1) {
+              if ($ratingManager->hasRatingByEntityLikeUser("com".$id, $loggedIn_userId) ==1) {
                   $rating_content = "Unlike";
-              } else if ($ratingManager->hasRatingByEntityDislikeUser("com".$id, $user_id) == 1 || 
-                         $ratingManager->hasRatingByEntityLikeUser("com".$id, $user_id) == 0 || 
-                         $ratingManager->hasRatingByEntityDislikeUser("com".$id, $user_id) == 0){
+              } else if ($ratingManager->hasRatingByEntityDislikeUser("com".$id, $loggedIn_userId) == 1 || 
+                         $ratingManager->hasRatingByEntityLikeUser("com".$id, $loggedIn_userId) == 0 || 
+                         $ratingManager->hasRatingByEntityDislikeUser("com".$id, $loggedIn_userId) == 0){
                   $rating_content = "Like";
               }
               $likeRating = $ratingManager->CountRatingByLikeEntity("com".$id);
               $likeRating = $likeRating > 0 ? $likeRating : "";
                 
-              $comment_report_id = $user_id."_reportCommentId_".$id;
+              $comment_report_id = $loggedIn_userId."_reportCommentId_".$id;
       ?>
 
       <div> <!--div2-->
@@ -469,7 +470,7 @@
                 <span id ="<?php echo $comment_likeNum_id; ?>" title ="<?php echo $likeRating;?> likes" style="font-family:Tahoma;font-size:12px;cursor:alias;" ><?php echo $likeRating;?></span>
             </div>
             
-            <?php if ($created_by == $user_id) { //show edit and delete icon if user is logged in?>
+            <?php if ($created_by == $loggedIn_userId) { //show edit and delete icon if user is logged in?>
             <div style="display:table-cell;">
                 <img src="images/edit.png" alt="Edit Icon" style="width:16px;height:16px" id="<?php echo $edit_icon_id; ?>" title="Edit"
                      onmouseover="$(this).css({'cursor': 'pointer'});" 
@@ -478,7 +479,7 @@
                          class="deleteComment" onmouseover="$(this).css({'cursor': 'pointer'});"/>
             </div>
         
-            <?php } //if ($created_by == $user_id)  ?>
+            <?php } //if ($created_by == $loggedIn_userId)  ?>
             <div style="display:table-cell; width: 100px; position: relative;">
                 <img src="images/arrow-down.png" alt="Arrow Down Icon" style="width:16px;height:16px" id="<?php echo $comment_report_id; ?>" 
                      class="reportComment" title="Report to Admin" onmouseover="$(this).css({'cursor': 'pointer'});"/>
@@ -489,7 +490,7 @@
                                   id="<?php echo 'reportCommentReason_'.$id; ?>"></textarea><br/>
                         <input type="hidden" id="<?php echo 'reportCommentBy_'.$id; ?>" 
                                name="<?php echo 'reportCommentBy_'.$id; ?>" 
-                               value ="<?php echo $user_id; ?>"/>
+                               value ="<?php echo $loggedIn_userId; ?>"/>
                         <button id="<?php echo 'reportCommentSub_'.$id; ?>" name="<?php echo 'reportCommentSub_'.$id; ?>" class="reportCommentSub" type="button" style="font-size:11px;">Submit</button>
                         <button id="<?php echo 'reportCommentCancel_'.$id; ?>" name="<?php echo 'reportCommentCancel_'.$id; ?>" class="reportCommentCancel" type="button" style="font-size:11px;">Cancel</button>
                     </form>
@@ -501,7 +502,7 @@
             </div> <!--end of table row -->
             </div> <!--end of table -->
     
-            <?php      if ($user_logged_in && $created_by == $user_id) { //edit comment form       
+            <?php      if ($user_logged_in && $created_by == $loggedIn_userId) { //edit comment form       
             ?>
         
             <div id="<?php echo $edit_area_id ?>" class="<?php echo $edit_area_id ?>" style="display:none;">
@@ -515,7 +516,7 @@
                </form> 
             </div>
         
-            <?php       } //end if($user_logged_in && $created_by == $user_id) edit comment form
+            <?php       } //end if($user_logged_in && $created_by == $loggedIn_userId) edit comment form
             ?>
         </div>    <!--end div2-->    
         <br> 
@@ -547,11 +548,11 @@
           //get the like number
           $rm = new RatingManager();
           $like_entry = "";
-          if ($rm->hasRatingByEntityLikeUser("ent".$entryId, $user_id) ==1) {
+          if ($rm->hasRatingByEntityLikeUser("ent".$entryId, $loggedIn_userId) ==1) {
               $like_entry = "Unlike";
-          } else if ($rm->hasRatingByEntityDislikeUser("ent".$entryId, $user_id) == 1  
-          //         ||  $rm->hasRatingByEntityLikeUser("ent".$entryId, $user_id) == 0  
-          //         ||  $rm->hasRatingByEntityDislikeUser("ent".$entryId, $user_id) == 0
+          } else if ($rm->hasRatingByEntityDislikeUser("ent".$entryId, $loggedIn_userId) == 1  
+          //         ||  $rm->hasRatingByEntityLikeUser("ent".$entryId, $loggedIn_userId) == 0  
+          //         ||  $rm->hasRatingByEntityDislikeUser("ent".$entryId, $loggedIn_userId) == 0
                     ){
               $like_entry = "Like";
           } else {
@@ -565,16 +566,16 @@
           if ($like_entry != "") {
       ?>
         <div style="display:inline-block; width: 280px;">
-            <span id ="<?php echo $user_id."_entryLike_".$entryId; ?>" name="<?php echo $user_id."_entryLike_".$entryId; ?>" class="entry_like"
+            <span id ="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" name="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" class="entry_like"
                 style="cursor: pointer; color: #0066cc;"><?php echo $like_entry."&nbsp;"; ?></span>
         </div>
       <?php
           } else { ?>
         <div style="display:inline-block; width: 280px;">
-            <span id ="<?php echo $user_id."_entryLike_".$entryId; ?>" name="<?php echo $user_id."_entryLike_".$entryId; ?>" class="entry_like"
+            <span id ="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" name="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" class="entry_like"
                   style="cursor: pointer; color: #0066cc;">Like</span>
             <span> | </span>
-            <span id ="<?php echo $user_id."_disentryLike_".$entryId; ?>" name="<?php echo $user_id."_disentryLike_".$entryId; ?>" class="entry_dislike"
+            <span id ="<?php echo $loggedIn_userId."_disentryLike_".$entryId; ?>" name="<?php echo $loggedIn_userId."_disentryLike_".$entryId; ?>" class="entry_dislike"
                   style="cursor: pointer; color: #0066cc;">Dislike</span>
         </div>        
       <?php  }
@@ -594,7 +595,7 @@
       <div class="entry_record_value">
           <!--start report entry div-->
             <div style="display:table-cell; ">
-                <div id="<?php echo $user_id."_reportEntryId_".$entryId; ?>" 
+                <div id="<?php echo $loggedIn_userId."_reportEntryId_".$entryId; ?>" 
                      class="reportEntry" title="Report to Admin" style="cursor: pointer; color: #0066cc;">Report</div>
                 <div id ="<?php echo 'reportEntryDiv_'.$entryId;?>" style="display: none; ">
                     <form name ="<?php echo 'reportEntryForm_'.$entryId;?>" id="<?php echo 'reportEntryForm_'.$entryId;?>" method="POST">
@@ -603,7 +604,7 @@
                                   id="<?php echo 'reportEntryReason_'.$entryId; ?>"></textarea><br/>
                         <input type="hidden" id="<?php echo 'reportEntryBy_'.$entryId; ?>" 
                                name="<?php echo 'reportEntryBy_'.$entryId; ?>" 
-                               value ="<?php echo $user_id; ?>"/>
+                               value ="<?php echo $loggedIn_userId; ?>"/>
                         <button id="<?php echo 'reportEntrySub_'.$entryId; ?>" name="<?php echo 'reportEntrySub_'.$entryId; ?>" class="reportEntrySub" type="button" style="font-size:12px; margin-top:8px;">Submit</button>
                         <button id="<?php echo 'reportEntryCancel_'.$entryId; ?>" name="<?php echo 'reportEntryCancel_'.$entryId; ?>" class="reportEntryCancel" type="button" style="font-size:12px;margin-top:8px;">Cancel</button>
                     </form>
