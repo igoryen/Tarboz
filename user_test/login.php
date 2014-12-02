@@ -22,12 +22,9 @@ if(get_magic_quotes_gpc()){
 //echo $userid . "Testing ";
 
 $userManager = new UserLoginManager();
-
 $logged = $userManager->userLogin($userid, $pwd);
-
-  $userTypeManager = new UserTypeManager();
-
-  $UST = $userTypeManager->getUserTypeById($logged->getUserType());
+$userTypeManager = new UserTypeManager();
+$UST = $userTypeManager->getUserTypeById($logged->getUserType());
 
 if ($logged->getFirstName() != "" && $UST=="ADMIN") {
   echo SUCCESS_ADMIN_RIGHT;
@@ -38,7 +35,7 @@ if ($logged->getFirstName() != "" && $UST=="USER") {
 if ($logged->getFirstName() != "" && $UST=="BANNED") {
   echo FAILURE_BANNED;
 }else
-if ($logged->getFirstName() != "" && $UST=="notconfirmed") {
+if ($logged->getFirstName() != "" && $UST=="INACTIVE") {
   echo FAILURE_NOT_CONFIRMED;
 }
 else {
