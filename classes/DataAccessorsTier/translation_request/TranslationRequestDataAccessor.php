@@ -45,6 +45,8 @@ class TranslationRequestDataAccessor{
                 ".LANGUAGE." AS l
               WHERE
                 e.ent_entry_id = r.treq_entry_id
+              AND 
+                e.ent_entry_deleted = 0
               AND
                 r.treq_target_lang_id = l.lan_language_id
               AND
