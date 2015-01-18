@@ -4,32 +4,73 @@
     //show more top translations:
     $top_translation = isset($_GET['toptranslation'] ) ? $_GET['toptranslation'] : "";
     if ($top_translation == "y") {
-        require("header.php");
-        $query =   "SELECT *, count(rating.rat_like_user_id) AS num_like
-            FROM 
-            (SELECT orig.ent_entry_id AS orig_entry_id, orig.ent_entry_text AS orig_phrase, 
-                    trans.ent_entry_id AS trans_entry_id, trans.ent_entry_text AS trans_phrase,
-                    trans.ent_entry_creator_id AS trans_creator,
-                    trans.ent_entry_creation_date AS trans_date
-             FROM 
-                    (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
-                            ent_entry_translation_of, ent_entry_creator_id, ent_entry_creation_date
-                     FROM tbl_entry where ent_entry_authen_status_id = 1 AND ent_entry_deleted = 0) AS orig
-             INNER JOIN 
-                    (SELECT ent_entry_id, ent_entry_text, ent_entry_verbatim, ent_entry_translit, ent_entry_authen_status_id, 
-                            ent_entry_translation_of, ent_entry_creator_id, ent_entry_creation_date
-                     FROM tbl_entry where ent_entry_authen_status_id = 2 AND ent_entry_deleted = 0) AS trans
-             ON orig.ent_entry_id = trans.ent_entry_translation_of
+      require("header.php");
+      $query =   "SELECT *, 
+            count(rating.rat_like_user_id) AS num_like
+          FROM 
+            (SELECT 
+              orig.ent_entry_id             AS orig_entry_id, 
+              orig.ent_entry_text           AS orig_phrase, 
+              trans.ent_entry_id            AS trans_entry_id, 
+              trans.ent_entry_text          AS trans_phrase,
+              trans.ent_entry_creator_id    AS trans_creator,
+              trans.ent_entry_creation_date AS trans_date
+              
+              FROM 
+                (SELECT 
+                  ent_entry_id, 
+                  ent_entry_text, 
+                  ent_entry_verbatim, 
+                  ent_entry_translit, 
+                  ent_entry_authen_status_id, 
+                  ent_entry_translation_of, 
+                  ent_entry_creator_id, 
+                  ent_entry_creation_date
+                   
+                  FROM 
+                    tbl_entry 
+                  WHERE 
+                    ent_entry_authen_status_id = 1 AND 
+                    ent_entry_deleted = 0
+                ) AS orig
+                
+                INNER JOIN 
+                  (SELECT 
+                    ent_entry_id, 
+                    ent_entry_text, 
+                    ent_entry_verbatim, 
+                    ent_entry_translit, 
+                    ent_entry_authen_status_id, 
+                    ent_entry_translation_of, 
+                    ent_entry_creator_id, 
+                    ent_entry_creation_date
+                  FROM 
+                    tbl_entry 
+                  WHERE 
+                    ent_entry_authen_status_id = 2 AND 
+                    ent_entry_deleted = 0
+                  ) AS trans
+                ON 
+                  orig.ent_entry_id = trans.ent_entry_translation_of
             ) AS sub_entry
-            LEFT JOIN tbl_rating AS rating
-            ON rating.rat_entity_id = CONCAT('ent', sub_entry.trans_entry_id) 
-               AND rating.rat_like_user_id IS NOT NULL AND rating.rat_like_user_id >0
-            GROUP BY sub_entry.trans_entry_id
-            ORDER BY num_like DESC, sub_entry.trans_date DESC, sub_entry.trans_entry_id ASC";
+          LEFT JOIN 
+            tbl_rating AS rating
+          ON 
+            rating.rat_entity_id = CONCAT('ent', sub_entry.trans_entry_id) 
+            AND 
+            rating.rat_like_user_id IS NOT NULL 
+            AND 
+            rating.rat_like_user_id >0
+          GROUP BY 
+            sub_entry.trans_entry_id
+          ORDER BY 
+            num_like DESC, 
+            sub_entry.trans_date DESC, 
+            sub_entry.trans_entry_id ASC";
       
-        $dbHelper = new DBHelper();
-        $result = $dbHelper->executeSelect($query);
-        $count = 0;
+      $dbHelper = new DBHelper();
+      $result = $dbHelper->executeSelect($query);
+      $count = 0;
 ?>
 <div align="center">
     <div id="toptranslationtable" style="display:table; width=1000px; background-color:#3B8DFF; color: #000000; border:1px solid #A99F9F;">
