@@ -1,0 +1,2 @@
+1. if after divided by 2 the remainder is zero
+    i.e. if the 'count' is even

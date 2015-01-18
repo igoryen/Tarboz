@@ -125,48 +125,104 @@
       
     </div> <!--end div id="toptranslationth"-->
 <?php
-        while ($list = mysqli_fetch_assoc($result)) {
-            $trans_phrase = $list['trans_phrase'];
-            $orig_phrase = $list['orig_phrase'];
-            $trans_entry_id = $list['trans_entry_id'];
-            $orig_entry_id = $list['orig_entry_id'];
-            $trans_creator_id = $list['trans_creator'];
-            $num_like = $list['num_like']; 
-            
-            $userManager = new UserManager();
-            $added_user = $userManager->getUserByUserId($trans_creator_id);
-            $added_user_name = $added_user->getLogin();
-            $fname = $added_user->getFirstName();
-            $lname = $added_user->getLastName();
-            //$added_user_name = $fname." ".$lname;
-            if ($count>= 10) {  
-        ?>
-          <div id="toptranslationtr" style="display:table-row; width:300px; padding: 5px; 
-                <?php if($count%2 == 0) { echo 'background-color: #ffffff;';} else {echo 'background-color:#B5BBF2;';} ?>">
-              <div id="toptranslationtdTrans" style="display:inline-block;width:400px;vertical-align: top; 
-                                                     margin: 5px; height:100px; overflow:auto; padding: 10px; text-align: left;">
-                    <a href="entryview.php?id=<?php echo $trans_entry_id;?>" style="color:#000000;"><?php echo $trans_phrase;?></a>
-              </div>  
-              <div id="toptranslationtdOrig" style="display:inline-block; width:400px;vertical-align: top; 
-                                                    margin: 5px;height:100px; overflow:auto; padding: 10px; text-align: left;">
-                    <a href="entryview.php?id=<?php echo $orig_entry_id;?>" style="color:#000000;" ><?php echo $orig_phrase;?></a>
-              </div>
-              <div id="toptranslationtdCreator" style="display:inline-block;width:120px;vertical-align: top; 
-                                                       margin: 5px;height:100px; padding: 10px; text-align: left;">
-                    <a href="other_user.php?id=<?php echo $trans_creator_id;?>&name=<?php echo $fname;?>" style="color:#000000;" ><?php echo $added_user_name;?></a>
-              </div>
-              <div id="toptranslationtdLikeNum" style="display:inline-block;width:50px;vertical-align: top; 
-                                                       margin: 5px;height:100px; padding: 10px; text-align: left;">
-                    <?php echo $num_like;?>
-              </div>
-          </div><!--end div id="toptranslationtr"-->
-        <?php
-            }
-            $count ++ ;
-        } //end while loop ?>
 
-    </div> <!--end div toptranslationtable  -->
+  while ($list = mysqli_fetch_assoc($result)) {
+    $trans_phrase     = $list['trans_phrase'];
+    $orig_phrase      = $list['orig_phrase'];
+    $trans_entry_id   = $list['trans_entry_id'];
+    $orig_entry_id    = $list['orig_entry_id'];
+    $trans_creator_id = $list['trans_creator'];
+    $num_like         = $list['num_like']; 
+
+    $userManager = new UserManager();
+    $added_user = $userManager->getUserByUserId($trans_creator_id);
+    $added_user_name = $added_user->getLogin();
+    $fname = $added_user->getFirstName();
+    $lname = $added_user->getLastName();
+    //$added_user_name = $fname." ".$lname;
+    
+    if ($count >= 10) {  
+?>
+      <div  id="toptranslationtr" 
+            style="display:table-row; 
+                   width:300px; 
+                   padding: 5px; 
+<?php 
+  if($count%2 == 0) { // 1
+    echo 'background-color: #ffffff;';
+  } 
+  else {
+    echo 'background-color:#B5BBF2;';
+  } 
+?>">
+        
+        <div id="toptranslationtdTrans" 
+             style="display:inline-block;
+                    width:400px;
+                    vertical-align: top;
+                    margin: 5px; 
+                    height:100px;
+                    overflow:auto; 
+                    padding: 10px; 
+                    text-align: left;">
+                    
+          <a href="entryview.php?id=<?php echo $trans_entry_id;?>" 
+             style="color:#000000;">
+            <?php echo $trans_phrase;?>
+          </a>
+        </div>
+        
+        <div id="toptranslationtdOrig" 
+             style="display:inline-block; 
+                    width:400px;
+                    vertical-align: top;
+                    margin: 5px;
+                    height:100px;
+                    overflow:auto; 
+                    padding: 10px; 
+                    text-align: left;">
+          <a href="entryview.php?id=<?php echo $orig_entry_id;?>" 
+             style="color:#000000;" >
+            <?php echo $orig_phrase;?>
+          </a>
+        </div>
+        
+        <div id="toptranslationtdCreator" 
+             style="display:inline-block;
+                    width:120px;
+                    vertical-align: top;
+                    margin: 5px;
+                    height:100px;
+                    padding: 10px; 
+                    text-align: left;">
+          <a href="other_user.php?id=<?php 
+              echo $trans_creator_id;
+                ?>&name=<?php 
+              echo $fname;
+                ?>" 
+             style="color:#000000;" >
+            <?php echo $added_user_name;?></a>
+        </div>
+
+        <div id="toptranslationtdLikeNum" 
+             style="display:inline-block;
+                    width:50px;
+                    vertical-align: top;
+                    margin: 5px;
+                    height:100px; 
+                    padding: 10px; 
+                    text-align: left;">
+          <?php echo $num_like;?>
+        </div>
+
+      </div><!--end div id="toptranslationtr"-->
+        <?php
+    }
+    $count ++ ;
+  } //end while loop ?>
+  </div> <!--end div toptranslationtable  -->
 </div>
+
 <?php 
     require("footer.php");  
     } //end if ($top_translation == "y") 
