@@ -73,26 +73,58 @@
       $count = 0;
 ?>
 <div align="center">
-    <div id="toptranslationtable" style="display:table; width=1000px; background-color:#3B8DFF; color: #000000; border:1px solid #A99F9F;">
-        <div id="toptranslationth" style="display:table-header; height:40px; color: #ffffff;">
-            <div id="toptranslationthTrans" style="display:inline-block; width:420px; font-weight:bold; 
-                                                    padding-top:8px; text-align: center;">
-                Translation
-            </div>   
-            <div id="toptranslationthOrig" style="display:inline-block; width:420px; font-weight:bold;
-                                                    padding-top:8px;  text-align: center;">
-                Original Phrase
-            </div>
-            <div id="toptranslationthCreator" style="display:inline-block; width:130px; font-weight:bold;
-                                                        padding-top:8px;  text-align: center;">
-                Added By
-            </div>
-            <div id="toptranslationthLikeNum" style="display:inline-block; width:50px; font-weight:bold;
-                                                        padding-top:8px;  text-align: center;">
-                Likes
-            </div>
-        </div> <!--end div id="toptranslationth"-->
-      <?php
+  
+  <div id="toptranslationtable" 
+       style="display:table; 
+              width=1000px; 
+              background-color:#3B8DFF; 
+              color: #000000; 
+              border:1px 
+              solid #A99F9F;">
+    
+    <div id="toptranslationth" 
+         style="display:table-header; 
+                height:40px; 
+                color: #ffffff;">
+      
+      <div  id="toptranslationthTrans" 
+            style="display:inline-block; 
+                   width:420px; 
+                   font-weight:bold;
+                   padding-top:8px; 
+                   text-align: center;">
+        Translation
+      </div>   
+      
+      <div  id="toptranslationthOrig" 
+            style="display:inline-block; 
+                   width:420px; 
+                   font-weight:bold;
+                   padding-top:8px;  
+                   text-align: center;">
+        Original Phrase
+      </div>
+      
+      <div id="toptranslationthCreator" 
+           style="display:inline-block; 
+                  width:130px; 
+                  font-weight:bold;
+                  padding-top:8px;  
+                  text-align: center;">
+        Added By
+      </div>
+      
+      <div id="toptranslationthLikeNum" 
+           style="display:inline-block; 
+                  width:50px; 
+                  font-weight:bold;
+                  padding-top:8px;
+                  text-align: center;">
+        Likes
+      </div>
+      
+    </div> <!--end div id="toptranslationth"-->
+<?php
         while ($list = mysqli_fetch_assoc($result)) {
             $trans_phrase = $list['trans_phrase'];
             $orig_phrase = $list['orig_phrase'];
