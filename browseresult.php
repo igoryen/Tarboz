@@ -76,7 +76,7 @@
   
   <div id="toptranslationtable" 
        style="display:table; 
-              width=1000px; 
+              width:1000px; 
               background-color:#3B8DFF; 
               color: #000000; 
               border:1px 
