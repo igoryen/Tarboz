@@ -486,20 +486,35 @@
     $kid_array['user'] = $u_m->getUserByUserId($i_kid->getEntryUserId())->getLogin(); 
 
 ?>
-     <div class="kid_room">
-      <div class="kid_text">
-        <a href="entryview.php?id=<?php echo $kid_array['id'];?>"><?php echo $kid_array['text'];?></a>
-      </div>
-      <div class="kid_profile_link"><?php echo $kid_array['authen_status']; ?></div>
-    <!--    <div class="kid_dad_link">O</div>-->
-      <div class="kid_votes"><span style="cursor: alias;" title="<?php echo $kid_array['kid_votes']; ?> users like"><?php if ($kid_array['kid_votes']>0) echo '+'.$kid_array['kid_votes']; ?></span> 
-    <!--        <span style="cursor: alias;" title="3 users dislike">-3</span> -->
-      </div>
-      <div class="kid_added_by">
-        <a href="profile.php?id=<?php echo $kid_array['user']; ?>"><?php echo $kid_array['user'];?></a>
-      </div>
-    <!--  <div class="is_mom">A</div>  -->
-     </div>
+<div class="kid_room">
+  <div class="kid_text">
+    <a href="entryview.php?id=<?php echo $kid_array['id'];?>">
+      <?php echo $kid_array['text'];?>
+    </a>
+  </div>
+  
+  <div class="kid_profile_link">
+    <?php echo $kid_array['authen_status']; ?>
+  </div>
+  <!--    <div class="kid_dad_link">O</div>-->
+  <div class="kid_votes">
+    <span style="cursor: alias;" 
+          title="<?php echo $kid_array['kid_votes']; 
+          ?> users like"><?php 
+          if ($kid_array['kid_votes']>0) {
+            echo '+'.$kid_array['kid_votes'];
+          } ?>
+    </span> 
+    <!-- <span style="cursor: alias;" title="3 users dislike">-3</span> -->
+  </div>
+  
+  <div class="kid_added_by">
+    <a href="profile.php?id=<?php echo $kid_array['user']; ?>"><?php 
+      echo $kid_array['user'];?>
+    </a>
+  </div>
+  <!--  <div class="is_mom">A</div>  -->
+</div>
 <?php 
     return $kid_array;
   } //end function browse_kid_room 
