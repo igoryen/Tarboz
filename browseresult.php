@@ -417,32 +417,60 @@
   } //end dad_house_no_dad function 
   
   function dad_house_has_dad($i_dad) { 
-      $entMan = new EntryManager();
-            $userMan = new UserManager();
-            $dad_arr['id'] = $i_dad->getEntryId();
-            $dad_arr['language'] = $i_dad->getEntryLanguage();
-            $dad_arr['authen_status'] = "Original";
-            $dad_arr['text'] = substr($i_dad->getEntryText(), 0, 72);
-            $dad_arr['kid_num'] = $entMan->getOriginalKidsNum($dad_arr['id']);
-            $dad_arr['like_num'] = $entMan->getEntryLikeNumByEntry($dad_arr['id']);
-            $dad_arr['add_kid'] = "y";
-            $dad_arr['user'] = $userMan->getUserByUserId($i_dad->getEntryUserId())->getLogin();
+    $entMan = new EntryManager();
+    $userMan = new UserManager();
+    $dad_arr['id'] = $i_dad->getEntryId();
+    $dad_arr['language'] = $i_dad->getEntryLanguage();
+    $dad_arr['authen_status'] = "Original";
+    $dad_arr['text'] = substr($i_dad->getEntryText(), 0, 72);
+    $dad_arr['kid_num'] = $entMan->getOriginalKidsNum($dad_arr['id']);
+    $dad_arr['like_num'] = $entMan->getEntryLikeNumByEntry($dad_arr['id']);
+    $dad_arr['add_kid'] = "y";
+    $dad_arr['user'] = $userMan->getUserByUserId($i_dad->getEntryUserId())->getLogin();
 ?>
-        <div id="dad_house">
-            <div class="dad_door"><span><?php echo $dad_arr['language']; ?></span></div>
-            <div id="dad_room">
-              <div id="dad_text">
-                <a href="entryview.php?id=<?php echo $dad_arr['id'];?>"><?php echo $dad_arr['text']; ?></a>
-              </div>
-              <div id="dad_profile_link"><?php echo $dad_arr['authen_status']; ?></div>
-              <div style="display:inline-block;width:50px"></div>
-              <div id="kids_num" title="There are <?php echo $dad_arr['kid_num']; ?> translations for this phrase"><?php echo $dad_arr['kid_num']; ?></div>
-              <div id="add_kid"><a href="entrycreate.php" title="Add a new translation"><?php if($dad_arr['add_kid'] == 'y') echo "+";?></a></div>
-              <div class="kid_added_by">
-                <a href="profile.php?id=<?php echo $dad_arr['user']; ?>"><?php echo $dad_arr['user']; ?></a>
-              </div>
-            </div>
-         </div><!-- dad_house -->
+  <div id="dad_house">
+    
+    <div class="dad_door">
+      <span>
+        <?php echo $dad_arr['language']; ?>
+      </span>
+    </div>
+    
+    <div id="dad_room">
+      <div id="dad_text">
+        <a href="entryview.php?id=<?php echo $dad_arr['id'];?>">
+          <?php echo $dad_arr['text']; ?>
+        </a>
+      </div>
+              
+      <div id="dad_profile_link">
+        <?php echo $dad_arr['authen_status']; ?>
+      </div>
+      
+      <div style="display:inline-block;width:50px"></div>
+              
+      <div id="kids_num" 
+           title="There are <?php 
+            echo $dad_arr['kid_num']; 
+            ?> translations for this phrase">
+              <?php echo $dad_arr['kid_num']; ?>
+      </div>
+              
+      <div id="add_kid">
+        <a href="entrycreate.php" 
+           title="Add a new translation">
+             <?php if($dad_arr['add_kid'] == 'y') echo "+";?>
+        </a>
+      </div>
+              
+      <div class="kid_added_by">
+        <a href="profile.php?id=<?php echo $dad_arr['user']; ?>"><?php 
+        echo $dad_arr['user']; ?>
+        </a>
+      </div>
+      
+    </div> <!-- dad_room -->
+  </div><!-- dad_house -->
 
 <?php   
     return $dad_arr;
