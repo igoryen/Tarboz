@@ -225,159 +225,136 @@
 
 <?php 
     require("footer.php");  
-    } //end if ($top_translation == "y") 
-    else {
+  } //end if ($top_translation == "y") 
     
-        //echo "<br>bowseresult::search text is [".$search_text . "]</br>";
-        //echo "<br>bowseresult::target language is [".$tgt_lang . "]</br>";
-        //echo "<br>bowseresult::from date is [".$from_date . "]</br>";
-        //echo "<br>bowseresult::end date is [".$end_date . "]</br>";
+  else {
+    //echo "<br>bowseresult::search text is [".$search_text . "]</br>";
+    //echo "<br>bowseresult::target language is [".$tgt_lang . "]</br>";
+    //echo "<br>bowseresult::from date is [".$from_date . "]</br>";
+    //echo "<br>bowseresult::end date is [".$end_date . "]</br>";
+    $entryManager = new EntryManager();
+    $dad_entryArr = $entryManager->getDadEntryListByLangDate(
+            $tgt_lang, $from_date, $end_date);
+    //echo "</br>browse result ++++Entry Dad Array+++</br>";
+    //var_dump($dad_entryArr);
         
-        $entryManager = new EntryManager();
-        $dad_entryArr = $entryManager->getDadEntryListByLangDate($tgt_lang, $from_date, $end_date);
-        //echo "</br>browse result ++++Entry Dad Array+++</br>";
-        //var_dump($dad_entryArr);
-        
-        $dadsNum = count($dad_entryArr);
-        if ($dadsNum == 1) {
-            $no_found_dad = count(reset($dad_entryArr)) == 0 ? true : false;
-        } else {
-            $no_found_dad = false;
-        }
-
-        if (isset($no_found_dad) && $no_found_dad === false) {
-
-            foreach($dad_entryArr as $i_dad) {
-                //display dad entry
-                $dad_arr = dad_house_has_dad($i_dad);
-                
-                $kids_entryArr = $entryManager->getKidEntryListByDadLangDate($dad_arr['id'], $tgt_lang, $from_date, $end_date);
-                //echo "</br>browse result ++++Entry Kids Array+++</br>";
-                //var_dump($kids_entryArr);
-                
-                $kidsNum = count($kids_entryArr); 
-                if ($kidsNum == 1) {
-                    $no_found_kid = count(reset($kids_entryArr)) ==0? true : false;
-                } else {
-                    $no_found_kid = false;
-                }
-                
-                if (isset($no_found_kid) && $no_found_kid === false) { //Has kids
-                    //echo "</br>browse result ++++has+++".$no_found_kid."</br>";
-                    if ($kidsNum == 1) { //One kid
-                        foreach ($kids_entryArr as $i_kid){                             
-                        //    $e_m = new EntryManager();
-                        //    $u_m = new UserManager();
-        
-                            $current_lang = $i_kid->getEntryLanguage();
-            
-                            open_kids_house($current_lang);                 
-
-                            browse_kid_room($i_kid);
-                            close_kids_house();
-        
-                            unset($current_lang);
-                        } //end loop
-                        
-                    } //end if ($num_of_kids == 1)
-                    else {  //More kids
-                        $i=0;
-                        foreach ($kids_entryArr as $i_kid){
-                            //$u_m = new UserManager(); 
-                            if($i_kid == $kids_entryArr[0]){   //first element of the array
-                                //echo "<br/>==================More kids first element================".var_dump(next($kids_entryArr));
-                                $current_lang = $i_kid->getEntryLanguage();
-                                $next_lang = $kids_entryArr[$i+1]->getEntryLanguage();  
-                                
-                                open_kids_house($current_lang);        
-
-                                browse_kid_room($i_kid);
-        
-                                unset($current_lang);
-                                unset($next_lang);
-                              } //end first element of the array
-                              //elseif($i_kid == end($kids_entryArr)){ // last element of the array
-                              elseif($i_kid == $kids_entryArr[$kidsNum-1]){ // last element of the array
-                                //echo "<br/>==================More kids last element================".var_dump($i_kid);
-                                //$prev_lang = prev($kids_entryArr)->getEntryLanguage();
-                                $prev_lang = $kids_entryArr[$i-1]->getEntryLanguage();
-                                $current_lang = $i_kid->getEntryLanguage();
-        
-                                if ($current_lang !== $prev_lang){ // current kid entry is in different languages from previous kid
-                                //echo "<br/>+++++++++++More kids last element different language++++++++++++++";
-                                  close_kids_house();
-        
-                                  open_kids_house($current_lang);          
-        
-                                  browse_kid_room($i_kid);          
-        
-                                  close_kids_house();
-        
-                                  unset($current_lang);
-                                  if(isset($prev_lang)) unset($prev_lang);
-                                }  //end different language
-                                else{                           //current kid entry is in same languages as previous kid
-                                  //echo "<br/>+++++++++++More kids last element same language++++++++++++++"; 
-                                  //if (prev($kids_entryArr)){
-                                   // $prev_lang = prev($kids_entryArr)->getEntryLanguage();
-                                  //}
-                                  $prev_lang = $kids_entryArr[$i-1]->getEntryLanguage();
-                                  $current_lang = $i_kid->getEntryLanguage();
-
-                                  browse_kid_room($i_kid);          
-                    
-                                  close_kids_house();
-                               
-                                  unset($current_lang);
-                                  unset($prev_lang);
-                                } //end same language 
-                              }  //end last elment     
-                              else{ // middle element of the array
-                                //echo "<br/>==================More kids middle element================".var_dump($i_kid);
-                                //$prev_lang = prev($kids_entryArr)->getEntryLanguage();
-                                $prev_lang = $kids_entryArr[$i-1]->getEntryLanguage();
-                                $current_lang = $i_kid->getEntryLanguage();
-                      
-                                if ($current_lang !== $prev_lang){
-                                //echo "<br/>+++++++++++More kids middle element different language++++++++++++++";
-                                  close_kids_house();          
-                            
-                                  open_kids_house($current_lang);          
-                         
-                                  browse_kid_room($i_kid);
-                           
-                                  unset($current_lang);
-                                  unset($prev_lang);
-                                } 
-                                else{ 
-                                 //echo "<br/>+++++++++++More kids middle element same language++++++++++++++";
-
-                                  browse_kid_room($i_kid);
-                
-                                  unset($current_lang);
-                                  unset($prev_lang);
-                                } 
-                              } //end middle elements of the array
-                            
-                              $i++;
-                            
-                        } //end loop
-                        
-                    } //end more kids
-                    
-                } // end if if (isset($no_found_verb) && !$no_found_kid)
-                    
-            }//end outer foreach
-        }//end if(isset($no_found_dad) && !$no_found_dad)
-        $noDad_entryArr = $entryManager->getEntryListByNoDadLangDate($tgt_lang, $from_date, $end_date);
-        //echo "</br>browse result ++++Entry NO Dad Array+++</br>";
-        foreach($noDad_entryArr as $i_noDad) {
-            //display dad entry
-
-            dad_house_no_dad($i_noDad);
-        
-        } //end foreach loop noDad
+    $dadsNum = count($dad_entryArr);
+    if ($dadsNum == 1) {
+      $no_found_dad = count(reset($dad_entryArr)) == 0 ? true : false;
+    } else {
+      $no_found_dad = false;
     }
+
+    if (isset($no_found_dad) && $no_found_dad === false) {
+
+      foreach($dad_entryArr as $i_dad) {
+        //display dad entry
+        $dad_arr = dad_house_has_dad($i_dad);
+                
+        $kids_entryArr = $entryManager->getKidEntryListByDadLangDate(
+          $dad_arr['id'], $tgt_lang, $from_date, $end_date);
+        //echo "</br>browse result ++++Entry Kids Array+++</br>";
+        //var_dump($kids_entryArr);
+                
+        $kidsNum = count($kids_entryArr); 
+        if ($kidsNum == 1) {
+          $no_found_kid = count(reset($kids_entryArr)) ==0? true : false;
+        } 
+        else {
+          $no_found_kid = false;
+        }
+                
+        if (isset($no_found_kid) && $no_found_kid === false) { //Has kids
+          //echo "</br>browse result ++++has+++".$no_found_kid."</br>";
+          if ($kidsNum == 1) { //One kid
+            foreach ($kids_entryArr as $i_kid){                             
+              //    $e_m = new EntryManager();
+              //    $u_m = new UserManager();
+              $current_lang = $i_kid->getEntryLanguage();
+              open_kids_house($current_lang);                 
+              browse_kid_room($i_kid);
+              close_kids_house();
+              unset($current_lang);
+            } //end foreach               
+          } //end if ($num_of_kids == 1)
+          else {  //More kids
+            $i = 0;
+            foreach ($kids_entryArr as $i_kid){
+              //$u_m = new UserManager(); 
+              if($i_kid == $kids_entryArr[0]){   //first element of the array
+                //echo "<br/>==================More kids first element================".var_dump(next($kids_entryArr));
+                $current_lang = $i_kid->getEntryLanguage();
+                $next_lang = $kids_entryArr[$i+1]->getEntryLanguage();  
+                open_kids_house($current_lang);
+                browse_kid_room($i_kid);
+                unset($current_lang);
+                unset($next_lang);
+              } //end first element of the array
+              //elseif($i_kid == end($kids_entryArr)){ // last element of the array
+              elseif($i_kid == $kids_entryArr[$kidsNum-1]){ // last element of the array
+                //echo "<br/>==================More kids last element================".var_dump($i_kid);
+                //$prev_lang = prev($kids_entryArr)->getEntryLanguage();
+                $prev_lang = $kids_entryArr[$i-1]->getEntryLanguage();
+                $current_lang = $i_kid->getEntryLanguage();
+        
+                if ($current_lang !== $prev_lang){ // current kid entry is in different languages from previous kid
+                  //echo "<br/>+++++++++++More kids last element different language++++++++++++++";
+                  close_kids_house();
+                  open_kids_house($current_lang);
+                  browse_kid_room($i_kid);          
+                  close_kids_house();
+                  unset($current_lang);
+                  if(isset($prev_lang)) unset($prev_lang);
+                }  //end different language
+                else{ //current kid entry is in same languages as previous kid
+                  //echo "<br/>+++++++++++More kids last element same language++++++++++++++"; 
+                  //if (prev($kids_entryArr)){
+                  // $prev_lang = prev($kids_entryArr)->getEntryLanguage();
+                  //}
+                  $prev_lang = $kids_entryArr[$i-1]->getEntryLanguage();
+                  $current_lang = $i_kid->getEntryLanguage();
+                  browse_kid_room($i_kid);          
+                  close_kids_house();
+                  unset($current_lang);
+                  unset($prev_lang);
+                } //end same language 
+              }  //end last elment     
+              else{ // middle element of the array
+                //echo "<br/>==================More kids middle element================".var_dump($i_kid);
+                //$prev_lang = prev($kids_entryArr)->getEntryLanguage();
+                $prev_lang = $kids_entryArr[$i-1]->getEntryLanguage();
+                $current_lang = $i_kid->getEntryLanguage();
+                      
+                if ($current_lang !== $prev_lang){
+                  //echo "<br/>+++++++++++More kids middle element different language++++++++++++++";
+                  close_kids_house();          
+                  open_kids_house($current_lang);          
+                  browse_kid_room($i_kid);
+                  unset($current_lang);
+                  unset($prev_lang);
+                } 
+                else{ 
+                  //echo "<br/>+++++++++++More kids middle element same language++++++++++++++";
+                  browse_kid_room($i_kid);
+                  unset($current_lang);
+                  unset($prev_lang);
+                } 
+              } //end middle elements of the array
+                            
+              $i++;
+            } //end foreach
+          } //end more kids
+        } // end if if (isset($no_found_verb) && !$no_found_kid)
+      }//end outer foreach
+    }//end if(isset($no_found_dad) && !$no_found_dad)
+    $noDad_entryArr = $entryManager->getEntryListByNoDadLangDate(
+            $tgt_lang, $from_date, $end_date);
+    //echo "</br>browse result ++++Entry NO Dad Array+++</br>";
+    foreach($noDad_entryArr as $i_noDad) {
+      //display dad entry
+      dad_house_no_dad($i_noDad);
+    } //end foreach loop noDad
+  }
 
 	//defining functions for this file
 	function dad_house_no_dad($i_noDad) {
