@@ -2,13 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/wamp/www/Tarboz/classes/BusinessLogicTier/entry/EntryManager.php</file>
-            <file>file:/C:/wamp/www/Tarboz/searchresult.php</file>
-            <file>file:/C:/wamp/www/Tarboz/classes/DataAccessorsTier/entry/EntryDataAccessor.php</file>
-            <file>file:/C:/wamp/www/Tarboz/entrycreate.php</file>
-            <file>file:/C:/wamp/www/Tarboz/views/entry/search_result_cases.php</file>
-            <file>file:/C:/wamp/www/Tarboz/classes/DataAccessorsTier/DBHelper.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
