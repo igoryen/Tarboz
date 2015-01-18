@@ -356,39 +356,68 @@
     } //end foreach loop noDad
   }
 
-	//defining functions for this file
-	function dad_house_no_dad($i_noDad) {
-		$entMan = new EntryManager();
-		$userMan = new UserManager();
-		$noDad_arr['id'] = $i_noDad->getEntryId();
-		$noDad_arr['language'] = $i_noDad->getEntryLanguage();
-		$noDad_arr['authen_status'] = "Translation";
-		$noDad_arr['text'] = substr($i_noDad->getEntryText(), 0, 72);
-		$noDad_arr['kid_num'] = "";
-		$noDad_arr['like_num'] = $entMan->getEntryLikeNumByEntry($noDad_arr['id']);
-		$noDad_arr['add_kid'] = "n";
-		$noDad_arr['user'] = $userMan->getUserByUserId($i_noDad->getEntryUserId())->getLogin();
+  //defining functions for this file
+  function dad_house_no_dad($i_noDad) {
+    // TODO: rename 'entMan' into 'em'
+    $entMan = new EntryManager();
+    $userMan = new UserManager();
+    $noDad_arr['id'] = $i_noDad->getEntryId();
+    $noDad_arr['language'] = $i_noDad->getEntryLanguage();
+    $noDad_arr['authen_status'] = "Translation";
+    $noDad_arr['text'] = substr($i_noDad->getEntryText(), 0, 72);
+    $noDad_arr['kid_num'] = "";
+    $noDad_arr['like_num'] = $entMan->getEntryLikeNumByEntry($noDad_arr['id']);
+    $noDad_arr['add_kid'] = "n";
+    $noDad_arr['user'] = 
+      $userMan->getUserByUserId($i_noDad->getEntryUserId())->getLogin();
 ?>
-		<div id="dad_house">
-			<div class="dad_door"><span><?php echo $noDad_arr['language']; ?></span></div>
-			<div id="dad_room">
-			  <div id="dad_text">
-				<a href="entryview.php?id=<?php echo $noDad_arr['id'];?>"><?php echo $noDad_arr['text']; ?></a>
-			  </div>
-			  <div id="dad_profile_link"><?php echo $noDad_arr['authen_status']; ?></div>
-			  <div id="likes_num" style="display:inline-block;margin-left:8px;cursor:alias;" 
-				   title="<?php echo $noDad_arr['like_num']; ?> users like"><?php if($noDad_arr['like_num']>0) echo '+'.$noDad_arr['like_num']; ?></div>
-			  <div class="kid_added_by" style="display:inline-block; margin-left:3px;text-align:right;" >
-				<a href="profile.php?id=<?php echo $noDad_arr['user']; ?>"><?php echo $noDad_arr['user']; ?></a>
-			  </div>
-			</div>
-		 </div><!-- dad_house -->
+    <div id="dad_house">
+      
+      <div class="dad_door">
+        <span>
+          <?php echo $noDad_arr['language']; ?>
+        </span>
+      </div>
+      
+      <div id="dad_room">
+        
+        <div id="dad_text">
+          <a href="entryview.php?id=<?php echo $noDad_arr['id'];?>">
+            <?php echo $noDad_arr['text']; ?>
+          </a>
+        </div>
+        
+        <div id="dad_profile_link">
+          <?php echo $noDad_arr['authen_status']; ?>
+        </div>
+        
+        <div id="likes_num" 
+             style="display:inline-block;
+                    margin-left:8px;
+                    cursor:alias;" 
+             title="<?php echo $noDad_arr['like_num']; ?> 
+             users like"><?php 
+             if($noDad_arr['like_num']>0){ 
+               echo '+'.$noDad_arr['like_num'];
+             } ?>
+        </div>
+        
+        <div class="kid_added_by" 
+             style="display:inline-block; 
+                    margin-left:3px;
+                    text-align:right;" >
+          <a href="profile.php?id=<?php echo $noDad_arr['user']; ?>">
+            <?php echo $noDad_arr['user']; ?>
+          </a>
+        </div>
+      </div><!-- dad_room -->
+    </div><!-- dad_house -->
 <?php 
-		return $noDad_arr;
-	} //end dad_house_no_dad function 
+    return $noDad_arr;
+  } //end dad_house_no_dad function 
   
-	function dad_house_has_dad($i_dad) { 
-			$entMan = new EntryManager();
+  function dad_house_has_dad($i_dad) { 
+      $entMan = new EntryManager();
             $userMan = new UserManager();
             $dad_arr['id'] = $i_dad->getEntryId();
             $dad_arr['language'] = $i_dad->getEntryLanguage();
@@ -415,36 +444,36 @@
             </div>
          </div><!-- dad_house -->
 
-<?php 	
-		return $dad_arr;
-	}  //end dad_house_has_dad function       
+<?php   
+    return $dad_arr;
+  }  //end dad_house_has_dad function       
 
-	function browse_kid_room($i_kid){
-		$e_m = new EntryManager();
-		$u_m = new UserManager(); 
-		$kid_array['id'] = $i_kid->getEntryId();
-		$kid_array['text'] = substr($i_kid->getEntryText(), 0, 72);
-		$kid_array['authen_status'] = "Translation";
-		$kid_array['kid_votes'] = $e_m->getEntryLikeNumByEntry($kid_array['id']);
-		$kid_array['user'] = $u_m->getUserByUserId($i_kid->getEntryUserId())->getLogin(); 
+  function browse_kid_room($i_kid){
+    $e_m = new EntryManager();
+    $u_m = new UserManager(); 
+    $kid_array['id'] = $i_kid->getEntryId();
+    $kid_array['text'] = substr($i_kid->getEntryText(), 0, 72);
+    $kid_array['authen_status'] = "Translation";
+    $kid_array['kid_votes'] = $e_m->getEntryLikeNumByEntry($kid_array['id']);
+    $kid_array['user'] = $u_m->getUserByUserId($i_kid->getEntryUserId())->getLogin(); 
 
 ?>
-		 <div class="kid_room">
-			<div class="kid_text">
-			  <a href="entryview.php?id=<?php echo $kid_array['id'];?>"><?php echo $kid_array['text'];?></a>
-			</div>
-			<div class="kid_profile_link"><?php echo $kid_array['authen_status']; ?></div>
-		<!--    <div class="kid_dad_link">O</div>-->
-			<div class="kid_votes"><span style="cursor: alias;" title="<?php echo $kid_array['kid_votes']; ?> users like"><?php if ($kid_array['kid_votes']>0) echo '+'.$kid_array['kid_votes']; ?></span> 
-		<!--        <span style="cursor: alias;" title="3 users dislike">-3</span> -->
-			</div>
-			<div class="kid_added_by">
-			  <a href="profile.php?id=<?php echo $kid_array['user']; ?>"><?php echo $kid_array['user'];?></a>
-			</div>
-		<!--	<div class="is_mom">A</div>  -->
-		 </div>
+     <div class="kid_room">
+      <div class="kid_text">
+        <a href="entryview.php?id=<?php echo $kid_array['id'];?>"><?php echo $kid_array['text'];?></a>
+      </div>
+      <div class="kid_profile_link"><?php echo $kid_array['authen_status']; ?></div>
+    <!--    <div class="kid_dad_link">O</div>-->
+      <div class="kid_votes"><span style="cursor: alias;" title="<?php echo $kid_array['kid_votes']; ?> users like"><?php if ($kid_array['kid_votes']>0) echo '+'.$kid_array['kid_votes']; ?></span> 
+    <!--        <span style="cursor: alias;" title="3 users dislike">-3</span> -->
+      </div>
+      <div class="kid_added_by">
+        <a href="profile.php?id=<?php echo $kid_array['user']; ?>"><?php echo $kid_array['user'];?></a>
+      </div>
+    <!--  <div class="is_mom">A</div>  -->
+     </div>
 <?php 
-		return $kid_array;
-	} //end function browse_kid_room 
+    return $kid_array;
+  } //end function browse_kid_room 
 ?>
 
