@@ -496,87 +496,235 @@
       ?>
 
       <div> <!--div2-->
+        
         <div style="display:table;">
+          
           <div style="display:table-row;">
-              <?php if ($user_logged_in ) { ?>
-              <a href="other_user.php?id=<?php echo $created_by;?>"><?php echo $created_user_name.":"; ?></a> 
-              <?php } else { echo $created_user_name.":"; } ?>
+            <?php if ($user_logged_in ) { ?>
+              <a href="other_user.php?id=<?php echo $created_by;?>">
+                <?php echo $created_user_name.":"; ?>
+              </a> 
+              <?php } 
+              else { 
+                echo $created_user_name.":"; 
+              } ?>
           </div>
+          
           <div style="display:table-row;">
-            <div style="display:table-cell; width:480px; padding-left:10px;">
-                <span id="<?php echo $edit_comment_text_id; ?>" style="display:'';"><?php echo $text; ?></span>  
-            </div>
-            <?php if ($user_logged_in ) { //check if user logged in or not ?>
-            <div style="display:table-cell;">
-                <span id ="<?php echo $comment_like_id; ?>" name="<?php echo $comment_like_id; ?>" class="comment_like"
-                      style="font-family:Tahoma;font-size:12px;" onmouseover="$(this).css({'cursor': 'pointer'});"><?php echo $rating_content."&nbsp;"?> 
-                </span>
-                <span id ="<?php echo $comment_likeNum_id; ?>" title ="<?php echo $likeRating;?> likes" style="font-family:Tahoma;font-size:12px;cursor:alias;" ><?php echo $likeRating;?></span>
+            
+            <div style="display:table-cell; 
+                        width:480px; 
+                        padding-left:10px;">
+              <span 
+                id="<?php echo $edit_comment_text_id; ?>" 
+                style="display:'';">
+                <?php echo $text; ?>
+              </span>
             </div>
             
-            <?php if ($created_by == $loggedIn_userId) { //show edit and delete icon if user is logged in?>
-            <div style="display:table-cell;">
-                <img src="images/edit.png" alt="Edit Icon" style="width:16px;height:16px" id="<?php echo $edit_icon_id; ?>" title="Edit"
-                     onmouseover="$(this).css({'cursor': 'pointer'});" 
-                     onclick = "$('#<?php echo $edit_area_id; ?>').css({'display': 'block'}); $('#<?php echo $edit_comment_text_id; ?>').css({'display': 'none'});"/>
-                <img src="images/delete.png" alt="Delete Icon" style="width:16px;height:16px" id="<?php echo $delete_icon_id; ?>" title="Delete"
-                         class="deleteComment" onmouseover="$(this).css({'cursor': 'pointer'});"/>
-            </div>
+            <?php 
+            if ($user_logged_in ) { //check if user logged in or not ?>
+              <div style="display:table-cell;">
+                
+                <span 
+                  id ="<?php echo $comment_like_id; ?>" 
+                  name="<?php echo $comment_like_id; ?>" 
+                  class="comment_like"
+                  style="font-family:Tahoma;
+                         font-size:12px;" 
+                  onmouseover="$(this).css({'cursor': 'pointer'});">
+                  <?php echo $rating_content."&nbsp;"?> 
+                </span>
+                
+                <span 
+                  id ="<?php echo $comment_likeNum_id; ?>" 
+                  title ="<?php echo $likeRating;?> likes" 
+                  style="font-family:Tahoma;
+                         font-size:12px;
+                         cursor:alias;" >
+                  <?php echo $likeRating;?>
+                </span>
+                
+              </div>
+            
+            <?php 
+            if ($created_by == $loggedIn_userId) { //show edit and delete icon if user is logged in?>
+              <div style="display:table-cell;">
+                <img  
+                  src="images/edit.png" 
+                  alt="Edit Icon" 
+                  style="width:16px;
+                         height:16px" 
+                  id="<?php echo $edit_icon_id; ?>" 
+                  title="Edit"
+                  onmouseover="$(this).css({'cursor': 'pointer'});" 
+                  onclick = "
+                    $('#<?php echo $edit_area_id; ?>').css({
+                      'display': 'block'}); 
+                    $('#<?php echo $edit_comment_text_id; ?>').css({
+                      'display': 'none'});" />
+                <img  
+                  src="images/delete.png" 
+                  alt="Delete Icon" 
+                  style="width:16px;
+                         height:16px" 
+                  id="<?php echo $delete_icon_id; ?>" 
+                  title="Delete"
+                  class="deleteComment" 
+                  onmouseover="$(this).css({'cursor': 'pointer'});" />
+              </div>
         
             <?php } //if ($created_by == $loggedIn_userId)  ?>
-            <div style="display:table-cell; width: 100px; position: relative;">
-                <img src="images/arrow-down.png" alt="Arrow Down Icon" style="width:16px;height:16px" id="<?php echo $comment_report_id; ?>" 
-                     class="reportComment" title="Report to Admin" onmouseover="$(this).css({'cursor': 'pointer'});"/>
-                <div id ="<?php echo 'reportCommentDiv_'.$id;?>" style="display: none; overflow: hidden; position:absolute;">
-                    <form name ="<?php echo 'reportCommentForm_'.$id;?>" id="<?php echo 'reportCommentForm_'.$id;?>" method="POST">
-                        <div>Report reason:</div>
-                        <textarea rows="2" cols="20" name="<?php echo 'reportCommentReason_'.$id; ?>" 
-                                  id="<?php echo 'reportCommentReason_'.$id; ?>"></textarea><br/>
-                        <input type="hidden" id="<?php echo 'reportCommentBy_'.$id; ?>" 
-                               name="<?php echo 'reportCommentBy_'.$id; ?>" 
-                               value ="<?php echo $loggedIn_userId; ?>"/>
-                        <button id="<?php echo 'reportCommentSub_'.$id; ?>" name="<?php echo 'reportCommentSub_'.$id; ?>" class="reportCommentSub" type="button" style="font-size:11px;">Submit</button>
-                        <button id="<?php echo 'reportCommentCancel_'.$id; ?>" name="<?php echo 'reportCommentCancel_'.$id; ?>" class="reportCommentCancel" type="button" style="font-size:11px;">Cancel</button>
-                    </form>
+            <div style="display:table-cell; 
+                        width: 100px; 
+                        position: relative;">
+              <img 
+                src="images/arrow-down.png" 
+                alt="Arrow Down Icon" 
+                style="width:16px;
+                       height:16px" 
+                id="<?php echo $comment_report_id; ?>" 
+                class="reportComment" 
+                title="Report to Admin" 
+                onmouseover="$(this).css({'cursor': 'pointer'});"/>
+
+                <div 
+                  id ="<?php echo 'reportCommentDiv_'.$id;?>" 
+                  style="display: none; 
+                         overflow: hidden; 
+                         position:absolute;">
+                  <form 
+                    name ="<?php echo 'reportCommentForm_'.$id;?>" 
+                    id="<?php echo 'reportCommentForm_'.$id;?>" 
+                    method="POST">
+                    
+                    <div>Report reason:</div>
+                    
+                    <textarea 
+                      rows="2" 
+                      cols="20" 
+                      name="<?php echo 'reportCommentReason_'.$id; ?>" 
+                      id="<?php echo 'reportCommentReason_'.$id; ?>"></textarea>
+                        
+                    <br/>
+                        
+                    <input 
+                      type="hidden" 
+                      id="<?php echo 'reportCommentBy_'.$id; ?>" 
+                      name="<?php echo 'reportCommentBy_'.$id; ?>" 
+                      value ="<?php echo $loggedIn_userId; ?>"/>
+                        
+                    <button 
+                      id="<?php echo 'reportCommentSub_'.$id; ?>" 
+                      name="<?php echo 'reportCommentSub_'.$id; ?>" 
+                      class="reportCommentSub" 
+                      type="button" 
+                      style="font-size:11px;">
+                      Submit
+                    </button>
+
+                    <button 
+                      id="<?php echo 'reportCommentCancel_'.$id; ?>" 
+                      name="<?php echo 'reportCommentCancel_'.$id; ?>" 
+                      class="reportCommentCancel" 
+                      type="button" 
+                      style="font-size:11px;">
+                      Cancel
+                    </button>
+                    
+                  </form>
                 </div> <!--end report comment div-->
             </div> <!--end table cell for report comment-->
             <?php
-                  } //end if ($user_logged_in)
+            } //end if ($user_logged_in)
             ?>
             </div> <!--end of table row -->
             </div> <!--end of table -->
     
-            <?php      if ($user_logged_in && $created_by == $loggedIn_userId) { //edit comment form       
+            <?php
+            if ($user_logged_in && $created_by == $loggedIn_userId) { //edit comment form       
             ?>
+              <div 
+                id="<?php echo $edit_area_id ?>" 
+                class="<?php echo $edit_area_id ?>" 
+                style="display:none;">
+                
+                <form 
+                  name="<?php echo $form_name; ?>" 
+                  id="<?php echo $form_name; ?>" 
+                  method="POST">
+                  
+                  <textarea 
+                    rows="2" 
+                    cols="40" 
+                    name="<?php echo $edit_comment_textarea; ?>"
+                    id="<?php echo $edit_comment_textarea; ?>">
+                      <?php echo $text; ?></textarea>
+                  
+                  <br/>
+                  <input 
+                    type="hidden" 
+                    id="<?php echo $edit_comment_input_hidden; ?>" 
+                    name="<?php echo $edit_comment_input_hidden; ?>" 
+                    value ="<?php echo $id; ?>"/>
+                      
+                  <button 
+                    id="<?php echo $edit_comment_submit; ?>" 
+                    name="<?php echo $edit_comment_submit; ?>" 
+                    class="editCommentSub" 
+                    type="button" >
+                    Submit
+                  </button>
+                  
+                </form> 
+              </div>
         
-            <div id="<?php echo $edit_area_id ?>" class="<?php echo $edit_area_id ?>" style="display:none;">
-                <form name="<?php echo $form_name; ?>" id="<?php echo $form_name; ?>" method="POST">
-                    <textarea rows="2" cols="40" name="<?php echo $edit_comment_textarea; ?>" 
-                                                 id="<?php echo $edit_comment_textarea; ?>"><?php echo $text; ?></textarea><br/>
-                    <input type="hidden" id="<?php echo $edit_comment_input_hidden; ?>" 
-                                         name="<?php echo $edit_comment_input_hidden; ?>" 
-                                         value ="<?php echo $id; ?>"/>
-                    <button id="<?php echo $edit_comment_submit; ?>" name="<?php echo $edit_comment_submit; ?>" class="editCommentSub" type="button" >Submit</button>
-               </form> 
-            </div>
-        
-            <?php       } //end if($user_logged_in && $created_by == $loggedIn_userId) edit comment form
-            ?>
+          <?php 
+            } //end if($user_logged_in && $created_by == $loggedIn_userId) edit comment form
+          ?>
         </div>    <!--end div2-->    
         <br> 
         <?php               
-            } //end of foreach loop
-          } else {
-            echo "No comments for this entry.</br>";
-          } //end if 
-         $user_logged_status = $user_logged_in ? "Y" : "N";
+          } //end of foreach loop
+        } 
+        else {
+          echo "No comments for this entry.</br>";
+        } //end if 
+        $user_logged_status = $user_logged_in ? "Y" : "N";
         ?> 
         <!--add a new comment form-->
         <form name="new_comment" id="new_comment" >
-          <textarea rows="3" cols="45" name="newComment" id="newComment" ></textarea><br/>
-          <input type="hidden" id = "commentEntityId" name = "commentEntityId" value ="<?php echo $entryId;?>"/>
-          <input type="hidden" id = "user_login_status" name = "user_login_status" value ="<?php echo $user_logged_status;?>"/>
-          <button id="new_commentSub" name="new_commentSub" class="search_button" type="button" <?php if ($user_logged_in == false) echo " disabled"; ?> style="margin-top:5px;">Comment</button>
+          
+          <textarea 
+            rows="3" 
+            cols="45" 
+            name="newComment" 
+            id="newComment" ></textarea>
+            
+          <br/>
+          
+          <input 
+            type="hidden" 
+            id = "commentEntityId" 
+            name = "commentEntityId" 
+            value ="<?php echo $entryId;?>"/>
+          
+          <input 
+            type="hidden" 
+            id = "user_login_status" 
+            name = "user_login_status" 
+            value ="<?php echo $user_logged_status;?>"/>
+          
+          <button 
+            id="new_commentSub" 
+            name="new_commentSub" 
+            class="search_button" 
+            type="button" 
+            <?php if ($user_logged_in == false) echo " disabled"; ?> 
+            style="margin-top:5px;">
+            Comment
+          </button>
+          
         </form>  
      </div> <!--entry_record_value-->
    </div> <!--entry_record_value-->
@@ -589,46 +737,91 @@
       <div class="entry_record_value">
        
       <?php
-          //get the like number
-          $rm = new RatingManager();
-          $like_entry = "";
-          if ($rm->hasRatingByEntityLikeUser("ent".$entryId, $loggedIn_userId) ==1) {
-              $like_entry = "Unlike";
-          } else if ($rm->hasRatingByEntityDislikeUser("ent".$entryId, $loggedIn_userId) == 1  
-          //         ||  $rm->hasRatingByEntityLikeUser("ent".$entryId, $loggedIn_userId) == 0  
-          //         ||  $rm->hasRatingByEntityDislikeUser("ent".$entryId, $loggedIn_userId) == 0
-                    ){
-              $like_entry = "Like";
-          } else {
-              $like_entry = "";
-          }
-          $likeRating = $rm->CountRatingByLikeEntity("ent".$entryId);
-          $likeRating = $likeRating > 0 ? $likeRating : 0;
-          $dislikeRating = $rm->CountRatingByDislikeEntity("ent".$entryId);
-          $dislikeRating = $dislikeRating > 0 ? $dislikeRating : 0;
+      //get the like number
+      $rm = new RatingManager();
+      $like_entry = "";
+      if ($rm->hasRatingByEntityLikeUser("ent".$entryId, $loggedIn_userId) ==1) {
+        $like_entry = "Unlike";
+      } 
+      else if ($rm->hasRatingByEntityDislikeUser("ent".$entryId, $loggedIn_userId) == 1  
+      // ||  $rm->hasRatingByEntityLikeUser("ent".$entryId, $loggedIn_userId) == 0  
+      // ||  $rm->hasRatingByEntityDislikeUser("ent".$entryId, $loggedIn_userId) == 0
+                ){
+        $like_entry = "Like";
+      } 
+      else {
+        $like_entry = "";
+      }
+      $likeRating = $rm->CountRatingByLikeEntity("ent".$entryId);
+      $likeRating = $likeRating > 0 ? $likeRating : 0;
+      $dislikeRating = $rm->CountRatingByDislikeEntity("ent".$entryId);
+      $dislikeRating = $dislikeRating > 0 ? $dislikeRating : 0;
 
-          if ($like_entry != "") {
+      if ($like_entry != "") {
       ?>
-        <div style="display:inline-block; width: 280px;">
-            <span id ="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" name="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" class="entry_like"
-                style="cursor: pointer; color: #0066cc;"><?php echo $like_entry."&nbsp;"; ?></span>
-        </div>
+      <div style="display:inline-block; 
+                  width: 280px;">
+        <span 
+          id ="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" 
+          name="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" 
+          class="entry_like"
+          style="cursor: pointer; color: #0066cc;">
+          <?php echo $like_entry."&nbsp;"; ?>
+        </span>
+      </div>
       <?php
-          } else { ?>
-        <div style="display:inline-block; width: 280px;">
-            <span id ="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" name="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" class="entry_like"
-                  style="cursor: pointer; color: #0066cc;">Like</span>
-            <span> | </span>
-            <span id ="<?php echo $loggedIn_userId."_disentryLike_".$entryId; ?>" name="<?php echo $loggedIn_userId."_disentryLike_".$entryId; ?>" class="entry_dislike"
-                  style="cursor: pointer; color: #0066cc;">Dislike</span>
+      } 
+      else { ?>
+        <div style="display:inline-block; 
+                    width: 280px;">
+          
+          <span 
+            id ="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" 
+            name="<?php echo $loggedIn_userId."_entryLike_".$entryId; ?>" 
+            class="entry_like"
+            style="cursor: pointer; color: #0066cc;">
+            Like
+          </span>
+          
+          <span> | </span>
+          
+          <span 
+            id ="<?php echo $loggedIn_userId."_disentryLike_".$entryId; ?>" 
+            name="<?php echo $loggedIn_userId."_disentryLike_".$entryId; ?>" 
+            class="entry_dislike"
+            style="cursor: pointer; color: #0066cc;">
+            Dislike
+          </span>
+          
         </div>        
-      <?php  }
+      <?php  
+      }
       ?>
-        <span class="entry_like_num" style="display:''; font-size:12px; margin-left: 20px;"><?php echo $likeRating; ?> </span>
-        <span style="font-size:12px;"><?php echo "Like(s)";?></span>
+        <span 
+          class="entry_like_num" 
+          style="display:''; 
+                 font-size:12px; 
+                 margin-left: 20px;">
+          <?php echo $likeRating; ?>
+        </span>
+        
+        <span 
+          style="font-size:12px;">
+            <?php echo "Like(s)";?>
+        </span>
+        
         <span> | </span>
-        <span class="entry_dislike_num" style="display:''; font-size:12px;"><?php echo $dislikeRating; ?> </span>
-        <span style="font-size:12px;"><?php echo "Dislike(s)";?></span>
+        
+        <span 
+          class="entry_dislike_num" 
+          style="display:''; font-size:12px;">
+          <?php echo $dislikeRating; ?>
+        </span>
+        
+        <span 
+          style="font-size:12px;">
+          <?php echo "Dislike(s)";?>
+        </span>
       </div><!--entry_record_value-->
     </div><!--entry_record_value-->
     <!--- rating section end --->  
@@ -639,20 +832,63 @@
       <div class="entry_record_value">
           <!--start report entry div-->
             <div style="display:table-cell; ">
-                <div id="<?php echo $loggedIn_userId."_reportEntryId_".$entryId; ?>" 
-                     class="reportEntry" title="Report to Admin" style="cursor: pointer; color: #0066cc;">Report</div>
-                <div id ="<?php echo 'reportEntryDiv_'.$entryId;?>" style="display: none; ">
-                    <form name ="<?php echo 'reportEntryForm_'.$entryId;?>" id="<?php echo 'reportEntryForm_'.$entryId;?>" method="POST">
-                        <div style="font-size:14px; margin-top:5px;">Please input the reason:</div>
-                        <textarea rows="2" cols="40" name="<?php echo 'reportEntryReason_'.$entryId; ?>" 
-                                  id="<?php echo 'reportEntryReason_'.$entryId; ?>"></textarea><br/>
-                        <input type="hidden" id="<?php echo 'reportEntryBy_'.$entryId; ?>" 
-                               name="<?php echo 'reportEntryBy_'.$entryId; ?>" 
-                               value ="<?php echo $loggedIn_userId; ?>"/>
-                        <button id="<?php echo 'reportEntrySub_'.$entryId; ?>" name="<?php echo 'reportEntrySub_'.$entryId; ?>" class="reportEntrySub" type="button" style="font-size:12px; margin-top:8px;">Submit</button>
-                        <button id="<?php echo 'reportEntryCancel_'.$entryId; ?>" name="<?php echo 'reportEntryCancel_'.$entryId; ?>" class="reportEntryCancel" type="button" style="font-size:12px;margin-top:8px;">Cancel</button>
-                    </form>
-                </div> <!--end report entry div inner-->
+              
+              <div  
+                id="<?php echo $loggedIn_userId."_reportEntryId_".$entryId; ?>" 
+                class="reportEntry" 
+                title="Report to Admin" 
+                style="cursor: pointer; color: #0066cc;">
+                Report
+              </div>
+              
+              <div 
+                id ="<?php echo 'reportEntryDiv_'.$entryId;?>" 
+                style="display: none; ">
+                
+                <form 
+                  name ="<?php echo 'reportEntryForm_'.$entryId;?>" 
+                  id="<?php echo 'reportEntryForm_'.$entryId;?>" 
+                  method="POST">
+                  
+                  <div style="font-size:14px; margin-top:5px;">
+                    Please input the reason:
+                  </div>
+                  
+                  <textarea 
+                    rows="2" 
+                    cols="40" 
+                    name="<?php echo 'reportEntryReason_'.$entryId; ?>" 
+                    id="<?php echo 'reportEntryReason_'.$entryId; ?>"></textarea>
+                  
+                  <br/>
+                        
+                  <input 
+                    type="hidden" 
+                    id="<?php echo 'reportEntryBy_'.$entryId; ?>" 
+                    name="<?php echo 'reportEntryBy_'.$entryId; ?>" 
+                    value ="<?php echo $loggedIn_userId; ?>"/>
+                        
+                  <button 
+                    id="<?php echo 'reportEntrySub_'.$entryId; ?>" 
+                    name="<?php echo 'reportEntrySub_'.$entryId; ?>" 
+                    class="reportEntrySub" 
+                    type="button" 
+                    style="font-size:12px; 
+                           margin-top:8px;">
+                    Submit
+                  </button>
+                        
+                  <button 
+                    id="<?php echo 'reportEntryCancel_'.$entryId; ?>" 
+                    name="<?php echo 'reportEntryCancel_'.$entryId; ?>" 
+                    class="reportEntryCancel" 
+                    type="button" 
+                    style="font-size:12px;
+                           margin-top:8px;">
+                    Cancel
+                  </button>
+                </form>
+              </div> <!--end report entry div inner-->
             </div> <!--end table cell for report en-->
           
       </div><!--entry_record_value-->
