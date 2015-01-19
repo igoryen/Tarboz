@@ -17,15 +17,15 @@
     //Check if user is logged in or not
    
     if(!isset($_GET['id']) && !isset($_POST['id'])){
-    echo "neither (GET['id']) nor (POST['id'])";
+      echo "neither (GET['id']) nor (POST['id'])";
     }
     if(isset($_GET['id'])){
-//    echo "we have GET[id], it is " . $_GET['id'] . "<br>";
-    $entryId = $_GET['id'];
+      //echo "we have GET[id], it is " . $_GET['id'] . "<br>";
+      $entryId = $_GET['id'];
     }
     elseif(isset($_POST['id'])){
-    echo "we have POST[id], it is " . $_POST['id'] . "<br>";
-    $entryId = $_POST['id'];
+      echo "we have POST[id], it is " . $_POST['id'] . "<br>";
+      $entryId = $_POST['id'];
     }
 
     $em = new EntryManager();
@@ -34,21 +34,20 @@
     $treqs = $trm->getTreqByEntryId($entry->getEntryId());
 
     $lm = new LanguageManager();
-    
     $um = new UserManager();
     
     
     //$userId = 3; // the id of the current logged-in user
     $loggedIn_userId = "";
     $loggedIn_userType = "";
-	$user_logged_in = true;
+    $user_logged_in = true;
     if (isset($_SESSION['user'])) {
-        $user = $_SESSION['user'];
-        $loggedIn_userId = $user->getUserId();
-        $loggedIn_userType = $user->getUserType();
-          //echo "logged in user id==".$loggedIn_userId;
+      $user = $_SESSION['user'];
+      $loggedIn_userId = $user->getUserId();
+      $loggedIn_userType = $user->getUserType();
+      //echo "logged in user id==".$loggedIn_userId;
     } else {
-        $user_logged_in = false;
+      $user_logged_in = false;
     }
     
     $language = $entry->getEntryLanguage();
@@ -69,15 +68,15 @@
     $date = $entry->getEntryCreationDate();
     //table_to_see_entry_values($entry); // for debugging
 
-      //$user_logged_in = true;
-      //$user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
-      //$user_id = "";
-      //if (isset($_SESSION['user'])) {
-          //$user = $_SESSION['user'];
-          //$user_id = $user->getUserId();
-      //} else {
-      //  $user_logged_in = false;
-      //}
+    //$user_logged_in = true;
+    //$user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
+    //$user_id = "";
+    //if (isset($_SESSION['user'])) {
+        //$user = $_SESSION['user'];
+        //$user_id = $user->getUserId();
+    //} else {
+    //  $user_logged_in = false;
+    //}
 
   ?>
 
@@ -112,13 +111,20 @@
       <!--<a href="other_user.php?id=<?php echo $user_id;?>&name=<?php echo $fname;?>" style="color:#000000;" >
               <?php echo $fname." ".$lname; ?>
           </a> -->
-         <span style="color: #939690">
-             <?php if ($user_logged_in ) { ?>
-             <a href="other_user.php?id=<?php echo $user_id; ?>&name=<?php echo $fname;?>" style="color:#000000;">
+        <span style="color: #939690">
+          Contributor:
+          <?php
+          if ($user_logged_in ) { ?>
+            <a href="other_user.php?id=<?php echo $user_id; 
+              ?>&name=<?php echo $fname; ?>" 
+              style="color:#000000;">
               <?php echo $user_login; ?>
              </a>
-          <?php } else { echo $user_login; }?>
-             created this entry at <?php echo $date; ?>
+          <?php 
+          } 
+          else { 
+            echo $user_login; 
+          }?>. Entry creation date: <?php echo $date; ?>
         </span>
       </div>
     </div>
@@ -127,22 +133,22 @@
     <div class="entry_record">
       <div class="entry_record_title">
         <span>Language: <?php echo $language; ?></span>  
-        <span> (
-        <?php 
-            //echo $authen."</br>"; 
-            $query = "SELECT * FROM tbl_authen_status WHERE athn_authen_status_id = '".$authen."'";
-            $dbHelper = new DBHelper();
-            $result = $dbHelper->executeSelect($query);
-            while ($list = mysqli_fetch_assoc($result)) {
-                $authen_status = $list['athn_stat_name'];
-                echo $authen_status;
-            }
-        ?>  ) 
-         <span class="question" id="entryviewauthen" >?</span>
+        <span> (<?php 
+          //echo $authen."</br>"; 
+          $query = "SELECT * FROM tbl_authen_status WHERE athn_authen_status_id = '".$authen."'";
+          $dbHelper = new DBHelper();
+          $result = $dbHelper->executeSelect($query);
+          while ($list = mysqli_fetch_assoc($result)) {
+            $authen_status = $list['athn_stat_name'];
+            echo $authen_status;
+          }
+        ?>) 
+          <span class="question" id="entryviewauthen" >?</span>
         </span>  
-
       </div>
-      <div class="entry_record_value_for_text"><?php echo $text; ?></div>
+      <div class="entry_record_value_for_text">
+        <?php echo $text; ?>
+      </div>
     </div>
     
     
@@ -334,15 +340,19 @@
     <?php if ($loggedIn_userId == $user_id || $loggedIn_userType == "1") { ?>
     <div class="entry_record">
       <div class="entry_record_title">Control</div>
+      
       <div class="entry_record_value">
         
         <div class="button_room">
           <!-- the Edit Entry button -->
-          <a href="entrycreate.php?id=<?php echo $entryId; ?>">Edit the entry</a><!-- #1-->
+          <a href="entrycreate.php?id=<?php echo $entryId; ?>">
+            Edit the entry
+          </a><!-- #1-->
           &nbsp;
         </div><!-- Edit button room -->
+        
         <div class="button_room"> <!-- the Delete Entry button --> 
-            <button id="entryDeleteButton" class="en_button" style="width: 150px; font-size: 14px;">Delete this entry</button>
+          <button id="entryDeleteButton" class="en_button" style="width: 150px; font-size: 14px;">Delete this entry</button>
             <span id="entryDeleteResponse" style="display: none"></span>
             <div id="entryDeleteDialog" style="display: none">
               Really delete this entry?<?php //echo $entryId; ?>
