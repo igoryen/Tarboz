@@ -351,32 +351,52 @@
           &nbsp;
         </div><!-- Edit button room -->
         
-        <div class="button_room"> <!-- the Delete Entry button --> 
-          <button id="entryDeleteButton" class="en_button" style="width: 150px; font-size: 14px;">Delete this entry</button>
-            <span id="entryDeleteResponse" style="display: none"></span>
-            <div id="entryDeleteDialog" style="display: none">
-              Really delete this entry?<?php //echo $entryId; ?>
-              <span><form action="index.php">
+        <div class="button_room"> <!-- the Delete Entry button -->
+          
+          <button id="entryDeleteButton" 
+                  class="en_button" 
+                  style="width: 150px; 
+                         font-size: 14px;">
+            Delete this entry
+          </button>
+          
+          <span id="entryDeleteResponse" style="display: none"></span>
+            
+          <div id="entryDeleteDialog" style="display: none">
+            Really delete this entry?<?php //echo $entryId; ?>
+            
+            <span>
+              <form action="index.php">
                 <button type="submit"
                         id="entryDeleteConfirm"
-                        onclick="entryDelete(<?php echo $entryId; ?>)">Yes, delete it.</button>
-              </form></span>
-              <span><button name="entryDeleteCancel" 
-                    id="entryDeleteCancel"
-                    onclick="">No. Cancel</button></span>
-            </div>
-            <script>
-                $( "#entryDeleteButton" ).click(function() {
-                  $( "#entryDeleteDialog" ).show("fast");
-                });
-                $( "#entryDeleteCancel" ).click(function() {
-                  $( "#entryDeleteDialog" ).hide("fast");          
-                });
-                $( "#entryDeleteConfirm ").click(function(){
-                  $("#entryDeleteResponse").show("fast");
-                  $( "#entryDeleteDialog" ).hide("fast");
-                });
-            </script> 
+                        onclick="entryDelete(<?php echo $entryId; ?>)">
+                  Yes, delete it.
+                </button>
+              </form>
+            </span>
+            
+            <span>
+              <button name="entryDeleteCancel" 
+                      id="entryDeleteCancel"
+                      onclick="">
+                No. Cancel
+              </button>
+            </span>
+            
+          </div>
+          
+          <script>
+            $( "#entryDeleteButton" ).click(function() {
+              $( "#entryDeleteDialog" ).show("fast");
+            });
+            $( "#entryDeleteCancel" ).click(function() {
+              $( "#entryDeleteDialog" ).hide("fast");          
+            });
+            $( "#entryDeleteConfirm ").click(function(){
+              $("#entryDeleteResponse").show("fast");
+              $( "#entryDeleteDialog" ).hide("fast");
+            });
+          </script> 
         </div>  <!-- the Delete Entry button -->       
       </div><!-- entry record value -->
     </div><!-- Entry record-->    
@@ -386,13 +406,20 @@
     <!--Display translation request-->
     <?php 
     if(isset($_SESSION['user'])){
-    if($entry->getEntryAuthenStatusId() == 1){?>
+      if($entry->getEntryAuthenStatusId() == 1){?>
+    
     <div class="entry_record">
-      <div class="entry_record_title">Request a translation into one of these languages</div>
+      
+      <div class="entry_record_title">
+        Request a translation into one of these languages
+      </div>
+      
       <div class="entry_record_value">
+        
         <select 
           name="treqLang" 
           onchange="treqCreate(this.value,<?php echo $user_id.','.$entryId; ?>)">
+          
           <option value="">Select a language:</option>
           <?php
           $langs = $lm->getLanguages();
@@ -403,11 +430,13 @@
             echo $lang->getLangName();
             echo '</option>';
           } ?>
-          </select>
+        </select>
         <span id="treqCreateResponse"></span>
       </div>
+      
     </div>
-    <?php } //end if($entry->getEntryAuthenStatusId() == 1)
+    <?php 
+      } //end if($entry->getEntryAuthenStatusId() == 1)
     }?>
     <!--Display translation request end-->
     <!--- comments section start --->
@@ -416,49 +445,54 @@
       <div class="entry_record_title">Comments</div>
       <div class="entry_record_value">
       <?php
-          $commentManager = new CommentManager();
-          $commentsByEntry = $commentManager->getCommentByEntry($entryId);
+        $commentManager = new CommentManager();
+        $commentsByEntry = $commentManager->getCommentByEntry($entryId);
                 
-          $commentCount = count($commentsByEntry);
-          if ($commentCount > 0) {
-            foreach($commentsByEntry as $coms){
-              $id         =   $coms->getId();
-              $text       =   $coms->getText();
-              $rating_id  =   $coms->getRatingId();
-              $created_by =   $coms->getCreatedBy();   
-              //echo "comment text: ". $text."<br/>";
+        $commentCount = count($commentsByEntry);
+        if ($commentCount > 0) {
+          foreach($commentsByEntry as $coms){
+            $id         =   $coms->getId();
+            $text       =   $coms->getText();
+            $rating_id  =   $coms->getRatingId();
+            $created_by =   $coms->getCreatedBy();   
+            //echo "comment text: ". $text."<br/>";
                 
-              //get the username who created the comment
-              $userManager = new UserManager();
-              $created_user = $userManager->getUserByUserId($created_by);
-              $created_user_name = $created_user->getLogin();
+            //get the username who created the comment
+            $userManager = new UserManager();
+            $created_user = $userManager->getUserByUserId($created_by);
+            $created_user_name = $created_user->getLogin();
                 
             //define ids for html tags in the loop
-              $edit_icon_id = "editIcon_".$id;
-              $edit_area_id = "edit_area_".$id;
-              $edit_comment_text_id = "comment_text_id_".$id;
-              $form_name = "formEditComment_".$id;
-              $edit_comment_textarea = "editCommentText_".$id;
-              $edit_comment_input_hidden = "editCommentId_".$id;
-              $edit_comment_submit = "editCommentSub_".$id;
-              $delete_icon_id ="deleteIcon_".$id;
-              $comment_like_id = $loggedIn_userId."_commentLike_".$id;
-              $comment_likeNum_id = $loggedIn_userId."_commentLikeNum_".$id;
-        
+            $edit_icon_id = "editIcon_".$id;
+            $edit_area_id = "edit_area_".$id;
+            $edit_comment_text_id = "comment_text_id_".$id;
+            $form_name = "formEditComment_".$id;
+            $edit_comment_textarea = "editCommentText_".$id;
+            $edit_comment_input_hidden = "editCommentId_".$id;
+            $edit_comment_submit = "editCommentSub_".$id;
+            $delete_icon_id ="deleteIcon_".$id;
+            $comment_like_id = $loggedIn_userId."_commentLike_".$id;
+            $comment_likeNum_id = $loggedIn_userId."_commentLikeNum_".$id;
             //ratings    
-              $ratingManager = new RatingManager();
-              $rating_content = ""; 
-              if ($ratingManager->hasRatingByEntityLikeUser("com".$id, $loggedIn_userId) ==1) {
-                  $rating_content = "Unlike";
-              } else if ($ratingManager->hasRatingByEntityDislikeUser("com".$id, $loggedIn_userId) == 1 || 
-                         $ratingManager->hasRatingByEntityLikeUser("com".$id, $loggedIn_userId) == 0 || 
-                         $ratingManager->hasRatingByEntityDislikeUser("com".$id, $loggedIn_userId) == 0){
-                  $rating_content = "Like";
-              }
-              $likeRating = $ratingManager->CountRatingByLikeEntity("com".$id);
-              $likeRating = $likeRating > 0 ? $likeRating : "";
-                
-              $comment_report_id = $loggedIn_userId."_reportCommentId_".$id;
+            $ratingManager = new RatingManager();
+            $rating_content = ""; 
+            if ($ratingManager->hasRatingByEntityLikeUser("com".$id, $loggedIn_userId) ==1) {
+              $rating_content = "Unlike";
+            } 
+            else if (
+              $ratingManager
+                ->hasRatingByEntityDislikeUser("com".$id, $loggedIn_userId) == 1 
+              || 
+              $ratingManager
+                ->hasRatingByEntityLikeUser("com".$id, $loggedIn_userId) == 0 
+              || 
+              $ratingManager
+                ->hasRatingByEntityDislikeUser("com".$id, $loggedIn_userId) == 0){
+              $rating_content = "Like";
+            }
+            $likeRating = $ratingManager->CountRatingByLikeEntity("com".$id);
+            $likeRating = $likeRating > 0 ? $likeRating : "";
+            $comment_report_id = $loggedIn_userId."_reportCommentId_".$id;
       ?>
 
       <div> <!--div2-->
