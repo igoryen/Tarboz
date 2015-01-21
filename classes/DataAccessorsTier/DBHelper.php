@@ -43,24 +43,24 @@ class DBHelper {
    * @return mysql_result $result
    */
   public function executeSelect($sql) {
-    //3*
+    //103*
     //echo "<br>dbh::executeSelect(sql) sql:<br>" . $sql;
     $this->connectToDB();
-    $result = mysqli_query($this->connection, $sql); // 1    
+    $result = mysqli_query($this->connection, $sql); // 101    
     $this->closeConnection();
-    // 5
-    return $result; // 1
+    // 105
+    return $result; // 101
   }
 
   public function executeQuery($sql) {
-    // 6*
+    // 106*
     $this->connectToDB();
     if ($this->connection) {
       $result = mysqli_query($this->connection, $sql);
-      // 4*
+      // 104*
     }
     $this->closeConnection();
-    // 4*,5*
+    // 104*,105*
     return $result;
   }
 

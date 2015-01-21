@@ -23,7 +23,7 @@ require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 //require DB_CONNECTION . 'DBHelper.php';
 //require DB_CONNECTION . 'datainfo.php';
 
-$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2); // 1
+$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2); // 5
 if($lang == 'zh'){
   $lang = 'ch';
 }

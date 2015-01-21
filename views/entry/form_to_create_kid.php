@@ -8,7 +8,7 @@ function form_to_create_kid($dad, $err_messages){
   $x = "Hi!";
   $lm = new LanguageManager();
   ?>
-  <!-- 1 -->
+
  <div align="center">
      <div style="width: 850px">
   <form action="" method="post" style="text-align: right; display: block;">
@@ -151,7 +151,7 @@ function form_to_create_kid($dad, $err_messages){
 
 
       <!-- entry_authen_status_id -->
-      <input name="authen" value="2" hidden/><!-- 1 -->
+      <input name="authen" value="2" hidden/>
 
       <!-- the value of ent_entry_translation_of will be dealt with separately -->
       <input name="translOf" value="<?php echo $dad->getEntryId(); ?>" hidden/>

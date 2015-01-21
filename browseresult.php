@@ -148,7 +148,7 @@
                    width:300px; 
                    padding: 5px; 
 <?php 
-  if($count%2 == 0) { // 1
+  if($count%2 == 0) { // 2
     echo 'background-color: #ffffff;';
   } 
   else {
