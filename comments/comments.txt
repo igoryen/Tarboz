@@ -11,6 +11,7 @@
 
 9.
 10.
+11.
 
 101. FRV (function's return value) is object of class mysql_result. You can't see its contents with echo (which tries to convert it to string)
 102. To convert the mysql_result object into an associative array
