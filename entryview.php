@@ -30,7 +30,7 @@
 
     $em = new EntryManager();
     $trm = new TranslationRequestManager();
-    $entry = $em->getEntryById($entryId); // 1
+    $entry = $em->getEntryById($entryId); // 3
     $treqs = $trm->getTreqByEntryId($entry->getEntryId());
 
     $lm = new LanguageManager();
@@ -178,7 +178,7 @@
 <?php }?>
     
     
-    <div class="entry_record" style="display: none;"><!-- 2 -->
+    <div class="entry_record" style="display: none;"><!-- 7 -->
       <div class="entry_record_title">Verbatim</div>
       <div class="entry_record_value"><?php echo $verbatim; ?></div>
     </div>
@@ -220,7 +220,7 @@
     
 <?php
   if($entry->getEntryAuthenStatusId() == 1){
-        // 1*
+        // 6
     ?>
     <div class="entry_record">
       <div class="entry_record_title">Translate this entry into <?php

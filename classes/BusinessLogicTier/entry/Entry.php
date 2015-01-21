@@ -2,24 +2,24 @@
 
 class Entry {
 
-  private $entry_id; // 1
+  private $entry_id; // 201
   private $entry_language_id;
-  private $entry_language; // 13
-  private $entry_text; // 2
-  private $entry_verbatim; // 3
-  private $entry_translit; // 4
-  private $entry_authen_status_id; //5
+  private $entry_language; // 213
+  private $entry_text; // 202
+  private $entry_verbatim; // 203
+  private $entry_translit; // 204
+  private $entry_authen_status_id; //205
   private $entry_transl_of;
-  private $entry_user_id; // 6
-  private $entry_media_id; // 7
-  private $entry_comment_id; //8
-  private $entry_rating_id; // 9
+  private $entry_user_id; // 206
+  private $entry_media_id; // 207
+  private $entry_comment_id; //208
+  private $entry_rating_id; // 209
   private $entry_tags;
-  private $entry_author_id; // 10
+  private $entry_author_id; // 210
   private $entry_authors;
-  private $entry_source_id; // 11
-  private $entry_use; // 12
-  private $entry_http_link; //12
+  private $entry_source_id; // 211
+  private $entry_use; // 212
+  private $entry_http_link; //212
   private $entry_creation_date;
 
 

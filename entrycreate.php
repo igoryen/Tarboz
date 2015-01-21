@@ -1,10 +1,10 @@
 <?php 
 
 //session_start();
-//if(isset($_SESSION['user'])){ // 1  
+//if(isset($_SESSION['user'])){ // 501  
   require("header.php"); // session is started in header.php
   require_once BUSINESS_DIR_ENTRY . "EntryManager.php";
-  //include_once "lib.php";  // 25
+  //include_once "lib.php";  // 525
   include_once 'views/entry/form_to_edit_entry.php';
   include_once 'views/entry/form_to_create_entry.php';
   include_once 'views/entry/form_to_create_kid.php';
@@ -25,13 +25,14 @@
 //      echo "user id==".$user_id;
   }
 
-  $user_input_valid = true; // 2
+  $user_input_valid = true; // 502
   date_default_timezone_set('America/Toronto');
-  // 3, 53*
+  // 553*
+  // 503 
   $text_error = "";
   //etc...  
-  // 51*
-  // 54
+  // 551*
+  // 554
   $err_messages = array(
       "langid"    => "",
       "text"      => "",
@@ -45,9 +46,9 @@
       "link"      => ""
   );
 
-  if($_POST){ // 4
-    // 44*, 45*
-    // 26 ------------------------------------------
+  if($_POST){ // 504
+    // 544*, 545*
+    // 526 ------------------------------------------
     //========================================================================
     // regex for latin and non-latin characters. Surround with single quotes
     // for unicode explanation, see: http://www.regular-expressions.info/unicode.html
@@ -187,21 +188,21 @@
     }
     // for tbl_entry :: ent_entry_creation_date
 
-    // end of 26 ---------------------------------------    
+    // end of 526 ---------------------------------------    
 
-    if($user_input_valid){ // 6       
+    if($user_input_valid){ // 506       
             
-      if(isset($_GET['id']) && !isset($_GET['a'])){ // 14
-        // 41*, 46*
+      if(isset($_GET['id']) && !isset($_GET['a'])){ // 514
+        // 541*, 546*
         
-        $em = new EntryManager(); // 12
-        // 7, 8, 9, 10
+        $em = new EntryManager(); // 512
+        // 507, 508, 509, 510
       
-        //table_to_see_POST_values(); // 27      
-        $entry = new Entry(); // 32
-        // 11, 29, 39 
+        //table_to_see_POST_values(); // 527      
+        $entry = new Entry(); // 532
+        // 511, 529, 539 
         $entry->setEntryId(         $_GET['id']);
-        $entry->setEntryLanguageId($_POST['langid']); // 30 (?)
+        $entry->setEntryLanguageId($_POST['langid']); // 530 (?)
         $entry->setEntryText(htmlentities($_POST['text']));
         $entry->setEntryVerbatim($_POST['verbatim']);
         $entry->setEntryTranslit(htmlentities($_POST['translit']));
@@ -217,25 +218,25 @@
         $entry->setEntrySourceId(htmlentities($_POST['source'])); 
         $entry->setEntryUse(htmlentities($_POST['use']));
         $entry->setEntryHttpLink(htmlentities(str_replace("watch?v=", "v/", $_POST['link'])));
-        // 40*, 50
+        // 540*, 550
         
-        $resultOfEntryUpdate = $em->updateEntry($entry); // 33
+        $resultOfEntryUpdate = $em->updateEntry($entry); // 533
         echo "<script type='text/javascript'>
               window.onload = function () { 
                 top.location.href = 'entryview.php?id={$_GET['id']}'; 
               };
              </script>";
       }
-      else{ // 16
-        // 11
-        $em = new EntryManager(); // 12
-        // 7, 8, 9, 10
+      else{ // 516
+        // 511
+        $em = new EntryManager(); // 512
+        // 507, 508, 509, 510
       
-        //table_to_see_post_values(); // 27      
-        $entry = new Entry(); // 32
-        // 11, 29
+        //table_to_see_post_values(); // 527      
+        $entry = new Entry(); // 532
+        // 511, 529
         //$entry->setEntryId($_POST['id']);
-        $entry->setEntryLanguageId($_POST['langid']); // 30 (?)
+        $entry->setEntryLanguageId($_POST['langid']); // 530 (?)
         $entry->setEntryText(htmlentities($_POST['text']));
         $entry->setEntryVerbatim(htmlentities($_POST['verbatim']));
         $entry->setEntryTranslit(htmlentities($_POST['translit']));
@@ -250,57 +251,57 @@
         $entry->setEntryAuthors(htmlentities($_POST['authors']));
         $entry->setEntrySourceId('1');//$_POST['source']); 
         $entry->setEntryUse(htmlentities($_POST['use']));
-        $entry->setEntryHttpLink(htmlentities(str_replace("watch?v=", "v/", $_POST['link']))); //43
+        $entry->setEntryHttpLink(htmlentities(str_replace("watch?v=", "v/", $_POST['link']))); //543
         $entry->setEntryCreationDate(date("Y-m-d H:i:s"));
         
         $id = $em->createEntry($entry); // 13
-        // 52*
-        //header("Location: index.php?id=" . $id); // 31
+        // 552*
+        //header("Location: index.php?id=" . $id); // 531
         echo "<script type='text/javascript'>
               window.onload = function () { 
                 top.location.href = 'entryview.php?id={$id}'; 
               };
              </script>";
         
-      } // 16
-    } // 6
+      } // 516
+    } // 506
     else{ // if user's input is invalid
       if(isset($_GET['id'])){
         if(isset($_GET['a'])){
-          // 48*
-          $em = new EntryManager(); // 12
-          $dad = $em->getEntryById($_GET['id']); // 36
+          // 548*
+          $em = new EntryManager(); // 512
+          $dad = $em->getEntryById($_GET['id']); // 536
           form_to_create_kid($dad, $err_messages);
         }
         else{
-          //49*
-          $em = new EntryManager(); // 12
-          $entry = $em->getEntryById($_GET['id']); // 36
-          form_to_edit_entry($entry, $err_messages); // 37
+          //549*
+          $em = new EntryManager(); // 512
+          $entry = $em->getEntryById($_GET['id']); // 536
+          form_to_edit_entry($entry, $err_messages); // 537
         }
       }
       else{
         form_to_create_entry($err_messages);
       }
     }
-  }// 4
-  else { // 17
-    if(isset($_GET['id'])){ // 34
+  }// 504
+  else { // 517
+    if(isset($_GET['id'])){ // 534
 
-      if(isset($_GET['a'])){ // 42
-        // 48*
-        $em = new EntryManager(); // 12
-        $dad = $em->getEntryById($_GET['id']); // 36
+      if(isset($_GET['a'])){ // 542
+        // 548*
+        $em = new EntryManager(); // 512
+        $dad = $em->getEntryById($_GET['id']); // 536
         form_to_create_kid($dad, $err_messages);
         
-      }else{ // 47
-        //49*
-        $em = new EntryManager(); // 12
-        $entry = $em->getEntryById($_GET['id']); // 36
-        form_to_edit_entry($entry, $err_messages); // 37
+      }else{ // 547
+        //549*
+        $em = new EntryManager(); // 512
+        $entry = $em->getEntryById($_GET['id']); // 536
+        form_to_edit_entry($entry, $err_messages); // 537
       }      
     }
-    else{ // 35
+    else{ // 535
       form_to_create_entry($err_messages);
     }
 

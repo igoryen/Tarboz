@@ -12,7 +12,7 @@ class EntryManager {
   public function createEntry($entry) {
     $eda = new EntryDataAccessor();
     $last_inserted_id = $eda->addEntry($entry);
-    //1
+    //401
     return $last_inserted_id;
   }
 
@@ -77,9 +77,9 @@ class EntryManager {
 
   public function getFatherByVerbatim($verbatim) {
     $eda = new EntryDataAccessor();
-    //2
+    //402
     $fatherGottenByVerbatim = $eda->getFatherByVerbatim($verbatim);    
-    //3
+    //403
     return $fatherGottenByVerbatim;
   }
 

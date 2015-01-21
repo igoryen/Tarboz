@@ -1,0 +1,145 @@
+1. call the getLanguage() on the current class (in this file).
+2. if after division by 2 the remainder is zero i.e. if the value of 'count' is even
+4.
+3. try to make a search for entry
+#1. redirect to Entry/create.php with "id=" set to the id of the entry which is currently displayed in this page.
+5. get the contents of the Accept-Language: header from the current request, if there is one. Example: 'en'.
+6. (formerly entryview 1) echo "<br>entryview.php:: this is an original, i.e. " .$entry->getEntryAuthenStatusId() . "<br>";
+7. (formerly entryview 2) style="display: none;" - use it to remove the element completely from the document, so it doesn't take up any space. For debugging.
+
+8. value="2" means this entry is a "kid" (a translation of an entry whose authen status is 1 i.e. "Original").
+
+9.
+10.
+
+101. FRV (function's return value) is object of class mysql_result. You can't see its contents with echo (which tries to convert it to string)
+102. To convert the mysql_result object into an associative array
+103. echo "<br>dbh::executeSelect(sql) sql:<br>" . $sql;
+104. echo "<br>dbh::executeQuery() result: " . print_r($result);
+105. echo "<br>dbh::executeQuery() result: "; $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array);
+106. echo "<br><br>dbh::executeQuery(sql) sql:<br>" . $sql;
+201. ent_entry_id
+202. ent_entry_text
+203. ent_entry_verbatim
+204. ent_entry_translit
+205. of class AuthenStatus
+206. of class User
+207. of class Media. why not "mediaSetId" ??
+208. why not "commentSetId" ??
+209. of class Rating. why not "ratingSet" or "ratingSetId" ???
+210. of class EntryAuthor. better than $authorName?
+211. of class EntrySource. source = a piece of lit. work
+212. of class EntryDetails
+213. the name of the variable is not $entry_language_id because we want it to store a string that comes from the DB
+301. [ent_entry_text] - the text of the entry, e.g. "Happy Birthday To You"
+302. [ent_entry_verbatim] - the verbatim of entry  ~ pinyin: e.g. "s dnyom rozhdenia tebya"
+303. [ent_entry_translit] -  entry's transliteration, using roman alphabet
+304. [ent_entry_authen_status_id] - The authenticity status of the entry: whether the entry is original, or a translation, or unauthenticated
+305. [ent_entry_translation_of] - the hyperlink to the entry which is the "father" of the 'entry family'
+306. [ent_entry_creator_id] - the id of the creator-user who added the entry to the database
+307. [ent_entry_media_id]
+308. [ent_entry_comment_id] - the set of comments for this entry/ [ent_entry_rating_id]
+309. [ent_entry_rating_id] - the rating of the entry
+310. [ent_entry_tags] - tags to make the entry search easier
+311. Whoever is the author of the text of the entry. Why the id??? Author is not in our database
+312. which book or other work the entry is taken from
+313. when/in which situations it is appropriate to use the entry
+314. // the link to the video of the entry
+315. compose the MySQL link
+316. echo "<hr>eda::addEntry() last_inserted_id = " . $last_inserted_id;
+317. returns the id of the last row which was inserted
+318. using: require_once DB_CONNECTION . 'DBHelper.php';
+319. like 'lan_lang_name' in 'tbl_language'
+320. receive the mysql_result object passed up by DBHelper 
+321. search bl_entry (the table with phrases) for the original entry whose verbatim is close to the verbatim provided by the user
+322. pass the mysql_result object to method getEntryBried() in the same object
+323. method is private: to be accessed by member functions only.
+324. convert the mysql_result object into an associative array
+325. echo "<br>eda::getFatherByVerbatim() query:<br>" . $query . "<br>";
+326. echo "<br>eda::getFatherByVerbatim() mysql_result:<br>" . print_r($result) . "<br>";
+327. $assoc_array= $result->fetch_array(MYSQLI_ASSOC); print_r($assoc_array);
+328. echo "<br>eda::getFatherByVerbatim() fatherGottenByVerbatim:<br>" . print_r($fatherGottenByVerbatim);
+329. echo "<br>LLL<br>eda::getFatherByVerbatim() fatherGottenByVerbatim->lang:<br>" . print_r($fatherGottenByVerbatim->getEntryLanguage());
+330. the counter keeps count of the entries
+331. an array of class Entry objects
+332. assign the value of each key of the associative array
+333. loop through each kid in the array of kids
+334. to filter the array and remove empty values
+335. return array_filter($Entries);  (DOESN'T WORK)
+336. echo "<br>TTT<br>eda::getEntryBrief() resultOfSelect['lan_lang_name']:<br>";
+337. echo mysqli_fetch_assoc($resultOfSelect)['lan_lang_name'];
+338. echo "<br>eda::getEntryBrief() list = mysqli_fetch_assoc(resultOfSelect):<br>";
+339. print_r($list = mysqli_fetch_assoc($resultOfSelect));
+340. echo "<br>eda::getEntryBrief() list['lan_lang_name']:<br>". $ary['lan_lang_name'];
+341. assign the value of each key of the associative array
+342. private: to be accessed by member functions only
+343. $selectResult is the result from executing a SELECT query
+344. create an empty object
+345. Fetch a result row as an associative array
+346. the current EntryDataAccessor object is $this
+347. return value is TRUE or FALSE
+348. echo "<hr>eda::getEntryBrief() entry->getEntryLanguage() == " . $Entry->getEntryLanguage() . "<br>";
+349. echo "<br>LLL<br>eda::getEntryBrief() entry->getEntryLanguage() == " . print_r($Entry) . "<hr>";
+350. echo "<hr>eda::getEntryBrief() entry['lan_lang_name'] == " . $Entry['lan_lang_name'] . "<br>";
+351. echo "<br>eda::query_insert:<br>"; echo $query_insert;
+352. echo "<br>eda::getEntryById() query:<br>" . $query;
+353. NB: the index ('lan_lang_name') is different because the query to get entry is build so that to retrieve the language_name by language_id
+
+401. echo "<hr>em::last inserted id = ". $last_inserted_id;
+402. echo "<br>TTT<br>em::getFatherByVerbatim() before eda->getFatherByVerbatim(verbatim)";
+403. echo "em::getFatherByVerbatim() fatherGottenByVerbatim-lang:<br>". $fatherGottenByVerbatim->getEntryLanguage();
+
+501. if a user is already in
+502. create a variable that will be used as a flag for user input validation
+503. variables to hold error messages for validation errors
+504. if we have data (a new entry) brought in by $_POST | if $_POST has data; if we have a whole full Entry object sitting in the $_POST, then we know it wants us to send it to the DB
+505. if format validation is passed | if user's input validation check was successful
+506. if user's input is valid, i.e. if the values of the $_POST are correct and clean
+507. create temporary variables
+508. populate the temp variables with values gotten from $_POST
+509. TO DO: add methods to sanitize the values
+510. also: maybe use numbers or single letters in the POST array to disguise?
+511. pull the values from the $_POST superglobal array and place them into an Entry object
+512. initialize EntryManager | create an EntryManager object
+513. do the actions to INSERT a new entry/row into the DB. pass the filled class Entry object for database INSERT operation
+514. if user is logged in && we have data in $_POST && that data (i.e. the user input) is valid && we have an entry id delivered in $_GET (i.e. UPDATE operation), then it means we have an UPDATE scenario, because if there is an id then it means it came from the database which means there exists a row/entry with that id already in the DB. 
+515.
+516. else if user is logged in && $_POST is filled (we have data in $_POST) && user input is valid BUT we don't have an id in $_GET (i.e. we have an INSERT operation/scenario)
+517. if $_POST has no data, if we come to this page empty-handed (empty-POST-ed), then we know we want to create (INSERT) a new entry (row). 
+518. if data dalidation succeeds, if there is no bad data
+519. What is the language X in which we are creating this new entry?
+520. What is the language X that the user selected?
+521. What is the greatest id number in the table for language X?
+522. create a new entry which is +1 greater than the greatest id number
+523. else if nobody is logged in, if no user is logged in, if the visitor is not logged in
+524. invite the guest to come in through the front door, send the not-logged-in guest to the login page
+525. the file with includable functions
+526. validation section: where $_POST data is validated and sanitized. Before we touch the values that are sitting in the $_POST we want to make sure it's clean and has no mistakes
+527. table to see the values contained in the $_POST superglobal array
+528. send the id of the newly created entry to the entry profile page to be displayed there
+529. load the entry object. pull the values from the $_POST array and use them to populate the class Entry object. the names of the keys of the $_POST superglobal array are the names of the attributes of the html elements in the entry create form. The values are the values of the attributes of the html elements.
+530. when I do the insert operation I store "1" here, but when I do SELECT, I put a string here. Is that OK?
+531. redirect the user to entry profile page and send it/there the id of the last inserted Entry object so that the last inserted Entry object would be displayed for the user to see the result of how he has created the Entry object
+532. create an empty Entry object to fill it with values from $_POST
+533. Start the process to update the entry row in the DB using the data passed in the Entry object
+534. if there's nothing in $_POST but $_GET has an ID, then it means that the user wants to do either of the 2: (1) edit (UPDATE) an entry whose id is in $_GET, or (2) create (INSERT) a new entry which will be a translation of the entry whose id is in $_GET. 
+535. if POST is empty AND GET has no id, that means we were not redirected to this page but we just came here by pressing the "create new entry" button, then we know that we want to create/compose (INSERT) a brand new entry (row) from scratch
+536. go to the DB and SELECT the Entry row by id
+537. pass the Entry object filled to the Entry Edit form, and display the Entry Edit form
+538. redirect the user to entry profile page and send it/there the id of the Entry object on which the UPDATE operation has just been done so that the updated Entry object would be displayed for the user to see the result of how he has updated the Entry object
+539. the list is different here, because we are getting the entry UPDATED and we DON'T the user edit all the columns, but only SOME of them
+540. echo "<br>Entry/create.php. entry passed for UPDATE:<br>".var_dump($entry)."end of var_dump of entry passed for Update<br>";
+541. echo "<br>We have a GET['id']! id=" . $_GET['id'];
+542. if $_GET has an id AND an a=t (for "action = translation", the indication that we are creating a kid off a father)
+543. modify the Youtube http link for embedding
+544. echo 'entrycreate.php: $_POST is populated'; 
+545. echo "POST: " . var_dump($_POST);
+546. echo "we have a POST and GET[id]".$_GET['id'].", operation: EDIT";
+547. if we $_POST is empty and we have no $_GET[id], then it means we are creating a new entry from scratch, not based on an original entry.
+548. echo "the id of the entry off which you want to create a translation is " . $_GET['id'];
+549. echo "the id of the entry you want to edit is " . $_GET['id'];
+550. this is an UPDATE operation and we don't need to create a new date stamp, we will be using the old (the very first) date of creation 
+551. echo 'entrycreate.php: $_GET[verbatim] is: '. $_GET['verbatim'];
+552. echo "<br> entrycreate.php: the result of the insert query = ". $id;
+553. echo "<br>Today: " . date("Y-m-d H:i:s");
+554. create an array to put validation error messages for all forms that deal with entry creation and editing. Create it outside of all the conditions, so its scope is global and it can be used in any condition.

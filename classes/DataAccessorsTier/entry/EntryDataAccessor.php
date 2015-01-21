@@ -16,26 +16,26 @@ class EntryDataAccessor {
     
     $id =         $entry->getEntryId();
     $langid =     $entry->getEntryLanguageId();
-    $text =       $entry->getEntryText(); // 1
+    $text =       $entry->getEntryText(); // 301
     // TODO: create the verbatim of $text using the Bing translator
-    $verbatim =   $entry->getEntryVerbatim(); // 2
+    $verbatim =   $entry->getEntryVerbatim(); // 302
     // TODO: transliterate the value of $text using ...
-    $translit =   $entry->getEntryTranslit(); // 3
-    $authen =     $entry->getEntryAuthenStatusId(); // 4
-    $translOf =   $entry->getEntryTranslOf(); // 5
-    $userId =     $entry->getEntryUserId(); // 6
-    $mediaId =    $entry->getEntryMediaId(); // 7
-    $commentId =  $entry->getEntryCommentId(); // 8
-    $ratingId =   $entry->getEntryRatingId(); // 9
-    $tags =       $entry->getEntryTags(); //10
-    //$authorId =   $entry->getEntryAuthorId(); // 11
+    $translit =   $entry->getEntryTranslit(); // 303
+    $authen =     $entry->getEntryAuthenStatusId(); // 304
+    $translOf =   $entry->getEntryTranslOf(); // 305
+    $userId =     $entry->getEntryUserId(); // 306
+    $mediaId =    $entry->getEntryMediaId(); // 307
+    $commentId =  $entry->getEntryCommentId(); // 308
+    $ratingId =   $entry->getEntryRatingId(); // 309
+    $tags =       $entry->getEntryTags(); //310
+    //$authorId =   $entry->getEntryAuthorId(); // 311
     $authors =    $entry->getEntryAuthors(); 
-    $sourceId =   $entry->getEntrySourceId(); // 12
-    $use =        $entry->getEntryUse(); // 13
-    $link =       $entry->getEntryHttpLink(); // 14
+    $sourceId =   $entry->getEntrySourceId(); // 312
+    $use =        $entry->getEntryUse(); // 313
+    $link =       $entry->getEntryHttpLink(); // 314
     $date =       $entry->getEntryCreationDate();
 
-    // 15
+    // 315
     $query_insert = 'INSERT INTO '
       .ENTRY. ' ('
             . '`ent_entry_language_id`, '
@@ -72,11 +72,11 @@ class EntryDataAccessor {
       . '", "' . $link
       . '", "' . $date
       . '")';
-    // 51
+    // 351
     //echo "<br>eda::query_insert:<br>"; echo $query_insert;
-    $dbHelper = new DBHelper();  // 18
-    $last_inserted_id = $dbHelper->executeInsertQuery($query_insert); // 17
-    //16
+    $dbHelper = new DBHelper();  // 318
+    $last_inserted_id = $dbHelper->executeInsertQuery($query_insert); // 317
+    //316
     //..............................................................
     // if this is a kid, delete the treq for its dad if exists
     if(!null == $translOf){ // if the entry being created has a dad (i.e. is a kid)
@@ -201,12 +201,12 @@ class EntryDataAccessor {
               FROM ".ENTRY." e, ".LANGUAGE." l 
               WHERE e.ent_entry_language_id = l.lan_language_id 
               AND e.ent_entry_id = ". $entryId;
-    // 52
+    // 352
     $dbHelper = new DBHelper();
     //********For Test Purpose:(((((())))))
     //echo $query;
     $result = $dbHelper->executeSelect($query);
-    // 46
+    // 346
     $entryGottenById = $this->getEntryFull($result);
     return $entryGottenById;
   }
@@ -225,7 +225,7 @@ class EntryDataAccessor {
     $query = "DELETE FROM ".ENTRY. 
              " WHERE ent_entry_id = $entryId";
     $dbHelper = new DBHelper();
-    $resultOfDelete = $dbHelper->executeQuery($query); //47
+    $resultOfDelete = $dbHelper->executeQuery($query); //347
     return $resultOfDelete;
   }
 
@@ -235,7 +235,7 @@ class EntryDataAccessor {
            . "WHERE ent_entry_id = '{$entryId}'";
     //echo "<br>eda::deleteEntryVirtual. Query = " . $query;
     $dbHelper = new DBHelper();
-    $resultOfDelete = $dbHelper->executeQuery($query); //47
+    $resultOfDelete = $dbHelper->executeQuery($query); //347
     return $resultOfDelete;
   }
   public function getAllFathers() {
@@ -258,11 +258,11 @@ class EntryDataAccessor {
   private function getListOfFathers($resultOfSelect) {
     $Entries[] = array();
     //
-    $count = 0; // 30
+    $count = 0; // 330
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
 
-      $Entries[$count] = new Entry(); // 31
-      // 32
+      $Entries[$count] = new Entry(); // 331
+      // 332
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryText($list['ent_entry_text']);
       $Entries[$count]->setEntryVerbatim($list['ent_entry_verbatim']);
@@ -292,7 +292,7 @@ class EntryDataAccessor {
   public function getFatherByVerbatim($verbatim) {
 
     //$fatherGottenByVerbatim = new Entry();
-    // 21
+    // 321
     $query = "SELECT
                 e.ent_entry_id,
                 l.lan_lang_name,
@@ -306,10 +306,10 @@ class EntryDataAccessor {
                 AND e.ent_entry_authen_status_id = 1";
     //echo "</br>EDA getFatherByVerbatim query: ".$query;
     $dbHelper = new DBHelper();
-    $result = $dbHelper->executeSelect($query); // 20
-    // 25,26,27
-    $fatherGottenByVerbatim = $this->getEntryBrief($result); // 22
-    //28,29
+    $result = $dbHelper->executeSelect($query); // 320
+    // 325,326,327
+    $fatherGottenByVerbatim = $this->getEntryBrief($result); // 322
+    //328,329
     return $fatherGottenByVerbatim;
   }
   public function getListOfKidBriefByVerbatim($verbatim) {
@@ -430,7 +430,7 @@ class EntryDataAccessor {
                         e.ent_entry_creation_date BETWEEN '{$f}' AND '{$t}'";
           }
           else{
-            /* #4 */
+            /* #304 */
             //echo "<br>eda::getListOfEntryBriefBySearch(): case 4: authen + time frame";
             $query = "SELECT e.*, l.lan_lang_name".
 /*                        e.ent_entry_id,
@@ -543,11 +543,11 @@ class EntryDataAccessor {
         }
       }
     } // #1-16. if no verbatim
-    else{//#17. if we HAVE verbatim
+    else{// #17. if we HAVE verbatim
       if ($l==NULL) { // if no language
         if($f==NULL || $t==NULL){ // if no time frame
           if($a==NULL){ // if no auth
-            //#9 - search phrase
+            //#309 - search phrase
             //echo "<br>eda::getListOfEntryBriefBySearch() case 9: verbatim";
             $query = "SELECT e.*, l.lan_lang_name ".
 /*                        e.ent_entry_id,
@@ -735,7 +735,7 @@ class EntryDataAccessor {
           }
         }
       }
-    }//#17-32
+    }//#317-332
     $dbHelper = new DBHelper(); 
     $resultOfSelect = $dbHelper->executeSelect($query);
     $arrayOfEntryGottenByLanguage = $this->getListOfEntryBrief2($resultOfSelect);
@@ -749,13 +749,13 @@ class EntryDataAccessor {
    */
   private function getListOfKidBrief($resultOfSelect) {
     $Entries[] = array(); //$Entries[] = new Entry(); 
-    $count = 0; // 30
-    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
+    $count = 0; // 330
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 333
    
-      $Entries[$count] = new Entry(); //31
-      // 32
+      $Entries[$count] = new Entry(); //331
+      // 332
       $Entries[$count]->setEntryId($list['ent_entry_id']);
-      $Entries[$count]->setEntryLanguage($list['lan_lang_name']); // 19
+      $Entries[$count]->setEntryLanguage($list['lan_lang_name']); // 319
       $Entries[$count]->setEntryText($list['ent_entry_text']);
 //      $Entries[$count]->setEntryVerbatim($list['ent_entry_verbatim']);
 //      $Entries[$count]->setEntryTranslit($list['ent_entry_translit']);
@@ -771,34 +771,34 @@ class EntryDataAccessor {
 //      $Entries[$count]->setEntryUse($list['ent_entry_use']);
 //      $Entries[$count]->setEntryHttpLink($list['ent_entry_http_link']);
       $count++;
-    } // 33
-    // 34,35
+    } // 333
+    // 334,335
     return $Entries;
   }
   private function getListOfEntryBrief($resultOfSelect) {
     $Entries[] = new Entry();
-    $count = 0; // 30
-    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
+    $count = 0; // 330
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 333
 
-      $Entries[] = new Entry(); //31
-      // 32
+      $Entries[] = new Entry(); //331
+      // 332
       $Entries[$count]->setEntryId($list['ent_entry_id']);
       $Entries[$count]->setEntryLanguage($list['lan_lang_name']);
       $Entries[$count]->setEntryText($list['ent_entry_text']);
       $count++;
-    } // 33
-    // 34,35
+    } // 333
+    // 334,335
     return $Entries;
   }
 
   // this method returns more fields than `getListOfEntryBrief` 
   private function getListOfEntryBrief2($resultOfSelect) {
     $Entries[] = new Entry();
-    $count = 0; // 30
-    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 33
+    $count = 0; // 330
+    while ($list = mysqli_fetch_assoc($resultOfSelect)) { // 333
 
-      $Entries[] = new Entry(); //31
-      // 32
+      $Entries[] = new Entry(); //331
+      // 332
       $Entries[$count]->setEntryId(             $list['ent_entry_id']);
       $Entries[$count]->setEntryLanguage(       $list['lan_lang_name']);
       $Entries[$count]->setEntryText(           $list['ent_entry_text']);
@@ -815,8 +815,8 @@ class EntryDataAccessor {
       $Entries[$count]->setEntryHttpLink(       $list['ent_entry_http_link']);
       $Entries[$count]->setEntryCreationDate(   $list['ent_entry_creation_date']);
       $count++;
-    } // 33
-    // 34,35
+    } // 333
+    // 334,335
     return $Entries;
   }
 
@@ -826,14 +826,14 @@ class EntryDataAccessor {
    * @param mysql_result $resultOfSelect
    * @return Entry $Entry
    */
-  private function getEntryBrief($resultOfSelect) { // 23
+  private function getEntryBrief($resultOfSelect) { // 323
     $Entry = new Entry();
     $i=0;
-    //36,37,38,39
-    $ary = mysqli_fetch_assoc($resultOfSelect); // 24
-      // 40,41
+    //336,337,338,339
+    $ary = mysqli_fetch_assoc($resultOfSelect); // 324
+      // 340,341
       $Entry->setEntryId($ary['ent_entry_id']);
-      $Entry->setEntryLanguage($ary['lan_lang_name']); // 19
+      $Entry->setEntryLanguage($ary['lan_lang_name']); // 319
       $Entry->setEntryText($ary['ent_entry_text']);
       //$Entry->setEntryVerbatim($ary['ent_entry_verbatim']);
       //$Entry->setEntryTranslit($ary['ent_entry_translit']);
@@ -848,7 +848,7 @@ class EntryDataAccessor {
       //$Entry->setEntrySourceId($ary['ent_entry_source_id']);
       //$Entry->setEntryUse($ary['ent_entry_use']);
       //$Entry->setEntryHttpLink($ary['ent_entry_http_link']);
-      //48,49,50
+      //348,349,350
     return $Entry;
   }
   /**
@@ -858,13 +858,13 @@ class EntryDataAccessor {
    * @return \Entry
    */
   private function getEntryFull($resultOfSelect) {
-    // 42,43,44
+    // 342,343,344
     $Entry = new Entry();
-    // 45
+    // 345
     while ($list = mysqli_fetch_assoc($resultOfSelect)) {
-      // 41
+      // 341
       $Entry->setEntryId(             $list['ent_entry_id']);
-      $Entry->setEntryLanguage(       $list['lan_lang_name']); //53
+      $Entry->setEntryLanguage(       $list['lan_lang_name']); //353
       $Entry->setEntryText(           $list['ent_entry_text']);
       $Entry->setEntryVerbatim(       $list['ent_entry_verbatim']);
       $Entry->setEntryTranslit(       $list['ent_entry_translit']);

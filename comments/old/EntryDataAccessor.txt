@@ -1,3 +1,4 @@
+X
 1. [ent_entry_text] - the text of the entry, e.g. "Happy Birthday To You"
 2. [ent_entry_verbatim] - the verbatim of entry  ~ pinyin: e.g. "s dnyom rozhdenia tebya"
 3. [ent_entry_translit] -  entry's transliteration, using roman alphabet
