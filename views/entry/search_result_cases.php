@@ -14,7 +14,9 @@ function no_dad_no_kids($text) { ?>
 // to draw the beginning of the section of a group of translations
 function open_kids_house($kids_house_lang){?>
   <div class="kids_house">
-    <div class="door"><?php echo $kids_house_lang;  ?></div>
+    <div class="door">
+      <?php echo $kids_house_lang;  ?>
+    </div>
 <?php
 }?>
 
@@ -66,23 +68,55 @@ function close_family_apartment(){?>
 // to draw the section for translation X of group of langugae A
 function make_kid_room($kid_room_array){?>
   <div class="kid_room">
+    
     <div class="kid_text">
-      &bull;&nbsp;<a href="entryview.php?id=<?php echo $kid_room_array['id'];?>"><?php echo $kid_room_array['text'];?></a>
-    </div>
-    <div class="kid_profile_link"><span class="question" id="tran">T</span></div>
-    <?php if( !is_null($kid_room_array['dad']) && ($kid_room_array['dad'] !== "")) { ?>
-    <div class="kid_dad_link">
-      <a href="entryview.php?id=<?php echo $kid_room_array['dad'];?>">O</a>
-    </div>
-    <?php } ?>
-    <div class="kid_votes">
-        <span style="cursor: alias;" title="<?php echo $kid_room_array['likes'];?> users like">+<?php echo $kid_room_array['likes'];?></span> 
-        <span style="cursor: alias;" title="<?php echo $kid_room_array['dislikes'];?> users dislike">-<?php echo $kid_room_array['dislikes'];?></span></div>
-    <div style="display:inline-block;width:20px"></div>
-    <div class="kid_added_by">
-      <a href="other_user.php?id=<?php echo $kid_room_array['user']; ?>">
-          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin();//echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getLastName();?>
+      &bull;&nbsp;
+      <a href="entryview.php?id=<?php echo $kid_room_array['id'];?>">
+        <?php echo $kid_room_array['text'];?>
       </a>
+    </div>
+    
+    <div class="kid_profile_link">
+      <span class="question" id="tran">
+        T
+      </span>
+    </div>
+    
+<?php 
+  if( !is_null($kid_room_array['dad']) && ($kid_room_array['dad'] !== "")) { ?>
+    <div class="kid_dad_link">
+      <a href="entryview.php?id=<?php echo $kid_room_array['dad'];?>">
+        O
+      </a>
+    </div>
+    
+<?php 
+  } ?>
+    <div class="kid_votes">
+      
+      <span 
+        style="cursor: alias;" 
+        title="<?php echo $kid_room_array['likes'];?> users like">+<?php 
+        echo $kid_room_array['likes'];?>
+      </span> 
+      
+      <span 
+        style="cursor: alias;" 
+        title="<?php 
+        echo $kid_room_array['dislikes'];?> users dislike">-<?php 
+        echo $kid_room_array['dislikes'];?>
+      </span>
+      
+    </div>
+    
+    <div style="display:inline-block;width:20px"></div>
+    
+    <div class="kid_added_by">
+      <a href="other_user.php?id=<?php echo $kid_room_array['user']; ?>"><?php 
+        $userMan = new UserManager(); 
+        echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin(); 
+        //echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getLastName();
+    ?></a>
     </div>
     <div class="en_creadate" title="When this entry was added">
       <?php echo $kid_room_array['creadate']; ?>
@@ -97,23 +131,48 @@ function make_kid_room($kid_room_array){?>
 // to draw the section for translation X of group of langugae A
 function make_family_kid_room($kid_room_array){?>
   <div class="kid_room">
+    
     <div class="kid_text">
       &bull;&nbsp;
-      <a href="entryview.php?id=<?php echo $kid_room_array['id'];?>"><?php echo $kid_room_array['text'];?></a>
+      <a href="entryview.php?id=<?php echo $kid_room_array['id'];?>">
+        <?php echo $kid_room_array['text'];?>
+      </a>
     </div>
-    <div class="kid_profile_link"><span class="question" id="tran">T</span></div>
+    
+    <div class="kid_profile_link">
+      <span class="question" id="tran">T</span>
+    </div>
+    
     <div class="kid_dad_link">
       <a href="entryview.php?id=<?php echo $kid_room_array['dad'];?>">O</a>
     </div>
+    
     <div class="kid_votes">
-        <span style="cursor: alias;" title="<?php echo $kid_room_array['likes'];?> users like">+<?php echo $kid_room_array['likes'];?></span> 
-        <span style="cursor: alias;" title="<?php echo $kid_room_array['dislikes'];?> users dislike">-<?php echo $kid_room_array['dislikes'];?></span>
+      <span 
+        style="cursor: alias;" 
+        title="<?php 
+          echo $kid_room_array['likes'];?> users like">+<?php 
+          echo $kid_room_array['likes'];?>
+      </span> 
+        
+      <span 
+        style="cursor: alias;" 
+        title="<?php 
+        echo $kid_room_array['dislikes'];?> users dislike">-<?php 
+        echo $kid_room_array['dislikes'];?>
+      </span>
+      
     </div>
+    
     <div class="kid_added_by">
-      <a href="other_user.php?id=<?php echo $kid_room_array['user']; ?>">
-          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin();//echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getFirstName();?>
+      <a href="other_user.php?id=<?php 
+        echo $kid_room_array['user']; ?>"><?php 
+        $userMan = new UserManager(); 
+        echo $userMan->getUserByUserId($kid_room_array['user'])->getLogin();
+        //echo $userMan->getUserByUserId($kid_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($kid_room_array['user'])->getFirstName();?>
       </a>
     </div>
+    
     <div class="en_creadate" title="When this entry was added">
       <?php echo $kid_room_array['creadate']; ?>
     </div>
@@ -128,20 +187,26 @@ function make_family_kid_room($kid_room_array){?>
 // to draw the section for translation X of group of langugae A
 function make_dad_room($dad_room_array){?>
   <div class="kid_room">
+    
     <div class="kid_text">
       <a href="entryview.php?id=<?php echo $dad_room_array['id'];?>">
       <?php echo $dad_room_array['text'];   ?></a>
     </div>
+    
     <div class="kid_profile_link">O</div>
     <div class="kid_dad_link">T</div>
     <div class="kid_votes">+12 -3</div>
+    
     <div class="kid_added_by">
       <a href="userview.php?id=<?php echo $dad_room_array['user']; ?>">
-        <?php 
-//            $userMan = new UserManager(); echo $userMan->getUserByUserId($dad_room_array['user'])->getLogin();
-                                        
-          ?>
-          <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($dad_room_array['user'])->getLogin();//echo $userMan->getUserByUserId($dad_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($dad_room_array['user'])->getFirstName();?>
+<?php 
+//     $userMan = new UserManager(); echo $userMan->getUserByUserId($dad_room_array['user'])->getLogin();
+
+  ?>
+<?php 
+        $userMan = new UserManager(); 
+        echo $userMan->getUserByUserId($dad_room_array['user'])->getLogin();
+        //echo $userMan->getUserByUserId($dad_room_array['user'])->getFirstName()." ".$userMan->getUserByUserId($dad_room_array['user'])->getFirstName();?>
       </a>
     </div>
     <div class="is_mom">A</div>
@@ -154,24 +219,23 @@ function make_dad_room($dad_room_array){?>
 // for CASE 2: Original: doesn't exist. Variants: 2 English, 2 Russian, 2 Mandarin
   function no_dad_kids_many($ar_a){?>
 
+    <div class="kid_room">
+      <div class="kid_text"><?php //echo $house0_kid1_text;   ?></div>
+      <div class="kid_profile_link">T</div>
+      <div class="kid_dad_link">O</div>
+      <div class="kid_votes">+12 -3</div>
+      <div class="kid_added_by">user123</div>
+      <div class="is_mom">A</div>
+    </div>
 
-        <div class="kid_room">
-          <div class="kid_text"><?php //echo $house0_kid1_text;   ?></div>
-          <div class="kid_profile_link">T</div>
-          <div class="kid_dad_link">O</div>
-          <div class="kid_votes">+12 -3</div>
-          <div class="kid_added_by">user123</div>
-          <div class="is_mom">A</div>
-        </div>
-
-        <div class="kid_room">
-          <div class="kid_text"><?php // echo $house0_kid2_text;  ?></div>
-          <div class="kid_profile_link">T</div>
-          <div class="kid_dad_link">O</div>
-          <div class="kid_votes">+0 -10</div>
-          <div class="kid_added_by">user456</div>
-          <div class="is_mom"></div>
-        </div>
+    <div class="kid_room">
+      <div class="kid_text"><?php // echo $house0_kid2_text;  ?></div>
+      <div class="kid_profile_link">T</div>
+      <div class="kid_dad_link">O</div>
+      <div class="kid_votes">+0 -10</div>
+      <div class="kid_added_by">user456</div>
+      <div class="is_mom"></div>
+    </div>
 
       <!-- </div> kids_house -->
   }
@@ -190,9 +254,11 @@ function dad_house_dad_0($no_original) { ?>
   <?php
   }
 
-  function kid_houses_kids_0($no_kids) { ?>
+function kid_houses_kids_0($no_kids) { ?>
   <div class="kids_house">
+    
     <div class="door"></div>
+    
     <div class="kid_room">
       <div class="kid_text"><?php echo $no_kids; ?></div>
       <div class="kid_profile_link">Translation</div>
@@ -201,36 +267,55 @@ function dad_house_dad_0($no_original) { ?>
       <div class="kid_added_by">user123</div>
       <div class="is_mom">A</div>
     </div><!-- kid_room -->
+    
   </div><!-- kids_house-->
 <?php } ?>
 
   <?php
 // for CASE 3: Original: exists. Variants: don't exist.
   function dad_house_dad_1($ary) { ?>
-        <div id="dad_house">
-            <!--<div class="dad_door"><span><?php echo $ary['language']; ?></span></div>-->
-            <div id="dad_room">
-              <div id="dad_text">
-                <a href="entryview.php?id=<?php echo $ary['id']?>"><?php echo $ary['text']; ?></a>
-              </div>
-              <div id="dad_profile_link"><span class="question" id="orig">O</span></div>
-              
-              <div id="kids_num" title="There are <?php echo $ary['kidsnum']; ?> translations for this phrase"><?php echo $ary['kidsnum']; ?></div>
-              <div id="add_kid">
-                <a href="entrycreate.php?id=<?php echo $ary['id']; ?>&a=t" 
-                   title="Add a new translation">+</a>
-              </div>
-              <div style="display:inline-block;width:50px"></div>
-              <div class="kid_added_by">
-                <a href="other_user.php?id=<?php echo $ary['user']; ?>">
-                    <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getLogin();//echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
-                </a>
-              </div>
-              <div class="en_creadate" title="When this entry was added">
-                <?php echo $ary['creadate']; ?>
-              </div>
-            </div>
-         </div><!-- dad_house -->
+    <div id="dad_house">
+      <!--<div class="dad_door"><span><?php echo $ary['language']; ?></span></div>-->
+      <div id="dad_room">
+        
+        <div id="dad_text">
+          <a href="entryview.php?id=<?php echo $ary['id']?>">
+            <?php echo $ary['text']; ?>
+          </a>
+        </div>
+        
+        <div id="dad_profile_link">
+          <span class="question" id="orig">O</span>
+        </div>
+
+        <div 
+          id="kids_num" 
+          title="There are <?php 
+            echo $ary['kidsnum']; 
+            ?> translations for this phrase">
+            <?php echo $ary['kidsnum']; ?>
+        </div>
+        
+        <div id="add_kid">
+          <a href="entrycreate.php?id=<?php echo $ary['id']; ?>&a=t" 
+             title="Add a new translation">+</a>
+        </div>
+        
+        <div style="display:inline-block;width:50px"></div>
+        
+        <div class="kid_added_by">
+          <a href="other_user.php?id=<?php echo $ary['user']; ?>"><?php 
+            $userMan = new UserManager(); 
+            echo $userMan->getUserByUserId($ary['user'])->getLogin();
+            //echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
+          </a>
+        </div>
+        
+        <div class="en_creadate" title="When this entry was added">
+          <?php echo $ary['creadate']; ?>
+        </div>
+      </div>
+     </div><!-- dad_house -->
 
 <?php }
 ?>
@@ -238,33 +323,49 @@ function dad_house_dad_0($no_original) { ?>
            <?php
 // for CASE 3: Original: exists. Variants: don't exist.
   function make_family_dad_room($ary) { ?>
-        <!--<div id="dad_house">-->
-            <!--<div class="dad_door"><span><?php echo $ary['language']; ?></span></div>-->
-            <div id="dad_room">
-              <div id="dad_text">
-                <a href="entryview.php?id=<?php echo $ary['id']?>"><?php echo $ary['text']; ?></a>
-              </div>
-              <div id="dad_profile_link"><span class="question" id="orig">O</span></div>
-              <div id="kids_num" 
-                   title="There are <?php echo $ary['kidsnum']; ?> translations for this phrase">
-                <?php echo $ary['kidsnum']; ?>
-              </div>
-              <div id="add_kid">
-                <a href="entrycreate.php?id=<?php echo $ary['id']; ?>&a=t" 
-                   title="Add a new translation">+</a>
-              </div>
-              <div style="display:inline-block;width:50px"></div>
-              <div class="kid_added_by">
-                <a href="other_user.php?id=<?php echo $ary['user']; ?>">
-                    <?php $userMan = new UserManager(); echo $userMan->getUserByUserId($ary['user'])->getLogin();//echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
-                </a>
-              </div>
-              <div class="en_creadate"
-                   title="When this entry was added">
-                     <?php echo $ary['creadate']; ?>
-              </div>
-            </div>
-         <!--</div> dad_house -->
+    <!--<div id="dad_house">-->
+        <!--<div class="dad_door"><span><?php echo $ary['language']; ?></span></div>-->
+        <div id="dad_room">
+          
+          <div id="dad_text">
+            <a href="entryview.php?id=<?php 
+            echo $ary['id']?>"><?php 
+            echo $ary['text']; ?></a>
+          </div>
+          
+          <div id="dad_profile_link">
+            <span class="question" id="orig">O</span>
+          </div>
+          
+          <div 
+            id="kids_num" 
+            title="There are <?php 
+            echo $ary['kidsnum']; 
+            ?> translations for this phrase">
+            <?php echo $ary['kidsnum']; ?>
+          </div>
+          
+          <div id="add_kid">
+            <a href="entrycreate.php?id=<?php echo $ary['id']; ?>&a=t" 
+               title="Add a new translation">+</a>
+          </div>
+          
+          <div style="display:inline-block;width:50px"></div>
+          
+          <div class="kid_added_by">
+            <a href="other_user.php?id=<?php echo $ary['user']; ?>"><?php 
+              $userMan = new UserManager(); 
+              echo $userMan->getUserByUserId($ary['user'])->getLogin();
+            //echo $userMan->getUserByUserId($ary['user'])->getFirstName()." ".$userMan->getUserByUserId($ary['user'])->getLastName();?>
+            </a>
+          </div>
+          
+          <div class="en_creadate"
+               title="When this entry was added">
+                 <?php echo $ary['creadate']; ?>
+          </div>
+        </div>
+     <!--</div> dad_house -->
 
 <?php }
 ?>
