@@ -7,7 +7,6 @@
   // echo "dirname SCRIPT_NAME: " . dirname($_SERVER['SCRIPT_NAME']) . "<br>"; 
   // $pathInPieces = explode('\\', dirname(__FILE__));
   // $root = "/" . $pathInPieces[3];
-
 require_once BUSINESS_DIR_USER. 'User.php';
 require_once BUSINESS_DIR_USER_LOGIN . 'UserLoginManager.php';
 

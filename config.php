@@ -6,39 +6,39 @@ define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT']);
 // Application directories
 
 //to access the business accessor
-define('BUSINESS_DIR_AUTHEN',             SITE_ROOT . '/tarboz/classes/BusinessLogicTier/authen/');
-define('BUSINESS_DIR_USER',               SITE_ROOT . '/tarboz/classes/BusinessLogicTier/User/');
-define('BUSINESS_DIR_USER_TYPE',          SITE_ROOT . '/tarboz/classes/BusinessLogicTier/UserType/');
-define('BUSINESS_DIR_USER_LOGIN',         SITE_ROOT . '/tarboz/classes/BusinessLogicTier/user_login/');
-define('BUSINESS_DIR_COMMENT',            SITE_ROOT . '/tarboz/classes/BusinessLogicTier/comment/');
-define('BUSINESS_DIR_ENTRY',              SITE_ROOT . '/tarboz/classes/BusinessLogicTier/entry/');
-define('BUSINESS_DIR_TRANSLREQ',          SITE_ROOT . '/tarboz/classes/BusinessLogicTier/translation_request/');
-define('BUSINESS_DIR_LANG',               SITE_ROOT . '/tarboz/classes/BusinessLogicTier/language/');
-define('BUSINESS_DIR_LANG_PROF',          SITE_ROOT . '/tarboz/classes/BusinessLogicTier/LanguageProf/');
-define('BUSINESS_DIR_RATING',             SITE_ROOT . '/tarboz/classes/BusinessLogicTier/rating/');
-define('BUSINESS_DIR_REPORT',             SITE_ROOT . '/tarboz/classes/BusinessLogicTier/report/');
-define('BUSINESS_DIR_SUBSCRIPTION',       SITE_ROOT . '/tarboz/classes/BusinessLogicTier/subscription/');
-define('BUSINESS_DIR_RESET',              SITE_ROOT . '/tarboz/classes/BusinessLogicTier/PasswordReset/');
-define('BUSINESS_DIR_LOCATION',           SITE_ROOT . '/tarboz/classes/BusinessLogicTier/Location/');
-define('BUSINESS_DIR_BADWORD',            SITE_ROOT . '/tarboz/classes/BusinessLogicTier/badword/');
+define('BUSINESS_DIR_AUTHEN',             SITE_ROOT . '/classes/BusinessLogicTier/authen/');
+define('BUSINESS_DIR_USER',               SITE_ROOT . '/classes/BusinessLogicTier/User/');
+define('BUSINESS_DIR_USER_TYPE',          SITE_ROOT . '/classes/BusinessLogicTier/UserType/');
+define('BUSINESS_DIR_USER_LOGIN',         SITE_ROOT . '/classes/BusinessLogicTier/user_login/');
+define('BUSINESS_DIR_COMMENT',            SITE_ROOT . '/classes/BusinessLogicTier/comment/');
+define('BUSINESS_DIR_ENTRY',              SITE_ROOT . '/classes/BusinessLogicTier/entry/');
+define('BUSINESS_DIR_TRANSLREQ',          SITE_ROOT . '/classes/BusinessLogicTier/translation_request/');
+define('BUSINESS_DIR_LANG',               SITE_ROOT . '/classes/BusinessLogicTier/language/');
+define('BUSINESS_DIR_LANG_PROF',          SITE_ROOT . '/classes/BusinessLogicTier/LanguageProf/');
+define('BUSINESS_DIR_RATING',             SITE_ROOT . '/classes/BusinessLogicTier/rating/');
+define('BUSINESS_DIR_REPORT',             SITE_ROOT . '/classes/BusinessLogicTier/report/');
+define('BUSINESS_DIR_SUBSCRIPTION',       SITE_ROOT . '/classes/BusinessLogicTier/subscription/');
+define('BUSINESS_DIR_RESET',              SITE_ROOT . '/classes/BusinessLogicTier/PasswordReset/');
+define('BUSINESS_DIR_LOCATION',           SITE_ROOT . '/classes/BusinessLogicTier/Location/');
+define('BUSINESS_DIR_BADWORD',            SITE_ROOT . '/classes/BusinessLogicTier/badword/');
 
 
 //To Access the dataaccessor
-define('DATA_ACCESSOR_DIR_AUTHEN',        SITE_ROOT . '/tarboz/classes/DataAccessorsTier/authen/');
-define('DATA_ACCESSOR_DIR_USER',          SITE_ROOT . '/tarboz/classes/DataAccessorsTier/User/');
-define('DATA_ACCESSOR_DIR_USER_TYPE',     SITE_ROOT . '/tarboz/classes/DataAccessorsTier/usertype/');
-define('DATA_ACCESSOR_DIR_USER_LOGIN',    SITE_ROOT . '/tarboz/classes/DataAccessorsTier/user_login/');
-define('DATA_ACCESSOR_DIR_COMMENT',       SITE_ROOT . '/tarboz/classes/DataAccessorsTier/comment/');
-define('DATA_ACCESSOR_DIR_ENTRY',         SITE_ROOT . '/tarboz/classes/DataAccessorsTier/entry/');
-define('DATA_ACCESSOR_DIR_TRANSLREQ',     SITE_ROOT . '/tarboz/classes/DataAccessorsTier/translation_request/');
-define('DATA_ACCESSOR_DIR_LANG',          SITE_ROOT . '/tarboz/classes/DataAccessorsTier/language/');
-define('DATA_ACCESSOR_DIR_LANG_PROF',     SITE_ROOT . '/tarboz/classes/DataAccessorsTier/LanguageProf/');
-define('DATA_ACCESSOR_DIR_RATING',        SITE_ROOT . '/tarboz/classes/DataAccessorsTier/rating/');
-define('DATA_ACCESSOR_DIR_REPORT',        SITE_ROOT . '/tarboz/classes/DataAccessorsTier/report/');
-define('DATA_ACCESSOR_DIR_SUBSCRIPTION',  SITE_ROOT . '/tarboz/classes/DataAccessorsTier/subscription/');
-define('DB_CONNECTION',                   SITE_ROOT . '/tarboz/classes/DataAccessorsTier/');
-define('DATA_ACCESSOR_DIR_Location',      SITE_ROOT . '/tarboz/classes/DataAccessorsTier/Location/');
-define('DATA_ACCESSOR_DIR_BADWORD',       SITE_ROOT . '/tarboz/classes/DataAccessorsTier/badword/');
+define('DATA_ACCESSOR_DIR_AUTHEN',        SITE_ROOT . '/classes/DataAccessorsTier/authen/');
+define('DATA_ACCESSOR_DIR_USER',          SITE_ROOT . '/classes/DataAccessorsTier/User/');
+define('DATA_ACCESSOR_DIR_USER_TYPE',     SITE_ROOT . '/classes/DataAccessorsTier/usertype/');
+define('DATA_ACCESSOR_DIR_USER_LOGIN',    SITE_ROOT . '/classes/DataAccessorsTier/user_login/');
+define('DATA_ACCESSOR_DIR_COMMENT',       SITE_ROOT . '/classes/DataAccessorsTier/comment/');
+define('DATA_ACCESSOR_DIR_ENTRY',         SITE_ROOT . '/classes/DataAccessorsTier/entry/');
+define('DATA_ACCESSOR_DIR_TRANSLREQ',     SITE_ROOT . '/classes/DataAccessorsTier/translation_request/');
+define('DATA_ACCESSOR_DIR_LANG',          SITE_ROOT . '/classes/DataAccessorsTier/language/');
+define('DATA_ACCESSOR_DIR_LANG_PROF',     SITE_ROOT . '/classes/DataAccessorsTier/LanguageProf/');
+define('DATA_ACCESSOR_DIR_RATING',        SITE_ROOT . '/classes/DataAccessorsTier/rating/');
+define('DATA_ACCESSOR_DIR_REPORT',        SITE_ROOT . '/classes/DataAccessorsTier/report/');
+define('DATA_ACCESSOR_DIR_SUBSCRIPTION',  SITE_ROOT . '/classes/DataAccessorsTier/subscription/');
+define('DB_CONNECTION',                   SITE_ROOT . '/classes/DataAccessorsTier/');
+define('DATA_ACCESSOR_DIR_Location',      SITE_ROOT . '/classes/DataAccessorsTier/Location/');
+define('DATA_ACCESSOR_DIR_BADWORD',       SITE_ROOT . '/classes/DataAccessorsTier/badword/');
 
 // define('UTILITY_DIR', SITE_ROOT . '/utilities/');
 // define('JAVASCRIPT_DIR', SITE_ROOT . '/js/');
@@ -52,7 +52,7 @@ define('IMAGES',          SITE_ROOT . '/Images/');
 define('CONTENT',         SITE_ROOT . '/Content/');
 define('LOGIN',           SITE_ROOT . '/Views/Login/');
 
-define('PHP_MAILER',               SITE_ROOT . '/tarboz/plug-in/phpmailer/');
+define('PHP_MAILER',               SITE_ROOT . '/plug-in/phpmailer/');
 
 
 define('USER_LOGIN','user_test');

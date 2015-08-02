@@ -15,7 +15,8 @@
   } else {
     $user_logged_in = false;
     //redirect to homepage
-    header("Location: http://localhost/tarboz/");
+    #header("Location: http://localhost/tarboz/");
+    header("Location: http://dev.tarboz.com/");
   }
  
   //echo "here: ".$_SERVER['REQUEST_METHOD'];
