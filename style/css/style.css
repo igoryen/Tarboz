@@ -8,7 +8,10 @@ body{
 
   color: #000000;
   display: block;
-  font-family: Verdana, Geneva, sans-serif;
+  /*font-family: Verdana, Geneva, sans-serif;*/
+  /*font-family: Georgia, Verdana, Geneva, sans-serif;*/
+  /*font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif*/
+  font-family: "Arial Black", Gadget, sans-serif;
   font-size: 16px;
   margin: 0px;
   padding: 0px;
@@ -1015,7 +1018,7 @@ a:active {
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
-  font-family:Courier New;
+  /*font-family:Courier New;*/
   font-size: 22px;
   padding: 7px 18px;
   text-decoration:none;
