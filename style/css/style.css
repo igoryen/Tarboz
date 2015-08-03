@@ -171,6 +171,30 @@ div > nav#navigation > a:hover {
     padding: 0px 0px 0px 60px;
 }
 
+/*styling the input placeholder's text*/
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    lightblue;
+    font-style: italic;
+    font-size: large;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    lightblue;
+   font-style: italic;
+   font-size: large;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    lightblue;
+   font-style: italic;
+   font-size: large;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    lightblue;
+   font-style: italic;
+   font-size: large;
+}
+
 #searchinput img {
   height: 50px;
   margin-bottom: 1%;

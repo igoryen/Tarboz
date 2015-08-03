@@ -17,7 +17,10 @@ $translator->getLanguagesSelectBox($selectbox);
 <div id="search" >
   <div align="center">
   <div style="width:980px;">        
-    <div><input type="text" name="txtString"  id="txtString"  class="keyboardInput"></div><!--1-->
+    <div>
+      <input type="text" name="txtString"  id="txtString"  class="keyboardInput"
+             placeholder="Example: Go ahead, make my day.">
+    </div><!--1-->
     <?php //echo $translator->response->languageSelectBox; ?>
 
     <!-- 3 -->
