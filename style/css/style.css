@@ -88,7 +88,8 @@ div.tooltip p {
 }
 .footer{
   background: #3B8DFF; /*#ffffff*/
-  color: #000000;
+  /*color: #000000;*/
+  color: #FFF;
   font-size: 15px;
   text-align: center;
   margin-top:30px;
@@ -97,7 +98,8 @@ div.tooltip p {
 
 div.footer > div > a {
   text-decoration: none;
-  color: #000000;
+  /*color: #000000;*/
+  color: #FFF;
   font-size:  15px;
   padding: 0px 10px;
 }
@@ -136,7 +138,8 @@ div.footer > div > a {
 }
 
 div > nav#navigation > a {
-  color: #000000;
+  /*color: #000000;*/
+  color: #FFF;
   font-size: 15px;
   padding: 10px 10px;
   text-decoration: none;

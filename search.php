@@ -23,7 +23,7 @@ $translator->getLanguagesSelectBox($selectbox);
     <!-- 3 -->
   
 
-    <p style="font-size:20px; text-align: left">
+    <p style="font-size:20px; text-align: left; color:#3B8DFF">
     <select name="tgt_lang" id="tgtlang">
       <option value="">Search in ...</option><?php
           //$langs = $lm->getListOfLang();
