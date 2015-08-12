@@ -144,3 +144,4 @@
 552. echo "<br> entrycreate.php: the result of the insert query = ". $id;
 553. echo "<br>Today: " . date("Y-m-d H:i:s");
 554. create an array to put validation error messages for all forms that deal with entry creation and editing. Create it outside of all the conditions, so its scope is global and it can be used in any condition.
+555. Sets the default client character set to be used when sending data from and to the database server
