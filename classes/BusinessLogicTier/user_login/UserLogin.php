@@ -22,5 +22,3 @@ class UserLogin extends User {
   }
 
 }
-
-?>
