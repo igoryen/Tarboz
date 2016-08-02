@@ -1,2 +1,3 @@
 sql scripts/*
 classes/DataAccessorsTier/constants.php
+config.php
